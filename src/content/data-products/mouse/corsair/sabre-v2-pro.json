@@ -1,0 +1,219 @@
+{
+  "slug": "corsair-sabre-v2-pro",
+  "brand": "Corsair",
+  "model": "Sabre v2 Pro",
+  "baseModel": "Sabre",
+  "variant": "v2 Pro",
+  "category": "mouse",
+  "imagePath": "/images/mouse/corsair/sabre-v2-pro",
+  "cardTags": "false",
+  "featured": "",
+  "release_date": "09/2025",
+  "discontinued": "",
+  "sku": "CH-931G000-WW",
+  "price_range": 99.99,
+  "colors": [
+    "black",
+    "white"
+  ],
+  "design": [
+    "standard"
+  ],
+  "lighting": "none",
+  "rgb": "no",
+  "connection": "hybrid",
+  "connectivity": "2.4GHz Dongle",
+  "computer_side_connector": "USB-A",
+  "mouse_side_connector": "USB-C",
+  "bluetooth": "no",
+  "cable_type": "braided",
+  "paracord": "yes",
+  "wireless_charging": "no",
+  "battery_hours": 70,
+  "adjustable_weight": "no",
+  "feet_material": "PTFE (Black-Dyed)",
+  "coating": "matte",
+  "honeycomb_frame": "no",
+  "silent_clicks": "no",
+  "weight": 36,
+  "material": "plastic",
+  "lngth": 119.2,
+  "width": 62.6,
+  "height": 38.2,
+  "form_factor": "right",
+  "shape": "symmetrical",
+  "hump": "middle",
+  "front_flare": "outward",
+  "thumb_rest": "no",
+  "grip": [
+    "claw",
+    "fingertip"
+  ],
+  "hand_size": [
+    "small",
+    "medium"
+  ],
+  "mcu": "NXP LPC11U68",
+  "mcu_link": "https://www.nxp.com/docs/en/data-sheet/LPC11U6X.pdf?utm_source=chatgpt.com",
+  "sensor": "MARKSMAN S",
+  "sensor_brand": "corsair",
+  "sensor_date": "05/2025",
+  "sensor_link": "https://www.corsair.com/newsroom/press-release/corsair-launches-three-new-gaming-mice-alongside-slipstream-corsair-wireless-technology",
+  "sensor_type": "optical",
+  "flawless_sensor": "yes",
+  "sensor_latency": "unk",
+  "sensor_latency_list": [
+    "unk"
+  ],
+  "shift_latency": "unk",
+  "polling_rate": [
+    8000,
+    4000,
+    2000,
+    1000,
+    500,
+    250,
+    125
+  ],
+  "dpi": 33000,
+  "ips": 750,
+  "acceleration": 50,
+  "lift": [
+    0.7
+  ],
+  "lift_settings": "adjustable",
+  "motion_sync": "yes",
+  "hardware_acceleration": "unk",
+  "smoothing": "unk",
+  "nvidia_reflex": "no",
+  "switch": "Transparent Crystal Shell White Dot",
+  "switch_brand": "huano",
+  "switch_type": "mechanical",
+  "switch_link": "https://www.amazon.com/Acinkeety-Transparent-Switch-Microswitch-Million/dp/B0CMQRMTN8?&linkCode=ll1&tag=eggear-20&linkId=c0844220fc8fd56d9e1870ad75c86ffb&language=en_US&ref_=as_li_ss_tl",
+  "hot_swappable": "no",
+  "debounce": 8,
+  "click_latency": 8.4,
+  "click_latency_list": "8.4 reciever",
+  "click_force": "unk",
+  "encoder": "",
+  "encoder_brand": "",
+  "encoder_link": "",
+  "side_buttons": 2,
+  "middle_buttons": 0,
+  "programmable_buttons": 5,
+  "tilt_scroll_wheel": "no",
+  "adjustable_scroll_wheel": "no",
+  "onboard_memory": "yes",
+  "onboard_memory_value": 1,
+  "profile_switching": "no",
+  "overall": 8.3,
+  "accuracy": 9.2,
+  "response": 7.2,
+  "quality": 7.3,
+  "comfort": 8.2,
+  "work": 6.2,
+  "feet_score": 8.6,
+  "fps_score": 8.3,
+  "mmo_score": 5.8,
+  "moba_score": 8.1,
+  "aarpg_score": 7.1,
+  "rts_score": 6.7,
+  "fps": "yes",
+  "mmo": "no",
+  "moba": "yes",
+  "aarpg": "yes",
+  "rts": "no",
+  "snap_dateUpdated": "12/12/2025",
+  "snap_datePublished": "10/13/2025",
+  "snap_subtitle": "36g, wireless 8K hyper-polling, and a 33K DPI Marksman S sensor—built for pure FPS speed.",
+  "hubTags": [
+    "price_range",
+    "weight",
+    "polling_rate",
+    "battery_hours",
+    "connection",
+    "fps"
+  ],
+  "game1": "Counter-Strike 2",
+  "game2": "Valorant",
+  "game3": "Apex Legends",
+  "game4": "",
+  "game5": "",
+  "game6": "",
+  "game7": "",
+  "game8": "",
+  "keytakeaway": "The Corsair SABRE v2 PRO is an ultralight wireless gaming mouse built for competitive FPS players who live in Counter-Strike 2, Valorant, and Apex Legends. The headline is speed: a 36g shell and up to 8K polling over 2.4GHz wireless (or wired) make it feel instantly “flickable,” while the Marksman S sensor’s high tracking headroom keeps fast swipes stable. If you want maximum agility with a clean, no-drama layout (and you don’t need Bluetooth), this is one of Corsair’s most laser-focused shooter mice yet.",
+  "pcard": "The Corsair SABRE v2 PRO is an **ultralight wireless FPS gaming mouse** built to make flicks, target switches, and fast tracking feel effortless—especially if you play low-to-mid sens shooters. The 36g build and **8K wireless polling** give it that “mouse disappears in your hand” vibe, and the included grip tape / spare skates let you tune feel without extra shopping. If you want a more traditional flagship shape and ecosystem, cross-shop the <pop=mouse-94>Logitech G Pro X Superlight 2</pop>—then decide whether *comfort familiarity* or *maximum weight savings* matters more.",
+  "verdict": "The Corsair **SABRE v2 PRO** is a wireless **FPS gaming mouse** that goes all-in on one promise: make your aim feel as close to “instant” as possible. At **36g**, it’s genuinely featherweight without turning into a honeycomb shell, and it pairs that with **8K hyper-polling** over 2.4GHz (and wired) plus a top-tier Marksman S sensor that’s built for high-speed tracking. If your competitive loop is Counter-Strike 2, Valorant, or Apex Legends—and you care more about *first-shot responsiveness* and *flick agility* than extra buttons—this mouse is aimed directly at you.\r\n\r\n#### What you’ll notice in real play\r\nThe first thing you feel isn’t a spec—it’s how little effort it takes to start and stop. A 36g mouse changes your micro-corrections: tiny crosshair nudges become easier to “tap in,” and wide swings for 180s or fast re-centers feel less taxing over long sessions. For tactical shooters, that can translate into cleaner counter-strafing shots and more confident one-taps. For tracking-heavy fights (Apex hipfire, fast strafe duels), it’s easier to stay glued to a target without the mouse feeling like it’s fighting you.\r\n\r\n> The SABRE v2 PRO’s whole personality is “fast hands, fast aim”—it rewards players who want a mouse that never feels like it’s dragging behind their intent.\r\n\r\n#### Speed vs battery (the trade you should understand)\r\n8K polling is real, but it’s also a “use it intentionally” setting. Many systems won’t feel dramatically different vs 1K/2K in day-to-day ranked play, and running extreme polling typically costs battery life and can raise the chance of USB/wireless sensitivity to interference. The good news: Corsair gives you a wide set of polling steps, so you can choose the sweet spot for your rig and your monitor refresh. At **1K**, the rated battery life is strong for a mouse this light, and the experience still feels extremely responsive.\r\n\r\n| Setting you pick | What it changes in practice |\r\n|---|---|\r\n| 1K–2K polling | “Set it and forget it” responsiveness with better battery stability |\r\n| 4K–8K polling | Maximum update rate for latency chasers (best on clean setups + high refresh) |\r\n| Grip tape / spare skates | Lets you tune control vs speed without swapping mice |\r\n\r\n#### Fit, comfort, and day-to-day usability\r\nShape-wise, the SABRE v2 PRO keeps things simple: a streamlined, competition-first body with a safe button layout. It’s not trying to be an ergonomic palm brick or an MMO command center—it’s a shooter tool. Most players who prefer claw or fingertip grips will adapt quickly; palm grippers may love it if the size matches their hand, but if you want a more sculpted right-hand “fills the palm” feel, something like the <pop=mouse-333>Razer Deathadder V4 Pro</pop> can make more sense.\r\n\r\nOne important lifestyle note: **Bluetooth isn’t part of the package** here. This is a performance-first mouse designed around 2.4GHz wireless and wired play. That’s fine for most FPS setups (and arguably preferable), but it’s worth knowing if you wanted a travel-friendly “work + play” hybrid.\r\n\r\n#### Comparison context (flagship lane)\r\nIf you want a flagship that’s widely considered the “safe pick” for competitive play—with a familiar shape philosophy and a huge player base—look at the <pop=mouse-94>Logitech G Pro X Superlight 2</pop>. If you’re chasing the newest wave of esports flagships and want another top-tier option with a different shape direction, the <pop=mouse-131>Razer Viper V3 Pro</pop> is a natural cross-shop. The SABRE v2 PRO’s unique angle is how aggressively it commits to weight + polling rate while keeping the layout clean and focused.\r\n\r\n**Bottom line:** If you want an ultralight wireless gaming mouse built specifically for FPS—and you’re the type who values fast flicks, quick re-centers, and “no resistance” aim feel—the SABRE v2 PRO belongs on your shortlist. Just be honest about whether you’ll actually run 8K all the time, and whether you need Bluetooth or extra features beyond pure shooter performance.",
+  "pros": [
+    "Featherweight **36g full-shell** design feels almost effortless for flicks and micro-corrections",
+    "**Up to 8,000Hz polling (wireless + wired)** via CORSAIR Web Hub for latency-focused competitive setups",
+    "**MARKSMAN S sensor (33K DPI / 750 IPS / 50G)** keeps fast swipes stable and consistent",
+    "Includes **grip tape + replacement skates**, so you can tune grip and glide without extra purchases",
+    "Clean, competition-first layout (no RGB, no gimmicks) that stays out of the way in CS2/Valorant-style play"
+  ],
+  "cons": [
+    "**Battery life drops hard at 8K** (up to ~16 hours vs up to ~70 hours at 1K)",
+    "**Default 8ms debounce** can add click delay vs esports-tuned mice (lower settings may risk slam/double-clicks; adjustability is planned for Web Hub)",
+    "**Web Hub is browser/online-based**, and **iCUE support wasn’t there day-one** (CORSAIR says full support is coming)",
+    "**No dedicated DPI/profile switch** — DPI cycling uses a button combo, which isn’t great if you swap sensitivities mid-match"
+  ],
+  "youtube": "https://www.youtube.com/watch?v=1tfU4aPeYgs",
+  "affiliateLinks": [
+    {
+      "url": "https://www.amazon.com/Corsair-Sabre-Ultralight-Wireless-Gaming/dp/B0FKJ2J2R8?th=1&linkCode=ll1&tag=eggear-20&linkId=184b30f9cd41a22e4790fe0d41bb47db&language=en_US&ref_=as_li_ss_tl",
+      "retailer": "amazon",
+      "slug": "amazon",
+      "variant": "black",
+      "isPrimary": true
+    },
+    {
+      "url": "https://www.amazon.com/Corsair-Sabre-Ultralight-Wireless-Gaming/dp/B0FKHRDL6N?th=1&linkCode=ll1&tag=eggear-20&linkId=3635784a8cd55161901dacc8c2328737&language=en_US&ref_=as_li_ss_tl",
+      "retailer": "amazon",
+      "slug": "amazon",
+      "variant": "white",
+      "isPrimary": false
+    }
+  ],
+  "url": "/hubs/mouse/corsair/sabre-v2-pro",
+  "gamesRecommended": [],
+  "media": {
+    "defaultColor": "black",
+    "colors": [
+      "black",
+      "white"
+    ],
+    "editions": [],
+    "images": [
+      {
+        "stem": "feature-image",
+        "view": "feature-image"
+      },
+      {
+        "stem": "top",
+        "view": "top"
+      },
+      {
+        "stem": "top1",
+        "view": "top",
+        "seq": 1
+      },
+      {
+        "stem": "sangle",
+        "view": "sangle"
+      },
+      {
+        "stem": "angle",
+        "view": "angle"
+      },
+      {
+        "stem": "side",
+        "view": "shape-side"
+      },
+      {
+        "stem": "top",
+        "view": "shape-top"
+      }
+    ]
+  }
+}

@@ -1,0 +1,175 @@
+{
+  "slug": "corsair-dark-core-rgb-pro",
+  "brand": "Corsair",
+  "model": "Dark Core RGB Pro",
+  "baseModel": "Dark Core",
+  "variant": "RGB Pro",
+  "category": "mouse",
+  "imagePath": "/images/mouse/corsair/dark-core-rgb-pro",
+  "cardTags": "false",
+  "featured": "",
+  "release_date": "04/2020",
+  "discontinued": "",
+  "sku": "CH-9315411-NA",
+  "price_range": 99.99,
+  "colors": [
+    "black"
+  ],
+  "design": [
+    "standard"
+  ],
+  "lighting": "9 zone (rgb)",
+  "rgb": "yes",
+  "connection": "hybrid",
+  "connectivity": "2.4GHz Dongle",
+  "computer_side_connector": "USB-A",
+  "mouse_side_connector": "USB-C",
+  "bluetooth": "yes",
+  "cable_type": "braided",
+  "paracord": "no",
+  "wireless_charging": "no",
+  "battery_hours": 36,
+  "adjustable_weight": "no",
+  "feet_material": "PTFE (Black-Dyed)",
+  "coating": "matte",
+  "honeycomb_frame": "no",
+  "silent_clicks": "no",
+  "weight": 133,
+  "material": "plastic",
+  "lngth": 127,
+  "width": 89,
+  "height": 43,
+  "form_factor": "right",
+  "shape": "ergonomic",
+  "hump": "middle",
+  "front_flare": "inward",
+  "thumb_rest": "yes",
+  "grip": [
+    "palm"
+  ],
+  "hand_size": [
+    "large"
+  ],
+  "mcu": "unk",
+  "mcu_link": "",
+  "sensor": "PAW3392",
+  "sensor_brand": "PixArt",
+  "sensor_date": "",
+  "sensor_link": "",
+  "sensor_type": "optical",
+  "flawless_sensor": "yes",
+  "sensor_latency": "unk",
+  "sensor_latency_list": [
+    "unk"
+  ],
+  "shift_latency": "unk",
+  "polling_rate": [
+    2000,
+    1000,
+    500,
+    250,
+    125
+  ],
+  "dpi": 18000,
+  "ips": 450,
+  "acceleration": 50,
+  "lift": [
+    2.4
+  ],
+  "lift_settings": "fixed high",
+  "motion_sync": "unk",
+  "hardware_acceleration": "no",
+  "smoothing": "unk",
+  "nvidia_reflex": "no",
+  "switch": "D2FC -F-K(50M)",
+  "switch_brand": "omron",
+  "switch_type": "mechanical",
+  "switch_link": "",
+  "hot_swappable": "no",
+  "debounce": "unk",
+  "click_latency": 1.8,
+  "click_latency_list": "1.6 wired, 1.8 receiver, 8.4 bluetooth",
+  "click_force": "unk",
+  "encoder": "",
+  "encoder_brand": "",
+  "encoder_link": "",
+  "side_buttons": 2,
+  "middle_buttons": 3,
+  "programmable_buttons": 8,
+  "tilt_scroll_wheel": "no",
+  "adjustable_scroll_wheel": "no",
+  "onboard_memory": "yes",
+  "onboard_memory_value": 3,
+  "profile_switching": "yes",
+  "overall": 7.3,
+  "accuracy": 8.4,
+  "response": 6.3,
+  "quality": 7.8,
+  "comfort": 8.7,
+  "work": 8,
+  "feet_score": 7.8,
+  "fps_score": 6.2,
+  "mmo_score": 7.2,
+  "moba_score": 6.7,
+  "aarpg_score": 7.2,
+  "rts_score": 5.8,
+  "fps": "no",
+  "mmo": "yes",
+  "moba": "yes",
+  "aarpg": "yes",
+  "rts": "no",
+  "snap_dateUpdated": "11/26/2025",
+  "snap_datePublished": null,
+  "snap_subtitle": "",
+  "hubTags": [],
+  "game1": "",
+  "game2": "",
+  "game3": "",
+  "game4": "",
+  "game5": "",
+  "game6": "",
+  "game7": "",
+  "game8": "",
+  "keytakeaway": "",
+  "pcard": "",
+  "verdict": "",
+  "pros": [],
+  "cons": [],
+  "youtube": "https://www.youtube.com/watch?v=E4RwoF2n_no",
+  "affiliateLinks": [
+    {
+      "url": "https://www.amazon.com/Corsair-Wireless-SLIPSTREAM-Technology-CH-9315411-NA/dp/B082LVNHW9?crid=NDSNZI02VH7H&dib=eyJ2IjoiMSJ9.l6EIwPjc41cnZ53ULr40PpWmjvA2HZb1hP7LlY1IjgMGKdqmANYR2HnIPULrRs13kXv4S-dtgtnzMoXOyzdLgXE1Y4JmyMWPKe8yDSsxQ-gk4VhTUEcKNnBXIVSTgtZfg_Z28j1ifrA2MwsL_4osPbPGFQ6OPLBWN6BO7Gs1vJyOvm9uZrqw6yLBy_-WnqSIYNjFzg4EzKM3G6BRF__TX73SBN8ciI95TRAU3fGkoj4.izb2yRQv4t6Y8NEM-DeWrgGMHMVADhRf5gsNqHFP4aA&dib_tag=se&keywords=Dark%2BCore%2BRGB%2BPro%2BSE&qid=1765258868&sprefix=dark%2Bcore%2Brgb%2Bpro%2Bse%2Caps%2C150&sr=8-2&th=1&linkCode=ll1&tag=eggear-20&linkId=6f26e2ad87921e0c26f68cbc714f5c27&language=en_US&ref_=as_li_ss_tl",
+      "retailer": "amazon",
+      "slug": "amazon",
+      "variant": "",
+      "isPrimary": true
+    }
+  ],
+  "url": "/hubs/mouse/corsair/dark-core-rgb-pro",
+  "gamesRecommended": [],
+  "media": {
+    "defaultColor": "black",
+    "colors": [
+      "black"
+    ],
+    "editions": [],
+    "images": [
+      {
+        "stem": "top",
+        "view": "top"
+      },
+      {
+        "stem": "left",
+        "view": "left"
+      },
+      {
+        "stem": "side",
+        "view": "shape-side"
+      },
+      {
+        "stem": "top",
+        "view": "shape-top"
+      }
+    ]
+  }
+}

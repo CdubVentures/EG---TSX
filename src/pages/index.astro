@@ -1,0 +1,201 @@
+---
+import MainLayout from '@shared/layouts/MainLayout.astro';
+import { CONFIG } from '@core/config';
+import { getCollection } from 'astro:content';
+import ProductTestSection from '@features/vault/components/ProductTestSection';
+
+const allProducts = await getCollection('dataProducts');
+
+// Serialize to VaultProduct shape (only identity + imagePath, no specs)
+const products = allProducts.map(p => ({
+  id: p.id,
+  slug: p.data.slug,
+  brand: p.data.brand,
+  model: p.data.model,
+  category: p.data.category,
+  imagePath: p.data.imagePath,
+}));
+---
+
+<MainLayout
+  title={`${CONFIG.site.name} — The Smarter Way to Compare PC Gear`}
+  description={CONFIG.site.defaultDescription}
+  theme="gaming"
+>
+  <ProductTestSection client:load products={products} />
+</MainLayout>
+
+<style is:global>
+  /* ═══════════════════════════════════════════════════════════════════════════
+     PRODUCT TEST SECTION (temporary — Phase 4.3)
+     ═══════════════════════════════════════════════════════════════════════════ */
+  .product-test-section {
+    padding: 2rem;
+    max-width: 1600px;
+    margin: 0 auto;
+  }
+
+  .product-test-title {
+    font-family: var(--identity-font);
+    font-size: var(--font-size-22px);
+    font-weight: var(--font-weight7);
+    color: var(--white-color-1);
+    margin: 0 0 0.5rem;
+  }
+
+  .product-test-subtitle {
+    font-family: var(--identity-font);
+    font-size: var(--font-size-13px);
+    color: var(--grey-color-2, #8a8f98);
+    margin: 0 0 1.5rem;
+  }
+
+  /* Category tabs */
+  .product-test-tabs {
+    display: flex;
+    gap: 0;
+    border-bottom: 1px solid #333;
+    margin-bottom: 1.5rem;
+    overflow-x: auto;
+  }
+
+  .product-test-tab {
+    background: none;
+    border: none;
+    border-bottom: 3px solid transparent;
+    color: var(--grey-color-2, #8a8f98);
+    font-family: var(--identity-font);
+    font-size: var(--font-size-14px);
+    font-weight: var(--font-weight5);
+    padding: 0.75rem 1.25rem;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: color 0.2s ease;
+  }
+
+  .product-test-tab:hover {
+    color: var(--white-color-1);
+  }
+
+  .product-test-tab.active {
+    font-weight: var(--font-weight7);
+  }
+
+  .product-test-tab-count {
+    margin-left: 0.4em;
+    font-size: var(--font-size-11px);
+    opacity: 0.6;
+  }
+
+  /* Product grid */
+  .product-test-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 1rem;
+  }
+
+  .product-test-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem 0.75rem;
+    background: var(--nav-surface-dark, #161718);
+    border-radius: 8px;
+    gap: 0.5rem;
+  }
+
+  .product-test-card:hover {
+    background: var(--nav-surface-medium, #2e343b);
+  }
+
+  .product-test-card-img {
+    width: 100%;
+    aspect-ratio: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  .product-test-card-img img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+  }
+
+  .product-test-card-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 0.1rem;
+    min-width: 0;
+    width: 100%;
+  }
+
+  .product-test-card-brand {
+    font-family: var(--identity-font);
+    font-size: var(--font-size-11px);
+    font-weight: var(--font-weight4);
+    color: var(--grey-color-2, #8a8f98);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
+  }
+
+  .product-test-card-model {
+    font-family: var(--identity-font);
+    font-size: var(--font-size-12px);
+    font-weight: var(--font-weight7);
+    color: var(--white-color-1);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
+  }
+
+  .product-test-empty {
+    text-align: center;
+    color: var(--grey-color-2, #8a8f98);
+    font-family: var(--identity-font);
+    font-size: var(--font-size-14px);
+    padding: 2rem;
+  }
+
+  /* Vault toggle button on cards */
+  .vault-toggle-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.3em;
+    background: var(--nav-surface-medium, #2e343b);
+    border: 1px solid #444;
+    border-radius: 4px;
+    color: var(--white-color-1);
+    font-family: var(--identity-font);
+    font-size: var(--font-size-11px);
+    font-weight: var(--font-weight7);
+    padding: 0.35rem 0.6rem;
+    cursor: pointer;
+    transition: background-color 0.2s ease, border-color 0.2s ease;
+    white-space: nowrap;
+  }
+
+  .vault-toggle-btn:hover {
+    border-color: var(--site-gradient-end);
+  }
+
+  .vault-toggle-btn.vault-toggle-active {
+    background: linear-gradient(to right, var(--site-gradient-start), var(--site-gradient-end));
+    border-color: transparent;
+  }
+
+  .vault-toggle-icon {
+    font-size: 1.1em;
+    line-height: 1;
+  }
+
+  .vault-toggle-label {
+    letter-spacing: 0.5px;
+  }
+</style>

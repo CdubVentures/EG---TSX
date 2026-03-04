@@ -1,0 +1,206 @@
+{
+  "slug": "asus-rog-keris-wireless-aimpoint",
+  "brand": "Asus",
+  "model": "ROG Keris Wireless AimPoint",
+  "baseModel": "ROG Keris",
+  "variant": "Wireless AimPoint",
+  "category": "mouse",
+  "imagePath": "/images/mouse/asus/rog-keris-wireless-aimpoint",
+  "cardTags": "false",
+  "featured": "",
+  "release_date": "10/2022",
+  "discontinued": "",
+  "sku": "90MP02V0-BMUA10",
+  "price_range": 114.99,
+  "colors": [
+    "black",
+    "white"
+  ],
+  "design": [
+    "standard"
+  ],
+  "lighting": "3 zone (rgb)",
+  "rgb": "yes",
+  "connection": "hybrid",
+  "connectivity": "2.4GHz Dongle",
+  "computer_side_connector": "USB-A",
+  "mouse_side_connector": "USB-C",
+  "bluetooth": "yes",
+  "cable_type": "braided",
+  "paracord": "yes",
+  "wireless_charging": "no",
+  "battery_hours": "n/a",
+  "adjustable_weight": "no",
+  "feet_material": "PTFE (Virgin-Grade)",
+  "coating": "matte",
+  "honeycomb_frame": "no",
+  "silent_clicks": "no",
+  "weight": 79,
+  "material": "plastic",
+  "lngth": 118,
+  "width": 62,
+  "height": 39,
+  "form_factor": "right",
+  "shape": "ergonomic",
+  "hump": "back - front",
+  "front_flare": "outward",
+  "thumb_rest": "no",
+  "grip": [
+    "palm",
+    "claw"
+  ],
+  "hand_size": [
+    "small",
+    "medium"
+  ],
+  "mcu": "unk",
+  "mcu_link": "",
+  "sensor": "AimPoint (PixArt PAW3395)",
+  "sensor_brand": "PixArt",
+  "sensor_date": "01/2022",
+  "sensor_link": "https://www.pixart.com/products-detail/129/PAW3395DM-T6QU",
+  "sensor_type": "optical",
+  "flawless_sensor": "yes",
+  "sensor_latency": "unk",
+  "sensor_latency_list": [
+    "unk"
+  ],
+  "shift_latency": "unk",
+  "polling_rate": [
+    1000,
+    500,
+    250,
+    125
+  ],
+  "dpi": 36000,
+  "ips": 650,
+  "acceleration": 50,
+  "lift": [
+    1
+  ],
+  "lift_settings": "adjustable",
+  "motion_sync": "no",
+  "hardware_acceleration": "no",
+  "smoothing": "no",
+  "nvidia_reflex": "yes",
+  "switch": "ROG Micro Switch",
+  "switch_brand": "asus",
+  "switch_type": "optical / mechanical",
+  "switch_link": "https://rog.asus.com/us/articles/gaming-keyboards-gaming-mice/guide-how-to-replace-the-switches-in-your-rog-gladius-iii-gaming-mouse/",
+  "hot_swappable": "yes",
+  "debounce": "unk",
+  "click_latency": 4.1,
+  "click_latency_list": "4.1 wireless",
+  "click_force": "unk",
+  "encoder": "",
+  "encoder_brand": "",
+  "encoder_link": "",
+  "side_buttons": 2,
+  "middle_buttons": 0,
+  "programmable_buttons": 5,
+  "tilt_scroll_wheel": "no",
+  "adjustable_scroll_wheel": "no",
+  "onboard_memory": "yes",
+  "onboard_memory_value": 5,
+  "profile_switching": "yes",
+  "overall": 8.4,
+  "accuracy": 9.1,
+  "response": 6.7,
+  "quality": 8.2,
+  "comfort": 8.3,
+  "work": 7.5,
+  "feet_score": 9,
+  "fps_score": 7.8,
+  "mmo_score": 6.3,
+  "moba_score": 7.7,
+  "aarpg_score": 7.4,
+  "rts_score": 7.6,
+  "fps": "yes",
+  "mmo": "no",
+  "moba": "yes",
+  "aarpg": "yes",
+  "rts": "yes",
+  "snap_dateUpdated": "12/18/2025",
+  "snap_datePublished": null,
+  "snap_subtitle": "Compact right-hand wireless FPS mouse with hot-swappable clicks and tri-mode flexibility.",
+  "hubTags": [
+    "price_range",
+    "weight",
+    "connection",
+    "hot_swappable"
+  ],
+  "game1": "Valorant",
+  "game2": "Counter-Strike 2",
+  "game3": "Apex Legends",
+  "game4": "Rainbow Six Siege",
+  "game5": "Call of Duty: Warzone",
+  "game6": "League of Legends",
+  "game7": "Fortnite",
+  "game8": "",
+  "keytakeaway": "The ASUS ROG Keris Wireless AimPoint is a compact right-handed tri-mode wireless gaming mouse built for FPS staples like CS2 and Valorant, pairing a flagship-grade AimPoint sensor with one of the rarest “longevity” features in the category: hot-swappable main click switches. At 75g it’s more planted than today’s superlights, which can feel steadier for controlled tracking and holding angles, and the Bluetooth mode makes it easy to pull double duty for laptop/work setups. Pick it if you want high-end performance without giving up repairability and multi-device flexibility.",
+  "pcard": "The ASUS ROG Keris Wireless AimPoint is a compact, right-handed **tri-mode wireless gaming mouse** tuned for FPS games like Valorant and CS2, with a flagship AimPoint sensor and a standout **hot-swappable main switch socket** for easy repairs and click-feel tweaks. At **75 g**, it’s not a featherweight superlight, but the extra “planted” feel can be a plus for steadier aim and longer sessions. If you want to go lighter in the same general lane, check <pop=mouse-94>Logitech G Pro X Superlight 2</pop> or <pop=mouse-54>ASUS ROG Keris II Ace</pop>.",
+  "verdict": "The ASUS ROG Keris Wireless AimPoint is a compact **tri-mode wireless gaming mouse** built for competitive FPS players who want flagship-grade tracking and real long-term ownership value. It’s one of the few small ergonomic mice that feels at home both in **ranked CS2 or Valorant** and at your work desk the next morning—making it a rare “one mouse for everything” pick that doesn’t feel like a compromise.\r\n\r\n#### Why It Stands Out\r\nWhat separates the Keris AimPoint is ASUS’s pairing of the **ROG AimPoint sensor** with its **Push-Fit Switch Socket II** system. The sensor is effectively flawless for real-world use—650 IPS, 50 G, and <1 % CPI deviation—so your aim consistency will never be limited by tracking accuracy. The switch socket is where longevity kicks in: when your main clicks eventually wear out, you can hot-swap new ones (3-pin or 5-pin, mechanical or optical) in seconds without soldering.\r\n\r\n> It’s one of the only wireless FPS mice genuinely designed to be *repairable*, not disposable.\r\n\r\n#### Shape & Feel\r\nThe 118 mm shell classifies this as a **small-to-medium “micro-ergo”** shape that favors **claw and fingertip grips**. Its gentle right-hand sculpt gives more natural wrist alignment than ambidextrous designs while keeping micro-corrections effortless. At **75 g**, it sits between ultralight and stable—light enough for fast flicks, heavy enough to hold crosshairs steady in tactical shooters. Larger-hand palm grippers may find it cramped during long sessions, but for claw users it’s one of the most comfortable compacts around.\r\n\r\n| Aspect | What You’ll Notice |\r\n|--------|--------------------|\r\n| Weight | Balanced between control and agility; steady for tracking, not floaty |\r\n| Grip   | Ideal for claw/fingertip users; cramped for large palm grips |\r\n| Build  | Solid inner frame with no flex; no honeycomb cutouts |\r\n\r\n#### Wireless & Battery Life\r\nASUS’s **SpeedNova 2.4 GHz** mode feels as responsive as wired, while **Bluetooth** and **USB-wired** modes cover productivity and charging duties. Battery life stretches up to **119 hours (2.4 GHz)** or **150 hours (Bluetooth)** with RGB off, and the included **ROG Paracord** cable means you can play comfortably while charging. The optional grip tape helps if the sides feel slick—an appreciated detail.\r\n\r\n#### Community Pulse\r\nMany owners praise its tracking stability and switch feel, but **some report scroll-wheel encoder glitches** or minor **firmware quirks** after updates. They’re not universal issues, yet worth noting since the wheel isn’t modular like the main clicks.\r\n\r\n#### Who It Suits Best\r\nPlayers who value **customizability, repairability, and tri-mode flexibility** will find the Keris AimPoint almost unmatched below $100. If you want lighter or simpler alternatives:\r\n- Try the <pop=mouse-94>Logitech G Pro X Superlight 2</pop> for a minimalist ambidextrous feel.\r\n- Go for the <pop=mouse-128>Razer DeathAdder V3 Pro</pop> if you prefer a larger right-hand ergo shell.\r\n- Or step up to the <pop=mouse-54>ASUS ROG Keris II Ace</pop> if you want the same DNA in a 54 g, higher-polling “race-car” body (but lose the hot-swap feature).\r\n\r\n**Bottom line:** The ASUS ROG Keris Wireless AimPoint is a smart middle-ground pick for hybrid gamers who want **flagship wireless performance with DIY longevity**. Catch it on sale and it’s one of the strongest value plays in the premium wireless tier.",
+  "pros": [
+    "**Hot-swappable main clicks** (Push-Fit Switch Socket II)",
+    "**ROG AimPoint sensor**: 36K DPI / 650 IPS / 50 G / <1% CPI dev",
+    "**Tri-mode**: SpeedNova 2.4 GHz, Bluetooth, wired",
+    "**PBT main buttons** + included grip tape",
+    "**Long battery life** (119 h 2.4G / 150 h BT); play-while-charging"
+  ],
+  "cons": [
+    "75 g—heavier than most superlights",
+    "Compact shape can feel tight for large hands",
+    "Armoury Crate is bloated; set once and forget",
+    "Some scroll-wheel stutter reports"
+  ],
+  "youtube": "https://www.youtube.com/watch?v=ZzxKK0XNR7I",
+  "affiliateLinks": [
+    {
+      "url": "https://www.amazon.com/ROG-Keris-AimPoint-connectivity-programmable/dp/B0CNL46V1R?dib=eyJ2IjoiMSJ9.oSl8_tQQPcItpBD_dhxBG9V_rVGB--9SUhSa6Xudm9PZuviWdI0Z57qTWk-mTsjmQGWi186z2e3d-QlDVpHSZvi04jfusURhoAFO-ZYTQg9GcsE_cVxCsmR-ul4cDvoHAAc96XmpPKDrBNbIMoZpzKUEIW-xuvmyTuq0u-FW_f8Opssz_0JbnebdPBtButBYCfSMabVvtB_fOX0vsk1KASDohorjmLjnvLVJ_KRSsBk.1iWxp1P7IrjyzOKk5-WjeI1Q8YsIyZ6lkHvWYHNktg0&dib_tag=se&keywords=ASUS%2BROG%2BKeris%2BWireless&qid=1709829395&sr=8-1&th=1&linkCode=ll1&tag=eggear-20&linkId=d39db19a1026fee419881ff05f963787&language=en_US&ref_=as_li_ss_tl",
+      "retailer": "amazon",
+      "slug": "amazon",
+      "variant": "black",
+      "isPrimary": true
+    },
+    {
+      "url": "https://www.amazon.com/ROG-Keris-AimPoint-connectivity-programmable/dp/B0BRTF2PGP?dib=eyJ2IjoiMSJ9.oSl8_tQQPcItpBD_dhxBG9V_rVGB--9SUhSa6Xudm9PZuviWdI0Z57qTWk-mTsjmQGWi186z2e3d-QlDVpHSZvi04jfusURhoAFO-ZYTQg9GcsE_cVxCsmR-ul4cDvoHAAc96XmpPKDrBNbIMoZpzKUEIW-xuvmyTuq0u-FW_f8Opssz_0JbnebdPBtButBYCfSMabVvtB_fOX0vsk1KASDohorjmLjnvLVJ_KRSsBk.1iWxp1P7IrjyzOKk5-WjeI1Q8YsIyZ6lkHvWYHNktg0&dib_tag=se&keywords=ASUS%2BROG%2BKeris%2BWireless&qid=1709829395&sr=8-1&th=1&linkCode=ll1&tag=eggear-20&linkId=15bd9dbf5ca41f96ad1e41e9a1515796&language=en_US&ref_=as_li_ss_tl",
+      "retailer": "amazon",
+      "slug": "amazon",
+      "variant": "white",
+      "isPrimary": false
+    }
+  ],
+  "url": "/hubs/mouse/asus/rog-keris-wireless-aimpoint",
+  "gamesRecommended": [],
+  "media": {
+    "defaultColor": "black",
+    "colors": [
+      "black",
+      "white"
+    ],
+    "editions": [],
+    "images": [
+      {
+        "stem": "top",
+        "view": "top"
+      },
+      {
+        "stem": "left",
+        "view": "left"
+      },
+      {
+        "stem": "sangle",
+        "view": "sangle"
+      },
+      {
+        "stem": "bot",
+        "view": "bot"
+      },
+      {
+        "stem": "img1",
+        "view": "img",
+        "seq": 1
+      }
+    ]
+  }
+}

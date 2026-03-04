@@ -1,0 +1,210 @@
+{
+  "slug": "asus-rog-harpe-ace-aim-lab",
+  "brand": "Asus",
+  "model": "ROG Harpe Ace Aim Lab",
+  "baseModel": "ROG Harpe",
+  "variant": "Ace Aim Lab",
+  "category": "mouse",
+  "imagePath": "/images/mouse/asus/rog-harpe-ace-aim-lab",
+  "cardTags": "false",
+  "featured": "",
+  "release_date": "01/2023",
+  "discontinued": "",
+  "sku": "90MP02W0-BMAA10",
+  "price_range": 149.99,
+  "colors": [
+    "black",
+    "white"
+  ],
+  "design": [
+    "standard"
+  ],
+  "lighting": "1 zone (rgb)",
+  "rgb": "yes",
+  "connection": "hybrid",
+  "connectivity": "2.4GHz Dongle",
+  "computer_side_connector": "USB-A",
+  "mouse_side_connector": "USB-C",
+  "bluetooth": "yes",
+  "cable_type": "braided",
+  "paracord": "yes",
+  "wireless_charging": "no",
+  "battery_hours": 90,
+  "adjustable_weight": "no",
+  "feet_material": "PTFE (Virgin-Grade)",
+  "coating": "matte",
+  "honeycomb_frame": "no",
+  "silent_clicks": "no",
+  "weight": 54,
+  "material": "plastic",
+  "lngth": 127.5,
+  "width": 63.7,
+  "height": 39.6,
+  "form_factor": "right",
+  "shape": "symmetrical",
+  "hump": "back mid",
+  "front_flare": "outward",
+  "thumb_rest": "no",
+  "grip": [
+    "palm",
+    "claw",
+    "fingertip"
+  ],
+  "hand_size": [
+    "medium",
+    "large"
+  ],
+  "mcu": "Nordic nRF52840",
+  "mcu_link": "https://www.nordicsemi.com/Products/nRF52840",
+  "sensor": "AimPoint (PixArt PAW3395)",
+  "sensor_brand": "PixArt",
+  "sensor_date": "01/2022",
+  "sensor_link": "https://www.pixart.com/products-detail/129/PAW3395DM-T6QU",
+  "sensor_type": "optical",
+  "flawless_sensor": "yes",
+  "sensor_latency": 10.1,
+  "sensor_latency_list": [
+    "10.1 start",
+    "3.6 half",
+    "4.0 end"
+  ],
+  "shift_latency": "unk",
+  "polling_rate": [
+    1000,
+    500,
+    250,
+    125
+  ],
+  "dpi": 36000,
+  "ips": 650,
+  "acceleration": 50,
+  "lift": [
+    1.2
+  ],
+  "lift_settings": "adjustable",
+  "motion_sync": "yes",
+  "hardware_acceleration": "unk",
+  "smoothing": "unk",
+  "nvidia_reflex": "yes",
+  "switch": "ROG Micro Switch",
+  "switch_brand": "asus",
+  "switch_type": "mechanical",
+  "switch_link": "",
+  "hot_swappable": "no",
+  "debounce": "unk",
+  "click_latency": 1.9,
+  "click_latency_list": "1.9 wireless",
+  "click_force": "unk",
+  "encoder": "",
+  "encoder_brand": "",
+  "encoder_link": "",
+  "side_buttons": 2,
+  "middle_buttons": 0,
+  "programmable_buttons": 5,
+  "tilt_scroll_wheel": "no",
+  "adjustable_scroll_wheel": "no",
+  "onboard_memory": "yes",
+  "onboard_memory_value": 5,
+  "profile_switching": "yes",
+  "overall": 8.8,
+  "accuracy": 9.1,
+  "response": 7.6,
+  "quality": 8,
+  "comfort": 8.2,
+  "work": 7.4,
+  "feet_score": 9,
+  "fps_score": 8.6,
+  "mmo_score": 7.3,
+  "moba_score": 8.5,
+  "aarpg_score": 8,
+  "rts_score": 8.3,
+  "fps": "yes",
+  "mmo": "no",
+  "moba": "yes",
+  "aarpg": "no",
+  "rts": "yes",
+  "snap_dateUpdated": "12/16/2025",
+  "snap_datePublished": "12/16/2025",
+  "snap_subtitle": "Ultra-light FPS performer with Aim Lab DNA—impressive speed, but polarizing feel.",
+  "hubTags": [
+    "price_range",
+    "weight",
+    "polling_rate",
+    "connection",
+    "overall",
+    "fps"
+  ],
+  "game1": "Apex Legends",
+  "game2": "Call of Duty Warzone",
+  "game3": "League of Legends",
+  "game4": "Dota 2",
+  "game5": "",
+  "game6": "",
+  "game7": "",
+  "game8": "",
+  "keytakeaway": "The Asus ROG Harpe Ace Aim Lab Edition is a 54 g wireless gaming mouse built for competitive FPS titles like **CS2** and **Valorant**. Co-developed with the Aim Lab training platform, it pairs flagship-grade low-latency performance with a simple ambidextrous shape to translate fast flicks and precise tracking into onscreen success:contentReference[oaicite:0]{index=0}. Its Aim Lab Settings Optimizer even helps players fine-tune DPI, lift-off distance, and angle tuning to suit their play style. The result is a snappy, ultra-light FPS mouse that can elevate your aim—provided you don’t mind its intentionally stiff clicks and spartan design.",
+  "pcard": "The ASUS ROG Harpe Ace Aim Lab Edition is a lightweight wireless gaming mouse tuned for FPS titles like Valorant and Counter-Strike 2, with tri-mode connectivity and an Aim Lab workflow that helps you lock in sensible DPI and lift-off settings. At 54g it feels quick for micro-corrections, while the 36K AimPoint sensor and 90-hour rated battery keep it set-and-forget for daily queues. If you want the newer Harpe formula with higher polling options and a smaller fit, start with the <pop=mouse-52>ROG Harpe Ace Mini</pop>.",
+  "verdict": "The ASUS ROG Harpe Ace Aim Lab Edition is an ultralight wireless gaming mouse built for competitive FPS play (Valorant, Counter-Strike 2, and Overwatch 2), where clean clicks and predictable tracking matter more than extra buttons. It pairs a simple, symmetrical 54g shell with tri-mode connectivity (2.4GHz, Bluetooth, or wired) and an Aim Lab workflow that helps you calibrate settings with a bit more structure than \"copy a pro sens and pray.\"\r\n\r\n> If you like to train your aim, not just play, the Harpe Ace's tuning flow makes sense.\r\n\r\n#### Performance and settings\r\nOn pure performance, the Harpe Ace is the kind of mouse that's easy to trust. The AimPoint sensor (36,000 DPI / 650 IPS) has plenty of headroom for fast swipes, and the click response feels very fast in both wired and 2.4GHz modes. It tops out at 1000 Hz polling, which is still absolutely viable for ranked play - but if you're shopping specifically for 4K/8K polling in 2025, this isn't the mouse that's chasing that trend.\r\n\r\nThe \"Aim Lab Edition\" part isn't just branding. If you use Aim Lab's Settings Optimizer, it can guide you toward sensible DPI/sensitivity and lift-off behavior based on short calibration drills. And once you've found your baseline, on-board memory plus on-mouse shortcuts make it realistic to keep the mouse feeling consistent even if you hop between setups.\r\n\r\n| Aspect | What you'll notice |\r\n|---|---|\r\n| Weight | Quick micro-corrections and easy re-centers without feeling \"hollow\" |\r\n| Shape | Symmetrical with a back-mid hump that suits claw/fingertip and many relaxed palm grips |\r\n| Connectivity | 2.4GHz for gaming, Bluetooth for convenience, wired when you want zero fuss |\r\n| In the box | Dongle extender, grip tape, and spare feet help you dial in feel quickly |\r\n\r\n#### Comfort, grip, and build\r\nFor medium-to-large hands, this is a \"safe\" esports shape with enough support to stay controlled, but not so much bulk that it fights you on flicks. Claw and fingertip grips feel especially natural because the mouse is easy to pick up and redirect, and the hump gives you a reference point without forcing your hand into one position.\r\n\r\nTwo common feel notes are worth calling out. First, the coating can come off a little slick (especially at the start of a session) so the included grip tape is more than a throw-in if you want a planted hold. Second, the scroll wheel is accurate for weapon swaps and cycling abilities, but it's louder and a bit stiffer than \"premium office mouse\" wheels, and there's no tilt or free-spin mode.\r\n\r\n#### Who it's for, who it's not\r\nIf your main games are tactical shooters and arena FPS (or you're grinding aim trainers), the Harpe Ace makes a lot of sense: light weight, stable tracking, fast-feeling clicks, and enough customization to match your pad and grip. If you play MMOs, it's the wrong tool - two side buttons is fine for grenades and melee, not rotations and macros.\r\n\r\n#### Buying advice and alternatives\r\nAt its typical premium price, the Harpe Ace is easiest to recommend when you specifically want tri-mode flexibility and you'll actually use the Aim Lab tuning to lock in consistent settings. If you want the same general ROG \"esports\" approach with a smaller fit and higher polling options, look at the <pop=mouse-52>ROG Harpe Ace Mini</pop>. If you're shopping the same price tier but want higher polling options and a bigger battery rating, the <pop=mouse-3>Alienware Pro</pop> is a strong alternative. And if you just want a cheaper sub-60g wireless pick that still plays well in shooters, the <pop=mouse-19>Cooler Master MM712</pop> is worth a look.\r\n\r\nBottom line: the Harpe Ace Aim Lab Edition still nails the fundamentals of a competitive FPS mouse - its main compromise is that it's a 1000 Hz-era flagship priced in a world where newer high-polling options are everywhere.",
+  "pros": [
+    "54g shell feels quick for flicks and micro-corrections",
+    "AimPoint sensor (36K DPI, 650 IPS) stays stable at high-speed swipes",
+    "Very low click latency with crisp, consistent main clicks",
+    "Tri-mode connectivity (2.4GHz + Bluetooth + wired) and strong rated battery life",
+    "Useful extras in the box: dongle extender, grip tape, and spare feet"
+  ],
+  "cons": [
+    "Max 1000 Hz polling feels dated next to newer high-polling mice",
+    "Armoury Crate is required for deep tuning and can feel heavy",
+    "Coating can feel a bit slick until grip tape helps",
+    "Scroll wheel is louder/stiffer than many rivals and lacks tilt/free-spin"
+  ],
+  "youtube": "https://www.youtube.com/watch?v=AdHCUY7BHHk",
+  "affiliateLinks": [
+    {
+      "url": "https://www.amazon.com/ASUS-Ultra-Lightweight-Programmable-Connectivity-Bluetooth/dp/B0DSCS2L1N?crid=EDRZNYF4TM07&dib=eyJ2IjoiMSJ9.dvE8QfQbwLWj4bHLpt-ExkTOFw0yps_Xf5fYgoAjvRSWMioDTIx9KyrkhEvXZcx5P0-xj3JdZMvlw-SldHR5TQ._45o69k9OjuLbrPrcClQlz0Aw6YPxpp_eqBntLk3LcM&dib_tag=se&keywords=rog%2Bharpa%2Bace%2Bextreme&qid=1765856694&s=electronics&sprefix=rog%2Bharpe%2Bace%2Bextreme%2Caps%2C144&sr=1-4&th=1&linkCode=ll1&tag=eggear-20&linkId=2ab69bd6ec275767fd92975ea18da948&language=en_US&ref_=as_li_ss_tl",
+      "retailer": "amazon",
+      "slug": "amazon",
+      "variant": "black",
+      "isPrimary": true
+    },
+    {
+      "url": "https://www.amazon.com/ASUS-ROG-Wireless-Lightweight-AimPoint/dp/B0CCZQTF74?crid=EDRZNYF4TM07&dib=eyJ2IjoiMSJ9.dvE8QfQbwLWj4bHLpt-ExkTOFw0yps_Xf5fYgoAjvRSWMioDTIx9KyrkhEvXZcx5P0-xj3JdZMvlw-SldHR5TQ._45o69k9OjuLbrPrcClQlz0Aw6YPxpp_eqBntLk3LcM&dib_tag=se&keywords=rog%2Bharpa%2Bace%2Bextreme&qid=1765856694&s=electronics&sprefix=rog%2Bharpe%2Bace%2Bextreme%2Caps%2C144&sr=1-1&th=1&linkCode=ll1&tag=eggear-20&linkId=1711eb0910def6ed7a0e7a5fd7dd0a31&language=en_US&ref_=as_li_ss_tl",
+      "retailer": "amazon",
+      "slug": "amazon",
+      "variant": "white",
+      "isPrimary": false
+    }
+  ],
+  "url": "/hubs/mouse/asus/rog-harpe-ace-aim-lab",
+  "gamesRecommended": [],
+  "media": {
+    "defaultColor": "black",
+    "colors": [
+      "black",
+      "white"
+    ],
+    "editions": [],
+    "images": [
+      {
+        "stem": "top",
+        "view": "top"
+      },
+      {
+        "stem": "left",
+        "view": "left"
+      },
+      {
+        "stem": "sangle",
+        "view": "sangle"
+      },
+      {
+        "stem": "side",
+        "view": "shape-side"
+      },
+      {
+        "stem": "top",
+        "view": "shape-top"
+      }
+    ]
+  }
+}

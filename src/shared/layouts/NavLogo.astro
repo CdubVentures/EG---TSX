@@ -1,0 +1,85 @@
+---
+/**
+ * NavLogo.astro — "EG GEAR" text wordmark.
+ *
+ * Matches HBS `egLogo(true)` helper output exactly:
+ *   <div class="logo-container">
+ *     <a href="/" class="site-name">
+ *       <span class="navsitename1">EG</span>
+ *       <span class="navsitename2">GEAR</span>
+ *     </a>
+ *   </div>
+ *
+ * When link=false, renders a <span> instead of <a> (matches HBS `{{egLogo false}}`
+ * used inside auth popups where the logo shouldn't navigate).
+ *
+ * WHY Futura: matches --logo-font1 in HBS global.css.
+ * WHY text-box-trim: HBS uses it to kill leading/trailing whitespace on the
+ * Futura glyphs so the two spans sit flush. Fallback uses line-height: .85em.
+ */
+
+interface Props {
+  link?: boolean;
+}
+
+const { link = true } = Astro.props;
+---
+
+<div class="logo-container">
+  {link ? (
+    <a href="/" class="site-name">
+      <span class="navsitename1">EG</span>
+      <span class="navsitename2">GEAR</span>
+    </a>
+  ) : (
+    <span class="site-name">
+      <span class="navsitename1">EG</span>
+      <span class="navsitename2">GEAR</span>
+    </span>
+  )}
+</div>
+
+<style>
+  /* WHY: layout styles only — visual logo styles live in global.css (.site-name,
+     .navsitename1, .navsitename2) so they're shared with BrandLogo.tsx. */
+  .logo-container {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    text-decoration: none;
+    max-width: fit-content;
+    gap: 0rem;
+  }
+
+  /* WHY: <a> tag needs text-decoration stripped */
+  .site-name {
+    text-decoration: none;
+  }
+
+  /* ≤1150px: centered, full width */
+  @media (max-width: 1150px) {
+    .logo-container {
+      width: 100%;
+      gap: 0.15rem;
+      justify-self: center;
+    }
+
+    .site-name {
+      justify-content: center;
+    }
+  }
+
+  /* ≤825px: row layout */
+  @media (max-width: 825px) {
+    .logo-container {
+      order: 2;
+      display: flex;
+      flex-direction: row;
+      max-width: none;
+      justify-content: flex-start;
+      align-items: center;
+      gap: 0;
+      margin: 0;
+    }
+  }
+</style>

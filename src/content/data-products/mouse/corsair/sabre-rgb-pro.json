@@ -1,0 +1,179 @@
+{
+  "slug": "corsair-sabre-rgb-pro",
+  "brand": "Corsair",
+  "model": "Sabre RGB Pro",
+  "baseModel": "Sabre",
+  "variant": "RGB Pro",
+  "category": "mouse",
+  "imagePath": "/images/mouse/corsair/sabre-rgb-pro",
+  "cardTags": "false",
+  "featured": "",
+  "release_date": "04/2021",
+  "discontinued": "",
+  "sku": "CH-9303111-NA-RF",
+  "price_range": 59.99,
+  "colors": [
+    "black"
+  ],
+  "design": [
+    "standard"
+  ],
+  "lighting": "2 zone (rgb)",
+  "rgb": "yes",
+  "connection": "wired",
+  "connectivity": "n/a",
+  "computer_side_connector": "USB-A",
+  "mouse_side_connector": "n/a",
+  "bluetooth": "no",
+  "cable_type": "braided",
+  "paracord": "yes",
+  "wireless_charging": "no",
+  "battery_hours": "n/a",
+  "adjustable_weight": "no",
+  "feet_material": "PTFE (Black-Dyed)",
+  "coating": "matte",
+  "honeycomb_frame": "no",
+  "silent_clicks": "no",
+  "weight": 74,
+  "material": "plastic",
+  "lngth": 129,
+  "width": 70,
+  "height": 43,
+  "form_factor": "right",
+  "shape": "ergonomic",
+  "hump": "middle",
+  "front_flare": "outward",
+  "thumb_rest": "no",
+  "grip": [
+    "palm",
+    "claw"
+  ],
+  "hand_size": [
+    "medium",
+    "large"
+  ],
+  "mcu": "NXP LPC54605J512",
+  "mcu_link": "https://www.nxp.com/products/LPC546XX",
+  "sensor": "PAW3392",
+  "sensor_brand": "PixArt",
+  "sensor_date": "",
+  "sensor_link": "https://www.corsair.com/newsroom/press-release/corsair-launches-three-new-gaming-mice-alongside-slipstream-corsair-wireless-technology",
+  "sensor_type": "optical",
+  "flawless_sensor": "yes",
+  "sensor_latency": "unk",
+  "sensor_latency_list": [
+    "unk"
+  ],
+  "shift_latency": "unk",
+  "polling_rate": [
+    8000,
+    4000,
+    2000,
+    1000,
+    500,
+    250,
+    125
+  ],
+  "dpi": 26000,
+  "ips": 400,
+  "acceleration": 50,
+  "lift": [
+    1.2
+  ],
+  "lift_settings": "unk",
+  "motion_sync": "unk",
+  "hardware_acceleration": "no",
+  "smoothing": "unk",
+  "nvidia_reflex": "yes",
+  "switch": "D2FC -F-K(50M)",
+  "switch_brand": "omron",
+  "switch_type": "mechanical",
+  "switch_link": "",
+  "hot_swappable": "no",
+  "debounce": "unk",
+  "click_latency": 3,
+  "click_latency_list": "3 wired",
+  "click_force": "unk",
+  "encoder": "",
+  "encoder_brand": "",
+  "encoder_link": "",
+  "side_buttons": 2,
+  "middle_buttons": 1,
+  "programmable_buttons": 6,
+  "tilt_scroll_wheel": "no",
+  "adjustable_scroll_wheel": "no",
+  "onboard_memory": "yes",
+  "onboard_memory_value": "unk",
+  "profile_switching": "yes",
+  "overall": 7.89,
+  "accuracy": 8.4,
+  "response": 6.25,
+  "quality": 7.8,
+  "comfort": 8.3,
+  "work": 7,
+  "feet_score": 7.2,
+  "fps_score": 7.28,
+  "mmo_score": 5.2,
+  "moba_score": 6.94,
+  "aarpg_score": 6.94,
+  "rts_score": 7.11,
+  "fps": "yes",
+  "mmo": "no",
+  "moba": "yes",
+  "aarpg": "yes",
+  "rts": "yes",
+  "snap_dateUpdated": "12/9/2025",
+  "snap_datePublished": null,
+  "snap_subtitle": "",
+  "hubTags": [],
+  "game1": "",
+  "game2": "",
+  "game3": "",
+  "game4": "",
+  "game5": "",
+  "game6": "",
+  "game7": "",
+  "game8": "",
+  "keytakeaway": "",
+  "pcard": "",
+  "verdict": "",
+  "pros": [],
+  "cons": [],
+  "youtube": "https://www.youtube.com/watch?v=0w8QmB0U-8Q",
+  "affiliateLinks": [
+    {
+      "url": "https://www.amazon.com/CORSAIR-Sabre-Champion-Gaming-Mouse/dp/B08W2J9JZ9?crid=1UR6YJSKNQ0WW&dib=eyJ2IjoiMSJ9.MgkUfFEm4aB3zaUObkVi89W0h4dyblTtA9Bj86fXoeq5eJQ-2X_iSCJiAPD0fCw0VufNVwX-3yYIX26vtZ3vIxKyjm8vRtdCNgkhTuWgnBzteL6eAtQeTlhGxJPXKCYJRtboSwH7C2EqFiPOfbpmwv3mY8xKhCdbV8Ue5FefmgdMP6sx_TfF1mGq4M0_F_ltXgjWfA3C65Ka5evGUCchk4PnsZT2336MHTJHJfV_C5Y.ZiXxgpUZX-Db9mQ-nd0oMgOsZkwPnyBwW8WchmTm48s&dib_tag=se&keywords=Corsair%2BSabre%2BPro&qid=1765419491&sprefix=corsair%2Bsabre%2Bpro%2Caps%2C142&sr=8-7&th=1&linkCode=ll1&tag=eggear-20&linkId=6a076d7a793dae6d0aaea37ba44b2387&language=en_US&ref_=as_li_ss_tl",
+      "retailer": "amazon",
+      "slug": "amazon",
+      "variant": "",
+      "isPrimary": true
+    }
+  ],
+  "url": "/hubs/mouse/corsair/sabre-rgb-pro",
+  "gamesRecommended": [],
+  "media": {
+    "defaultColor": "black",
+    "colors": [
+      "black"
+    ],
+    "editions": [],
+    "images": [
+      {
+        "stem": "top",
+        "view": "top"
+      },
+      {
+        "stem": "left",
+        "view": "left"
+      },
+      {
+        "stem": "side",
+        "view": "shape-side"
+      },
+      {
+        "stem": "top",
+        "view": "shape-top"
+      }
+    ]
+  }
+}

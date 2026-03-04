@@ -1,0 +1,177 @@
+{
+  "slug": "corsair-katar-pro-wireless",
+  "brand": "Corsair",
+  "model": "Katar Pro Wireless",
+  "baseModel": "Katar",
+  "variant": "Pro Wireless",
+  "category": "mouse",
+  "imagePath": "/images/mouse/corsair/katar-pro-wireless",
+  "cardTags": "false",
+  "featured": "",
+  "release_date": "10/2020",
+  "discontinued": "",
+  "sku": "CH-931C011-NA",
+  "price_range": 39.99,
+  "colors": [
+    "black"
+  ],
+  "design": [
+    "standard"
+  ],
+  "lighting": "1 zone (rgb)",
+  "rgb": "yes",
+  "connection": "wireless",
+  "connectivity": "2.4GHz Dongle",
+  "computer_side_connector": "USB-A",
+  "mouse_side_connector": "n/a",
+  "bluetooth": "yes",
+  "cable_type": "braided",
+  "paracord": "yes",
+  "wireless_charging": "no",
+  "battery_hours": 135,
+  "adjustable_weight": "no",
+  "feet_material": "PTFE (Black-Dyed)",
+  "coating": "matte",
+  "honeycomb_frame": "no",
+  "silent_clicks": "no",
+  "weight": 96,
+  "material": "plastic",
+  "lngth": 115.8,
+  "width": 64.2,
+  "height": 37.8,
+  "form_factor": "right",
+  "shape": "symmetrical",
+  "hump": "back - front",
+  "front_flare": "inward",
+  "thumb_rest": "no",
+  "grip": [
+    "claw",
+    "fingertip"
+  ],
+  "hand_size": [
+    "small",
+    "medium"
+  ],
+  "mcu": "unk",
+  "mcu_link": "",
+  "sensor": "PMW3325",
+  "sensor_brand": "PixArt",
+  "sensor_date": "",
+  "sensor_link": "",
+  "sensor_type": "optical",
+  "flawless_sensor": "yes",
+  "sensor_latency": "unk",
+  "sensor_latency_list": [
+    "unk"
+  ],
+  "shift_latency": "unk",
+  "polling_rate": [
+    2000,
+    1000,
+    500,
+    250,
+    125
+  ],
+  "dpi": 10000,
+  "ips": 100,
+  "acceleration": 20,
+  "lift": [
+    3.6
+  ],
+  "lift_settings": "fixed high",
+  "motion_sync": "no",
+  "hardware_acceleration": "unk",
+  "smoothing": "unk",
+  "nvidia_reflex": "no",
+  "switch": "Black Shell Blue Dot",
+  "switch_brand": "huano",
+  "switch_type": "mechanical",
+  "switch_link": "",
+  "hot_swappable": "no",
+  "debounce": "unk",
+  "click_latency": 2.3,
+  "click_latency_list": "2.3 wireless",
+  "click_force": "unk",
+  "encoder": "",
+  "encoder_brand": "",
+  "encoder_link": "",
+  "side_buttons": 2,
+  "middle_buttons": 1,
+  "programmable_buttons": 6,
+  "tilt_scroll_wheel": "no",
+  "adjustable_scroll_wheel": "no",
+  "onboard_memory": "yes",
+  "onboard_memory_value": 1,
+  "profile_switching": "yes",
+  "overall": 6.7,
+  "accuracy": 6.9,
+  "response": 6.9,
+  "quality": 7.3,
+  "comfort": 7.1,
+  "work": 7.4,
+  "feet_score": 7.1,
+  "fps_score": 5.9,
+  "mmo_score": 5.2,
+  "moba_score": 6,
+  "aarpg_score": 5.8,
+  "rts_score": 5.8,
+  "fps": "yes",
+  "mmo": "no",
+  "moba": "yes",
+  "aarpg": "no",
+  "rts": "no",
+  "snap_dateUpdated": "11/26/2025",
+  "snap_datePublished": null,
+  "snap_subtitle": "",
+  "hubTags": [],
+  "game1": "",
+  "game2": "",
+  "game3": "",
+  "game4": "",
+  "game5": "",
+  "game6": "",
+  "game7": "",
+  "game8": "",
+  "keytakeaway": "",
+  "pcard": "",
+  "verdict": "",
+  "pros": [],
+  "cons": [],
+  "youtube": "https://www.youtube.com/watch?v=5SuLe-UqIWg",
+  "affiliateLinks": [
+    {
+      "url": "https://www.amazon.com/Corsair-Lightweight-Slipstream-Technology-Symmetric/dp/B08W9CJKZP?crid=3LFN4S4GU10SW&dib=eyJ2IjoiMSJ9.C8ZQW6kh3mAQJs3ZA-Kt7P-xHX-BpVtT8hHz1lDUSvkEis9P1kQSTv41qDKCjJ4Yf-VwvBBTWhQymA-7rnjBZzFJYIH5plhRcxntXsk_b0LeLViGpLyHEmHPVXxN3YRhcA3HL61uy1mZNQ2S6ZH3tsl5Ywu2v1LLkoobOi15sxMSMPznL9N95Nr_HBX6fYMvRPQPdCTIppjl2XMULMtMyb6H_5sa3ALMdl_Lj8ewwSM.WRXErXtcQTFjeJ3JFZVODAie_dZs3bcT8deI9-OSVcs&dib_tag=se&keywords=Corsair+Katar+Pro+Wireless&qid=1712953073&sprefix=corsair+katar+pro+wireless%2Caps%2C166&sr=8-4&linkCode=ll1&tag=eggear-20&linkId=88c52db790b92f6e9893634b16747281&language=en_US&ref_=as_li_ss_tl",
+      "retailer": "amazon",
+      "slug": "amazon",
+      "variant": "",
+      "isPrimary": true
+    }
+  ],
+  "url": "/hubs/mouse/corsair/katar-pro-wireless",
+  "gamesRecommended": [],
+  "media": {
+    "defaultColor": "black",
+    "colors": [
+      "black"
+    ],
+    "editions": [],
+    "images": [
+      {
+        "stem": "top",
+        "view": "top"
+      },
+      {
+        "stem": "left",
+        "view": "left"
+      },
+      {
+        "stem": "side",
+        "view": "shape-side"
+      },
+      {
+        "stem": "top",
+        "view": "shape-top"
+      }
+    ]
+  }
+}

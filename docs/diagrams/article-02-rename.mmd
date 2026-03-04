@@ -1,0 +1,49 @@
+flowchart TB
+  subgraph RENAME_TYPE["WHAT KIND OF ARTICLE IS BEING RENAMED?"]
+    direction LR
+    Q1["REVIEW\n(productId-linked)"]
+    Q2["GUIDE / NEWS\n(own image folder)"]
+  end
+
+  subgraph REVIEW_RENAME["REVIEW RENAME -- SAFE (images unaffected)"]
+    direction TB
+    RR1["Rename file:\nrazer-viper-v3-pro-review.md\n  -> razer-viper-v3-pro-\n     gaming-mouse-review.md"]
+    RR2["Astro entry.id changes:\nrazer-viper-v3-pro-review\n  -> razer-viper-v3-pro-\n     gaming-mouse-review"]
+    RR3["productId UNCHANGED:\nstill razer-viper-v3-pro\n(points to product, not file)"]
+    RR4["Product images UNCHANGED:\npublic/images/mouse/razer/\nviper-v3-pro/ stays put"]
+    RR5["URL changes:\n/reviews/mouse/\n  razer-viper-v3-pro-review\n  -> razer-viper-v3-pro-\n     gaming-mouse-review"]
+    RR6["Components UNAFFECTED:\ngetImage() + contentImage()\nstill work (reads from\nproduct.imagePath + media\nnot from article filename)"]
+    RR1 --> RR2 --> RR3 --> RR4
+    RR1 --> RR5 --> RR6
+  end
+
+  subgraph GUIDE_RENAME["GUIDE / NEWS RENAME -- REQUIRES FOLDER MOVE"]
+    direction TB
+    GR1["Rename file:\nbest-fps-mice-2026.md\n  -> best-fps-mice-\n     march-2026.md"]
+    GR2["Astro entry.id changes:\nbest-fps-mice-2026\n  -> best-fps-mice-march-2026"]
+    GR3["MUST also rename image folder:\npublic/images/guides/mouse/\n  best-fps-mice-2026/\n  -> best-fps-mice-march-2026/"]
+    GR4["URL changes:\n/guides/mouse/\n  best-fps-mice-2026\n  -> best-fps-mice-march-2026"]
+    GR5["Tooling handles both renames\natomically (file + folder together)"]
+    GR1 --> GR2 --> GR3 --> GR4
+    GR3 --> GR5
+  end
+
+  RENAME_TYPE -->|"Review"| REVIEW_RENAME
+  RENAME_TYPE -->|"Guide / News"| GUIDE_RENAME
+
+  style RENAME_TYPE fill:#7f1d1d,stroke:#ef4444,color:#eee
+  style REVIEW_RENAME fill:#064e3b,stroke:#10b981,color:#eee
+  style GUIDE_RENAME fill:#92400e,stroke:#f59e0b,color:#eee
+  style Q1 fill:#7f1d1d,stroke:#ef4444,color:#eee
+  style Q2 fill:#7f1d1d,stroke:#ef4444,color:#eee
+  style RR1 fill:#064e3b,stroke:#10b981,color:#eee
+  style RR2 fill:#064e3b,stroke:#10b981,color:#eee
+  style RR3 fill:#064e3b,stroke:#10b981,color:#eee
+  style RR4 fill:#064e3b,stroke:#10b981,color:#eee
+  style RR5 fill:#064e3b,stroke:#10b981,color:#eee
+  style RR6 fill:#064e3b,stroke:#10b981,color:#eee
+  style GR1 fill:#92400e,stroke:#f59e0b,color:#eee
+  style GR2 fill:#92400e,stroke:#f59e0b,color:#eee
+  style GR3 fill:#92400e,stroke:#f59e0b,color:#eee
+  style GR4 fill:#92400e,stroke:#f59e0b,color:#eee
+  style GR5 fill:#92400e,stroke:#f59e0b,color:#eee

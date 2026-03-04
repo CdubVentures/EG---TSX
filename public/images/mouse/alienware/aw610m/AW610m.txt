@@ -1,0 +1,1417 @@
+
+
+AW610m
+
+YOU ARE GOING TO WRITE 100% of this ARTICLE , ALL 2500-4000 WORDS IN THE JSON TEMPLATE PROVIDED ABOVE , FOLLOWING THE INSTRUCTIONS BELOW VERY CAREFULLY AND REFERING TO ALL TH ELINKED ARTICLES FOR INFORMATION AND MATERIAL AND OPNIONs
+
+i would like you to write a product review based for  the Alienware 610m      on all the information i have posted in this conversation (it is very important you use all of this information to be thorough and precise), please be professional, fun, relatable and friendly, remember you are a gamer and engineer with 30 years of gaming experience and 15+ as an engineer,  reference current games where you feel applicable. Also remember you are Review writing which requires the reviewer to consider various aspects, such as quality, performance, usability, and value for money. It often incorporates descriptions, examples, and comparisons to support the evaluation. Never tell the reader to continue on, instead offer opinions and keep the article engaging and come across as a real person. They clicked to the site, it's your job to keep them engaged and reading while following the structure and guidelines below. ENSURE YOU HAVE A CONVERSTAIONAL TONE THROUGHOUT and you need to write more enganging and Start some paragraphs with a Hook: Begin your content with an attention-grabbing hook—a provocative question, a surprising fact, a compelling anecdote, or a thought-provoking statement that piques readers' curiosity. You can add past knowledge of the brand or histroy to add value and depth
+
+
+Providing insights and recommendations, review writing helps consumers make informed decisions and promotes dialogue within communities of enthusiasts and consumers.
+
+
+Review Writing Characteristics
+
+– Evaluation and critique
+
+– Subjectivity and personal opinion
+
+– Supporting evidence and examples
+
+Authoritative yet Accessible: The author speaks with knowledge and experience (mentioning testing procedures, industry standards, and comparisons), but the language remains easy to follow and understand, making it accessible to a broad audience.
+
+Comparative Context: The piece frequently references similar products, industry benchmarks, and competitor mice, situating the item in a broader marketplace. This adds depth and credibility to the critique.
+
+Personal Experience and Subjective Impressions: The reviewer doesn’t shy away from personal anecdotes—how the mouse felt during extended use, the nature of discomfort over time, and subtle ergonomic quirks. This personal angle humanizes the review and helps readers relate.
+
+Analytical Detail: Technical elements like sensor specifications, battery life, software capabilities, and design nuances are dissected. The tone is informed and detail-oriented, showing the reviewer’s familiarity with gaming peripherals and their performance metrics.
+
+Balanced Critique: While the language can be blunt about shortcomings, the review acknowledges positive elements. It’s not a purely negative takedown; rather, it provides a fair, even-handed evaluation aimed at helping potential buyers make informed decisions.
+
+
+
+Below is how I would like the article structured. each section can be multiple paragraphs or one, when applicable use bullet points in some sections to highlight information for the reader easily,  information that is important, all sections should be completed main and subsections. It is very important that you keep the article focused on crafting high-quality, engaging, and informative content that provides real value to readers. The Intro to conclusion  should be between 2000 and 3500 words. the first 3 our for seo only. When using specs and data why I want you to take and use the opinions from the other articles only use the specs I linked in the last post.  
+
+Always add internal links where you feel you can and underline them so i know, you shoudl do this when referencing alternative brands and models, games I will eventually have links to brands reviews, mouses by game reviews. Underline it for now and I'll go back and add them late.  
+
+Be sure to include internal links at least once to my sites mouse-hub ; a page that has 100s of mice avilable to easily compare all side by side, hsapes side by side , mini reviews, full reviews and detailed specifications etc 
+
+
+creative tag 1 to 3 word for seo tag , this is displayed on the article display card on the homepage and other pages 
+creative title yet seo optimized - for ranking and article display on other pages
+creative subtitle yet seo optimized - for ranking and article display on other pages
+seoKeywords - for ranking 
+seoDescription - for ranking 
+keytakeaway - which is our opinion based on all the linked articled and everything below, and acts as a at a glance summary to of the product and company, no more than 60 words. 
+
+we rarely want to be below a 7 for overall score, you need to use that sensor chart as reference , as that is the KPI of performance , there are obvisly other factors to consider, we are an unbiased review site but use decimal places to help balance this
+
+overall score ( 1 to 10) based on articles and my opinion and the weight of scores below , really learn from the 				linked articles and score based on data
+accuracy  score ( 1 to 10) (24.25% weighted to overall score)  based on articles and my opinion 
+response score ( 1 to 10) (24.25% weighted to overall score) based on articles and my opinion
+quality score ( 1 to 10) (24.25% weighted to overall score) based on articles and my opinion
+comfort score ( 1 to 10) (24.24% weighted to overall score) based on articles and my opinion
+work score ( 1 to 10) (5% weighted to overall score) based on articles and my opinion
+FPS video games score ( 1 to 10) based on posted articles and my opinion, should never have the same score as the 				others, also do research on what makes a good FPS mouse us that as a factor 
+MMO video Games score ( 1 to 10) based on posted articles and my opinion, should never have the same score as the 				others, also do research on what makes a good MMO mouse us that as a factor
+MOBOA video Game score ( 1 to 10) based on posted articles and my opinion, should never have the same score as the 				others, also do research on what makes a good MOBA mouse us that as a factorn
+Do the same for RTS video games and aarpg video games
+
+Do not put the calculations or any math in the tooltips for how we weight or conclude scores , the tooltips are for the reader to understand why we went with that score or help explain what the spec is and how it compares to the market and help the understand make informed disccions, these should not be length 
+
+
+The article will be provided in JSON format, 100% of it in full, i provided examples below and an intial example above .
+The top-level JSON object will contain fields like id, brand, model, datePublished, title, description, pros, cons, and sections.You will start writing at TAG i will fill in
+
+        "id": "",
+        "brand": "",
+        "model": "",
+        "url": "",
+        "dateUpdated": "",
+        "datePublished": "",
+        "dashboard": "",
+        "pinned": "",
+        "gamesRecommended": [
+
+        ],
+        "shapesVaultItems": [
+
+        ],
+        "versusVaultItems": [
+        ], 
+
+
+For the main body of the article, each section and subsection will use a content array.
+Within content, use objects with type to specify the kind of content block:
+"paragraphs": An object containing a paragraphs array of strings. Each string is one paragraph.
+"bullets": An object containing an items array of bullet point strings.
+"images": An object containing an images array. Each element in images has src, zoom, and alt.
+The order of content objects should match the order in which the content should appear in the final article. For instance, if you want a paragraph, then bullets, then an image, just list them in that sequence.
+For subsections, use the subsections array under a given section. Each subsection also has a content array following the same pattern.
+Style and Formatting Rules:
+
+Intro: 175 to 250 words, SEO optimized, no author focus.
+Pros/Cons:
+Pros and cons are given as arrays of strings at the top level (pros, cons).
+Each bullet should be under 25 words, ideally 3-8 bullets.
+Make them concise and punchy based on the articles and opinions below .
+Sections and Subsections:
+Follow the structure provided:
+
+Article Structure:
+
+Intro - especially seo optimized (175 to 300 words, never focus on the author, no one will care)
+Pros - in bulleted format (never over 25 words, average of 3-8, can be good to include longer bullets though)
+Cons - in bulleted format  (never over 25 words, average of 3-8, can be good to include longer bullets though)
+Build Quality
+    Shape & Dimensions
+    Grip Recommendations
+    Coating
+    Mouse Feet
+Buttons and Scroll Wheel
+    Side Buttons
+    Main Buttons
+    Scroll Wheel
+Performance and Gaming
+    Gaming Experience
+    Sensor and Performance
+    Switch
+    Battery Life
+Work and Everyday Use
+Software
+    Customization
+    Ease of Use
+Alternatives
+Conclusion and Verdict
+
+
+Each of these headings corresponds to a title (for main sections) or subTitle (for subsections). For subsections, create an object in subsections with subTitle and a content array.
+Within content, use "type": "paragraphs" for regular text and "type": "bullets" for lists. If you need images, use "type": "images" and provide the necessary fields.
+Paragraph text should be in natural, professional, and SEO-friendly language.
+For bullet lists (e.g., pros, cons, or recommended grips), just list items in the items array.
+Follow the given instructions for word counts, especially in the Intro.
+Do not focus on the author or mention personal involvement; keep it objective and product-focused.
+Ensure that SEO considerations are naturally integrated (e.g., using the product name and related keywords where appropriate).
+
+
+Example Format Sketch (not final text, just a template):
+
+{
+  "id": 2,
+  "brand": "Alienware",
+  "model": "AW610M",
+  "datePublished": "2024-06-17",
+  "title": "Alienware AW610M Review: Your Next High-Precision Wired/Wireless Gaming Mouse",
+  "description": "Short SEO-friendly description...",
+  "cardSummary": "A brief card summary for quick reference...",
+  "intro": {
+    "content": [
+      {
+        "type": "paragraphs",
+        "paragraphs": [
+          "Intro paragraph 1...",
+          "Intro paragraph 2..."
+        ]
+      },
+      {
+        "type": "images",
+        "images": [
+          {
+            "src": "/images/mice/brand/model/title.webp",
+            "zoom": "/images/mice/brand/model/title_zoom.webp",
+            "alt": "Descriptive alt text"
+          }
+        ]
+      },
+      {
+        "type": "paragraphs",
+        "paragraphs": [
+          "Intro paragraph 3..."
+        ]
+      }
+    ]
+  },
+  "pros": [
+    "Short bullet 1",
+    "Short bullet 2"
+  ],
+  "cons": [
+    "Short bullet 1",
+    "Short bullet 2"
+  ],
+  "sections": [
+    {
+      "title": "Build Quality",
+      "content": [
+        {
+          "type": "paragraphs",
+          "paragraphs": [
+            "Paragraph about build quality..."
+          ]
+        }
+      ],
+      "subsections": [
+        {
+          "subTitle": "Shape & Dimensions",
+          "content": [
+            {
+              "type": "paragraphs",
+              "paragraphs": [
+                "Description of shape and dimensions..."
+              ]
+            }
+          ]
+        },
+        {
+          "subTitle": "Grip Recommendations",
+          "content": [
+            {
+              "type": "bullets",
+              "items": [
+                "Palm Grip: ...",
+                "Claw Grip: ...",
+                "Fingertip Grip: ..."
+              ]
+            }
+          ]
+        }
+        // ...and so on for Coating, Mouse Feet
+      ]
+    }
+    // ...and so forth for other main sections (Buttons and Scroll Wheel, Performance and Gaming, etc.)
+  ]
+}
+Writing the Article Step-by-Step:
+
+Start with the Intro section. Write the intro as paragraphs blocks and include images if needed. Keep the word count within 175-250 words. Insert type: "paragraphs" blocks as many times as needed. If you need an image, add type: "images" in between.
+Fill in the pros and cons arrays at the top level with your bullet points. Keep each bullet under 25 words.
+Move through each main section (e.g., "Build Quality"). Write a few paragraphs if needed (type: "paragraphs"), then create subsections with their own content. For example, "Shape & Dimensions" might have one paragraphs block, while "Grip Recommendations" might have a bullets block.
+For subsections that need multiple paragraphs and maybe a bullet list afterward, just create multiple content blocks in the desired order. For example:
+
+
+"content": [
+  {
+    "type": "paragraphs",
+    "paragraphs": ["First paragraph of subsection..."]
+  },
+  {
+    "type": "bullets",
+    "items": ["Bullet 1", "Bullet 2"]
+  },
+  {
+    "type": "paragraphs",
+    "paragraphs": ["Another paragraph after the bullets..."]
+  }
+]
+This ensures exact control over the reading order.
+Continue with all sections (Buttons and Scroll Wheel, Performance and Gaming, etc.), following the same structure: paragraphs, bullets, images as needed, in any order.
+For images, always provide src, zoom, and alt. src is the image path, zoom is the zoomable version (if any), and alt is a descriptive alt text for SEO and accessibility.
+Conclude with the "Conclusion and Verdict" section, again as a sequence of type: "paragraphs" or mixed blocks as needed.
+Final Checks:
+
+Ensure the JSON is valid and properly formatted.
+Make sure it meets all my requirements in this post especially the SEO and using the prior linked articles as reference and data source for our review to add depth
+Make sure all sections and subsections match the requested structure.
+Check word counts where specified (e.g., Intro).
+
+the text is inline html so add styles in text for strong and underlined and change links to be in my   use these to change text 
+
+.mouse-review-body-link {
+    color: var(--brand-color);
+}
+
+.mouse-review-body-underline {
+    text-decoration: underline;
+}
+
+
+.mouse-review-body-bold {
+    font-weight: bold;
+}
+
+
+
+example of adding a link <a href=\"/mouse-hub\" class=\"mouse-review-body-link\">our Mouse Hub</a> 
+
+ example of adding an underline  "<span class=\"mouse-review-body-underline\">Logitech G Pro Wireless</span>: Ultra-light, esports-friendly precision.",
+
+Below are other factors you need to include
+
+ALSO ITS VERY IMPORTANT YOU NEVER SAY FROM OR REFERENCE FROM ONE OF THE REVIEWS I LINKED, THOSE ARE INFOMRTAIONAL PIECES FOR US TO EDUCATE OURSELVES AND USE TO HELP WRITE OUR REVIEW, YOU CAN EVEN PARAPHRASE OR TAKE INFOMRATION THAT ALIGNS WITH OUR REVIEW BUT DO NOT STATE THE SOURE EVER! 
+
+
+My personal opinion: 
+
+its uncomfortable for me when using  palm use, i think the nature of my hands size just didn't modl well but other uses had no issues and preferred it, and a little awkward for other grips, i find i have large hands and still am not able to quite reach the front side button easily but that probably had to do alot with my comfort with this mouse was a fingertip grip experience. The scroller has two setting one very stiff which I find quite functional in working application but can have downsides in most games, the lighter one which i used for gaming. Its on the heavy side , i found it much comfortable to use on a soft mouse pad rather than a hard surface . Given its weight I cnat help but say it does feel well built and sturdy and has a unique appeal i find very attractive . given the mouses weight i opted to test with valorant and fortnite, it lacks competive edge for at least when playing MMO or Moba, since i'm comfortable playing fps at well over 3000 dpi i found the weight ration quite nice, when decreasing thge dpi it did become probalmtic. these are largely nitpicks, having had great sucess with other mice recently. this is a mouse for someone who prefers things heavy and understands that going into , it great feel if you can adjust to the weight , im on the stronger side and its a little much for me on long days but works well. Given its got non virgin 100% ptfe it does glide smooth but it being on the heavy side the intial amount of force to get it going can be an issue , once in motion though it glides quite well. 
+
+
+Include these keywords as often as you can without breaking seo ranking rules , ensure it flows, utilize the, when referencing games or brand try and do Fortnite mouse or whatever game we are referencing , etc to help stregthen keywords for other search factors keywords i shared from our top competitors  
+
+Alienware AW610M review
+Alienware AW610M
+alienware mouse
+alienware mouses
+alienware mice
+wireless gaming mouse
+wired/wireless gaming mouse
+white gaming mouse
+good gaming mouse
+gaming mouse
+
+keywords to include when you can 
+Adjustable DPI"
+PTFE feet"
+Ergonomic design
+Adjustable mouse wheel feel
+High DPI up to 16,000
+7 customizable buttons
+Non-slip rubberized material
+Ergonomic shape” / “Palm grip
+PTFE feet” (important for gamers looking for good glide)
+Wired or wireless operation
+350 hours of battery life (from one of the reviews)
+Alienware Command Center (the software for customization)
+
+Reference competitors brands and models
+
+do not use quotation unless referring to speech or text that someone has said or written
+
+Keywords of top competitors 
+
+Keyword
+Intent
+Position
+SERP Features
+Traffic
+Traffic %
+Volume
+KD %
+URL
+Updated
+what is wireless report rate
+
+I
+62
++4
+0
+< 0.01
+70
+28
+www.techpowerup.com/review/alienware-pro-wireless-gaming-mouse/5.html
+Dec 03
+mouse cpi test
+
+I
+24
++3
+0
+< 0.01
+110
+32
+www.techpowerup.com/review/alienware-pro-wireless-gaming-mouse/5.html
+Dec 12
+alienware pro wireless gaming mouse
+
+I
+T
+19
++7
+0
+< 0.01
+90
+45
+www.techpowerup.com/review/alienware-pro-wireless-gaming-mouse/7.html
+Dec 05
+alien mouse
+
+I
+T
+41
++4
+0
+< 0.01
+140
+25
+www.techpowerup.com/review/alienware-pro-wireless-gaming-mouse/
+Dec 06
+alienware pro mouse
+
+T
+16
++6
+0
+< 0.01
+110
+35
+www.techpowerup.com/review/alienware-pro-wireless-gaming-mouse/5.html
+Nov 28
+alienware pro mouse
+
+T
+25
++6
+0
+< 0.01
+110
+35
+www.techpowerup.com/review/alienware-pro-wireless-gaming-mouse/8.html
+Nov 28
+what is cpi on mouse
+
+I
+88
++5
+0
+< 0.01
+110
+46
+www.techpowerup.com/review/alienware-pro-wireless-gaming-mouse/5.html
+Nov 25
+alienware pro wireless mouse
+
+C
+19
++5
+0
+< 0.01
+90
+43
+www.techpowerup.com/review/alienware-pro-wireless-gaming-mouse/7.html
+Nov 28
+cpi on mouse
+
+I
+84
++4
+0
+< 0.01
+40
+46
+www.techpowerup.com/review/alienware-pro-wireless-gaming-mouse/5.html
+Nov 26
+what is cpi button in mouse
+
+I
+60
++5
+0
+< 0.01
+50
+39
+www.techpowerup.com/review/alienware-pro-wireless-gaming-mouse/5.html
+Nov 29
+g pro wireless dimensions
+
+I
+T
+23
+0
+< 0.01
+30
+29
+www.techpowerup.com/review/alienware-pro-wireless-gaming-mouse/3.html
+Dec 01
+what does cpi mean on a mouse
+
+I
+56
++3
+0
+< 0.01
+50
+30
+www.techpowerup.com/review/alienware-pro-wireless-gaming-mouse/5.html
+Dec 10
+cpi button in mouse
+
+I
+87
++5
+0
+< 0.01
+110
+40
+www.techpowerup.com/review/alienware-pro-wireless-gaming-mouse/5.html
+Nov 20
+what is cpi on a mouse
+
+I
+57
++5
+0
+< 0.01
+140
+40
+www.techpowerup.com/review/alienware-pro-wireless-gaming-mouse/5.html
+Dec 08
+cpi button on mouse
+
+I
+59
++4
+0
+< 0.01
+170
+34
+www.techpowerup.com/review/alienware-pro-wireless-gaming-mouse/5.html
+Dec 02
+
+aw610m
+
+I
+T
+5
++4
+4
+100.00
+170
+24
+www.pcmag.com/reviews/alienware-wiredwireless-gaming-mouse-aw610m
+22 hours
+alienware aw610m
+
+I
+T
+4
++5
+0
+< 0.01
+110
+49
+www.pcmag.com/reviews/alienware-wiredwireless-gaming-mouse-aw610m
+Nov 24
+heaviest pc mouse
+
+C
+44
++3
+0
+< 0.01
+590
+24
+www.pcmag.com/reviews/alienware-wiredwireless-gaming-mouse-aw610m
+Dec 06
+alienware mouse not working
+
+I
+42
++5
+0
+< 0.01
+70
+25
+www.pcmag.com/reviews/alienware-wiredwireless-gaming-mouse-aw610m
+Nov 26
+dell alienware wireless mouse
+
+I
+T
+35
++5
+0
+< 0.01
+110
+49
+www.pcmag.com/reviews/alienware-wiredwireless-gaming-mouse-aw610m
+Nov 23
+alienware mouse software
+
+I
+16
++3
+0
+< 0.01
+90
+30
+www.pcmag.com/reviews/alienware-wiredwireless-gaming-mouse-aw610m
+Dec 07
+alienware wired/wireless gaming mouse aw610m
+
+I
+T
+3
++6
+0
+< 0.01
+40
+41
+www.pcmag.com/reviews/alienware-wiredwireless-gaming-mouse-aw610m
+2 days
+alienware aw610m wired/wireless gaming mouse
+
+I
+T
+5
++6
+0
+< 0.01
+30
+44
+www.pcmag.com/reviews/alienware-wiredwireless-gaming-mouse-aw610m
+Nov 19
+alienware aw610m wired/wireless gaming mouse
+
+I
+T
++6
+0
+< 0.01
+30
+44
+www.pcmag.com/reviews/alienware-wiredwireless-gaming-mouse-aw610m
+Nov 19
+wired or wireless gaming mouse
+
+C
+66
++4
+0
+< 0.01
+70
+35
+www.pcmag.com/reviews/alienware-wiredwireless-gaming-mouse-aw610m
+3 days
+alienware wired wireless gaming mouse aw610m
+
+I
+T
+4
++6
+0
+< 0.01
+30
+36
+www.pcmag.com/reviews/alienware-wiredwireless-gaming-mouse-aw610m
+Nov 24
+wired wireless gaming mouse
+
+C
+58
++5
+0
+< 0.01
+30
+58
+www.pcmag.com/reviews/alienware-wiredwireless-gaming-mouse-aw610m
+Dec 04
+alienware aw610 mouse manual
+
+I
+31
+0
+< 0.01
+1K
+31
+www.pcmag.com/reviews/alienware-wiredwireless-gaming-mouse-aw610m
+Dec 10
+alienware 610m
+
+I
+T
+10
++5
+0
+< 0.01
+210
+46
+www.pcmag.com/reviews/alienware-wiredwireless-gaming-mouse-aw610m
+Nov 30
+alienware 610m mouse
+
+I
+T
+9
++7
+0
+< 0.01
+40
+44
+www.pcmag.com/reviews/alienware-wiredwireless-gaming-mouse-aw610m
+Dec 13
+alienware wired/wireless gaming mouse - aw610m
+
+I
+T
+5
++6
+0
+< 0.01
+40
+43
+www.pcmag.com/reviews/alienware-wiredwireless-gaming-mouse-aw610m
+Nov 29
+alienware white mouse
+
+I
+T
+27
++4
+0
+< 0.01
+30
+40
+www.pcmag.com/reviews/alienware-wiredwireless-gaming-mouse-aw610m
+Dec 13
+alienware mouse wireless
+
+I
+T
+8
++6
+0
+< 0.01
+30
+57
+www.pcmag.com/reviews/alienware-wiredwireless-gaming-mouse-aw610m
+Dec 09
+gaming mouse wired and wireless
+
+C
+91
++5
+0
+< 0.01
+30
+65
+www.pcmag.com/reviews/alienware-wiredwireless-gaming-mouse-aw610m
+Dec 04
+wired/wireless gaming mouse
+
+I
+T
+40
++5
+0
+< 0.01
+30
+45
+www.pcmag.com/reviews/alienware-wiredwireless-gaming-mouse-aw610m
+Dec 04
+wireless mouse alienware
+
+I
+T
+16
++5
+0
+< 0.01
+140
+50
+www.pcmag.com/reviews/alienware-wiredwireless-gaming-mouse-aw610m
+Dec 06
+alienware 610m mouse not working
+
+I
+43
++4
+0
+< 0.01
+40
+24
+www.pcmag.com/reviews/alienware-wiredwireless-gaming-mouse-aw610m
+Nov 19
+wired or wireless mouse for gaming
+
+C
+63
++4
+0
+< 0.01
+320
+47
+www.pcmag.com/reviews/alienware-wiredwireless-gaming-mouse-aw610m
+Nov 28
+wired and wireless gaming mouse
+
+C
+80
++4
+0
+< 0.01
+40
+19
+www.pcmag.com/reviews/alienware-wiredwireless-gaming-mouse-aw610m
+Dec 0
+
+alien mouse
+
+I
+T
++4
+5
+100.00
+140
+25
+www.rtings.com/mouse/reviews/dell/alienware-aw610m
+Dec 06
+alienware aw610m
+
+I
+T
+12
++5
+0
+< 0.01
+110
+49
+www.rtings.com/mouse/reviews/dell/alienware-aw610m
+Nov 24
+alienware gaming mouse and keyboard
+
+I
+T
+31
++5
+0
+< 0.01
+30
+30
+www.rtings.com/mouse/reviews/dell/alienware-aw610m
+2 days
+dell gaming mouse wireless
+
+I
+T
+39
++3
+0
+< 0.01
+30
+36
+www.rtings.com/mouse/reviews/dell/alienware-aw610m
+Dec 06
+alienware mouse not working
+
+I
+47
++5
+0
+< 0.01
+70
+25
+www.rtings.com/mouse/reviews/dell/alienware-aw610m
+Nov 26
+alien mouse
+
+I
+T
+24
++4
+0
+< 0.01
+140
+25
+www.rtings.com/mouse/reviews/dell/alienware-aw610m
+Dec 06
+alienware mouse software
+
+I
+20
++3
+0
+< 0.01
+90
+30
+www.rtings.com/mouse/reviews/dell/alienware-aw610m
+Dec 07
+aw610m
+
+I
+T
+16
++4
+0
+< 0.01
+170
+24
+www.rtings.com/mouse/reviews/dell/alienware-aw610m
+22 hours
+alienware wired/wireless gaming mouse aw610m
+
+I
+T
+18
++6
+0
+< 0.01
+40
+41
+www.rtings.com/mouse/reviews/dell/alienware-aw610m
+2 days
+alienware mouse charger
+
+T
+38
++5
+0
+< 0.01
+30
+32
+www.rtings.com/mouse/reviews/dell/alienware-aw610m
+Dec 07
+alienware aw610m wired/wireless gaming mouse
+
+I
+T
+24
++6
+0
+< 0.01
+30
+44
+www.rtings.com/mouse/reviews/dell/alienware-aw610m
+Nov 19
+dell mouses
+
+N
+T
+38
++4
+0
+< 0.01
+320
+37
+www.rtings.com/mouse/reviews/dell/alienware-aw610m
+Nov 27
+alienware wired wireless gaming mouse aw610m
+
+I
+T
+22
++6
+0
+< 0.01
+30
+36
+www.rtings.com/mouse/reviews/dell/alienware-aw610m
+Nov 24
+alienware 610m
+
+I
+T
+12
++5
+0
+< 0.01
+210
+46
+www.rtings.com/mouse/reviews/dell/alienware-aw610m
+Nov 30
+alienware 610m mouse
+
+I
+T
+13
++7
+0
+< 0.01
+40
+44
+www.rtings.com/mouse/reviews/dell/alienware-aw610m
+Dec 13
+alienware wired/wireless gaming mouse - aw610m
+
+I
+T
+27
++6
+0
+< 0.01
+40
+43
+www.rtings.com/mouse/reviews/dell/alienware-aw610m
+Nov 29
+alienware mouse and keyboard
+
+I
+T
+67
++5
+0
+< 0.01
+140
+29
+www.rtings.com/mouse/reviews/dell/alienware-aw610m
+Nov 25
+aw command center
+
+I
+88
++3
+0
+< 0.01
+590
+32
+www.rtings.com/mouse/reviews/dell/alienware-aw610m
+Dec 03
+alienware companion app
+
+C
+N
+71
++2
+0
+< 0.01
+210
+31
+www.rtings.com/mouse/reviews/dell/alienware-aw610m
+Nov 21
+alienware mouse
+
+I
+T
+40
++5
+0
+< 0.01
+1.9K
+37
+www.rtings.com/mouse/reviews/dell/alienware-aw610m
+Dec 13
+alienware white mouse
+
+I
+T
+34
++4
+0
+< 0.01
+30
+40
+www.rtings.com/mouse/reviews/dell/alienware-aw610m
+Dec 13
+alienware mouse wireless
+
+I
+T
+27
++6
+0
+< 0.01
+30
+57
+www.rtings.com/mouse/reviews/dell/alienware-aw610m
+Dec 09
+alienware computer mouse
+
+I
+T
+45
++3
+0
+< 0.01
+720
+40
+www.rtings.com/mouse/reviews/dell/alienware-aw610m
+3 days
+alienware 610m mouse not working
+
+I
+36
++4
+0
+< 0.01
+40
+24
+www.rtings.com/mouse/reviews/dell/alienware-aw610m
+Nov 19
+dell gaming mouse and keyboard
+
+I
+T
+64
++5
+0
+< 0.01
+90
+24
+www.rtings.com/mouse/reviews/dell/alienware-aw610m
+Dec 01
+alien ware mouse
+
+I
+T
+43
++4
+0
+< 0.01
+90
+33
+www.rtings.com/mouse/reviews/dell/alienware-aw610m
+Nov 27
+alienware wireless mouse
+
+I
+T
+48
++5
+0
+< 0.01
+210
+54
+www.rtings.com/mouse/reviews/dell/alienware-aw610m
+
+aw610m
+
+I
+T
+3
++4
+13
+100.00
+170
+24
+www.tomsguide.com/reviews/alienware-aw610m-gaming-mouse
+22 hours
+alienware aw610m
+
+I
+T
+8
++5
+0
+< 0.01
+110
+49
+www.tomsguide.com/reviews/alienware-aw610m-gaming-mouse
+Nov 24
+alienware gaming mice
+
+I
+T
+40
++5
+0
+< 0.01
+210
+49
+www.tomsguide.com/reviews/alienware-aw610m-gaming-mouse
+Nov 19
+alienware mice
+
+I
+T
+22
++3
+0
+< 0.01
+1K
+33
+www.tomsguide.com/reviews/alienware-aw610m-gaming-mouse
+Dec 11
+dell gaming mouse wireless
+
+I
+T
+37
++3
+0
+< 0.01
+30
+36
+www.tomsguide.com/reviews/alienware-aw610m-gaming-mouse
+Dec 06
+alien mouse
+
+I
+T
+33
++4
+0
+< 0.01
+140
+25
+www.tomsguide.com/reviews/alienware-aw610m-gaming-mouse
+Dec 06
+alienware wired/wireless gaming mouse aw610m
+
+I
+T
+7
++6
+0
+< 0.01
+40
+41
+www.tomsguide.com/reviews/alienware-aw610m-gaming-mouse
+2 days
+alienware aw610m wired/wireless gaming mouse
+
+I
+T
+7
++6
+0
+< 0.01
+30
+44
+www.tomsguide.com/reviews/alienware-aw610m-gaming-mouse
+Nov 19
+alienware wired wireless gaming mouse aw610m
+
+I
+T
+7
++6
+0
+< 0.01
+30
+36
+www.tomsguide.com/reviews/alienware-aw610m-gaming-mouse
+Nov 24
+alienware mosue
+
+I
+T
+19
++4
+0
+< 0.01
+1.6K
+54
+www.tomsguide.com/reviews/alienware-aw610m-gaming-mouse
+Dec 09
+alienware aw610 mouse manual
+
+I
+34
+0
+< 0.01
+1K
+31
+www.tomsguide.com/reviews/alienware-aw610m-gaming-mouse
+Dec 10
+alienware 610m
+
+I
+T
+8
++5
+0
+< 0.01
+210
+46
+www.tomsguide.com/reviews/alienware-aw610m-gaming-mouse
+Nov 30
+alienware mouses
+
+I
+T
+20
++4
+0
+< 0.01
+90
+42
+www.tomsguide.com/reviews/alienware-aw610m-gaming-mouse
+Dec 07
+alienware 610m mouse
+
+I
+T
+8
++7
+0
+< 0.01
+40
+44
+www.tomsguide.com/reviews/alienware-aw610m-gaming-mouse
+Dec 13
+alienware wired/wireless gaming mouse - aw610m
+
+I
+T
+8
++6
+0
+< 0.01
+40
+43
+www.tomsguide.com/reviews/alienware-aw610m-gaming-mouse
+Nov 29
+alienware mouse
+
+I
+T
+20
++5
+0
+< 0.01
+1.9K
+37
+www.tomsguide.com/reviews/alienware-aw610m-gaming-mouse
+Dec 13
+alienware white mouse
+
+I
+T
+30
++4
+0
+< 0.01
+30
+40
+www.tomsguide.com/reviews/alienware-aw610m-gaming-mouse
+Dec 13
+alienware mouse wireless
+
+I
+T
+6
++6
+0
+< 0.01
+30
+57
+www.tomsguide.com/reviews/alienware-aw610m-gaming-mouse
+Dec 09
+wireless mouse alienware
+
+I
+T
+11
++5
+0
+< 0.01
+140
+50
+www.tomsguide.com/reviews/alienware-aw610m-gaming-mouse
+Dec 06
+alienware 610m mouse not working
+
+I
+46
++4
+0
+< 0.01
+40
+24
+www.tomsguide.com/reviews/alienware-aw610m-gaming-mouse
+Nov 19
+wired or wireless mouse for gaming
+
+C
+67
++4
+0
+< 0.01
+320
+47
+www.tomsguide.com/reviews/alienware-aw610m-gaming-mouse
+Nov 28
+alienware mouse gaming
+
+I
+T
+28
++5
+0
+< 0.01
+170
+43
+www.tomsguide.com/reviews/alienware-aw610m-gaming-mouse
+4 days
+alien ware mouse
+
+I
+T
+36
++4
+0
+< 0.01
+90
+33
+www.tomsguide.com/reviews/alienware-aw610m-gaming-mouse
+Nov 27
+alienware wireless mouse
+
+I
+T
+24
++5
+0
+< 0.01
+210
+54
+www.tomsguide.com/reviews/alienware-aw610m-gaming-mouse
+
+sensor data for your reference to compare
+
+PAW 3395Optical26000 cpi650 ips50 g 
+PAW 3399Optical20000 cpi650 ips50 g 
+Focus+Optical20000 cpi650 ips50 gThis is the Razer variant of the 3399 with some additional technology
+TrueMove Pro+Optical18000 cpi450 ips50 gThis is SteelSeries's variant of the 3390 sensor
+PMW 3390Optical16000 cpi450 ips50 gThis is Razer's variant of the PMW 3389 sensor. Razer has referred to this as a '5G Laser'.
+PMW 3370Optical19000 cpi400 ips50 g 
+PMW 3389Optical16000 cpi400 ips50 g 
+PMW 3360Optical12000 cpi250 ips50 g 
+PMW 3391Optical12000 cpi250 ips50 gThis is Corsair's variant of the 3360 sensor, they somehow claim 18,000 cpi but I'm not sure how that's possible without introducing flaws. Therefore I've marked it as 12,000
+PMW 3366Optical12000 cpi250 ips50 gThis is Logitech's variant of the 3360 sensor
+TrueMove 3Optical12000 cpi250 ips50 gThis is SteelSeries's variant of the 3360 sensor
+PMW 3361 / Owl EyeOptical12000 cpi250 ips50 gThis is Roccat's variant of the 3360 sensor
+SDNS 3988Optical6400 cpi200 ips50 g 
+SDNS 3989Optical6400 cpi200 ips50 gThis is Razer's variant of the 3988 sensor
+Hero 16kOptical16000 cpi400 ips40 g 
+PAW 3338Optical16000 cpi400 ips40 gThis is the Ajazz variant of the 3335 sensor
+TrueMove AirOptical16000 cpi400 ips40 gThis is the SteelSeries variant of the 3335 sensor
+PAW 3369Optical16000 cpi400 ips40 gThis is the Razer variant of the 3335 sensor
+PAW 3335Optical16000 cpi400 ips40 g 
+HeroOptical12000 cpi400 ips40 g 
+PMW 3359Optical8500 cpi300 ips35 gThis is basically a 3331 with better LOD settings which fixes the main issues on the 3331
+PMW 3331Optical8500 cpi300 ips35 g 
+TrueMove CoreOptical8500 cpi300 ips35 gThis is SteelSeries variant of the 3331
+PAW 3333Optical8000 cpi300 ips35 g 
+PAW 3327Optical6200 cpi220 ips30 g 
+PMW 3330Optical7200 cpi150 ips30 g 
+PMW 3336Optical10800 cpi150 ips30 gThis seems to be a variant of the 3330 used by Dare-U / Togran / Sharkoon
+PMW 3310Optical5000 cpi130 ips30 g 
+MercuryOptical8000 cpi200 ips25 g 
+PMW 3320Optical3500 cpi80 ips20 g 
+ADNS 3095Optical3500 cpi60 ips20 gThis is a logitech exclusive, specs similar to the 3090 so that sheet is linked.
+ADNS 3090Optical3500 cpi60 ips20 g 
+ADNS 3050Optical2000 cpi60 ips20 g 
+AM010Optical4000 cpi120 ips20 gThis is the logitech variant of the PMW 3320. On the G102 it's limited to 2000 cpi, on the G402 the ips is artificially raised to 500 and due to this the acceleration is limited to 16g
+PMW 3325Optical5000 cpi100 ips20 g 
+
+Specs You Can Reference , see image and excell table below , ignore empty cells BE SURE YOU USE THE DATA I PROVIDED FOR REFERENCE TO SPECS AND VLUES BUT TAKE OPNIONS FROM THE ARTICLES 
+

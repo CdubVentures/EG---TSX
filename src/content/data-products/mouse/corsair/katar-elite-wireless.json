@@ -1,0 +1,197 @@
+{
+  "slug": "corsair-katar-elite-wireless",
+  "brand": "Corsair",
+  "model": "Katar Elite Wireless",
+  "baseModel": "Katar",
+  "variant": "Elite Wireless",
+  "category": "mouse",
+  "imagePath": "/images/mouse/corsair/katar-elite-wireless",
+  "cardTags": "false",
+  "featured": "",
+  "release_date": "10/2022",
+  "discontinued": "",
+  "sku": "CH-931C111-NA",
+  "price_range": 79.99,
+  "colors": [
+    "black"
+  ],
+  "design": [
+    "standard"
+  ],
+  "lighting": "2 zone (rgb)",
+  "rgb": "yes",
+  "connection": "hybrid",
+  "connectivity": "2.4GHz Dongle",
+  "computer_side_connector": "USB-A",
+  "mouse_side_connector": "USB-C",
+  "bluetooth": "yes",
+  "cable_type": "braided",
+  "paracord": "yes",
+  "wireless_charging": "no",
+  "battery_hours": 60,
+  "adjustable_weight": "no",
+  "feet_material": "PTFE (Virgin-Grade)",
+  "coating": "matte",
+  "honeycomb_frame": "no",
+  "silent_clicks": "no",
+  "weight": 69,
+  "material": "plastic",
+  "lngth": 115.8,
+  "width": 64.2,
+  "height": 37.8,
+  "form_factor": "right",
+  "shape": "symmetrical",
+  "hump": "back - front",
+  "front_flare": "inward",
+  "thumb_rest": "no",
+  "grip": [
+    "claw",
+    "fingertip"
+  ],
+  "hand_size": [
+    "small",
+    "medium"
+  ],
+  "mcu": "unk",
+  "mcu_link": "",
+  "sensor": "MARKSMAN 26K",
+  "sensor_brand": "corsair",
+  "sensor_date": "",
+  "sensor_link": "",
+  "sensor_type": "optical",
+  "flawless_sensor": "unk",
+  "sensor_latency": "unk",
+  "sensor_latency_list": [
+    "unk"
+  ],
+  "shift_latency": "unk",
+  "polling_rate": [
+    2000,
+    1000,
+    500,
+    250,
+    125
+  ],
+  "dpi": 26000,
+  "ips": 650,
+  "acceleration": 50,
+  "lift": [],
+  "lift_settings": "unk",
+  "motion_sync": "no",
+  "hardware_acceleration": "no",
+  "smoothing": "no",
+  "nvidia_reflex": "no",
+  "switch": "D2FC -F-7N(60M)",
+  "switch_brand": "omron",
+  "switch_type": "optical",
+  "switch_link": "",
+  "hot_swappable": "no",
+  "debounce": "unk",
+  "click_latency": 1.4,
+  "click_latency_list": "1.4 wireless",
+  "click_force": "unk",
+  "encoder": "",
+  "encoder_brand": "",
+  "encoder_link": "",
+  "side_buttons": 2,
+  "middle_buttons": 1,
+  "programmable_buttons": 6,
+  "tilt_scroll_wheel": "no",
+  "adjustable_scroll_wheel": "no",
+  "onboard_memory": "yes",
+  "onboard_memory_value": 1,
+  "profile_switching": "yes",
+  "overall": 8.4,
+  "accuracy": 9,
+  "response": 7,
+  "quality": 8.2,
+  "comfort": 8,
+  "work": 6.8,
+  "feet_score": 9,
+  "fps_score": 7.8,
+  "mmo_score": 6.5,
+  "moba_score": 7.5,
+  "aarpg_score": 7,
+  "rts_score": 7.3,
+  "fps": "yes",
+  "mmo": "no",
+  "moba": "yes",
+  "aarpg": "yes",
+  "rts": "yes",
+  "snap_dateUpdated": "11/26/2025",
+  "snap_datePublished": null,
+  "snap_subtitle": "Light, compact FPS-first wireless mouse for claw and fingertip grip styles.",
+  "hubTags": [
+    "price_range",
+    "weight",
+    "polling_rate",
+    "connection",
+    "fps",
+    "overall"
+  ],
+  "game1": "Counter-Strike 2",
+  "game2": "Valorant",
+  "game3": "Fortnite",
+  "game4": "League of Legends",
+  "game5": "",
+  "game6": "",
+  "game7": "",
+  "game8": "",
+  "keytakeaway": "The Corsair Katar Elite Wireless takes the familiar Katar shape and trims it down to a 69 g, hybrid-wireless shell that’s happiest in claw and fingertip grips. Its 26K Marksman sensor, PTFE feet, and low-latency Slipstream 2.4 GHz link make it a dependable FPS/MOBA mouse, especially once you find it closer to its common ~$50 street price than the original MSRP. The only real curveball is Corsair’s “2,000 Hz” hyper-polling option, which doesn’t behave like true 2K in practice, so it’s best to treat this as a very solid 1,000 Hz-class wireless mouse rather than a genuine high-refresh outlier.rtip players grinding ranked FPS and Battle Royale matches. Corsair’s MARKSMAN 26K sensor, 1,000 Hz SLIPSTREAM wireless, and long-lasting battery (around 60 hours on 2.4 GHz or 110 hours over Bluetooth with lighting dialed back) keep it responsive without constant charging. You don’t get bleeding-edge 4K/8K polling or a ton of side buttons, but if you want a light everyday mouse that can comfortably handle CS2, Valorant, and Fortnite, it hits a very solid middle ground.",
+  "pcard": "The Corsair Katar Elite Wireless is a **69 g hybrid-wireless claw/fingertip mouse** built around Corsair’s 26K Marksman sensor, 100% PTFE feet, and a sub-1 ms Slipstream 2.4 GHz link. You get responsive 1,000 Hz-class latency, up to **60 hours on 2.4 GHz or 110 hours over Bluetooth**, and a compact symmetrical shell that feels like a lighter, stretched-out take on the <pop=mouse-102>Logitech G305 Lightspeed</pop>. Its “2,000 Hz” hyper-polling toggle doesn’t deliver a real step up over 1,000 Hz, so think of it as a strong mid-tier wireless rather than a budget shortcut to true 2K/4K/8K play. If you want genuinely higher polling and lower weight, premium picks such as the <pop=mouse-94>Logitech G Pro X Superlight 2</pop> or <pop=mouse-131>Razer Viper V3 Pro</pop> are better fits, but for many players the Katar Elite Wireless hits a much friendlier price-to-performance sweet spot.",
+  "verdict": "#### What You Need To Know  \r\n\r\nThe Corsair Katar Elite Wireless is Corsair’s compact, small-to-medium-hand wireless FPS/MOBA mouse: **69 g**, a low-profile symmetrical shell, hybrid 2.4 GHz + Bluetooth + USB-C wired, and a **26K Marksman sensor** rated for **650 IPS** and **50G** acceleration. It’s tuned for claw and fingertip grips and aimed more at “serious ranked play on a budget” than at the absolute bleeding edge of 4K/8K esports specs. At its original **$79.99** MSRP it sat in slightly awkward territory, but it’s frequently discounted into the ~$50 range, which is where the value really clicks.  \r\n\r\n| Spec highlight | What it feels like in game |\r\n|----------------|---------------------------|\r\n| 69 g weight    | Easy to whip around, but still more stable than ultra-tiny 50–60 g mice |\r\n| Hybrid wireless| One mouse that covers gaming PC, laptop, and couch setups |\r\n| 26K sensor     | No spinouts or sensor weirdness even at low sens with big flicks |\r\n\r\n#### Performance, Sensor & The “2K” Question  \r\n\r\nCorsair’s Marksman 26K sensor is effectively “flawless” for normal play: very wide DPI range with 1-DPI steps, 650 IPS tracking, 50G acceleration, and no smoothing or hardware acceleration flags in your internal data. Paired with Slipstream 2.4 GHz, that gives you low, consistent click latency and stable **1,000 Hz-class** responsiveness that’s easily good enough for ranked FPS and arena games.  \r\n\r\nWhere things get messy is the advertised **“2,000 Hz” hyper-polling**. Early spec lists (and some retailer pages) still mention up to 2,000 Hz report rates, and in iCUE you can toggle a 2K mode. Under the hood, though, independent USB traces and community testing show that the mouse enumerates as a full-speed USB device and simply **duplicates updates inside each packet** when 2K is enabled, instead of actually sending twice as many real motion samples per second. In other words, the 2K toggle behaves **functionally like 1,000 Hz**: there’s no measurable jump in motion smoothness or click-to-shot timing compared with its standard 1K setting.  \r\n\r\nPractically, that means two things:\r\n\r\n- You’re **not** getting true 2K-class performance, so it shouldn’t be judged against real 2K/4K/8K mice like the <pop=mouse-94>Logitech G Pro X Superlight 2</pop> or <pop=mouse-131>Razer Viper V3 Pro</pop>.  \r\n- You **also aren’t handicapped** versus other well-tuned 1K wireless mice — the Katar Elite hangs right with that crowd; the “2K” label is more marketing noise than a real advantage.  \r\n\r\n#### Shape, Comfort & Build  \r\n\r\nThe Katar Elite Wireless sticks with the Katar family’s compact, low-profile outline: a narrow, symmetrical shell with gently flared triggers and textured side walls. At 69 g without the cable it lands in “light, but not ultra-light” territory for 2025. Small-to-medium hands using claw or fingertip grips are the clear winners; larger hands trying to palm it will usually run out of support and may feel like they’re pinching the mouse rather than resting on it. Community feedback often compares it to a **stretched-out, slimmed-down <pop=mouse-102>Logitech G305 Lightspeed</pop>** — easier to whip around than a G305, but similarly compact in footprint.  \r\n\r\nOverall build quality is solid: no major creaks, and the shell doesn’t feel hollow or cheap. Primary clicks benefit from Corsair’s Quickstrike mechanism and 60M-rated switches, giving them a fast, snappy feel. The tradeoff is that the **scroll wheel and side buttons** have more resistance and a slightly mushier/meatier feel than the absolute top-tier esports mice. They’re absolutely usable, but if you spam wheel jumps or rely heavily on thumb buttons, you’ll notice the difference versus the crispest click implementations out there.  \r\n\r\nThe stock **100% PTFE feet** glide well on most cloth and hard pads. On very rough cloth surfaces they won’t feel as “floaty” as oversized aftermarket skates, but for most players the default glide is plenty quick.  \r\n\r\n#### Wireless Experience & Everyday Use  \r\n\r\nHybrid connectivity is one of the Katar Elite’s strengths. Slipstream 2.4 GHz handles your low-latency gaming, Bluetooth is handy for laptops, work PCs or a couch setup, and the detachable USB-C cable covers both charging and wired play. Corsair rates the battery for **up to 60 hours over 2.4 GHz** and **up to 110 hours over Bluetooth**, which lines up with third-party testing and long-term user reports: in practice that’s several evenings of gaming between charges if you primarily stay on Slipstream, and much longer if you idle in BT.  \r\n\r\niCUE lets you remap all six buttons, configure DPI steps, lighting and polling options, and store a single onboard profile. The software is powerful but heavier than some competitors, so the best workflow is to set your DPI stages, lighting, and preferred polling once, save to the mouse, and then minimize it.  \r\n\r\n#### Where It Fits In The Lineup  \r\n\r\nIn your scoring, the Katar Elite Wireless lands as a strong **mid-tier FPS/MOBA** option (overall around **8.4**, FPS around **7.8**), not a flagship killer. It’s clearly more competitive-ready than older, heavier budget wireless options like the <pop=mouse-38>Corsair Katar Pro Wireless</pop>, thanks to its lower weight, higher-end sensor, and rechargeable battery. On the other side, lighter and far pricier mice such as the <pop=mouse-94>Logitech G Pro X Superlight 2</pop> or <pop=mouse-131>Razer Viper V3 Pro</pop> bring true 4K/8K polling and sub-60 g shells — but you pay significantly more for those last few percentage points of latency and weight savings.  \r\n\r\nIf your absolute priority is raw value and you don’t care about Bluetooth or rechargeability, something like the <pop=mouse-102>Logitech G305 Lightspeed</pop> can undercut the Katar Elite on price, but you give up hybrid connectivity and make a big jump in weight. That leaves the Katar Elite Wireless in a nice **“middle lane”** — a lighter, more modern hybrid-wireless upgrade that doesn’t demand a flagship budget.  \r\n\r\n> Bottom line: buy the Katar Elite Wireless as a fast, reliable **1,000 Hz-class hybrid wireless** with a very good sensor and compact claw/fingertip shape — not as a budget shortcut to true 2,000+ Hz high-refresh performance.\r\n\r\nIf you have small-to-medium hands, prefer claw or fingertip, and want one mouse that can handle both ranked matches and day-to-day desktop use, the Katar Elite Wireless is easy to recommend when it’s decently discounted. If you’re chasing the lightest shells and real 4K/8K polling, you’ll still be happier stepping up to the latest top-end esports mice, but most players won’t feel held back by what the Katar Elite delivers in real games.",
+  "pros": [
+    "69 g lightweight shell feels quick and low-effort for claw/fingertip play",
+    "MARKSMAN 26K sensor with 650 IPS tracking keeps flicks and micro-adjustments precise",
+    "Dual-wireless (SLIPSTREAM 2.4 GHz + Bluetooth) plus USB-C wired mode for flexibility",
+    "Rated for roughly 60 hours (2.4 GHz) to 110 hours (Bluetooth) between charges with sensible lighting",
+    "QUICKSTRIKE primary buttons offer crisp, low-pre-travel clicks that many players praise",
+    "Large 100% PTFE feet provide smooth glide on most cloth and hybrid pads"
+  ],
+  "cons": [
+    "Scroll wheel and side buttons are usable but feel stiffer/mushier than the best esports-focused designs",
+    "“2,000 Hz” hyper-polling mode doesn’t deliver true 2K performance in practice — it behaves like a 1,000 Hz mouse",
+    "Not as ultra-light or high-refresh as newer 50–60 g 4K/8K wireless options if you’re chasing absolute top-end performance"
+  ],
+  "youtube": "https://www.youtube.com/watch?v=PECbQW9JgPk",
+  "affiliateLinks": [
+    {
+      "url": "https://www.amazon.com/Corsair-KATAR-Elite-Wireless-Gaming/dp/B0BGSGBB9F?crid=380UILI5L4JHY&dib=eyJ2IjoiMSJ9.C8ZQW6kh3mAQJs3ZA-Kt7I7HsLmMFKnqNHj95ILiKKwhKM3I95TlDPJ-lpFEJLuy2b7iDOjRkXZBAUcQ3VAKCD7zJOqVSa7GDYFY_pmsN3eD3TqmwXcPMkiXAg-b-kY_Q7_0rSLG3uKiEDh53PMGL3g00bU3JA38zXCxWUu-RfJ3HzXKhE1sluSUTR-MbmCmwRmuRR9dsOn6cvoZDfgCq6eGruP48KZe-SA727WGizQ.1_Ik2JDrPcPuHVk9oUKLq23hLeGLr8WgpM2U-scX6wE&dib_tag=se&keywords=Corsair+Katar+Elite+Wireless&qid=1712953305&sprefix=corsair+katar+elite+wireles%2Caps%2C163&sr=8-2&linkCode=ll1&tag=eggear-20&linkId=afd08b54d5e9e602ed0c416b5b319f79&language=en_US&ref_=as_li_ss_tl",
+      "retailer": "amazon",
+      "slug": "amazon",
+      "variant": "",
+      "isPrimary": true
+    }
+  ],
+  "url": "/hubs/mouse/corsair/katar-elite-wireless",
+  "gamesRecommended": [],
+  "media": {
+    "defaultColor": "black",
+    "colors": [
+      "black"
+    ],
+    "editions": [],
+    "images": [
+      {
+        "stem": "top",
+        "view": "top"
+      },
+      {
+        "stem": "left",
+        "view": "left"
+      },
+      {
+        "stem": "sangle",
+        "view": "sangle"
+      },
+      {
+        "stem": "side",
+        "view": "shape-side"
+      },
+      {
+        "stem": "top",
+        "view": "shape-top"
+      }
+    ]
+  }
+}

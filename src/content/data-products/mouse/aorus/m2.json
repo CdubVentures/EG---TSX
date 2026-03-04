@@ -1,0 +1,210 @@
+{
+  "slug": "aorus-m2",
+  "brand": "Aorus",
+  "model": "M2",
+  "baseModel": "M2",
+  "variant": "",
+  "category": "mouse",
+  "imagePath": "/images/mouse/aorus/m2",
+  "cardTags": "false",
+  "featured": "",
+  "release_date": "05/2019",
+  "discontinued": "",
+  "sku": "GM-AORUS-M2",
+  "price_range": 29.99,
+  "colors": [
+    "black"
+  ],
+  "design": [
+    "standard"
+  ],
+  "lighting": "1 zone (rgb)",
+  "rgb": "yes",
+  "connection": "wired",
+  "connectivity": "n/a",
+  "computer_side_connector": "USB-A",
+  "mouse_side_connector": "n/a",
+  "bluetooth": "no",
+  "cable_type": "braided",
+  "paracord": "no",
+  "wireless_charging": "no",
+  "battery_hours": "n/a",
+  "adjustable_weight": "no",
+  "feet_material": "PTFE (Black-Dyed)",
+  "coating": "matte",
+  "honeycomb_frame": "no",
+  "silent_clicks": "no",
+  "weight": 76,
+  "material": "plastic",
+  "lngth": 117,
+  "width": 63,
+  "height": 36,
+  "form_factor": "ambidextrous",
+  "shape": "symmetrical",
+  "hump": "middle",
+  "front_flare": "inward",
+  "thumb_rest": "no",
+  "grip": [
+    "palm",
+    "claw",
+    "fingertip"
+  ],
+  "hand_size": [
+    "small",
+    "medium"
+  ],
+  "mcu": "unk",
+  "mcu_link": "",
+  "sensor": "PMW3327",
+  "sensor_brand": "PixArt",
+  "sensor_date": "01/2019",
+  "sensor_link": "",
+  "sensor_type": "optical",
+  "flawless_sensor": "yes",
+  "sensor_latency": "unk",
+  "sensor_latency_list": [
+    "unk"
+  ],
+  "shift_latency": "unk",
+  "polling_rate": [
+    1000,
+    500,
+    250,
+    125
+  ],
+  "dpi": 6200,
+  "ips": 220,
+  "acceleration": 30,
+  "lift": [
+    2.5
+  ],
+  "lift_settings": "fixed high",
+  "motion_sync": "unk",
+  "hardware_acceleration": "no",
+  "smoothing": "no",
+  "nvidia_reflex": "yes",
+  "switch": "D2FC -F-K(50M)",
+  "switch_brand": "omron",
+  "switch_type": "mechanical",
+  "switch_link": "",
+  "hot_swappable": "no",
+  "debounce": "unk",
+  "click_latency": 7.5,
+  "click_latency_list": "7.5 wireless",
+  "click_force": "unk",
+  "encoder": "",
+  "encoder_brand": "",
+  "encoder_link": "",
+  "side_buttons": 4,
+  "middle_buttons": 1,
+  "programmable_buttons": 8,
+  "tilt_scroll_wheel": "no",
+  "adjustable_scroll_wheel": "no",
+  "onboard_memory": "yes",
+  "onboard_memory_value": 4,
+  "profile_switching": "no",
+  "overall": 5.7,
+  "accuracy": 7.3,
+  "response": 4.9,
+  "quality": 5.8,
+  "comfort": 6.6,
+  "work": 5.5,
+  "feet_score": 4.8,
+  "fps_score": 5.2,
+  "mmo_score": 5.4,
+  "moba_score": 5.6,
+  "aarpg_score": 5.4,
+  "rts_score": 5.4,
+  "fps": "yes",
+  "mmo": "no",
+  "moba": "yes",
+  "aarpg": "no",
+  "rts": "no",
+  "snap_dateUpdated": "11/21/2025",
+  "snap_datePublished": "11/21/2025",
+  "snap_subtitle": "",
+  "hubTags": [],
+  "game1": "Valorant",
+  "game2": "Counter-Strike 2",
+  "game3": "Fortnite",
+  "game4": "Overwatch 2",
+  "game5": "Apex Legends",
+  "game6": "Rainbow Six Siege",
+  "game7": "League of Legends",
+  "game8": "Dota 2",
+  "keytakeaway": "",
+  "pcard": "Compact and easy to aim, the AORUS M2 pairs an **~76 g** low-profile shell with an **ambidextrous layout (thumb buttons on both sides)**, a **PixArt 3327 sensor up to 6,200 DPI**, and **Omron 50M** switches—ideal for claw/fingertip players who want crisp tracking without the flagship price tag.\r\nIt’s frequently discounted (it even launched as a budget model), making it a smart top-pick/backup mouse when you catch a sale—see full details in Key Features below",
+  "verdict": "#### Overview\r\nThe Aorus M2 gaming mouse, released by Gigabyte in July 2019, targets pro-level gamers seeking a balance of performance and cost. Its lightweight design at 76 grams and ambidextrous shape make it versatile for various grip styles, ideal for competitive play in FPS and MOBAs like Valorant and League of Legends. Priced at around $30, it's a budget-friendly option for gamers looking to upgrade without a hefty investment.\r\n\r\n#### Design and Features\r\nThe mouse's compact, symmetrical design is a standout, offering comfort for both left and right-handed users with a matte finish for a solid grip. It supports palm, claw, and fingertip grips, fitting small to medium hands best. With four programmable side buttons and Omron switches rated for 50 million clicks, it's built for durability. The single-zone RGB lighting, customizable via RGB Fusion 2.0 software, adds a personal touch to gaming setups, connected via a standard USB-A cable.\r\n\r\n#### Performance and Software\r\nPerformance-wise, the Aorus M2 delivers with a 6200 DPI optical sensor and 1000 Hz polling rate, ensuring precise tracking for fast-paced games. However, the middle mouse button's stiffness can be a minor annoyance, especially for actions requiring frequent use. The accompanying Aorus Engine software, while functional for DPI and button customization, has reported issues like failing to launch or save settings, though RGB customization via RGB Fusion 2.0 works well.\r\n\r\n#### Key Takeaways\r\n* **Budget champ:** The Aorus M2 proves you don’t need to splurge for a lightweight esports mouse that pins aim in FPS titles like Valorant\r\n* **Jack-of-all-trades:** Its versatility shines across grips and genres, making it a go-to for MOBA grinders and casual fraggers alike;\r\n* **Not future-proof:** At 76g and 1000 Hz, it lags behind 2025’s sub-60g, 8K Hz elite—pro aspirants might feel the gap in hyper-competitive scenes\r\n\r\n#### Comparisons and Value\r\nCompared to peers like the Logitech G Pro Wired (heavier, more expensive) and <pop=mouse-130>Razer DeathAdder V3</pop> (higher accruracy, pricier), the Aorus M2 offers great value at its price point. <pop=mouse-15>The Cooler Master MM310</pop>, a budget alternative, lacks RGB but is lighter at 75 grams. For cost-conscious gamers, it holds its own, though modern high-end mice may offer lighter weights and higher polling rates.",
+  "pros": [
+    "Budget-friendly with solid performance",
+    "Precise sensor for accurate tracking",
+    "Ambidextrous design suits both hands",
+    "Comfortable for claw and fingertip grips",
+    "Four side buttons for extra controls",
+    "Reliable switches for durability"
+  ],
+  "cons": [
+    "Too small for large hands",
+    "Software has reliability issues",
+    "Middle mouse button is stiff",
+    "Mouse wheel may squeak over time",
+    "Weight feels heavy for some"
+  ],
+  "youtube": "https://www.youtube.com/watch?v=L9VyE9GgFvI",
+  "affiliateLinks": [
+    {
+      "url": "https://www.amazon.com/Accurate-Lightweight-Esports-Grade-Ambidextrous-GM-AORUS/dp/B092MXDMC6?crid=1V2J454WWWTBZ&dib=eyJ2IjoiMSJ9.bDv9o9pboRnn97cs7132nqq2TYR2DBtrRhBd55Ck-OtdKx99hc625E158FM8towgeQUDxVV1dJicOHvw5DQLlh4mKOP9hJUgIZIBcM9YPS6U0EibWdbpmaO-tRxORelbOvU_utmiJEkGS5YqigvIabZbfLiGBx9rU5r1Sa5aP4LMA-EPKg-RjDO63RyFUAKETtlG7PHqACKMhBXEIVsp34lHFG2c91y72Ys4Zq1_vnw.evfaN4V_DRC3P_H0mU0aidMbYbcIrGYQ96uWr5TAt0M&dib_tag=se&keywords=aorus+mouse&qid=1765320661&sprefix=aorus+mous%2Caps%2C150&sr=8-7&linkCode=ll1&tag=eggear-20&linkId=26c1a5e75014c59b0ff50f1b3ea8f955&language=en_US&ref_=as_li_ss_tl",
+      "retailer": "amazon",
+      "slug": "amazon",
+      "variant": "",
+      "isPrimary": true
+    }
+  ],
+  "url": "/hubs/mouse/aorus/m2",
+  "gamesRecommended": [],
+  "media": {
+    "defaultColor": "black",
+    "colors": [
+      "black"
+    ],
+    "editions": [],
+    "images": [
+      {
+        "stem": "feature-image",
+        "view": "feature-image"
+      },
+      {
+        "stem": "top",
+        "view": "top"
+      },
+      {
+        "stem": "left",
+        "view": "left"
+      },
+      {
+        "stem": "right",
+        "view": "right"
+      },
+      {
+        "stem": "sangle",
+        "view": "sangle"
+      },
+      {
+        "stem": "angle",
+        "view": "angle"
+      },
+      {
+        "stem": "bot",
+        "view": "bot"
+      },
+      {
+        "stem": "side",
+        "view": "shape-side"
+      },
+      {
+        "stem": "top",
+        "view": "shape-top"
+      }
+    ]
+  }
+}

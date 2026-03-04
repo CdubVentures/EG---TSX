@@ -1,0 +1,2226 @@
+---
+/**
+ * NavLinks.astro — Desktop primary navigation links + mega menu dropdowns.
+ *
+ * Matches HBS `<nav class="main-nav"><div class="wrapper"><ul class="nav-links">`
+ * with full mega menus for Games, Guides, Brands, and Hubs.
+ *
+ * WHY inline script: Dropdown open/close logic and category switching requires
+ * DOM manipulation that matches HBS partial_navbar.js behavior exactly:
+ * - Fine pointer: hover to open, click to lock/unlock
+ * - Coarse pointer: click to toggle open/close
+ * - Category tabs switch content panels in Guides/Brands
+ */
+
+import { contentImage, collectionImagePath } from '@core/images';
+import { plural } from '@core/config';
+import VaultCount from '@features/vault/components/VaultCount';
+import VaultDropdown from '@features/vault/components/VaultDropdown';
+
+interface Props {
+  games: Array<{ title: string; slug: string; url: string }>;
+  guides: Array<{
+    category: string;
+    sections: Array<{
+      title: string;
+      items: Array<{ guide: string; url: string }>;
+    }>;
+  }>;
+  brands: Array<{
+    category: string;
+    columns: Array<Array<{ brand: string; slug: string; url: string }>>;
+  }>;
+  hubs: Array<{ category: string }>;
+}
+
+const { games, guides, brands, hubs } = Astro.props;
+const pathname = Astro.url.pathname;
+
+/* WHY: the mega menu must stay the same width regardless of which category
+   tab is selected. Using the max section count across all categories prevents
+   layout shift when switching between e.g. Mouse (4 sections) and Keyboard (1). */
+const maxGuideSections = Math.max(...guides.map((g) => g.sections.length), 1);
+
+function isActive(href: string): boolean {
+  if (href === '/') return pathname === '/';
+  return pathname.startsWith(href);
+}
+
+function titleCase(s: string): string {
+  return s.charAt(0).toUpperCase() + s.slice(1);
+}
+---
+
+<nav class="main-nav">
+  <div class="wrapper">
+    <ul class="nav-links">
+      {/* Home icon link — hidden at ≤1600px */}
+      <li class="home-link">
+        <a href="/" class="nav-link icon-inline" aria-label="Home">
+          <svg viewBox="0 0 384 384" xmlns="http://www.w3.org/2000/svg" class="nav-home-svg" aria-hidden="true">
+            <defs>
+              <linearGradient id="navbarThemeGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" style="stop-color: var(--site-gradient-start);" />
+                <stop offset="100%" style="stop-color: var(--site-gradient-end);" />
+              </linearGradient>
+            </defs>
+            <path
+              d="M319.63,199.86v121.64c0,6.56-7.48,13.74-13.91,14.53-21.69-1.34-45.95,2-67.33.1-6.34-.57-13.51-5.98-14.52-12.43-2.35-15.01,1.52-35.81-.05-51.6-.85-8.59-6.71-15.01-15.42-16.02-7.87-.91-23.3-.7-31.39-.11-10.5.76-16.68,6.28-17.59,16.85-1.34,15.64,2.02,34.99-.04,50.11-.96,7.06-7.53,12.57-14.5,13.19-21.38,1.91-45.65-1.44-67.33-.1-6.44-.8-13.91-7.97-13.91-14.53v-121.64c-14.92,18.87-41.54,2.5-27.69-18.34L178.14,55.01c8.44-8.49,18.52-8.5,26.97,0l141.46,125.77c15.56,20.65-11.47,38.46-26.94,19.08Z"
+              fill="currentColor"
+            />
+          </svg>
+          <span>Home</span>
+        </a>
+      </li>
+
+      <li><a href="/news" class="nav-link" aria-current={isActive('/news') ? 'page' : undefined}>News</a></li>
+      <li><a href="/reviews" class="nav-link" aria-current={isActive('/reviews') ? 'page' : undefined}>Reviews</a></li>
+
+      {/* ─── Games mega menu ─── */}
+      {games.length > 0 && (
+        <li class="sub-menu">
+          <a href="#" class="nav-link">Games</a>
+          <div class="mega-menu games-menu" style="opacity: 0; visibility: hidden; pointer-events: none;">
+            <div class="nav-game-grid">
+              {/* Explore All card */}
+              <div class="nav-game-grid-item">
+                <a href="/games" class="nav-game-item-link explore-all-link">
+                  <div class="nav-game-image-container">
+                    <img
+                      src="/images/games/exploreall.webp"
+                      alt="Explore All Games"
+                      class="nav-game-item-image"
+                      draggable="false"
+                      loading="lazy"
+                    />
+                  </div>
+                  <h4 class="nav-game-title">Explore All</h4>
+                </a>
+              </div>
+              {games.map((g) => (
+                <div class="nav-game-grid-item">
+                  <a href={g.url} class="nav-game-item-link">
+                    <div class="nav-game-image-container">
+                      <img
+                        src={contentImage(collectionImagePath('games', g.slug), 'box-art-cover', 's')}
+                        alt={g.title}
+                        class="nav-game-item-image"
+                        draggable="false"
+                        loading="lazy"
+                      />
+                    </div>
+                    <h4 class="nav-game-title">{g.title}</h4>
+                  </a>
+                </div>
+              ))}
+            </div>
+          </div>
+        </li>
+      )}
+
+      {/* ─── Guides mega menu ─── */}
+      {guides.length > 0 && (
+        <li class="sub-menu">
+          <a href="#" class="nav-link">Guides</a>
+          <div class="mega-menu mega-menu-guides" id="mega-menu-guides" style="opacity: 0; visibility: hidden; pointer-events: none;">
+            <div class="mega-menu-inner">
+              {/* Left column: category tabs */}
+              <div class="mega-menu-left-column">
+                <div class="mega-left-stack">
+                  <ul class="mega-menu-left-nav">
+                    {guides.map((cat, i) => (
+                      <li>
+                        <a
+                          href="#"
+                          data-category={cat.category}
+                          class={`${cat.category}-color${i === 0 ? ' active' : ''}`}
+                        >
+                          <span class={`category-icon icon-${cat.category}`} />
+                          {plural(cat.category)}
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                  <div class="mega-left-spacer" />
+                  <a href="/guides" class="mega-menu-bottom-link left-explore-all-cta all-guides-link">
+                    <span class="nav-underline">Explore All</span>
+                  </a>
+                </div>
+              </div>
+
+              {/* Right content: guide sections per category (HBS: titled columns) */}
+              <div class="mega-menu-content">
+                {guides.map((cat, i) => (
+                  <div
+                    class="guides-set"
+                    data-category={cat.category}
+                    style={i === 0 ? undefined : 'display:none;'}
+                  >
+                    <div class="guides-set-inner" style={`grid-template-columns: repeat(${maxGuideSections}, var(--grid-width));`}>
+                      {cat.sections.map((section) => (
+                        <div class="dropdown-column1">
+                          <div class="category-header">
+                            <h4><span class="genre-focused">{section.title}</span></h4>
+                          </div>
+                          <ul>
+                            {section.items.map((item) => (
+                              <li>
+                                <a href={item.url}>
+                                  <span class="nav-underline">{item.guide}</span>
+                                </a>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      ))}
+                    </div>
+                    <a href={`/guides/${cat.category}`} class="mega-menu-bottom-link all-guides-link">
+                      <span class="nav-underline">Explore All {plural(cat.category)}</span>
+                    </a>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </li>
+      )}
+
+      {/* ─── Brands mega menu ─── */}
+      {brands.length > 0 && (
+        <li class="sub-menu">
+          <a href="#" class="nav-link">Brands</a>
+          <div class="mega-menu mega-menu-brands" id="mega-menu-brands" style="opacity: 0; visibility: hidden; pointer-events: none;">
+            <div class="mega-menu-inner">
+              {/* Left column: category tabs */}
+              <div class="mega-menu-left-column">
+                <div class="mega-left-stack">
+                  <ul class="mega-menu-left-nav">
+                    {brands.map((cat, i) => (
+                      <li>
+                        <a
+                          href="#"
+                          data-category={cat.category}
+                          class={`${cat.category}-color${i === 0 ? ' active' : ''}`}
+                        >
+                          <span class={`category-icon icon-${cat.category}`} />
+                          {plural(cat.category)}
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                  <div class="mega-left-spacer" />
+                  <a href="/brands" class="mega-menu-bottom-link left-explore-all-cta all-guides-link">
+                    <span class="nav-underline">Explore All</span>
+                  </a>
+                </div>
+              </div>
+
+              {/* Right content: brand items per category */}
+              <div class="mega-menu-content">
+                {brands.map((cat, i) => (
+                  <div
+                    class={`brand-set ${cat.category}-color`}
+                    data-category={cat.category}
+                    style={i === 0 ? undefined : 'display:none;'}
+                  >
+                    <div class="brand-set-inner">
+                      {cat.columns.map((col) => (
+                        <div class="dropdown-column1">
+                          <ul>
+                            {col.map((item) => (
+                              <li>
+                                <a href={item.url} class="brand-item">
+                                  <div class="brand-logo-container">
+                                    <img
+                                      src={contentImage(collectionImagePath('brands', item.slug), 'brand-logo-horizontal-mono-black', 'xs', 'png')}
+                                      alt={`${item.brand} logo`}
+                                      class="brand-logo"
+                                      loading="lazy"
+                                    />
+                                  </div>
+                                  <span class="nav-underline">{item.brand}</span>
+                                </a>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      ))}
+                    </div>
+                    <a href={`/brands/${cat.category}`} class="mega-menu-bottom-link all-guides-link">
+                      <span class="nav-underline">Explore All {plural(cat.category)}</span>
+                    </a>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </li>
+      )}
+
+      {/* ─── Hubs mega menu ─── */}
+      {hubs.length > 0 && (
+        <li class="sub-menu hubs-dropdown">
+          <a href="#" class="nav-link">
+            Hubs <span class="nav-dropdown-arrow"></span>
+            <span class="navbar-new-badge" data-neutral="true">&nbsp;New!</span>
+          </a>
+          <div class="mega-menu hubs-menu" style="opacity: 0; visibility: hidden; pointer-events: none;">
+            <ul>
+              {hubs.map((h) => (
+                <li>
+                  <a href={`/hubs/${h.category}`} data-category={h.category}>
+                    <span class={`category-icon icon-${h.category} ${h.category}-color`} />
+                    <span class={`nav-underline ${h.category}-color`}>{titleCase(h.category)}</span>
+                  </a>
+                </li>
+              ))}
+              <li>
+                <a href="/hubs" class="see-all-link" aria-label="See all hubs">
+                  <span class="see-all-icon" aria-hidden="true">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="880 880 2240 2240" focusable="false">
+                      <path fill="currentColor"
+                        d="M1888 2448v336c0 184.789-151.211 336-336 336h-336c-184.789 0-336-151.211-336-336v-336c0-184.789 151.211-336 336-336h336c184.789 0 336 151.211 336 336zM1888 1216v336c0 184.789-151.211 336-336 336h-336c-184.789 0-336-151.211-336-336v-336c0-184.789 151.211-336 336-336h336c184.789 0 336 151.211 336 336zM3120 2448v336c0 184.789-151.211 336-336 336h-336c-184.789 0-336-151.211-336-336v-336c0-184.789 151.211-336 336-336h336c184.789 0 336 151.211 336 336zM3120 1216v336c0 184.789-151.211 336-336 336h-336c-184.789 0-336-151.211-336-336v-336c0-184.789 151.211-336 336-336h336c184.789 0 336 151.211 336 336z" />
+                    </svg>
+                  </span>
+                  <span class="nav-underline">See All</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </li>
+      )}
+
+      {/* ─── Vault mega menu (LAST item in nav — matches HBS navbar.handlebars line 400) ─── */}
+      <li class="sub-menu vault-bin-menu">
+        <a href="#" class="vault-bin-button nav-link">
+          <span class="vault-bin-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" class="svg-base" fill="none">
+              <defs>
+                <linearGradient id="neutralGradient-1" x1="0%" y1="0%" x2="100%" y2="0%">
+                  <stop offset="0%" style="stop-color: var(--site-start-color);" />
+                  <stop offset="100%" style="stop-color: var(--site-end-color);" />
+                </linearGradient>
+              </defs>
+              <g fill="url(#neutralGradient-1)">
+                <path d="M8.088 12.098l3.185-1.81a.178.178 0 01.176 0l2.843 1.615a.172.172 0 010 .3l-6.204 3.524a.178.178 0 01-.176 0L1.088 11.85A.173.173 0 011 11.7V3.947c0-.061.033-.118.088-.15L7.292.274a.176.176 0 01.264.15v3.23a.172.172 0 01-.088.15l-3.186 1.81a.173.173 0 00-.088.149v4.124c0 .062.034.119.088.15l3.63 2.062c.054.03.122.03.176 0z" />
+                <path d="M8.532 3.803l3.186 1.81a.173.173 0 01.088.149v3.62c0 .06.033.118.088.149l2.842 1.615a.176.176 0 00.264-.15V3.947a.173.173 0 00-.088-.15L8.708.274a.176.176 0 00-.264.15v3.23c0 .062.034.119.088.150z" />
+                <path d="M4 2h8a2 2 0 012 2v8a2 2 0 01-2 2H4a2 2 0 01-2-2V4a2 2 0 012-2z" fill="#000000" opacity="0.1" />
+                <path d="M5.9 6.2l2.1 4.2h0l2.1-4.2H8l-2.1 0z" fill="#FFFFFF" />
+              </g>
+            </svg>
+          </span>
+          <div class="nav-vault-item-count-wrapper">
+            <VaultCount client:only="react" />
+          </div>
+          Comparison Vault
+        </a>
+        <div class="mega-menu mega-menu-vault" id="mega-menu-vault" style="opacity: 0; visibility: hidden; pointer-events: none;">
+          <VaultDropdown client:only="react" />
+        </div>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+{/* ─── Dropdown logic (matches HBS partial_navbar.js) ─── */}
+{/* WHY no DOMContentLoaded: Astro module scripts are deferred — DOM is
+    already parsed when they execute. Wrapping in DOMContentLoaded would
+    cause the listener to never fire (event already dispatched). */}
+<script>
+  let activeDropdown: HTMLElement | null = null;
+
+  function closeAllDropdowns() {
+    document.querySelectorAll<HTMLElement>('.nav-links > li.sub-menu, .nav-links > li').forEach((item) => {
+      const dropdown = item.querySelector<HTMLElement>('.mega-menu');
+      if (dropdown) {
+        dropdown.style.opacity = '0';
+        dropdown.style.visibility = 'hidden';
+        dropdown.style.pointerEvents = 'none';
+      }
+      item.classList.remove('active', 'locked');
+    });
+    activeDropdown = null;
+  }
+
+  function isMenuLocked(): boolean {
+    if (!activeDropdown) return false;
+    const parentLi = activeDropdown.closest('li');
+    return parentLi?.classList.contains('locked') ?? false;
+  }
+
+  function openMegaMenu(item: HTMLElement, dropdown: HTMLElement) {
+    dropdown.style.opacity = '1';
+    dropdown.style.visibility = 'visible';
+    dropdown.style.pointerEvents = 'auto';
+    item.classList.add('active');
+    activeDropdown = dropdown;
+  }
+
+  function openMegaMenuLocked(item: HTMLElement, dropdown: HTMLElement) {
+    dropdown.style.opacity = '1';
+    dropdown.style.visibility = 'visible';
+    dropdown.style.pointerEvents = 'auto';
+    item.classList.add('active', 'locked');
+    activeDropdown = dropdown;
+  }
+
+  function closeMegaMenu(item: HTMLElement, dropdown: HTMLElement) {
+    dropdown.style.opacity = '0';
+    dropdown.style.visibility = 'hidden';
+    dropdown.style.pointerEvents = 'none';
+    item.classList.remove('active', 'locked');
+    if (activeDropdown === dropdown) activeDropdown = null;
+  }
+
+  const isFinePointer = () => window.matchMedia('(pointer: fine)').matches;
+
+  /* WHY: links that should always navigate (skip dropdown toggling) */
+  const BYPASS = '.all-guides-link, .all-hubs-link, .see-all-link, .explore-all-link, .mega-menu-vault-inner';
+
+  /* Close open menus when hovering plain items (no dropdown) */
+  document.querySelectorAll<HTMLElement>('.nav-links > li:not(.sub-menu)').forEach((li) => {
+    li.addEventListener('mouseenter', () => {
+      if (!isMenuLocked()) closeAllDropdowns();
+    });
+  });
+
+  document.querySelectorAll<HTMLElement>('.nav-links > li').forEach((item) => {
+    const dropdown = item.querySelector<HTMLElement>('.mega-menu');
+    if (!dropdown) {
+      item.addEventListener('click', () => closeAllDropdowns());
+      return;
+    }
+
+    /* Hover open (fine pointer only) */
+    item.addEventListener('mouseenter', () => {
+      if (!isFinePointer()) return;
+      if (activeDropdown && !isMenuLocked()) {
+        const currentLi = activeDropdown.closest('li');
+        if (currentLi !== item) closeAllDropdowns();
+      }
+      if (!activeDropdown) openMegaMenu(item, dropdown);
+    });
+
+    /* Close when leaving the trigger, unless entering its dropdown */
+    item.addEventListener('mouseleave', (e) => {
+      if (!isFinePointer()) return;
+      const to = (e as MouseEvent).relatedTarget as Node | null;
+      if (!isMenuLocked() && !dropdown.contains(to) && !item.contains(to)) {
+        closeMegaMenu(item, dropdown);
+      }
+    });
+
+    /* Close when leaving the dropdown, unless returning to trigger */
+    dropdown.addEventListener('mouseleave', (e) => {
+      if (!isFinePointer()) return;
+      const to = (e as MouseEvent).relatedTarget as Node | null;
+      if (!isMenuLocked() && !item.contains(to)) {
+        closeMegaMenu(item, dropdown);
+      }
+    });
+
+    /* Click: toggle (coarse) or lock/unlock (fine) */
+    item.addEventListener('click', (e) => {
+      if ((e.target as HTMLElement).closest(BYPASS)) return;
+
+      const a = (e.target as HTMLElement).closest('a');
+      if (a) {
+        const href = a.getAttribute('href');
+        if (href && href !== '#') return;
+      }
+
+      e.preventDefault();
+      e.stopPropagation();
+
+      const isCoarse = window.matchMedia('(pointer: coarse)').matches;
+      if (isCoarse) {
+        if (activeDropdown === dropdown) {
+          closeMegaMenu(item, dropdown);
+          return;
+        }
+        if (activeDropdown && activeDropdown !== dropdown) closeAllDropdowns();
+        openMegaMenuLocked(item, dropdown);
+      } else {
+        if (activeDropdown === dropdown) {
+          item.classList.toggle('locked');
+          dropdown.style.opacity = '1';
+          dropdown.style.visibility = 'visible';
+          dropdown.style.pointerEvents = 'auto';
+          item.classList.add('active');
+          activeDropdown = dropdown;
+        } else {
+          if (activeDropdown && activeDropdown !== dropdown) closeAllDropdowns();
+          openMegaMenuLocked(item, dropdown);
+        }
+      }
+    });
+
+    /* Prevent clicks inside dropdown from closing it */
+    dropdown.addEventListener('click', (e) => e.stopPropagation());
+  });
+
+  /* ─── Mobile vault icon → toggles the vault mega-menu ─── */
+  const mobileVaultIcon = document.querySelector<HTMLElement>('.vault-mobile-icon');
+  const vaultLi = document.querySelector<HTMLElement>('.vault-bin-menu');
+  const vaultMenu = vaultLi?.querySelector<HTMLElement>('.mega-menu-vault');
+
+  if (mobileVaultIcon && vaultLi && vaultMenu) {
+    /* WHY move to body: the navbar (mainNav) creates a stacking context with
+       z-index 95000. Any child — even position:fixed — paints within that
+       context, so it can never appear BEHIND the navbar. Moving the vault menu
+       to <body> lets it sit at z-index 94000 (below 95000), so the navbar
+       covers the menu as it slides down, creating the "from under" effect.
+       WHY lazy: the move happens on first click, not page load. If the page
+       loads at desktop width (e.g. DevTools responsive toggle), the matchMedia
+       check at load time would fail and the menu would stay trapped. */
+    let _vaultMovedToBody = false;
+    function ensureVaultInBody() {
+      if (_vaultMovedToBody) return;
+      _vaultMovedToBody = true;
+      document.body.appendChild(vaultMenu!);
+      // WHY: force the browser to compute the initial layout (translateY(-100%))
+      // before we add vault-menu-open. Without this, the browser batches the
+      // append + class add into one paint and skips the transition.
+      vaultMenu!.getBoundingClientRect();
+    }
+
+    function closeSideMenuIfOpen() {
+      const sideMenu = document.querySelector<HTMLElement>('.side-menu.active');
+      if (!sideMenu) return false;
+      document.querySelector<HTMLElement>('.mobile-hamburger-menu-icon')?.click();
+      return true;
+    }
+
+    function openVaultMobile() {
+      vaultMenu!.style.opacity = '1';
+      vaultMenu!.style.visibility = 'visible';
+      vaultMenu!.style.pointerEvents = 'auto';
+      vaultMenu!.classList.add('vault-menu-open');
+      vaultLi!.classList.add('active', 'locked');
+      activeDropdown = vaultMenu!;
+    }
+
+    function closeVaultMobile() {
+      vaultMenu!.classList.remove('vault-menu-open');
+      vaultLi!.classList.remove('active', 'locked');
+      // Let the slide-up transition finish before hiding
+      setTimeout(() => {
+        if (!vaultMenu!.classList.contains('vault-menu-open')) {
+          vaultMenu!.style.opacity = '0';
+          vaultMenu!.style.visibility = 'hidden';
+          vaultMenu!.style.pointerEvents = 'none';
+        }
+      }, 350);
+      if (activeDropdown === vaultMenu) activeDropdown = null;
+    }
+
+    mobileVaultIcon.addEventListener('click', (e) => {
+      e.stopPropagation();
+      ensureVaultInBody();
+
+      if (vaultLi!.classList.contains('locked')) {
+        closeVaultMobile();
+        return;
+      }
+
+      closeAllDropdowns();
+
+      if (closeSideMenuIfOpen()) {
+        setTimeout(() => openVaultMobile(), 300);
+      } else {
+        openVaultMobile();
+      }
+    });
+
+    // Prevent clicks inside vault dropdown from closing it
+    vaultMenu.addEventListener('click', (e) => e.stopPropagation());
+  }
+
+  /* Close on top-bar-right hover/click (skip if mobile vault icon was clicked) */
+  const topBarRight = document.querySelector<HTMLElement>('.top-bar-right');
+  if (topBarRight) {
+    topBarRight.addEventListener('mouseenter', () => {
+      if (!isMenuLocked()) closeAllDropdowns();
+    });
+    topBarRight.addEventListener('click', (e) => {
+      if ((e.target as HTMLElement).closest('.vault-mobile-icon')) return;
+      closeAllDropdowns();
+    });
+  }
+
+  /* Close on logo hover */
+  const logo = document.querySelector<HTMLElement>('.logo-container');
+  if (logo) {
+    logo.addEventListener('mouseenter', () => {
+      if (!isMenuLocked()) closeAllDropdowns();
+    });
+  }
+
+  /* Global away-click */
+  function globalClickClose(e: Event) {
+    const target = e.target as HTMLElement;
+    if (activeDropdown && !target.closest('.nav-links') && !target.closest('.vault-mobile-icon') && !target.closest('.mega-menu-vault')) {
+      closeAllDropdowns();
+      // Also close mobile vault (it's outside .nav-links since it's in body)
+      if (vaultMenu?.classList.contains('vault-menu-open')) {
+        vaultMenu.classList.remove('vault-menu-open');
+        vaultLi?.classList.remove('active', 'locked');
+        setTimeout(() => {
+          if (!vaultMenu!.classList.contains('vault-menu-open')) {
+            vaultMenu!.style.opacity = '0';
+            vaultMenu!.style.visibility = 'hidden';
+            vaultMenu!.style.pointerEvents = 'none';
+          }
+        }, 350);
+      }
+    }
+  }
+  document.addEventListener('click', globalClickClose);
+  document.addEventListener('touchstart', globalClickClose);
+
+  /* ─── Guides category switching ─── */
+  document.querySelectorAll<HTMLElement>('.mega-menu-guides .mega-menu-left-nav a[data-category]').forEach((link) => {
+    link.addEventListener('click', (e) => {
+      e.preventDefault();
+      const category = link.getAttribute('data-category');
+      if (!category) return;
+
+      document.querySelectorAll<HTMLElement>('.mega-menu-guides .mega-menu-left-nav a[data-category]')
+        .forEach((el) => el.classList.remove('active'));
+      link.classList.add('active');
+
+      document.querySelectorAll<HTMLElement>('.guides-set').forEach((set) => {
+        set.style.display = 'none';
+      });
+      const target = document.querySelector<HTMLElement>(`.guides-set[data-category="${category}"]`);
+      if (target) target.style.display = 'flex';
+
+      const menu = document.querySelector<HTMLElement>('.mega-menu-guides');
+      if (menu) menu.style.setProperty('--navbar-guides-color', `var(--cat-${category})`);
+    });
+  });
+
+  /* Set default guides category color */
+  const defaultGuidesLink = document.querySelector<HTMLElement>('.mega-menu-guides .mega-menu-left-nav a[data-category]');
+  if (defaultGuidesLink) {
+    const cat = defaultGuidesLink.getAttribute('data-category');
+    const menu = document.querySelector<HTMLElement>('.mega-menu-guides');
+    if (menu && cat) menu.style.setProperty('--navbar-guides-color', `var(--cat-${cat})`);
+  }
+
+  /* ─── Brands category switching ─── */
+  document.querySelectorAll<HTMLElement>('.mega-menu-brands .mega-menu-left-nav a[data-category]').forEach((link) => {
+    link.addEventListener('click', (e) => {
+      e.preventDefault();
+      const category = link.getAttribute('data-category');
+      if (!category) return;
+
+      document.querySelectorAll<HTMLElement>('.mega-menu-brands .mega-menu-left-nav a[data-category]')
+        .forEach((el) => el.classList.remove('active'));
+      link.classList.add('active');
+
+      document.querySelectorAll<HTMLElement>('.brand-set').forEach((set) => {
+        set.style.display = 'none';
+      });
+      const target = document.querySelector<HTMLElement>(`.brand-set[data-category="${category}"]`);
+      if (target) target.style.display = 'flex';
+
+      const menu = document.querySelector<HTMLElement>('.mega-menu-brands');
+      if (menu) menu.style.setProperty('--navbar-brands-color', `var(--cat-${category})`);
+    });
+  });
+
+  /* Set default brands category color */
+  const defaultBrandsLink = document.querySelector<HTMLElement>('.mega-menu-brands .mega-menu-left-nav a[data-category]');
+  if (defaultBrandsLink) {
+    const cat = defaultBrandsLink.getAttribute('data-category');
+    const menu = document.querySelector<HTMLElement>('.mega-menu-brands');
+    if (menu && cat) menu.style.setProperty('--navbar-brands-color', `var(--cat-${cat})`);
+  }
+
+  /* ─── Hubs menu pinning (fixed position under top bar) ─── */
+  const hubsLi = document.querySelector<HTMLElement>('.sub-menu.hubs-dropdown');
+  const hubsLink = hubsLi?.querySelector<HTMLElement>('.nav-link');
+  const hubsMenu = hubsLi?.querySelector<HTMLElement>('.mega-menu.hubs-menu');
+  const topBar = document.querySelector<HTMLElement>('.top-bar');
+
+  if (hubsLi && hubsLink && hubsMenu && topBar) {
+    Object.assign(hubsMenu.style, { position: 'fixed', transform: 'none' });
+
+    function placeHubs() {
+      const bar = topBar!.getBoundingClientRect();
+      const a = hubsLink!.getBoundingClientRect();
+      hubsMenu!.style.left = `${a.left}px`;
+      hubsMenu!.style.top = `${bar.bottom}px`;
+      hubsMenu!.style.minWidth = `${a.width}px`;
+    }
+
+    function onHubs() {
+      placeHubs();
+      window.addEventListener('resize', placeHubs);
+      window.addEventListener('scroll', placeHubs, { passive: true });
+    }
+    function offHubs() {
+      window.removeEventListener('resize', placeHubs);
+      window.removeEventListener('scroll', placeHubs);
+    }
+
+    const observer = new MutationObserver((muts) => {
+      for (const m of muts) {
+        if (m.attributeName !== 'class') continue;
+        hubsLi!.classList.contains('active') ? onHubs() : offHubs();
+      }
+    });
+    observer.observe(hubsLi, { attributes: true });
+  }
+
+  /* ─── VanillaTilt on game cards (matches HBS lazyNavGames.js) ─── */
+  /* WHY lazy: HBS only initializes tilt on first games menu hover.
+     We load the library dynamically and init once to avoid blocking. */
+  {
+    const gamesSubMenu = document.querySelector<HTMLElement>('li.sub-menu:has(.games-menu)');
+    const gamesMenu = gamesSubMenu?.querySelector<HTMLElement>('.games-menu');
+
+    if (gamesSubMenu && gamesMenu) {
+      let tiltInit = false;
+
+      function initGamesTilt() {
+        if (tiltInit) return;
+        tiltInit = true;
+
+        const tiles = gamesMenu!.querySelectorAll<HTMLElement>('.nav-game-image-container');
+        if (!tiles.length) return;
+
+        /* WHY: load script dynamically — matches HBS pattern where
+           widget_tile_tilt.js is a global script and navbar uses window.VanillaTilt */
+        if ((window as any).VanillaTilt) {
+          (window as any).VanillaTilt.init(Array.from(tiles), {
+            max: 15,
+            speed: 400,
+            scale: 1.025,
+            perspective: 800,
+            glare: true,
+            'max-glare': 0.35,
+          });
+          return;
+        }
+
+        const script = document.createElement('script');
+        script.src = '/js/widget_tile_tilt.js';
+        script.onload = () => {
+          if ((window as any).VanillaTilt) {
+            (window as any).VanillaTilt.init(Array.from(tiles), {
+              max: 15,
+              speed: 400,
+              scale: 1.025,
+              perspective: 800,
+              glare: true,
+              'max-glare': 0.35,
+            });
+          }
+        };
+        document.head.appendChild(script);
+      }
+
+      gamesSubMenu.addEventListener('pointerenter', initGamesTilt, { once: true });
+      gamesSubMenu.addEventListener('focusin', initGamesTilt, { once: true });
+      gamesSubMenu.addEventListener('touchstart', initGamesTilt, { once: true });
+    }
+  }
+
+  /* ─── Index link bypass (ensure CTAs always navigate) ─── */
+  const bypassLinks = document.querySelectorAll<HTMLAnchorElement>(
+    '.mega-menu .all-guides-link, .mega-menu .all-hubs-link, .mega-menu .see-all-link'
+  );
+  bypassLinks.forEach((a) => {
+    ['click', 'pointerup', 'touchend'].forEach((type) => {
+      a.addEventListener(type, (ev) => {
+        const href = a.getAttribute('href');
+        if (!href || href === '#') return;
+        ev.preventDefault();
+        ev.stopPropagation();
+        ev.stopImmediatePropagation?.();
+        window.location.assign(href);
+      }, { capture: true });
+    });
+  });
+</script>
+
+<style is:global>
+  /* ═══════════════════════════════════════════════════════════════════════════
+     NAV LINKS BASE
+     WHY is:global: The dropdown script does DOM queries by class name.
+     Astro scoped styles add data attributes that can break specificity chains
+     and prevent the script from matching elements. The navbar is a singleton
+     so global scope is safe.
+     ═══════════════════════════════════════════════════════════════════════════ */
+  .main-nav {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    white-space: nowrap;
+    height: 100%;
+  }
+
+  .wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+  }
+
+  .nav-links {
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    height: 100%;
+    text-transform: capitalize;
+    width: auto;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    align-items: center;
+  }
+
+  /* WHY no position:relative — HBS does NOT set position on .sub-menu.
+     Without it, .mega-menu (position:absolute) is positioned relative to
+     .mainNav (position:fixed), which lets it escape .top-bar's overflow-y:hidden.
+     CSS spec: overflow only clips absolutely positioned descendants whose
+     containing block chain includes the overflow element. */
+  .sub-menu {
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+  }
+
+  .nav-links > li > a,
+  .sub-menu > a {
+    letter-spacing: 0px;
+    font-weight: 700;
+    margin: 0 clamp(0.455rem, -0.213rem + 0.638vw, 1.273rem);
+  }
+
+  .nav-link {
+    display: block;
+    font-family: var(--identity-font);
+    color: var(--white-color-1);
+    text-decoration: none;
+    padding: 8px 15px;
+    font-size: var(--font-size-14px);
+    letter-spacing: 0px;
+    position: relative;
+  }
+
+  .nav-link:hover {
+    background: linear-gradient(to right, var(--site-gradient-start), var(--site-gradient-end));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 3px;
+    background: linear-gradient(to right, var(--site-gradient-start), var(--site-gradient-end));
+    transition: width 0.5s ease;
+  }
+
+  .nav-links > li.sub-menu.locked > a::after {
+    width: 80%;
+  }
+  .nav-links > li.sub-menu.locked > a {
+    color: var(--nav-text);
+  }
+
+  .nav-link[aria-current="page"]::after {
+    width: 80%;
+  }
+
+  .icon-inline {
+    display: inline-flex;
+    align-items: center;
+    color: var(--nav-text);
+    text-decoration: none;
+  }
+
+  .nav-home-svg {
+    width: var(--font-size-18px);
+    height: var(--font-size-18px);
+    margin-right: 0.5rem;
+    fill: currentColor;
+  }
+
+  .icon-inline:hover .nav-home-svg path {
+    fill: url(#navbarThemeGradient);
+  }
+
+  .icon-inline span {
+    display: flex;
+    align-items: center;
+  }
+
+  @media (max-width: 1600px) {
+    .home-link { display: none; }
+  }
+
+  @media (max-width: 1150px) {
+    .main-nav { display: none; }
+  }
+
+  /* ═══════════════════════════════════════════════════════════════════════════
+     NEW BADGE + DROPDOWN ARROW (Hubs)
+     ═══════════════════════════════════════════════════════════════════════════ */
+  /* WHY no font-size: HBS has no explicit size — inherits from .nav-link (14px) */
+  .navbar-new-badge[data-neutral="true"] {
+    background: linear-gradient(to right, var(--site-start-color), var(--site-end-color));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .nav-dropdown-arrow {
+    position: relative;
+    display: inline-block;
+    width: auto;
+    height: auto;
+    margin-left: 0px;
+    line-height: 1;
+  }
+
+  .nav-dropdown-arrow::after {
+    content: '\25BC';
+    display: inline-block;
+    color: var(--nav-text);
+    transform-origin: center;
+    transition: transform 0.3s ease, background 0.3s ease, color 0.3s ease;
+  }
+
+  .sub-menu.hubs-dropdown:hover .nav-dropdown-arrow::after,
+  .sub-menu.hubs-dropdown.locked .nav-dropdown-arrow::after {
+    transform: rotate(180deg);
+    background: linear-gradient(to right, var(--site-gradient-start), var(--site-gradient-end));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  /* ═══════════════════════════════════════════════════════════════════════════
+     MEGA MENU BASE
+     ═══════════════════════════════════════════════════════════════════════════ */
+  .mega-menu {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: var(--nav-surface);
+    z-index: 94000;
+    /* WHY: initial hidden state set via inline style (matching HBS).
+       Script toggles inline opacity/visibility/pointer-events. */
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4) !important;
+    box-sizing: border-box;
+    width: fit-content;
+    max-width: 100vw;
+    max-height: clamp(75vh, calc(100vh - 300px), calc(100vh - var(--nav-height)));
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    overflow-x: auto;
+    white-space: nowrap;
+    scrollbar-width: thin;
+    border-bottom: 1px solid transparent;
+  }
+
+  .nav-links > li.locked .mega-menu {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+  }
+
+  /* Bottom border colors */
+  .games-menu,
+  .hubs-menu {
+    background-image: linear-gradient(to right, var(--site-gradient-start), var(--site-gradient-end));
+    background-repeat: no-repeat;
+    background-position: bottom -1px left;
+    background-size: 100% 1px;
+  }
+  .mega-menu-guides {
+    border-bottom: 1px solid var(--navbar-guides-color, var(--cat-mouse));
+  }
+  .mega-menu-brands {
+    border-bottom: 1px solid var(--navbar-brands-color, var(--cat-mouse));
+  }
+
+  /* ═══════════════════════════════════════════════════════════════════════════
+     GAMES MEGA MENU
+     ═══════════════════════════════════════════════════════════════════════════ */
+  .mega-menu.games-menu {
+    min-width: 900px;
+    padding: 2rem;
+  }
+
+  .nav-game-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 12rem);
+    column-gap: 1.5rem;
+    row-gap: 1rem;
+    width: max-content;
+    margin: 0 auto;
+    padding: 0;
+    justify-content: center;
+  }
+
+  .nav-game-grid-item {
+    width: 12rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    position: relative;
+    transition: transform 0.3s ease;
+    padding: 0;
+    margin: 0;
+  }
+
+  .nav-game-item-link {
+    overflow: visible;
+    text-decoration: none;
+  }
+
+  .nav-game-image-container {
+    width: 12rem;
+    aspect-ratio: 7/10;
+    border-radius: 8px;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    will-change: transform;
+    transform-style: preserve-3d;
+  }
+
+  .nav-game-item-image {
+    width: 100%;
+    height: 100%;
+    border-radius: 8px;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.3s ease;
+  }
+
+  .nav-game-title {
+    font-family: var(--identity-font);
+    font-weight: var(--font-weight7);
+    color: var(--white-color-1);
+    font-size: var(--font-size-13px);
+    line-height: 1.4;
+    text-align: center;
+    margin: 0.5rem 0 0 0;
+    white-space: normal;
+    word-wrap: break-word;
+    text-transform: capitalize;
+    transition: color 0.3s ease;
+  }
+
+  .nav-game-grid-item:hover .nav-game-item-image {
+    transform: scale(1.025);
+  }
+  .nav-game-grid-item:hover .nav-game-title {
+    background: linear-gradient(to right, var(--site-gradient-start), var(--site-gradient-end));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  /* ═══════════════════════════════════════════════════════════════════════════
+     GUIDES & BRANDS 2-COLUMN LAYOUT
+     ═══════════════════════════════════════════════════════════════════════════ */
+  .mega-menu-guides,
+  .mega-menu-brands {
+    max-width: 100vw;
+    padding: 2rem 2.5rem 0 2.5rem;
+  }
+
+  .mega-menu-inner {
+    display: grid;
+    grid-template-columns: 20rem 1fr;
+    align-items: stretch;
+  }
+
+  /* ─── Left column ─── */
+  .mega-menu-left-column {
+    display: flex;
+    position: relative;
+    flex-direction: column;
+    padding-right: 2.5rem;
+    min-width: 20rem;
+    padding-bottom: 2rem;
+    height: 100%;
+    box-sizing: border-box;
+  }
+
+  .mega-menu-left-column::after {
+    content: "";
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 2rem;
+    width: 1px;
+    background: #444;
+    pointer-events: none;
+  }
+
+  .mega-left-stack {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-height: 100%;
+  }
+
+  .mega-left-spacer {
+    flex: 1 1 auto;
+  }
+
+  .mega-menu-left-column .mega-menu-bottom-link {
+    margin-top: 0;
+  }
+
+  /* ─── Left nav items ─── */
+  .mega-menu-left-nav {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .mega-menu-left-nav li {
+    margin-bottom: 0.5rem;
+  }
+
+  .mega-menu-left-nav li a {
+    display: flex;
+    align-items: center;
+    gap: 1em;
+    position: relative;
+    justify-content: flex-start;
+    color: var(--white-color-1);
+    font-family: var(--identity-font);
+    font-weight: var(--font-weight7);
+    font-size: var(--font-size-15px);
+    letter-spacing: -0.5px;
+    text-align: left;
+    padding: 1rem 1.75rem;
+    transition: none;
+    border-radius: 0 8px 8px 0;
+    text-decoration: none;
+    line-height: 1;
+    padding-right: 1.75em;
+  }
+
+  /* Chevron after */
+  .mega-menu-guides .mega-menu-left-nav li a::after,
+  .mega-menu-brands .mega-menu-left-nav li a::after {
+    content: '\276F';
+    position: absolute;
+    top: 50%;
+    right: 1.25rem;
+    transform: translateY(-50%);
+    color: var(--nav-text);
+    background: none;
+    width: auto;
+    height: auto;
+  }
+
+  /* Category icon (CSS mask) */
+  .category-icon {
+    flex: 0 0 1.5em;
+    width: 1.5em;
+    height: 1.5em;
+    background-color: var(--nav-text);
+    -webkit-mask-size: contain;
+    -webkit-mask-repeat: no-repeat;
+    -webkit-mask-position: center;
+    mask-size: contain;
+    mask-repeat: no-repeat;
+    mask-position: center;
+  }
+
+  /* Category icon masks — loaded from /images/navbar/{id}.svg
+     SSOT: categories.json defines the IDs. Drop {id}.svg into public/images/navbar/.
+     All 10 categories have dedicated icons. New categories need an SVG added here. */
+  .icon-mouse {
+    -webkit-mask-image: url('/images/navbar/mouse.svg');
+    mask-image: url('/images/navbar/mouse.svg');
+  }
+  .icon-keyboard {
+    -webkit-mask-image: url('/images/navbar/keyboard.svg');
+    mask-image: url('/images/navbar/keyboard.svg');
+  }
+  .icon-monitor {
+    -webkit-mask-image: url('/images/navbar/monitor.svg');
+    mask-image: url('/images/navbar/monitor.svg');
+  }
+  .icon-headset {
+    -webkit-mask-image: url('/images/navbar/headset.svg');
+    mask-image: url('/images/navbar/headset.svg');
+  }
+  .icon-mousepad {
+    -webkit-mask-image: url('/images/navbar/mousepad.svg');
+    mask-image: url('/images/navbar/mousepad.svg');
+  }
+  .icon-controller {
+    -webkit-mask-image: url('/images/navbar/controller.svg');
+    mask-image: url('/images/navbar/controller.svg');
+  }
+  .icon-hardware {
+    -webkit-mask-image: url('/images/navbar/hardware.svg');
+    mask-image: url('/images/navbar/hardware.svg');
+  }
+  .icon-game {
+    -webkit-mask-image: url('/images/navbar/game.svg');
+    mask-image: url('/images/navbar/game.svg');
+  }
+  .icon-gpu {
+    -webkit-mask-image: url('/images/navbar/gpu.svg');
+    mask-image: url('/images/navbar/gpu.svg');
+  }
+  .icon-ai {
+    -webkit-mask-image: url('/images/navbar/ai.svg');
+    mask-image: url('/images/navbar/ai.svg');
+  }
+
+  /* Hover states */
+  .mega-menu-left-nav li a:hover {
+    color: var(--card-color, var(--site-gradient-end));
+  }
+  .mega-menu-left-nav li a:hover::after {
+    color: var(--card-color, var(--site-gradient-end));
+  }
+  .mega-menu-left-column .mega-menu-left-nav li a:hover:not(.active) .category-icon {
+    background-color: var(--card-color, var(--site-gradient-end));
+  }
+
+  /* Active states */
+  .mega-menu-left-column .mega-menu-left-nav li a.active .category-icon {
+    background-color: var(--nav-text);
+  }
+  .mega-menu-left-column .mega-menu-left-nav li a.active,
+  .mega-menu-left-column .mega-menu-left-nav li a.active:hover {
+    color: var(--nav-text);
+  }
+
+  .mega-menu-guides .mega-menu-left-column .mega-menu-left-nav li a.active {
+    background-color: var(--nav-surface-dark);
+    border-left: 3px solid var(--navbar-guides-color, var(--cat-mouse));
+  }
+  .mega-menu-guides .mega-menu-left-column .mega-menu-left-nav li a.active::after {
+    color: var(--navbar-guides-color, var(--cat-mouse));
+  }
+  .mega-menu-brands .mega-menu-left-column .mega-menu-left-nav li a.active {
+    background-color: var(--nav-surface-dark);
+    border-left: 3px solid var(--navbar-brands-color, var(--cat-mouse));
+  }
+  .mega-menu-brands .mega-menu-left-column .mega-menu-left-nav li a.active::after {
+    color: var(--navbar-brands-color, var(--cat-mouse));
+  }
+
+  /* ─── Right content area ─── */
+  .mega-menu-content {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    height: max-content;
+    box-sizing: border-box;
+    padding: 0 0 0 3rem;
+    height: 100%;
+  }
+
+  .brand-set,
+  .guides-set {
+    display: none;
+    flex-direction: column;
+    gap: 2rem;
+    height: 100%;
+    justify-content: space-between;
+    padding-bottom: 2rem;
+    box-sizing: border-box;
+  }
+
+  /* WHY: first set shown by default */
+  .guides-set:first-child,
+  .brand-set:first-child {
+    display: flex;
+  }
+
+  :root {
+    --grid-width: clamp(17rem, 9.333rem + 7.333vw, 20rem);
+  }
+
+  .brand-set-inner {
+    display: grid;
+    grid-template-columns: repeat(4, var(--grid-width));
+    gap: 2rem;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  /* WHY fixed column count via inline style: the widest category (mouse = 4
+     sections) sets the column count for ALL categories via an inline
+     grid-template-columns. This prevents layout shift when switching tabs.
+     The CSS here is a fallback — inline style from Astro always wins. */
+  .guides-set-inner {
+    display: grid;
+    grid-template-columns: repeat(4, var(--grid-width));
+    gap: 2rem;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  /* ─── Content items ─── */
+  .dropdown-column1 {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    box-sizing: border-box;
+  }
+
+  /* Section headers (HBS: .category-header h4 > .genre-focused) */
+  .category-header {
+    margin: 0;
+    padding: 0;
+  }
+
+  .category-header h4 {
+    margin: 0;
+    padding: 0;
+  }
+
+  .genre-focused {
+    font-size: var(--font-size-12px);
+    font-family: var(--identity-font);
+    font-weight: var(--font-weight4);
+    color: var(--grey-color-2, #8a8f98);
+    text-decoration: none;
+    cursor: default;
+    display: block;
+    text-align: left;
+    transition: none;
+    margin-bottom: 1rem;
+    text-transform: capitalize;
+    letter-spacing: 0px;
+    white-space: normal;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+  }
+
+  .dropdown-column1 ul {
+    text-transform: none;
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .dropdown-column1 ul li {
+    text-align: left;
+    word-wrap: break-word;
+    display: block;
+    margin-bottom: 0.5rem;
+  }
+
+  .dropdown-column1 ul li a {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    padding: 1.25rem 0;
+    color: var(--white-color-1);
+    text-decoration: none;
+    font-size: var(--font-size-14px);
+    letter-spacing: -0.5px;
+    font-family: var(--identity-font);
+    font-weight: var(--font-weight5);
+    width: 100%;
+    white-space: normal;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+  }
+
+  /* Underline wrapper */
+  .nav-underline {
+    position: relative;
+    display: inline-block;
+    white-space: normal;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+  }
+
+  /* Guides hover: category color */
+  .mega-menu-guides .dropdown-column1 ul li a:hover .nav-underline {
+    color: var(--navbar-guides-color, var(--cat-mouse));
+  }
+  .mega-menu-guides .dropdown-column1 ul li a:hover .nav-underline::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 1px;
+    background: var(--navbar-guides-color, var(--cat-mouse));
+  }
+
+  /* Brands hover: category color */
+  .mega-menu-brands .dropdown-column1 ul li a:hover .nav-underline {
+    color: var(--navbar-brands-color, var(--cat-mouse));
+  }
+  .mega-menu-brands .dropdown-column1 ul li a:hover .nav-underline::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 1px;
+    background: var(--navbar-brands-color, var(--cat-mouse));
+  }
+
+  /* ─── Bottom CTA buttons ─── */
+  .mega-menu-bottom-link {
+    width: 100%;
+    cursor: pointer;
+    text-align: center;
+    background-color: var(--nav-surface-medium, #2e343b);
+    box-sizing: border-box;
+    border-radius: 4px;
+    transition: background-color 0.2s ease, color 0.2s ease;
+  }
+
+  .all-guides-link {
+    color: var(--white-color-1);
+    text-decoration: none;
+    font-family: var(--identity-font);
+    font-weight: var(--font-weight7);
+    font-size: var(--font-size-14px);
+    display: inline-block;
+    padding: 0.65rem 1rem;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    cursor: pointer;
+    position: relative;
+  }
+
+  .mega-menu-guides .mega-menu-bottom-link:hover {
+    background-color: var(--navbar-guides-color, var(--cat-mouse)) !important;
+  }
+  .mega-menu-brands .mega-menu-bottom-link:hover {
+    background-color: var(--navbar-brands-color, var(--cat-mouse)) !important;
+  }
+
+  /* Chevron arrow on bottom CTA */
+  .all-guides-link::after {
+    content: '\276F';
+    display: inline-block;
+    position: static;
+    bottom: auto;
+    left: auto;
+    transform: none;
+    width: auto;
+    height: auto;
+    background: none;
+    margin-left: 1rem;
+    transition: transform 0.3s ease, color 0.3s ease;
+    color: var(--nav-text);
+  }
+
+  .mega-menu-guides .mega-menu-bottom-link:hover .all-guides-link::after,
+  .mega-menu-brands .mega-menu-bottom-link:hover .all-guides-link::after {
+    transform: translateX(5px);
+  }
+
+  /* Left column explore-all CTA — no extra padding vs the right button.
+     WHY: HBS selector was .mega-menu-left-nav .left-explore-all-cta but the
+     CTA is a sibling, not a child, so the padding-top never applied in HBS. */
+  .left-explore-all-cta {
+    display: block;
+    text-align: center;
+  }
+  .left-explore-all-cta::after {
+    display: none;
+  }
+
+  /* ═══════════════════════════════════════════════════════════════════════════
+     BRANDS — logo circles
+     ═══════════════════════════════════════════════════════════════════════════ */
+  .brand-logo-container {
+    flex: 0 0 2.5em;
+    width: 2.5em;
+    height: 2.5em;
+    margin-right: 0.5rem;
+    border-radius: 50%;
+    background-color: #121212; /* HBS --section-darkestdark-background-color */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .brand-logo {
+    width: 1.85em;
+    height: 1.85em;
+    object-fit: contain;
+    filter: brightness(0) invert(1);
+  }
+
+  .brand-item {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+  }
+
+  .brand-item:hover .brand-logo-container {
+    background-color: var(--card-color, var(--site-gradient-end)) !important;
+  }
+
+  /* ═══════════════════════════════════════════════════════════════════════════
+     HUBS MEGA MENU
+     ═══════════════════════════════════════════════════════════════════════════ */
+  .hubs-menu {
+    padding: 1rem 2rem;
+    min-width: max-content;
+  }
+
+  .hubs-menu > ul {
+    display: block;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+  }
+
+  .hubs-menu ul li a {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    padding: 1.25rem 0;
+    color: var(--white-color-1);
+    text-decoration: none;
+    font-size: var(--font-size-14px);
+    letter-spacing: -0.5px;
+    font-family: var(--identity-font);
+    font-weight: var(--font-weight5);
+    width: 100%;
+    gap: 1rem;
+    white-space: normal;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+  }
+
+  /* Hubs hover: per-row category color using --card-color */
+  .hubs-menu ul li a:not(.active):hover .nav-underline {
+    color: var(--card-color, var(--site-gradient-end));
+  }
+  .hubs-menu ul li a:not(.active):hover .category-icon {
+    background-color: var(--card-color, var(--site-gradient-end));
+  }
+  .hubs-menu ul li a:not(.active):hover .nav-underline::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 1px;
+    background-color: var(--card-color, var(--site-gradient-end));
+  }
+
+  /* Category color classes — SSOT: generated from categories.json in MainLayout.astro.
+     .{cat}-color sets --card-color, --card-accent, --card-rgb, --card-glow, etc. */
+
+  /* See All link */
+  .see-all-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 1rem;
+  }
+  .see-all-icon {
+    flex: 0 0 1.5em;
+    width: 1.5em;
+    height: 1.5em;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--nav-text);
+  }
+  .see-all-icon svg {
+    width: 70%;
+    height: 70%;
+    display: block;
+    fill: currentColor;
+  }
+
+  .hubs-menu ul li a.see-all-link:hover .nav-underline {
+    color: var(--site-gradient-end);
+  }
+  .hubs-menu ul li a.see-all-link:hover .see-all-icon {
+    color: var(--site-gradient-end);
+  }
+  .hubs-menu ul li a.see-all-link:hover .nav-underline::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 1px;
+    background: var(--site-gradient-end);
+  }
+
+  /* ═══════════════════════════════════════════════════════════════════════════
+     HUBS DROPDOWN HOVER (CSS-only open for fine pointer)
+     ═══════════════════════════════════════════════════════════════════════════ */
+  .sub-menu.hubs-dropdown {
+    position: relative;
+  }
+
+  /* ═══════════════════════════════════════════════════════════════════════════
+     VAULT MEGA MENU — matches HBS partial_navbar.css vault section exactly
+     ═══════════════════════════════════════════════════════════════════════════ */
+
+  /* Vault trigger button — bordered box */
+  .vault-bin-button {
+    position: relative;
+    display: inline-flex !important;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 0.35rem;
+    border: 3px solid var(--white-color-1);
+    border-radius: 0;
+    transition: border 0.3s ease-out;
+  }
+
+  .vault-bin-menu {
+    padding: 0.35rem;
+  }
+
+  .vault-bin-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .vault-bin-icon svg {
+    display: block;
+    width: 1.3em;
+    height: 1.3em;
+    fill: currentColor;
+    transition: transform 0.3s ease;
+  }
+
+  /* No underline on vault button */
+  .nav-links > li.sub-menu.vault-bin-menu.locked > a.vault-bin-button::after {
+    content: none !important;
+  }
+
+  /* Rotate icon on hover / locked */
+  .sub-menu.vault-bin-menu:hover .vault-bin-icon svg {
+    transform: rotate(180deg);
+  }
+  .nav-links > li.sub-menu.vault-bin-menu.locked .vault-bin-icon svg {
+    transform: rotate(180deg);
+  }
+
+  /* Gradient text when locked + hover */
+  .nav-links li.sub-menu.vault-bin-menu.locked > a.vault-bin-button:hover {
+    background: linear-gradient(to right, var(--site-start-color), var(--site-end-color));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .nav-links > li.sub-menu.vault-bin-menu.locked > a.vault-bin-button {
+    border-color: transparent;
+  }
+
+  /* Gradient border via @supports mask (HBS uses this exact pattern) */
+  @supports ((mask-composite: exclude) or (-webkit-mask-composite: xor)) {
+    .vault-bin-button::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to right, var(--site-start-color), var(--site-end-color));
+      top: -3px;
+      left: -3px;
+      right: -3px;
+      bottom: -3px;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.3s ease-out;
+      box-sizing: border-box;
+      padding: 3px;
+      mask:
+        linear-gradient(#fff 0 0) content-box,
+        linear-gradient(#fff 0 0) border-box;
+      mask-composite: exclude;
+      -webkit-mask:
+        linear-gradient(#fff 0 0) content-box,
+        linear-gradient(#fff 0 0) border-box;
+      -webkit-mask-composite: xor;
+    }
+  }
+
+  .nav-links > li.sub-menu.vault-bin-menu.locked > a.vault-bin-button::before {
+    opacity: 1;
+  }
+
+  /* Badge: item count circle */
+  .nav-vault-item-count-wrapper {
+    position: absolute;
+    top: 0;
+    right: 0;
+    transform: translate(50%, -50%);
+    background: linear-gradient(to right, var(--site-start-color), var(--site-end-color));
+    color: var(--white-color-1);
+    width: 1.55em;
+    aspect-ratio: 1;
+    font-family: var(--identity-font);
+    border-radius: 50%;
+    font-size: var(--font-size-12px);
+    font-weight: 700;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    min-inline-size: max-content;
+    pointer-events: none;
+    flex-shrink: 0;
+  }
+
+  /* Show badge when React island renders content */
+  .nav-vault-item-count-wrapper:has(.nav-vault-item-count) {
+    display: flex;
+  }
+
+  .nav-vault-item-count {
+    line-height: 1;
+  }
+
+  @media (max-width: 1150px) {
+    .vault-bin-button {
+      display: none !important;
+    }
+    .vault-bin-menu {
+      padding: 0;
+    }
+    .nav-vault-item-count-wrapper {
+      width: 1.35em;
+    }
+  }
+
+  /* ─── Mega menu vault panel ─── */
+  .mega-menu-vault {
+    border-bottom: 1px solid var(--navbar-vault-color, var(--cat-mouse));
+    padding: 2rem 2.5rem 0 2.5rem;
+  }
+
+  /* ─── Vault inner grid (same 20rem + 1fr as Guides/Brands) ─── */
+  .mega-menu-vault-inner {
+    display: grid;
+    grid-template-columns: 20rem 1fr;
+    align-items: stretch;
+  }
+
+  /* ─── Vault left column (shared styling with Guides/Brands left-column) ─── */
+  /* WHY: vault reuses .mega-menu-left-column + .vault-left-column double class
+     from HBS. The base styles are already on .mega-menu-left-column above. */
+
+  /* ─── Vault-specific left-nav overrides ─── */
+  .vault-link-count {
+    color: var(--white-color-1);
+    font-family: var(--identity-font);
+    font-weight: var(--font-weight4);
+    margin-left: 4px;
+    margin-bottom: 2px;
+  }
+
+  /* Vault chevron (shared with guides/brands — already defined above) */
+  .mega-menu-vault .mega-menu-left-nav li a::after {
+    content: '\276F' !important;
+    position: absolute !important;
+    bottom: auto !important;
+    left: auto !important;
+    top: 50% !important;
+    right: 1.25rem !important;
+    transform: translateY(-50%) !important;
+    color: var(--white-color-1);
+    width: auto !important;
+    height: auto !important;
+    background: none !important;
+    margin-left: 2rem;
+  }
+
+  /* Vault empty-cat (categories with 0 items) */
+  .mega-menu-vault .mega-menu-left-nav .empty-cat::after {
+    color: var(--overall-zero-score, #555) !important;
+  }
+  .mega-menu-vault .mega-menu-left-nav .empty-cat:hover {
+    color: var(--overall-zero-score, #555);
+  }
+  .mega-menu-vault .mega-menu-left-nav .empty-cat:hover::after {
+    filter: brightness(130%);
+  }
+  .mega-menu-vault .empty-cat .category-icon {
+    background-color: var(--overall-zero-score, #555) !important;
+  }
+  .mega-menu-vault .mega-menu-left-column .mega-menu-left-nav .empty-cat:hover:not(.active) .category-icon {
+    filter: brightness(130%);
+  }
+  .mega-menu-vault .mega-menu-left-column .mega-menu-left-nav .empty-cat.active .category-icon {
+    background-color: var(--overall-zero-score, #555) !important;
+  }
+  .mega-menu-vault .mega-menu-left-column .mega-menu-left-nav .empty-cat:not(.active):hover .vault-link-count {
+    color: var(--card-color);
+  }
+  .vault-left-nav li a.empty-cat {
+    color: var(--overall-zero-score, #555) !important;
+  }
+  .vault-left-nav li a.empty-cat:hover {
+    filter: brightness(130%);
+  }
+
+  /* Vault active state overrides */
+  .mega-menu-vault .mega-menu-left-column .mega-menu-left-nav li a.active::after {
+    color: var(--navbar-vault-color, var(--cat-mouse));
+  }
+  .mega-menu-vault .mega-menu-left-column .mega-menu-left-nav li a.active {
+    background-color: var(--section-darkest-background-color, #0d0e0f);
+    border-left: 3px solid var(--navbar-vault-color, var(--cat-mouse));
+  }
+
+  /* ─── Vault clear section ─── */
+  .vault-clear-section {
+    margin-top: auto;
+    padding-top: 0.5rem;
+    border-top: 1px solid #444;
+  }
+
+  .vault-clear-all-link {
+    display: block;
+    text-decoration: none;
+    font-family: var(--identity-font);
+    font-weight: var(--font-weight7);
+    font-size: var(--font-size-15px);
+    color: var(--white-color-1);
+    padding: 1rem;
+    white-space: normal;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+  }
+
+  .vault-clear-category-link {
+    font-family: var(--identity-font);
+    font-size: var(--font-size-15px) !important;
+    display: block;
+    padding: 1rem;
+    font-weight: 500;
+    text-decoration: none;
+    text-transform: capitalize;
+    color: var(--white-color-2, #ccc) !important;
+    white-space: normal;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .vault-clear-all-link:hover {
+      color: var(--navbar-vault-color, var(--cat-mouse)) !important;
+    }
+    .vault-clear-category-link:hover {
+      color: var(--navbar-vault-color, var(--cat-mouse)) !important;
+    }
+  }
+
+  /* Confirm timer bar (2-click confirmation pattern) */
+  .confirm-timer-bar {
+    height: 2px;
+    background-color: var(--navbar-vault-color, var(--cat-mouse));
+    width: 100%;
+    transition: width 10s linear;
+  }
+
+  /* ─── Vault right content area ─── */
+  .vault-right-content {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    box-sizing: border-box;
+    padding-bottom: 2rem;
+    height: unset;
+    padding-left: 3rem;
+  }
+
+  .vault-set {
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    justify-content: space-between;
+  }
+
+  .vault-set-inner {
+    display: grid;
+    grid-template-columns: repeat(3, calc((var(--grid-width) * 4 + 6rem - 2rem) / 3));
+    grid-auto-rows: minmax(90px, 1fr);
+    gap: 1rem;
+    align-items: stretch;
+    justify-items: center;
+  }
+
+  .vault-set-empty {
+    justify-content: center;
+    align-items: center;
+    width: calc(var(--grid-width) * 4 + 6rem);
+  }
+
+  .vault-set-empty .vault-set-inner {
+    display: none;
+  }
+
+  /* ─── Empty state (dashed border box) ─── */
+  .vault-nav-empty {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex: 1 1 100%;
+    max-width: 100%;
+    white-space: normal;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+    width: 100%;
+    margin: auto;
+    text-align: center;
+    color: var(--grey-color-2, #8a8f98);
+    font-family: var(--identity-font);
+    font-size: var(--font-size-14px);
+    border: 1px dashed var(--accent-color-1, #555);
+    border-radius: 4px;
+    opacity: 0.8;
+    padding: 2rem 1rem;
+    box-sizing: border-box;
+  }
+
+  /* ─── Vault item cards ─── */
+  .navbar-vault-item {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    background-color: var(--section-darkest-background-color, #0d0e0f);
+    border: 1px solid var(--navbar-vault-color, var(--cat-mouse));
+    border-radius: 4px;
+    padding: 0.75rem;
+    display: flex;
+    align-items: center;
+  }
+
+  .navbar-vault-img {
+    font-size: var(--font-size-15px);
+    width: 4.25em;
+    height: 4.25em;
+    flex-shrink: 0;
+  }
+
+  .navbar-vault-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  .navbar-vault-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    margin-left: 0.5rem;
+    flex: 1;
+    min-width: 0;
+    max-width: 100%;
+    white-space: normal;
+    cursor: pointer;
+  }
+
+  .navbar-vault-info a {
+    width: 100%;
+    text-decoration: none;
+  }
+
+  .navbar-vault-info .navbar-vault-brand,
+  .navbar-vault-info .navbar-vault-model {
+    text-decoration: none;
+    text-decoration-color: transparent;
+  }
+
+  .navbar-vault-info:hover .navbar-vault-brand,
+  .navbar-vault-info:hover .navbar-vault-model {
+    text-decoration: underline;
+    text-decoration-color: var(--navbar-vault-color, var(--cat-mouse));
+    text-underline-offset: 3px !important;
+    text-decoration-thickness: 2px !important;
+  }
+
+  .navbar-vault-brand,
+  .navbar-vault-model {
+    overflow: hidden;
+    text-align: left;
+    text-transform: capitalize;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    white-space: normal;
+    max-width: 100%;
+    word-wrap: break-word;
+  }
+
+  .navbar-vault-brand {
+    font-family: var(--identity-font);
+    font-size: var(--font-size-13px);
+    font-weight: 400;
+    color: var(--white-color-2, #ccc);
+    opacity: 0.8;
+    margin-bottom: 2px;
+  }
+
+  .navbar-vault-model {
+    font-family: var(--identity-font);
+    font-size: var(--font-size-15px);
+    font-weight: 700;
+    color: var(--white-color-1);
+  }
+
+  /* Remove button (trash icon) */
+  .navbar-vault-remove {
+    position: absolute;
+    top: 6px;
+    right: 4px;
+    font-size: var(--font-size-15px);
+    width: 1.35em;
+    height: 1.35em;
+    cursor: pointer;
+    transition: transform 0.2s ease, color 0.2s ease;
+  }
+
+  .navbar-vault-remove svg {
+    width: 100%;
+    height: 100%;
+    stroke: var(--white-color-1);
+  }
+
+  .navbar-vault-remove:hover {
+    transform: scale(1.1);
+    color: var(--navbar-vault-color, var(--cat-mouse));
+  }
+
+  .navbar-vault-remove:hover svg {
+    stroke: var(--navbar-vault-color, var(--cat-mouse));
+  }
+
+  /* ─── Comparison buttons row ─── */
+  .vault-comparison-row {
+    display: flex;
+    gap: 1rem;
+    box-sizing: border-box;
+    align-items: stretch;
+    flex-wrap: wrap;
+  }
+
+  .vault-comparison-row .vault-compare-link {
+    flex: 1 1 calc(50% - 0.5rem);
+    text-align: center;
+  }
+
+  .vault-compare-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    white-space: normal;
+    text-align: center;
+    flex-wrap: wrap;
+    max-width: 100%;
+    background-color: var(--nav-surface-medium, #2e343b);
+    border-radius: 4px;
+    color: var(--white-color-1);
+    padding: 0.65rem 1rem;
+    font-family: var(--identity-font);
+    font-size: var(--font-size-15px);
+    font-weight: var(--font-weight7);
+    text-decoration: none;
+    transition: background-color 0.2s ease, color 0.2s ease;
+    box-sizing: border-box;
+    line-height: 1.25;
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .vault-compare-link:hover {
+      background-color: var(--navbar-vault-color, var(--cat-mouse));
+    }
+  }
+
+  /* ═══════════════════════════════════════════════════════════════════════════
+     RESPONSIVE — ≤1600px
+     ═══════════════════════════════════════════════════════════════════════════ */
+  @media (max-width: 1600px) {
+    .nav-links > li:first-child { display: none; } /* hide Home icon */
+
+    .mega-menu.games-menu,
+    .mega-menu-guides,
+    .mega-menu-brands,
+    .mega-menu-vault {
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-start;
+      align-items: flex-start;
+      gap: 2rem;
+      width: 100% !important;
+    }
+
+    .mega-menu-inner,
+    .mega-menu-vault-inner {
+      margin: 0 auto;
+    }
+  }
+
+  /* ═══════════════════════════════════════════════════════════════════════════
+     RESPONSIVE — ≤1150px (mobile breakpoint — hide desktop nav)
+     ═══════════════════════════════════════════════════════════════════════════ */
+  @media (max-width: 1150px) {
+    .main-nav {
+      display: none;
+    }
+
+    /* WHY position:fixed + z-index below navbar (95000): the vault menu
+       is moved to <body> via JS on mobile so it escapes the navbar's
+       stacking context. At z-index 94000 (below 95000), the navbar covers
+       the menu as it slides down — creating the "from under" effect. */
+    .mega-menu-vault {
+      position: fixed;
+      top: var(--nav-height);
+      left: 0;
+      width: 100vw;
+      max-height: calc(100dvh - var(--nav-height));
+      transform: translateY(-100%);
+      transition: transform 0.3s ease;
+      z-index: 94000;
+      min-width: unset;
+    }
+
+    .mega-menu-vault.vault-menu-open {
+      transform: translateY(0);
+    }
+
+    .mega-menu-vault-inner {
+      overflow-x: auto;
+      overflow-y: hidden;
+      margin: 0;
+      display: flex;
+      flex-direction: row;
+      column-gap: 0;
+      width: 100%;
+    }
+
+    .vault-right-content {
+      flex: 1 1 auto;
+      padding-left: 2.5rem;
+    }
+
+    .vault-left-column {
+      min-width: clamp(17rem, 13.727rem + 6vw, 20rem);
+    }
+
+    .vault-set-inner {
+      display: grid;
+      gap: 1rem;
+      grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
+    }
+
+    .vault-set-empty {
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+    }
+  }
+
+  /* ═══════════════════════════════════════════════════════════════════════════
+     RESPONSIVE — ≤600px (small mobile — vault stacks vertically)
+     ═══════════════════════════════════════════════════════════════════════════ */
+  @media (max-width: 600px) {
+    .mega-menu-vault-inner {
+      flex-direction: column;
+    }
+
+    .vault-left-nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .vault-left-nav > li {
+      flex: 1 1 calc(50% - 0.5rem);
+    }
+
+    .vault-left-nav > li:nth-last-child(1):nth-child(odd) {
+      flex-basis: 100%;
+    }
+
+    .vault-clear-section {
+      border-top: none;
+      margin: 0;
+      padding: 0;
+      display: none;
+    }
+
+    .mega-menu-vault .mega-menu-left-column .mega-menu-left-nav li a.active {
+      background-color: var(--section-darkest-background-color, #0d0e0f);
+      border-left: 3px solid var(--navbar-vault-color, var(--cat-mouse));
+    }
+
+    .vault-left-column::after {
+      display: none;
+    }
+
+    .vault-left-column {
+      padding-right: 0;
+      min-width: 22em;
+    }
+
+    .vault-right-content {
+      padding-left: 0;
+      min-width: 22em;
+    }
+
+    .mega-menu-vault {
+      padding: 2rem clamp(1rem, -2rem + 7.5vw, 2.5rem) 0 clamp(1rem, -2rem + 7.5vw, 2.5rem);
+    }
+
+    .navbar-vault-brand {
+      font-size: var(--font-size-12px);
+    }
+
+    .navbar-vault-remove,
+    .navbar-vault-img,
+    .vault-clear-category-link,
+    .vault-clear-all-link,
+    .vault-compare-link {
+      font-size: var(--font-size-14px);
+    }
+
+    .navbar-vault-model,
+    .mega-menu-vault .mega-menu-left-nav li a {
+      font-size: var(--font-size-14px);
+    }
+
+    .mega-menu-vault .mega-menu-left-nav li a::after {
+      display: none;
+    }
+  }
+</style>

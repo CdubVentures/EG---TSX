@@ -1,0 +1,253 @@
+{
+  "slug": "alienware-aw610m",
+  "brand": "Alienware",
+  "model": "AW610M",
+  "baseModel": "AW610M",
+  "variant": "",
+  "category": "mouse",
+  "imagePath": "/images/mouse/alienware/aw610m",
+  "cardTags": "false",
+  "featured": "",
+  "release_date": "06/2019",
+  "discontinued": "",
+  "sku": "570-ABCQ ",
+  "price_range": 59.99,
+  "colors": [
+    "white+black",
+    "gray+black"
+  ],
+  "design": [
+    "standard"
+  ],
+  "lighting": "3 zone (rgb)",
+  "rgb": "yes",
+  "connection": "hybrid",
+  "connectivity": "2.4GHz Dongle",
+  "computer_side_connector": "USB-A",
+  "mouse_side_connector": "Micro-B",
+  "bluetooth": "no",
+  "cable_type": "braided",
+  "paracord": "no",
+  "wireless_charging": "no",
+  "battery_hours": 350,
+  "adjustable_weight": "no",
+  "feet_material": "PTFE (Black-Dyed)",
+  "coating": "matte",
+  "honeycomb_frame": "no",
+  "silent_clicks": "no",
+  "weight": 120,
+  "material": "plastic",
+  "lngth": 133.3,
+  "width": 77.5,
+  "height": 49,
+  "form_factor": "ambidextrous",
+  "shape": "symmetrical",
+  "hump": "middle",
+  "front_flare": "inward",
+  "thumb_rest": "yes",
+  "grip": [
+    "palm"
+  ],
+  "hand_size": [
+    "large",
+    "medium"
+  ],
+  "mcu": "unk",
+  "mcu_link": "",
+  "sensor": "PMW3389",
+  "sensor_brand": "PixArt",
+  "sensor_date": "01/2018",
+  "sensor_link": "https://www.pixart.com/products-detail/4/PMW3389DM-T3QU",
+  "sensor_type": "optical",
+  "flawless_sensor": "yes",
+  "sensor_latency": "unk",
+  "sensor_latency_list": [
+    "unk"
+  ],
+  "shift_latency": "unk",
+  "polling_rate": [
+    1000,
+    500,
+    250,
+    125
+  ],
+  "dpi": 16000,
+  "ips": 400,
+  "acceleration": 40,
+  "lift": [
+    1.2
+  ],
+  "lift_settings": "fixed low",
+  "motion_sync": "no",
+  "hardware_acceleration": "no",
+  "smoothing": "no",
+  "nvidia_reflex": "yes",
+  "switch": "D2FC -F-7N(20M)",
+  "switch_brand": "omron",
+  "switch_type": "optical",
+  "switch_link": "https://www.mouser.com/ProductDetail/Omron-Electronics/D2FC-F-7N20M?qs=17ckDYBRdek0%2FvhX1fLcuQ%3D%3D",
+  "hot_swappable": "no",
+  "debounce": "unk",
+  "click_latency": 14,
+  "click_latency_list": "14 wireless, 16 wired",
+  "click_force": 60,
+  "encoder": "",
+  "encoder_brand": "",
+  "encoder_link": "",
+  "side_buttons": 2,
+  "middle_buttons": 1,
+  "programmable_buttons": 7,
+  "tilt_scroll_wheel": "no",
+  "adjustable_scroll_wheel": "no",
+  "onboard_memory": "yes",
+  "onboard_memory_value": "unk",
+  "profile_switching": "no",
+  "overall": 7.4,
+  "accuracy": 8.04,
+  "response": 5.8,
+  "quality": 7.8,
+  "comfort": 8,
+  "work": 7.5,
+  "feet_score": 7.4,
+  "fps_score": 6.8,
+  "mmo_score": 6.8,
+  "moba_score": 6.5,
+  "aarpg_score": 7.1,
+  "rts_score": 6.6,
+  "fps": "no",
+  "mmo": "no",
+  "moba": "no",
+  "aarpg": "yes",
+  "rts": "no",
+  "snap_dateUpdated": "11/21/2025",
+  "snap_datePublished": "11/21/2025",
+  "snap_subtitle": "Solid build, yet slightly disappointing.",
+  "hubTags": [
+    "price_range",
+    "weight",
+    "polling_rate",
+    "connection"
+  ],
+  "game1": "Diablo IV",
+  "game2": "Path of Exile",
+  "game3": "",
+  "game4": "",
+  "game5": "",
+  "game6": "",
+  "game7": "",
+  "game8": "",
+  "keytakeaway": "The Alienware AW610M’s distinct sci-fi-inspired shape and flared rubber backing truly set it apart, delivering notable comfort and responsiveness in a packed gaming mouse market. While not without its flaws, its memorable design and dependable performance illustrate that taking stylistic risks can yield rewarding results.",
+  "pcard": "",
+  "verdict": "The AW610M’s bold, sci-fi design may catch your eye, and its unique contours offer a welcome departure from conventional silhouettes, lending surprising comfort if you prefer a heavier, more controlled feel. However, be warned: this weight can prove fatiguing over extended sessions. While brief tasks and shorter bouts of gaming are manageable, marathon sessions left me feeling cramped. On the plus side, its robust construction and top-tier sensor ensure commendable precision across multiple genres. Though achieving the advertised 350-hour battery life means disabling RGB lighting and fine-tuning settings, the resulting longevity still outpaces much of the competition. It’s true that the AW610M may not shine in fast-paced FPS titles—slippery side grips and awkward button placement can hamper quick reflexes—but for those seeking a well-built, visually striking mouse with reliable performance, it remains a refreshing alternative to the ordinary",
+  "pros": [
+    "Its daring design truly hit the sweet spot",
+    "Well built, constructed and robust",
+    "Ergonomic shape and non-slip material add stability",
+    "350 hours of battery life supporting long wireless sessions",
+    "Adjustable mouse wheel feel for versatile usage"
+  ],
+  "cons": [
+    "Heavier weight may deter low-DPI flick enthusiasts",
+    "Front side button awkwardly placed for smaller hands",
+    "Ergonomic shape challenging several grip types",
+    "Alienware Command Center lacks depth and is over complex"
+  ],
+  "youtube": "https://www.youtube.com/watch?v=1OqznipUcko",
+  "affiliateLinks": [
+    {
+      "url": "https://www.amazon.com/Alienware-Wired-Wireless-Gaming-AW610M/dp/B07V7QPT94?crid=3EA9WJLYB2S38&dib=eyJ2IjoiMSJ9.U50fiZmkscy_3D8nLkgN7UJrFDghHFedd8ztdUGbCsGD3ANXtSNCkqLQpJ4jAiwoMUz_ZReCL5x7ZJJPaH4CCfwj-NMBEDVZWtSm_CBZIyACFokLqyM-HBk8n-RWmmIaQB0J2EKFK9iK5qEF__Mtu4tg9BJadDswHY8qNKTLY10J7D06O7HU3ianWgiRgO0aaaxOGPPUrXRHDbH_1xe-H832Y8JJJxw-Rm5ZSVX2SSQ.igafiXVH6C7dUKskNFgVVtX59IxPpl-FmZ4Afx9os_4&dib_tag=se&keywords=AW610M&qid=1765310263&sprefix=aw610m%2Caps%2C153&sr=8-3&th=1&linkCode=ll1&tag=eggear-20&linkId=0698677449a61e779190d85799d70cce&language=en_US&ref_=as_li_ss_tl",
+      "retailer": "amazon",
+      "slug": "amazon",
+      "variant": "white",
+      "isPrimary": true
+    },
+    {
+      "url": "https://www.amazon.com/Alienware-Wired-Wireless-Gaming-AW610M/dp/B07V83NMCV?crid=3EA9WJLYB2S38&dib=eyJ2IjoiMSJ9.U50fiZmkscy_3D8nLkgN7UJrFDghHFedd8ztdUGbCsGD3ANXtSNCkqLQpJ4jAiwoMUz_ZReCL5x7ZJJPaH4CCfwj-NMBEDVZWtSm_CBZIyACFokLqyM-HBk8n-RWmmIaQB0J2EKFK9iK5qEF__Mtu4tg9BJadDswHY8qNKTLY10J7D06O7HU3ianWgiRgO0aaaxOGPPUrXRHDbH_1xe-H832Y8JJJxw-Rm5ZSVX2SSQ.igafiXVH6C7dUKskNFgVVtX59IxPpl-FmZ4Afx9os_4&dib_tag=se&keywords=AW610M&qid=1765310263&sprefix=aw610m%2Caps%2C153&sr=8-3&th=1&linkCode=ll1&tag=eggear-20&linkId=da32bd9c070a691f3b72ca80c1c8c800&language=en_US&ref_=as_li_ss_tl",
+      "retailer": "amazon",
+      "slug": "amazon",
+      "variant": "black",
+      "isPrimary": false
+    }
+  ],
+  "url": "/hubs/mouse/alienware/aw610m",
+  "gamesRecommended": [],
+  "media": {
+    "defaultColor": "white+black",
+    "colors": [
+      "white+black",
+      "gray+black"
+    ],
+    "editions": [],
+    "images": [
+      {
+        "stem": "feature-image---white+black",
+        "view": "feature-image",
+        "color": "white+black"
+      },
+      {
+        "stem": "top---white+black",
+        "view": "top",
+        "color": "white+black"
+      },
+      {
+        "stem": "top---gray+black",
+        "view": "top",
+        "color": "gray+black"
+      },
+      {
+        "stem": "left---white+black",
+        "view": "left",
+        "color": "white+black"
+      },
+      {
+        "stem": "sangle",
+        "view": "sangle"
+      },
+      {
+        "stem": "sangle---white+black",
+        "view": "sangle",
+        "color": "white+black"
+      },
+      {
+        "stem": "sangle---gray+black",
+        "view": "sangle",
+        "color": "gray+black"
+      },
+      {
+        "stem": "angle---white+black",
+        "view": "angle",
+        "color": "white+black"
+      },
+      {
+        "stem": "angle---gray+black",
+        "view": "angle",
+        "color": "gray+black"
+      },
+      {
+        "stem": "bot---gray+black",
+        "view": "bot",
+        "color": "gray+black"
+      },
+      {
+        "stem": "img1---gray+black",
+        "view": "img",
+        "color": "gray+black",
+        "seq": 1
+      },
+      {
+        "stem": "img2---gray+black",
+        "view": "img",
+        "color": "gray+black",
+        "seq": 2
+      },
+      {
+        "stem": "side",
+        "view": "shape-side"
+      },
+      {
+        "stem": "top",
+        "view": "shape-top"
+      }
+    ]
+  }
+}

@@ -1,0 +1,267 @@
+{
+  "slug": "corsair-m75-air-wireless",
+  "brand": "Corsair",
+  "model": "M75 Air Wireless",
+  "baseModel": "M75",
+  "variant": "Air Wireless",
+  "category": "mouse",
+  "imagePath": "/images/mouse/corsair/m75-air-wireless",
+  "cardTags": "false",
+  "featured": "",
+  "release_date": "10/2023",
+  "discontinued": "",
+  "sku": "CH-931D100-NA",
+  "price_range": 99.99,
+  "colors": [
+    "black",
+    "white",
+    "gray",
+    "yellow"
+  ],
+  "design": [
+    "standard"
+  ],
+  "lighting": "none",
+  "rgb": "no",
+  "connection": "hybrid",
+  "connectivity": "2.4GHz Dongle",
+  "computer_side_connector": "USB-A",
+  "mouse_side_connector": "USB-C",
+  "bluetooth": "yes",
+  "cable_type": "braided",
+  "paracord": "no",
+  "wireless_charging": "no",
+  "battery_hours": 34,
+  "adjustable_weight": "no",
+  "feet_material": "PTFE (Virgin-Grade)",
+  "coating": "matte",
+  "honeycomb_frame": "no",
+  "silent_clicks": "no",
+  "weight": 60,
+  "material": "plastic",
+  "lngth": 128.4,
+  "width": 64.6,
+  "height": 41.6,
+  "form_factor": "right",
+  "shape": "symmetrical",
+  "hump": "middle",
+  "front_flare": "inward",
+  "thumb_rest": "no",
+  "grip": [
+    "palm",
+    "claw",
+    "fingertip"
+  ],
+  "hand_size": [
+    "medium",
+    "large"
+  ],
+  "mcu": "Nordic nRF52840",
+  "mcu_link": "https://www.nordicsemi.com/Products/nRF52840",
+  "sensor": "MARKSMAN 26K",
+  "sensor_brand": "corsair",
+  "sensor_date": "",
+  "sensor_link": "",
+  "sensor_type": "optical",
+  "flawless_sensor": "unk",
+  "sensor_latency": "unk",
+  "sensor_latency_list": [
+    "unk"
+  ],
+  "shift_latency": "unk",
+  "polling_rate": [
+    1000,
+    500,
+    250,
+    125
+  ],
+  "dpi": 26000,
+  "ips": 650,
+  "acceleration": 50,
+  "lift": [
+    1.2
+  ],
+  "lift_settings": "adjustable",
+  "motion_sync": "unk",
+  "hardware_acceleration": "no",
+  "smoothing": "no",
+  "nvidia_reflex": "no",
+  "switch": "Optical Microswitch",
+  "switch_brand": "ttc",
+  "switch_type": "optical",
+  "switch_link": "",
+  "hot_swappable": "no",
+  "debounce": "0, 8",
+  "click_latency": 1,
+  "click_latency_list": ".6 wireless, 1 wired",
+  "click_force": "unk",
+  "encoder": "",
+  "encoder_brand": "",
+  "encoder_link": "",
+  "side_buttons": 2,
+  "middle_buttons": 0,
+  "programmable_buttons": 5,
+  "tilt_scroll_wheel": "no",
+  "adjustable_scroll_wheel": "no",
+  "onboard_memory": "yes",
+  "onboard_memory_value": "unk",
+  "profile_switching": "yes",
+  "overall": 8.6,
+  "accuracy": 9,
+  "response": 8.2,
+  "quality": 8.4,
+  "comfort": 8.4,
+  "work": 6.5,
+  "feet_score": 9.2,
+  "fps_score": 8.8,
+  "mmo_score": 6.5,
+  "moba_score": 8.5,
+  "aarpg_score": 6.8,
+  "rts_score": 8,
+  "fps": "yes",
+  "mmo": "no",
+  "moba": "yes",
+  "aarpg": "no",
+  "rts": "yes",
+  "snap_dateUpdated": "11/20/2025",
+  "snap_datePublished": null,
+  "snap_subtitle": "",
+  "hubTags": [],
+  "game1": "",
+  "game2": "",
+  "game3": "",
+  "game4": "",
+  "game5": "",
+  "game6": "",
+  "game7": "",
+  "game8": "",
+  "keytakeaway": "",
+  "pcard": "",
+  "verdict": "",
+  "pros": [],
+  "cons": [],
+  "youtube": "https://www.youtube.com/watch?v=VR_nVgNBOKg",
+  "affiliateLinks": [
+    {
+      "url": "https://www.amazon.com/Corsair-Wireless-Ultra-Lightweight-Gaming/dp/B0CHN2R8GY?crid=2I6FYAIWY83A&dib=eyJ2IjoiMSJ9.iBsf_Wl3A3Tu-fdJLuukaV7HCx6Om1gG9qaWkkvzaLClIrY3vuNp0P84MfJARM0hRdMnmAz9YQ6FpZdfpIzr28oHbiZPyjWGYO3Rgfb2COywDH4owxp33YJiRwVBPud9OEJ2UjzWy1jIXSWhkSTaJZgGirL3ell-mJEV1R03XSWe3_bvgItTC9eQWotbazUhPhUQo7kID82ZL2AfJnZh17GyQtm8nkKn_72qAursbUQ.Wuwiy_c4i19aKp6n-yYdFxiXk5eKvbodjpzjs_7TmfE&dib_tag=se&keywords=M75%2BAir%2BWireless&qid=1765321205&sprefix=m75%2Bair%2Bwireless%2Caps%2C148&sr=8-1&th=1&linkCode=ll1&tag=eggear-20&linkId=f9cfd911b61ed685002af17fb1723d17&language=en_US&ref_=as_li_ss_tl",
+      "retailer": "amazon",
+      "slug": "amazon",
+      "variant": "black",
+      "isPrimary": true
+    },
+    {
+      "url": "https://www.amazon.com/Corsair-Wireless-Ultra-Lightweight-Gaming/dp/B0CV16JRPL?crid=2I6FYAIWY83A&dib=eyJ2IjoiMSJ9.iBsf_Wl3A3Tu-fdJLuukaV7HCx6Om1gG9qaWkkvzaLClIrY3vuNp0P84MfJARM0hRdMnmAz9YQ6FpZdfpIzr28oHbiZPyjWGYO3Rgfb2COywDH4owxp33YJiRwVBPud9OEJ2UjzWy1jIXSWhkSTaJZgGirL3ell-mJEV1R03XSWe3_bvgItTC9eQWotbazUhPhUQo7kID82ZL2AfJnZh17GyQtm8nkKn_72qAursbUQ.Wuwiy_c4i19aKp6n-yYdFxiXk5eKvbodjpzjs_7TmfE&dib_tag=se&keywords=M75%2BAir%2BWireless&qid=1765321205&sprefix=m75%2Bair%2Bwireless%2Caps%2C148&sr=8-1&th=1&linkCode=ll1&tag=eggear-20&linkId=456a7960dd231d14aa892f154971b7e3&language=en_US&ref_=as_li_ss_tl",
+      "retailer": "amazon",
+      "slug": "amazon",
+      "variant": "white",
+      "isPrimary": false
+    }
+  ],
+  "url": "/hubs/mouse/corsair/m75-air-wireless",
+  "gamesRecommended": [],
+  "media": {
+    "defaultColor": "black",
+    "colors": [
+      "black",
+      "white",
+      "gray",
+      "yellow"
+    ],
+    "editions": [],
+    "images": [
+      {
+        "stem": "feature-image---black",
+        "view": "feature-image",
+        "color": "black"
+      },
+      {
+        "stem": "feature-image---yellow",
+        "view": "feature-image",
+        "color": "yellow"
+      },
+      {
+        "stem": "top---black",
+        "view": "top",
+        "color": "black"
+      },
+      {
+        "stem": "top---gray",
+        "view": "top",
+        "color": "gray"
+      },
+      {
+        "stem": "top---white",
+        "view": "top",
+        "color": "white"
+      },
+      {
+        "stem": "left---black",
+        "view": "left",
+        "color": "black"
+      },
+      {
+        "stem": "left---gray",
+        "view": "left",
+        "color": "gray"
+      },
+      {
+        "stem": "left---white",
+        "view": "left",
+        "color": "white"
+      },
+      {
+        "stem": "right---black",
+        "view": "right",
+        "color": "black"
+      },
+      {
+        "stem": "right---white",
+        "view": "right",
+        "color": "white"
+      },
+      {
+        "stem": "sangle---black",
+        "view": "sangle",
+        "color": "black"
+      },
+      {
+        "stem": "sangle---gray",
+        "view": "sangle",
+        "color": "gray"
+      },
+      {
+        "stem": "sangle---white",
+        "view": "sangle",
+        "color": "white"
+      },
+      {
+        "stem": "sangle---yellow",
+        "view": "sangle",
+        "color": "yellow"
+      },
+      {
+        "stem": "angle---black",
+        "view": "angle",
+        "color": "black"
+      },
+      {
+        "stem": "angle---gray",
+        "view": "angle",
+        "color": "gray"
+      },
+      {
+        "stem": "bot---black",
+        "view": "bot",
+        "color": "black"
+      },
+      {
+        "stem": "side",
+        "view": "shape-side"
+      },
+      {
+        "stem": "top",
+        "view": "shape-top"
+      }
+    ]
+  }
+}

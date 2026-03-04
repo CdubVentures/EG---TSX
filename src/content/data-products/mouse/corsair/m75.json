@@ -1,0 +1,180 @@
+{
+  "slug": "corsair-m75",
+  "brand": "Corsair",
+  "model": "M75",
+  "baseModel": "M75",
+  "variant": "",
+  "category": "mouse",
+  "imagePath": "/images/mouse/corsair/m75",
+  "cardTags": "false",
+  "featured": "",
+  "release_date": "02/2024",
+  "discontinued": "",
+  "sku": "CH-930D010-NA",
+  "price_range": 79.99,
+  "colors": [
+    "black"
+  ],
+  "design": [
+    "standard"
+  ],
+  "lighting": "3 zone (rgb)",
+  "rgb": "yes",
+  "connection": "wired",
+  "connectivity": "n/a",
+  "computer_side_connector": "USB-A",
+  "mouse_side_connector": "USB-C",
+  "bluetooth": "no",
+  "cable_type": "braided",
+  "paracord": "no",
+  "wireless_charging": "no",
+  "battery_hours": "n/a",
+  "adjustable_weight": "no",
+  "feet_material": "PTFE (Virgin-Grade)",
+  "coating": "matte",
+  "honeycomb_frame": "no",
+  "silent_clicks": "no",
+  "weight": 74,
+  "material": "plastic",
+  "lngth": 128.4,
+  "width": 64.6,
+  "height": 41.6,
+  "form_factor": "ambidextrous",
+  "shape": "symmetrical",
+  "hump": "middle",
+  "front_flare": "inward",
+  "thumb_rest": "no",
+  "grip": [
+    "palm",
+    "claw",
+    "fingertip"
+  ],
+  "hand_size": [
+    "medium",
+    "large"
+  ],
+  "mcu": "unk",
+  "mcu_link": "",
+  "sensor": "MARKSMAN 26K",
+  "sensor_brand": "corsair",
+  "sensor_date": "",
+  "sensor_link": "",
+  "sensor_type": "optical",
+  "flawless_sensor": "unk",
+  "sensor_latency": "unk",
+  "sensor_latency_list": [
+    "unk"
+  ],
+  "shift_latency": "unk",
+  "polling_rate": [
+    8000,
+    4000,
+    2000,
+    1000,
+    500,
+    250,
+    125
+  ],
+  "dpi": 26000,
+  "ips": 650,
+  "acceleration": 50,
+  "lift": [
+    1.2
+  ],
+  "lift_settings": "adjustable",
+  "motion_sync": "yes",
+  "hardware_acceleration": "no",
+  "smoothing": "no",
+  "nvidia_reflex": "no",
+  "switch": "Quickstrike",
+  "switch_brand": "corsair",
+  "switch_type": "optical",
+  "switch_link": "",
+  "hot_swappable": "no",
+  "debounce": "unk",
+  "click_latency": "unk",
+  "click_latency_list": "unk",
+  "click_force": "unk",
+  "encoder": "",
+  "encoder_brand": "",
+  "encoder_link": "",
+  "side_buttons": 4,
+  "middle_buttons": 0,
+  "programmable_buttons": 7,
+  "tilt_scroll_wheel": "no",
+  "adjustable_scroll_wheel": "no",
+  "onboard_memory": "yes",
+  "onboard_memory_value": 1,
+  "profile_switching": "yes",
+  "overall": 8.5,
+  "accuracy": 9,
+  "response": 8.3,
+  "quality": 8.4,
+  "comfort": 8.5,
+  "work": 7.1,
+  "feet_score": 9,
+  "fps_score": 8.4,
+  "mmo_score": 6.8,
+  "moba_score": 8.3,
+  "aarpg_score": 7.3,
+  "rts_score": 8.1,
+  "fps": "yes",
+  "mmo": "no",
+  "moba": "yes",
+  "aarpg": "yes",
+  "rts": "yes",
+  "snap_dateUpdated": "11/20/2025",
+  "snap_datePublished": null,
+  "snap_subtitle": "",
+  "hubTags": [],
+  "game1": "",
+  "game2": "",
+  "game3": "",
+  "game4": "",
+  "game5": "",
+  "game6": "",
+  "game7": "",
+  "game8": "",
+  "keytakeaway": "",
+  "pcard": "",
+  "verdict": "",
+  "pros": [],
+  "cons": [],
+  "youtube": "https://www.youtube.com/watch?v=iy5e4eSDWHU",
+  "affiliateLinks": [
+    {
+      "url": "https://www.amazon.com/Corsair-Wired-Lightweight-Gaming-Mouse/dp/B0CTN13WT1?crid=11N9RKL8L6F5Z&dib=eyJ2IjoiMSJ9.Gp2w20mQnx1t004aZozwuHHmd6o9Do87FE7qUBBkrOPwbyZsrP3YaXvme6kj7923JwuA-w4zM2eZLyNEJo5SoVcYEgfqZUe_emeQbLauzP22EM3IqpJphnQ4tLby-a1NdHwOweIIH1eP6inIeuyCBdRRViHT3KCJCYAUbEDoMx-JZLwLxR8CMZCSf4CYuZCVhdGOuTIYaGJptMWR59ugvY-OPoE4NrMVGsnJ5Y4eOh4.rP0dJIwjPS1UyuYc8_wRneq3Z2ZFoeKvKmGXaPkErUg&dib_tag=se&keywords=M75%2Bwired&qid=1765321474&sprefix=m75%2Bwi%2Caps%2C460&sr=8-3&th=1&linkCode=ll1&tag=eggear-20&linkId=645b61b7ea9ca2d1d5e5c41a40319e1f&language=en_US&ref_=as_li_ss_tl",
+      "retailer": "amazon",
+      "slug": "amazon",
+      "variant": "black",
+      "isPrimary": true
+    }
+  ],
+  "url": "/hubs/mouse/corsair/m75",
+  "gamesRecommended": [],
+  "media": {
+    "defaultColor": "black",
+    "colors": [
+      "black"
+    ],
+    "editions": [],
+    "images": [
+      {
+        "stem": "top",
+        "view": "top"
+      },
+      {
+        "stem": "left",
+        "view": "left"
+      },
+      {
+        "stem": "side",
+        "view": "shape-side"
+      },
+      {
+        "stem": "top",
+        "view": "shape-top"
+      }
+    ]
+  }
+}

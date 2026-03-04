@@ -1,0 +1,184 @@
+{
+  "slug": "corsair-m65-rgb-ultra-wireless",
+  "brand": "Corsair",
+  "model": "M65 RGB Ultra Wireless",
+  "baseModel": "M65",
+  "variant": "RGB Ultra Wireless",
+  "category": "mouse",
+  "imagePath": "/images/mouse/corsair/m65-rgb-ultra-wireless",
+  "cardTags": "false",
+  "featured": "",
+  "release_date": "09/2021",
+  "discontinued": "",
+  "sku": "CH-9319411-NA2",
+  "price_range": 89.99,
+  "colors": [
+    "black"
+  ],
+  "design": [
+    "standard"
+  ],
+  "lighting": "2 zone (rgb)",
+  "rgb": "yes",
+  "connection": "hybrid",
+  "connectivity": "2.4GHz Dongle",
+  "computer_side_connector": "USB-A",
+  "mouse_side_connector": "USB-C",
+  "bluetooth": "yes",
+  "cable_type": "rubber",
+  "paracord": "no",
+  "wireless_charging": "no",
+  "battery_hours": 90,
+  "adjustable_weight": "yes",
+  "feet_material": "PTFE (Black-Dyed)",
+  "coating": "matte",
+  "honeycomb_frame": "no",
+  "silent_clicks": "no",
+  "weight": 109.8,
+  "material": "plastic",
+  "lngth": 116,
+  "width": 78,
+  "height": 39,
+  "form_factor": "right",
+  "shape": "ergonomic",
+  "hump": "back mid",
+  "front_flare": "inward",
+  "thumb_rest": "yes",
+  "grip": [
+    "palm",
+    "claw"
+  ],
+  "hand_size": [
+    "medium",
+    "large"
+  ],
+  "mcu": "unk",
+  "mcu_link": "",
+  "sensor": "MARKSMAN 26K",
+  "sensor_brand": "corsair",
+  "sensor_date": "",
+  "sensor_link": "",
+  "sensor_type": "optical",
+  "flawless_sensor": "unk",
+  "sensor_latency": "unk",
+  "sensor_latency_list": [
+    "unk"
+  ],
+  "shift_latency": "unk",
+  "polling_rate": [
+    1000,
+    500,
+    250,
+    125
+  ],
+  "dpi": 26000,
+  "ips": 650,
+  "acceleration": 50,
+  "lift": [
+    1.2
+  ],
+  "lift_settings": "adjustable",
+  "motion_sync": "no",
+  "hardware_acceleration": "no",
+  "smoothing": "no",
+  "nvidia_reflex": "no",
+  "switch": "Optical Microswitch",
+  "switch_brand": "ttc",
+  "switch_type": "optical",
+  "switch_link": "",
+  "hot_swappable": "no",
+  "debounce": "unk",
+  "click_latency": 5.7,
+  "click_latency_list": "5.7 wired, 6.8 wireless, 24.5 bluetooth",
+  "click_force": "unk",
+  "encoder": "",
+  "encoder_brand": "",
+  "encoder_link": "",
+  "side_buttons": 3,
+  "middle_buttons": 2,
+  "programmable_buttons": 12,
+  "tilt_scroll_wheel": "no",
+  "adjustable_scroll_wheel": "no",
+  "onboard_memory": "yes",
+  "onboard_memory_value": 1,
+  "profile_switching": "yes",
+  "overall": 8.2,
+  "accuracy": 8.9,
+  "response": 7.6,
+  "quality": 7.9,
+  "comfort": 7.8,
+  "work": 7.8,
+  "feet_score": 8.5,
+  "fps_score": 7,
+  "mmo_score": 7.8,
+  "moba_score": 7.3,
+  "aarpg_score": 7.8,
+  "rts_score": 7.2,
+  "fps": "yes",
+  "mmo": "yes",
+  "moba": "yes",
+  "aarpg": "yes",
+  "rts": "yes",
+  "snap_dateUpdated": "11/20/2025",
+  "snap_datePublished": null,
+  "snap_subtitle": "",
+  "hubTags": [],
+  "game1": "",
+  "game2": "",
+  "game3": "",
+  "game4": "",
+  "game5": "",
+  "game6": "",
+  "game7": "",
+  "game8": "",
+  "keytakeaway": "",
+  "pcard": "",
+  "verdict": "",
+  "pros": [],
+  "cons": [],
+  "youtube": "https://www.youtube.com/watch?v=HQWyF_0AOT0",
+  "affiliateLinks": [
+    {
+      "url": "https://www.amazon.com/Corsair-DARKSTAR-Wireless-Gaming-Mouse/dp/B0CCVXDLGG?crid=MTXBFU7R3GPR&dib=eyJ2IjoiMSJ9.jx6th7pUUqAxWM6APWbXMgd1SCj-XzBfDiwsfTYNlLTGjHj071QN20LucGBJIEps.bI7pXvK2zpI85Go8DnQlZ6M_w5wc_FbMzNERxvJ9agM&dib_tag=se&keywords=Darkstar%2BWireless%2BRGB&qid=1765321769&sprefix=darkstar%2Bwireless%2Brgb%2Caps%2C276&sr=8-2&th=1&linkCode=ll1&tag=eggear-20&linkId=c4dc6cd80771b1142a4329b9bb3a7c69&language=en_US&ref_=as_li_ss_tl",
+      "retailer": "amazon",
+      "slug": "amazon",
+      "variant": "",
+      "isPrimary": true
+    }
+  ],
+  "url": "/hubs/mouse/corsair/m65-rgb-ultra-wireless",
+  "gamesRecommended": [],
+  "media": {
+    "defaultColor": "black",
+    "colors": [
+      "black"
+    ],
+    "editions": [],
+    "images": [
+      {
+        "stem": "feature-image",
+        "view": "feature-image"
+      },
+      {
+        "stem": "top",
+        "view": "top"
+      },
+      {
+        "stem": "left",
+        "view": "left"
+      },
+      {
+        "stem": "sangle",
+        "view": "sangle"
+      },
+      {
+        "stem": "side",
+        "view": "shape-side"
+      },
+      {
+        "stem": "top",
+        "view": "shape-top"
+      }
+    ]
+  }
+}

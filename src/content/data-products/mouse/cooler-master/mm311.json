@@ -1,0 +1,266 @@
+{
+  "slug": "cooler-master-mm311",
+  "brand": "Cooler Master",
+  "model": "MM311",
+  "baseModel": "MM311",
+  "variant": "",
+  "category": "mouse",
+  "imagePath": "/images/mouse/cooler-master/mm311",
+  "cardTags": "false",
+  "featured": "",
+  "release_date": "08/2022",
+  "discontinued": "",
+  "sku": "MM-311-KKOW1",
+  "price_range": 39.99,
+  "colors": [
+    "black",
+    "white"
+  ],
+  "design": [
+    "standard"
+  ],
+  "lighting": "2 zone (rgb)",
+  "rgb": "yes",
+  "connection": "wireless",
+  "connectivity": "2.4GHz Dongle",
+  "computer_side_connector": "USB-A",
+  "mouse_side_connector": "n/a",
+  "bluetooth": "no",
+  "cable_type": "braided",
+  "paracord": "no",
+  "wireless_charging": "no",
+  "battery_hours": "n/a",
+  "adjustable_weight": "no",
+  "feet_material": "PTFE (95%)",
+  "coating": "matte",
+  "honeycomb_frame": "no",
+  "silent_clicks": "no",
+  "weight": 77,
+  "material": "plastic",
+  "lngth": 125.5,
+  "width": 71,
+  "height": 40.5,
+  "form_factor": "right",
+  "shape": "symmetrical",
+  "hump": "back - front",
+  "front_flare": "outward",
+  "thumb_rest": "no",
+  "grip": [
+    "palm",
+    "claw"
+  ],
+  "hand_size": [
+    "medium"
+  ],
+  "mcu": "unk",
+  "mcu_link": "",
+  "sensor": "PAW3327",
+  "sensor_brand": "PixArt",
+  "sensor_date": "10/2018",
+  "sensor_link": "https://www.pixart.com/products-detail/12/PAW3327DB-TWQU",
+  "sensor_type": "optical",
+  "flawless_sensor": "yes",
+  "sensor_latency": "unk",
+  "sensor_latency_list": [
+    "unk"
+  ],
+  "shift_latency": "unk",
+  "polling_rate": [
+    1000,
+    500,
+    250,
+    125
+  ],
+  "dpi": 12000,
+  "ips": 220,
+  "acceleration": 30,
+  "lift": [
+    3.5
+  ],
+  "lift_settings": "fixed high",
+  "motion_sync": "unk",
+  "hardware_acceleration": "no",
+  "smoothing": "no",
+  "nvidia_reflex": "yes",
+  "switch": "GM 4.0",
+  "switch_brand": "kailh",
+  "switch_type": "mechanical",
+  "switch_link": "",
+  "hot_swappable": "no",
+  "debounce": 1,
+  "click_latency": 1.5,
+  "click_latency_list": "1.5 wireless",
+  "click_force": "unk",
+  "encoder": "",
+  "encoder_brand": "",
+  "encoder_link": "",
+  "side_buttons": 2,
+  "middle_buttons": 1,
+  "programmable_buttons": 6,
+  "tilt_scroll_wheel": "no",
+  "adjustable_scroll_wheel": "no",
+  "onboard_memory": "yes",
+  "onboard_memory_value": "unk",
+  "profile_switching": "no",
+  "overall": 7.3,
+  "accuracy": 7.7,
+  "response": 8,
+  "quality": 7.3,
+  "comfort": 7.8,
+  "work": 7.2,
+  "feet_score": 7.8,
+  "fps_score": 6.7,
+  "mmo_score": 7,
+  "moba_score": 6.8,
+  "aarpg_score": 7,
+  "rts_score": 6.6,
+  "fps": "yes",
+  "mmo": "yes",
+  "moba": "yes",
+  "aarpg": "yes",
+  "rts": "yes",
+  "snap_dateUpdated": "11/21/2025",
+  "snap_datePublished": null,
+  "snap_subtitle": "",
+  "hubTags": [],
+  "game1": "",
+  "game2": "",
+  "game3": "",
+  "game4": "",
+  "game5": "",
+  "game6": "",
+  "game7": "",
+  "game8": "",
+  "keytakeaway": "",
+  "pcard": "",
+  "verdict": "",
+  "pros": [],
+  "cons": [],
+  "youtube": "https://www.youtube.com/watch?v=uz3nI6guE18",
+  "affiliateLinks": [
+    {
+      "url": "https://www.amazon.com/Cooler-Master-Adjustable-MasterPlus-MM-311-WWOW1/dp/B0B8TKY2YT?crid=3RH0MCQP3ZKUQ&dib=eyJ2IjoiMSJ9.GbBq8B8yC_s62cA3nsfjE5iZ8LtsMBMhumnM57UxBZUKtwrEfJWfZC58JrnyGnbR7VpUWHL-yXMNciVpDNceJ1qbolojlC5LE86XisuL3FAHXX2jdkJ0Wl3b69Adidrufy1you9UNeJnnVjzbTv04g.T-U50n_C9uziuX0WXuQaKKFlNSfZW97Wd_vfIAyBBoE&dib_tag=se&keywords=MM311&qid=1765320888&sprefix=mm311%2Caps%2C212&sr=8-1&th=1&linkCode=ll1&tag=eggear-20&linkId=d1e35915ac6313ba926fb8f23976644a&language=en_US&ref_=as_li_ss_tl",
+      "retailer": "amazon",
+      "slug": "amazon",
+      "variant": "black",
+      "isPrimary": true
+    },
+    {
+      "url": "https://www.amazon.com/Cooler-Master-Adjustable-MasterPlus-MM-311-WWOW1/dp/B0B8TK5H42?crid=3RH0MCQP3ZKUQ&dib=eyJ2IjoiMSJ9.GbBq8B8yC_s62cA3nsfjE5iZ8LtsMBMhumnM57UxBZUKtwrEfJWfZC58JrnyGnbR7VpUWHL-yXMNciVpDNceJ1qbolojlC5LE86XisuL3FAHXX2jdkJ0Wl3b69Adidrufy1you9UNeJnnVjzbTv04g.T-U50n_C9uziuX0WXuQaKKFlNSfZW97Wd_vfIAyBBoE&dib_tag=se&keywords=MM311&qid=1765320888&sprefix=mm311%2Caps%2C212&sr=8-1&th=1&linkCode=ll1&tag=eggear-20&linkId=148f920041252d30234399419dfce2c2&language=en_US&ref_=as_li_ss_tl",
+      "retailer": "amazon",
+      "slug": "amazon",
+      "variant": "white",
+      "isPrimary": false
+    }
+  ],
+  "url": "/hubs/mouse/cooler-master/mm311",
+  "gamesRecommended": [],
+  "media": {
+    "defaultColor": "black",
+    "colors": [
+      "black",
+      "white"
+    ],
+    "editions": [],
+    "images": [
+      {
+        "stem": "feature-image---black",
+        "view": "feature-image",
+        "color": "black"
+      },
+      {
+        "stem": "top",
+        "view": "top"
+      },
+      {
+        "stem": "top---black",
+        "view": "top",
+        "color": "black"
+      },
+      {
+        "stem": "top---white",
+        "view": "top",
+        "color": "white"
+      },
+      {
+        "stem": "left",
+        "view": "left"
+      },
+      {
+        "stem": "left---black",
+        "view": "left",
+        "color": "black"
+      },
+      {
+        "stem": "left---white",
+        "view": "left",
+        "color": "white"
+      },
+      {
+        "stem": "right",
+        "view": "right"
+      },
+      {
+        "stem": "right---black",
+        "view": "right",
+        "color": "black"
+      },
+      {
+        "stem": "right---white",
+        "view": "right",
+        "color": "white"
+      },
+      {
+        "stem": "sangle",
+        "view": "sangle"
+      },
+      {
+        "stem": "sangle---black",
+        "view": "sangle",
+        "color": "black"
+      },
+      {
+        "stem": "angle---black",
+        "view": "angle",
+        "color": "black"
+      },
+      {
+        "stem": "angle---white",
+        "view": "angle",
+        "color": "white"
+      },
+      {
+        "stem": "front---black",
+        "view": "front",
+        "color": "black"
+      },
+      {
+        "stem": "front---white",
+        "view": "front",
+        "color": "white"
+      },
+      {
+        "stem": "bot",
+        "view": "bot"
+      },
+      {
+        "stem": "bot---black",
+        "view": "bot",
+        "color": "black"
+      },
+      {
+        "stem": "bot---white",
+        "view": "bot",
+        "color": "white"
+      },
+      {
+        "stem": "side",
+        "view": "shape-side"
+      },
+      {
+        "stem": "top",
+        "view": "shape-top"
+      }
+    ]
+  }
+}

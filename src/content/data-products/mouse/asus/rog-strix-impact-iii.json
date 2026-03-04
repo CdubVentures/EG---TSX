@@ -1,0 +1,189 @@
+{
+  "slug": "asus-rog-strix-impact-iii",
+  "brand": "Asus",
+  "model": "ROG Strix Impact III",
+  "baseModel": "ROG Strix",
+  "variant": "Impact III",
+  "category": "mouse",
+  "imagePath": "/images/mouse/asus/rog-strix-impact-iii",
+  "cardTags": "false",
+  "featured": "",
+  "release_date": "03/2023",
+  "discontinued": "",
+  "sku": "90MP0300-BMUA00",
+  "price_range": 49.99,
+  "colors": [
+    "black"
+  ],
+  "design": [
+    "standard"
+  ],
+  "lighting": "2 zone (rgb)",
+  "rgb": "yes",
+  "connection": "wired",
+  "connectivity": "n/a",
+  "computer_side_connector": "USB-A",
+  "mouse_side_connector": "n/a",
+  "bluetooth": "no",
+  "cable_type": "braided",
+  "paracord": "yes",
+  "wireless_charging": "no",
+  "battery_hours": "n/a",
+  "adjustable_weight": "no",
+  "feet_material": "PTFE (Virgin-Grade)",
+  "coating": "matte",
+  "honeycomb_frame": "no",
+  "silent_clicks": "no",
+  "weight": 59,
+  "material": "plastic",
+  "lngth": 126,
+  "width": 62,
+  "height": 39,
+  "form_factor": "ambidextrous",
+  "shape": "symmetrical",
+  "hump": "back mid",
+  "front_flare": "inward",
+  "thumb_rest": "no",
+  "grip": [
+    "palm",
+    "claw",
+    "fingertip"
+  ],
+  "hand_size": [
+    "medium",
+    "large"
+  ],
+  "mcu": "STM32L412C8U6",
+  "mcu_link": "https://www.st.com/resource/en/datasheet/stm32l412c8.pdf",
+  "sensor": "PAW3311",
+  "sensor_brand": "pixart",
+  "sensor_date": "11/2022",
+  "sensor_link": "https://www.pixart.com/products-detail/131/PAW3311DB-T2MU",
+  "sensor_type": "optical",
+  "flawless_sensor": "yes",
+  "sensor_latency": 4,
+  "sensor_latency_list": [
+    "unk"
+  ],
+  "shift_latency": "unk",
+  "polling_rate": [
+    1000,
+    500,
+    250,
+    125
+  ],
+  "dpi": 12000,
+  "ips": 300,
+  "acceleration": 35,
+  "lift": [
+    1.2
+  ],
+  "lift_settings": "unk",
+  "motion_sync": "no",
+  "hardware_acceleration": "no",
+  "smoothing": "no",
+  "nvidia_reflex": "yes",
+  "switch": "ROG Micro Switch",
+  "switch_brand": "asus",
+  "switch_type": "optical / mechanical",
+  "switch_link": "https://rog.asus.com/us/articles/gaming-keyboards-gaming-mice/guide-how-to-replace-the-switches-in-your-rog-gladius-iii-gaming-mouse/",
+  "hot_swappable": "yes",
+  "debounce": "unk",
+  "click_latency": 0.4,
+  "click_latency_list": "0.4 wired",
+  "click_force": "unk",
+  "encoder": "",
+  "encoder_brand": "",
+  "encoder_link": "",
+  "side_buttons": 2,
+  "middle_buttons": 0,
+  "programmable_buttons": 5,
+  "tilt_scroll_wheel": "no",
+  "adjustable_scroll_wheel": "no",
+  "onboard_memory": "yes",
+  "onboard_memory_value": 3,
+  "profile_switching": "yes",
+  "overall": 7.5,
+  "accuracy": 7.8,
+  "response": 8.1,
+  "quality": 7.9,
+  "comfort": 8,
+  "work": 6.9,
+  "feet_score": 8.6,
+  "fps_score": 7.8,
+  "mmo_score": 6.9,
+  "moba_score": 7.6,
+  "aarpg_score": 6.9,
+  "rts_score": 7.4,
+  "fps": "yes",
+  "mmo": "no",
+  "moba": "yes",
+  "aarpg": "no",
+  "rts": "yes",
+  "snap_dateUpdated": "12/20/2025",
+  "snap_datePublished": null,
+  "snap_subtitle": "",
+  "hubTags": [],
+  "game1": "",
+  "game2": "",
+  "game3": "",
+  "game4": "",
+  "game5": "",
+  "game6": "",
+  "game7": "",
+  "game8": "",
+  "keytakeaway": "",
+  "pcard": "",
+  "verdict": "",
+  "pros": [],
+  "cons": [],
+  "youtube": "https://www.youtube.com/watch?v=v9qy0zfF9sg",
+  "affiliateLinks": [
+    {
+      "url": "https://www.amazon.com/ASUS-ROG-III-Semi-Ambidextrous-programmable/dp/B0BRTKB9SK?dib=eyJ2IjoiMSJ9.4lU3vA9qCW4tIEpSK4-zgFQAoxvQxzp9l49GXdb-X3W0uj4OzHaO4b0mktBPCJFW7chWzTXsOWxYqYHSQ4VQ_SBPKJNSOH6f0cusKPSH-CPEZ1Q2LR4JNJ2R34qgFh1a9198dO7RDd2Bk92HLjFTJA.sOxE5zBkpqKRnwr90zTtBt2IYnbd6tJdcoJmqRPDxrA&dib_tag=se&keywords=ASUS%2BROG%2BStrix%2BImpact%2BIII&qid=1709836905&sr=8-1&th=1&linkCode=ll1&tag=eggear-20&linkId=c3653cac08ce241729c44c99e0385725&language=en_US&ref_=as_li_ss_tl",
+      "retailer": "amazon",
+      "slug": "amazon",
+      "variant": "",
+      "isPrimary": true
+    }
+  ],
+  "url": "/hubs/mouse/asus/rog-strix-impact-iii",
+  "gamesRecommended": [],
+  "media": {
+    "defaultColor": "black",
+    "colors": [
+      "black"
+    ],
+    "editions": [],
+    "images": [
+      {
+        "stem": "top",
+        "view": "top"
+      },
+      {
+        "stem": "left",
+        "view": "left"
+      },
+      {
+        "stem": "sangle",
+        "view": "sangle"
+      },
+      {
+        "stem": "angle",
+        "view": "angle"
+      },
+      {
+        "stem": "bot",
+        "view": "bot"
+      },
+      {
+        "stem": "side",
+        "view": "shape-side"
+      },
+      {
+        "stem": "top",
+        "view": "shape-top"
+      }
+    ]
+  }
+}

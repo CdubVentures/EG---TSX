@@ -1,0 +1,207 @@
+{
+  "slug": "asus-rog-gladius-iii",
+  "brand": "Asus",
+  "model": "ROG Gladius III",
+  "baseModel": "ROG Gladius III",
+  "variant": "",
+  "category": "mouse",
+  "imagePath": "/images/mouse/asus/rog-gladius-iii",
+  "cardTags": "false",
+  "featured": "",
+  "release_date": "01/2021",
+  "discontinued": "",
+  "sku": "90MP0270-BMUA00",
+  "price_range": "Superseded by Core",
+  "colors": [
+    "black"
+  ],
+  "design": [
+    "standard"
+  ],
+  "lighting": "3 zone (rgb)",
+  "rgb": "yes",
+  "connection": "wired",
+  "connectivity": "n/a",
+  "computer_side_connector": "USB-A",
+  "mouse_side_connector": "n/a",
+  "bluetooth": "no",
+  "cable_type": "braided",
+  "paracord": "yes",
+  "wireless_charging": "no",
+  "battery_hours": "n/a",
+  "adjustable_weight": "no",
+  "feet_material": "PTFE (Virgin-Grade)",
+  "coating": "matte",
+  "honeycomb_frame": "no",
+  "silent_clicks": "no",
+  "weight": 79,
+  "material": "plastic",
+  "lngth": 123,
+  "width": 68,
+  "height": 44,
+  "form_factor": "right",
+  "shape": "ergonomic",
+  "hump": "back - front",
+  "front_flare": "outward",
+  "thumb_rest": "no",
+  "grip": [
+    "palm",
+    "claw"
+  ],
+  "hand_size": [
+    "medium",
+    "large"
+  ],
+  "mcu": "STM32F072CBU6",
+  "mcu_link": "https://app.ultralibrarian.com/details/01ac463e-8630-11ea-8c00-0ad2c9526b44/STMicroelectronics/STM32F072CBU6",
+  "sensor": "PAW3370",
+  "sensor_brand": "PixArt",
+  "sensor_date": "08/2020",
+  "sensor_link": "https://www.pixart.com/products-detail/4/PAW3370DM-T4QU",
+  "sensor_type": "optical",
+  "flawless_sensor": "yes",
+  "sensor_latency": "unk",
+  "sensor_latency_list": [
+    "unk"
+  ],
+  "shift_latency": "unk",
+  "polling_rate": [
+    1000,
+    500,
+    250,
+    125
+  ],
+  "dpi": 26000,
+  "ips": 400,
+  "acceleration": 50,
+  "lift": [
+    1.2
+  ],
+  "lift_settings": "adjustable",
+  "motion_sync": "no",
+  "hardware_acceleration": "no",
+  "smoothing": "no",
+  "nvidia_reflex": "yes",
+  "switch": "ROG Micro Switch",
+  "switch_brand": "asus",
+  "switch_type": "mechanical",
+  "switch_link": "https://rog.asus.com/us/articles/gaming-keyboards-gaming-mice/guide-how-to-replace-the-switches-in-your-rog-gladius-iii-gaming-mouse/",
+  "hot_swappable": "yes",
+  "debounce": "unk",
+  "click_latency": 3.2,
+  "click_latency_list": "3.2 wired",
+  "click_force": 5,
+  "encoder": "",
+  "encoder_brand": "",
+  "encoder_link": "",
+  "side_buttons": 2,
+  "middle_buttons": 1,
+  "programmable_buttons": 5,
+  "tilt_scroll_wheel": "no",
+  "adjustable_scroll_wheel": "no",
+  "onboard_memory": "yes",
+  "onboard_memory_value": 5,
+  "profile_switching": "yes",
+  "overall": "7,2",
+  "accuracy": 8.4,
+  "response": 7.6,
+  "quality": 8.3,
+  "comfort": 8.5,
+  "work": 7.1,
+  "feet_score": 7.9,
+  "fps_score": 7.7,
+  "mmo_score": 5.5,
+  "moba_score": 7.4,
+  "aarpg_score": 7.4,
+  "rts_score": 7.3,
+  "fps": "yes",
+  "mmo": "no",
+  "moba": "yes",
+  "aarpg": "yes",
+  "rts": "yes",
+  "snap_dateUpdated": "12/22/2025",
+  "snap_datePublished": "12/22/2025",
+  "snap_subtitle": "Hot-swap switches in a solid 79 g ergo shell—scroll wheel reliability is the asterisk.",
+  "hubTags": [
+    "weight",
+    "connection",
+    "hot_swappable",
+    "grip"
+  ],
+  "game1": "Fortnite",
+  "game2": "StarCraft II",
+  "game3": "League of Legends",
+  "game4": "Valorant",
+  "game5": "Counter-Strike 2",
+  "game6": "",
+  "game7": "",
+  "game8": "",
+  "keytakeaway": "The ASUS ROG Gladius III Wired is an ergonomic gaming mouse built for right-handed FPS players who prioritize comfort and customization over extreme weight reduction. Its standout Push-Fit Switch Socket II system allows you to easily swap click switches to extend the mouse’s lifespan or customize the feel, while the 19,000 DPI sensor (tuned to 26k) ensures flawless tracking in competitive shooters like CS2.",
+  "pcard": "The ASUS ROG Gladius III Wired is a customizable ergonomic FPS mouse designed for palm and claw grippers. With a 79 g shell, a PixArt 3370-based sensor, and exclusive Push-Fit Switch Sockets, it offers a rare mix of repairability and performance. While heavier than the Logitech G Pro X Superlight, its ability to hot-swap switches makes it a unique value pick for longevity-minded gamers.",
+  "verdict": "The **ASUS ROG Gladius III Wired** is a right‑handed **ergonomic wired gaming mouse** built for aim-heavy FPS play in **CS2** and **Valorant**—the kind of mouse that prioritizes a filled-hand shape and stable control without dragging you back into the 100 g era. It landed in 2021 during the shift from “feature tanks” to lighter performance tools, and it still hits a useful middle ground: a solid-shell, premium feel at **~79 g**, light enough for quick target switches but planted enough for long tracking in games like **Overwatch 2** and **Apex Legends**.\r\n\r\n> A rare “serviceable” ergo mouse: swap switches now and keep it going for years—if the scroll wheel doesn’t become your maintenance tax.\r\n\r\n#### Lineup context\r\nGladius III was ROG’s lighter competitive pivot before the brand’s newer AimPoint-generation releases took over the spotlight. So in 2025, this isn’t the “newest tech flex” pick—it’s the “classic ergo comfort + unusually repair-friendly clicks” pick, especially when it shows up at a discounted street price.\r\n\r\n#### Shape & grip feel\r\nThe **123 × 68 × 44 mm** shell has a tall hump that supports **palm** and **relaxed claw** grips, with a rightward slope that naturally anchors the back of the hand. For medium-to-large hands, comfort and stability are the main selling points. For fingertip grip, the hump and full-size shape tend to feel like extra bulk you’re constantly steering around. You also get **two** side buttons—enough for FPS utility, not an MMO binding layout.\r\n\r\nASUS also avoided the honeycomb trend: weight savings come from internal structure, so the outside stays solid, easy to keep clean, and less “hollow” than many hole-drilled designs. The flexible paracord cable and rounded-edge PTFE skates help it glide smoothly, especially if you run a bungee.\r\n\r\n#### Sensor & tuning\r\nThe tuned PixArt **PAW3370** is competitive where it matters: consistent tracking at normal DPI steps with adjustable lift‑off distance for low‑sens re-centering. The “26K DPI” number is a ceiling more than a reason to buy—most players will live in the 400–1600 range—so the practical win is that it stays predictable when you’re making small corrections and controlled stops.\r\n\r\n#### The real reason people buy it: Push‑Fit Switch Socket II\r\nGladius III’s main clicks use **hot‑swappable sockets**, letting you run standard **3‑pin mechanical switches** or compatible **5‑pin optical switches** without soldering. That’s a big deal for long-term ownership: you can change click feel on purpose, and you can sidestep most of the classic “double-click = new mouse” failure path. The pivoted button design also helps the clicks feel crisp and consistent across the paddles instead of getting mushy near the edges.\r\n\r\n#### The tradeoffs to know up front\r\nThe big long-term asterisk is the **scroll wheel encoder**. Many owners report “kickback/jumping” (a step registering the wrong direction) showing up later in ownership—especially frustrating if you scroll for weapon swaps or have jump bound to the wheel. Cleaning can help temporarily, but the durable fix is usually an encoder replacement (soldering), which is exactly the kind of upkeep some buyers want to avoid.\r\n\r\nArmoury Crate is the other friction point. It’s powerful, but heavy. The clean workflow is: install once, update firmware, set DPI/LOD/polling + lighting, save to onboard memory (up to five profiles), then uninstall.\r\n\r\n| Aspect | What you’ll notice in real play |\r\n|---|---|\r\n| Shape & grip | Tall hump = palm/relaxed claw comfort; not a fingertip-friendly shell |\r\n| Clicks | Hot-swap sockets make it unusually “keepable” long-term |\r\n| Wheel & software | Wheel can become the maintenance point; software is best used once, then removed |\r\n\r\n**Bottom line:** The Gladius III Wired makes the most sense for palm/claw FPS players who want a classic right-hand ergonomic shape and care about long-term serviceability—especially the freedom to swap switches instead of replacing the whole mouse. If you want the same general ergonomic lane with a more “set-and-forget” vibe, the <pop=mouse-130>Razer DeathAdder V3</pop> is the cleanest cross-shop. If you want to push harder into lightweight ergo performance, the <pop=mouse-313>Pulsar Xlite v3 Medium</pop> is the faster-handling direction—just without the Gladius’ switch ecosystem. And if you want to stay in the ROG family while simplifying the idea, the <pop=mouse-338>ASUS ROG Gladius III Core</pop> is the new alternative.",
+  "pros": [
+    "**Excellent palm/relaxed-claw comfort** with a stable, classic ergonomic silhouette",
+    "**Hot-swappable main switches** make it one of the most repair-friendly wired FPS mice in its class",
+    "**Consistent, competitive-grade tracking** from the tuned PAW3370 at normal DPI ranges",
+    "**Solid-shell build** that feels premium and stays cleaner than honeycomb alternatives",
+    "**Flexible paracord + PTFE feet** keep glide smooth and controlled"
+  ],
+  "cons": [
+    "Not ideal for **fingertip grip** due to the tall hump and “filled-hand” feel",
+    "Only **two side buttons**, so it’s clearly FPS-focused rather than feature-maximal",
+    "As Always Armoury Crate software is resource-heavy and often buggy"
+  ],
+  "youtube": "https://www.youtube.com/watch?v=R2QZ7sV5KB8",
+  "affiliateLinks": [
+    {
+      "url": "https://www.amazon.com/ASUS-Programmable-Lighting-Swappable-Ergonomic/dp/B0922PL5BR?th=1&linkCode=ll1&tag=eggear-20&linkId=9bdb967e502925825089249692875c9e&language=en_US&ref_=as_li_ss_tl",
+      "retailer": "amazon",
+      "slug": "amazon",
+      "variant": "",
+      "isPrimary": true
+    }
+  ],
+  "url": "/hubs/mouse/asus/rog-gladius-iii",
+  "gamesRecommended": [],
+  "media": {
+    "defaultColor": "black",
+    "colors": [
+      "black"
+    ],
+    "editions": [],
+    "images": [
+      {
+        "stem": "feature-image",
+        "view": "feature-image"
+      },
+      {
+        "stem": "top",
+        "view": "top"
+      },
+      {
+        "stem": "left",
+        "view": "left"
+      },
+      {
+        "stem": "sangle",
+        "view": "sangle"
+      },
+      {
+        "stem": "angle",
+        "view": "angle"
+      },
+      {
+        "stem": "bot",
+        "view": "bot"
+      },
+      {
+        "stem": "side",
+        "view": "shape-side"
+      },
+      {
+        "stem": "top",
+        "view": "shape-top"
+      }
+    ]
+  }
+}

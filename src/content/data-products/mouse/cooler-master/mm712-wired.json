@@ -1,0 +1,194 @@
+{
+  "slug": "cooler-master-mm712-wired",
+  "brand": "Cooler Master",
+  "model": "MM712 Wired",
+  "baseModel": "MM712",
+  "variant": "Wired",
+  "category": "mouse",
+  "imagePath": "/images/mouse/cooler-master/mm712-wired",
+  "cardTags": "false",
+  "featured": "",
+  "release_date": "03/2024",
+  "discontinued": "",
+  "sku": "MM-712-KKOL1",
+  "price_range": 49.99,
+  "colors": [
+    "black",
+    "white"
+  ],
+  "design": [
+    "standard"
+  ],
+  "lighting": "1 zone (rgb)",
+  "rgb": "yes",
+  "connection": "wired",
+  "connectivity": "n/a",
+  "computer_side_connector": "USB-A",
+  "mouse_side_connector": "n/a",
+  "bluetooth": "no",
+  "cable_type": "ultraweave",
+  "paracord": "yes",
+  "wireless_charging": "no",
+  "battery_hours": "n/a",
+  "adjustable_weight": "no",
+  "feet_material": "PTFE (Virgin-Grade)",
+  "coating": "matte",
+  "honeycomb_frame": "no",
+  "silent_clicks": "no",
+  "weight": 49,
+  "material": "plastic",
+  "lngth": 116.6,
+  "width": 62.2,
+  "height": 38.2,
+  "form_factor": "right",
+  "shape": "symmetrical",
+  "hump": "back mid",
+  "front_flare": "flat",
+  "thumb_rest": "no",
+  "grip": [
+    "palm",
+    "claw",
+    "fingertip"
+  ],
+  "hand_size": [
+    "small",
+    "medium"
+  ],
+  "mcu": "unk",
+  "mcu_link": "",
+  "sensor": "PMW3395",
+  "sensor_brand": "PixArt",
+  "sensor_date": "04/2022",
+  "sensor_link": "https://www.pixart.com/products-detail/4/PAW3395DM-T6QU",
+  "sensor_type": "optical",
+  "flawless_sensor": "yes",
+  "sensor_latency": "unk",
+  "sensor_latency_list": [
+    "unk"
+  ],
+  "shift_latency": "unk",
+  "polling_rate": [
+    1000,
+    500,
+    250,
+    125
+  ],
+  "dpi": 26000,
+  "ips": 650,
+  "acceleration": 50,
+  "lift": [
+    2
+  ],
+  "lift_settings": "fixed low",
+  "motion_sync": "unk",
+  "hardware_acceleration": "no",
+  "smoothing": "no",
+  "nvidia_reflex": "no",
+  "switch": "Optical V2",
+  "switch_brand": "lk",
+  "switch_type": "optical",
+  "switch_link": "",
+  "hot_swappable": "no",
+  "debounce": "unk",
+  "click_latency": "unk",
+  "click_latency_list": "unk",
+  "click_force": "unk",
+  "encoder": "",
+  "encoder_brand": "",
+  "encoder_link": "",
+  "side_buttons": 2,
+  "middle_buttons": 0,
+  "programmable_buttons": 5,
+  "tilt_scroll_wheel": "no",
+  "adjustable_scroll_wheel": "no",
+  "onboard_memory": "yes",
+  "onboard_memory_value": "unk",
+  "profile_switching": "yes",
+  "overall": 8.6,
+  "accuracy": 9,
+  "response": 7.5,
+  "quality": 8.2,
+  "comfort": 8.5,
+  "work": 7.1,
+  "feet_score": 9.3,
+  "fps_score": 8.3,
+  "mmo_score": 8.4,
+  "moba_score": 8.1,
+  "aarpg_score": 8.4,
+  "rts_score": 8,
+  "fps": "yes",
+  "mmo": "yes",
+  "moba": "yes",
+  "aarpg": "yes",
+  "rts": "yes",
+  "snap_dateUpdated": "11/21/2025",
+  "snap_datePublished": null,
+  "snap_subtitle": "",
+  "hubTags": [],
+  "game1": "",
+  "game2": "",
+  "game3": "",
+  "game4": "",
+  "game5": "",
+  "game6": "",
+  "game7": "",
+  "game8": "",
+  "keytakeaway": "",
+  "pcard": "",
+  "verdict": "We’re still putting the MM712 Wired through its paces. Just a heads-up: for now, this mouse is only launching in Europe.",
+  "pros": [],
+  "cons": [],
+  "youtube": "https://www.youtube.com/watch?v=wu1WGhRkaQk",
+  "affiliateLinks": [],
+  "url": "/hubs/mouse/cooler-master/mm712-wired",
+  "gamesRecommended": [],
+  "media": {
+    "defaultColor": "black",
+    "colors": [
+      "black",
+      "white"
+    ],
+    "editions": [],
+    "images": [
+      {
+        "stem": "feature-image",
+        "view": "feature-image"
+      },
+      {
+        "stem": "top",
+        "view": "top"
+      },
+      {
+        "stem": "top---white",
+        "view": "top",
+        "color": "white"
+      },
+      {
+        "stem": "left",
+        "view": "left"
+      },
+      {
+        "stem": "left---white",
+        "view": "left",
+        "color": "white"
+      },
+      {
+        "stem": "sangle",
+        "view": "sangle"
+      },
+      {
+        "stem": "angle---white",
+        "view": "angle",
+        "color": "white"
+      },
+      {
+        "stem": "side",
+        "view": "shape-side"
+      },
+      {
+        "stem": "top",
+        "view": "shape-top"
+      }
+    ]
+  }
+}

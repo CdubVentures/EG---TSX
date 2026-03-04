@@ -1,0 +1,232 @@
+{
+  "slug": "corsair-m75-wireless",
+  "brand": "Corsair",
+  "model": "M75 Wireless",
+  "baseModel": "M75",
+  "variant": "Wireless",
+  "category": "mouse",
+  "imagePath": "/images/mouse/corsair/m75-wireless",
+  "cardTags": "false",
+  "featured": "",
+  "release_date": "02/2024",
+  "discontinued": "",
+  "sku": "CH-931D010-NA",
+  "price_range": 129.99,
+  "colors": [
+    "black",
+    "black+red",
+    "white+orange+blue",
+    "black+white+blue+orange"
+  ],
+  "design": [
+    "multiple"
+  ],
+  "lighting": "3 zone (rgb)",
+  "rgb": "yes",
+  "connection": "hybrid",
+  "connectivity": "2.4GHz Dongle",
+  "computer_side_connector": "USB-A",
+  "mouse_side_connector": "USB-C",
+  "bluetooth": "yes",
+  "cable_type": "braided",
+  "paracord": "no",
+  "wireless_charging": "no",
+  "battery_hours": 105,
+  "adjustable_weight": "no",
+  "feet_material": "PTFE (Virgin-Grade)",
+  "coating": "matte",
+  "honeycomb_frame": "no",
+  "silent_clicks": "no",
+  "weight": 89,
+  "material": "plastic",
+  "lngth": 128.4,
+  "width": 64.6,
+  "height": 41.6,
+  "form_factor": "ambidextrous",
+  "shape": "symmetrical",
+  "hump": "middle",
+  "front_flare": "inward",
+  "thumb_rest": "no",
+  "grip": [
+    "palm",
+    "claw",
+    "fingertip"
+  ],
+  "hand_size": [
+    "medium",
+    "large"
+  ],
+  "mcu": "unk",
+  "mcu_link": "",
+  "sensor": "MARKSMAN 26K",
+  "sensor_brand": "corsair",
+  "sensor_date": "",
+  "sensor_link": "",
+  "sensor_type": "optical",
+  "flawless_sensor": "unk",
+  "sensor_latency": "unk",
+  "sensor_latency_list": [
+    "unk"
+  ],
+  "shift_latency": "unk",
+  "polling_rate": [
+    2000,
+    1000,
+    500,
+    250,
+    125
+  ],
+  "dpi": 26000,
+  "ips": 650,
+  "acceleration": 50,
+  "lift": [
+    1.2
+  ],
+  "lift_settings": "adjustable",
+  "motion_sync": "unk",
+  "hardware_acceleration": "no",
+  "smoothing": "no",
+  "nvidia_reflex": "no",
+  "switch": "Quickstrike",
+  "switch_brand": "corsair",
+  "switch_type": "optical",
+  "switch_link": "",
+  "hot_swappable": "no",
+  "debounce": "unk",
+  "click_latency": "unk",
+  "click_latency_list": "unk",
+  "click_force": "unk",
+  "encoder": "",
+  "encoder_brand": "",
+  "encoder_link": "",
+  "side_buttons": 4,
+  "middle_buttons": 0,
+  "programmable_buttons": 7,
+  "tilt_scroll_wheel": "no",
+  "adjustable_scroll_wheel": "no",
+  "onboard_memory": "yes",
+  "onboard_memory_value": 9,
+  "profile_switching": "yes",
+  "overall": 8.6,
+  "accuracy": 9,
+  "response": 8.2,
+  "quality": 8.5,
+  "comfort": 8.6,
+  "work": 7.3,
+  "feet_score": 9,
+  "fps_score": 7.7,
+  "mmo_score": 7,
+  "moba_score": 8.1,
+  "aarpg_score": 7.4,
+  "rts_score": 7.7,
+  "fps": "yes",
+  "mmo": "no",
+  "moba": "yes",
+  "aarpg": "yes",
+  "rts": "yes",
+  "snap_dateUpdated": "11/20/2025",
+  "snap_datePublished": "11/20/2025",
+  "snap_subtitle": "Ambidextrous wireless FPS mouse with swappable side buttons and strong battery life.",
+  "hubTags": [
+    "price_range",
+    "weight",
+    "polling_rate",
+    "connection",
+    "fps",
+    "moba"
+  ],
+  "game1": "Counter-Strike 2",
+  "game2": "Valorant",
+  "game3": "Apex Legends",
+  "game4": "StarCraft II",
+  "game5": "",
+  "game6": "",
+  "game7": "",
+  "game8": "",
+  "keytakeaway": "The Corsair M75 Wireless pairs a flagship 26,000 DPI sensor with low-latency 2K Hz wireless, translating into precise, lag-free aiming in twitchy shooters like CS2 and Valorant. Its medium-sized symmetrical shell (with side buttons on both sides) offers comfortable control for hours of MOBA teamfights or RTS battles, and over 100 hours of battery life means you can play longer without wires.",
+  "pcard": "The Corsair M75 Wireless is a **lefty-friendly wireless FPS mouse** that doesn't skimp on performance or comfort. It features an elite 26K DPI sensor and 2,000 Hz Slipstream wireless, delivering nearly latency-free responsiveness in competitive titles. At ~89 g, its symmetrical shape still feels agile for flick shots, while offering solid palm support for medium to large hands. You also get swappable magnetic side buttons on both flanks for true ambidexterity, plus Bluetooth and a 105-hour battery that make this mouse as versatile for all-day work or MOBA marathons as it is for nightly ranked matches.",
+  "verdict": "The Corsair M75 Wireless is an 89 g, truly ambidextrous wireless gaming mouse built for competitive FPS and battle royale players who want a flexible layout that works in either hand. It aims to give both right- and left-handed players a modern, high-performance shape without forcing you into ultra-light or ultra-specialized designs.\r\n\r\nIts 128 x 65 x 42 mm shell is symmetrical with a fairly tall central hump, so it naturally supports claw and relaxed palm grips on medium to larger hands. Smaller hands and strict fingertip grippers can still use it, but the fuller height and width make it feel more like a classic, stable shell than a flat, ultra-low-profile click box. Swappable magnetic side buttons on both flanks let you run a standard right-hand layout, mirror it for left-hand play, or blank out one side entirely to avoid accidental presses.\r\n\r\nUnder the hood, CORSAIR’s MARKSMAN 26K optical sensor supports a 100–26,000 DPI range with up to 650 IPS tracking and 50G acceleration, so fast swipes and micro-corrections in games like Counter-Strike 2, Valorant, and Apex Legends stay accurate. A maximum 1,000 Hz polling rate over 2.4 GHz SLIPSTREAM wireless or wired USB-C is more than enough for most 144–240 Hz setups, even if true latency chasers may prefer newer 2K–8K Hz mice. Optical main switches with CORSAIR QUICKSTRIKE actuation give primary clicks a crisp, low-pre-travel feel and avoid double-click issues that can show up in older mechanical designs.\r\n\r\nBattery life is a strong point: with RGB off, you can expect up to around 105 hours on the SLIPSTREAM dongle and roughly 210 hours over Bluetooth, plus the option to plug in via the included USB-C cable and keep playing while it charges. The feet are 100% PTFE, so glide on cloth or hybrid pads is smooth out of the box, and the mid-weight 89 g chassis helps the mouse feel controlled rather than twitchy when you’re tracking in long fights.\r\n\r\n#### Highlights\r\n\r\n* True ambidextrous shape with magnetic side buttons makes it one of the few wireless options that genuinely works for both right- and left-handed FPS players.\r\n* 26K sensor, 650 IPS tracking, optical main switches, and PTFE feet give it reliable esports-grade fundamentals without a complex feature list.\r\n* SLIPSTREAM 2.4 GHz wireless, Bluetooth, and wired USB-C cover low-latency play, multi-device setups, and charging without downtime.\r\n* iCUE software lets you tune DPI stages, lighting, and surface calibration, with one onboard profile for simple plug-and-play configurations.\r\n* The main trade-offs are its mid-weight 89 g shell and 1,000 Hz ceiling, which lag behind ultra-light 4K/8K mice aimed purely at cutting-edge latency.\r\n\r\n> If you’re more concerned with a comfortable ambidextrous shape and dependable wireless than chasing the absolute lowest grams and highest polling numbers, the M75 Wireless lands in a very comfortable middle ground.\r\n\r\nDay-to-day, the main ergonomic wildcard is the side-button system. The included clicky modules are quite short and sit fairly flush with the shell, so they’re easy to miss or brush accidentally until your muscle memory adapts, and some players may prefer the smoother blank inserts on the off-side for exactly that reason. The scroll wheel is a standard notched design with defined, slightly firm steps—perfectly usable for weapon swaps and bunny-hopping, but not especially tuned for hyper-scrolling long documents.\r\n\r\nIn terms of value, the M75 Wireless launched at a premium price but is often available closer to a mid-range bracket, which makes its spec and build much easier to justify. At that level you can find lighter or higher-polling alternatives, but very few that combine a polished ambidextrous shell, strong battery life, swappable side buttons, and multi-platform support. It’s best suited to competitive FPS and battle royale players who want one mouse they can use comfortably on both gaming and work machines, or to left-handed users who have been waiting for a modern wireless option that doesn’t feel like an afterthought.\r\n\r\nBottom line: choose the Corsair M75 Wireless if you prioritize a versatile ambidextrous shape, dependable 1,000 Hz wireless performance, and long battery life over chasing the lightest shell and most extreme polling numbers—everyone else can [see all wireless ambidextrous mice](/hubs/mouse?connection=wireless%2Chybrid&form_factor=ambidextrous&view=large) to compare more specialized options.",
+  "pros": [
+    "True ambidextrous shape with swappable magnetic side buttons for left- or right-handed layouts",
+    "MARKSMAN 26K optical sensor (up to 26,000 DPI, 650 IPS, 50G) delivers reliable high-speed tracking for competitive FPS",
+    "Sub-1 ms SLIPSTREAM 2.4 GHz wireless, Bluetooth, and USB-C wired modes cover gaming, travel, and productivity use",
+    "Strong battery life for a gaming mouse, rated up to ~105 hours on SLIPSTREAM or ~210 hours on Bluetooth with RGB off",
+    "100% PTFE mouse feet and an 89 g chassis provide smooth glide without feeling out-of-control",
+    "iCUE software support for DPI stages, macros, lighting, and surface calibration with one onboard profile"
+  ],
+  "cons": [
+    "89 g weight feels mid-heavy next to modern sub-60 g esports-focused mice",
+    "Capped at 1,000 Hz polling, so it won’t satisfy players specifically chasing 2K/4K/8K-class mice",
+    "Side buttons are short and low-profile, making them easy to miss or mis-press until you tune the included button sets",
+    "Tall hump and fuller width favor palm or claw grips; small hands and pure fingertip users may struggle to get truly comfortable",
+    "Only one onboard profile limits completely software-free setup flexibility"
+  ],
+  "youtube": "https://www.youtube.com/watch?v=iy5e4eSDWHU",
+  "affiliateLinks": [
+    {
+      "url": "https://www.amazon.com/Corsair-Wireless-Lightweight-Gaming-Mouse/dp/B0CTN26P3Z?crid=3Q0FC8QNA0L1T&dib=eyJ2IjoiMSJ9.6e4RgQQSO0EDsWC4Osh4ltdB4-Yus5mRyIvc3N3EDrq-SVWe7zaRMAvFa4lj7a2k9SE5Xn1o7QJVXDj2TRseB1GmjOmhnfuuyWOUAfl9BjOFNu5zPbETSDmOSK2QkRlj-6yZ6x02ZCp_FLVJ94wl0RpoQvmVSXBwaBZjGWY_vLJZiux3N38L0VC0Df2y1U_rPIMAyhqL9Dr9sKSFK11xwBuCkLm_t8NmrkiPkhJbN9w.N0eAtowqFXCdCr1nK8txhCTwTOuUlDfyjH4pruPFh-0&dib_tag=se&keywords=M75%2BWireless&qid=1765321435&sprefix=m75%2Bwireless%2Caps%2C264&sr=8-3&th=1&linkCode=ll1&tag=eggear-20&linkId=fd1ca2bd22cb994448279b27d809077a&language=en_US&ref_=as_li_ss_tl",
+      "retailer": "amazon",
+      "slug": "amazon",
+      "variant": "black",
+      "isPrimary": true
+    },
+    {
+      "url": "https://www.amazon.com/Corsair-Wireless-Lightweight-Gaming-Mouse/dp/B0FKGZ92CF?crid=2D556VYZFHIS2&dib=eyJ2IjoiMSJ9.WgshxgOEsy1EP-0wZ9iOrauMcffAE8n-KiubDFxHqHRUrrfwGOR-GFuME6--QmuIcudLO6ao_FCcx1he7DnsOz-2A1W0E9iWbBoM2qWvAKMnnPkwJZ8_NDLhJNkaJiI2pLS3eWSt_py_Kw8S1PsQAeG5mUU6YraCeMicHr7Cg_AXlOt0ekerk4yeNlji1FdCojvPCjETEfH6pNsd_bIxy95K1B5-RmrZOK2vtPfr-3EHqkw6dyHol0w7md7eqEoJLv-VZvB3dZSgQotHOsnKbBfHsMFB45hxX4h4GUcilaI.sbgzjivYc7wYkTr1PivzSV8LR5gZoyc_thXjvBmG1tg&dib_tag=se&keywords=M75+WIRELESS+Lightweight+RGB+Gaming+Mouse+-+Cyberpunk+2077&nsdOptOutParam=true&qid=1765432701&s=electronics&sprefix=m75+wireless+lightweight+rgb+gaming+mouse+-+cyberpunk+2077%2Caps%2C128&sr=1-2&linkCode=ll1&tag=eggear-20&linkId=7575b6028fa2020cd41693a9c4669c32&language=en_US&ref_=as_li_ss_tl",
+      "retailer": "amazon",
+      "slug": "amazon",
+      "variant": "mac",
+      "isPrimary": false
+    },
+    {
+      "url": "https://www.amazon.com/Corsair-Wireless-Lightweight-Gaming-Mouse/dp/B0CTN26P3Z?crid=3Q0FC8QNA0L1T&dib=eyJ2IjoiMSJ9.6e4RgQQSO0EDsWC4Osh4ltdB4-Yus5mRyIvc3N3EDrq-SVWe7zaRMAvFa4lj7a2k9SE5Xn1o7QJVXDj2TRseB1GmjOmhnfuuyWOUAfl9BjOFNu5zPbETSDmOSK2QkRlj-6yZ6x02ZCp_FLVJ94wl0RpoQvmVSXBwaBZjGWY_vLJZiux3N38L0VC0Df2y1U_rPIMAyhqL9Dr9sKSFK11xwBuCkLm_t8NmrkiPkhJbN9w.N0eAtowqFXCdCr1nK8txhCTwTOuUlDfyjH4pruPFh-0&dib_tag=se&keywords=M75%2BWireless&qid=1765321435&sprefix=m75%2Bwireless%2Caps%2C264&sr=8-3&th=1&linkCode=ll1&tag=eggear-20&linkId=9b21013b7c5cfb36046674037edbb5d3&language=en_US&ref_=as_li_ss_tl",
+      "retailer": "amazon",
+      "slug": "amazon",
+      "variant": "white",
+      "isPrimary": false
+    }
+  ],
+  "url": "/hubs/mouse/corsair/m75-wireless",
+  "gamesRecommended": [],
+  "media": {
+    "defaultColor": "black",
+    "colors": [
+      "black",
+      "black+red",
+      "white+orange+blue",
+      "black+white+blue+orange"
+    ],
+    "editions": [
+      "cyberpunk-2077-edition"
+    ],
+    "images": [
+      {
+        "stem": "top",
+        "view": "top"
+      },
+      {
+        "stem": "top___cyberpunk-2077-edition---black+red",
+        "view": "top",
+        "color": "black+red",
+        "edition": "cyberpunk-2077-edition"
+      },
+      {
+        "stem": "left",
+        "view": "left"
+      },
+      {
+        "stem": "left___cyberpunk-2077-edition---black+red",
+        "view": "left",
+        "color": "black+red",
+        "edition": "cyberpunk-2077-edition"
+      },
+      {
+        "stem": "side",
+        "view": "shape-side"
+      },
+      {
+        "stem": "top",
+        "view": "shape-top"
+      }
+    ]
+  }
+}

@@ -1,0 +1,324 @@
+{
+  "slug": "logitech-g-pro-x-superlight-2c",
+  "brand": "Logitech G",
+  "model": "Pro X Superlight 2c",
+  "baseModel": "Pro X",
+  "variant": "Superlight 2c",
+  "category": "mouse",
+  "imagePath": "/images/mouse/logitech-g/pro-x-superlight-2c",
+  "cardTags": "false",
+  "featured": "",
+  "release_date": "09/2025",
+  "discontinued": "",
+  "sku": "910-007518",
+  "price_range": 159.99,
+  "colors": [
+    "black",
+    "white",
+    "pink"
+  ],
+  "design": [
+    "standard"
+  ],
+  "lighting": "none",
+  "rgb": "no",
+  "connection": "hybrid",
+  "connectivity": "2.4GHz Dongle",
+  "computer_side_connector": "USB-A",
+  "mouse_side_connector": "USB-C",
+  "bluetooth": "yes",
+  "cable_type": "rubber",
+  "paracord": "no",
+  "wireless_charging": "",
+  "battery_hours": 95,
+  "adjustable_weight": "no",
+  "feet_material": "PTFE (Virgin-Grade)",
+  "coating": "matte",
+  "honeycomb_frame": "no",
+  "silent_clicks": "no",
+  "weight": 51,
+  "material": "plastic",
+  "lngth": 118.4,
+  "width": 61.2,
+  "height": 38.6,
+  "form_factor": "right",
+  "shape": "symmetrical",
+  "hump": "middle",
+  "front_flare": "outward",
+  "thumb_rest": "no",
+  "grip": [
+    "claw",
+    "fingertip"
+  ],
+  "hand_size": [
+    "small",
+    "medium"
+  ],
+  "mcu": "Nordic nRF52833",
+  "mcu_link": "https://www.nordicsemi.com/Products/nRF52833",
+  "sensor": "Logitech HERO 2",
+  "sensor_brand": "",
+  "sensor_date": "",
+  "sensor_link": "",
+  "sensor_type": "",
+  "flawless_sensor": "",
+  "sensor_latency": "unk",
+  "sensor_latency_list": [
+    "unk"
+  ],
+  "shift_latency": "unk",
+  "polling_rate": [
+    8000,
+    4000,
+    2000,
+    1000,
+    500,
+    250,
+    125
+  ],
+  "dpi": 44000,
+  "ips": 888,
+  "acceleration": 88,
+  "lift": [
+    1.2
+  ],
+  "lift_settings": "adjustable",
+  "motion_sync": "unk",
+  "hardware_acceleration": "no",
+  "smoothing": "no",
+  "nvidia_reflex": "yes",
+  "switch": "Logitech LIGHTFORCE (Omron (70M) - D2FP-FH1)",
+  "switch_brand": "",
+  "switch_type": "optical-mechanical",
+  "switch_link": "https://www.logitechg.com/en-us/discover/technology/lightforce",
+  "hot_swappable": "no",
+  "debounce": "unk",
+  "click_latency": 1,
+  "click_latency_list": "1 wireless",
+  "click_force": "unk",
+  "encoder": "",
+  "encoder_brand": "",
+  "encoder_link": "",
+  "side_buttons": 2,
+  "middle_buttons": 0,
+  "programmable_buttons": 5,
+  "tilt_scroll_wheel": "no",
+  "adjustable_scroll_wheel": "no",
+  "onboard_memory": "yes",
+  "onboard_memory_value": 5,
+  "profile_switching": "yes",
+  "overall": 9.3,
+  "accuracy": 9.9,
+  "response": 9.7,
+  "quality": 9,
+  "comfort": 9.4,
+  "work": 7.2,
+  "feet_score": 8.3,
+  "fps_score": 9.7,
+  "mmo_score": 6.8,
+  "moba_score": 8.8,
+  "aarpg_score": 7.4,
+  "rts_score": 9,
+  "fps": "Yes",
+  "mmo": "No",
+  "moba": "Yes",
+  "aarpg": "No",
+  "rts": "Yes",
+  "snap_dateUpdated": "12/20/2025",
+  "snap_datePublished": "12/21/2025",
+  "snap_subtitle": "Ultralight wireless FPS mouse that finally fits small hands.",
+  "hubTags": [
+    "price_range",
+    "weight",
+    "polling_rate",
+    "connection",
+    "fps",
+    "hand_size"
+  ],
+  "game1": "Valorant",
+  "game2": "Counter-Strike 2",
+  "game3": "PUBG",
+  "game4": "Valorant",
+  "game5": "Apex Legends",
+  "game6": "Escape from Tarkov",
+  "game7": "",
+  "game8": "",
+  "keytakeaway": "The Logitech G Pro X Superlight 2c is a compact wireless gaming mouse built for competitive FPS players, especially those using fingertip or aggressive claw grips in CS2 and Valorant. Its 51 g solid-shell body, shorter 118.4 mm length, and HERO 2 + LIGHTSPEED platform deliver effortless lift-reset control with reliable tracking and stable wireless performance. Optional 8K polling is available for high-refresh rigs, while 1K–2K keeps battery life strong for daily ranked queues.",
+  "pcard": "The Logitech G Pro X Superlight 2c is a **compact ultralight wireless gaming mouse** tuned for FPS play, pairing a **51 g** solid shell with the full **HERO 2 + LIGHTSPEED + LIGHTFORCE** stack. If the full-size Superlight felt a bit long, this shorter shell frees fingertip/claw control without sacrificing reliability. Prefer the classic length or a right-hand ergo? Compare <pop=mouse-94>Logitech G Pro X Superlight 2</pop> and <pop=mouse-91>Logitech G Pro X Superlight 2 Dex</pop>.",
+  "verdict": "The Logitech G Pro X Superlight 2c is a compact **wireless gaming mouse** built for FPS players who value nimble lift-and-reset control in **CS2**, **Valorant**, and similarly twitchy shooters. By scaling the familiar Superlight geometry into a shorter 118.4 mm shell at just 51 g (solid, no honeycomb), it keeps the “Series 2” platform intact—**HERO 2** sensor, **LIGHTSPEED** wireless, **LIGHTFORCE** hybrid switches, onboard memory, and **USB-C**—so you get elite tracking without turning to a niche “mini” with compromises.\r\n\r\n#### Lineup context\r\nWithin Logitech’s current trio, the 2c is the **agility specialist**. If you want the same platform in a longer, steadier shell, see the <pop=mouse-94>Pro X Superlight 2</pop>; for a right-hand ergonomic take, there’s the <pop=mouse-91>Pro X Superlight 2 Dex</pop>.\r\n\r\n#### What you feel in game\r\nSmall-to-medium hands and fingertip/aggressive-claw grips benefit most. The shorter body avoids the tail pressing into your palm, opening up vertical micro-adjustments and quick re-centers on low sens. That translates to cleaner recoil control and target-to-target transitions. Despite the featherweight, the body feels rigid and “sealed,” so it’s fast in hand but not flimsy.\r\n\r\n> A 51 g **solid-shell** design plus stable wireless makes the 2c feel quick and dependable—not delicate.\r\n\r\n#### Performance spine\r\nHERO 2’s headroom (100–44,000 DPI, up to 888 IPS / 88G) effectively removes spinout risk on modern pads, while LIGHTSPEED maintains a consistent link you can stop thinking about. The mouse supports polling **up to 8,000 Hz** for high-refresh setups; many players will still prefer 1K–2K or 4K to balance smoothness, battery life, and CPU load. Battery is rated around **95 hours** at standard settings, unusually strong for this weight class.\r\n\r\n| Spec | What you’ll notice |\r\n|---|---|\r\n| 51 g, solid shell | Low inertia for faster starts/stops; easy lift-reset without flex. |\r\n| 118.4 × 61.2 × 38.6 mm | Less palm contact; more fingertip/claw freedom. |\r\n| Up to 8K polling | Finer motion updates on 360–540 Hz displays (with battery/CPU trade-offs). |\r\n\r\n#### Clicks, side buttons, and coating\r\nLIGHTFORCE main clicks are crisp and defined, but a bit **firmer and louder** than ultra-light mechanicals—great for preventing accidental presses during aggressive repositioning, less ideal if you spam-click. The **side buttons** remain the family weak spot: they work reliably but can feel **mushy** with extra travel compared to top competitors. Coating is a functional matte; the included pre-cut grip tape is a nice “tune it your way” option.\r\n\r\n#### Bottom line\r\nIf the full-size Superlight has always felt just a bit too long, the **Superlight 2c** is the rare compact that keeps flagship hardware, battery efficiency, and wireless stability intact. It’s a top-tier fit for small-to-medium hands in fingertip/claw, with trade-offs mainly in side-button tactility and price. If you want a flatter, even more fingertip-leaning premium compact, consider the <pop=mouse-127>Razer Viper Mini Signature Edition</pop>; for a narrow claw specialist feel, look at the <pop=mouse-193>Endgame Gear OP1w 4k Wireless</pop>. For broader shopping, see our [more ultra-light wireless mice](/hubs/mouse?connection=hybrid&weight=36-60).\r\n\r\n#### Key takeaways\r\n- Compact **Superlight geometry** that finally suits smaller hands and fingertip/aggressive claw.\r\n- **HERO 2 + LIGHTSPEED** delivers “set and forget” tracking and wireless.\r\n- Optional **8K polling** helps on very high refresh rigs; 1K–4K is the practical sweet spot.\r\n- Downsides: side buttons feel average, clicks run firm/loud, and pricing sits on the premium side.",
+  "pros": [
+    "51 g solid shell; no holes",
+    "Shorter 118.4 mm; better fingertip/claw* HERO 2 tracking; spinout-proof",
+    "Stable LIGHTSPEED; onboard memory",
+    "Up to 8K polling (optional)*USB-C charging; grip tape included"
+  ],
+  "cons": [
+    "Premium price vs rivals",
+    "No Bluetooth; high polling drains battery",
+    "Compact shape poor for large palm grips"
+  ],
+  "youtube": "https://www.youtube.com/watch?v=Z4RFlSIGL7c",
+  "affiliateLinks": [
+    {
+      "url": "https://www.amazon.com/dp/B0FFM4WLD5?th=1&linkCode=ll1&tag=eggear-20&linkId=8d3f060b8f830136a1357838eb306f14&language=en_US&ref_=as_li_ss_tl",
+      "retailer": "amazon",
+      "slug": "amazon",
+      "variant": "black",
+      "isPrimary": true
+    },
+    {
+      "url": "https://www.amazon.com/dp/B0FFLVHJGB?th=1&linkCode=ll1&tag=eggear-20&linkId=3ada439f9a94bb391b99f536c5408909&language=en_US&ref_=as_li_ss_tl",
+      "retailer": "amazon",
+      "slug": "amazon",
+      "variant": "pink",
+      "isPrimary": false
+    },
+    {
+      "url": "https://www.amazon.com/dp/B0FFM4V8PV?th=1&linkCode=ll1&tag=eggear-20&linkId=f7014bdca3d4e1d8ab407ceb091b961b&language=en_US&ref_=as_li_ss_tl",
+      "retailer": "amazon",
+      "slug": "amazon",
+      "variant": "white",
+      "isPrimary": false
+    }
+  ],
+  "url": "/hubs/mouse/logitech-g/pro-x-superlight-2c",
+  "gamesRecommended": [],
+  "media": {
+    "defaultColor": "black",
+    "colors": [
+      "black",
+      "white",
+      "pink"
+    ],
+    "editions": [],
+    "images": [
+      {
+        "stem": "feature-image",
+        "view": "feature-image"
+      },
+      {
+        "stem": "top",
+        "view": "top"
+      },
+      {
+        "stem": "top---black",
+        "view": "top",
+        "color": "black"
+      },
+      {
+        "stem": "top---pink",
+        "view": "top",
+        "color": "pink"
+      },
+      {
+        "stem": "top---white",
+        "view": "top",
+        "color": "white"
+      },
+      {
+        "stem": "left",
+        "view": "left"
+      },
+      {
+        "stem": "left---black",
+        "view": "left",
+        "color": "black"
+      },
+      {
+        "stem": "left---pink",
+        "view": "left",
+        "color": "pink"
+      },
+      {
+        "stem": "left---white",
+        "view": "left",
+        "color": "white"
+      },
+      {
+        "stem": "right",
+        "view": "right"
+      },
+      {
+        "stem": "sangle",
+        "view": "sangle"
+      },
+      {
+        "stem": "sangle---black",
+        "view": "sangle",
+        "color": "black"
+      },
+      {
+        "stem": "sangle---pink",
+        "view": "sangle",
+        "color": "pink"
+      },
+      {
+        "stem": "sangle---white",
+        "view": "sangle",
+        "color": "white"
+      },
+      {
+        "stem": "bot",
+        "view": "bot"
+      },
+      {
+        "stem": "side",
+        "view": "shape-side"
+      },
+      {
+        "stem": "top",
+        "view": "shape-top"
+      },
+      {
+        "stem": "botC2",
+        "view": "botC",
+        "seq": 2
+      },
+      {
+        "stem": "leftC2",
+        "view": "leftC",
+        "seq": 2
+      },
+      {
+        "stem": "rightC2",
+        "view": "rightC",
+        "seq": 2
+      },
+      {
+        "stem": "sangleC2",
+        "view": "sangleC",
+        "seq": 2
+      },
+      {
+        "stem": "topC2",
+        "view": "topC",
+        "seq": 2
+      },
+      {
+        "stem": "botC3",
+        "view": "botC",
+        "seq": 3
+      },
+      {
+        "stem": "leftC3",
+        "view": "leftC",
+        "seq": 3
+      },
+      {
+        "stem": "rightC3",
+        "view": "rightC",
+        "seq": 3
+      },
+      {
+        "stem": "sangleC3",
+        "view": "sangleC",
+        "seq": 3
+      },
+      {
+        "stem": "topC3",
+        "view": "topC",
+        "seq": 3
+      }
+    ]
+  }
+}

@@ -1,0 +1,224 @@
+{
+  "slug": "corsair-scimitar-elite-wireless",
+  "brand": "Corsair",
+  "model": "Scimitar Elite Wireless",
+  "baseModel": "Scimitar",
+  "variant": "Elite Wireless",
+  "category": "mouse",
+  "imagePath": "/images/mouse/corsair/scimitar-elite-wireless",
+  "cardTags": "false",
+  "featured": "",
+  "release_date": "08/2023",
+  "discontinued": "",
+  "sku": "CH-9314311-NA",
+  "price_range": 129.99,
+  "colors": [
+    "black"
+  ],
+  "design": [
+    "standard"
+  ],
+  "lighting": "2 zone (rgb)",
+  "rgb": "yes",
+  "connection": "hybrid",
+  "connectivity": "2.4GHz Dongle",
+  "computer_side_connector": "USB-A",
+  "mouse_side_connector": "USB-C",
+  "bluetooth": "no",
+  "cable_type": "braided",
+  "paracord": "no",
+  "wireless_charging": "no",
+  "battery_hours": 150,
+  "adjustable_weight": "no",
+  "feet_material": "PTFE (Virgin-Grade)",
+  "coating": "matte",
+  "honeycomb_frame": "no",
+  "silent_clicks": "no",
+  "weight": 114,
+  "material": "plastic",
+  "lngth": 119.23,
+  "width": 73.48,
+  "height": 42.17,
+  "form_factor": "right",
+  "shape": "ergonomic",
+  "hump": "back mid",
+  "front_flare": "flat",
+  "thumb_rest": "no",
+  "grip": [
+    "palm",
+    "claw",
+    "fingertip"
+  ],
+  "hand_size": [
+    "medium",
+    "large"
+  ],
+  "mcu": "unk",
+  "mcu_link": "",
+  "sensor": "MARKSMAN 26K",
+  "sensor_brand": "corsair",
+  "sensor_date": "",
+  "sensor_link": "",
+  "sensor_type": "optical",
+  "flawless_sensor": "unk",
+  "sensor_latency": "unk",
+  "sensor_latency_list": [
+    "unk"
+  ],
+  "shift_latency": "unk",
+  "polling_rate": [
+    2000,
+    1000,
+    500,
+    250,
+    125
+  ],
+  "dpi": 26000,
+  "ips": 650,
+  "acceleration": 50,
+  "lift": [
+    1.2
+  ],
+  "lift_settings": "adjustable",
+  "motion_sync": "yes",
+  "hardware_acceleration": "no",
+  "smoothing": "no",
+  "nvidia_reflex": "no",
+  "switch": "Optical Microswitch",
+  "switch_brand": "ttc",
+  "switch_type": "optical",
+  "switch_link": "",
+  "hot_swappable": "no",
+  "debounce": "unk",
+  "click_latency": "unk",
+  "click_latency_list": "unk",
+  "click_force": "unk",
+  "encoder": "",
+  "encoder_brand": "",
+  "encoder_link": "",
+  "side_buttons": 12,
+  "middle_buttons": 2,
+  "programmable_buttons": 15,
+  "tilt_scroll_wheel": "no",
+  "adjustable_scroll_wheel": "no",
+  "onboard_memory": "yes",
+  "onboard_memory_value": 3,
+  "profile_switching": "no",
+  "overall": 8.4,
+  "accuracy": 9,
+  "response": 7.6,
+  "quality": 8.1,
+  "comfort": 8,
+  "work": 8.4,
+  "feet_score": 8.7,
+  "fps_score": 6,
+  "mmo_score": 8.7,
+  "moba_score": 8.5,
+  "aarpg_score": 8.7,
+  "rts_score": 7.4,
+  "fps": "no",
+  "mmo": "yes",
+  "moba": "yes",
+  "aarpg": "yes",
+  "rts": "no",
+  "snap_dateUpdated": "11/20/2025",
+  "snap_datePublished": "11/20/2025",
+  "snap_subtitle": "Comfortable MMO workhorse with a flexible 12-button side grid.",
+  "hubTags": [
+    "price_range",
+    "weight",
+    "polling_rate",
+    "connection",
+    "overall",
+    "mmo",
+    "aarpg"
+  ],
+  "game1": "World of Warcraft",
+  "game2": "Final Fantasy XIV",
+  "game3": "Lost Ark",
+  "game4": "Guild Wars 2",
+  "game5": "League of Legends",
+  "game6": "",
+  "game7": "",
+  "game8": "",
+  "keytakeaway": "The Corsair Scimitar Elite Wireless is a classic “MMO brick” in the best sense: a big, palm-filling mouse that trades lightweight feel for comfort and a 12-button thumb grid you can dial in with the adjustable Key Slider. With 16 programmable buttons, a MARKSMAN 26K sensor, tri‑mode connectivity, and up to 120–150 hours of rated battery life with lighting off, it’s built for long dungeon nights in games like World of Warcraft, Final Fantasy XIV, and Lost Ark. At roughly 114 g it is noticeably heavier than modern FPS mice, so it suits players who value stability and easy access to cooldowns over razor‑fast flicks. If you have medium‑to‑large hands and want a wireless MMO mouse that feels like a command center under your thumb, this is exactly that.",
+  "pcard": "The Corsair Scimitar Elite Wireless is a **wireless MMO workhorse**: a right‑handed, palm‑filling mouse with **16 programmable buttons** and an adjustable 12‑button Key Slider that makes complex rotations in games like World of Warcraft or FFXIV feel natural. Its **MARKSMAN 26K sensor, up to 2,000Hz polling, and tri‑mode wireless (Slipstream, Bluetooth, wired USB‑C)** keep inputs responsive even in busier raids, while the 114 g shell and sculpted shape clearly favor comfort over twitch‑aim speed. If you love binding skills, macros, and utility to your thumb and don’t mind a heavier mouse, this is a smart primary or “MMO‑only” companion next to a lighter FPS pointer.",
+  "verdict": "*Update: This snapshot has been refreshed to reflect Corsair’s newer Scimitar Elite Wireless SE, which now sits above this model in their MMO lineup.* \r\n\r\nThe Scimitar Elite Wireless was Corsair’s answer to MMO players who demanded **a small keyboard’s worth of thumb buttons** in a single mouse. It delivers on that promise – a dozen thumb keys (16 buttons total) that can be tailored to spells or macros, all in a contoured wireless design that feels substantial in hand. The iconic **Key Slider™ side panel** adjusts for your thumb’s reach, meaning even smaller hands can hit the back rows (though the rearmost buttons may still require a stretch). The overall shape is broad and supportive for palm grips, with a textured side grip that helps keep control during long dungeon runs.\r\n\r\nDespite its heft (around 4.2 oz), the mouse glides smoothly on 100% PTFE feet and tracks reliably thanks to Corsair’s **26,000 DPI Marksman sensor**. A **1,000 Hz** wireless polling rate keeps inputs responsive enough for most gamers, and in practice there’s no lag to speak of – whether you’re dodging attacks in *FFXIV* or cycling hotbars in *WoW*, the Scimitar Elite Wireless executes commands with flagship-level confidence. Corsair’s 2.4 GHz SLIPSTREAM wireless remains rock-solid, and you can always switch to Bluetooth on the fly to pair with a laptop or secondary device. *Update: At this point, the SE version adds a higher-end sensor and tighter Stream Deck integration, but the original still holds up when it’s discounted.* On its own merits, the Scimitar Elite Wireless still offers a premium build: the main clicks are snappy and guaranteed for 100 million presses, and the front-mounted USB-C port means you can keep playing while charging (a full charge lasts **up to 150 hours** in Bluetooth mode with lighting off.\r\n\r\nWhere it **now** falls short is less about execution and more about position. When this model launched, it was Corsair’s most advanced MMO mouse – but since then, a Special Edition has stolen that crown. In day-to-day use, the differences are easy to live with: unless you truly need a 33K DPI sensor or direct Elgato Stream Deck button mapping, the original Scimitar Elite Wireless still **feels like a high-end MMO controller**. Its thumb key grid is satisfyingly tactile (each row has a unique texture and a small nub on one button to help orient your thumb), though some players note they’d prefer even sharper differentiation by feel. The mouse’s weight and bulk can be a double-edged sword: on one hand, it offers great stability for deliberate skill rotations and RTS-style camera panning; on the other, it’s not the agile choice for flick-intensive FPS moments, and fatigue can set in during ultra-long sessions if you’re more used to lightweight designs.\r\n\r\n#### Lineup context  \r\nWhen it launched, this was Corsair’s flagship MMO grid mouse, bringing their long-running Scimitar line into high-end wireless territory. Since then, the Scimitar Elite Wireless SE has taken over as the true halo model, but this version now fills the role of **“last-gen hero”** that you can often snag at a better price. In other words, it currently serves as the value option in Corsair’s MMO lineup – you get the same 12-button layout and core comfort, as long as you’re okay with slightly older internals.\r\n\r\nIn the end, the Scimitar Elite Wireless still makes a strong case for itself among MMO and MOBA enthusiasts who want **maximum thumb control without wires**. It’s especially appealing now to value-conscious gamers: when on sale, it undercuts newer rivals while delivering a very similar experience. If you demand the absolute newest tech (or you’re deeply embedded in the Elgato streaming ecosystem), Corsair’s <pop=mouse-???>Scimitar Elite Wireless SE</pop> is the one to beat. But for many, this original Elite hits a sweet spot – a comfortable, feature-rich MMO mouse that sacrifices a bit of cutting-edge precision for a lower price. And if even that is too steep or you prefer a different brand’s twist on the formula, consider the <pop=mouse-133>Razer Naga V2 Pro</pop> for a more modular, but pricier, multi-button alternative.\r\n#### Wireless, Battery & Software\r\n\r\nSlipstream 2.4GHz gives you the lowest‑latency connection for gaming, while Bluetooth is handy for swapping to a laptop or secondary rig, and USB‑C wired mode lets you play while charging. With RGB off, Corsair rates the battery at up to roughly 120 hours on 2.4GHz and 150 hours on Bluetooth, so you can clear a lot of dungeons between charges.\r\n\r\nAll of the customization – remaps, layered macros, per‑game profiles, and RGB – runs through Corsair’s iCUE software. It’s powerful and lets you turn the side grid into a true ability launcher or workflow controller, but you’ll want to spend some time setting it up properly.\r\n\r\n> Treated as a dedicated MMO/ARPG mouse, the Scimitar Elite Wireless feels like a small control panel under your thumb, not just another pointer.\r\n\r\n#### Bottom Line\r\n\r\nIf your evenings are more about raid nights, dungeon queues, and hotbar juggling than laser‑focused aim duels, the Corsair Scimitar Elite Wireless makes a lot of sense. It’s heavy and unapologetically large, but in return you get a comfortable palm‑friendly shape, a highly adjustable 12‑button side panel, long‑lasting wireless, and a sensor/polling combo that keeps up with any MMO or ARPG you throw at it.\r\n\r\nPlayers with smaller hands, fingertip grips, or a single‑mouse setup that must also serve as a competitive FPS pointer will likely find the bulk and weight hard to love. For medium‑to‑large‑hand MMO fans who want a wireless replacement for older “brick‑style” MMO mice, though, this is a strong contender.",
+  "pros": [
+    "16 programmable buttons with adjustable 12‑button Key Slider make complex MMO rotations and macros easy to reach",
+    "Comfortable, contoured right‑handed shell that supports a full palm grip for long raid sessions",
+    "CORSAIR MARKSMAN 26K sensor, up to 2,000Hz polling, and 100% PTFE feet deliver precise, smooth tracking",
+    "Tri‑mode connectivity (2.4GHz Slipstream, Bluetooth, wired USB‑C) with up to 120–150 hours of rated battery life with lighting off",
+    "Optical main switches rated for 100M clicks plus onboard storage for up to three profiles"
+  ],
+  "cons": [
+    "Superseded by a newer SE model that offers a higher-DPI sensor and extra software features",
+    "Heavier and bulkier than many modern gaming mice – not ideal for twitchy FPS play or small hands",
+    "Only worth choosing over the latest version when it’s meaningfully discounted (otherwise, the SE brings modest but tangible upgrades)",
+    "iCUE software is powerful but can be overkill for simple remaps, and it’s required to unlock this mouse’s full potential"
+  ],
+  "youtube": "https://www.youtube.com/watch?v=aTqd-Q6ty2s",
+  "affiliateLinks": [
+    {
+      "url": "https://www.amazon.com/CORSAIR-SCIMITAR-ELITE-WIRELESS-Gaming/dp/B0CCVYHZ9N?dib=eyJ2IjoiMSJ9.c9KVYwyNZVjiD_GpDxaipIdhkm2yi_2ShBGGkoMcVBEs6Ue4bmECfk9f2nRL2SiShBVI_2_xlCIr5J3vmYQt74wqaPxfkznY2QKoW3SRXPl_r0GGX9KyZUd0Xlnz7kMlvfBNbX7d46btwhsAmI5oVYzXCsXX18WjyykZK8Fums35XQRmGxjJFbQnkuiJfKXRanTP0Xvs7oPwayUf8HIBVnjNm0OWNryEhNX4qcWS48I.qHeEzGleLt6p674mXyboYE591fwa3jvD-N58XDxwyBM&dib_tag=se&keywords=Corsair%2BScimitar%2BElite%2BWireless&qid=1713786021&sr=8-1&th=1&linkCode=ll1&tag=eggear-20&linkId=400f0a485f88fd29fdf658a79cfb550d&language=en_US&ref_=as_li_ss_tl",
+      "retailer": "amazon",
+      "slug": "amazon",
+      "variant": "",
+      "isPrimary": true
+    }
+  ],
+  "url": "/hubs/mouse/corsair/scimitar-elite-wireless",
+  "gamesRecommended": [],
+  "media": {
+    "defaultColor": "black",
+    "colors": [
+      "black"
+    ],
+    "editions": [],
+    "images": [
+      {
+        "stem": "feature-image",
+        "view": "feature-image"
+      },
+      {
+        "stem": "top",
+        "view": "top"
+      },
+      {
+        "stem": "left",
+        "view": "left"
+      },
+      {
+        "stem": "sangle",
+        "view": "sangle"
+      },
+      {
+        "stem": "img1",
+        "view": "img",
+        "seq": 1
+      },
+      {
+        "stem": "img2",
+        "view": "img",
+        "seq": 2
+      },
+      {
+        "stem": "img3",
+        "view": "img",
+        "seq": 3
+      },
+      {
+        "stem": "featureImgCover",
+        "view": "featureImgCover"
+      },
+      {
+        "stem": "side",
+        "view": "shape-side"
+      },
+      {
+        "stem": "top",
+        "view": "shape-top"
+      }
+    ]
+  }
+}

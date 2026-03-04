@@ -1,0 +1,207 @@
+{
+  "slug": "acer-cestus-330",
+  "brand": "Acer",
+  "model": "Cestus 330",
+  "baseModel": "Cestus",
+  "variant": "330",
+  "category": "mouse",
+  "imagePath": "/images/mouse/acer/cestus-330",
+  "cardTags": "false",
+  "featured": "",
+  "release_date": "07/2019",
+  "discontinued": "",
+  "sku": "NP.MCE11.00V",
+  "price_range": 69.99,
+  "colors": [
+    "black"
+  ],
+  "design": [
+    "standard"
+  ],
+  "lighting": "3 zone (rgb)",
+  "rgb": "yes",
+  "connection": "wired",
+  "connectivity": "n/a",
+  "computer_side_connector": "USB-A",
+  "mouse_side_connector": "n/a",
+  "bluetooth": "no",
+  "cable_type": "braided",
+  "paracord": "no",
+  "wireless_charging": "no",
+  "battery_hours": "n/a",
+  "adjustable_weight": "no",
+  "feet_material": "PTFE (Black-Dyed)",
+  "coating": "matte",
+  "honeycomb_frame": "no",
+  "silent_clicks": "no",
+  "weight": 96,
+  "material": "plastic",
+  "lngth": 124.4,
+  "width": 66,
+  "height": 40.6,
+  "form_factor": "right",
+  "shape": "symmetrical",
+  "hump": "middle",
+  "front_flare": "outward",
+  "thumb_rest": "no",
+  "grip": [
+    "palm",
+    "claw",
+    "fingertip"
+  ],
+  "hand_size": [
+    "medium",
+    "large"
+  ],
+  "mcu": "unk",
+  "mcu_link": "",
+  "sensor": "PMW3335",
+  "sensor_brand": "PixArt",
+  "sensor_date": "01/2019",
+  "sensor_link": "",
+  "sensor_type": "optical",
+  "flawless_sensor": "yes",
+  "sensor_latency": "unk",
+  "sensor_latency_list": [
+    "unk"
+  ],
+  "shift_latency": "unk",
+  "polling_rate": [
+    1000,
+    500,
+    250,
+    125
+  ],
+  "dpi": 16000,
+  "ips": 400,
+  "acceleration": 40,
+  "lift": [
+    2
+  ],
+  "lift_settings": "adjustable",
+  "motion_sync": "no",
+  "hardware_acceleration": "no",
+  "smoothing": "no",
+  "nvidia_reflex": "yes",
+  "switch": "D2FC -F-7N(20M)",
+  "switch_brand": "omron",
+  "switch_type": "mechanical",
+  "switch_link": "",
+  "hot_swappable": "no",
+  "debounce": "unk",
+  "click_latency": "unk",
+  "click_latency_list": "unk",
+  "click_force": "unk",
+  "encoder": "",
+  "encoder_brand": "",
+  "encoder_link": "",
+  "side_buttons": 2,
+  "middle_buttons": 2,
+  "programmable_buttons": 7,
+  "tilt_scroll_wheel": "no",
+  "adjustable_scroll_wheel": "no",
+  "onboard_memory": "yes",
+  "onboard_memory_value": 5,
+  "profile_switching": "no",
+  "overall": 5.2,
+  "accuracy": 8,
+  "response": 6.8,
+  "quality": 6.8,
+  "comfort": 6.8,
+  "work": 6.7,
+  "feet_score": 4.5,
+  "fps_score": 5.9,
+  "mmo_score": 5.7,
+  "moba_score": 5.7,
+  "aarpg_score": 6.3,
+  "rts_score": 5.2,
+  "fps": "no",
+  "mmo": "no",
+  "moba": "no",
+  "aarpg": "no",
+  "rts": "no",
+  "snap_dateUpdated": "11/21/2025",
+  "snap_datePublished": "11/21/2025",
+  "snap_subtitle": "FPS Precision Meets ARPG Agility Under $65",
+  "hubTags": [
+    "price_range",
+    "weight",
+    "polling_rate",
+    "connection"
+  ],
+  "game1": "Counter-Strike 2",
+  "game2": "Valorant",
+  "game3": "Apex Legends",
+  "game4": "Overwatch 2",
+  "game5": "Fortnite",
+  "game6": "Rainbow Six Siege",
+  "game7": "Destiny 2",
+  "game8": "Call of Duty: Warzone",
+  "keytakeaway": "",
+  "pcard": "",
+  "verdict": "The Acer Predator Cestus 330 positions itself as a solid FPS workhorse with just enough flexibility to handle other genres. Its two side buttons and middle click, programmable via Acer’s QuarterMaster software offer just enough utility without cluttering your grip. The Pixart 3335 sensor delivers 400 IPS tracking, ensuring crisp shots even at 1,600 DPI, while the 1K Hz polling rate is serviceable—though noticeably behind faster options like the 8K Hz <pop=mouse-200>EVGA X17.</pop>\r\n\r\nThe Cestus 330 leans into durability over the ultralight trend, with a sturdy ergonomic shell and textured grips that keep things stable during long sessions. The PTFE feet provide decent glide on cloth pads, but they’re not as slick as alternative options like the <pop=mouse-46>Corsair Sabre RGB Pro</pop>. That said, RGB lighting options are rare at this price, which adds some flair, especially for gamers looking for extra customization.\r\n\r\nThe stiff scroll wheel (which could just be an unlucky unit) and lack of tilt inputs might be a dealbreaker for some, but the lack of smoothing (artificial corrections or delays to your movements) at high DPI makes it a sneaky-good pick for FPS players who also dip into other genres. If you need a no-frills, reliable gaming mouse that nails precision without breaking the bank, the Cestus 330 gets the job done.",
+  "pros": [
+    "PixArt 3335 sensor delivers 400 IPS tracking for zero spinout during high-speed flicks",
+    "Five programmable inputs (two side buttons, middle click, DPI toggle, profile switch)",
+    "NVIDIA Reflex Latency Analyzer integration for real-time click-to-display latency measurement",
+    "Compatible with NVIDIA Reflex games to minimize system latency in games, such as Valorant/CS2"
+  ],
+  "cons": [
+    "Stiff scroll wheel and lacks tilt functionality",
+    "Predator QuarterMaster software occasionally glitches post-update, resetting RGB profiles or button mappings",
+    "No onboard memory requires QuarterMaster software for profile retention"
+  ],
+  "youtube": "https://www.youtube.com/watch?v=tGGD2KkenAc",
+  "affiliateLinks": [
+    {
+      "url": "https://www.amazon.com/Acer-Predator-Cestus-Gaming-Board/dp/B07VRYL6W9?dib=eyJ2IjoiMSJ9.PSxjwLFXkmvkD9PIjQGM20DJ4utuSzy1gndy-z8WDUHsfFidBAYqnBS6gZca-7hGnkLOPwOkRdzP8qUI2F7WGbNAwsYg3QK8mcrekmXIx3Gft25GGYaVedDqywVCHVk_Z3QKGpLrVQJuyjcq8nsE53jgy3HZeJurw5IPRbVLomiuh2JMuP6bdBCjlknDaTGF8ObPynNNqWD5OvakbV2MZLY86SVInVDnw1IBgNcQSTs.ZE_JHMPQX0_I8Y40SZZdQxOG5LeWyA8X66qWwvITeHA&dib_tag=se&keywords=Acer%2BCestus%2B330&qid=1709836543&sr=8-1&th=1&linkCode=ll1&tag=eggear-20&linkId=7dfa7687fc1a01bd82d745fa47762f06&language=en_US&ref_=as_li_ss_tl",
+      "retailer": "amazon",
+      "slug": "amazon",
+      "variant": "",
+      "isPrimary": true
+    }
+  ],
+  "url": "/hubs/mouse/acer/cestus-330",
+  "gamesRecommended": [],
+  "media": {
+    "defaultColor": "black",
+    "colors": [
+      "black"
+    ],
+    "editions": [],
+    "images": [
+      {
+        "stem": "feature-image",
+        "view": "feature-image"
+      },
+      {
+        "stem": "top",
+        "view": "top"
+      },
+      {
+        "stem": "left",
+        "view": "left"
+      },
+      {
+        "stem": "right",
+        "view": "right"
+      },
+      {
+        "stem": "sangle",
+        "view": "sangle"
+      },
+      {
+        "stem": "angle",
+        "view": "angle"
+      },
+      {
+        "stem": "side",
+        "view": "shape-side"
+      },
+      {
+        "stem": "top",
+        "view": "shape-top"
+      }
+    ]
+  }
+}

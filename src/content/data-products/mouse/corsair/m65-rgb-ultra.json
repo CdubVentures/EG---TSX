@@ -1,0 +1,200 @@
+{
+  "slug": "corsair-m65-rgb-ultra",
+  "brand": "Corsair",
+  "model": "M65 RGB Ultra",
+  "baseModel": "M65",
+  "variant": "RGB Ultra",
+  "category": "mouse",
+  "imagePath": "/images/mouse/corsair/m65-rgb-ultra",
+  "cardTags": "false",
+  "featured": "",
+  "release_date": "09/2021",
+  "discontinued": "",
+  "sku": "CH-9309411-NA2",
+  "price_range": 79.99,
+  "colors": [
+    "black"
+  ],
+  "design": [
+    "standard"
+  ],
+  "lighting": "2 zone (rgb)",
+  "rgb": "yes",
+  "connection": "wired",
+  "connectivity": "n/a",
+  "computer_side_connector": "USB-A",
+  "mouse_side_connector": "n/a",
+  "bluetooth": "no",
+  "cable_type": "braided",
+  "paracord": "yes",
+  "wireless_charging": "no",
+  "battery_hours": "n/a",
+  "adjustable_weight": "yes",
+  "feet_material": "PTFE (Black-Dyed)",
+  "coating": "matte",
+  "honeycomb_frame": "no",
+  "silent_clicks": "no",
+  "weight": 97,
+  "material": "plastic",
+  "lngth": 116,
+  "width": 78,
+  "height": 39,
+  "form_factor": "right",
+  "shape": "ergonomic",
+  "hump": "back mid",
+  "front_flare": "inward",
+  "thumb_rest": "yes",
+  "grip": [
+    "palm",
+    "claw"
+  ],
+  "hand_size": [
+    "medium",
+    "large"
+  ],
+  "mcu": "unk",
+  "mcu_link": "",
+  "sensor": "MARKSMAN 26K",
+  "sensor_brand": "corsair",
+  "sensor_date": "",
+  "sensor_link": "",
+  "sensor_type": "optical",
+  "flawless_sensor": "unk",
+  "sensor_latency": "unk",
+  "sensor_latency_list": [
+    "unk"
+  ],
+  "shift_latency": "unk",
+  "polling_rate": [
+    8000,
+    4000,
+    2000,
+    1000,
+    500,
+    250,
+    125
+  ],
+  "dpi": 26000,
+  "ips": 650,
+  "acceleration": 50,
+  "lift": [
+    1
+  ],
+  "lift_settings": "adjustable",
+  "motion_sync": "no",
+  "hardware_acceleration": "no",
+  "smoothing": "no",
+  "nvidia_reflex": "no",
+  "switch": "Optical Microswitch",
+  "switch_brand": "ttc",
+  "switch_type": "optical",
+  "switch_link": "",
+  "hot_swappable": "no",
+  "debounce": "unk",
+  "click_latency": "unk",
+  "click_latency_list": "unk",
+  "click_force": "unk",
+  "encoder": "",
+  "encoder_brand": "",
+  "encoder_link": "",
+  "side_buttons": 3,
+  "middle_buttons": 2,
+  "programmable_buttons": 12,
+  "tilt_scroll_wheel": "no",
+  "adjustable_scroll_wheel": "no",
+  "onboard_memory": "yes",
+  "onboard_memory_value": 2,
+  "profile_switching": "yes",
+  "overall": 8.4,
+  "accuracy": 8.9,
+  "response": 8.5,
+  "quality": 8,
+  "comfort": 8.2,
+  "work": 7.8,
+  "feet_score": 8.7,
+  "fps_score": 8.2,
+  "mmo_score": 8,
+  "moba_score": 7.6,
+  "aarpg_score": 7.9,
+  "rts_score": 7.8,
+  "fps": "yes",
+  "mmo": "yes",
+  "moba": "yes",
+  "aarpg": "yes",
+  "rts": "yes",
+  "snap_dateUpdated": "11/25/2025",
+  "snap_datePublished": "11/25/2025",
+  "snap_subtitle": "Old-school weight meets modern 8K tech in a tunable FPS-first mouse.",
+  "hubTags": [
+    "price_range",
+    "weight",
+    "polling_rate",
+    "connection",
+    "fps",
+    "mmo",
+    "work",
+    "overall"
+  ],
+  "game1": "Destiny 2",
+  "game2": "Call of Duty Warzone",
+  "game3": "Rainbow Six Siege",
+  "game4": "Counter-Strike 2",
+  "game5": "",
+  "game6": "",
+  "game7": "",
+  "game8": "",
+  "keytakeaway": "The Corsair M65 RGB Ultra is a wired, tunable FPS mouse for players who like a heavier, anchored feel when lining up shots in CS2, Rainbow Six Siege, and other tactical shooters. Its 97 g aluminum shell (tunable up past 110 g), 26K MARKSMAN sensor, and up to 8,000 Hz polling deliver precise tracking and low latency, while the dedicated sniper button and tilt-gesture shortcuts add extra control once you take time to configure them. It’s less about chasing ultra-light flick speed and more about stable, deliberate aim with plenty of customization.",
+  "pcard": "An update to Corsair’s classic M65 shape, the M65 RGB Ultra pairs a **97 g tunable aluminum frame** with a **26K MARKSMAN sensor** and **up to 8,000 Hz wired polling**, making it a strong pick for FPS players who prefer a planted, low‑sens feel over featherweight flicks. The thumb rest, sniper button, and tilt‑gesture shortcuts give you plenty of ways to bind utility actions without crowding your keyboard. If you want the same vibe in a lighter shell, look at the <pop=mouse-26>Corsair M75</pop>, while wireless‑first players should consider the <pop=mouse-24>Corsair M75 Air Wireless</pop> or <pop=mouse-32>M65 RGB Ultra Wireless</pop> instead.",
+  "verdict": "The Corsair M65 RGB Ultra is basically the modern endgame for Corsair’s classic M65 shape: a heavy, tunable FPS-first mouse that swaps in cutting-edge internals without abandoning its aluminum tank feel. At its lightest 97 g, and up to roughly 115 g with the screw‑in weights installed, it’s far from the ultra‑light trend, but its 26K MARKSMAN sensor and up to 8,000 Hz polling give it the kind of raw performance you’d expect from current high-end esports mice.\r\n\r\n#### What You Need To Know\r\n\r\nThis is a **wired-only**, right‑handed mouse with a pronounced thumb rest and a back‑tilted hump, built for claw or palm grip and medium to large hands. The aluminum frame keeps it feeling dense and solid, while the weight‑tuning system lets you shift both total mass and center of gravity—handy if you like an especially front‑ or back‑weighted feel. 100% PTFE feet and a soft paracord‑style cable keep it moving more freely than the 97 g number suggests, so it feels planted rather than sluggish.\r\n\r\nThe MARKSMAN sensor tracks cleanly across low and high sensitivities, with a 100–26,000 DPI range and 650 IPS / 50G specs that easily cover any realistic FPS scenario. Paired with Corsair’s AXON 8K polling, clicks and micro‑adjustments feel extremely responsive as long as your frame rate and CPU can keep up. In practice it lands as a “precision first” mouse: great for holding angles, controlling recoil, and tracking in games like CS2, Rainbow Six Siege, Destiny 2, and other tactical or hybrid shooters, even if it won’t spin around quite as effortlessly as a 60 g shell.\r\n\r\n| Aspect | What you’ll feel |\r\n|--------|------------------|\r\n| Weight | Anchored and stable, favoring controlled tracking over ultra‑fast flicks |\r\n| Shape  | Pronounced thumb rest and back‑tilted hump that suit claw/palm on medium–large hands |\r\n| Extras | Sniper button plus motion‑based tilt gestures for additional inputs |\r\n\r\nThe control story is where the M65 RGB Ultra leans into its niche. You get eight physical buttons including the classic sniper button, and the six‑axis gyro adds four tilt‑gesture inputs you can bind in iCUE, effectively giving you a dozen ways to trigger abilities, utility, or comms without moving your fingers off primary keys. The onboard memory supports multiple profiles, so you can swap DPI and bindings per game without leaving the desktop.\r\n\r\n> If you like the classic M65 shape and don’t mind heft, this is its sharpest, most responsive incarnation so far.\r\n\r\n#### Tradeoffs, Genres, and Alternatives\r\n\r\nThe obvious downside is weight. At a minimum of 97 g, this is objectively heavy by 2025 standards, and low‑DPI wrist‑flick players chasing pure speed will be happier with something like the lighter wired <pop=mouse-26>Corsair M75</pop> or the ultra‑light wireless <pop=mouse-24>Corsair M75 Air Wireless</pop>. Likewise, if you love the M65 shape but want to cut the cord and gain battery life, the <pop=mouse-32>Corsair M65 RGB Ultra Wireless</pop> is the more flexible choice, trading 8K polling for hybrid wired/2.4 GHz/Bluetooth use.\r\n\r\nGenre-wise, the M65 RGB Ultra scores well across FPS, MMO, and general gaming: it has enough side buttons and programmable inputs to work for MMOs and ARPGs, but without the full 12‑button grid of something like the <pop=mouse-28>Corsair Scimitar RGB Elite</pop>. Think of it as an FPS‑first mouse that can comfortably moonlight in looter shooters, ARPGs, and lighter MMOs, but isn’t the most efficient pick if you live in high‑end raid content.\r\n\r\n**Bottom line:** if you’re okay with a heavier, wired mouse and you value stability, tuning options, and a classic right‑handed shell over chasing the absolute lowest number on the scale, the Corsair M65 RGB Ultra still feels genuinely competitive. It’s a great fit for players who grew up on earlier M60/M65 revisions and want that same anchored feel with modern sensor tech, tilt gestures, and 8K polling layered on top.",
+  "pros": [
+    "Tunable 97–115 g aluminum shell provides a solid, planted feel with adjustable center of gravity.",
+    "CORSAIR MARKSMAN 26K sensor (650 IPS / 50G) delivers flawless tracking for modern FPS play.",
+    "Up to 8,000 Hz wired polling via AXON keeps click and cursor latency extremely low on high-refresh setups.",
+    "Six-axis gyro enables ultra-low lift-off distance and tilt-gesture inputs for extra keybinds.",
+    "Comfortable right-handed shape with thumb rest, PTFE feet, and paracord cable that keeps it controllable for claw/palm grips on medium–large hands.",
+    "Strong all-round genre performance: great for FPS but still capable in MMOs, ARPGs, and general PC use."
+  ],
+  "cons": [
+    "Heavier than most modern competitive mice, even at its lightest 97 g setting.",
+    "Wired-only; for the same general shape in wireless form you need the <pop=mouse-32>Corsair M65 RGB Ultra Wireless</pop>.",
+    "Weight and shape can feel bulky for small hands or fingertip grips that prefer ultra-light shells.",
+    "Tilt gestures and deep iCUE options are powerful but require setup time and may be overkill if you just want simple plug-and-play."
+  ],
+  "youtube": "https://www.youtube.com/watch?v=0siFZKKI19w",
+  "affiliateLinks": [
+    {
+      "url": "https://www.amazon.com/Corsair-Marksman-Switches-Hyper-Processing-Technology/dp/B09CXQZMHG?crid=3TX29W1QT4GZP&dib=eyJ2IjoiMSJ9.qw_YV3_AegUy4pWTDOTSspOujNPe1HSYsUleVsgpONgfD3Aj-isIFFYbAfvbBOU3g9Kih59U5eRVuPfN1GAgzIz3RDz0LSmJRpbwI71e1yJnXYGKZ9o2LderrzrMcICf5jKeMP90DQoKM2zpI9wggKCJN6PLUYQsWh-tCkiwEUa0y0-ynuQohRRQoo3LFWdCteFD_H9TJj_zQg5tuOGDmnK29PrHKPbIemnUDUfdz-M.HXGTYvvFnAw2jlUx3uSVNqKyTx21kF3BvAZhXBjWDoo&dib_tag=se&keywords=M65%2BRGB%2BUltra&qid=1765322152&sprefix=m65%2Brgb%2Bultra%2Caps%2C158&sr=8-1&th=1&linkCode=ll1&tag=eggear-20&linkId=aa148fe1e38fe88b9301fe6cfc428131&language=en_US&ref_=as_li_ss_tl",
+      "retailer": "amazon",
+      "slug": "amazon",
+      "variant": "",
+      "isPrimary": true
+    }
+  ],
+  "url": "/hubs/mouse/corsair/m65-rgb-ultra",
+  "gamesRecommended": [],
+  "media": {
+    "defaultColor": "black",
+    "colors": [
+      "black"
+    ],
+    "editions": [],
+    "images": [
+      {
+        "stem": "top",
+        "view": "top"
+      },
+      {
+        "stem": "left",
+        "view": "left"
+      },
+      {
+        "stem": "side",
+        "view": "shape-side"
+      },
+      {
+        "stem": "top",
+        "view": "shape-top"
+      }
+    ]
+  }
+}

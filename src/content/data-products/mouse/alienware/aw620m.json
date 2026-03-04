@@ -1,0 +1,255 @@
+{
+  "slug": "alienware-aw620m",
+  "brand": "Alienware",
+  "model": "AW620M",
+  "baseModel": "AW620M",
+  "variant": "",
+  "category": "mouse",
+  "imagePath": "/images/mouse/alienware/aw620m",
+  "cardTags": "false",
+  "featured": "",
+  "release_date": "03/2023",
+  "discontinued": "",
+  "sku": "570-BBBV",
+  "price_range": 99.99,
+  "colors": [
+    "white",
+    "black"
+  ],
+  "design": [
+    "standard"
+  ],
+  "lighting": "3 zone (rgb)",
+  "rgb": "yes",
+  "connection": "hybrid",
+  "connectivity": "2.4GHz Dongle",
+  "computer_side_connector": "USB-A",
+  "mouse_side_connector": "USB-C",
+  "bluetooth": "no",
+  "cable_type": "braided",
+  "paracord": "no",
+  "wireless_charging": "no",
+  "battery_hours": 140,
+  "adjustable_weight": "no",
+  "feet_material": "PTFE (Virgin-Grade)",
+  "coating": "matte",
+  "honeycomb_frame": "no",
+  "silent_clicks": "no",
+  "weight": 99,
+  "material": "plastic",
+  "lngth": 131.5,
+  "width": 77.8,
+  "height": 41.5,
+  "form_factor": "right",
+  "shape": "ergonomic",
+  "hump": "middle",
+  "front_flare": "flat",
+  "thumb_rest": "yes",
+  "grip": [
+    "palm",
+    "claw"
+  ],
+  "hand_size": [
+    "medium",
+    "large"
+  ],
+  "mcu": "unk",
+  "mcu_link": "",
+  "sensor": "PAW3395",
+  "sensor_brand": "PixArt",
+  "sensor_date": "04/2022",
+  "sensor_link": "https://www.pixart.com/products-detail/129/PAW3395DM-T6QU",
+  "sensor_type": "optical",
+  "flawless_sensor": "yes",
+  "sensor_latency": "unk",
+  "sensor_latency_list": [
+    "unk"
+  ],
+  "shift_latency": "unk",
+  "polling_rate": [
+    1000,
+    500,
+    250,
+    125
+  ],
+  "dpi": 26000,
+  "ips": 650,
+  "acceleration": 50,
+  "lift": [
+    1.2
+  ],
+  "lift_settings": "fixed low",
+  "motion_sync": "yes",
+  "hardware_acceleration": "no",
+  "smoothing": "no",
+  "nvidia_reflex": "yes",
+  "switch": "Optical Switches",
+  "switch_brand": "unk",
+  "switch_type": "optical",
+  "switch_link": "",
+  "hot_swappable": "no",
+  "debounce": "unk",
+  "click_latency": "unk",
+  "click_latency_list": "unk",
+  "click_force": "unk",
+  "encoder": "",
+  "encoder_brand": "",
+  "encoder_link": "",
+  "side_buttons": 2,
+  "middle_buttons": 1,
+  "programmable_buttons": 7,
+  "tilt_scroll_wheel": "no",
+  "adjustable_scroll_wheel": "no",
+  "onboard_memory": "yes",
+  "onboard_memory_value": "unk",
+  "profile_switching": "no",
+  "overall": 8.6,
+  "accuracy": 9.02,
+  "response": 7.4,
+  "quality": 8.5,
+  "comfort": 8.5,
+  "work": 8.1,
+  "feet_score": 8,
+  "fps_score": 7.8,
+  "mmo_score": 8.06,
+  "moba_score": 7.8,
+  "aarpg_score": 8.1,
+  "rts_score": 7.88,
+  "fps": "yes",
+  "mmo": "yes",
+  "moba": "yes",
+  "aarpg": "yes",
+  "rts": "yes",
+  "snap_dateUpdated": "11/21/2025",
+  "snap_datePublished": "11/21/2025",
+  "snap_subtitle": "",
+  "hubTags": [
+    "price_range",
+    "weight",
+    "polling_rate",
+    "connection",
+    "overall",
+    "fps",
+    "onboard_memory"
+  ],
+  "game1": "Valorant",
+  "game2": "Counter-Strike 2",
+  "game3": "Apex Legends",
+  "game4": "Overwatch 2",
+  "game5": "Fortnite",
+  "game6": "Call of Duty: Warzone",
+  "game7": "League of Legends",
+  "game8": "Destiny 2",
+  "keytakeaway": "",
+  "pcard": "",
+  "verdict": "Have you ever wondered if Alienware’s flair for futuristic hardware could translate into a serious competitive edge? The AW620M boldly answers that call, packing a 26,000 DPI optical sensor, 650 IPS tracking speed—enough raw power to keep pace with hair-trigger flicks in titles like Valorant or Apex Legends. Its ergonomic shape offers a roomy thumb rest and a natural palm contour, making longer sessions surprisingly comfortable. Though it tips the scale on the heavier side compared to ultralight esports mice, most players will find the trade-off worthwhile for the added grip and stability.\r\n\r\n#### High-Level Highlights:\r\n* **Pro-Grade Sensor & Speed** – The PixArt-based 26K DPI sensor ensures flawless tracking at high speeds (650 IPS, 50G acceleration) for pinpoint accuracy\r\n* **Comfortable Ergonomics** – Palm-friendly shape with a dedicated thumb rest makes it ideal for long MOBA and MMO sessions\r\n* **FPS Suitability** – While not an ultra-lightweight option, it remains precise and stable, though flick-heavy players may prefer a sub-70g alternative\r\n* **Versatility Across Genres** – Great for FPS, MOBA, and general gaming, but MMO players may want more programmable buttons\r\n* **Lacks Competitive Extras** – No tilt scroll, and only two side buttons—other mice offer more flexibility for customization\r\n\r\nWhere this mouse truly shines is in its snappy click response and reliable wireless performance. Despite housing only two side buttons, it’s plenty for MOBAs or quick ability combos, though hardcore MMO enthusiasts craving more macro options may look elsewhere. In side-by-side comparisons with well-known rivals, the AW620M holds its ground in pure accuracy and consistent latency. If you’re after a dependable, competition-grade mouse with just enough customization to adapt across fast-paced shooters and strategic titles, this Alienware option hits the sweet spot between comfort and performance—proving the brand’s legacy goes well beyond iconic gaming rigs.",
+  "pros": [
+    "Flawless IPS tracking ensures reliable, high-speed performance",
+    "Magnetic optical switches provide fast actuation with minimal debounce delay",
+    "Ergonomic right-handed design supports long gaming sessions without fatigue",
+    "Motion Sync helps maintain consistent cursor positioning at high speeds",
+    "Balanced weight (approx. 89g) for precision aiming without excessive drag"
+  ],
+  "cons": [
+    "Lacks 4K/8K polling—capped at 1000Hz, which is now a baseline for esports",
+    "Unclear switch branding, leaving competitive gamers uncertain of long-term durability",
+    "Two side buttons limit macro flexibility for MMO/MOBA players"
+  ],
+  "youtube": "https://www.youtube.com/watch?v=uzkllN1s-oo",
+  "affiliateLinks": [
+    {
+      "url": "https://www.amazon.com/Alienware-Wireless-Gaming-Mouse-AW620M/dp/B0DKL245ZF?crid=1TJ6E9A9IS1QH&dib=eyJ2IjoiMSJ9.-E0Y0I_HWPAITYGmSz6b3-UNdEkkek65rqSrQVAsgi4Ta5SmwAH9FDWKarYBZsrhdCS3qPCOk0ZdSaheJPl6tt6yJlflvNueQiiLsfstgPOgT5gt2MFdknT3uuA8B_qUGfDMuNOZX6KvbrYvwP9y8g.0fB6q6mYRh_EAXKTtwsWnP7ZIOe96YiEhnCpWNPDHPc&dib_tag=se&keywords=AW620M&qid=1765310725&s=electronics&sprefix=aw620m%2Caps%2C139&sr=1-1&th=1&linkCode=ll1&tag=eggear-20&linkId=8a2eaf40d6833af7c1d4f5a97c48b6a5&language=en_US&ref_=as_li_ss_tl",
+      "retailer": "amazon",
+      "slug": "amazon",
+      "variant": "white",
+      "isPrimary": true
+    },
+    {
+      "url": "https://www.amazon.com/Alienware-Wireless-Gaming-Mouse-AW620M/dp/B0DKL245ZF?crid=1TJ6E9A9IS1QH&dib=eyJ2IjoiMSJ9.-E0Y0I_HWPAITYGmSz6b3-UNdEkkek65rqSrQVAsgi4Ta5SmwAH9FDWKarYBZsrhdCS3qPCOk0ZdSaheJPl6tt6yJlflvNueQiiLsfstgPOgT5gt2MFdknT3uuA8B_qUGfDMuNOZX6KvbrYvwP9y8g.0fB6q6mYRh_EAXKTtwsWnP7ZIOe96YiEhnCpWNPDHPc&dib_tag=se&keywords=AW620M&qid=1765310725&s=electronics&sprefix=aw620m%2Caps%2C139&sr=1-1&th=1&linkCode=ll1&tag=eggear-20&linkId=09fe7c40e1928baf55cd448c357360bf&language=en_US&ref_=as_li_ss_tl",
+      "retailer": "amazon",
+      "slug": "amazon",
+      "variant": "black",
+      "isPrimary": false
+    }
+  ],
+  "url": "/hubs/mouse/alienware/aw620m",
+  "gamesRecommended": [],
+  "media": {
+    "defaultColor": "white",
+    "colors": [
+      "white",
+      "black"
+    ],
+    "editions": [],
+    "images": [
+      {
+        "stem": "feature-image---white",
+        "view": "feature-image",
+        "color": "white"
+      },
+      {
+        "stem": "top---white",
+        "view": "top",
+        "color": "white"
+      },
+      {
+        "stem": "top---black",
+        "view": "top",
+        "color": "black"
+      },
+      {
+        "stem": "left---white",
+        "view": "left",
+        "color": "white"
+      },
+      {
+        "stem": "left---black",
+        "view": "left",
+        "color": "black"
+      },
+      {
+        "stem": "right---white",
+        "view": "right",
+        "color": "white"
+      },
+      {
+        "stem": "right---black",
+        "view": "right",
+        "color": "black"
+      },
+      {
+        "stem": "sangle---white",
+        "view": "sangle",
+        "color": "white"
+      },
+      {
+        "stem": "sangle---black",
+        "view": "sangle",
+        "color": "black"
+      },
+      {
+        "stem": "angle---white",
+        "view": "angle",
+        "color": "white"
+      },
+      {
+        "stem": "angle---black",
+        "view": "angle",
+        "color": "black"
+      },
+      {
+        "stem": "bot---black",
+        "view": "bot",
+        "color": "black"
+      },
+      {
+        "stem": "side",
+        "view": "shape-side"
+      },
+      {
+        "stem": "top",
+        "view": "shape-top"
+      }
+    ]
+  }
+}

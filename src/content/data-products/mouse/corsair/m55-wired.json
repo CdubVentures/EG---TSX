@@ -1,0 +1,191 @@
+{
+  "slug": "corsair-m55-wired",
+  "brand": "Corsair",
+  "model": "M55 Wired",
+  "baseModel": "M55",
+  "variant": "Wired",
+  "category": "mouse",
+  "imagePath": "/images/mouse/corsair/m55-wired",
+  "cardTags": "false",
+  "featured": "",
+  "release_date": "08/2024",
+  "discontinued": "",
+  "sku": "CH-930F000-WW",
+  "price_range": 29.99,
+  "colors": [
+    "black"
+  ],
+  "design": [
+    "standard"
+  ],
+  "lighting": "none",
+  "rgb": "no",
+  "connection": "wired",
+  "connectivity": "n/a",
+  "computer_side_connector": "USB-A",
+  "mouse_side_connector": "n/a",
+  "bluetooth": "no",
+  "cable_type": "braided",
+  "paracord": "no",
+  "wireless_charging": "no",
+  "battery_hours": "n/a",
+  "adjustable_weight": "no",
+  "feet_material": "PTFE (Virgin-Grade)",
+  "coating": "matte",
+  "honeycomb_frame": "no",
+  "silent_clicks": "no",
+  "weight": 55,
+  "material": "plastic",
+  "lngth": 118.7,
+  "width": 62.15,
+  "height": 38.25,
+  "form_factor": "right",
+  "shape": "symmetrical",
+  "hump": "middle",
+  "front_flare": "inward",
+  "thumb_rest": "no",
+  "grip": [
+    "palm",
+    "claw",
+    "fingertip"
+  ],
+  "hand_size": [
+    "small",
+    "medium"
+  ],
+  "mcu": "unk",
+  "mcu_link": "",
+  "sensor": "unk",
+  "sensor_brand": "",
+  "sensor_date": "",
+  "sensor_link": "",
+  "sensor_type": "optical",
+  "flawless_sensor": "unk",
+  "sensor_latency": "unk",
+  "sensor_latency_list": [
+    "unk"
+  ],
+  "shift_latency": "unk",
+  "polling_rate": [
+    1000,
+    500,
+    250,
+    125
+  ],
+  "dpi": 16000,
+  "ips": 300,
+  "acceleration": 35,
+  "lift": [],
+  "lift_settings": "unk",
+  "motion_sync": "unk",
+  "hardware_acceleration": "no",
+  "smoothing": "no",
+  "nvidia_reflex": "no",
+  "switch": "unk",
+  "switch_brand": "unk",
+  "switch_type": "mechanical",
+  "switch_link": "",
+  "hot_swappable": "no",
+  "debounce": "unk",
+  "click_latency": "unk",
+  "click_latency_list": "unk",
+  "click_force": "unk",
+  "encoder": "",
+  "encoder_brand": "",
+  "encoder_link": "",
+  "side_buttons": 2,
+  "middle_buttons": 1,
+  "programmable_buttons": 6,
+  "tilt_scroll_wheel": "no",
+  "adjustable_scroll_wheel": "no",
+  "onboard_memory": "yes",
+  "onboard_memory_value": "unk",
+  "profile_switching": "no",
+  "overall": 7.2,
+  "accuracy": 8,
+  "response": 5.6,
+  "quality": 8,
+  "comfort": 8,
+  "work": 7.5,
+  "feet_score": 8,
+  "fps_score": 6.3,
+  "mmo_score": 6.7,
+  "moba_score": 6.2,
+  "aarpg_score": 6.8,
+  "rts_score": 6.1,
+  "fps": "no",
+  "mmo": "no",
+  "moba": "no",
+  "aarpg": "no",
+  "rts": "yes",
+  "snap_dateUpdated": "11/21/2025",
+  "snap_datePublished": null,
+  "snap_subtitle": "",
+  "hubTags": [],
+  "game1": "",
+  "game2": "",
+  "game3": "",
+  "game4": "",
+  "game5": "",
+  "game6": "",
+  "game7": "",
+  "game8": "",
+  "keytakeaway": "",
+  "pcard": "",
+  "verdict": "",
+  "pros": [],
+  "cons": [],
+  "youtube": "",
+  "affiliateLinks": [
+    {
+      "url": "https://www.amazon.com/Corsair-Wired-Lightweight-Gaming-Mouse/dp/B0D9M51VBS?crid=3TOU491LXA2N1&dib=eyJ2IjoiMSJ9.CqBc4CsopWclBq_IzYP4npzlk5viko4U6SVZWojidqwMpN9dka2fl_X4Qq6OPwW0S8wNx8xg2PA8vvzFLS5XikakJYxnI_r0DNKuWZOpbw_lUlr2QNPtPhRqX9V5vsSBoFxpywZJp9J7FN5gpc3ypDiPKPUy-pzGHk-9N_ASzxvg0__m5jFtAuKN5BqT8RdRvM5GZj-Q4m869LINpD-z1c0GU9tBu0wvpmqhOuSt0bw.IhaE7Gh9w5UGzVgOiDgUN1qRSW1qlEBz2T28ajDsEBs&dib_tag=se&keywords=m55%2Bcorsair&qid=1765321143&sprefix=m55%2Bcorsair%2Caps%2C150&sr=8-3&th=1&linkCode=ll1&tag=eggear-20&linkId=8012ce62ba3c73dd9422658c6a8f546a&language=en_US&ref_=as_li_ss_tl",
+      "retailer": "amazon",
+      "slug": "amazon",
+      "variant": "",
+      "isPrimary": true
+    }
+  ],
+  "url": "/hubs/mouse/corsair/m55-wired",
+  "gamesRecommended": [],
+  "media": {
+    "defaultColor": "black",
+    "colors": [
+      "black"
+    ],
+    "editions": [],
+    "images": [
+      {
+        "stem": "feature-image",
+        "view": "feature-image"
+      },
+      {
+        "stem": "top",
+        "view": "top"
+      },
+      {
+        "stem": "left",
+        "view": "left"
+      },
+      {
+        "stem": "sangle",
+        "view": "sangle"
+      },
+      {
+        "stem": "angle",
+        "view": "angle"
+      },
+      {
+        "stem": "bot",
+        "view": "bot"
+      },
+      {
+        "stem": "side",
+        "view": "shape-side"
+      },
+      {
+        "stem": "top",
+        "view": "shape-top"
+      }
+    ]
+  }
+}

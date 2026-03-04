@@ -1,0 +1,203 @@
+{
+  "slug": "asus-rog-harpe-ace-extreme",
+  "brand": "Asus",
+  "model": "ROG Harpe Ace Extreme",
+  "baseModel": "ROG Harpe",
+  "variant": "Ace Extreme",
+  "category": "mouse",
+  "imagePath": "/images/mouse/asus/rog-harpe-ace-extreme",
+  "cardTags": "false",
+  "featured": "",
+  "release_date": "09/2024",
+  "discontinued": "",
+  "sku": "90MP03U0-BMUA00",
+  "price_range": 249.99,
+  "colors": [
+    "black"
+  ],
+  "design": [
+    "standard"
+  ],
+  "lighting": "1 zone (rgb)",
+  "rgb": "yes",
+  "connection": "hybrid",
+  "connectivity": "2.4GHz Dongle",
+  "computer_side_connector": "USB-A",
+  "mouse_side_connector": "USB-C",
+  "bluetooth": "yes",
+  "cable_type": "braided",
+  "paracord": "yes",
+  "wireless_charging": "no",
+  "battery_hours": 70,
+  "adjustable_weight": "no",
+  "feet_material": "Glass",
+  "coating": "matte",
+  "honeycomb_frame": "no",
+  "silent_clicks": "no",
+  "weight": 47,
+  "material": "carbon fiber",
+  "lngth": 127.5,
+  "width": 63.7,
+  "height": 39.6,
+  "form_factor": "right",
+  "shape": "symmetrical",
+  "hump": "back mid",
+  "front_flare": "outward",
+  "thumb_rest": "no",
+  "grip": [
+    "palm",
+    "claw",
+    "fingertip"
+  ],
+  "hand_size": [
+    "medium",
+    "large"
+  ],
+  "mcu": "Nordic nRF52840",
+  "mcu_link": "https://www.nordicsemi.com/Products/nRF52840",
+  "sensor": "AimPoint Pro (PixArt PAW3950)",
+  "sensor_brand": "asus",
+  "sensor_date": "04/2024",
+  "sensor_link": "",
+  "sensor_type": "optical",
+  "flawless_sensor": "yes",
+  "sensor_latency": "unk",
+  "sensor_latency_list": [
+    "unk"
+  ],
+  "shift_latency": "unk",
+  "polling_rate": [
+    8000,
+    4000,
+    2000,
+    1000,
+    500,
+    250,
+    125
+  ],
+  "dpi": 42000,
+  "ips": 750,
+  "acceleration": 50,
+  "lift": [
+    1.2
+  ],
+  "lift_settings": "adjustable",
+  "motion_sync": "yes",
+  "hardware_acceleration": "unk",
+  "smoothing": "unk",
+  "nvidia_reflex": "yes",
+  "switch": "ROG Optical Micro Switches",
+  "switch_brand": "asus",
+  "switch_type": "optical",
+  "switch_link": "",
+  "hot_swappable": "no",
+  "debounce": "unk",
+  "click_latency": 1,
+  "click_latency_list": "1 wireless",
+  "click_force": "unk",
+  "encoder": "",
+  "encoder_brand": "",
+  "encoder_link": "",
+  "side_buttons": 2,
+  "middle_buttons": 0,
+  "programmable_buttons": 5,
+  "tilt_scroll_wheel": "no",
+  "adjustable_scroll_wheel": "no",
+  "onboard_memory": "yes",
+  "onboard_memory_value": 5,
+  "profile_switching": "yes",
+  "overall": 8.4,
+  "accuracy": 9.2,
+  "response": 8.3,
+  "quality": 8.7,
+  "comfort": 8.2,
+  "work": 7.4,
+  "feet_score": 9.2,
+  "fps_score": 9,
+  "mmo_score": 7.3,
+  "moba_score": 8.9,
+  "aarpg_score": 8.3,
+  "rts_score": 8.7,
+  "fps": "yes",
+  "mmo": "no",
+  "moba": "yes",
+  "aarpg": "yes",
+  "rts": "yes",
+  "snap_dateUpdated": "12/16/2025",
+  "snap_datePublished": "12/16/2025",
+  "snap_subtitle": "Featherweight wireless esports mouse with pro-level speed and precision.",
+  "hubTags": [
+    "price_range",
+    "weight",
+    "polling_rate",
+    "connection",
+    "fps",
+    "moba"
+  ],
+  "game1": "Counter-Strike 2",
+  "game2": "Apex Legends",
+  "game3": "Rainbow Six Siege",
+  "game4": "Call of Duty: Warzone",
+  "game5": "PUBG",
+  "game6": "",
+  "game7": "",
+  "game8": "",
+  "keytakeaway": "The Asus ROG Harpe Ace Extreme is a 47 g carbon‑fiber wireless gaming mouse aimed squarely at competitive FPS—think Counter‑Strike 2, Valorant, and Apex Legends—where low weight, clean tracking, and consistent clicks matter more than extra buttons. It pairs a 42,000‑DPI AimPoint Pro sensor with tri‑mode connectivity (2.4 GHz, Bluetooth, or wired) and ships with ASUS’s Polling Rate Booster for up to 8,000 Hz polling, plus both glass and PTFE skates. The catch is price: it’s a luxury “all‑in” package that makes the most sense if you love the Harpe shape and want a premium build with every accessory in the box.",
+  "pcard": "**Asus ROG Harpe Ace Extreme** is a **47 g** carbon‑fiber **wireless gaming mouse** built for competitive FPS players who want maximum speed without a honeycomb shell. You get tri‑mode connectivity (2.4 GHz/Bluetooth/wired), the **AimPoint Pro** sensor (up to **42,000 DPI**), and an included **ROG Polling Rate Booster** for up to **8,000 Hz** polling. If the price is hard to justify, <pop=mouse-52>ROG Harpe Ace Mini</pop> keeps the same family feel for less, while <pop=mouse-3>Alienware Pro</pop> is a more mainstream 8K-capable alternative.",
+  "verdict": "The **Asus ROG Harpe Ace Extreme** is an ultralight **wireless gaming mouse** that treats competitive FPS as the whole mission statement: keep weight low, clicks consistent, and tracking rock-solid. At ~**47 g**, it’s quick to start and stop, which helps in games where micro‑corrections and fast flicks decide rounds — but at roughly **$250**, the big question is whether the premium carbon‑fiber build and accessory bundle are worth the “Extreme” tax.\r\n\r\n> The “Extreme” part isn’t just the carbon fiber — it’s the *everything-in-the-box* approach (8K booster, spare skates, case, stand) paired with a price that’s clearly aiming at enthusiasts and collectors.\r\n\r\n#### What stands out in actual play\r\nThe shape is a familiar, safe semi‑symmetrical silhouette that works best for **claw and fingertip**, and can be comfortable for **palm** if you have medium-to-large hands. The carbon‑fiber top shell gives it a “dense but featherweight” feel that many premium mice chase, and the matte finish tends to feel grippier than bare plastic — useful when your hands get warm mid‑match.\r\n\r\nTracking is the “set it and forget it” kind of solid: the AimPoint Pro sensor is built for clean flicks and micro‑adjustments, and it’s happy on a wide range of surfaces (including glass when paired with the right skates/pad setup).\r\n\r\nThe default glide can be a *lot* faster than typical PTFE setups if you install the included glass skates. That’s a win for players who like effortless, low‑friction movement on cloth pads, but it can feel twitchy if you rely on heavier control. Thankfully, ASUS includes PTFE skates too, so you can tune the mouse toward speed or control without buying aftermarket parts on day one.\r\n\r\n#### Performance knobs that matter\r\nThe headline feature is **up to 8,000 Hz polling** (with the included booster). In practice, 8K is a “nice to have” rather than a must: it can feel a bit smoother on high‑refresh setups, but it also increases CPU workload and can noticeably reduce battery life compared to 1K. If you don’t want to fuss, running 1K–2K is a perfectly sane default. Battery life is rated up to ~70 hours depending on settings, and it will drop as you raise polling.\r\n\r\nPlan on spending a few minutes in **Armoury Crate Gear** to update firmware and set your polling steps — especially if you’re chasing 8K stability.\r\n\r\nHere’s the short version of what you can actually tweak:\r\n\r\n| What you can change | Why you’d change it |\r\n|---|---|\r\n| Polling rate (1K → 8K) | Smoothness vs battery/CPU overhead |\r\n| Glass vs PTFE skates | Faster glide vs more controlled stops |\r\n| 2.4 GHz / Bluetooth / wired | Best latency vs convenience across devices |\r\n\r\n#### Who it’s for (and who should skip it)\r\nBuy it if you want a no-compromises **FPS mouse** with a premium build and you’ll actually use the included extras. It makes the most sense if you already like the Harpe shape and you’re optimizing for ranked shooters.\r\n\r\nSkip it if the price stings or you have smaller hands that find the Harpe shell a bit long. In that case, <pop=mouse-52>ROG Harpe Ace Mini</pop> is the obvious “same vibe, easier buy” option, while <pop=mouse-53>ROG Harpe Ace Aim</pop> keeps the core feel at a lower price (but with a more standard polling-rate setup). If you want a more mainstream flagship-style package (and don’t mind a bit more weight), <pop=mouse-3>Alienware Pro</pop> is worth a look.\r\n\r\nIf you’re shopping the whole category, it’s also worth browsing [more ultra-light mice](/hubs/mouse?weight=35-60) to see how far you can go before the “Extreme” tax stops making sense.",
+  "pros": [
+    "Featherweight ~47 g carbon-fiber shell feels premium",
+    "42K DPI AimPoint Pro sensor tracks flawlessly",
+    "Comes with 8K booster, Omni receiver, extra skates",
+    "Crisp optical clicks with consistent left/right feel",
+    "Tri-mode: 2.4 GHz, Bluetooth, and wired"
+  ],
+  "cons": [
+    "Ultra-premium price (~$250) is tough to justify"
+  ],
+  "youtube": "https://www.youtube.com/watch?v=C9dCQPp0dcg",
+  "affiliateLinks": [
+    {
+      "url": "https://www.amazon.com/ASUS-ROG-Wireless-Lightweight-AimPoint/dp/B0D65GJF7C?crid=EDRZNYF4TM07&dib=eyJ2IjoiMSJ9.EP7dpTlZMtt4PXg6YEZb3HeKbQ5mt0Ylhb6ohkkPyRhuxGdM_gO_dz92TkMPSTba.avWUbLKwSLq6vrR49ZcK5qURTazDHoPmNITp0aKzIgg&dib_tag=se&keywords=rog%2Bharpa%2Bace%2Bextreme&qid=1765856694&s=electronics&sprefix=rog%2Bharpe%2Bace%2Bextreme%2Caps%2C144&sr=1-1-catcorr&th=1&linkCode=ll1&tag=eggear-20&linkId=ade1d7a9d3e12e2fc0fc6564194fa29d&language=en_US&ref_=as_li_ss_tl",
+      "retailer": "amazon",
+      "slug": "amazon",
+      "variant": "",
+      "isPrimary": true
+    }
+  ],
+  "url": "/hubs/mouse/asus/rog-harpe-ace-extreme",
+  "gamesRecommended": [],
+  "media": {
+    "defaultColor": "black",
+    "colors": [
+      "black"
+    ],
+    "editions": [],
+    "images": [
+      {
+        "stem": "feature-image",
+        "view": "feature-image"
+      },
+      {
+        "stem": "top",
+        "view": "top"
+      },
+      {
+        "stem": "left",
+        "view": "left"
+      },
+      {
+        "stem": "sangle",
+        "view": "sangle"
+      },
+      {
+        "stem": "side",
+        "view": "shape-side"
+      },
+      {
+        "stem": "top",
+        "view": "shape-top"
+      }
+    ]
+  }
+}

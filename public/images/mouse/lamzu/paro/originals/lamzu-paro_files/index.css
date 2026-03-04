@@ -1,0 +1,1228 @@
+.country-flag {
+	background: url(//cdn.vstar.app/static/images/flag.png) -786px -304px
+		no-repeat;
+	display: inline-block;
+	zoom: 0.5;
+	-moz-transform: scale(0.5);
+	width: 49px;
+	height: 35px;
+	/* border: 1px solid #ccc; */
+	/* border-radius: 5px; */
+	vertical-align: middle;
+}
+
+.BYR,
+.CW,
+.EU,
+.EUR,
+.SJ,
+.SX {
+	zoom: 0.4;
+	-moz-transform: scale(0.4);
+}
+
+.AD,
+.AND {
+	background-position: -5px -5px;
+}
+
+.AE,
+.AED {
+	background-position: -61px -5px;
+}
+
+.AF,
+.AFN {
+	background-position: -117px -5px;
+}
+
+.AG,
+.ATG {
+	background-position: -173px -5px;
+}
+
+.AI,
+.AIA {
+	background-position: -229px -5px;
+}
+
+.AL,
+.ALB .ALL {
+	background-position: -285px -5px;
+}
+
+.ALA {
+	background-position: -341px -5px;
+}
+
+.AM,
+.ARM,
+.AMD {
+	background-position: -397px -5px;
+}
+
+.AN,
+.ANG {
+	background-position: -453px -5px;
+}
+
+.AO,
+.AGO,
+.AOA {
+	background-position: -509px -5px;
+}
+
+.AQ,
+.ATA {
+	background-position: -565px -5px;
+}
+
+.AR,
+.ARG,
+.ARS {
+	background-position: -621px -5px;
+}
+
+.AS,
+.ASM {
+	background-position: -677px -5px;
+}
+
+.ASC {
+	width: 46px;
+	height: 23px;
+	background-position: -5px -47px;
+}
+
+.AT,
+.AUT {
+	background-position: -61px -47px;
+}
+
+.AU,
+.AUS,
+.AUD {
+	background-position: -117px -47px;
+}
+
+.AW,
+.ABW,
+.AWG {
+	background-position: -173px -47px;
+}
+
+.AZ,
+.AZE,
+.AZN {
+	background-position: -229px -47px;
+}
+
+.BA,
+.BAM {
+	background-position: -285px -47px;
+}
+
+.BB,
+.BBD {
+	background-position: -341px -47px;
+}
+
+.BD,
+.BGD,
+.BDT {
+	background-position: -397px -47px;
+}
+
+.BE {
+	background-position: -453px -47px;
+}
+
+.BF {
+	background-position: -509px -47px;
+}
+
+.BG,
+.BGN {
+	background-position: -565px -47px;
+}
+
+.BH,
+.BHR,
+.BHD {
+	background-position: -621px -47px;
+}
+
+.BI,
+.BIF {
+	background-position: -677px -47px;
+}
+
+.BJ {
+	background-position: -5px -89px;
+}
+
+.BLM {
+	background-position: -61px -89px;
+}
+
+.BM,
+.BMD {
+	background-position: -117px -89px;
+}
+
+.BN,
+.BND {
+	background-position: -173px -89px;
+}
+
+.BO,
+.BOB {
+	background-position: -229px -89px;
+}
+
+.BR,
+.BRL {
+	background-position: -285px -89px;
+}
+
+.BS,
+.BHS,
+.BSD {
+	background-position: -341px -89px;
+}
+
+.BT,
+.BTN {
+	background-position: -397px -89px;
+}
+
+.BW,
+.BWP {
+	background-position: -453px -89px;
+}
+
+.BY {
+	background-position: -509px -89px;
+}
+
+.BYR {
+	width: 60px;
+	height: 40px;
+	background-position: -565px -89px;
+}
+
+.BZ,
+.BZD {
+	background-position: -635px -89px;
+}
+
+.CA,
+.CAD {
+	background-position: -691px -89px;
+}
+
+.CC {
+	background-position: -5px -131px;
+}
+.CD,
+.COD {
+	background: url(https://img.trustoo.io/pro/55960502325/2024/4/26/cBm6cQT8iP.png?x-oss-process=style/trustoo_small)
+		no-repeat 0 / 49px 35px;
+}
+
+.CF,
+.XAF {
+	background-position: -61px -131px;
+}
+
+.CG {
+	background-position: -117px -131px;
+}
+
+.CH,
+.CHF {
+	width: 32px;
+	height: 32px;
+	background-position: -735px -6px;
+}
+
+.CW,
+.EU,
+.EUR {
+	width: 60px;
+	height: 40px;
+}
+
+.GP,
+.HR,
+.HRK,
+.IO {
+	width: 46px;
+}
+
+.CI,
+.XOF {
+	background-position: -173px -131px;
+}
+
+.CK {
+	background-position: -229px -131px;
+}
+
+.CL,
+.CLP {
+	background-position: -285px -131px;
+}
+
+.CM {
+	background-position: -341px -131px;
+}
+
+.CN {
+	background-position: -397px -131px;
+}
+
+.CO,
+.COP {
+	background-position: -453px -131px;
+}
+
+.CR,
+.CRC {
+	background-position: -509px -131px;
+}
+
+.CV,
+.CVE {
+	background-position: -635px -131px;
+}
+
+.CW {
+	background-position: -691px -131px;
+}
+
+.CX {
+	background-position: -5px -181px;
+}
+
+.CY {
+	background-position: -61px -181px;
+}
+
+.CZ,
+.CZK {
+	background-position: -117px -181px;
+}
+
+.DE {
+	background-position: -173px -181px;
+}
+
+.DJ,
+.DJF {
+	background-position: -229px -181px;
+}
+
+.DK,
+.DKK {
+	background-position: -285px -181px;
+}
+
+.DM {
+	background-position: -341px -181px;
+}
+
+.DO,
+.DOP {
+	background-position: -397px -181px;
+}
+
+.DZ,
+.DZA,
+.DZD {
+	background-position: -453px -181px;
+}
+
+.EAZ {
+	background-position: -509px -181px;
+}
+
+.EC {
+	background-position: -565px -181px;
+}
+
+.EE {
+	background-position: -621px -181px;
+}
+
+.EG,
+.EGP {
+	background-position: -677px -181px;
+}
+
+.EH {
+	background-position: -5px -223px;
+}
+
+.ER,
+.ERN {
+	background-position: -61px -223px;
+}
+
+.ES {
+	background-position: -117px -223px;
+}
+
+.ET,
+.ETB {
+	background-position: -173px -223px;
+}
+
+.EU,
+.EUR {
+	background-position: -229px -223px;
+}
+
+.FI {
+	background-position: -299px -223px;
+}
+
+.FJ,
+.FJD {
+	background-position: -355px -223px;
+}
+
+.FK,
+.FKP {
+	background-position: -411px -223px;
+}
+
+.FM {
+	background-position: -467px -223px;
+}
+
+.FO {
+	background-position: -523px -223px;
+}
+
+.FR {
+	background-position: -579px -223px;
+}
+
+.GA {
+	background-position: -635px -223px;
+}
+
+.GBA {
+	background-position: -691px -223px;
+}
+
+.GD {
+	background-position: -5px -265px;
+}
+
+.GE,
+.GEL {
+	background-position: -61px -265px;
+}
+
+.GF {
+	background-position: -117px -265px;
+}
+
+.GGY {
+	background-position: -173px -265px;
+}
+
+.GH,
+.GHS {
+	background-position: -299px -265px;
+}
+
+.GI,
+.GIP {
+	background-position: -355px -265px;
+}
+
+.GL {
+	background-position: -411px -265px;
+}
+
+.GM,
+.GMD {
+	background-position: -467px -265px;
+}
+
+.GN,
+.GNF {
+	background-position: -523px -265px;
+}
+
+.GP {
+	height: 31px;
+	background-position: -579px -265px;
+}
+
+.GQ {
+	background-position: -635px -265px;
+}
+
+.GR {
+	background-position: -691px -265px;
+}
+
+.GT,
+.GTQ {
+	background-position: -5px -307px;
+}
+
+.GU {
+	background-position: -61px -307px;
+}
+
+.GW {
+	background-position: -117px -307px;
+}
+
+.GY,
+.GYD {
+	background-position: -173px -307px;
+}
+
+.HK,
+.HKD {
+	background-position: -229px -307px;
+}
+
+.HN,
+.HNL {
+	background-position: -285px -307px;
+}
+
+.HR,
+.HRK {
+	height: 28px;
+	background-position: -341px -307px;
+}
+
+.HT,
+.HTG {
+	background-position: -397px -307px;
+}
+
+.HU {
+	background-position: -453px -307px;
+}
+
+.ID,
+.IDR {
+	background-position: -509px -307px;
+}
+
+.IE {
+	background-position: -565px -307px;
+}
+
+.IL,
+.ILS {
+	background-position: -621px -307px;
+}
+
+.IM {
+	background-position: -677px -307px;
+}
+
+.IN,
+.IND,
+.INR {
+	background-position: -5px -349px;
+}
+
+.IO {
+	height: 23px;
+	background-position: -61px -349px;
+}
+
+.IQ,
+.IQD {
+	background-position: -117px -349px;
+}
+
+.IS,
+.ISK {
+	background-position: -173px -349px;
+}
+
+.IT {
+	background-position: -229px -349px;
+}
+
+.JEY {
+	background-position: -285px -349px;
+}
+
+.JM,
+.JMD {
+	background-position: -341px -349px;
+}
+
+.JO,
+.JOD {
+	background-position: -397px -349px;
+}
+
+.JP,
+.JPY {
+	background-position: -453px -349px;
+}
+
+.KE,
+.KES {
+	background-position: -509px -349px;
+}
+
+.KG {
+	background-position: -565px -349px;
+}
+
+.KH {
+	background-position: -621px -349px;
+}
+
+.KI {
+	background-position: -677px -349px;
+}
+
+.KM,
+.KMF {
+	background-position: -5px -391px;
+}
+
+.KN {
+	background-position: -61px -391px;
+}
+
+.KR,
+.KRW {
+	background-position: -117px -391px;
+}
+
+.KS {
+	background-position: -173px -391px;
+}
+
+.KW,
+.KWD {
+	background-position: -229px -391px;
+}
+
+.KY,
+.KYD {
+	background-position: -285px -391px;
+}
+
+.KZ,
+.KZT {
+	background-position: -341px -391px;
+}
+
+.LA,
+.LAK {
+	background-position: -397px -391px;
+}
+
+.LB,
+.LBP {
+	background-position: -453px -391px;
+}
+
+.LC,
+.XCD {
+	background-position: -509px -391px;
+}
+
+.LI {
+	background-position: -565px -391px;
+}
+
+.LK,
+.LKR {
+	background-position: -621px -391px;
+}
+
+.LR {
+	background-position: -677px -391px;
+}
+
+.LS,
+.LSL {
+	background-position: -5px -433px;
+}
+
+.LT {
+	background-position: -61px -433px;
+}
+
+.LU {
+	background-position: -117px -433px;
+}
+
+.LV {
+	background-position: -173px -433px;
+}
+
+.LY,
+.LYD {
+	background-position: -229px -433px;
+}
+
+.MA,
+.MAD {
+	background-position: -285px -433px;
+}
+
+.MAF {
+	background-position: -341px -433px;
+}
+
+.MC {
+	background-position: -397px -433px;
+}
+
+.MD,
+.MDL {
+	background-position: -453px -433px;
+}
+
+.MG {
+	background-position: -509px -433px;
+}
+
+.MH {
+	background-position: -565px -433px;
+}
+
+.MK {
+	background-position: -621px -433px;
+}
+
+.ML {
+	background-position: -677px -433px;
+}
+
+.MM,
+.MMK {
+	background-position: -5px -475px;
+}
+
+.MN,
+.MNT {
+	background-position: -61px -475px;
+}
+
+.MNE {
+	background-position: -117px -475px;
+}
+
+.MO,
+.MOP {
+	background-position: -173px -475px;
+}
+
+.MP {
+	background-position: -229px -475px;
+}
+
+.MQ {
+	background-position: -285px -475px;
+}
+
+.MR {
+	background-position: -341px -475px;
+}
+
+.MS {
+	background-position: -397px -475px;
+}
+
+.MT {
+	background-position: -453px -475px;
+}
+
+.MU,
+.MUR {
+	background-position: -509px -475px;
+}
+
+.MV,
+.MVR {
+	background-position: -565px -475px;
+}
+
+.MW {
+	background-position: -621px -475px;
+}
+
+.MX,
+.MXN {
+	background-position: -677px -475px;
+}
+
+.MY,
+.MYR {
+	background-position: -5px -517px;
+}
+
+.MZ {
+	background-position: -61px -517px;
+}
+
+.NA,
+.NAD {
+	background-position: -117px -517px;
+}
+
+.NC {
+	background-position: -173px -517px;
+}
+
+.NE {
+	background-position: -229px -517px;
+}
+
+.NF {
+	background-position: -285px -517px;
+}
+
+.NG,
+.NGN {
+	background-position: -341px -517px;
+}
+
+.NI,
+.NIO {
+	background-position: -397px -517px;
+}
+
+.NL {
+	background-position: -453px -517px;
+}
+
+.NO,
+.NOK {
+	background-position: -509px -517px;
+}
+
+.NP,
+.NPR {
+	width: 33px;
+	height: 40px;
+	border: 0;
+	background-position: -733px -307px;
+}
+
+.NR {
+	background-position: -565px -517px;
+}
+
+.NU {
+	background-position: -621px -517px;
+}
+
+.NZ,
+.NZD {
+	background-position: -677px -517px;
+}
+
+.OM,
+.OMR {
+	background-position: -5px -559px;
+}
+
+.PA,
+.PAB {
+	background-position: -61px -559px;
+}
+
+.PE,
+.PEN {
+	background-position: -117px -559px;
+}
+
+.PF,
+.XPF {
+	background-position: -173px -559px;
+}
+
+.PG,
+.PGK {
+	background-position: -229px -559px;
+}
+
+.PH,
+.PHP {
+	background-position: -285px -559px;
+}
+
+.PK,
+.PKR {
+	background-position: -341px -559px;
+}
+
+.PL,
+.PLN {
+	background-position: -397px -559px;
+}
+
+.PM {
+	background-position: -453px -559px;
+}
+
+.PN {
+	background-position: -509px -559px;
+}
+
+.PR {
+	background-position: -565px -559px;
+}
+
+.PS {
+	background-position: -621px -559px;
+}
+
+.PT {
+	background-position: -677px -559px;
+}
+
+.PW {
+	background-position: -5px -601px;
+}
+
+.PY,
+.PYG {
+	background-position: -61px -601px;
+}
+
+.QA,
+.QAR {
+	background-position: -117px -601px;
+}
+
+.RE {
+	background-position: -173px -601px;
+}
+
+.RO,
+.RON {
+	background-position: -229px -601px;
+}
+
+.RU,
+.RUB {
+	background-position: -285px -601px;
+}
+
+.RW,
+.RWF {
+	background-position: -341px -601px;
+}
+
+.SA,
+.SAR {
+	background-position: -397px -601px;
+}
+
+.SB,
+.SBD {
+	background-position: -453px -601px;
+}
+
+.SC,
+.SCR {
+	background-position: -509px -601px;
+}
+
+.SCT {
+	background-position: -565px -601px;
+}
+
+.SE,
+.SEK {
+	background-position: -621px -601px;
+}
+
+.SG,
+.SGD {
+	background-position: -677px -601px;
+}
+
+.SGS {
+	background-position: -5px -643px;
+}
+
+.SH,
+.SHP {
+	width: 46px;
+	height: 27px;
+	background-position: -61px -643px;
+}
+
+.SJ,
+.SX {
+	width: 60px;
+	height: 40px;
+}
+
+.UNKNOW,
+.VA {
+	height: 32px;
+}
+
+.SI {
+	background-position: -117px -643px;
+}
+
+.SJ {
+	background-position: -173px -643px;
+}
+
+.SK {
+	background-position: -243px -643px;
+}
+
+.SL,
+.SLL {
+	background-position: -299px -643px;
+}
+
+.SM {
+	background-position: -355px -643px;
+}
+
+.SN {
+	background-position: -411px -643px;
+}
+
+.SO,
+.SOS {
+	background-position: -467px -643px;
+}
+
+.SR,
+.SRD {
+	background-position: -523px -643px;
+}
+
+.RS,
+.SRB {
+	background-position: -579px -643px;
+}
+
+.SS {
+	background-position: -635px -643px;
+}
+
+.ST,
+.STD {
+	background-position: -691px -643px;
+}
+
+.SV,
+.SVC {
+	background-position: -5px -685px;
+}
+
+.SX {
+	background-position: -61px -685px;
+}
+
+.SZ,
+.SZL {
+	background-position: -243px -685px;
+}
+
+.TC {
+	background-position: -299px -685px;
+}
+
+.TD {
+	background-position: -355px -685px;
+}
+
+.TF {
+	background-position: -411px -685px;
+}
+
+.TG {
+	background-position: -467px -685px;
+}
+
+.TH,
+.THB {
+	background-position: -523px -685px;
+}
+
+.TJ,
+.TJS {
+	background-position: -579px -685px;
+}
+
+.TK {
+	background-position: -635px -685px;
+}
+
+.TLS {
+	background-position: -691px -685px;
+}
+
+.TM,
+.TMT {
+	background-position: -5px -727px;
+}
+
+.TN,
+.TND {
+	background-position: -131px -727px;
+}
+
+.TO,
+.TOP {
+	background-position: -187px -727px;
+}
+
+.TP {
+	background-position: -243px -727px;
+}
+
+.TR,
+.TRY {
+	background-position: -299px -727px;
+}
+
+.TT,
+.TTD {
+	background-position: -355px -727px;
+}
+
+.TV {
+	background-position: -411px -727px;
+}
+
+.TW,
+.TWD {
+	background-position: -467px -727px;
+}
+
+.TZ,
+.TZS {
+	background-position: -523px -727px;
+}
+
+.UA,
+.UAH {
+	background-position: -579px -727px;
+}
+
+.UG,
+.UGX {
+	background-position: -635px -727px;
+}
+
+.GBR,
+.GB,
+.UK,
+.UKR {
+	background-position: -691px -727px;
+}
+
+.UNKNOW {
+	width: 44px;
+	background-position: -775px -5px;
+}
+
+.US,
+.USA,
+.USD {
+	background-position: -733px -47px;
+}
+
+.UY,
+.UYU {
+	background-position: -747px -89px;
+}
+
+.UZ,
+.UZS {
+	background-position: -761px -131px;
+}
+
+.VA {
+	width: 32px;
+	background-position: -761px -173px;
+}
+
+.VC {
+	background-position: -747px -215px;
+}
+
+.VE,
+.VEF {
+	background-position: -747px -257px;
+}
+
+.VG {
+	background-position: -733px -357px;
+}
+
+.VI {
+	background-position: -733px -399px;
+}
+
+.VN,
+.VND {
+	background-position: -733px -441px;
+}
+
+.VU,
+.VUV {
+	background-position: -733px -483px;
+}
+
+.WF {
+	background-position: -733px -525px;
+}
+
+.WS,
+.WST {
+	background-position: -733px -567px;
+}
+
+.YE,
+.YER {
+	background-position: -747px -609px;
+}
+
+.YT {
+	background-position: -747px -651px;
+}
+
+.YU {
+	background-position: -747px -693px;
+}
+
+.ZA,
+.ZAR {
+	background-position: -61px -735px;
+}
+
+.ZM {
+	background-position: -747px -735px;
+}
+
+.ZR {
+	background-position: -829px -5px;
+}
+
+.ZW {
+	background-position: -789px -47px;
+}

@@ -1,0 +1,223 @@
+{
+  "slug": "asus-rog-keris-ii-ace",
+  "brand": "Asus",
+  "model": "ROG Keris II Ace",
+  "baseModel": "ROG Keris II",
+  "variant": "Ace",
+  "category": "mouse",
+  "imagePath": "/images/mouse/asus/rog-keris-ii-ace",
+  "cardTags": "false",
+  "featured": "",
+  "release_date": "04/2024",
+  "discontinued": "",
+  "sku": "P714 ROG KERIS II WL ACE",
+  "price_range": 179.99,
+  "colors": [
+    "black",
+    "white"
+  ],
+  "design": [
+    "standard"
+  ],
+  "lighting": "1 zone (rgb)",
+  "rgb": "yes",
+  "connection": "hybrid",
+  "connectivity": "2.4GHz Dongle",
+  "computer_side_connector": "USB-A",
+  "mouse_side_connector": "USB-C",
+  "bluetooth": "yes",
+  "cable_type": "braided",
+  "paracord": "yes",
+  "wireless_charging": "no",
+  "battery_hours": 107,
+  "adjustable_weight": "no",
+  "feet_material": "PTFE (Virgin-Grade)",
+  "coating": "matte",
+  "honeycomb_frame": "no",
+  "silent_clicks": "no",
+  "weight": 54,
+  "material": "plastic",
+  "lngth": 121,
+  "width": 67,
+  "height": 42,
+  "form_factor": "right",
+  "shape": "ergonomic",
+  "hump": "middle",
+  "front_flare": "outward",
+  "thumb_rest": "no",
+  "grip": [
+    "palm",
+    "claw"
+  ],
+  "hand_size": [
+    "small",
+    "medium"
+  ],
+  "mcu": "Nordic nRF52840",
+  "mcu_link": "https://www.nordicsemi.com/Products/nRF52840",
+  "sensor": "AimPoint Pro (PixArt PAW3950)",
+  "sensor_brand": "asus",
+  "sensor_date": "04/2024",
+  "sensor_link": "",
+  "sensor_type": "optical",
+  "flawless_sensor": "yes",
+  "sensor_latency": 14,
+  "sensor_latency_list": [
+    "14 start",
+    "4 half",
+    "4.0 end"
+  ],
+  "shift_latency": "unk",
+  "polling_rate": [
+    8000,
+    4000,
+    2000,
+    1000,
+    500,
+    250,
+    125
+  ],
+  "dpi": 42000,
+  "ips": 750,
+  "acceleration": 50,
+  "lift": [
+    1.2
+  ],
+  "lift_settings": "adjustable",
+  "motion_sync": "yes",
+  "hardware_acceleration": "unk",
+  "smoothing": "unk",
+  "nvidia_reflex": "yes",
+  "switch": "ROG Optical Micro Switches",
+  "switch_brand": "asus",
+  "switch_type": "optical",
+  "switch_link": "",
+  "hot_swappable": "no",
+  "debounce": 0,
+  "click_latency": 1,
+  "click_latency_list": "1 wireless",
+  "click_force": "unk",
+  "encoder": "",
+  "encoder_brand": "",
+  "encoder_link": "",
+  "side_buttons": 2,
+  "middle_buttons": 0,
+  "programmable_buttons": 5,
+  "tilt_scroll_wheel": "no",
+  "adjustable_scroll_wheel": "no",
+  "onboard_memory": "yes",
+  "onboard_memory_value": 5,
+  "profile_switching": "yes",
+  "overall": 9,
+  "accuracy": 9.3,
+  "response": 8.3,
+  "quality": 8.6,
+  "comfort": 8.5,
+  "work": 7,
+  "feet_score": 9,
+  "fps_score": 8.8,
+  "mmo_score": 7.3,
+  "moba_score": 8.6,
+  "aarpg_score": 8.2,
+  "rts_score": 8.3,
+  "fps": "yes",
+  "mmo": "no",
+  "moba": "yes",
+  "aarpg": "yes",
+  "rts": "no",
+  "snap_dateUpdated": "12/18/2025",
+  "snap_datePublished": "12/18/2025",
+  "snap_subtitle": "Ultralight ergo FPS mouse with elite tracking and crisp optical clicks—best if you like right-hand comfort at 54g.",
+  "hubTags": [
+    "price_range",
+    "weight",
+    "polling_rate",
+    "connection",
+    "fps"
+  ],
+  "game1": "Valorant",
+  "game2": "Counter-Strike 2",
+  "game3": "Apex Legends",
+  "game4": "Rainbow Six Siege",
+  "game5": "Call of Duty: Warzone",
+  "game6": "League of Legends",
+  "game7": "Fortnite",
+  "game8": "",
+  "keytakeaway": "The ASUS ROG Keris II Ace is a lightweight wireless gaming mouse built for right-handed FPS players who value stable aim and predictable control over extra buttons or flashy features. Its 54 g ergonomic shell, high-end AimPoint Pro sensor, and optical main switches make it especially well-suited for games like CS2 and Valorant, where small corrections and repeatable tracking matter more than raw speed. With tri-mode connectivity and support for higher polling rates via the included booster, it balances esports focus with everyday flexibility.",
+  "pcard": "The ASUS ROG Keris II Ace is an **ultralight wireless FPS gaming mouse** designed around aim stability and clean ergonomics rather than feature overload. At **54 g**, it feels fast without becoming twitchy, making it a strong fit for claw or relaxed claw grips in tactical shooters. If you prefer ambidextrous shapes or want something even simpler, the <pop=mouse-94>Logitech Pro X Superlight 2</pop> remains a strong alternative in the same performance tier.",
+  "verdict": "The ASUS ROG Keris II Ace is a wireless gaming mouse built for right-handed FPS players who want an ultralight feel without giving up control. Rather than chasing the smallest possible shell, ASUS leans into a compact ergonomic shape that feels immediately planted in hand, especially during steady tracking and small aim corrections in games like Counter-Strike 2 and Valorant.\r\n\r\n> The short version: it’s a premium, pro-leaning ergo that prioritizes aim feel and responsiveness over extra buttons and “productivity” extras.\r\n\r\nAt 54 g, the weight hits a sweet spot: light enough for quick starts and stops, but not so minimal that the mouse feels nervous or unstable. The ergonomic right-hand contour adds a sense of guidance that many ambidextrous ultralights lack, which helps during long sessions where consistency matters more than raw speed.\r\n\r\n#### Performance & feel\r\nThe AimPoint Pro sensor is firmly in flagship territory and includes track-on-glass support, so surface choice is less likely to throw off your aim. In practice, tracking feels consistent and predictable, whether you’re making small corrections while holding angles or following fast-moving targets. The optical main switches deliver crisp, uniform clicks that avoid double-click quirks and feel especially reliable for burst firing and tap shots.\r\n\r\nGlide and balance are tuned for competitive play rather than experimentation. Once you dial in your DPI and polling settings, this is the kind of mouse you stop thinking about mid-match—which is exactly what many FPS players want.\r\n\r\n#### Connectivity & everyday use\r\nUnlike many esports-focused ultralights, the Keris II Ace keeps some daily-driver flexibility. Tri-mode connectivity (2.4 GHz wireless, Bluetooth, and USB-C wired) plus Omni Receiver support make it easy to move between a main gaming PC and a laptop without juggling multiple dongles. That versatility is a genuine bonus if your setup isn’t single-purpose.\r\n\r\nOne caveat is polling rate management. To run the highest polling modes, you’ll rely on the included Polling Rate Booster, which adds a second dongle to your desk. It works as intended, but it’s one more component to manage—and battery life will drop faster if you keep polling and RGB maxed out.\r\n\r\n#### What this mouse is—and isn’t\r\nThis is an esports-first tool. You get two side buttons, a clean top shell, and very little in the way of extras or customization beyond performance tuning. If you rely on lots of binds for MMOs, productivity workflows, or creative apps, it will feel under-equipped.\r\n\r\n| Aspect | What you’ll notice in-game |\r\n|---|---|\r\n| 54 g ergonomic shell | Fast movement with better long-session stability than most ambi ultralights |\r\n| AimPoint Pro sensor | Consistent tracking with fewer surface-related surprises |\r\n| Optical switches | Clean, immediate clicks for controlled firing |\r\n| Polling Rate Booster | Smoother feel on high-refresh setups, with extra dongle management |\r\n\r\nIf you like the idea of an aim-focused ultralight but prefer a larger, more traditional palm-filling shape, the <pop=mouse-131>Razer DeathAdder V3 Pro</pop> is a better fit. Players who want more size options and similar weight targets can also look at the <pop=mouse-287>Pulsar Xlite V3 ES</pop> lineup.\r\n\r\n**Bottom line:** the Keris II Ace does exactly what it sets out to do. It’s an aim-first ultralight ergonomic mouse that rewards disciplined FPS play, as long as you’re comfortable with a minimalist button layout and the booster-based path to its highest polling rates.",
+  "pros": [
+    "54 g ergonomic shell balances speed with control",
+    "High-end AimPoint Pro sensor with track-on-glass support",
+    "Optical main switches feel crisp and consistent over time",
+    "Tri-mode connectivity adds real multi-device flexibility",
+    "Well-tuned balance for claw and relaxed claw grips"
+  ],
+  "cons": [
+    "High polling setups can be pickier about receiver placement and may reduce battery life vs 1000 Hz use",
+    "Premium feature set can be overkill if you don’t care about 4K/8K polling or ultra-light weight",
+    "Armoury Crate can feel heavy/finicky"
+  ],
+  "youtube": "https://www.youtube.com/watch?v=3fcag1L_RBQ",
+  "affiliateLinks": [
+    {
+      "url": "https://www.amazon.com/ASUS-ROG-II-Lightweight-SpeedNova/dp/B0D3CX3WFL?adgrpid=181532387034&hvpone=&hvptwo=&hvadid=748029726673&hvpos=&hvnetw=g&hvrand=6674073196659963498&hvqmt=&hvdev=c&hvdvcmdl=&hvlocint=&hvlocphy=9031993&hvtargid=dsa-1463395464853&hydadcr=&mcid=&hvocijid=6674073196659963498--&hvexpln=m-dsad&hvsb=Electronics_d&hvcampaign=dsadesk&th=1&linkCode=ll1&tag=eggear-20&linkId=93c34ffe62a544ae077400b9f17ecd12&language=en_US&ref_=as_li_ss_tl",
+      "retailer": "amazon",
+      "slug": "amazon",
+      "variant": "black",
+      "isPrimary": true
+    },
+    {
+      "url": "https://www.amazon.com/ASUS-ROG-II-Lightweight-SpeedNova/dp/B0D3CX3QMD?adgrpid=181532387034&hvpone=&hvptwo=&hvadid=748029726673&hvpos=&hvnetw=g&hvrand=6674073196659963498&hvqmt=&hvdev=c&hvdvcmdl=&hvlocint=&hvlocphy=9031993&hvtargid=dsa-1463395464853&hydadcr=&mcid=&hvocijid=6674073196659963498--&hvexpln=m-dsad&hvsb=Electronics_d&hvcampaign=dsadesk&th=1&linkCode=ll1&tag=eggear-20&linkId=8d2d9447c20827755ab21236790a8969&language=en_US&ref_=as_li_ss_tl",
+      "retailer": "amazon",
+      "slug": "amazon",
+      "variant": "white",
+      "isPrimary": false
+    }
+  ],
+  "url": "/hubs/mouse/asus/rog-keris-ii-ace",
+  "gamesRecommended": [],
+  "media": {
+    "defaultColor": "black",
+    "colors": [
+      "black",
+      "white"
+    ],
+    "editions": [],
+    "images": [
+      {
+        "stem": "feature-image",
+        "view": "feature-image"
+      },
+      {
+        "stem": "top",
+        "view": "top"
+      },
+      {
+        "stem": "top1",
+        "view": "top",
+        "seq": 1
+      },
+      {
+        "stem": "left",
+        "view": "left"
+      },
+      {
+        "stem": "sangle",
+        "view": "sangle"
+      },
+      {
+        "stem": "bot",
+        "view": "bot"
+      },
+      {
+        "stem": "side",
+        "view": "shape-side"
+      },
+      {
+        "stem": "top",
+        "view": "shape-top"
+      }
+    ]
+  }
+}

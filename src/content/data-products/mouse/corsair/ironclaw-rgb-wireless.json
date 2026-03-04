@@ -1,0 +1,195 @@
+{
+  "slug": "corsair-ironclaw-rgb-wireless",
+  "brand": "Corsair",
+  "model": "Ironclaw RGB Wireless",
+  "baseModel": "Ironclaw",
+  "variant": "RGB Wireless",
+  "category": "mouse",
+  "imagePath": "/images/mouse/corsair/ironclaw-rgb-wireless",
+  "cardTags": "false",
+  "featured": "",
+  "release_date": "04/2019",
+  "discontinued": "",
+  "sku": " CH-9317011-NA",
+  "price_range": 69.99,
+  "colors": [
+    "black"
+  ],
+  "design": [
+    "standard"
+  ],
+  "lighting": "3 zone (rgb)",
+  "rgb": "yes",
+  "connection": "hybrid",
+  "connectivity": "2.4GHz Dongle",
+  "computer_side_connector": "USB-A",
+  "mouse_side_connector": "Micro-B",
+  "bluetooth": "yes",
+  "cable_type": "braided",
+  "paracord": "no",
+  "wireless_charging": "no",
+  "battery_hours": 24,
+  "adjustable_weight": "no",
+  "feet_material": "PTFE (Black-Dyed)",
+  "coating": "rubber grips",
+  "honeycomb_frame": "no",
+  "silent_clicks": "no",
+  "weight": 130,
+  "material": "plastic / rubber",
+  "lngth": 130,
+  "width": 80,
+  "height": 45,
+  "form_factor": "right",
+  "shape": "ergonomic",
+  "hump": "middle",
+  "front_flare": "flat",
+  "thumb_rest": "yes",
+  "grip": [
+    "palm"
+  ],
+  "hand_size": [
+    "large"
+  ],
+  "mcu": "unk",
+  "mcu_link": "",
+  "sensor": "PMW3391",
+  "sensor_brand": "PixArt",
+  "sensor_date": "",
+  "sensor_link": "https://www.corsair.com/newsroom/press-release/corsair-launches-three-new-gaming-mice-alongside-slipstream-corsair-wireless-technology",
+  "sensor_type": "optical",
+  "flawless_sensor": "yes",
+  "sensor_latency": "unk",
+  "sensor_latency_list": [
+    "unk"
+  ],
+  "shift_latency": "unk",
+  "polling_rate": [
+    1000,
+    500,
+    250,
+    125
+  ],
+  "dpi": 18000,
+  "ips": 400,
+  "acceleration": 50,
+  "lift": [
+    1.2
+  ],
+  "lift_settings": "surface-tuned",
+  "motion_sync": "unk",
+  "hardware_acceleration": "no",
+  "smoothing": "unk",
+  "nvidia_reflex": "no",
+  "switch": "D2FC -F-K(50M)",
+  "switch_brand": "omron",
+  "switch_type": "mechanical",
+  "switch_link": "",
+  "hot_swappable": "no",
+  "debounce": "unk",
+  "click_latency": 2.7,
+  "click_latency_list": "2.0 wired, 2.7 wireless, 7.6 bluetooth",
+  "click_force": "unk",
+  "encoder": "",
+  "encoder_brand": "",
+  "encoder_link": "",
+  "side_buttons": 5,
+  "middle_buttons": 2,
+  "programmable_buttons": 10,
+  "tilt_scroll_wheel": "no",
+  "adjustable_scroll_wheel": "no",
+  "onboard_memory": "yes",
+  "onboard_memory_value": 3,
+  "profile_switching": "yes",
+  "overall": 7.1,
+  "accuracy": 8.2,
+  "response": 6,
+  "quality": 7.5,
+  "comfort": 8.8,
+  "work": 8.1,
+  "feet_score": 7.5,
+  "fps_score": 6,
+  "mmo_score": 7.1,
+  "moba_score": 6.7,
+  "aarpg_score": 7.1,
+  "rts_score": 5.8,
+  "fps": "no",
+  "mmo": "yes",
+  "moba": "yes",
+  "aarpg": "yes",
+  "rts": "no",
+  "snap_dateUpdated": "12/9/2025",
+  "snap_datePublished": "12/9/2025",
+  "snap_subtitle": "Big, comfy wireless with smart binds—great for palm, heavy for twitch FPS.",
+  "hubTags": [
+    "price_range",
+    "weight",
+    "polling_rate",
+    "connection",
+    "bluetooth",
+    "hand_size"
+  ],
+  "game1": "World of Warcraft",
+  "game2": "Final Fantasy XIV",
+  "game3": "Diablo IV",
+  "game4": "Path of Exile",
+  "game5": "League of Legends",
+  "game6": "Dota 2",
+  "game7": "",
+  "game8": "",
+  "keytakeaway": "Corsair's Ironclaw RGB Wireless is a large, right-handed palm-grip mouse with 10 programmable buttons and both Slipstream 2.4GHz + Bluetooth, making it a strong pick for MMO/MOBA/ARPG hotkeys and easy multi-device swapping. The trade-off is weight: it feels planted and stable, but it’s not the mouse you buy for low-DPI flicks or aim-training when you want something ultra-light.",
+  "pcard": "**Corsair Ironclaw RGB Wireless** is a big, palm-first ergonomic mouse that shines when you want extra binds without going full MMO-grid. You get Slipstream 2.4GHz, Bluetooth, and USB play-while-charging, plus 10 programmable buttons for abilities, pings, or push-to-talk. If you want a similar “button-heavy” wireless vibe, compare <pop=mouse-97>Logitech G502 X Lightspeed Wireless</pop>; if you want a true MMO side-button wall, step up to <pop=mouse-27>Corsair Scimitar Elite Wireless</pop>.",
+  "verdict": "#### Quick take\r\n\r\nThe Ironclaw RGB Wireless is built around a simple idea: fill the hand, stay comfortable, and give you enough buttons to actually *do things* mid-fight. The shape is wide and palm-friendly (especially for larger hands), with a thumb-side cluster that’s easy to bind for abilities, pings, push-to-talk, or utility shortcuts. In MOBA/MMO/ARPG play, that convenience matters more than shaving grams.\r\n\r\n> A comfort-first, right-hand wireless “command mouse” that’s awesome for ability-heavy games—just know it’s heavy, and it’s not chasing modern esports-light trends.\r\n\r\nOn the connection side, it’s flexible: Slipstream 2.4GHz for “gaming mode,” Bluetooth for quick laptop pairing, and a wired option so you can keep playing while it charges. It’s also the kind of mouse that can double as a work companion—those extra buttons are just as useful for copy/paste, timeline nudges, or app macros as they are for cooldowns.\r\n\r\n| Aspect | What you’ll notice |\r\n|---|---|\r\n| Shape | Big, supportive palm feel that suits larger hands best |\r\n| Buttons | 10 total, with easy “bindable” access for skills/macros |\r\n| Weight | Stable and planted—less “flicky” for fast, low-DPI aim |\r\n\r\n#### Where it shines\r\n* MMO / MOBA / ARPG setups where extra binds genuinely reduce keyboard juggling  \r\n* Players who prefer palm grip comfort over ultra-light speed  \r\n* Multi-device users who want both 2.4GHz and Bluetooth in one mouse  \r\n\r\n#### Trade-offs to know\r\n* The weight is the headline compromise—great for control, but it can feel sluggish in twitchy FPS if you live on big flicks  \r\n* Bluetooth is best treated as “basic mode”; for the deepest remaps/macros, you’ll usually want the 2.4GHz dongle or wired  \r\n* Battery expectations depend heavily on wireless mode and lighting—if you leave RGB on and stay on 2.4GHz, you’ll charge more often  \r\n* Long-term feedback is mixed: comfort gets praise, but scroll-wheel quirks show up often enough to be worth keeping in mind\r\n\r\n#### Alternatives worth a look\r\n* Want a lighter, aim-first palm wireless? Check <pop=mouse-128>Razer Deathadder V3 Pro</pop>.  \r\n* Want a similar ergonomic multi-button vibe in another layout? Try <pop=mouse-139>Razer Basilisk V3 X Hyperspeed</pop>.  \r\n* Want to browse lighter wireless [FPS-focused picks in general?](/hubs/mouse?genre=FPS&connection=wireless&weight=49-80)",
+  "pros": [
+    "Big, palm-friendly ergonomic shell that especially suits larger hands",
+    "10 programmable buttons + onboard profiles make ability-heavy games and macros easy",
+    "Tri-mode flexibility: Slipstream 2.4GHz, Bluetooth, or wired play-while-charging",
+    "Responsive, modern-enough sensor performance for everyday gaming",
+    "Strong software feature set for remaps/macros and lighting (best on 2.4GHz or wired)"
+  ],
+  "cons": [
+    "Heavy feel can be a dealbreaker for low-DPI flick-heavy FPS play",
+    "Battery life can feel average if you stay on 2.4GHz with RGB enabled",
+    "Recurring user feedback mentions scroll-wheel quirks over time (worth factoring into the buy)"
+  ],
+  "youtube": "https://www.youtube.com/watch?v=ewc9QeeA8Qg",
+  "affiliateLinks": [
+    {
+      "url": "https://www.amazon.com/CORSAIR-IRONCLAW-RGB-Optical-Backlit/dp/B07Q424WFW?crid=AE9KFVG1QOZI&dib=eyJ2IjoiMSJ9.nSUhTHRNyseUAXiCBGgqDAaJrUj0H-QDMZ127l8qRyroHYIsaLsFLrDHH8jnVR_e8I0IUo9bLqoDtPVuZMtwxb2cDszjjhb19M0gA9azgnYE9VA7M8wNhJlQmdDj3e-okhVpyeFGHNQ-hg_NYQU54SESNOgOHL-46zAwIR2y8bRjNMxEJquf-jfRvQBbbVnKirH0F8e5R9q29c6UKdrYLg.8lcdOQ72PDoUNlPIgkY9wQcizBgL7WWcUFKXBZLmXhs&dib_tag=se&keywords=Ironclaw%2BRGB&qid=1765258960&sprefix=ironclaw%2Brgb%2Caps%2C148&sr=8-1&th=1&linkCode=ll1&tag=eggear-20&linkId=749beeafb834a586ea6d3fda78dbf3d7&language=en_US&ref_=as_li_ss_tl",
+      "retailer": "amazon",
+      "slug": "amazon",
+      "variant": "",
+      "isPrimary": true
+    }
+  ],
+  "url": "/hubs/mouse/corsair/ironclaw-rgb-wireless",
+  "gamesRecommended": [],
+  "media": {
+    "defaultColor": "black",
+    "colors": [
+      "black"
+    ],
+    "editions": [],
+    "images": [
+      {
+        "stem": "top",
+        "view": "top"
+      },
+      {
+        "stem": "left",
+        "view": "left"
+      },
+      {
+        "stem": "sangle",
+        "view": "sangle"
+      },
+      {
+        "stem": "side",
+        "view": "shape-side"
+      },
+      {
+        "stem": "top",
+        "view": "shape-top"
+      }
+    ]
+  }
+}

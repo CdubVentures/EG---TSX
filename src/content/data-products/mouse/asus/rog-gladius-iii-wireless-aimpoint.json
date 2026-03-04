@@ -1,0 +1,235 @@
+{
+  "slug": "asus-rog-gladius-iii-wireless-aimpoint",
+  "brand": "Asus",
+  "model": "ROG Gladius III Wireless AimPoint",
+  "baseModel": "ROG Gladius III",
+  "variant": "Wireless AimPoint",
+  "category": "mouse",
+  "imagePath": "/images/mouse/asus/rog-gladius-iii-wireless-aimpoint",
+  "cardTags": "false",
+  "featured": "",
+  "release_date": "10/2022",
+  "discontinued": "",
+  "sku": "90MP02Y0-BMAA01",
+  "price_range": 99.99,
+  "colors": [
+    "black",
+    "white"
+  ],
+  "design": [
+    "standard"
+  ],
+  "lighting": "1 zone (rgb)",
+  "rgb": "yes",
+  "connection": "hybrid",
+  "connectivity": "2.4GHz Dongle",
+  "computer_side_connector": "USB-A",
+  "mouse_side_connector": "USB-C",
+  "bluetooth": "yes",
+  "cable_type": "braided",
+  "paracord": "yes",
+  "wireless_charging": "no",
+  "battery_hours": 119,
+  "adjustable_weight": "no",
+  "feet_material": "PTFE (Virgin-Grade)",
+  "coating": "matte",
+  "honeycomb_frame": "no",
+  "silent_clicks": "no",
+  "weight": 79,
+  "material": "plastic",
+  "lngth": 123,
+  "width": 68,
+  "height": 44,
+  "form_factor": "right",
+  "shape": "ergonomic",
+  "hump": "back - front",
+  "front_flare": "outward",
+  "thumb_rest": "no",
+  "grip": [
+    "palm",
+    "claw"
+  ],
+  "hand_size": [
+    "medium",
+    "large"
+  ],
+  "mcu": "unk",
+  "mcu_link": "",
+  "sensor": "AimPoint (PixArt PAW3395)",
+  "sensor_brand": "PixArt",
+  "sensor_date": "01/2022",
+  "sensor_link": "https://www.pixart.com/products-detail/129/PAW3395DM-T6QU",
+  "sensor_type": "optical",
+  "flawless_sensor": "yes",
+  "sensor_latency": "unk",
+  "sensor_latency_list": [
+    "unk"
+  ],
+  "shift_latency": "unk",
+  "polling_rate": [
+    1000,
+    500,
+    250,
+    125
+  ],
+  "dpi": 36000,
+  "ips": 650,
+  "acceleration": 50,
+  "lift": [
+    1.2
+  ],
+  "lift_settings": "adjustable",
+  "motion_sync": "no",
+  "hardware_acceleration": "no",
+  "smoothing": "no",
+  "nvidia_reflex": "yes",
+  "switch": "ROG Micro Switch",
+  "switch_brand": "asus",
+  "switch_type": "optical / mechanical",
+  "switch_link": "https://rog.asus.com/us/articles/gaming-keyboards-gaming-mice/guide-how-to-replace-the-switches-in-your-rog-gladius-iii-gaming-mouse/",
+  "hot_swappable": "yes",
+  "debounce": "unk",
+  "click_latency": 4.5,
+  "click_latency_list": "4.5 wireless",
+  "click_force": 5,
+  "encoder": "",
+  "encoder_brand": "",
+  "encoder_link": "",
+  "side_buttons": 2,
+  "middle_buttons": 1,
+  "programmable_buttons": 5,
+  "tilt_scroll_wheel": "no",
+  "adjustable_scroll_wheel": "no",
+  "onboard_memory": "yes",
+  "onboard_memory_value": 5,
+  "profile_switching": "yes",
+  "overall": 8.1,
+  "accuracy": 9.1,
+  "response": 7.2,
+  "quality": 8.4,
+  "comfort": 8.6,
+  "work": 7.8,
+  "feet_score": 7.9,
+  "fps_score": 8,
+  "mmo_score": 6,
+  "moba_score": 7.7,
+  "aarpg_score": 7.7,
+  "rts_score": 7.5,
+  "fps": "yes",
+  "mmo": "no",
+  "moba": "yes",
+  "aarpg": "yes",
+  "rts": "yes",
+  "snap_dateUpdated": "12/21/2025",
+  "snap_datePublished": "12/21/2025",
+  "snap_subtitle": "Feature-rich ergonomic workhorse that trades weight for long-term utility.",
+  "hubTags": [
+    "price_range",
+    "weight",
+    "polling_rate",
+    "connection",
+    "form_factor",
+    "grip"
+  ],
+  "game1": "Cyberpunk 2077",
+  "game2": "Dota 2",
+  "game3": "Apex Legends",
+  "game4": "Overwatch 2",
+  "game5": "",
+  "game6": "",
+  "game7": "",
+  "game8": "",
+  "keytakeaway": "The ASUS ROG Gladius III Wireless AimPoint is a wireless ergonomic gaming mouse that prioritizes comfort, modularity, and battery life over minimal weight. With tri-mode connectivity, a 36K DPI AimPoint sensor, and the unique Push-Fit Switch Socket II system, it’s designed for players who value reliability and longevity across FPS, RTS, and MOBA genres. Its 79 g shell feels planted and stable for tracking-heavy play, making it a rare “one mouse for everything” solution in 2025’s featherweight-obsessed market.",
+  "pcard": "The ASUS ROG Gladius III Wireless AimPoint is a **wireless ergonomic gaming mouse** built for players who want a single, comfortable mouse for both work and competitive play. At **79 g**, it’s heavier than the <pop=mouse-122>Razer DeathAdder V3 Pro</pop>, but it wins on **battery life (119 hours)**, **tri-mode connectivity**, and **repairable click switches**. The **Push-Fit Switch Socket II** lets you replace worn switches or change their feel without soldering—something no other mainstream brand offers. A strong all-rounder for those who prize **longevity, comfort, and versatility** over raw esports minimalism.",
+  "verdict": "The ASUS ROG Gladius III Wireless AimPoint (Model 90MP02Y0-BMAA01) is a [**right-handed ergonomic wireless gaming mouse**](/hubs/mouse?form_factor=right&shape=ergonomic) that *doesn’t* chase the ultralight trend. Instead of aiming for 50-gram shells and 8K polling ecosystems, it focuses on what keeps a mouse enjoyable for years: **comfort, modularity, and long battery life**.\r\n\r\n### Lineup context\r\nLaunched as the *AimPoint refresh* of the Gladius III Wireless, this version trims weight versus the older wireless model while adopting the **ROG AimPoint sensor** (a custom-tuned, **PAW3395-tier** platform). It stays capped at **1,000 Hz polling**, but ASUS leans into “daily driver” value with **SpeedNova wireless efficiency** and **Push-Fit Switch Socket II** maintainability.\r\n\r\n> A mouse built for years, not months — with switch modularity that makes it far easier to keep feeling “new.”\r\n\r\n### What it feels like in real use\r\nAt **79 g**, it sits in the “middleweight” class—heavier than esports-focused shells but lighter than many older ergonomic designs. That added mass creates a *planted*, controlled feel that suits **tracking-heavy shooters** like *Apex Legends* or *Overwatch 2*, plus longer **MOBA/RTS** sessions where comfort and steady control matter more than constant lift-and-recenter play.\r\n\r\nThe tall ~44 mm hump fills the palm comfortably for **palm** and **relaxed claw**, and the **100% PTFE feet** keep glide smooth and predictable—less “floaty,” more “stable precision.”\r\n\r\n| Aspect | What You’ll Notice Day-to-Day |\r\n|--------|-------------------------------|\r\n| Weight (79 g) | Feels planted; better for steadier tracking and longer sessions |\r\n| Push-Fit sockets | Replace or tune click feel in minutes—no soldering required |\r\n| Tri-mode wireless | Swap easily between gaming PC, laptop, and tablet |\r\n| Battery life | Up to 119 hours on 2.4 GHz; 143 on Bluetooth with RGB off |\r\n\r\n### Performance and modular engineering\r\nThe **ROG AimPoint sensor** is rated up to **36,000 DPI / 650 IPS / 50 g**, and in real play it feels consistent and trustworthy—exactly what you want when you’re building muscle memory for small corrections and long tracking arcs. Unless you’re chasing the absolute latest latency/polling bragging rights, the core performance is more than strong enough for competitive queues.\r\n\r\nThe star of the mouse is still **Push-Fit Switch Socket II**—compatible with both **3-pin mechanical** and **5-pin optical** switches. If you’re the kind of player who notices click feel (or just hates throwing away a mouse when switches age), this system is a genuine quality-of-life advantage. It also gives the Gladius a maintainability edge over rivals like the <pop=mouse-128>Razer DeathAdder V3 Pro</pop> or a lighter ergo alternative such as the <pop=mouse-313>Pulsar Xlite v3 Medium</pop>.\r\n\r\nWireless flexibility is equally practical. SpeedNova 2.4 GHz feels steady and responsive, Bluetooth is handy for travel/laptops, and **USB-C wired** mode keeps it simple. For hybrid work-and-play setups, that versatility often matters more than 4K/8K polling.\r\n\r\n### Tradeoffs and reliability notes\r\n* **Weight:** If you’re coming from a sub-60 g mouse, you’ll feel the heft—especially if you lift often at low sensitivity.  \r\n* **Polling cap:** It’s locked at **1,000 Hz** and isn’t compatible with ASUS’s high-polling booster ecosystem.  \r\n* **Scroll wheel:** The most repeated long-term concern **in community reports** is encoder wear that can cause “jumping” or inconsistent scroll steps. The main switches are easy to swap; the wheel isn’t as simple.\r\n\r\n### Who it suits best\r\n- Players who mix genres—**FPS + MOBA + RTS**—and want one reliable mouse.  \r\n- Users who prioritize **comfort, battery life, and repairability** over raw spec flexing.  \r\n- Anyone who likes a *“buy once, maintain forever”* approach instead of disposable peripherals.\r\n\r\n### Key Takeaways\r\n* Excellent ergonomics for palm and relaxed claw grips.  \r\n* Modular switch system extends lifespan and click customization.  \r\n* Outstanding battery life and tri-mode convenience.  \r\n* Middleweight control—steady instead of twitchy.  \r\n* Scroll-wheel longevity is the biggest “watch this” risk.\r\n\r\n**Bottom line:** If you want a wireless gaming mouse that’s built to *last*, the Gladius III Wireless AimPoint is still a smart pick in its price lane. It’s heavier and less esports-pure than the <pop=mouse-128>Razer DeathAdder V3 Pro</pop>, but for many players its comfort, modularity, and battery life make it the more practical long-term flagship.\r\n\r\nFor those chasing the lightest possible FPS toolset, check our [best sub-60 g wireless mice](/hubs/mouse?connection=wireless%2Chybrid&weight=36-60s). For everyone else, it’s a strong all-rounder—especially if switch hot-swap and battery life are high on your list.",
+  "pros": [
+    "Push-Fit Switch Socket II allows quick, solder-free switch replacement",
+    "Exceptional battery life (119–143 hours) beats most competitors",
+    "Tri-mode connectivity adds real hybrid convenience",
+    "AimPoint 36K sensor delivers flawless tracking and low CPI deviation",
+    "Palm-friendly shape with included grip tape and 100% PTFE feet"
+  ],
+  "cons": [
+    "79 g is heavier than today’s sub-60 g esports mice",
+    "Scroll-wheel encoder prone to “jumping” over time",
+    "Armoury Crate software is bloated and slow",
+    "Capped at 1,000 Hz; no 4K/8K polling support"
+  ],
+  "youtube": "https://www.youtube.com/watch?v=JJghS2G3UW4",
+  "affiliateLinks": [
+    {
+      "url": "https://www.amazon.com/ASUS-ROG-Connectivity-programmable-Replaceable/dp/B0CCZQTF73?th=1&linkCode=ll1&tag=eggear-20&linkId=c8c86d4997b670d5e7cf2d0369bec55a&language=en_US&ref_=as_li_ss_tl",
+      "retailer": "amazon",
+      "slug": "amazon",
+      "variant": "black",
+      "isPrimary": true
+    },
+    {
+      "url": "https://www.amazon.com/ASUS-ROG-Connectivity-programmable-Replaceable/dp/B0BRTJNQQ8?th=1&linkCode=ll1&tag=eggear-20&linkId=1aa26a0750dfa1bdbf05964824f1460d&language=en_US&ref_=as_li_ss_tl",
+      "retailer": "amazon",
+      "slug": "amazon",
+      "variant": "white",
+      "isPrimary": false
+    }
+  ],
+  "url": "/hubs/mouse/asus/rog-gladius-iii-wireless-aimpoint",
+  "gamesRecommended": [],
+  "media": {
+    "defaultColor": "black",
+    "colors": [
+      "black",
+      "white"
+    ],
+    "editions": [],
+    "images": [
+      {
+        "stem": "feature-image",
+        "view": "feature-image"
+      },
+      {
+        "stem": "top",
+        "view": "top"
+      },
+      {
+        "stem": "left",
+        "view": "left"
+      },
+      {
+        "stem": "sangle",
+        "view": "sangle"
+      },
+      {
+        "stem": "bot",
+        "view": "bot"
+      },
+      {
+        "stem": "side",
+        "view": "shape-side"
+      },
+      {
+        "stem": "top",
+        "view": "shape-top"
+      },
+      {
+        "stem": "botC2",
+        "view": "botC",
+        "seq": 2
+      },
+      {
+        "stem": "leftC2",
+        "view": "leftC",
+        "seq": 2
+      },
+      {
+        "stem": "sangleC2",
+        "view": "sangleC",
+        "seq": 2
+      },
+      {
+        "stem": "topC2",
+        "view": "topC",
+        "seq": 2
+      }
+    ]
+  }
+}

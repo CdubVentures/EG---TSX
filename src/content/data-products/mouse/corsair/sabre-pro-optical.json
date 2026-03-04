@@ -1,0 +1,179 @@
+{
+  "slug": "corsair-sabre-pro-optical",
+  "brand": "Corsair",
+  "model": "Sabre Pro Optical",
+  "baseModel": "Sabre",
+  "variant": "Pro Optical",
+  "category": "mouse",
+  "imagePath": "/images/mouse/corsair/sabre-pro-optical",
+  "cardTags": "false",
+  "featured": "",
+  "release_date": "04/2021",
+  "discontinued": "",
+  "sku": "CH-9303101-NA",
+  "price_range": "N/A",
+  "colors": [
+    "black"
+  ],
+  "design": [
+    "standard"
+  ],
+  "lighting": "none",
+  "rgb": "no",
+  "connection": "wired",
+  "connectivity": "n/a",
+  "computer_side_connector": "USB-A",
+  "mouse_side_connector": "n/a",
+  "bluetooth": "no",
+  "cable_type": "braided",
+  "paracord": "yes",
+  "wireless_charging": "no",
+  "battery_hours": "n/a",
+  "adjustable_weight": "no",
+  "feet_material": "PTFE (Black-Dyed)",
+  "coating": "matte",
+  "honeycomb_frame": "no",
+  "silent_clicks": "no",
+  "weight": 74,
+  "material": "plastic",
+  "lngth": 129,
+  "width": 70,
+  "height": 43,
+  "form_factor": "right",
+  "shape": "ergonomic",
+  "hump": "middle",
+  "front_flare": "outward",
+  "thumb_rest": "no",
+  "grip": [
+    "palm",
+    "claw"
+  ],
+  "hand_size": [
+    "medium",
+    "large"
+  ],
+  "mcu": "unk",
+  "mcu_link": "",
+  "sensor": "PAW3392",
+  "sensor_brand": "PixArt",
+  "sensor_date": "",
+  "sensor_link": "https://www.corsair.com/newsroom/press-release/corsair-launches-three-new-gaming-mice-alongside-slipstream-corsair-wireless-technology",
+  "sensor_type": "optical",
+  "flawless_sensor": "yes",
+  "sensor_latency": 3,
+  "sensor_latency_list": [
+    "3.0 wired"
+  ],
+  "shift_latency": "unk",
+  "polling_rate": [
+    8000,
+    4000,
+    2000,
+    1000,
+    500,
+    250,
+    125
+  ],
+  "dpi": 18000,
+  "ips": 400,
+  "acceleration": 50,
+  "lift": [
+    1.2
+  ],
+  "lift_settings": "surface-tuned",
+  "motion_sync": "unk",
+  "hardware_acceleration": "no",
+  "smoothing": "unk",
+  "nvidia_reflex": "yes",
+  "switch": "D2FC -F-K(50M)",
+  "switch_brand": "omron",
+  "switch_type": "mechanical",
+  "switch_link": "",
+  "hot_swappable": "no",
+  "debounce": "unk",
+  "click_latency": 7.5,
+  "click_latency_list": "7.5 wired",
+  "click_force": "unk",
+  "encoder": "",
+  "encoder_brand": "",
+  "encoder_link": "",
+  "side_buttons": 2,
+  "middle_buttons": 1,
+  "programmable_buttons": 6,
+  "tilt_scroll_wheel": "no",
+  "adjustable_scroll_wheel": "no",
+  "onboard_memory": "yes",
+  "onboard_memory_value": "unk",
+  "profile_switching": "yes",
+  "overall": 7.67,
+  "accuracy": 8.5,
+  "response": 4.9,
+  "quality": 7.7,
+  "comfort": 8.2,
+  "work": 6.9,
+  "feet_score": 7.2,
+  "fps_score": 6.74,
+  "mmo_score": 5.2,
+  "moba_score": 6.13,
+  "aarpg_score": 6.13,
+  "rts_score": 6.44,
+  "fps": "yes",
+  "mmo": "no",
+  "moba": "yes",
+  "aarpg": "yes",
+  "rts": "yes",
+  "snap_dateUpdated": "12/10/2025",
+  "snap_datePublished": null,
+  "snap_subtitle": "",
+  "hubTags": [],
+  "game1": "",
+  "game2": "",
+  "game3": "",
+  "game4": "",
+  "game5": "",
+  "game6": "",
+  "game7": "",
+  "game8": "",
+  "keytakeaway": "",
+  "pcard": "",
+  "verdict": "",
+  "pros": [],
+  "cons": [],
+  "youtube": "https://www.youtube.com/watch?v=0w8QmB0U-8Q",
+  "affiliateLinks": [
+    {
+      "url": "https://www.amazon.com/CORSAIR-Sabre-Champion-Gaming-Mouse/dp/B08W22932K?crid=3S95WLTQMU0LK&dib=eyJ2IjoiMSJ9.ZQ-R-2XZo95RNiohxaKAZw.zJa0sNm2LOMjKKRiKAzn1Q1yeKbejxw7EINfoOiRu_E&dib_tag=se&keywords=CH-9303101-NA&qid=1765419630&sprefix=ch-9303101-na%2Caps%2C141&sr=8-1&th=1&linkCode=ll1&tag=eggear-20&linkId=0a2ef94e0253d143d1169b985699b271&language=en_US&ref_=as_li_ss_tl",
+      "retailer": "amazon",
+      "slug": "amazon",
+      "variant": "",
+      "isPrimary": true
+    }
+  ],
+  "url": "/hubs/mouse/corsair/sabre-pro-optical",
+  "gamesRecommended": [],
+  "media": {
+    "defaultColor": "black",
+    "colors": [
+      "black"
+    ],
+    "editions": [],
+    "images": [
+      {
+        "stem": "top",
+        "view": "top"
+      },
+      {
+        "stem": "left",
+        "view": "left"
+      },
+      {
+        "stem": "side",
+        "view": "shape-side"
+      },
+      {
+        "stem": "top",
+        "view": "shape-top"
+      }
+    ]
+  }
+}

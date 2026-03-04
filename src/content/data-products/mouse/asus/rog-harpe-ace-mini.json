@@ -1,0 +1,210 @@
+{
+  "slug": "asus-rog-harpe-ace-mini",
+  "brand": "Asus",
+  "model": "ROG Harpe Ace Mini",
+  "baseModel": "ROG Harpe",
+  "variant": "Ace Mini",
+  "category": "mouse",
+  "imagePath": "/images/mouse/asus/rog-harpe-ace-mini",
+  "cardTags": "false",
+  "featured": "",
+  "release_date": "09/2024",
+  "discontinued": "",
+  "sku": "90MP03Z0-BMAA00",
+  "price_range": 129.99,
+  "colors": [
+    "black",
+    "white"
+  ],
+  "design": [
+    "standard"
+  ],
+  "lighting": "1 zone (rgb)",
+  "rgb": "yes",
+  "connection": "hybrid",
+  "connectivity": "2.4GHz Dongle",
+  "computer_side_connector": "USB-A",
+  "mouse_side_connector": "USB-C",
+  "bluetooth": "yes",
+  "cable_type": "braided",
+  "paracord": "yes",
+  "wireless_charging": "no",
+  "battery_hours": 105,
+  "adjustable_weight": "no",
+  "feet_material": "PTFE (Virgin-Grade)",
+  "coating": "matte",
+  "honeycomb_frame": "no",
+  "silent_clicks": "no",
+  "weight": 49,
+  "material": "bio-based nylon",
+  "lngth": 117,
+  "width": 63,
+  "height": 37,
+  "form_factor": "right",
+  "shape": "symmetrical",
+  "hump": "back mid",
+  "front_flare": "outward",
+  "thumb_rest": "no",
+  "grip": [
+    "claw",
+    "fingertip"
+  ],
+  "hand_size": [
+    "small",
+    "medium"
+  ],
+  "mcu": "Nordic nRF52840",
+  "mcu_link": "https://www.nordicsemi.com/Products/nRF52840",
+  "sensor": "AimPoint Pro (PixArt PAW3950)",
+  "sensor_brand": "asus",
+  "sensor_date": "04/2024",
+  "sensor_link": "",
+  "sensor_type": "optical",
+  "flawless_sensor": "yes",
+  "sensor_latency": "unk",
+  "sensor_latency_list": [
+    "unk"
+  ],
+  "shift_latency": "unk",
+  "polling_rate": [
+    8000,
+    4000,
+    2000,
+    1000,
+    500,
+    250,
+    125
+  ],
+  "dpi": 42000,
+  "ips": 750,
+  "acceleration": 50,
+  "lift": [
+    1.2
+  ],
+  "lift_settings": "adjustable",
+  "motion_sync": "yes",
+  "hardware_acceleration": "unk",
+  "smoothing": "unk",
+  "nvidia_reflex": "yes",
+  "switch": "ROG Optical Micro Switches",
+  "switch_brand": "asus",
+  "switch_type": "optical",
+  "switch_link": "",
+  "hot_swappable": "no",
+  "debounce": "unk",
+  "click_latency": 1,
+  "click_latency_list": "1 wireless",
+  "click_force": "unk",
+  "encoder": "",
+  "encoder_brand": "",
+  "encoder_link": "",
+  "side_buttons": 2,
+  "middle_buttons": 0,
+  "programmable_buttons": 5,
+  "tilt_scroll_wheel": "no",
+  "adjustable_scroll_wheel": "no",
+  "onboard_memory": "yes",
+  "onboard_memory_value": 5,
+  "profile_switching": "yes",
+  "overall": 8.8,
+  "accuracy": 9.2,
+  "response": 8.3,
+  "quality": 8.2,
+  "comfort": 7.9,
+  "work": 7.4,
+  "feet_score": 9.1,
+  "fps_score": 8.9,
+  "mmo_score": 7.3,
+  "moba_score": 8.8,
+  "aarpg_score": 8.2,
+  "rts_score": 8.6,
+  "fps": "yes",
+  "mmo": "no",
+  "moba": "yes",
+  "aarpg": "yes",
+  "rts": "no",
+  "snap_dateUpdated": "12/16/2025",
+  "snap_datePublished": "12/16/2025",
+  "snap_subtitle": "Ultralight tri‑mode FPS mouse that finally fits small-hand claw and fingertip.",
+  "hubTags": [
+    "price_range",
+    "lngth",
+    "polling_rate",
+    "connection",
+    "overall",
+    "fps"
+  ],
+  "game1": "Valorant",
+  "game2": "Overwatch 2",
+  "game3": "Fortnite",
+  "game4": "",
+  "game5": "",
+  "game6": "",
+  "game7": "",
+  "game8": "",
+  "keytakeaway": "The Asus ROG Harpe Ace Mini is a 49 g tri‑mode wireless gaming mouse tuned for competitive FPS aim in titles like Counter‑Strike 2, Valorant, and Apex Legends. Its compact, shallow‑hump shell naturally suits claw and fingertip grips, while the 42,000‑DPI AimPoint Pro sensor stays stable during fast flicks and micro‑corrections (with track‑on‑glass support for hard surfaces). You get 1–2K polling out of the box, and can reach up to 8K wireless polling with ASUS’s optional Polling Rate Booster—just expect lower battery life at higher rates, and note that larger-hand palm grippers may find the Mini too tight.",
+  "pcard": "The Asus ROG Harpe Ace Mini is an ultralight wireless gaming mouse that prioritizes clean FPS tracking over extra buttons. Tri‑mode connectivity (2.4 GHz, Bluetooth, or wired) and optional up to 8K polling (with the Polling Rate Booster) make it feel fast and consistent for ranked grinds in CS2 or Valorant, while the shorter shell helps small-to-medium hands stay locked into claw or fingertip control. If you want the same Harpe DNA in a roomier body, the <pop=mouse-53>ROG Harpe Ace Aim</pop> is the more forgiving sibling—otherwise, start with our [top wireless mouse picks](/guides/mouse/top-10-wireless).",
+  "verdict": "The Asus ROG Harpe Ace Mini is an ultralight, semi-symmetrical wireless gaming mouse built for competitive FPS players who want a compact shape without giving up flagship specs. At 49 g with tri‑mode connectivity (2.4 GHz, Bluetooth, or wired), it’s a natural fit for fast flicks in Counter‑Strike 2 and Valorant, plus long tracking fights in Apex Legends.\r\n\r\n#### What you need to know\r\nThis is the smaller Harpe: a shorter shell and a shallower hump that keep more of the mouse out of your palm, which is exactly what many claw and fingertip players want when they’re making tiny mid‑spray corrections. You still get the core “esports mouse” checklist—an AimPoint Pro sensor (42,000 DPI / 750 IPS / 50 g accel), optical main switches, and a clean 6‑button layout with a dedicated DPI button—just in a footprint that’s easier to control for small-to-medium hands.\r\n\r\n#### How it feels in real play\r\nThe headline isn’t just the 49 g number—it’s how balanced it feels when you pick it up and reposition between fights. The smooth matte coating leans more “silky” than sticky, but it’s designed to stay consistent when hands get warm, and the included grip tape lets you add bite if you prefer a locked-in feel. Clicks are crisp and low-travel, the scroll is defined enough for weapon swaps, and the stock skates give you an easy glide on cloth or hybrid pads.\r\n\r\n> If you aim with your fingertips or an aggressive claw, the Mini’s lower hump is a real advantage—not just a size change.\r\n\r\n#### Performance and settings\r\nOut of the box, the Harpe Ace Mini already feels plenty responsive at 1–2K polling, which is the sweet spot for most players (and for battery life). If you’re chasing the absolute smoothest cursor updates, it can go up to 8K wireless polling—but that requires the ROG Polling Rate Booster accessory. In practice, ultra‑high polling is where you’re most likely to encounter extra setup or compatibility quirks; if you see stutters or disconnects, firmware updates and stepping down to 2K or 1K usually gets you back to rock-solid play.\r\n\r\n| Aspect | What you’ll notice |\r\n|---|---|\r\n| Shape | Compact length + shallow hump favors claw / fingertip control |\r\n| Weight | Easy lift + fast resets for flick-heavy shooters |\r\n| Polling | 1–2K is hassle-free; 8K is enthusiast territory (Booster required) |\r\n| Battery | Strong at sane polling, but higher rates will drain faster |\r\n| Software | Armoury Crate/Gear can do a lot, but it’s not the lightest setup |\r\n\r\n#### Who it suits best\r\n- Competitive FPS players who value quick lifts, micro‑adjustments, and a compact shell\r\n- Small-to-medium hands looking for a “safe” claw shape that doesn’t force constant re‑gripping\r\n- Anyone who wants tri‑mode convenience for travel or swapping between devices\r\n\r\nIf you’re a relaxed palm gripper, prefer a taller back hump, or want a mouse mainly for MMO bind-heavy play, the Mini is the wrong tool—its whole identity is “less mouse in the hand, more control at the fingertips.”\r\n\r\n#### Alternatives worth cross-shopping\r\nIf you like the Harpe feel but want more room, the <pop=mouse-53>ROG Harpe Ace Aim</pop> keeps the same competitive vibe in a larger shell. Want to spend less and you don’t mind extra grams? The <pop=mouse-24>Corsair M75 Air Wireless</pop> is a strong value-oriented wireless pick. And if you want the most premium “Harpe” experience (and can justify the cost), the <pop=mouse-51>ROG Harpe Ace Extreme</pop> is the lighter, flashier step-up.\r\n\r\nFor more comparisons, start with our [top FPS mouse picks](/guides/mouse/top-10-fps) and [wireless gaming mouse roundup](/guides/mouse/top-10-wireless).",
+  "pros": [
+    "49 g chassis feels quick to lift, reset, and control in flick-heavy shooters",
+    "Tri‑mode connection (2.4 GHz, Bluetooth, or wired) plus Omni Receiver support for flexible setups",
+    "AimPoint Pro sensor (up to 42,000 DPI / 750 IPS / 50 g) tracks cleanly for both flicks and smooth tracking",
+    "Optional up to 8K wireless polling with the ROG Polling Rate Booster for high‑refresh esports rigs",
+    "Crisp ROG optical micro switches rated for 100M clicks",
+    "Includes useful extras (grip tape, spare skates, and a paracord cable) for dialing in feel"
+  ],
+  "cons": [
+    "Compact, shallow-hump shell can feel cramped for large hands or relaxed palm grips",
+    "8K polling requires the separate Polling Rate Booster and can add setup/battery tradeoffs",
+    "Armoury Crate/Gear software is feature-rich, but many players find it heavier than it needs to be"
+  ],
+  "youtube": "https://www.youtube.com/watch?v=WrSZ5DzX49U",
+  "affiliateLinks": [
+    {
+      "url": "https://www.amazon.com/ASUS-ROG-Wireless-Lightweight-AimPoint/dp/B0D65GJF7C?crid=EDRZNYF4TM07&dib=eyJ2IjoiMSJ9.EP7dpTlZMtt4PXg6YEZb3HeKbQ5mt0Ylhb6ohkkPyRhuxGdM_gO_dz92TkMPSTba.avWUbLKwSLq6vrR49ZcK5qURTazDHoPmNITp0aKzIgg&dib_tag=se&keywords=rog%2Bharpa%2Bace%2Bextreme&qid=1765856694&s=electronics&sprefix=rog%2Bharpe%2Bace%2Bextreme%2Caps%2C144&sr=1-1-catcorr&th=1&linkCode=ll1&tag=eggear-20&linkId=ade1d7a9d3e12e2fc0fc6564194fa29d&language=en_US&ref_=as_li_ss_tl",
+      "retailer": "amazon",
+      "slug": "amazon",
+      "variant": "black",
+      "isPrimary": true
+    },
+    {
+      "url": "https://www.amazon.com/ASUS-ROG-Wireless-Lightweight-AimPoint/dp/B0DK687S26?crid=EDRZNYF4TM07&dib=eyJ2IjoiMSJ9.dvE8QfQbwLWj4bHLpt-ExkTOFw0yps_Xf5fYgoAjvRSWMioDTIx9KyrkhEvXZcx5P0-xj3JdZMvlw-SldHR5TQ._45o69k9OjuLbrPrcClQlz0Aw6YPxpp_eqBntLk3LcM&dib_tag=se&keywords=rog%2Bharpa%2Bace%2Bextreme&qid=1765856694&s=electronics&sprefix=rog%2Bharpe%2Bace%2Bextreme%2Caps%2C144&sr=1-1&th=1&linkCode=ll1&tag=eggear-20&linkId=a332321c9af4f930491de6ec298da6d8&language=en_US&ref_=as_li_ss_tl",
+      "retailer": "amazon",
+      "slug": "amazon",
+      "variant": "white",
+      "isPrimary": false
+    }
+  ],
+  "url": "/hubs/mouse/asus/rog-harpe-ace-mini",
+  "gamesRecommended": [],
+  "media": {
+    "defaultColor": "black",
+    "colors": [
+      "black",
+      "white"
+    ],
+    "editions": [],
+    "images": [
+      {
+        "stem": "top",
+        "view": "top"
+      },
+      {
+        "stem": "left",
+        "view": "left"
+      },
+      {
+        "stem": "sangle",
+        "view": "sangle"
+      },
+      {
+        "stem": "side",
+        "view": "shape-side"
+      },
+      {
+        "stem": "top",
+        "view": "shape-top"
+      }
+    ]
+  }
+}

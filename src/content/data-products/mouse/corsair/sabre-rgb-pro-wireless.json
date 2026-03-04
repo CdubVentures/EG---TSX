@@ -1,0 +1,182 @@
+{
+  "slug": "corsair-sabre-rgb-pro-wireless",
+  "brand": "Corsair",
+  "model": "Sabre RGB Pro Wireless",
+  "baseModel": "Sabre",
+  "variant": "RGB Pro Wireless",
+  "category": "mouse",
+  "imagePath": "/images/mouse/corsair/sabre-rgb-pro-wireless",
+  "cardTags": "false",
+  "featured": "",
+  "release_date": "09/2021",
+  "discontinued": "",
+  "sku": "CH-9313211-NA",
+  "price_range": 109.99,
+  "colors": [
+    "black"
+  ],
+  "design": [
+    "standard"
+  ],
+  "lighting": "1 zone (rgb)",
+  "rgb": "yes",
+  "connection": "hybrid",
+  "connectivity": "2.4GHz Dongle",
+  "computer_side_connector": "USB-A",
+  "mouse_side_connector": "USB-C",
+  "bluetooth": "no",
+  "cable_type": "braided",
+  "paracord": "yes",
+  "wireless_charging": "no",
+  "battery_hours": 60,
+  "adjustable_weight": "no",
+  "feet_material": "PTFE (Black-Dyed)",
+  "coating": "matte",
+  "honeycomb_frame": "no",
+  "silent_clicks": "no",
+  "weight": 79,
+  "material": "plastic",
+  "lngth": 129,
+  "width": 70,
+  "height": 43,
+  "form_factor": "right",
+  "shape": "ergonomic",
+  "hump": "middle",
+  "front_flare": "outward",
+  "thumb_rest": "no",
+  "grip": [
+    "palm",
+    "claw"
+  ],
+  "hand_size": [
+    "medium",
+    "large"
+  ],
+  "mcu": "unk",
+  "mcu_link": "",
+  "sensor": "MARKSMAN 26K",
+  "sensor_brand": "corsair",
+  "sensor_date": "",
+  "sensor_link": "https://www.corsair.com/newsroom/press-release/corsair-launches-three-new-gaming-mice-alongside-slipstream-corsair-wireless-technology",
+  "sensor_type": "optical",
+  "flawless_sensor": "unk",
+  "sensor_latency": 4,
+  "sensor_latency_list": [
+    "11.1 start",
+    "4.0 half",
+    "6.2 end"
+  ],
+  "shift_latency": "unk",
+  "polling_rate": [
+    1000,
+    500,
+    250,
+    125
+  ],
+  "dpi": 26000,
+  "ips": 650,
+  "acceleration": 50,
+  "lift": [
+    1.2
+  ],
+  "lift_settings": "adjustable",
+  "motion_sync": "unk",
+  "hardware_acceleration": "no",
+  "smoothing": "unk",
+  "nvidia_reflex": "yes",
+  "switch": "D2FC -F-K(50M)",
+  "switch_brand": "omron",
+  "switch_type": "mechanical",
+  "switch_link": "",
+  "hot_swappable": "no",
+  "debounce": "unk",
+  "click_latency": 3.1,
+  "click_latency_list": "2.5 wired, 3.1 receiver, 10.6 bluetooth",
+  "click_force": "unk",
+  "encoder": "",
+  "encoder_brand": "",
+  "encoder_link": "",
+  "side_buttons": 2,
+  "middle_buttons": 1,
+  "programmable_buttons": 6,
+  "tilt_scroll_wheel": "no",
+  "adjustable_scroll_wheel": "no",
+  "onboard_memory": "yes",
+  "onboard_memory_value": 3,
+  "profile_switching": "yes",
+  "overall": 7.7,
+  "accuracy": 8.9,
+  "response": 5.83,
+  "quality": 8,
+  "comfort": 8.1,
+  "work": 7.6,
+  "feet_score": 7.1,
+  "fps_score": 8.12,
+  "mmo_score": 5.4,
+  "moba_score": 7.36,
+  "aarpg_score": 7.36,
+  "rts_score": 7.74,
+  "fps": "yes",
+  "mmo": "no",
+  "moba": "yes",
+  "aarpg": "yes",
+  "rts": "yes",
+  "snap_dateUpdated": "12/11/2025",
+  "snap_datePublished": null,
+  "snap_subtitle": "",
+  "hubTags": [],
+  "game1": "",
+  "game2": "",
+  "game3": "",
+  "game4": "",
+  "game5": "",
+  "game6": "",
+  "game7": "",
+  "game8": "",
+  "keytakeaway": "",
+  "pcard": "",
+  "verdict": "",
+  "pros": [],
+  "cons": [],
+  "youtube": "https://www.youtube.com/watch?v=gj-VLCyCYzQ",
+  "affiliateLinks": [
+    {
+      "url": "https://www.amazon.com/dp/B09CXT81P3?_encoding=UTF8&th=1&linkCode=ll1&tag=eggear-20&linkId=a7b84411652ac8376757e28aacd47f99&language=en_US&ref_=as_li_ss_tl",
+      "retailer": "amazon",
+      "slug": "amazon",
+      "variant": "",
+      "isPrimary": true
+    }
+  ],
+  "url": "/hubs/mouse/corsair/sabre-rgb-pro-wireless",
+  "gamesRecommended": [],
+  "media": {
+    "defaultColor": "black",
+    "colors": [
+      "black"
+    ],
+    "editions": [],
+    "images": [
+      {
+        "stem": "top",
+        "view": "top"
+      },
+      {
+        "stem": "left",
+        "view": "left"
+      },
+      {
+        "stem": "sangle",
+        "view": "sangle"
+      },
+      {
+        "stem": "side",
+        "view": "shape-side"
+      },
+      {
+        "stem": "top",
+        "view": "shape-top"
+      }
+    ]
+  }
+}

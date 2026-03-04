@@ -1,0 +1,177 @@
+{
+  "slug": "corsair-dark-core-rgb-se",
+  "brand": "Corsair",
+  "model": "Dark Core RGB SE",
+  "baseModel": "Dark Core",
+  "variant": "RGB SE",
+  "category": "mouse",
+  "imagePath": "/images/mouse/corsair/dark-core-rgb-se",
+  "cardTags": "false",
+  "featured": "",
+  "release_date": "01/2018",
+  "discontinued": "",
+  "sku": "CH-9315311-NA",
+  "price_range": 89.99,
+  "colors": [
+    "black"
+  ],
+  "design": [
+    "standard"
+  ],
+  "lighting": "3 zone (rgb)",
+  "rgb": "yes",
+  "connection": "hybrid",
+  "connectivity": "2.4GHz Dongle",
+  "computer_side_connector": "USB-A",
+  "mouse_side_connector": "USB-C",
+  "bluetooth": "yes",
+  "cable_type": "braided",
+  "paracord": "no",
+  "wireless_charging": "yes",
+  "battery_hours": 24,
+  "adjustable_weight": "no",
+  "feet_material": "PTFE (Black-Dyed)",
+  "coating": "matte",
+  "honeycomb_frame": "no",
+  "silent_clicks": "no",
+  "weight": 128,
+  "material": "plastic",
+  "lngth": 127,
+  "width": 89,
+  "height": 43,
+  "form_factor": "right",
+  "shape": "ergonomic",
+  "hump": "middle",
+  "front_flare": "inward",
+  "thumb_rest": "yes",
+  "grip": [
+    "palm"
+  ],
+  "hand_size": [
+    "large"
+  ],
+  "mcu": "unk",
+  "mcu_link": "",
+  "sensor": "PMW3367",
+  "sensor_brand": "PixArt",
+  "sensor_date": "",
+  "sensor_link": "",
+  "sensor_type": "optical",
+  "flawless_sensor": "yes",
+  "sensor_latency": "unk",
+  "sensor_latency_list": [
+    "unk"
+  ],
+  "shift_latency": "unk",
+  "polling_rate": [
+    2000,
+    1000,
+    500,
+    250,
+    125
+  ],
+  "dpi": 16000,
+  "ips": 300,
+  "acceleration": 50,
+  "lift": [],
+  "lift_settings": "fixed high",
+  "motion_sync": "unk",
+  "hardware_acceleration": "no",
+  "smoothing": "unk",
+  "nvidia_reflex": "no",
+  "switch": "D2FC -F-K(50M)",
+  "switch_brand": "omron",
+  "switch_type": "mechanical",
+  "switch_link": "",
+  "hot_swappable": "no",
+  "debounce": "unk",
+  "click_latency": "unk",
+  "click_latency_list": "unk",
+  "click_force": "unk",
+  "encoder": "",
+  "encoder_brand": "",
+  "encoder_link": "",
+  "side_buttons": 3,
+  "middle_buttons": 4,
+  "programmable_buttons": 9,
+  "tilt_scroll_wheel": "no",
+  "adjustable_scroll_wheel": "no",
+  "onboard_memory": "yes",
+  "onboard_memory_value": 3,
+  "profile_switching": "yes",
+  "overall": 6.3,
+  "accuracy": 7.9,
+  "response": 5.3,
+  "quality": 6.6,
+  "comfort": 7.8,
+  "work": 8,
+  "feet_score": 7,
+  "fps_score": 5.8,
+  "mmo_score": 6.7,
+  "moba_score": 6.3,
+  "aarpg_score": 6.7,
+  "rts_score": 6,
+  "fps": "no",
+  "mmo": "yes",
+  "moba": "yes",
+  "aarpg": "yes",
+  "rts": "no",
+  "snap_dateUpdated": "11/26/2025",
+  "snap_datePublished": null,
+  "snap_subtitle": "",
+  "hubTags": [],
+  "game1": "",
+  "game2": "",
+  "game3": "",
+  "game4": "",
+  "game5": "",
+  "game6": "",
+  "game7": "",
+  "game8": "",
+  "keytakeaway": "",
+  "pcard": "",
+  "verdict": "",
+  "pros": [],
+  "cons": [],
+  "youtube": "https://www.youtube.com/watch?v=o-1IH-tzWi4",
+  "affiliateLinks": [
+    {
+      "url": "https://www.amazon.com/CORSAIR-Performance-Wireless-Backlit-Charging/dp/B08FP445PJ?crid=9VCUO3NBZ3XM&dib=eyJ2IjoiMSJ9.h2NaaIPIsEpnvvJIyg9O1CUKxNh9mJu32wSVvNIr6HlDrN9T-53IUPcSArhyt9jmqJRZB4A90Bcmpu002ixDeSBiKCpTGgIV4IeissugGm7frcinf-o6QzPqgM6jwPp1GY9I8BgUoawGLPVu0jdk60K_RqNTAUGvu1pdObj7UET3zHHYtCbkRmR8Uq94e0co4YiaVjads39YmDEtXtHPCNgmUcRpRtjX0PQ_XtwiIRM.tYkb-9djDh0hp7eTf7cfbnMQBWWJzSQVlEcay17c2fA&dib_tag=se&keywords=Dark+Core+RGB+SE&qid=1765258907&sprefix=dark+core+rgb+se%2Caps%2C158&sr=8-4&linkCode=ll1&tag=eggear-20&linkId=0fd215a45730c4723e5584a460a1f1e7&language=en_US&ref_=as_li_ss_tl",
+      "retailer": "amazon",
+      "slug": "amazon",
+      "variant": "",
+      "isPrimary": true
+    }
+  ],
+  "url": "/hubs/mouse/corsair/dark-core-rgb-se",
+  "gamesRecommended": [],
+  "media": {
+    "defaultColor": "black",
+    "colors": [
+      "black"
+    ],
+    "editions": [],
+    "images": [
+      {
+        "stem": "top",
+        "view": "top"
+      },
+      {
+        "stem": "left",
+        "view": "left"
+      },
+      {
+        "stem": "sangle",
+        "view": "sangle"
+      },
+      {
+        "stem": "side",
+        "view": "shape-side"
+      },
+      {
+        "stem": "top",
+        "view": "shape-top"
+      }
+    ]
+  }
+}

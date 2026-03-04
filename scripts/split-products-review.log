@@ -1,0 +1,368 @@
+CATEGORY | BRAND | MODEL | BASE_MODEL | VARIANT | SOURCE | FILE
+------------------------------------------------------------------------------------------------------------------------
+mouse | Alienware | AW610M | AW610M | (none) | override | mouse/alienware/aw610m.json
+mouse | Alienware | AW620M | AW620M | (none) | override | mouse/alienware/aw620m.json
+mouse | Alienware | Alienware Pro | Alienware Pro | (none) | no-variant | mouse/alienware/alienware-pro.json
+mouse | Alienware | AW720M | AW720M | (none) | override | mouse/alienware/aw720m.json
+mouse | Alienware | AW320M | AW320M | (none) | override | mouse/alienware/aw320m.json
+mouse | Acer | Cestus 310 | Cestus | 310 | override | mouse/acer/cestus-310.json
+mouse | Acer | Cestus 330 | Cestus | 330 | override | mouse/acer/cestus-330.json
+mouse | Acer | Cestus 335 | Cestus | 335 | override | mouse/acer/cestus-335.json
+mouse | Acer | Cestus 350 | Cestus | 350 | override | mouse/acer/cestus-350.json
+mouse | Aorus | M2 | M2 | (none) | no-variant | mouse/aorus/m2.json
+mouse | Aorus | M3 | M3 | (none) | no-variant | mouse/aorus/m3.json
+mouse | Aorus | M4 | M4 | (none) | no-variant | mouse/aorus/m4.json
+mouse | Aorus | M5 | M5 | (none) | no-variant | mouse/aorus/m5.json
+mouse | Aorus | M6 | M6 | (none) | no-variant | mouse/aorus/m6.json
+mouse | Cooler Master | MM310 | MM310 | (none) | no-variant | mouse/cooler-master/mm310.json
+mouse | Cooler Master | MM311 | MM311 | (none) | no-variant | mouse/cooler-master/mm311.json
+mouse | Cooler Master | MM711 Wired | MM711 | Wired | auto | mouse/cooler-master/mm711-wired.json
+mouse | Cooler Master | MM712 Wired | MM712 | Wired | auto | mouse/cooler-master/mm712-wired.json
+mouse | Cooler Master | MM712 | MM712 | (none) | no-variant | mouse/cooler-master/mm712.json
+mouse | Cooler Master | MM712 30th Anniversary Edition | MM712 | 30th Anniversary Edition | auto | mouse/cooler-master/mm712-30th-anniversary-edition.json
+mouse | Corsair | M55 Wired | M55 | Wired | auto | mouse/corsair/m55-wired.json
+mouse | Corsair | M55 Wireless | M55 | Wireless | auto | mouse/corsair/m55-wireless.json
+mouse | Corsair | M55 RGB Pro | M55 | RGB Pro | auto | mouse/corsair/m55-rgb-pro.json
+mouse | Corsair | M75 Air Wireless | M75 | Air Wireless | auto | mouse/corsair/m75-air-wireless.json
+mouse | Corsair | M75 Wireless | M75 | Wireless | auto | mouse/corsair/m75-wireless.json
+mouse | Corsair | M75 | M75 | (none) | no-variant | mouse/corsair/m75.json
+mouse | Corsair | Scimitar Elite Wireless Se | Scimitar | Elite Wireless Se | auto | mouse/corsair/scimitar-elite-wireless-se.json
+mouse | Corsair | Scimitar Elite Wireless | Scimitar | Elite Wireless | auto | mouse/corsair/scimitar-elite-wireless.json
+mouse | Corsair | Scimitar RGB Elite | Scimitar | RGB Elite | auto | mouse/corsair/scimitar-rgb-elite.json
+mouse | Corsair | Scimitar Pro RGB | Scimitar | Pro RGB | auto | mouse/corsair/scimitar-pro-rgb.json
+mouse | Corsair | Nightsabre Wireless | Nightsabre | Wireless | auto | mouse/corsair/nightsabre-wireless.json
+mouse | Corsair | Darkstar Wireless RGB | Darkstar | Wireless RGB | auto | mouse/corsair/darkstar-wireless-rgb.json
+mouse | Corsair | M65 RGB Ultra Wireless | M65 | RGB Ultra Wireless | auto | mouse/corsair/m65-rgb-ultra-wireless.json
+mouse | Corsair | M65 RGB Ultra | M65 | RGB Ultra | auto | mouse/corsair/m65-rgb-ultra.json
+mouse | Corsair | M65 RGB Laser | M65 | RGB Laser | auto | mouse/corsair/m65-rgb-laser.json
+mouse | Corsair | M65 RGB Elite | M65 | RGB Elite | override | mouse/corsair/m65-rgb-elite.json
+mouse | Corsair | Katar Pro XT | Katar | Pro XT | auto | mouse/corsair/katar-pro-xt.json
+mouse | Corsair | Katar Elite Wireless | Katar | Elite Wireless | auto | mouse/corsair/katar-elite-wireless.json
+mouse | Corsair | Katar Pro Wireless | Katar | Pro Wireless | auto | mouse/corsair/katar-pro-wireless.json
+mouse | Corsair | Dark Core RGB Pro SE | Dark Core | RGB Pro SE | auto | mouse/corsair/dark-core-rgb-pro-se.json
+mouse | Corsair | Dark Core RGB Pro | Dark Core | RGB Pro | auto | mouse/corsair/dark-core-rgb-pro.json
+mouse | Corsair | Dark Core RGB SE | Dark Core | RGB SE | auto | mouse/corsair/dark-core-rgb-se.json
+mouse | Corsair | Ironclaw RGB | Ironclaw | RGB | auto | mouse/corsair/ironclaw-rgb.json
+mouse | Corsair | Ironclaw RGB Wireless | Ironclaw | RGB Wireless | auto | mouse/corsair/ironclaw-rgb-wireless.json
+mouse | Corsair | Harpoon RGB Wireless | Harpoon | RGB Wireless | auto | mouse/corsair/harpoon-rgb-wireless.json
+mouse | Corsair | Harpoon RGB | Harpoon | RGB | auto | mouse/corsair/harpoon-rgb.json
+mouse | Corsair | Sabre RGB Pro | Sabre | RGB Pro | auto | mouse/corsair/sabre-rgb-pro.json
+mouse | Corsair | Sabre Pro Optical | Sabre | Pro Optical | auto | mouse/corsair/sabre-pro-optical.json
+mouse | Corsair | Sabre RGB Pro Wireless | Sabre | RGB Pro Wireless | auto | mouse/corsair/sabre-rgb-pro-wireless.json
+mouse | Corsair | Sabre v2 Pro | Sabre | v2 Pro | auto | mouse/corsair/sabre-v2-pro.json
+mouse | Corsair | Nightsword RGB Tunable | Nightsword | RGB Tunable | auto | mouse/corsair/nightsword-rgb-tunable.json
+mouse | Corsair | Glaive RGB Pro | Glaive | RGB Pro | auto | mouse/corsair/glaive-rgb-pro.json
+mouse | Asus | ROG Harpe II Ace | ROG Harpe II | Ace | auto | mouse/asus/rog-harpe-ii-ace.json
+mouse | Asus | ROG Harpe Ace Extreme | ROG Harpe | Ace Extreme | auto | mouse/asus/rog-harpe-ace-extreme.json
+mouse | Asus | ROG Harpe Ace Mini | ROG Harpe | Ace Mini | auto | mouse/asus/rog-harpe-ace-mini.json
+mouse | Asus | ROG Harpe Ace Aim Lab | ROG Harpe | Ace Aim Lab | auto | mouse/asus/rog-harpe-ace-aim-lab.json
+mouse | Asus | ROG Keris II Ace | ROG Keris II | Ace | auto | mouse/asus/rog-keris-ii-ace.json
+mouse | Asus | ROG Keris II Origin | ROG Keris II | Origin | auto | mouse/asus/rog-keris-ii-origin.json
+mouse | Asus | ROG Keris | ROG Keris | (none) | no-variant | mouse/asus/rog-keris.json
+mouse | Asus | ROG Keris Wireless AimPoint | ROG Keris | Wireless AimPoint | auto | mouse/asus/rog-keris-wireless-aimpoint.json
+mouse | Asus | ROG Strix Impact III | ROG Strix | Impact III | auto | mouse/asus/rog-strix-impact-iii.json
+mouse | Asus | ROG Strix Impact III Wireless | ROG Strix | Impact III Wireless | auto | mouse/asus/rog-strix-impact-iii-wireless.json
+mouse | Asus | ROG Gladius III Wireless AimPoint | ROG Gladius III | Wireless AimPoint | auto | mouse/asus/rog-gladius-iii-wireless-aimpoint.json
+mouse | Asus | ROG Gladius III Wireless AimPoint EVA-02 | ROG Gladius III | Wireless AimPoint EVA-02 | auto | mouse/asus/rog-gladius-iii-wireless-aimpoint-eva-02.json
+mouse | Asus | ROG Gladius III Core | ROG Gladius III | Core | auto | mouse/asus/rog-gladius-iii-core.json
+mouse | Asus | ROG Gladius III Wireless | ROG Gladius III | Wireless | auto | mouse/asus/rog-gladius-iii-wireless.json
+mouse | Asus | ROG Gladius III | ROG Gladius III | (none) | no-variant | mouse/asus/rog-gladius-iii.json
+mouse | Asus | ROG Chakram | ROG Chakram | (none) | no-variant | mouse/asus/rog-chakram.json
+mouse | Asus | ROG Chakram X Origin | ROG Chakram | X Origin | auto | mouse/asus/rog-chakram-x-origin.json
+mouse | Asus | ROG Chakram X Core | ROG Chakram | X Core | auto | mouse/asus/rog-chakram-x-core.json
+mouse | Asus | ROG Spatha X | ROG Spatha | X | auto | mouse/asus/rog-spatha-x.json
+mouse | Asus | GX1000 Eagle Eye Mouse | GX1000 | Eagle Eye Mouse | auto | mouse/asus/gx1000-eagle-eye-mouse.json
+mouse | Glorious | Model O 2 Wireless | Model O 2 | Wireless | override | mouse/glorious/model-o-2-wireless.json
+mouse | Glorious | Model O 2 Wired | Model O 2 | Wired | override | mouse/glorious/model-o-2-wired.json
+mouse | Glorious | Model O 2 Mini Wireless | Model O 2 Mini | Wireless | override | mouse/glorious/model-o-2-mini-wireless.json
+mouse | Glorious | Model O 2 Mini Wired | Model O 2 Mini | Wired | override | mouse/glorious/model-o-2-mini-wired.json
+mouse | Glorious | Model O 2 PRO Series Wireless 8KHz Edition | Model O 2 PRO | Series Wireless 8KHz Edition | override | mouse/glorious/model-o-2-pro-series-wireless-8khz-edition.json
+mouse | Glorious | Model O 2 PRO Series | Model O 2 PRO | Series | override | mouse/glorious/model-o-2-pro-series.json
+mouse | Glorious | Model D Wired | Mod | el D Wired | auto | mouse/glorious/model-d-wired.json
+mouse | Glorious | Model D Minus Wired | Model D Minus | Wired | auto | mouse/glorious/model-d-minus-wired.json
+mouse | Glorious | Model D Minus Wireless | Model D Minus | Wireless | auto | mouse/glorious/model-d-minus-wireless.json
+mouse | Glorious | Model D 2 PRO Series Wireless | Model D 2 PRO | Series Wireless | override | mouse/glorious/model-d-2-pro-series-wireless.json
+mouse | Glorious | Model D 2 PRO Series Wireless 8Khz Edition | Model D 2 PRO | Series Wireless 8Khz Edition | override | mouse/glorious/model-d-2-pro-series-wireless-8khz-edition.json
+mouse | Glorious | Model D 2 Wireless | Model D 2 | Wireless | override | mouse/glorious/model-d-2-wireless.json
+mouse | Glorious | Model D 2 Wired | Model D 2 | Wired | override | mouse/glorious/model-d-2-wired.json
+mouse | Glorious | Model I 2 Wireless | Model I 2 | Wireless | auto | mouse/glorious/model-i-2-wireless.json
+mouse | Glorious | Model I 2 Wired | Model I 2 | Wired | override | mouse/glorious/model-i-2-wired.json
+mouse | Glorious | Series 2 PRO Wireless | Series 2 | PRO Wireless | auto | mouse/glorious/series-2-pro-wireless.json
+mouse | HyperX | Pulsefire Haste 2 Pro Wireless | Pulsefire Haste 2 | Pro Wireless | auto | mouse/hyperx/pulsefire-haste-2-pro-wireless.json
+mouse | HyperX | Pulsefire Haste 2 Wireless | Pulsefire Haste 2 | Wireless | auto | mouse/hyperx/pulsefire-haste-2-wireless.json
+mouse | HyperX | Pulsefire Haste 2 Core Wireless | Pulsefire Haste | 2 Core Wireless | auto | mouse/hyperx/pulsefire-haste-2-core-wireless.json
+mouse | HyperX | Pulsefire Haste 2 | Pulsefire Haste | 2 | auto | mouse/hyperx/pulsefire-haste-2.json
+mouse | HyperX | Pulsefire Wireless Haste 2 Mini Wireless | Pulsefire Wireless Haste | 2 Mini Wireless | auto | mouse/hyperx/pulsefire-wireless-haste-2-mini-wireless.json
+mouse | HyperX | Pulsefire Haste Wireless | Pulsefire Haste | Wireless | auto | mouse/hyperx/pulsefire-haste-wireless.json
+mouse | HyperX | Pulsefire Haste | Pulsefire Haste | (none) | no-variant | mouse/hyperx/pulsefire-haste.json
+mouse | HyperX | Pulsefire Surge | Pulsefire Surge | (none) | no-variant | mouse/hyperx/pulsefire-surge.json
+mouse | HyperX | Pulsefire Core | Pulsefire Core | (none) | no-variant | mouse/hyperx/pulsefire-core.json
+mouse | Logitech G | Pro X Superlight 2 Dex | Pro X Superlight 2 | Dex | override | mouse/logitech-g/pro-x-superlight-2-dex.json
+mouse | Logitech G | Pro 2 Lightspeed | Pro 2 | Lightspeed | auto | mouse/logitech-g/pro-2-lightspeed.json
+mouse | Logitech G | G309 Lightspeed | G309 | Lightspeed | auto | mouse/logitech-g/g309-lightspeed.json
+mouse | Logitech G | Pro X Superlight 2 | Pro X | Superlight 2 | auto | mouse/logitech-g/pro-x-superlight-2.json
+mouse | Logitech G | G502 X Plus | G502 X | Plus | auto | mouse/logitech-g/g502-x-plus.json
+mouse | Logitech G | Pro X Superlight | Pro X | Superlight | auto | mouse/logitech-g/pro-x-superlight.json
+mouse | Logitech G | Pro X Superlight 2c | Pro X | Superlight 2c | auto | mouse/logitech-g/pro-x-superlight-2c.json
+mouse | Logitech G | Pro X 2 Superstrike | Pro X | 2 Superstrike | auto | mouse/logitech-g/pro-x-2-superstrike.json
+mouse | Logitech G | G502 X Lightspeed Wireless | G502 X | Lightspeed Wireless | auto | mouse/logitech-g/g502-x-lightspeed-wireless.json
+mouse | Logitech G | Pro Wireless | Pro | Wireless | auto | mouse/logitech-g/pro-wireless.json
+mouse | Logitech G | G502 X | G502 X | (none) | no-variant | mouse/logitech-g/g502-x.json
+mouse | Logitech G | G705 Wireless | G705 | Wireless | auto | mouse/logitech-g/g705-wireless.json
+mouse | Logitech G | G502 Lightspeed | G502 | Lightspeed | auto | mouse/logitech-g/g502-lightspeed.json
+mouse | Logitech G | G305 Lightspeed | G305 | Lightspeed | auto | mouse/logitech-g/g305-lightspeed.json
+mouse | Logitech G | G502 Hero | G502 | Hero | auto | mouse/logitech-g/g502-hero.json
+mouse | Logitech G | G903 Lightspeed | G903 | Lightspeed | auto | mouse/logitech-g/g903-lightspeed.json
+mouse | Logitech G | G703 Hero Lightspeed | G703 | Hero Lightspeed | auto | mouse/logitech-g/g703-hero-lightspeed.json
+mouse | Logitech G | G203 Lightsync | G203 | Lightsync | auto | mouse/logitech-g/g203-lightsync.json
+mouse | Logitech G | G403 Hero | G403 | Hero | auto | mouse/logitech-g/g403-hero.json
+mouse | MSI | Clutch GM41 LW Wireless | Clutch GM41 | LW Wireless | auto | mouse/msi/clutch-gm41-lw-wireless.json
+mouse | MSI | Clutch GM41 LW V2 | Clutch GM41 | LW V2 | auto | mouse/msi/clutch-gm41-lw-v2.json
+mouse | MSI | Clutch GM20 Elite | Clutch GM20 | Elite | auto | mouse/msi/clutch-gm20-elite.json
+mouse | MSI | Versa 300 Wireless | Versa 300 | Wireless | auto | mouse/msi/versa-300-wireless.json
+mouse | MSI | Versa 300 Elite Wireless | Versa 300 | Elite Wireless | auto | mouse/msi/versa-300-elite-wireless.json
+mouse | MSI | Clutch GM31 LW | Clutch GM31 | LW | auto | mouse/msi/clutch-gm31-lw.json
+mouse | MSI | Clutch GM51 LW Wireless | Clutch GM51 | LW Wireless | auto | mouse/msi/clutch-gm51-lw-wireless.json
+mouse | MSI | Clutch GM51 LW | Clutch GM51 | LW | auto | mouse/msi/clutch-gm51-lw.json
+mouse | MSI | Clutch GM31 LW Wireless | Clutch GM31 | LW Wireless | auto | mouse/msi/clutch-gm31-lw-wireless.json
+mouse | MSI | Forge GM300 | Forge GM300 | (none) | no-variant | mouse/msi/forge-gm300.json
+mouse | MSI | Forge GM100 | Forge GM100 | (none) | no-variant | mouse/msi/forge-gm100.json
+mouse | MSI | Forge GM310 | Forge GM310 | (none) | no-variant | mouse/msi/forge-gm310.json
+mouse | MSI | Clutch GM30 | Clutch GM30 | (none) | no-variant | mouse/msi/clutch-gm30.json
+mouse | MSI | Clutch GM08 | Clutch GM08 | (none) | no-variant | mouse/msi/clutch-gm08.json
+mouse | MSI | Clutch DM07 | Clutch DM07 | (none) | no-variant | mouse/msi/clutch-dm07.json
+mouse | MSI | Clutch GM11 | Clutch GM11 | (none) | no-variant | mouse/msi/clutch-gm11.json
+mouse | MSI | Clutch GM41 LW | Clutch GM41 | LW | auto | mouse/msi/clutch-gm41-lw.json
+mouse | Razer | Cobra | Cobra | (none) | no-variant | mouse/razer/cobra.json
+mouse | Razer | Cobra Pro | Cobra | Pro | auto | mouse/razer/cobra-pro.json
+mouse | Razer | Viper Mini Signature Edition | Viper Mini | Signature Edition | auto | mouse/razer/viper-mini-signature-edition.json
+mouse | Razer | Deathadder V3 Pro | Deathadder | V3 Pro | auto | mouse/razer/deathadder-v3-pro.json
+mouse | Razer | Deathadder V3 Hyperspeed | Deathadder | V3 Hyperspeed | auto | mouse/razer/deathadder-v3-hyperspeed.json
+mouse | Razer | Deathadder V3 | Deathadder | V3 | auto | mouse/razer/deathadder-v3.json
+mouse | Razer | Viper V3 Pro | Viper | V3 Pro | auto | mouse/razer/viper-v3-pro.json
+mouse | Razer | Viper V3 Hyperspeed | Viper | V3 Hyperspeed | auto | mouse/razer/viper-v3-hyperspeed.json
+mouse | Razer | Naga V2 Pro | Naga V2 | Pro | auto | mouse/razer/naga-v2-pro.json
+mouse | Razer | Naga V2 Hyperspeed | Naga V2 | Hyperspeed | auto | mouse/razer/naga-v2-hyperspeed.json
+mouse | Razer | Naga X | Naga X | (none) | no-variant | mouse/razer/naga-x.json
+mouse | Razer | Naga Left-Handed Edition | Naga Left-Handed Edition | (none) | no-variant | mouse/razer/naga-left-handed-edition.json
+mouse | Razer | Basilisk V3 Pro 35k | Basilisk V3 | Pro 35k | auto | mouse/razer/basilisk-v3-pro-35k.json
+mouse | Razer | Basilisk V3 35k | Basilisk V3 | 35k | auto | mouse/razer/basilisk-v3-35k.json
+mouse | Razer | Basilisk V3 X Hyperspeed | Basilisk V3 | X Hyperspeed | auto | mouse/razer/basilisk-v3-x-hyperspeed.json
+mouse | Razer | Orochi V2 | Orochi V2 | (none) | no-variant | mouse/razer/orochi-v2.json
+mouse | Razer | Pro Click | Pro Click | (none) | no-variant | mouse/razer/pro-click.json
+mouse | Redragon | Aatrox M811 MMO | Aatrox M811 | MMO | auto | mouse/redragon/aatrox-m811-mmo.json
+mouse | Redragon | Aatrox M811 Pro | Aatrox M811 | Pro | auto | mouse/redragon/aatrox-m811-pro.json
+mouse | Redragon | Bullseye M806 | Bullseye M806 | (none) | no-variant | mouse/redragon/bullseye-m806.json
+mouse | Redragon | Bullseye M806 Pro | Bullseye M806 | Pro | auto | mouse/redragon/bullseye-m806-pro.json
+mouse | Redragon | Cobra M711 | Cobra M711 | (none) | no-variant | mouse/redragon/cobra-m711.json
+mouse | Redragon | Cobra M711 FPS | Cobra M711 | FPS | auto | mouse/redragon/cobra-m711-fps.json
+mouse | Redragon | Devourer M993 | Devourer M993 | (none) | no-variant | mouse/redragon/devourer-m993.json
+mouse | Redragon | EISA K1NG M916 Pro (1khz) | K1NG M916 | Pro (1khz) | override | mouse/redragon/eisa-k1ng-m916-pro-1khz.json
+mouse | Redragon | FYZU M995 | FYZU M995 | (none) | no-variant | mouse/redragon/fyzu-m995.json
+mouse | Redragon | Gainer M656 | Gainer M656 | (none) | no-variant | mouse/redragon/gainer-m656.json
+mouse | Redragon | Impact Elite M913 | Impact Elite M913 | (none) | no-variant | mouse/redragon/impact-elite-m913.json
+mouse | Redragon | Impact M908 | Impact M908 | (none) | no-variant | mouse/redragon/impact-m908.json
+mouse | Redragon | Invader M719 Pro | Invader M719 | Pro | auto | mouse/redragon/invader-m719-pro.json
+mouse | Redragon | K1ING M916 Pro (4K Hz) | K1ING M916 | Pro (4K Hz) | auto | mouse/redragon/k1ing-m916-pro-4k-hz.json
+mouse | Redragon | K1NG M724 (1K Hz) | K1NG M724 | (1K Hz) | auto | mouse/redragon/k1ng-m724-1k-hz.json
+mouse | Redragon | K1NG M916 (2.4Ghz Wireless) | K1NG M916 | (2.4Ghz Wireless) | auto | mouse/redragon/k1ng-m916-24ghz-wireless.json
+mouse | Redragon | K1NG M916 PRO (1K Hz) | K1NG M916 | PRO (1K Hz) | auto | mouse/redragon/k1ng-m916-pro-1k-hz.json
+mouse | Redragon | K1NG M996 (8K Hz) | K1NG M996 | (8K Hz) | auto | mouse/redragon/k1ng-m996-8k-hz.json
+mouse | Redragon | K1NG MAX M918 (1K Hz) | K1NG MAX M918 | (1K Hz) | auto | mouse/redragon/k1ng-max-m918-1k-hz.json
+mouse | Redragon | K1NG MAX M918 PRO (1K Hz) | K1NG MAX M918 | PRO (1K Hz) | auto | mouse/redragon/k1ng-max-m918-pro-1k-hz.json
+mouse | Redragon | Legend Chroma M990 | Legend Chroma M990 | (none) | no-variant | mouse/redragon/legend-chroma-m990.json
+mouse | Redragon | M991 Wireless FPS | M991 | Wireless FPS | auto | mouse/redragon/m991-wireless-fps.json
+mouse | Redragon | Mirage M690 Pro | Mirage M690 | Pro | auto | mouse/redragon/mirage-m690-pro.json
+mouse | Redragon | Mirage 2 M690-1 | Mirage 2 M690 | 1 | auto | mouse/redragon/mirage-2-m690-1.json
+mouse | Redragon | Nirvana M652 | Nirvana M652 | (none) | no-variant | mouse/redragon/nirvana-m652.json
+mouse | Redragon | Predator M612 | Predator M612 | (none) | no-variant | mouse/redragon/predator-m612.json
+mouse | Redragon | Predator M612 Pro | Predator M612 | Pro | auto | mouse/redragon/predator-m612-pro.json
+mouse | Redragon | Rind M813 Pro | Rind M813 | Pro | auto | mouse/redragon/rind-m813-pro.json
+mouse | Redragon | Storm M808 | Storm M808 | (none) | no-variant | mouse/redragon/storm-m808.json
+mouse | Redragon | Storm M808-N | Storm M808 | N | auto | mouse/redragon/storm-m808-n.json
+mouse | Redragon | Storm Pro M808 | Storm Pro M808 | (none) | no-variant | mouse/redragon/storm-pro-m808.json
+mouse | Redragon | Taipan Pro M810 Pro | Taipan Pro M810 | Pro | auto | mouse/redragon/taipan-pro-m810-pro.json
+mouse | Redragon | Trident M616 | Trident M616 | (none) | no-variant | mouse/redragon/trident-m616.json
+mouse | Redragon | Trident M693 | Trident | M693 | override | mouse/redragon/trident-m693.json
+mouse | Redragon | Vampire Elite M686 | Vampire Elite M686 | (none) | no-variant | mouse/redragon/vampire-elite-m686.json
+mouse | Redragon | Woki M994 | Woki M994 | (none) | no-variant | mouse/redragon/woki-m994.json
+mouse | Cougar | Revenger Pro 4k | Revenger Pro 4k | (none) | no-variant | mouse/cougar/revenger-pro-4k.json
+mouse | Cougar | Dualblader | Dualblader | (none) | no-variant | mouse/cougar/dualblader.json
+mouse | Cougar | 700M EVO eSPORTS | 700M EVO eSPORTS | (none) | no-variant | mouse/cougar/700m-evo-esports.json
+mouse | Cougar | Minos Neo | Minos Neo | (none) | no-variant | mouse/cougar/minos-neo.json
+mouse | Cougar | Airblader | Airblader | (none) | no-variant | mouse/cougar/airblader.json
+mouse | Cougar | Airblader Tournamanet | Airblader | Tournamanet | auto | mouse/cougar/airblader-tournamanet.json
+mouse | Cougar | Minox XT | Minox XT | (none) | no-variant | mouse/cougar/minox-xt.json
+mouse | Cougar | Minos X2 | Minos X2 | (none) | no-variant | mouse/cougar/minos-x2.json
+mouse | Cougar | Minos EX | Minos EX | (none) | no-variant | mouse/cougar/minos-ex.json
+mouse | Cougar | Surpassion EX | Surpassion | EX | auto | mouse/cougar/surpassion-ex.json
+mouse | Cougar | Surpassion RX | Surpassion | RX | auto | mouse/cougar/surpassion-rx.json
+mouse | Endgame Gear | XM2w 4k Wireless | XM2w | 4k Wireless | override | mouse/endgame-gear/xm2w-4k-wireless.json
+mouse | Endgame Gear | OP1 | OP1 | (none) | no-variant | mouse/endgame-gear/op1.json
+mouse | Endgame Gear | OP1 RGB | OP1 | RGB | auto | mouse/endgame-gear/op1-rgb.json
+mouse | Endgame Gear | OP1 8k | OP1 | 8k | auto | mouse/endgame-gear/op1-8k.json
+mouse | Endgame Gear | OP1w 4k Wireless | OP1w | 4k Wireless | override | mouse/endgame-gear/op1w-4k-wireless.json
+mouse | Endgame Gear | OP1we Wireless | OP1we | Wireless | override | mouse/endgame-gear/op1we-wireless.json
+mouse | Endgame Gear | XM2we Wireless | XM2we | Wireless | override | mouse/endgame-gear/xm2we-wireless.json
+mouse | Endgame Gear | XM2 8k | XM2 | 8k | auto | mouse/endgame-gear/xm2-8k.json
+mouse | Endgame Gear | XM1r | XM1 | r | auto | mouse/endgame-gear/xm1r.json
+mouse | Endgame Gear | XM1 RGB | XM1 | RGB | auto | mouse/endgame-gear/xm1-rgb.json
+mouse | EVGA | X12 | X12 | (none) | no-variant | mouse/evga/x12.json
+mouse | EVGA | X17 | X17 | (none) | no-variant | mouse/evga/x17.json
+mouse | EVGA | X15 MMO | X15 | MMO | auto | mouse/evga/x15-mmo.json
+mouse | EVGA | X20 Wireless | X20 | Wireless | auto | mouse/evga/x20-wireless.json
+mouse | Finalmouse | ULX Prophecy - Clix | ULX Prophecy | Clix | override | mouse/finalmouse/ulx-prophecy-clix.json
+mouse | Finalmouse | ULX Prophecy - Scream | ULX Prophecy | Scream | override | mouse/finalmouse/ulx-prophecy-scream.json
+mouse | Finalmouse | ULX Prophecy - Tarik | ULX Prophecy | Tarik | override | mouse/finalmouse/ulx-prophecy-tarik.json
+mouse | Finalmouse | ULX Prophecy - Tfue | ULX Prophecy | Tfue | override | mouse/finalmouse/ulx-prophecy-tfue.json
+mouse | Fnatic | x Lamzu MAYA X 8K | x Lamzu MAYA | X 8K | auto | mouse/fnatic/x-lamzu-maya-x-8k.json
+mouse | Fnatic | x Lamzu MAYA 8K | x Lamzu MAYA | 8K | auto | mouse/fnatic/x-lamzu-maya-8k.json
+mouse | Fnatic | x Lamzu THORN | x Lamzu THORN | (none) | no-variant | mouse/fnatic/x-lamzu-thorn.json
+mouse | Fnatic | Bolt | Bolt | (none) | no-variant | mouse/fnatic/bolt.json
+mouse | G-Wolves | HTR PRO 8k Wireless | HTR | PRO 8k Wireless | auto | mouse/g-wolves/htr-pro-8k-wireless.json
+mouse | G-Wolves | HTR 8k Wireless | HTR | 8k Wireless | auto | mouse/g-wolves/htr-8k-wireless.json
+mouse | G-Wolves | HT-S2 8k Wireless | HT-S2 | 8k Wireless | auto | mouse/g-wolves/ht-s2-8k-wireless.json
+mouse | G-Wolves | HTS Ultra 8K Wireless | HTS | Ultra 8K Wireless | auto | mouse/g-wolves/hts-ultra-8k-wireless.json
+mouse | G-Wolves | Hati-S ACE Wireless | Hati-S | ACE Wireless | override | mouse/g-wolves/hati-s-ace-wireless.json
+mouse | G-Wolves | Hati-S OPEN Source Wireless | Hati-S | OPEN Source Wireless | override | mouse/g-wolves/hati-s-open-source-wireless.json
+mouse | G-Wolves | HTS Plus 8K Wireless | HTS Plus | 8K Wireless | auto | mouse/g-wolves/hts-plus-8k-wireless.json
+mouse | G-Wolves | HTS Plus 4K Wireless | HTS Plus | 4K Wireless | auto | mouse/g-wolves/hts-plus-4k-wireless.json
+mouse | G-Wolves | HTS Plus Ace Wireless | HTS Plus | Ace Wireless | auto | mouse/g-wolves/hts-plus-ace-wireless.json
+mouse | G-Wolves | HTS Plus Classic Wireless | HTS Plus | Classic Wireless | auto | mouse/g-wolves/hts-plus-classic-wireless.json
+mouse | G-Wolves | HTX Mini 8K Wireless | HTX | Mini 8K Wireless | auto | mouse/g-wolves/htx-mini-8k-wireless.json
+mouse | G-Wolves | HTX 4K Wireless | HTX | 4K Wireless | auto | mouse/g-wolves/htx-4k-wireless.json
+mouse | G-Wolves | HTX ACE Wireless | HTX | ACE Wireless | auto | mouse/g-wolves/htx-ace-wireless.json
+mouse | G-Wolves | HSK Pro 4K Wireless | HSK Pro | 4K Wireless | auto | mouse/g-wolves/hsk-pro-4k-wireless.json
+mouse | G-Wolves | HSK Pro ACE Wireless | HSK Pro | ACE Wireless | auto | mouse/g-wolves/hsk-pro-ace-wireless.json
+mouse | G-Wolves | HSK Plus 4k Wireless | HSK Plus | 4k Wireless | auto | mouse/g-wolves/hsk-plus-4k-wireless.json
+mouse | G-Wolves | HSK Plus Lite Wireless | HSK Plus | Lite Wireless | auto | mouse/g-wolves/hsk-plus-lite-wireless.json
+mouse | G-Wolves | HSK Plus Ace-2 Wireless | HSK Plus | Ace-2 Wireless | auto | mouse/g-wolves/hsk-plus-ace-2-wireless.json
+mouse | G-Wolves | Hati-M HTM ACE Wireless | Hati-M | HTM ACE Wireless | auto | mouse/g-wolves/hati-m-htm-ace-wireless.json
+mouse | G-Wolves | Hati HTM ACE Wired | Hati HTM | ACE Wired | override | mouse/g-wolves/hati-htm-ace-wired.json
+mouse | G-Wolves | Hati HTM Classic Wired | Hati HTM | Classic Wired | override | mouse/g-wolves/hati-htm-classic-wired.json
+mouse | G-Wolves | Hati-S HTS ACE Wired | Hati-S HTS | ACE Wired | override | mouse/g-wolves/hati-s-hts-ace-wired.json
+mouse | G-Wolves | HSK Wired | HSK | Wired | auto | mouse/g-wolves/hsk-wired.json
+mouse | G-Wolves | Skoll Mini SK-S Wired | Skoll Mini | SK-S Wired | override | mouse/g-wolves/skoll-mini-sk-s-wired.json
+mouse | Lamzu | Tachi | Tachi | (none) | no-variant | mouse/lamzu/tachi.json
+mouse | Lamzu | Maya 4k | Maya | 4k | auto | mouse/lamzu/maya-4k.json
+mouse | Lamzu | Maya X | Maya | X | auto | mouse/lamzu/maya-x.json
+mouse | Lamzu | Maya (4k Compatible) | Maya | (4k Compatible) | auto | mouse/lamzu/maya-4k-compatible.json
+mouse | Lamzu | Maya Doodle | Maya | Doodle | auto | mouse/lamzu/maya-doodle.json
+mouse | Lamzu | Paro | Paro | (none) | no-variant | mouse/lamzu/paro.json
+mouse | Lamzu | Thorn 4k | Thorn | 4k | auto | mouse/lamzu/thorn-4k.json
+mouse | Lamzu | Thorn 4k (4K Compatible) | Thorn | 4k (4K Compatible) | auto | mouse/lamzu/thorn-4k-4k-compatible.json
+mouse | Lamzu | Atlantis Mini 4k | Atlantis | Mini 4k | auto | mouse/lamzu/atlantis-mini-4k.json
+mouse | Lamzu | Atlantis Mini Pro (4k Compatible) | Atlantis | Mini Pro (4k Compatible) | auto | mouse/lamzu/atlantis-mini-pro-4k-compatible.json
+mouse | Lamzu | Atlantis Mini [Champion Edition] | Atlantis | Mini [Champion Edition] | auto | mouse/lamzu/atlantis-mini-champion-edition.json
+mouse | Lamzu | Atlantis OG V2 4k | Atlantis | OG V2 4k | auto | mouse/lamzu/atlantis-og-v2-4k.json
+mouse | Lamzu | Atlantis OG V2 Pro (4k Compatible) | Atlantis | OG V2 Pro (4k Compatible) | auto | mouse/lamzu/atlantis-og-v2-pro-4k-compatible.json
+mouse | Lenovo Legion | M300s RGB | M300s | RGB | auto | mouse/lenovo-legion/m300s-rgb.json
+mouse | Lenovo Legion | M210 RGB | M210 | RGB | auto | mouse/lenovo-legion/m210-rgb.json
+mouse | Lenovo Legion | M410 Wireless RGB | M410 | Wireless RGB | auto | mouse/lenovo-legion/m410-wireless-rgb.json
+mouse | Lenovo Legion | M600s Wireless | M600s | Wireless | auto | mouse/lenovo-legion/m600s-wireless.json
+mouse | Lenovo Legion | M600 Wireless | M600 | Wireless | auto | mouse/lenovo-legion/m600-wireless.json
+mouse | Mad Catz | B.A.T. 6+ | B.A.T. 6+ | (none) | no-variant | mouse/mad-catz/bat-6.json
+mouse | Mad Catz | M.O.J.O. M1 | M.O.J.O. | M1 | override | mouse/mad-catz/mojo-m1.json
+mouse | Mad Catz | R.A.T. 8+ ADV | R.A.T. 8+ ADV | (none) | no-variant | mouse/mad-catz/rat-8-adv.json
+mouse | Mad Catz | R.A.T. PRO X3 Supreme | R.A.T. PRO X3 Supreme | (none) | no-variant | mouse/mad-catz/rat-pro-x3-supreme.json
+mouse | Mad Catz | R.A.T. PRO X3 | R.A.T. PRO | X3 | override | mouse/mad-catz/rat-pro-x3.json
+mouse | Mad Catz | R.A.T. 8+ | R.A.T. 8+ | (none) | no-variant | mouse/mad-catz/rat-8.json
+mouse | Mad Catz | R.A.T. 6+ | R.A.T. 6+ | (none) | no-variant | mouse/mad-catz/rat-6.json
+mouse | Mad Catz | R.A.T. PRO S3 | R.A.T. PRO | S3 | override | mouse/mad-catz/rat-pro-s3.json
+mouse | Mad Catz | R.A.T. 4+ | R.A.T. 4+ | (none) | no-variant | mouse/mad-catz/rat-4.json
+mouse | Mad Catz | R.A.T. 2+ | R.A.T. 2+ | (none) | no-variant | mouse/mad-catz/rat-2.json
+mouse | Mad Catz | R.A.T. 1+ | R.A.T. 1+ | (none) | no-variant | mouse/mad-catz/rat-1.json
+mouse | Mad Catz | M.O.J.O. M2 | M.O.J.O. | M2 | override | mouse/mad-catz/mojo-m2.json
+mouse | Mad Catz | R.A.T. DWS | R.A.T. DWS | (none) | no-variant | mouse/mad-catz/rat-dws.json
+mouse | Mad Catz | R.A.T. AIR | R.A.T. AIR | (none) | no-variant | mouse/mad-catz/rat-air.json
+mouse | NZXT | Lift Elite Wireless | Lift Elite Wireless | (none) | no-variant | mouse/nzxt/lift-elite-wireless.json
+mouse | NZXT | Lift 2 Symm | Lift 2 Symm | (none) | no-variant | mouse/nzxt/lift-2-symm.json
+mouse | NZXT | Lift 2 Ergo | Lift 2 Ergo | (none) | no-variant | mouse/nzxt/lift-2-ergo.json
+mouse | Turtle Beach | Kone II Air | Kone II | Air | auto | mouse/turtle-beach/kone-ii-air.json
+mouse | Turtle Beach | Kone II | Kone II | (none) | no-variant | mouse/turtle-beach/kone-ii.json
+mouse | Turtle Beach | Burst II Air | Burst II | Air | auto | mouse/turtle-beach/burst-ii-air.json
+mouse | Turtle Beach | Pure Air | Pure | Air | auto | mouse/turtle-beach/pure-air.json
+mouse | Turtle Beach | Pure Sel | Pure | Sel | auto | mouse/turtle-beach/pure-sel.json
+mouse | Turtle Beach | Kone XP Air | Kone XP | Air | auto | mouse/turtle-beach/kone-xp-air.json
+mouse | Pulsar | X3 | X3 | (none) | no-variant | mouse/pulsar/x3.json
+mouse | Pulsar | X3 Mini | X3 Mini | (none) | no-variant | mouse/pulsar/x3-mini.json
+mouse | Pulsar | X3 LHD | X3 LHD | (none) | no-variant | mouse/pulsar/x3-lhd.json
+mouse | Pulsar | X3 LHD Mini | X3 LHD Mini | (none) | no-variant | mouse/pulsar/x3-lhd-mini.json
+mouse | Pulsar | X2 Crazylight | X2 Crazylight | (none) | no-variant | mouse/pulsar/x2-crazylight.json
+mouse | Pulsar | X2 v3 Mini | X2 v3 Mini | (none) | no-variant | mouse/pulsar/x2-v3-mini.json
+mouse | Pulsar | X2 v3 | X2 v3 | (none) | no-variant | mouse/pulsar/x2-v3.json
+mouse | Pulsar | X2 Wired | X2 Wired | (none) | no-variant | mouse/pulsar/x2-wired.json
+mouse | Pulsar | X2 v2 Mini | X2 v2 Mini | (none) | no-variant | mouse/pulsar/x2-v2-mini.json
+mouse | Pulsar | X2 v2 | X2 v2 | (none) | no-variant | mouse/pulsar/x2-v2.json
+mouse | Pulsar | X2 v1 Mini | X2 v1 Mini | (none) | no-variant | mouse/pulsar/x2-v1-mini.json
+mouse | Pulsar | X2 v1 | X2 | v1 | override | mouse/pulsar/x2-v1.json
+mouse | Pulsar | [Founders Edition] X2 v2 | X2 | [Founders Edition] v2 | override | mouse/pulsar/founders-edition-x2-v2.json
+mouse | Pulsar | [Founders Edition] X2 v2 Mini | [Founders Edition] X2 v2 | Mini | auto | mouse/pulsar/founders-edition-x2-v2-mini.json
+mouse | Pulsar | X2H v3 | X2H v3 | (none) | no-variant | mouse/pulsar/x2h-v3.json
+mouse | Pulsar | X2H v3 Mini | X2H v3 Mini | (none) | no-variant | mouse/pulsar/x2h-v3-mini.json
+mouse | Pulsar | X2H | X2H | (none) | no-variant | mouse/pulsar/x2h.json
+mouse | Pulsar | X2H Medium | X2H Medium | (none) | no-variant | mouse/pulsar/x2h-medium.json
+mouse | Pulsar | X2H Wired | X2H Wired | (none) | no-variant | mouse/pulsar/x2h-wired.json
+mouse | Pulsar | X2H Mini | X2H Mini | (none) | no-variant | mouse/pulsar/x2h-mini.json
+mouse | Pulsar | X2H eS | X2H eS | (none) | no-variant | mouse/pulsar/x2h-es.json
+mouse | Pulsar | [Founders Edition] X2H | [Founders Edition] X2H | (none) | no-variant | mouse/pulsar/founders-edition-x2h.json
+mouse | Pulsar | [Founders Edition] X2H Mini | [Founders Edition] X2H Mini | (none) | no-variant | mouse/pulsar/founders-edition-x2h-mini.json
+mouse | Pulsar | [Founders Edition] X2H eS | [Founders Edition] X2H eS | (none) | no-variant | mouse/pulsar/founders-edition-x2h-es.json
+mouse | Pulsar | X2A v3 | X2A v3 | (none) | no-variant | mouse/pulsar/x2a-v3.json
+mouse | Pulsar | X2A Wired | X2A Wired | (none) | no-variant | mouse/pulsar/x2a-wired.json
+mouse | Pulsar | [Founders Edition] X2A eS | X2A | [Founders Edition] eS | override | mouse/pulsar/founders-edition-x2a-es.json
+mouse | Pulsar | X2A eS | X2A | eS | override | mouse/pulsar/x2a-es.json
+mouse | Pulsar | X2A Mini | X2A Mini | (none) | no-variant | mouse/pulsar/x2a-mini.json
+mouse | Pulsar | X2A | X2A | (none) | no-variant | mouse/pulsar/x2a.json
+mouse | Pulsar | Xlite v4 | Xlite v4 | (none) | no-variant | mouse/pulsar/xlite-v4.json
+mouse | Pulsar | Xlite v4 Large | Xlite v4 Large | (none) | no-variant | mouse/pulsar/xlite-v4-large.json
+mouse | Pulsar | Xlite v4 Mini | Xlite v4 Mini | (none) | no-variant | mouse/pulsar/xlite-v4-mini.json
+mouse | Pulsar | Xlite v4 eS | Xlite v4 eS | (none) | no-variant | mouse/pulsar/xlite-v4-es.json
+mouse | Pulsar | Xlite Wired | Xlite Wired | (none) | no-variant | mouse/pulsar/xlite-wired.json
+mouse | Pulsar | [Founders Edition] Xlite v3 eS | [Founders Edition] Xlite v3 eS | (none) | no-variant | mouse/pulsar/founders-edition-xlite-v3-es.json
+mouse | Pulsar | Xlite v3 Large | Xlite v3 Large | (none) | no-variant | mouse/pulsar/xlite-v3-large.json
+mouse | Pulsar | Xlite v3 Medium | Xlite v3 Medium | (none) | no-variant | mouse/pulsar/xlite-v3-medium.json
+mouse | Pulsar | Xlite v3 Mini | Xlite v3 Mini | (none) | no-variant | mouse/pulsar/xlite-v3-mini.json
+mouse | Pulsar | Xlite v3 eS | Xlite v3 eS | (none) | no-variant | mouse/pulsar/xlite-v3-es.json
+mouse | Pulsar | Xlite v2 | Xlite v2 | (none) | no-variant | mouse/pulsar/xlite-v2.json
+mouse | Pulsar | Xlite v2 Mini | Xlite v2 Mini | (none) | no-variant | mouse/pulsar/xlite-v2-mini.json
+mouse | Pulsar | [First Edition] Feinmann F01 | [First Edition] Feinmann F01 | (none) | no-variant | mouse/pulsar/first-edition-feinmann-f01.json
+mouse | Pwnage | Trinity CF | Trinity CF | (none) | no-variant | mouse/pwnage/trinity-cf.json
+mouse | Pwnage | StormBreaker MAX CF | StormBreaker | MAX CF | auto | mouse/pwnage/stormbreaker-max-cf.json
+mouse | Pwnage | StormBreaker 8k | StormBreaker | 8k | auto | mouse/pwnage/stormbreaker-8k.json
+mouse | Pwnage | StormBreaker x Whzy MAX CF | StormBreaker | x Whzy MAX CF | auto | mouse/pwnage/stormbreaker-x-whzy-max-cf.json
+mouse | Pwnage | StormBreaker X BLG Valorant | StormBreaker | X BLG Valorant | auto | mouse/pwnage/stormbreaker-x-blg-valorant.json
+mouse | Pwnage | Ultra Custom Wireless Ambi | Ultra Custom Wireless Ambi | (none) | no-variant | mouse/pwnage/ultra-custom-wireless-ambi.json
+mouse | Pwnage | Ultra Custom Ergo | Ultra Custom Ergo | (none) | no-variant | mouse/pwnage/ultra-custom-ergo.json
+mouse | Pwnage | Ultra Custom Wireless Ergo Gen 2 | Ultra Custom Wireless Ergo Gen 2 | (none) | no-variant | mouse/pwnage/ultra-custom-wireless-ergo-gen-2.json
+mouse | Pwnage | Ultra Custom Wireless Symm 1 Gen 2 | Ultra Custom Wireless Symm 1 Gen 2 | (none) | no-variant | mouse/pwnage/ultra-custom-wireless-symm-1-gen-2.json
+mouse | Pwnage | Ultra Custom Wireless Symm 2 | Ultra Custom Wireless Symm 2 | (none) | no-variant | mouse/pwnage/ultra-custom-wireless-symm-2.json
+mouse | Pwnage | Ultra Custom Symm 2 | Ultra Custom Symm 2 | (none) | no-variant | mouse/pwnage/ultra-custom-symm-2.json
+mouse | Pwnage | Ultra Custom Symm | Ultra Custom Symm | (none) | no-variant | mouse/pwnage/ultra-custom-symm.json
+mouse | Cooler Master | MM730 | MM730 | (none) | no-variant | mouse/cooler-master/mm730.json
+mouse | Cooler Master | MM731 | MM731 | (none) | no-variant | mouse/cooler-master/mm731.json
+mouse | Razer | Deathadder V4 Pro | Deathadder | V4 Pro | auto | mouse/razer/deathadder-v4-pro.json
+keyboard | NuPhy | Field75HE | Field75HE | (none) | no-variant | keyboard/nuphy/field75he.json
+keyboard | Asus | ROG Strix Scope II 96 Wireless | ROG Strix Scope II 96 Wireless | (none) | no-variant | keyboard/asus/rog-strix-scope-ii-96-wireless.json
+keyboard | Mountain | Everest 60 | Everest 60 | (none) | no-variant | keyboard/mountain/everest-60.json
+keyboard | Lemokey | P1 HE Wireless | P1 HE Wireless | (none) | no-variant | keyboard/lemokey/p1-he-wireless.json
+keyboard | SteelSeries | Apex Pro TKL Gen 3 | Apex Pro TKL Gen 3 | (none) | no-variant | keyboard/steelseries/apex-pro-tkl-gen-3.json
+keyboard | SteelSeries | Apex Pro Gen 3 | Apex Pro Gen 3 | (none) | no-variant | keyboard/steelseries/apex-pro-gen-3.json
+keyboard | Razer | Huntsman V2 Analog | Huntsman V2 Analog | (none) | no-variant | keyboard/razer/huntsman-v2-analog.json
+keyboard | Logitech G | G915 TKL | G915 TKL | (none) | no-variant | keyboard/logitech-g/g915-tkl.json
+keyboard | Corsair | K100 RGB | K100 RGB | (none) | no-variant | keyboard/corsair/k100-rgb.json
+keyboard | HyperX | Alloy Origins | Alloy Origins | (none) | no-variant | keyboard/hyperx/alloy-origins.json
+keyboard | Wooting | 60HE | 60HE | (none) | no-variant | keyboard/wooting/60he.json
+keyboard | Razer | BlackWidow V3 | BlackWidow V3 | (none) | no-variant | keyboard/razer/blackwidow-v3.json
+monitor | MSI | MPG 321URX QD-OLED | MPG 321URX QD-OLED | (none) | no-variant | monitor/msi/mpg-321urx-qd-oled.json
+monitor | Alienware | AW3423DWF | AW3423DWF | (none) | no-variant | monitor/alienware/aw3423dwf.json
+monitor | LG | 27GR95QE-B | 27GR95QE-B | (none) | no-variant | monitor/lg/27gr95qe-b.json
+monitor | ASUS | ROG Swift PG27AQDM | ROG Swift PG27AQDM | (none) | no-variant | monitor/asus/rog-swift-pg27aqdm.json
+monitor | ViewSonic | Elite XG321UG | Elite XG321UG | (none) | no-variant | monitor/viewsonic/elite-xg321ug.json
+monitor | MSI | MAG 274QRF QD E2 | MAG 274QRF QD E2 | (none) | no-variant | monitor/msi/mag-274qrf-qd-e2.json
+monitor | HP | Omen Transcend 32 | Omen Transcend 32 | (none) | no-variant | monitor/hp/omen-transcend-32.json
+monitor | Dell | UltraSharp U3425WE | UltraSharp U3425WE | (none) | no-variant | monitor/dell/ultrasharp-u3425we.json
+monitor | Acer | Predator X34 OLED | Predator X34 OLED | (none) | no-variant | monitor/acer/predator-x34-oled.json
+monitor | Samsung | Smart Monitor M9 | Smart Monitor M9 | (none) | no-variant | monitor/samsung/smart-monitor-m9.json
+monitor | Dell | AW2725Q | AW2725Q | (none) | no-variant | monitor/dell/aw2725q.json
+monitor | Gigabyte | MO27Q2 | MO27Q2 | (none) | no-variant | monitor/gigabyte/mo27q2.json

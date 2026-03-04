@@ -1,0 +1,46 @@
+﻿/**
+ * email格式驗證
+ * @param {any} email
+ */
+function isEmail(email) {
+    var emailReg = /^[^\[\]\(\)\\<>:;,@.]+[^\[\]\(\)\\<>:;,@]*@[a-z0-9A-Z]+(([.]?[a-z0-9A-Z]+)*[-]*)*[.]([a-z0-9A-Z]+[-]*)+$/g;
+
+    if (!emailReg.test(email)) {
+        console.log('not email format:' , email);
+        return false;
+    }
+    else {
+        return true;
+    }
+}
+
+/*取得當前querystring*/
+function getUrlVars() {
+    var i = window.location.href.indexOf('?');
+    if (i === -1) {
+        return {};
+    }
+    var vars = [], hash;
+    var hashes = window.location.href.slice(i + 1).split('&');
+    for (var j = 0; j < hashes.length; j++) {
+        hash = hashes[j].split('=');
+        vars[hash[0]] = hash[1];
+    }
+    return vars;
+}
+
+/**
+ * 根據querystring前往其他頁面
+ * @param {any} params queryString的object
+ */
+function goToPage(params) {
+
+    var queryString = Object.keys(params).map(function (key) {
+        return key + '=' + params[key];
+    }).join('&');
+
+    const origin = window.location.origin;
+    const pathname = window.location.pathname;
+    const url = origin + pathname + '?' + queryString;
+    window.location.href = url;
+}

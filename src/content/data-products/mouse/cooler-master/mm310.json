@@ -1,0 +1,285 @@
+{
+  "slug": "cooler-master-mm310",
+  "brand": "Cooler Master",
+  "model": "MM310",
+  "baseModel": "MM310",
+  "variant": "",
+  "category": "mouse",
+  "imagePath": "/images/mouse/cooler-master/mm310",
+  "cardTags": "false",
+  "featured": "",
+  "release_date": "08/2022",
+  "discontinued": "",
+  "sku": "MM-310-KKOL1",
+  "price_range": 29.99,
+  "colors": [
+    "black",
+    "white",
+    "white+blue"
+  ],
+  "design": [
+    "standard"
+  ],
+  "lighting": "2 zone (rgb)",
+  "rgb": "yes",
+  "connection": "wired",
+  "connectivity": "n/a",
+  "computer_side_connector": "USB-A",
+  "mouse_side_connector": "n/a",
+  "bluetooth": "no",
+  "cable_type": "braided",
+  "paracord": "yes",
+  "wireless_charging": "no",
+  "battery_hours": "n/a",
+  "adjustable_weight": "no",
+  "feet_material": "PTFE (95%)",
+  "coating": "matte",
+  "honeycomb_frame": "no",
+  "silent_clicks": "no",
+  "weight": 53,
+  "material": "plastic",
+  "lngth": 125.5,
+  "width": 71,
+  "height": 40.5,
+  "form_factor": "right",
+  "shape": "symmetrical",
+  "hump": "back - front",
+  "front_flare": "outward",
+  "thumb_rest": "no",
+  "grip": [
+    "palm",
+    "claw"
+  ],
+  "hand_size": [
+    "medium"
+  ],
+  "mcu": "unk",
+  "mcu_link": "",
+  "sensor": "PAW3327",
+  "sensor_brand": "PixArt",
+  "sensor_date": "10/2018",
+  "sensor_link": "https://www.pixart.com/products-detail/12/PAW3327DB-TWQU",
+  "sensor_type": "optical",
+  "flawless_sensor": "yes",
+  "sensor_latency": "unk",
+  "sensor_latency_list": [
+    "unk"
+  ],
+  "shift_latency": "unk",
+  "polling_rate": [
+    1000,
+    500,
+    250,
+    125
+  ],
+  "dpi": 12000,
+  "ips": 220,
+  "acceleration": 30,
+  "lift": [
+    1.2
+  ],
+  "lift_settings": "fixed low",
+  "motion_sync": "unk",
+  "hardware_acceleration": "no",
+  "smoothing": "no",
+  "nvidia_reflex": "yes",
+  "switch": "GM 4.0",
+  "switch_brand": "kailh",
+  "switch_type": "mechanical",
+  "switch_link": "",
+  "hot_swappable": "no",
+  "debounce": "unk",
+  "click_latency": 4,
+  "click_latency_list": "4 wired",
+  "click_force": "unk",
+  "encoder": "",
+  "encoder_brand": "",
+  "encoder_link": "",
+  "side_buttons": 2,
+  "middle_buttons": 1,
+  "programmable_buttons": 6,
+  "tilt_scroll_wheel": "no",
+  "adjustable_scroll_wheel": "no",
+  "onboard_memory": "yes",
+  "onboard_memory_value": "unk",
+  "profile_switching": "no",
+  "overall": 7.2,
+  "accuracy": 7.7,
+  "response": 7.1,
+  "quality": 7.6,
+  "comfort": 7.6,
+  "work": 6.5,
+  "feet_score": 8.4,
+  "fps_score": 6.5,
+  "mmo_score": 6.7,
+  "moba_score": 6.6,
+  "aarpg_score": 6.8,
+  "rts_score": 6.6,
+  "fps": "yes",
+  "mmo": "yes",
+  "moba": "yes",
+  "aarpg": "yes",
+  "rts": "yes",
+  "snap_dateUpdated": "11/21/2025",
+  "snap_datePublished": null,
+  "snap_subtitle": "",
+  "hubTags": [],
+  "game1": "",
+  "game2": "",
+  "game3": "",
+  "game4": "",
+  "game5": "",
+  "game6": "",
+  "game7": "",
+  "game8": "",
+  "keytakeaway": "",
+  "pcard": "",
+  "verdict": "",
+  "pros": [],
+  "cons": [],
+  "youtube": "https://www.youtube.com/watch?v=mltu7z4cmbY",
+  "affiliateLinks": [
+    {
+      "url": "https://www.amazon.com/Cooler-Master-Adjustable-Ultraweave-MM-310-KKOL1/dp/B0BHZX2PJB?dib=eyJ2IjoiMSJ9.N0yVekJPGSYF8lttbks4bVLG0mAN-JjItPmKx5vvtp7GjHj071QN20LucGBJIEps.ln4W6Wol59o3gl4BCAfuzmhc72jRmnYIGba5YBT55XE&dib_tag=se&keywords=Cooler%2BMaster%2BMM310&qid=1709813225&sr=8-1&th=1&linkCode=ll1&tag=eggear-20&linkId=a181fc51868cefb6ba003e0aa624707a&language=en_US&ref_=as_li_ss_tl",
+      "retailer": "amazon",
+      "slug": "amazon",
+      "variant": "black",
+      "isPrimary": true
+    },
+    {
+      "url": "https://www.amazon.com/Cooler-Master-Adjustable-Ultraweave-MM-310-KKOL1/dp/B0BHZX2PJB?dib=eyJ2IjoiMSJ9.N0yVekJPGSYF8lttbks4bVLG0mAN-JjItPmKx5vvtp7GjHj071QN20LucGBJIEps.ln4W6Wol59o3gl4BCAfuzmhc72jRmnYIGba5YBT55XE&dib_tag=se&keywords=Cooler%2BMaster%2BMM310&qid=1709813225&sr=8-1&th=1&linkCode=ll1&tag=eggear-20&linkId=f109efb4004250228d39d8e36cf02864&language=en_US&ref_=as_li_ss_tl",
+      "retailer": "amazon",
+      "slug": "amazon",
+      "variant": "white",
+      "isPrimary": false
+    }
+  ],
+  "url": "/hubs/mouse/cooler-master/mm310",
+  "gamesRecommended": [],
+  "media": {
+    "defaultColor": "black",
+    "colors": [
+      "black",
+      "white",
+      "white+blue"
+    ],
+    "editions": [
+      "sf6-chun-li"
+    ],
+    "images": [
+      {
+        "stem": "feature-image---black",
+        "view": "feature-image",
+        "color": "black"
+      },
+      {
+        "stem": "feature-image---white",
+        "view": "feature-image",
+        "color": "white"
+      },
+      {
+        "stem": "top---black",
+        "view": "top",
+        "color": "black"
+      },
+      {
+        "stem": "top---white",
+        "view": "top",
+        "color": "white"
+      },
+      {
+        "stem": "top___sf6-chun-li---white+blue",
+        "view": "top",
+        "color": "white+blue",
+        "edition": "sf6-chun-li"
+      },
+      {
+        "stem": "left---black",
+        "view": "left",
+        "color": "black"
+      },
+      {
+        "stem": "left---white",
+        "view": "left",
+        "color": "white"
+      },
+      {
+        "stem": "left___sf6-chun-li---white+blue",
+        "view": "left",
+        "color": "white+blue",
+        "edition": "sf6-chun-li"
+      },
+      {
+        "stem": "right---black",
+        "view": "right",
+        "color": "black"
+      },
+      {
+        "stem": "right---white",
+        "view": "right",
+        "color": "white"
+      },
+      {
+        "stem": "right___sf6-chun-li---white+blue",
+        "view": "right",
+        "color": "white+blue",
+        "edition": "sf6-chun-li"
+      },
+      {
+        "stem": "sangle---black",
+        "view": "sangle",
+        "color": "black"
+      },
+      {
+        "stem": "sangle---white",
+        "view": "sangle",
+        "color": "white"
+      },
+      {
+        "stem": "sangle___sf6-chun-li---white+blue",
+        "view": "sangle",
+        "color": "white+blue",
+        "edition": "sf6-chun-li"
+      },
+      {
+        "stem": "bot---black",
+        "view": "bot",
+        "color": "black"
+      },
+      {
+        "stem": "bot___sf6-chun-li---white+blue",
+        "view": "bot",
+        "color": "white+blue",
+        "edition": "sf6-chun-li"
+      },
+      {
+        "stem": "img1",
+        "view": "img",
+        "seq": 1
+      },
+      {
+        "stem": "img2",
+        "view": "img",
+        "seq": 2
+      },
+      {
+        "stem": "img3",
+        "view": "img",
+        "seq": 3
+      },
+      {
+        "stem": "img4",
+        "view": "img",
+        "seq": 4
+      },
+      {
+        "stem": "side",
+        "view": "shape-side"
+      },
+      {
+        "stem": "top",
+        "view": "shape-top"
+      }
+    ]
+  }
+}

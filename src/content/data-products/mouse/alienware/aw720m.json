@@ -1,0 +1,263 @@
+{
+  "slug": "alienware-aw720m",
+  "brand": "Alienware",
+  "model": "AW720M",
+  "baseModel": "AW720M",
+  "variant": "",
+  "category": "mouse",
+  "imagePath": "/images/mouse/alienware/aw720m",
+  "cardTags": "false",
+  "featured": "",
+  "release_date": "06/2022",
+  "discontinued": "",
+  "sku": "570-ABNC",
+  "price_range": 129.99,
+  "colors": [
+    "white",
+    "black"
+  ],
+  "design": [
+    "standard"
+  ],
+  "lighting": "1 zone (rgb)",
+  "rgb": "yes",
+  "connection": "hybrid",
+  "connectivity": "2.4GHz WIFI Dongle",
+  "computer_side_connector": "USB-C",
+  "mouse_side_connector": "USB-C",
+  "bluetooth": "yes",
+  "cable_type": "braided",
+  "paracord": "yes",
+  "wireless_charging": "no",
+  "battery_hours": 140,
+  "adjustable_weight": "no",
+  "feet_material": "PTFE (Virgin-Grade)",
+  "coating": "matte",
+  "honeycomb_frame": "no",
+  "silent_clicks": "no",
+  "weight": 89,
+  "material": "plastic",
+  "lngth": 125.2,
+  "width": 61.7,
+  "height": 37.8,
+  "form_factor": "ambidextrous",
+  "shape": "symmetrical",
+  "hump": "middle",
+  "front_flare": "outward",
+  "thumb_rest": "no",
+  "grip": [
+    "claw",
+    "fingertip"
+  ],
+  "hand_size": [
+    "medium",
+    "large"
+  ],
+  "mcu": "unk",
+  "mcu_link": "",
+  "sensor": "PAW3395",
+  "sensor_brand": "PixArt",
+  "sensor_date": "04/2022",
+  "sensor_link": "https://www.pixart.com/products-detail/129/PAW3395DM-T6QU",
+  "sensor_type": "optical",
+  "flawless_sensor": "yes",
+  "sensor_latency": "unk",
+  "sensor_latency_list": [
+    "unk"
+  ],
+  "shift_latency": 1.2,
+  "polling_rate": [
+    1000,
+    500,
+    250,
+    125
+  ],
+  "dpi": 26000,
+  "ips": 650,
+  "acceleration": 50,
+  "lift": [
+    1.2
+  ],
+  "lift_settings": "fixed low",
+  "motion_sync": "yes",
+  "hardware_acceleration": "no",
+  "smoothing": "no",
+  "nvidia_reflex": "yes",
+  "switch": "D2FC-F-K",
+  "switch_brand": "omron",
+  "switch_type": "optical",
+  "switch_link": "",
+  "hot_swappable": "no",
+  "debounce": "unk",
+  "click_latency": "unk",
+  "click_latency_list": "\t1.1 wired, 1.3 wireless 3.3 bluetooth",
+  "click_force": 70,
+  "encoder": "",
+  "encoder_brand": "",
+  "encoder_link": "",
+  "side_buttons": 2,
+  "middle_buttons": 0,
+  "programmable_buttons": 8,
+  "tilt_scroll_wheel": "no",
+  "adjustable_scroll_wheel": "no",
+  "onboard_memory": "yes",
+  "onboard_memory_value": "unk",
+  "profile_switching": "no",
+  "overall": 8.7,
+  "accuracy": 9.02,
+  "response": 7.6,
+  "quality": 8.3,
+  "comfort": 8.6,
+  "work": 8.3,
+  "feet_score": 8.3,
+  "fps_score": 8.25,
+  "mmo_score": 8.16,
+  "moba_score": 8.2,
+  "aarpg_score": 8.4,
+  "rts_score": 7.98,
+  "fps": "yes",
+  "mmo": "yes",
+  "moba": "yes",
+  "aarpg": "yes",
+  "rts": "yes",
+  "snap_dateUpdated": "11/21/2025",
+  "snap_datePublished": "11/21/2025",
+  "snap_subtitle": "",
+  "hubTags": [
+    "price_range",
+    "weight",
+    "polling_rate",
+    "connection"
+  ],
+  "game1": "Counter-Strike 2",
+  "game2": "Valorant",
+  "game3": "Apex Legends",
+  "game4": "Overwatch 2",
+  "game5": "Fortnite",
+  "game6": "Rainbow Six Siege",
+  "game7": "Call of Duty: Warzone",
+  "game8": "PUBG: Battlegrounds",
+  "keytakeaway": "",
+  "pcard": "",
+  "verdict": "Alienware’s AW720M Tri-Mode is a serious contender in the elite mouse arena, built to satisfy competitive gamers who demand performance. It delivers virtually wired-level responsiveness – thanks to a [PixArt PAW3395](https://www.pixart.com/products-detail/4/PAW3395DM-T6QU) sensor pushing 26,000 DPI and fast-tracking 650 IPS speeds – so flick shots in Valorant or pinpoint skillshots in League feel exceptionally smooth. In intense FPS firefights like CS2 or Apex Legends, the AW720M’s low latency 1ms wireless connection means no input lag; every headshot lands as if you’re using a corded mouse. The ambidextrous chassis is a boon for southpaw players, and it’s comfortable for both claw and palm grips, making long ranked sessions or MMO raids manageable. Even MMO/MMO RPG fans will find the mouse’s ergonomics and accuracy beneficial for marathon raids, though its button count isn’t as extensive as genre-specific MMO mice.\r\n\r\nWhere the AW720M flexes high-end specs, it also faces stiff competition. At roughly 86–89g, it’s noticeably heavier than ultra-light esports darlings like the ~63g <pop=mouse-96>Logitech G Pro X Superlight</pop> or <pop=mouse-131>Razer’s 55g Viper V3 Pro</pop>. This extra weight gives a sturdy, stable feel for tracking, but flick enthusiasts might prefer a lighter device for faster turns. Still, the AW720M holds its own in precision and has advantages like marathon battery life (up to ~140 hours on 2.4GHz) and an innovative magnetic quick-charge – a 5-minute top-up can fuel roughly 20 hours of play, meaning you won’t be caught empty during a tournament. The wireless gaming mouse for FPS/MOBA titles also shines in consistency: no sensor spin-outs, no noticeable acceleration – just reliable aim. Its sensor performance is on par with the best esports mice on the market, and in practice we found it as accurate in Overwatch 2 or Dota 2 as any rival. The only real downsides are the steep $150 price tag and that lack of standout extras to justify it (no customizable weights or exotic 8K polling here). In comparison, many top-tier alternatives now cost less or weigh less.\r\n\r\n**Bottom line:** The Alienware AW720M nails the fundamentals of a competitive FPS/MOBA mouse – low latency, rock-solid connectivity, and a top-notch sensor – in a stylish, no-nonsense package that both righties and lefties can enjoy. It feels great and performs like a champ, easily handling high-stakes play in titles from CS2 to Dota 2. However, its slightly higher weight and premium price keep it just shy of dethroning the lighter legends in the “best esports mouse” category. If you value ambidextrous design, outstanding battery endurance, and Alienware’s signature build quality, the AW720M is a reliable weapon for your competitive arsenal – just know that you’re paying a bit extra for a well-rounded, workhorse mouse rather than a groundbreaking one.",
+  "pros": [
+    "Ambidextrous design accommodates left-handed users, which is rare in high-end mice",
+    "650 IPS sensor ensures flawless tracking during ultra-fast flicks in fast-paced games",
+    "140-hour 2.4GHz battery life provides exceptional longevity for extended gaming sessions",
+    "Stable 26,000 DPI with zero smoothing even at max sensitivity",
+    "Magnetic USB-C charging dock enables 20-hour gameplay from a 5-minute charge."
+  ],
+  "cons": [
+    "89g weight is heavier than many ultralight gaming mice",
+    "Textured plastic sides lack grip compared to rubberized alternatives",
+    "Six-button layout limits macro customization for MMO/MOBA players",
+    "$149 price is higher than some similarly specced alternatives",
+    "Plastic glide pads offer less smoothness than PTFE options in high-speed scenarios."
+  ],
+  "youtube": "https://www.youtube.com/watch?v=Zh29cXRAn_M",
+  "affiliateLinks": [
+    {
+      "url": "https://www.amazon.com/Alienware-AW720M-Tri-Mode-Wireless-Gaming/dp/B0B45G75QZ?crid=3TTC9MU2A4ORC&dib=eyJ2IjoiMSJ9.kZXbMX63yLjCmfTsm719zUlpJ2yLd1iNpc0yOiMu9u7IElJYM6iK3C5c_zGjLl9O75PW4VdbytRpSnBbb6qFHCkdhqgc9wI-y4fF6cQchaVv3TmEAQJUce6SBnOnTh_-sb3LlM1XY_lPZptt-mjvqSRq28ERmcuIjRqvE7aKW4HgHD2wGxe0ksWjFh01p6qZrtxCUZ3AHfNksBDE-coEIw.f7uwyC4v6KAnBFXRbdaaaYrFgsJlbYQEcBEY-fl5HW4&dib_tag=se&keywords=AW720M&qid=1765310809&s=electronics&sprefix=aw720m%2Caps%2C160&sr=1-2&th=1&linkCode=ll1&tag=eggear-20&linkId=f3631a70b7738a44bb04fb16f92b9390&language=en_US&ref_=as_li_ss_tl",
+      "retailer": "amazon",
+      "slug": "amazon",
+      "variant": "white",
+      "isPrimary": true
+    },
+    {
+      "url": "https://www.amazon.com/Alienware-AW720M-Tri-Mode-Wireless-Gaming/dp/B0B4516W4L?crid=3TTC9MU2A4ORC&dib=eyJ2IjoiMSJ9.kZXbMX63yLjCmfTsm719zUlpJ2yLd1iNpc0yOiMu9u7IElJYM6iK3C5c_zGjLl9O75PW4VdbytRpSnBbb6qFHCkdhqgc9wI-y4fF6cQchaVv3TmEAQJUce6SBnOnTh_-sb3LlM1XY_lPZptt-mjvqSRq28ERmcuIjRqvE7aKW4HgHD2wGxe0ksWjFh01p6qZrtxCUZ3AHfNksBDE-coEIw.f7uwyC4v6KAnBFXRbdaaaYrFgsJlbYQEcBEY-fl5HW4&dib_tag=se&keywords=AW720M&qid=1765310809&s=electronics&sprefix=aw720m%2Caps%2C160&sr=1-2&th=1&linkCode=ll1&tag=eggear-20&linkId=217c1b49c438939ee0c8929625b1ae54&language=en_US&ref_=as_li_ss_tl",
+      "retailer": "amazon",
+      "slug": "amazon",
+      "variant": "black",
+      "isPrimary": false
+    }
+  ],
+  "url": "/hubs/mouse/alienware/aw720m",
+  "gamesRecommended": [],
+  "media": {
+    "defaultColor": "white",
+    "colors": [
+      "white",
+      "black"
+    ],
+    "editions": [],
+    "images": [
+      {
+        "stem": "feature-image---white",
+        "view": "feature-image",
+        "color": "white"
+      },
+      {
+        "stem": "top---white",
+        "view": "top",
+        "color": "white"
+      },
+      {
+        "stem": "top---black",
+        "view": "top",
+        "color": "black"
+      },
+      {
+        "stem": "left---white",
+        "view": "left",
+        "color": "white"
+      },
+      {
+        "stem": "left---black",
+        "view": "left",
+        "color": "black"
+      },
+      {
+        "stem": "sangle---white",
+        "view": "sangle",
+        "color": "white"
+      },
+      {
+        "stem": "sangle---black",
+        "view": "sangle",
+        "color": "black"
+      },
+      {
+        "stem": "angle---white",
+        "view": "angle",
+        "color": "white"
+      },
+      {
+        "stem": "angle---black",
+        "view": "angle",
+        "color": "black"
+      },
+      {
+        "stem": "front---white",
+        "view": "front",
+        "color": "white"
+      },
+      {
+        "stem": "front---black",
+        "view": "front",
+        "color": "black"
+      },
+      {
+        "stem": "rear",
+        "view": "rear"
+      },
+      {
+        "stem": "rear---black",
+        "view": "rear",
+        "color": "black"
+      },
+      {
+        "stem": "bot---black",
+        "view": "bot",
+        "color": "black"
+      },
+      {
+        "stem": "side",
+        "view": "shape-side"
+      },
+      {
+        "stem": "top",
+        "view": "shape-top"
+      }
+    ]
+  }
+}

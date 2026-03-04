@@ -1,0 +1,188 @@
+{
+  "slug": "corsair-scimitar-pro-rgb",
+  "brand": "Corsair",
+  "model": "Scimitar Pro RGB",
+  "baseModel": "Scimitar",
+  "variant": "Pro RGB",
+  "category": "mouse",
+  "imagePath": "/images/mouse/corsair/scimitar-pro-rgb",
+  "cardTags": "false",
+  "featured": "",
+  "release_date": "01/2017",
+  "discontinued": "",
+  "sku": "CH-9304011-NA",
+  "price_range": 79.99,
+  "colors": [
+    "black",
+    "black+yellow"
+  ],
+  "design": [
+    "standard"
+  ],
+  "lighting": "4 zone (rgb)",
+  "rgb": "yes",
+  "connection": "wired",
+  "connectivity": "n/a",
+  "computer_side_connector": "USB-A",
+  "mouse_side_connector": "n/a",
+  "bluetooth": "no",
+  "cable_type": "braided",
+  "paracord": "no",
+  "wireless_charging": "no",
+  "battery_hours": "n/a",
+  "adjustable_weight": "no",
+  "feet_material": "PTFE",
+  "coating": "matte",
+  "honeycomb_frame": "no",
+  "silent_clicks": "no",
+  "weight": 147,
+  "material": "plastic",
+  "lngth": 119.4,
+  "width": 77,
+  "height": 42.4,
+  "form_factor": "right",
+  "shape": "ergonomic",
+  "hump": "back - front",
+  "front_flare": "flat",
+  "thumb_rest": "no",
+  "grip": [
+    "palm",
+    "claw",
+    "fingertip"
+  ],
+  "hand_size": [
+    "medium",
+    "large"
+  ],
+  "mcu": "unk",
+  "mcu_link": "",
+  "sensor": "PMW3367",
+  "sensor_brand": "PixArt",
+  "sensor_date": "",
+  "sensor_link": "",
+  "sensor_type": "optical",
+  "flawless_sensor": "no",
+  "sensor_latency": "unk",
+  "sensor_latency_list": [
+    "unk"
+  ],
+  "shift_latency": "unk",
+  "polling_rate": [
+    1000,
+    500,
+    250,
+    125
+  ],
+  "dpi": 16000,
+  "ips": 250,
+  "acceleration": 50,
+  "lift": [
+    1.2
+  ],
+  "lift_settings": "adjustable",
+  "motion_sync": "no",
+  "hardware_acceleration": "no",
+  "smoothing": "no",
+  "nvidia_reflex": "no",
+  "switch": "D2FC -F-7N",
+  "switch_brand": "omron",
+  "switch_type": "optical",
+  "switch_link": "",
+  "hot_swappable": "no",
+  "debounce": "unk",
+  "click_latency": 6.8,
+  "click_latency_list": "6.8 wired",
+  "click_force": "unk",
+  "encoder": "",
+  "encoder_brand": "",
+  "encoder_link": "",
+  "side_buttons": 12,
+  "middle_buttons": 3,
+  "programmable_buttons": 17,
+  "tilt_scroll_wheel": "no",
+  "adjustable_scroll_wheel": "no",
+  "onboard_memory": "yes",
+  "onboard_memory_value": 3,
+  "profile_switching": "yes",
+  "overall": 6.8,
+  "accuracy": 7.8,
+  "response": 5.6,
+  "quality": 7.6,
+  "comfort": 7.4,
+  "work": 8.7,
+  "feet_score": 7,
+  "fps_score": 4.8,
+  "mmo_score": 8.1,
+  "moba_score": 7.1,
+  "aarpg_score": 8.3,
+  "rts_score": 6.1,
+  "fps": "no",
+  "mmo": "yes",
+  "moba": "yes",
+  "aarpg": "yes",
+  "rts": "no",
+  "snap_dateUpdated": "11/20/2025",
+  "snap_datePublished": null,
+  "snap_subtitle": "",
+  "hubTags": [],
+  "game1": "",
+  "game2": "",
+  "game3": "",
+  "game4": "",
+  "game5": "",
+  "game6": "",
+  "game7": "",
+  "game8": "",
+  "keytakeaway": "",
+  "pcard": "",
+  "verdict": "",
+  "pros": [],
+  "cons": [],
+  "youtube": "https://www.youtube.com/watch?v=Gro8CzhXUd0",
+  "affiliateLinks": [
+    {
+      "url": "https://www.amazon.com/Corsair-Scimitar-Optical-1600DPI-Right-hand/dp/B01N9K2PBQ?crid=24JQ9YQ246KAQ&dib=eyJ2IjoiMSJ9.yCdM0sIDbl3fUWFQ4ROn3elH1lqWR-4kv9OfnWRKp4xKdXHz5Nnwe-3yLG2BdjeMGqIuyWNBEUtcuA038702nn1gh7y4-YBaTmGpY3XT5gYn_6zYf1Hlhblyek_I_UAAjg4SDI8x0A7ywNTASMPcIOCKgISKIZr5eG4W-nmYuAJZGD25xBxL_c4Gl5qWoMME-gyXpQjGkbBbfxAkJwxSYlvaO95WjURy2aY1KhOWjMQ.Hg-EGoHsmJDVq_H5gEQKPPdhaU75ubCb9ty9NO1W3aI&dib_tag=se&keywords=Scimitar+Pro+RGB&qid=1765321577&sprefix=scimitar+pro+rgb%2Caps%2C413&sr=8-1&linkCode=ll1&tag=eggear-20&linkId=cb223a59d35fdab312e91923276008de&language=en_US&ref_=as_li_ss_tl",
+      "retailer": "amazon",
+      "slug": "amazon",
+      "variant": "",
+      "isPrimary": true
+    }
+  ],
+  "url": "/hubs/mouse/corsair/scimitar-pro-rgb",
+  "gamesRecommended": [],
+  "media": {
+    "defaultColor": "black",
+    "colors": [
+      "black",
+      "black+yellow"
+    ],
+    "editions": [],
+    "images": [
+      {
+        "stem": "top",
+        "view": "top"
+      },
+      {
+        "stem": "left",
+        "view": "left"
+      },
+      {
+        "stem": "sangle",
+        "view": "sangle"
+      },
+      {
+        "stem": "img1",
+        "view": "img",
+        "seq": 1
+      },
+      {
+        "stem": "side",
+        "view": "shape-side"
+      },
+      {
+        "stem": "top",
+        "view": "shape-top"
+      }
+    ]
+  }
+}

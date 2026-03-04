@@ -1,0 +1,252 @@
+{
+  "slug": "asus-rog-strix-impact-iii-wireless",
+  "brand": "Asus",
+  "model": "ROG Strix Impact III Wireless",
+  "baseModel": "ROG Strix",
+  "variant": "Impact III Wireless",
+  "category": "mouse",
+  "imagePath": "/images/mouse/asus/rog-strix-impact-iii-wireless",
+  "cardTags": "false",
+  "featured": "",
+  "release_date": "01/2024",
+  "discontinued": "",
+  "sku": "90MP03D0-BMUA00",
+  "price_range": 74.99,
+  "colors": [
+    "black",
+    "white"
+  ],
+  "design": [
+    "standard"
+  ],
+  "lighting": "1 zone (rgb)",
+  "rgb": "yes",
+  "connection": "hybrid",
+  "connectivity": "2.4GHz Dongle",
+  "computer_side_connector": "USB-A",
+  "mouse_side_connector": "USB-C",
+  "bluetooth": "yes",
+  "cable_type": "braided",
+  "paracord": "yes",
+  "wireless_charging": "no",
+  "battery_hours": 450,
+  "adjustable_weight": "no",
+  "feet_material": "PTFE (Virgin-Grade)",
+  "coating": "matte",
+  "honeycomb_frame": "no",
+  "silent_clicks": "no",
+  "weight": 72,
+  "material": "plastic",
+  "lngth": 120,
+  "width": 62,
+  "height": 39,
+  "form_factor": "ambidextrous",
+  "shape": "symmetrical",
+  "hump": "back mid",
+  "front_flare": "inward",
+  "thumb_rest": "no",
+  "grip": [
+    "palm",
+    "claw",
+    "fingertip"
+  ],
+  "hand_size": [
+    "medium",
+    "large"
+  ],
+  "mcu": "Nordic nRF52840",
+  "mcu_link": "https://www.nordicsemi.com/Products/nRF52840",
+  "sensor": "AimPoint (PixArt PAW3395)",
+  "sensor_brand": "PixArt",
+  "sensor_date": "01/2022",
+  "sensor_link": "https://www.pixart.com/products-detail/129/PAW3395DM-T6QU",
+  "sensor_type": "optical",
+  "flawless_sensor": "yes",
+  "sensor_latency": "unk",
+  "sensor_latency_list": [
+    "unk"
+  ],
+  "shift_latency": "unk",
+  "polling_rate": [
+    1000,
+    500,
+    250,
+    125
+  ],
+  "dpi": 36000,
+  "ips": 650,
+  "acceleration": 50,
+  "lift": [
+    1.2
+  ],
+  "lift_settings": "adjustable",
+  "motion_sync": "no",
+  "hardware_acceleration": "no",
+  "smoothing": "no",
+  "nvidia_reflex": "yes",
+  "switch": "ROG Micro Switch",
+  "switch_brand": "asus",
+  "switch_type": "optical / mechanical",
+  "switch_link": "https://rog.asus.com/us/articles/gaming-keyboards-gaming-mice/guide-how-to-replace-the-switches-in-your-rog-gladius-iii-gaming-mouse/",
+  "hot_swappable": "yes",
+  "debounce": "unk",
+  "click_latency": 0.8,
+  "click_latency_list": "0.8 wireless",
+  "click_force": "unk",
+  "encoder": "",
+  "encoder_brand": "",
+  "encoder_link": "",
+  "side_buttons": 2,
+  "middle_buttons": 0,
+  "programmable_buttons": 5,
+  "tilt_scroll_wheel": "no",
+  "adjustable_scroll_wheel": "no",
+  "onboard_memory": "yes",
+  "onboard_memory_value": 5,
+  "profile_switching": "yes",
+  "overall": 8.1,
+  "accuracy": 9.1,
+  "response": 7.9,
+  "quality": 8,
+  "comfort": 7.8,
+  "work": 7.4,
+  "feet_score": 8.6,
+  "fps_score": 8.2,
+  "mmo_score": 6.8,
+  "moba_score": 8,
+  "aarpg_score": 7.2,
+  "rts_score": 7.8,
+  "fps": "yes",
+  "mmo": "no",
+  "moba": "yes",
+  "aarpg": "yes",
+  "rts": "yes",
+  "snap_dateUpdated": "12/20/2025",
+  "snap_datePublished": "12/20/2025",
+  "snap_subtitle": "The G305 killer with flagship specs and hot-swap switches.",
+  "hubTags": [
+    "price_range",
+    "weight",
+    "polling_rate",
+    "connection",
+    "fps",
+    "moba",
+    "overall"
+  ],
+  "game1": "Valorant",
+  "game2": "Helldivers 2",
+  "game3": "Palworld",
+  "game4": "Overwatch 2",
+  "game5": "League of Legends",
+  "game6": "",
+  "game7": "",
+  "game8": "",
+  "keytakeaway": "The Asus ROG Strix Impact III Wireless is a lightweight, dual-mode gaming mouse that outperforms its budget rivals by using the flagship AimPoint sensor and hot-swappable switches. Powered by AA/AAA batteries, it offers a \"forever mouse\" appeal for FPS and MOBA players who want top-tier tracking without the built-in battery decay.",
+  "pcard": "The ROG Strix Impact III Wireless is a **battery-powered wireless gaming mouse** that brings flagship performance to the mid-range market. With its 36k DPI AimPoint sensor and ~57 g (bare) shell, it directly challenges the <pop=mouse-568>Logitech G305</pop> by offering better tracking, Bluetooth support, and hot-swappable switches. It’s a fantastic choice for claw and fingertip players who want a durable, repairable mouse for competitive shooters.",
+  "verdict": "The **Asus ROG Strix Impact III Wireless** is a battery-powered **wireless gaming mouse** designed for claw and fingertip players who want modern tracking in Valorant, CS2, Apex Legends, and other aim-heavy games—without committing to an internal rechargeable pack. It pairs the **ROG AimPoint sensor** (36,000 DPI, <1% deviation, 650 IPS, 50G) with **SpeedNova 2.4GHz** and Bluetooth, so it can be both a competitive desk mouse and a genuinely practical travel mouse. The standout feature is the **Push-Fit Switch Socket** design: when the main clicks wear or develop issues, you can swap compatible mechanical switches instead of replacing the entire mouse.\r\n\r\n#### Lineup context\r\nPositioned below the <pop=mouse-53>ROG Harpe Ace Aim Lab Edition</pop>, this model acts as the “value + longevity” option in Asus’s lineup. You give up an integrated battery and the absolute lightest weight, but you gain long-term ownership perks: **replaceable batteries**, **repairable main clicks**, and a compact, familiar shape.\r\n\r\n#### Shape, grip, and balance\r\nThe shell sticks to a compact, symmetrical “egg” profile with **flatter sidewalls** than the <pop=mouse-102>Logitech G305 Lightspeed</pop>. In practice, that feels less cramped and makes it easier to reposition your fingers for small vertical aim corrections—useful for recoil control and steady tracking in CS2/Valorant. It’s a safer fit for **claw and fingertip** than full palm—especially if your hands are larger and you like a taller rear hump.\r\n\r\nAsus advertises a 57 g shell, but the mouse can’t run without a battery—and where that weight sits affects how “snappy” it feels during starts/stops. The good news: you get a **AAA-to-AA adapter** in the box, so you can tune the feel instead of being locked into a heavy, rear-biased setup.\r\n\r\n| Battery setup | Feel & balance in play |\r\n|---|---|\r\n| **AA (convenience)** | Heavier, more back-weighted; fine for mixed work/gaming, but less controlled on fast stops |\r\n| **AA lithium** | Better than alkaline, still somewhat rear-biased |\r\n| **AAA lithium + adapter (recommended)** | More neutral balance and easier lifts/resets for low-sens FPS play |\r\n\r\n> If you like replaceable-battery mice but hate outdated sensors and “throw it away when it double-clicks” ownership, this one makes a strong case.\r\n\r\n#### Performance, wireless, and setup\r\nIn 2.4GHz mode, **1,000 Hz polling** is the sweet spot for competitive FPS, and Asus rates battery life up to **450 hours** with lighting off (on an AA lithium). Bluetooth stretches endurance further (up to **618 hours** with lighting off) and can pair up to three devices; it’s great for travel and productivity, but treat it as a convenience mode rather than your ranked-queue link. Onboard controls plus **onboard memory** let you adjust core settings directly on the mouse, then optionally use Armoury Crate for deeper remaps or lighting before uninstalling after you’ve saved a profile.\r\n\r\n#### Clicks, materials, and reliability notes\r\nThe hot-swap sockets dramatically reduce long-term risk from switch wear. Primary buttons use durable **PBT** tops that resist shine and keep their texture over time. The side shell uses a smooth matte plastic rather than a tacky rubber coat, so dry hands may want grip tape for effortless lifts/resets. Layout is simple—two side buttons—perfect for FPS and most MOBA binds, but not an MMO grid.\r\n\r\n#### How it compares\r\nThink of this as the “<pop=mouse-102>G305</pop> idea” modernized: similar size and control, but with Bluetooth and user-serviceable clicks. It’s steadier than an <pop=mouse-140>Orochi V2</pop> for relaxed claw, and more sustainable than a <pop=mouse-53>Harpe Ace</pop> thanks to replaceable batteries. If you value longevity over chasing the lightest possible shell, this lands in the right spot.\r\n\r\n#### Bottom line\r\nRun it on the **AAA adapter setup**, save your profile to onboard memory, and you get a **fast, flexible, repair-friendly mouse** that’s one of the easiest recommendations in the battery-powered segment. It’s strong in tactical shooters, travel-friendly, and built to outlast most sealed-battery rivals. The coating and Armoury Crate bloat are the main nitpicks—but they’re easy to live with considering the performance and lifespan advantages.\r\n\r\nFor a curated short list tailored to tactical shooters, see our [best wireless gaming mice for Valorant](/guides/mouse/top-10-wireless) guide.",
+  "pros": [
+    "Flagship ROG AimPoint sensor (36k DPI, 650 IPS) provides esports-grade tracking",
+    "Push-Fit Switch Sockets enable instant repairs and customizable click feel",
+    "Dual-mode connectivity (2.4GHz + Bluetooth) offers flexible use",
+    "PBT buttons resist shine and surface wear over time",
+    "Excellent battery life (450h on 2.4GHz / 618h on Bluetooth)",
+    "Lightweight potential (~68 g) with AAA lithium configuration"
+  ],
+  "cons": [
+    "Weight balance is rear-heavy with standard AA batteries",
+    "Coating can feel slippery for users with dry hands",
+    "Armoury Crate software is bloated and resource-heavy",
+    "Scroll wheel lacks the same premium feel as main buttons"
+  ],
+  "youtube": "https://www.youtube.com/watch?list=TLGGE49g1HIoS44yMTEyMjAyNQ&v=I3rZ3n39aNM&feature=youtu.be",
+  "affiliateLinks": [
+    {
+      "url": "https://www.amazon.com/ASUS-ROG-Strix-Impact-Wireless/dp/B0CVR5DM26?adgrpid=181532387034&hvpone=&hvptwo=&hvadid=748029726673&hvpos=&hvnetw=g&hvrand=11706202292333351564&hvqmt=&hvdev=c&hvdvcmdl=&hvlocint=&hvlocphy=9031993&hvtargid=dsa-1463395464853&hydadcr=&mcid=&hvocijid=11706202292333351564--&hvexpln=m-dsad&hvsb=Electronics_d&hvcampaign=dsadesk&th=1&linkCode=ll1&tag=eggear-20&linkId=af37ef927dab1ede45944d2082b798a5&language=en_US&ref_=as_li_ss_tl",
+      "retailer": "amazon",
+      "slug": "amazon",
+      "variant": "black",
+      "isPrimary": true
+    },
+    {
+      "url": "https://www.amazon.com/ASUS-ROG-III-Lightweight-Replaceable/dp/B0FC414B9B?crid=37IWJHCQFEW1B&dib=eyJ2IjoiMSJ9.rMGkPK-_HD3TNIZU78mMdP74qn5CK5MWJOignzm3od35q5RWvmUplsBJeV7BrnOIOqqx_Zw5UsvpihXPRjxvl6p4m_TTsu6KccDJJqJsbh-dM5y0J94RpvDGRnL21QsE45w_5hhxMfEvz6H4-_rX_Wf19G3QX7QwS3WZXGvzO57WudfUUm1vnYTHiUtF-6DazlACWyg7Ib9ROhtuMdDQ_v3gzHrNpZodvxd38_h6n6QEBjt5_rEFZnzgdNSISdcq4uEQP31nLraNZqdGKk-khwv5kC7sszA5uaZA0fn6d3k.JkRRTQ5ffdHtehK5aWfKH_OzEss8VemTYSb79PS12Yo&dib_tag=se&keywords=ROG+Strix+Impact+III+Wireless&qid=1766286228&s=electronics&sprefix=rog+strix+impact+iii+wireless%2Caps%2C209&sr=1-2&linkCode=ll1&tag=eggear-20&linkId=768535922fd8f1f70ae1e9e7cd4221a5&language=en_US&ref_=as_li_ss_tl",
+      "retailer": "amazon",
+      "slug": "amazon",
+      "variant": "white",
+      "isPrimary": false
+    }
+  ],
+  "url": "/hubs/mouse/asus/rog-strix-impact-iii-wireless",
+  "gamesRecommended": [],
+  "media": {
+    "defaultColor": "black",
+    "colors": [
+      "black",
+      "white"
+    ],
+    "editions": [],
+    "images": [
+      {
+        "stem": "top",
+        "view": "top"
+      },
+      {
+        "stem": "left",
+        "view": "left"
+      },
+      {
+        "stem": "sangle",
+        "view": "sangle"
+      },
+      {
+        "stem": "angle",
+        "view": "angle"
+      },
+      {
+        "stem": "bot",
+        "view": "bot"
+      },
+      {
+        "stem": "img",
+        "view": "img"
+      },
+      {
+        "stem": "img1",
+        "view": "img",
+        "seq": 1
+      },
+      {
+        "stem": "side",
+        "view": "shape-side"
+      },
+      {
+        "stem": "top",
+        "view": "shape-top"
+      },
+      {
+        "stem": "angleC2",
+        "view": "angleC",
+        "seq": 2
+      },
+      {
+        "stem": "botC2",
+        "view": "botC",
+        "seq": 2
+      },
+      {
+        "stem": "leftC2",
+        "view": "leftC",
+        "seq": 2
+      },
+      {
+        "stem": "sangleC2",
+        "view": "sangleC",
+        "seq": 2
+      },
+      {
+        "stem": "topC2",
+        "view": "topC",
+        "seq": 2
+      }
+    ]
+  }
+}

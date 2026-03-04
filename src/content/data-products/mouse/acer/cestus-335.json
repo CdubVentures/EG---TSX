@@ -1,0 +1,198 @@
+{
+  "slug": "acer-cestus-335",
+  "brand": "Acer",
+  "model": "Cestus 335",
+  "baseModel": "Cestus",
+  "variant": "335",
+  "category": "mouse",
+  "imagePath": "/images/mouse/acer/cestus-335",
+  "cardTags": "false",
+  "featured": "",
+  "release_date": "09/2021",
+  "discontinued": "",
+  "sku": "GP.MCE11.01Q",
+  "price_range": 79.99,
+  "colors": [
+    "black"
+  ],
+  "design": [
+    "standard"
+  ],
+  "lighting": "3 zone (rgb)",
+  "rgb": "yes",
+  "connection": "wired",
+  "connectivity": "n/a",
+  "computer_side_connector": "USB-A",
+  "mouse_side_connector": "n/a",
+  "bluetooth": "no",
+  "cable_type": "braided",
+  "paracord": "no",
+  "wireless_charging": "no",
+  "battery_hours": "n/a",
+  "adjustable_weight": "no",
+  "feet_material": "PTFE (Black-Dyed)",
+  "coating": "matte",
+  "honeycomb_frame": "no",
+  "silent_clicks": "no",
+  "weight": 90.71,
+  "material": "plastic",
+  "lngth": 119.38,
+  "width": 73.66,
+  "height": 40.64,
+  "form_factor": "right",
+  "shape": "symmetrical",
+  "hump": "middle",
+  "front_flare": "outward",
+  "thumb_rest": "no",
+  "grip": [
+    "palm",
+    "claw"
+  ],
+  "hand_size": [
+    "medium",
+    "large"
+  ],
+  "mcu": "unk",
+  "mcu_link": "",
+  "sensor": "PMW3370",
+  "sensor_brand": "PixArt",
+  "sensor_date": "10/2020",
+  "sensor_link": "",
+  "sensor_type": "optical",
+  "flawless_sensor": "yes",
+  "sensor_latency": "unk",
+  "sensor_latency_list": [
+    "unk"
+  ],
+  "shift_latency": "unk",
+  "polling_rate": [
+    2000,
+    1000,
+    500,
+    250,
+    125
+  ],
+  "dpi": 19000,
+  "ips": 400,
+  "acceleration": 50,
+  "lift": [],
+  "lift_settings": "unk",
+  "motion_sync": "unk",
+  "hardware_acceleration": "no",
+  "smoothing": "no",
+  "nvidia_reflex": "no",
+  "switch": "unk",
+  "switch_brand": "unk",
+  "switch_type": "unk",
+  "switch_link": "",
+  "hot_swappable": "no",
+  "debounce": "unk",
+  "click_latency": "unk",
+  "click_latency_list": "unk",
+  "click_force": "unk",
+  "encoder": "",
+  "encoder_brand": "",
+  "encoder_link": "",
+  "side_buttons": 2,
+  "middle_buttons": 3,
+  "programmable_buttons": 10,
+  "tilt_scroll_wheel": "yes",
+  "adjustable_scroll_wheel": "no",
+  "onboard_memory": "yes",
+  "onboard_memory_value": 5,
+  "profile_switching": "no",
+  "overall": 5.3,
+  "accuracy": 8.4,
+  "response": 7.3,
+  "quality": 7.2,
+  "comfort": 7,
+  "work": 7,
+  "feet_score": 6,
+  "fps_score": 6.3,
+  "mmo_score": 7.2,
+  "moba_score": 6.5,
+  "aarpg_score": 7.6,
+  "rts_score": 5.5,
+  "fps": "no",
+  "mmo": "yes",
+  "moba": "no",
+  "aarpg": "yes",
+  "rts": "no",
+  "snap_dateUpdated": "11/21/2025",
+  "snap_datePublished": "11/21/2025",
+  "snap_subtitle": "",
+  "hubTags": [],
+  "game1": "World of Warcraft",
+  "game2": "Final Fantasy XIV",
+  "game3": "Guild Wars 2",
+  "game4": "Lost Ark",
+  "game5": "Diablo IV",
+  "game6": "Path of Exile",
+  "game7": "League of Legends",
+  "game8": "Dota 2",
+  "keytakeaway": "",
+  "pcard": "",
+  "verdict": "#### Overview\r\n\r\nThe Acer Cestus 335, released in September 2021, is priced around \\$80 and targets pro-level gamers, particularly those playing MMO and MOBA games. It offers a high 2000 Hz polling rate for responsive cursor movement and a PixArt 3370 sensor with up to 19,000 DPI and 400 IPS, meeting pro tracking standards. Its design supports palm and claw grips, making it versatile for different hand sizes.\r\n\r\n#### Design and Features\r\n\r\nThe mouse weighs 90.71 grams, which is heavier than ultralight esports mice, potentially less ideal for FPS players. Its symmetrical, right-handed design suits medium to large hands, with a matte coating and PTFE feet for decent glide. The 10 programmable buttons, including 2 side and 3 middle buttons, cater to extensive customization, with onboard memory for 5 profiles. However, some users report discomfort for larger hands and issues with the scroll wheel causing extra scrolling.\r\n\r\n#### Dimensions and Weight\r\n\r\n| Dimension | Value   |\r\n| --------- | ------  |\r\n| Length    | 124.8 mm|\r\n| Width     | 62.4 mm |\r\n| Height    | 38 mm   |\r\n| Weight    | 74 g    |\r\n\r\n#### Key Takeaways\r\n\r\n* High 2000 Hz polling rate ensures responsive gaming, perfect for competitive play\r\n* Extensive button customization with 10 programmable buttons, ideal for complex game commands\r\n* Versatile grip options support both palm and claw styles, fitting medium to large hands\r\n\r\n#### Comparisons and Considerations\r\n\r\nCompared to the <pop=mouse-103>Logitech G502 Hero</pop>, the Cestus 335 offers a higher polling rate and is lighter, better for responsiveness. <pop=mouse-130>The Razer Deathadder V3</pop> is lighter with a superior sensor but has fewer buttons, suiting FPS more. The <pop=mouse-46>Corsair Sabre RGB Pro</pop> has a higher polling rate and better sensor, but fewer buttons, ideal for genre versatility.  \r\n\r\nConsider the Cestus 335 for MMO/MOBA players who value responsiveness and customization, but be aware of potential durability issues.",
+  "pros": [
+    "2000 Hz polling rate boosts responsiveness for competitive play",
+    "PixArt 3370 sensor delivers reliable 400 IPS tracking",
+    "10 programmable buttons enhance MMO/MOBA customization",
+    "Onboard memory stores 5 profiles for seamless setup switches",
+    "Wired design ensures consistent low-latency performance",
+    "Symmetrical shape fits palm and claw grips well",
+    "Matte coating provides a secure, sweat-resistant grip"
+  ],
+  "cons": [
+    "Left-click durability issues reported after heavy use",
+    "Comfort lacks for larger hands in prolonged sessions"
+  ],
+  "youtube": "https://www.youtube.com/watch?v=jlNJWu6kVfs",
+  "affiliateLinks": [
+    {
+      "url": "https://www.amazon.com/Acer-Predator-Cestus-335-GP-MCE11-01Q/dp/B09FJNWCBK?crid=2JBX4HLAC7SRN&dib=eyJ2IjoiMSJ9.1JkSiEl4GhH43vbSUzkb8uqpS_qGqKLSdsyg9aNk6f-FlVqa9VEBOfnkuHdCiLoMk2Yx-XZkdZyTE_XBPBXcY9ku5UDKbJUTpZ1sZFsC3PE.DQq7oB1IPhpBaUQDCoJHGpgTneLPg843YPFwiRNacWo&dib_tag=se&keywords=Acer%2BCestus%2B335&qid=1765320553&sprefix=acer%2Bcestus%2B335%2Caps%2C151&sr=8-3&linkCode=ll1&tag=eggear-20&linkId=45b59bf7957b4ab2f4bf6387d4934ead&language=en_US&ref_=as_li_ss_tl",
+      "retailer": "amazon",
+      "slug": "amazon",
+      "variant": "",
+      "isPrimary": true
+    }
+  ],
+  "url": "/hubs/mouse/acer/cestus-335",
+  "gamesRecommended": [],
+  "media": {
+    "defaultColor": "black",
+    "colors": [
+      "black"
+    ],
+    "editions": [],
+    "images": [
+      {
+        "stem": "feature-image",
+        "view": "feature-image"
+      },
+      {
+        "stem": "top",
+        "view": "top"
+      },
+      {
+        "stem": "left",
+        "view": "left"
+      },
+      {
+        "stem": "sangle",
+        "view": "sangle"
+      },
+      {
+        "stem": "angle",
+        "view": "angle"
+      },
+      {
+        "stem": "side",
+        "view": "shape-side"
+      },
+      {
+        "stem": "top",
+        "view": "shape-top"
+      }
+    ]
+  }
+}

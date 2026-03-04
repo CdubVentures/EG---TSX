@@ -1,0 +1,50 @@
+flowchart TB
+  subgraph SF["SPEC FACTORY (Source of Truth)"]
+    direction TB
+    SF1["Developer adds product\nin Spec Factory GUI"]
+    SF2["Identity Gate validates\nbrand + model + variant\n(no duplicates)"]
+    SF3["Generate immutable identifier\n(8-char hex, e.g. c730517d)"]
+    SF4["Build productId slug\ncategory-brand-model-variant\ne.g. mouse-razer-viper-v3-pro"]
+    SF5["Write to product_catalog.json\n+ brand_registry.json"]
+    SF1 --> SF2 --> SF3 --> SF4 --> SF5
+  end
+
+  subgraph SYNC["SYNC BRIDGE (scripts/)"]
+    direction TB
+    SY1["Export script reads\nSpec Factory catalogs"]
+    SY2["Generate EG-TSX product entry:\n  slug: razer-viper-v3-pro\n  brand: Razer\n  model: Viper V3 Pro\n  imagePath: /images/mouse/razer/viper-v3-pro\n  url: /hubs/mouse/razer/viper-v3-pro\n  identifier: c730517d"]
+    SY3["Write to\nsrc/content/data-products/\nmouse/{brand}/{slug}.json"]
+    SY4["Create image folder\npublic/images/mouse/razer/viper-v3-pro/"]
+    SY1 --> SY2 --> SY3 --> SY4
+  end
+
+  subgraph TSX["EG-TSX (Consumer)"]
+    direction TB
+    TX1["Astro build reads\nproduct JSON files"]
+    TX2["Component receives\nproduct object with\nimagePath + media"]
+    TX3["Calls getImage(product.media, 'top')\nthen contentImage(\nproduct.imagePath,\nimg.stem, 'm')"]
+    TX4["Resolver returns\n/images/mouse/razer/\nviper-v3-pro/\ntop_m.webp"]
+    TX5["Image renders\nin browser"]
+    TX1 --> TX2 --> TX3 --> TX4 --> TX5
+  end
+
+  SF5 ==>|"Spec Factory\nexport"| SY1
+  SY4 ==>|"Files ready\non disk"| TX1
+
+  style SF fill:#1a1a2e,stroke:#e94560,color:#eee
+  style SYNC fill:#16213e,stroke:#0f3460,color:#eee
+  style TSX fill:#0f3460,stroke:#53a8b6,color:#eee
+  style SF1 fill:#1a1a2e,stroke:#e94560,color:#eee
+  style SF2 fill:#1a1a2e,stroke:#e94560,color:#eee
+  style SF3 fill:#1a1a2e,stroke:#e94560,color:#eee
+  style SF4 fill:#1a1a2e,stroke:#e94560,color:#eee
+  style SF5 fill:#1a1a2e,stroke:#e94560,color:#eee
+  style SY1 fill:#16213e,stroke:#0f3460,color:#eee
+  style SY2 fill:#16213e,stroke:#0f3460,color:#eee
+  style SY3 fill:#16213e,stroke:#0f3460,color:#eee
+  style SY4 fill:#16213e,stroke:#0f3460,color:#eee
+  style TX1 fill:#0f3460,stroke:#53a8b6,color:#eee
+  style TX2 fill:#0f3460,stroke:#53a8b6,color:#eee
+  style TX3 fill:#0f3460,stroke:#53a8b6,color:#eee
+  style TX4 fill:#0f3460,stroke:#53a8b6,color:#eee
+  style TX5 fill:#0f3460,stroke:#53a8b6,color:#eee

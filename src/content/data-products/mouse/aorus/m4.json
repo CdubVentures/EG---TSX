@@ -1,0 +1,212 @@
+{
+  "slug": "aorus-m4",
+  "brand": "Aorus",
+  "model": "M4",
+  "baseModel": "M4",
+  "variant": "",
+  "category": "mouse",
+  "imagePath": "/images/mouse/aorus/m4",
+  "cardTags": "false",
+  "featured": "",
+  "release_date": "05/2019",
+  "discontinued": "",
+  "sku": "GM-AORUS-M4",
+  "price_range": 59.99,
+  "colors": [
+    "black"
+  ],
+  "design": [
+    "standard"
+  ],
+  "lighting": "4 zone (rgb)",
+  "rgb": "yes",
+  "connection": "wired",
+  "connectivity": "n/a",
+  "computer_side_connector": "USB-A",
+  "mouse_side_connector": "n/a",
+  "bluetooth": "no",
+  "cable_type": "braided",
+  "paracord": "no",
+  "wireless_charging": "no",
+  "battery_hours": "n/a",
+  "adjustable_weight": "no",
+  "feet_material": "PTFE (Black-Dyed)",
+  "coating": "matte",
+  "honeycomb_frame": "no",
+  "silent_clicks": "no",
+  "weight": 98,
+  "material": "plastic",
+  "lngth": 122.4,
+  "width": 66.3,
+  "height": 40,
+  "form_factor": "ambidextrous",
+  "shape": "symmetrical",
+  "hump": "back - front",
+  "front_flare": "inward",
+  "thumb_rest": "no",
+  "grip": [
+    "palm",
+    "claw",
+    "fingertip"
+  ],
+  "hand_size": [
+    "medium"
+  ],
+  "mcu": "unk",
+  "mcu_link": "",
+  "sensor": "SDNS3988",
+  "sensor_brand": "avago",
+  "sensor_date": "",
+  "sensor_link": "",
+  "sensor_type": "optical",
+  "flawless_sensor": "yes",
+  "sensor_latency": "unk",
+  "sensor_latency_list": [
+    "unk"
+  ],
+  "shift_latency": "unk",
+  "polling_rate": [
+    1000,
+    500,
+    250,
+    125
+  ],
+  "dpi": 6400,
+  "ips": 200,
+  "acceleration": 50,
+  "lift": [
+    1.5
+  ],
+  "lift_settings": "fixed low",
+  "motion_sync": "unk",
+  "hardware_acceleration": "no",
+  "smoothing": "no",
+  "nvidia_reflex": "yes",
+  "switch": "D2FC -F-K(50M)",
+  "switch_brand": "omron",
+  "switch_type": "mechanical",
+  "switch_link": "",
+  "hot_swappable": "no",
+  "debounce": "unk",
+  "click_latency": "unk",
+  "click_latency_list": "unk",
+  "click_force": "unk",
+  "encoder": "",
+  "encoder_brand": "",
+  "encoder_link": "",
+  "side_buttons": 4,
+  "middle_buttons": 1,
+  "programmable_buttons": 8,
+  "tilt_scroll_wheel": "no",
+  "adjustable_scroll_wheel": "no",
+  "onboard_memory": "yes",
+  "onboard_memory_value": "unk",
+  "profile_switching": "no",
+  "overall": 5.8,
+  "accuracy": 6.5,
+  "response": 5,
+  "quality": 6.7,
+  "comfort": 7,
+  "work": 6.3,
+  "feet_score": 6,
+  "fps_score": 5,
+  "mmo_score": 5.9,
+  "moba_score": 6,
+  "aarpg_score": 5.8,
+  "rts_score": 5.7,
+  "fps": "yes",
+  "mmo": "no",
+  "moba": "yes",
+  "aarpg": "no",
+  "rts": "no",
+  "snap_dateUpdated": "11/21/2025",
+  "snap_datePublished": null,
+  "snap_subtitle": "",
+  "hubTags": [],
+  "game1": "",
+  "game2": "",
+  "game3": "",
+  "game4": "",
+  "game5": "",
+  "game6": "",
+  "game7": "",
+  "game8": "",
+  "keytakeaway": "",
+  "pcard": "",
+  "verdict": "",
+  "pros": [],
+  "cons": [],
+  "youtube": "",
+  "affiliateLinks": [
+    {
+      "url": "https://www.amazon.com/Gigabyte-AORUS-Optical-Programmable-Onboard/dp/B07WD3DNNB?crid=1V2J454WWWTBZ&dib=eyJ2IjoiMSJ9.bDv9o9pboRnn97cs7132nqq2TYR2DBtrRhBd55Ck-OtdKx99hc625E158FM8towgeQUDxVV1dJicOHvw5DQLlh4mKOP9hJUgIZIBcM9YPS6U0EibWdbpmaO-tRxORelbOvU_utmiJEkGS5YqigvIabZbfLiGBx9rU5r1Sa5aP4LMA-EPKg-RjDO63RyFUAKETtlG7PHqACKMhBXEIVsp34lHFG2c91y72Ys4Zq1_vnw.evfaN4V_DRC3P_H0mU0aidMbYbcIrGYQ96uWr5TAt0M&dib_tag=se&keywords=aorus+mouse&qid=1765320661&sprefix=aorus+mous%2Caps%2C150&sr=8-3&linkCode=ll1&tag=eggear-20&linkId=0d013a7191446570a7c2b6375a4a960d&language=en_US&ref_=as_li_ss_tl",
+      "retailer": "amazon",
+      "slug": "amazon",
+      "variant": "",
+      "isPrimary": true
+    }
+  ],
+  "url": "/hubs/mouse/aorus/m4",
+  "gamesRecommended": [],
+  "media": {
+    "defaultColor": "black",
+    "colors": [
+      "black"
+    ],
+    "editions": [],
+    "images": [
+      {
+        "stem": "feature-image",
+        "view": "feature-image"
+      },
+      {
+        "stem": "top",
+        "view": "top"
+      },
+      {
+        "stem": "left",
+        "view": "left"
+      },
+      {
+        "stem": "right",
+        "view": "right"
+      },
+      {
+        "stem": "sangle",
+        "view": "sangle"
+      },
+      {
+        "stem": "bot",
+        "view": "bot"
+      },
+      {
+        "stem": "img1",
+        "view": "img",
+        "seq": 1
+      },
+      {
+        "stem": "img2",
+        "view": "img",
+        "seq": 2
+      },
+      {
+        "stem": "img3",
+        "view": "img",
+        "seq": 3
+      },
+      {
+        "stem": "img4",
+        "view": "img",
+        "seq": 4
+      },
+      {
+        "stem": "side",
+        "view": "shape-side"
+      },
+      {
+        "stem": "top",
+        "view": "shape-top"
+      }
+    ]
+  }
+}

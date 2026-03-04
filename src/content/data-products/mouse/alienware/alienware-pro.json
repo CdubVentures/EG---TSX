@@ -1,0 +1,267 @@
+{
+  "slug": "alienware-alienware-pro",
+  "brand": "Alienware",
+  "model": "Alienware Pro",
+  "baseModel": "Alienware Pro",
+  "variant": "",
+  "category": "mouse",
+  "imagePath": "/images/mouse/alienware/alienware-pro",
+  "cardTags": "false",
+  "featured": "",
+  "release_date": "01/2024",
+  "discontinued": "",
+  "sku": "570-BBGJ",
+  "price_range": 149.99,
+  "colors": [
+    "white",
+    "black"
+  ],
+  "design": [
+    "standard"
+  ],
+  "lighting": "none",
+  "rgb": "no",
+  "connection": "hybrid",
+  "connectivity": "2.4GHz Dongle",
+  "computer_side_connector": "USB-A",
+  "mouse_side_connector": "USB-C",
+  "bluetooth": "no",
+  "cable_type": "braided",
+  "paracord": "yes",
+  "wireless_charging": "no",
+  "battery_hours": 120,
+  "adjustable_weight": "no",
+  "feet_material": "PTFE (Virgin-Grade)",
+  "coating": "matte",
+  "honeycomb_frame": "no",
+  "silent_clicks": "no",
+  "weight": 59,
+  "material": "plastic",
+  "lngth": 124.5,
+  "width": 63.5,
+  "height": 40.6,
+  "form_factor": "right",
+  "shape": "symmetrical",
+  "hump": "middle",
+  "front_flare": "flat",
+  "thumb_rest": "no",
+  "grip": [
+    "palm",
+    "claw",
+    "fingertip"
+  ],
+  "hand_size": [
+    "medium",
+    "large"
+  ],
+  "mcu": "Nordic nRF52832",
+  "mcu_link": "https://www.nordicsemi.com/Products/nRF52832",
+  "sensor": "PAW3395",
+  "sensor_brand": "PixArt",
+  "sensor_date": "04/2022",
+  "sensor_link": "https://www.pixart.com/products-detail/129/PAW3395DM-T6QU",
+  "sensor_type": "optical",
+  "flawless_sensor": "yes",
+  "sensor_latency": "unk",
+  "sensor_latency_list": [
+    "unk"
+  ],
+  "shift_latency": "unk",
+  "polling_rate": [
+    8000,
+    4000,
+    2000,
+    1000,
+    500,
+    250,
+    125
+  ],
+  "dpi": 26000,
+  "ips": 650,
+  "acceleration": 50,
+  "lift": [
+    1
+  ],
+  "lift_settings": "adjustable",
+  "motion_sync": "no",
+  "hardware_acceleration": "no",
+  "smoothing": "no",
+  "nvidia_reflex": "yes",
+  "switch": "D2FC -F-7N(20M)",
+  "switch_brand": "omron",
+  "switch_type": "optical",
+  "switch_link": "",
+  "hot_swappable": "no",
+  "debounce": "unk",
+  "click_latency": 1,
+  "click_latency_list": "1.3 wireless, 1.0 wired",
+  "click_force": 60,
+  "encoder": "",
+  "encoder_brand": "",
+  "encoder_link": "",
+  "side_buttons": 2,
+  "middle_buttons": 0,
+  "programmable_buttons": 6,
+  "tilt_scroll_wheel": "no",
+  "adjustable_scroll_wheel": "no",
+  "onboard_memory": "yes",
+  "onboard_memory_value": "unk",
+  "profile_switching": "yes",
+  "overall": 9.3,
+  "accuracy": 9.02,
+  "response": 8.7,
+  "quality": 8.8,
+  "comfort": 8.7,
+  "work": 7.6,
+  "feet_score": 8.8,
+  "fps_score": 8.85,
+  "mmo_score": 8.71,
+  "moba_score": 7.5,
+  "aarpg_score": 8,
+  "rts_score": 8.52,
+  "fps": "yes",
+  "mmo": "no",
+  "moba": "yes",
+  "aarpg": "yes",
+  "rts": "yes",
+  "snap_dateUpdated": "12/10/2025",
+  "snap_datePublished": "11/21/2025",
+  "snap_subtitle": "A true esports-style Alienware: light, fast, and tuned for ranked aim.",
+  "hubTags": [
+    "price_range",
+    "weight",
+    "polling_rate",
+    "connection",
+    "rts",
+    "fps"
+  ],
+  "game1": "Counter-Strike 2",
+  "game2": "Valorant",
+  "game3": "Apex Legends",
+  "game4": "Overwatch 2",
+  "game5": "Fortnite",
+  "game6": "Rainbow Six Siege",
+  "game7": "StarCraft II",
+  "game8": "Diablo IV",
+  "keytakeaway": "Alienware’s Pro Wireless is a 59 g, no-RGB flagship built for players who care more about clean tracking and quick stops than extra buttons. It feels dialed for competitive shooters like Counter-Strike 2 and Valorant (and still works well for MOBAs/RTS), with high polling options and a strong 26K/650 IPS sensor—just know the premium price and lack of Bluetooth make it a “desk esports” mouse, not a travel-friendly all-rounder.",
+  "pcard": "The Alienware Pro Wireless Gaming Mouse is a **59 g symmetrical esports mouse** that prioritizes speed, consistency, and a clean no‑RGB look. With up to **4K wireless / 8K wired** polling, onboard memory, and a rated **120-hour** battery at 1K, it’s built for long sessions in CS2 or Valorant without feeling laggy or heavy. If you want a lighter-on-the-wallet wireless alternative with Bluetooth, compare it to the <pop=mouse-24>Corsair M75 Air Wireless</pop>.",
+  "verdict": "The Alienware Pro is Alienware's cleanest \"serious esports\" mouse so far: a sub-60 g, symmetrical shell paired with a top-tier sensor and genuinely high polling options. If you play a lot of tactical FPS (and you actually care about fast click registration and tight cursor feel), it delivers the kind of responsiveness you normally expect from the usual esports suspects - without leaning on RGB or bulky gimmicks.\r\n\r\n#### Lineup context\r\nAs of today, the Alienware Pro sits at the top of Alienware's mouse lineup as the lightweight, competition-first option. It's the one you pick when you want Alienware's build/design language, but you also want modern latency features (4KHz wireless, 8KHz wired) and a familiar, \"safe\" shape that doesn't demand a specific grip style.\r\n\r\n#### What you'll notice in-game\r\nAt ~59 g, the Pro feels quick to start/stop - great for micro-corrections in Valorant/CS2 and for long tracking fights in Apex. The symmetrical 125 x 64 x 41 mm sizing lands in a medium, widely compatible zone: claw grip feels natural, fingertip players get enough length to stabilize, and palm grip can work best on small-to-medium hands (larger palms may wish for a bit more rear support).\r\n\r\nAlienware's Magnetic-Force keyplates + optical switches are the headline here. The practical upside is a crisp, consistent click that suits fast tap-firing and rapid re-peeks, without the \"mushy\" feel some lightweight shells can develop over time. You also get the basics done right: two side buttons, clean scroll behavior, and virgin-grade PTFE feet that glide smoothly on common cloth pads.\r\n\r\n#### Performance and battery reality\r\nThe PixArt PAW3395-class sensor spec (up to 26,000 DPI, 650 IPS, 50G) is the \"don't worry about spinouts\" tier for competitive play. The more meaningful choice is polling rate: 1KHz is the efficiency sweet spot, 4KHz wireless is the competitive flex, and 8KHz is there when you're wired and chasing maximum responsiveness on high-refresh setups.\r\n\r\nBattery scales the way you'd expect: Alienware rates it for up to ~120 hours at 1KHz, but closer to ~32 hours at 4KHz. That's still plenty for most weekly routines - you just don't buy this mouse to set it and forget it for a month.\r\n\r\n| Aspect | What you'll notice |\r\n|---|---|\r\n| Weight | Fast, flickable, and easy to re-center after shots |\r\n| Shape | Safe symmetrical profile that works for claw/fingertip first |\r\n| Polling | 4K wireless feels \"tighter\"; 8K is a wired-only peak mode |\r\n| Buttons | FPS-lean (6 total), not an MMO grid |\r\n| Software | Customization lives in Alienware Command Center |\r\n\r\n> The Alienware Pro is a rare \"brand flagship\" mouse that actually plays like a modern tournament tool, not a novelty peripheral.\r\n\r\n#### The tradeoffs\r\nThe biggest asterisk is software. To remap buttons, manage macros, and handle profiles, you'll likely be living in Alienware Command Center. When it behaves, it's fine - when it doesn't, it's the kind of friction that makes you miss simpler driver stacks. Also note the connectivity focus: you get 2.4GHz wireless + USB wired, but no Bluetooth, which limits its \"one mouse for gaming + travel\" flexibility.\r\n\r\n#### Alternatives worth cross-shopping\r\nIf you like the lightweight, symmetrical lane but want a more price-friendly entry point, the <pop=mouse-24>Corsair M75 Air Wireless</pop> is a strong \"same idea\" option (with lower polling). If you want the most mainstream esports pick with a huge ecosystem behind it, the <pop=mouse-94>Logitech G Pro X Superlight 2</pop> remains the easy short-list. And if you want to stay in Alienware's family but prefer a heavier, more anchored feel, the <pop=mouse-4>Alienware AW720M</pop> is the calmer all-rounder.\r\n\r\n**Bottom line:** If you're an FPS-first player who wants a lightweight, high-polling mouse in a safe shape - and you're OK with Alienware's software - Alienware's Pro is the one to buy from the lineup. If you need Bluetooth, more thumb buttons, or you don't plan to run high polling, there are cheaper options that feel just as consistent in real matches.",
+  "pros": [
+    "59 g symmetrical shell feels effortless for fast flicks and long ranked sessions",
+    "Up to 4K wireless / 8K wired polling keeps high-refresh shooters feeling crisp",
+    "PixArt 3395 sensor (26K DPI / 650 IPS) tracks confidently at high-speed swipes",
+    "Optical Kailh main switches deliver consistent clicks under rapid inputs",
+    "Rated up to 120 hours at 1K with fast charge and onboard memory for set-and-forget setup"
+  ],
+  "cons": [
+    "Premium $149.99 price—amazing for aim-first play, but not a value pick",
+    "Stock glide is decent, not elite; pad choice matters",
+    "Alienware Command Center is required for deep tuning and firmware, and can feel heavyweight"
+  ],
+  "youtube": "https://www.youtube.com/watch?v=oGyagUpBM2M",
+  "affiliateLinks": [
+    {
+      "url": "https://www.amazon.com/Alienware-Pro-Wireless-Gaming-Mouse/dp/B0CTKJYZGW?crid=226CDJTGB4GA3&dib=eyJ2IjoiMSJ9.SD5UIICpO8sjYQmOLqpcDvrLNHx6zoTkr3C-wV1ds_Vyg2dnrFMqClWGqO_CWhEIGvn02GCO9Df1AUPqLJJClG7E-qJVZ-tyVKkNLT0Zq24tXgZ7h5vzmflfj6nYhkU7Vze3WvaMecfOchXP8byyFoQWZgcNCeVRZ1mbS9vO3ntJd_FdYaKLRC2Ufw-3llJaxaJwRVbJMjpmPAnlZ7TFKhJjVeDw3XI7jJCTnYwUD3qruHDD1hdjmFnXdaQS-oS5QTHVrcXdhetf0Uog0ZmLfgqyicdc7B_cW7XZdi0ydxo.mygsosZiPrBnwM_Fl_Eyfcej2VqJWlawtPubNslJq5s&dib_tag=se&keywords=Alienware%2BPro&qid=1765310769&s=electronics&sprefix=alienware%2Bpro%2Caps%2C165&sr=1-3&th=1&linkCode=ll1&tag=eggear-20&linkId=bb97e34503298ce6f2636350c6c72baa&language=en_US&ref_=as_li_ss_tl",
+      "retailer": "amazon",
+      "slug": "amazon",
+      "variant": "white",
+      "isPrimary": true
+    },
+    {
+      "url": "https://www.amazon.com/Alienware-Pro-Wireless-Gaming-Mouse/dp/B0CTKJ65CK?crid=226CDJTGB4GA3&dib=eyJ2IjoiMSJ9.SD5UIICpO8sjYQmOLqpcDvrLNHx6zoTkr3C-wV1ds_Vyg2dnrFMqClWGqO_CWhEIGvn02GCO9Df1AUPqLJJClG7E-qJVZ-tyVKkNLT0Zq24tXgZ7h5vzmflfj6nYhkU7Vze3WvaMecfOchXP8byyFoQWZgcNCeVRZ1mbS9vO3ntJd_FdYaKLRC2Ufw-3llJaxaJwRVbJMjpmPAnlZ7TFKhJjVeDw3XI7jJCTnYwUD3qruHDD1hdjmFnXdaQS-oS5QTHVrcXdhetf0Uog0ZmLfgqyicdc7B_cW7XZdi0ydxo.mygsosZiPrBnwM_Fl_Eyfcej2VqJWlawtPubNslJq5s&dib_tag=se&keywords=Alienware%2BPro&qid=1765310769&s=electronics&sprefix=alienware%2Bpro%2Caps%2C165&sr=1-3&th=1&linkCode=ll1&tag=eggear-20&linkId=e863456f2220d8b1056fdc2eadf10657&language=en_US&ref_=as_li_ss_tl",
+      "retailer": "amazon",
+      "slug": "amazon",
+      "variant": "black",
+      "isPrimary": false
+    }
+  ],
+  "url": "/hubs/mouse/alienware/alienware-pro",
+  "gamesRecommended": [],
+  "media": {
+    "defaultColor": "white",
+    "colors": [
+      "white",
+      "black"
+    ],
+    "editions": [],
+    "images": [
+      {
+        "stem": "feature-image---white",
+        "view": "feature-image",
+        "color": "white"
+      },
+      {
+        "stem": "top---white",
+        "view": "top",
+        "color": "white"
+      },
+      {
+        "stem": "top---black",
+        "view": "top",
+        "color": "black"
+      },
+      {
+        "stem": "left---white",
+        "view": "left",
+        "color": "white"
+      },
+      {
+        "stem": "left---black",
+        "view": "left",
+        "color": "black"
+      },
+      {
+        "stem": "right---white",
+        "view": "right",
+        "color": "white"
+      },
+      {
+        "stem": "right---black",
+        "view": "right",
+        "color": "black"
+      },
+      {
+        "stem": "sangle---white",
+        "view": "sangle",
+        "color": "white"
+      },
+      {
+        "stem": "sangle---black",
+        "view": "sangle",
+        "color": "black"
+      },
+      {
+        "stem": "angle---white",
+        "view": "angle",
+        "color": "white"
+      },
+      {
+        "stem": "angle---black",
+        "view": "angle",
+        "color": "black"
+      },
+      {
+        "stem": "rear---white",
+        "view": "rear",
+        "color": "white"
+      },
+      {
+        "stem": "rear---black",
+        "view": "rear",
+        "color": "black"
+      },
+      {
+        "stem": "514zHweOVZL._AC_SL1500_",
+        "view": "514zHweOVZL._AC_SL1500_"
+      },
+      {
+        "stem": "side",
+        "view": "shape-side"
+      },
+      {
+        "stem": "top",
+        "view": "shape-top"
+      }
+    ]
+  }
+}

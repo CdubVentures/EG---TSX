@@ -1,0 +1,183 @@
+{
+  "slug": "corsair-harpoon-rgb-wireless",
+  "brand": "Corsair",
+  "model": "Harpoon RGB Wireless",
+  "baseModel": "Harpoon",
+  "variant": "RGB Wireless",
+  "category": "mouse",
+  "imagePath": "/images/mouse/corsair/harpoon-rgb-wireless",
+  "cardTags": "false",
+  "featured": "",
+  "release_date": "01/2019",
+  "discontinued": "",
+  "sku": "CH-9311011-NA",
+  "price_range": 64.99,
+  "colors": [
+    "black"
+  ],
+  "design": [
+    "standard"
+  ],
+  "lighting": "1 zone (rgb)",
+  "rgb": "yes",
+  "connection": "hybrid",
+  "connectivity": "2.4GHz Dongle",
+  "computer_side_connector": "USB-A",
+  "mouse_side_connector": "Micro-B",
+  "bluetooth": "yes",
+  "cable_type": "rubber",
+  "paracord": "no",
+  "wireless_charging": "no",
+  "battery_hours": 45,
+  "adjustable_weight": "no",
+  "feet_material": "PTFE (Black-Dyed)",
+  "coating": "rubber grips",
+  "honeycomb_frame": "no",
+  "silent_clicks": "no",
+  "weight": 99,
+  "material": "plastic / rubber",
+  "lngth": 115.5,
+  "width": 68.3,
+  "height": 40.4,
+  "form_factor": "right",
+  "shape": "ergonomic",
+  "hump": "back mid",
+  "front_flare": "outward",
+  "thumb_rest": "no",
+  "grip": [
+    "palm",
+    "claw",
+    "fingertip"
+  ],
+  "hand_size": [
+    "small",
+    "medium"
+  ],
+  "mcu": "unk",
+  "mcu_link": "",
+  "sensor": "PMW3325",
+  "sensor_brand": "PixArt",
+  "sensor_date": "",
+  "sensor_link": "https://www.corsair.com/newsroom/press-release/corsair-launches-three-new-gaming-mice-alongside-slipstream-corsair-wireless-technology",
+  "sensor_type": "optical",
+  "flawless_sensor": "yes",
+  "sensor_latency": 7,
+  "sensor_latency_list": [
+    "14.4 start",
+    "7.0 half",
+    "7.7 end"
+  ],
+  "shift_latency": "unk",
+  "polling_rate": [
+    1000,
+    500,
+    250,
+    125
+  ],
+  "dpi": 10000,
+  "ips": 100,
+  "acceleration": 20,
+  "lift": [
+    3.6
+  ],
+  "lift_settings": "fixed high",
+  "motion_sync": "unk",
+  "hardware_acceleration": "unk",
+  "smoothing": "unk",
+  "nvidia_reflex": "no",
+  "switch": "D2FC -F-K(50M)",
+  "switch_brand": "omron",
+  "switch_type": "mechanical",
+  "switch_link": "",
+  "hot_swappable": "no",
+  "debounce": "unk",
+  "click_latency": 3.5,
+  "click_latency_list": "3.5 wired, 3.5 receiver, 8.3 bluetooth",
+  "click_force": "unk",
+  "encoder": "",
+  "encoder_brand": "",
+  "encoder_link": "",
+  "side_buttons": 2,
+  "middle_buttons": 1,
+  "programmable_buttons": 6,
+  "tilt_scroll_wheel": "no",
+  "adjustable_scroll_wheel": "no",
+  "onboard_memory": "yes",
+  "onboard_memory_value": 1,
+  "profile_switching": "yes",
+  "overall": 6.4,
+  "accuracy": 6.8,
+  "response": 5.68,
+  "quality": 7,
+  "comfort": 6.8,
+  "work": 7.4,
+  "feet_score": 6.4,
+  "fps_score": 5.61,
+  "mmo_score": 4.8,
+  "moba_score": 5.63,
+  "aarpg_score": 5.63,
+  "rts_score": 5.62,
+  "fps": "yes",
+  "mmo": "no",
+  "moba": "yes",
+  "aarpg": "yes",
+  "rts": "yes",
+  "snap_dateUpdated": "12/7/2025",
+  "snap_datePublished": null,
+  "snap_subtitle": "",
+  "hubTags": [],
+  "game1": "",
+  "game2": "",
+  "game3": "",
+  "game4": "",
+  "game5": "",
+  "game6": "",
+  "game7": "",
+  "game8": "",
+  "keytakeaway": "",
+  "pcard": "",
+  "verdict": "",
+  "pros": [],
+  "cons": [],
+  "youtube": "https://www.youtube.com/watch?v=1wQWwvbpEUY",
+  "affiliateLinks": [
+    {
+      "url": "https://www.amazon.com/CORSAIR-Harpoon-RGB-Gaming-Mouse/dp/B01M9DDCKD?&linkCode=ll1&tag=eggear-20&linkId=1365a7053250eb8030a74b215b65ed33&language=en_US&ref_=as_li_ss_tl",
+      "retailer": "amazon",
+      "slug": "amazon",
+      "variant": "",
+      "isPrimary": true
+    }
+  ],
+  "url": "/hubs/mouse/corsair/harpoon-rgb-wireless",
+  "gamesRecommended": [],
+  "media": {
+    "defaultColor": "black",
+    "colors": [
+      "black"
+    ],
+    "editions": [],
+    "images": [
+      {
+        "stem": "top",
+        "view": "top"
+      },
+      {
+        "stem": "left",
+        "view": "left"
+      },
+      {
+        "stem": "sangle",
+        "view": "sangle"
+      },
+      {
+        "stem": "side",
+        "view": "shape-side"
+      },
+      {
+        "stem": "top",
+        "view": "shape-top"
+      }
+    ]
+  }
+}

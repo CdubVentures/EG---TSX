@@ -1,0 +1,258 @@
+{
+  "slug": "corsair-m55-rgb-pro",
+  "brand": "Corsair",
+  "model": "M55 RGB Pro",
+  "baseModel": "M55",
+  "variant": "RGB Pro",
+  "category": "mouse",
+  "imagePath": "/images/mouse/corsair/m55-rgb-pro",
+  "cardTags": "false",
+  "featured": "",
+  "release_date": "06/2019",
+  "discontinued": "",
+  "sku": "CH-9308011-NA",
+  "price_range": 39.99,
+  "colors": [
+    "black",
+    "white"
+  ],
+  "design": [
+    "standard"
+  ],
+  "lighting": "1 zone (rgb)",
+  "rgb": "no",
+  "connection": "wired",
+  "connectivity": "n/a",
+  "computer_side_connector": "USB-A",
+  "mouse_side_connector": "n/a",
+  "bluetooth": "no",
+  "cable_type": "braided",
+  "paracord": "no",
+  "wireless_charging": "no",
+  "battery_hours": "n/a",
+  "adjustable_weight": "no",
+  "feet_material": "PTFE (Black-Dyed)",
+  "coating": "matte",
+  "honeycomb_frame": "no",
+  "silent_clicks": "no",
+  "weight": 86,
+  "material": "plastic",
+  "lngth": 124.4,
+  "width": 57.25,
+  "height": 40,
+  "form_factor": "ambidextrous",
+  "shape": "symmetrical",
+  "hump": "back - front",
+  "front_flare": "flat",
+  "thumb_rest": "no",
+  "grip": [
+    "palm",
+    "claw",
+    "fingertip"
+  ],
+  "hand_size": [
+    "medium",
+    "large"
+  ],
+  "mcu": "unk",
+  "mcu_link": "",
+  "sensor": "PAW3327",
+  "sensor_brand": "PixArt",
+  "sensor_date": "",
+  "sensor_link": "",
+  "sensor_type": "optical",
+  "flawless_sensor": "yes",
+  "sensor_latency": "unk",
+  "sensor_latency_list": [
+    "unk"
+  ],
+  "shift_latency": "unk",
+  "polling_rate": [
+    1000,
+    500,
+    250,
+    125
+  ],
+  "dpi": 12400,
+  "ips": 220,
+  "acceleration": 30,
+  "lift": [
+    2.5
+  ],
+  "lift_settings": "fixed high",
+  "motion_sync": "unk",
+  "hardware_acceleration": "no",
+  "smoothing": "no",
+  "nvidia_reflex": "no",
+  "switch": "D2FC -F-K(50M)",
+  "switch_brand": "omron",
+  "switch_type": "mechanical",
+  "switch_link": "",
+  "hot_swappable": "no",
+  "debounce": "unk",
+  "click_latency": 6,
+  "click_latency_list": "6 wired",
+  "click_force": "unk",
+  "encoder": "",
+  "encoder_brand": "",
+  "encoder_link": "",
+  "side_buttons": 4,
+  "middle_buttons": 1,
+  "programmable_buttons": 8,
+  "tilt_scroll_wheel": "no",
+  "adjustable_scroll_wheel": "no",
+  "onboard_memory": "no",
+  "onboard_memory_value": "unk",
+  "profile_switching": "no",
+  "overall": 6.4,
+  "accuracy": 7.4,
+  "response": 4.9,
+  "quality": 7.8,
+  "comfort": 7.8,
+  "work": 7.2,
+  "feet_score": 7,
+  "fps_score": 5.3,
+  "mmo_score": 5.8,
+  "moba_score": 5.4,
+  "aarpg_score": 5.9,
+  "rts_score": 5.3,
+  "fps": "yes",
+  "mmo": "no",
+  "moba": "yes",
+  "aarpg": "no",
+  "rts": "no",
+  "snap_dateUpdated": "11/20/2025",
+  "snap_datePublished": null,
+  "snap_subtitle": "",
+  "hubTags": [],
+  "game1": "",
+  "game2": "",
+  "game3": "",
+  "game4": "",
+  "game5": "",
+  "game6": "",
+  "game7": "",
+  "game8": "",
+  "keytakeaway": "",
+  "pcard": "",
+  "verdict": "",
+  "pros": [],
+  "cons": [],
+  "youtube": "https://www.youtube.com/watch?v=Ejz03-ihtSo",
+  "affiliateLinks": [
+    {
+      "url": "https://www.amazon.com/Corsair-Wired-Lightweight-Gaming-Mouse/dp/B07QZHSTLC?crid=3TOU491LXA2N1&dib=eyJ2IjoiMSJ9.CqBc4CsopWclBq_IzYP4npzlk5viko4U6SVZWojidqwMpN9dka2fl_X4Qq6OPwW0S8wNx8xg2PA8vvzFLS5XikakJYxnI_r0DNKuWZOpbw_lUlr2QNPtPhRqX9V5vsSBoFxpywZJp9J7FN5gpc3ypDiPKPUy-pzGHk-9N_ASzxvg0__m5jFtAuKN5BqT8RdRvM5GZj-Q4m869LINpD-z1c0GU9tBu0wvpmqhOuSt0bw.IhaE7Gh9w5UGzVgOiDgUN1qRSW1qlEBz2T28ajDsEBs&dib_tag=se&keywords=m55%2Bcorsair&qid=1765321143&sprefix=m55%2Bcorsair%2Caps%2C150&sr=8-3&th=1&linkCode=ll1&tag=eggear-20&linkId=d942110299ab773993323f4a15eaca17&language=en_US&ref_=as_li_ss_tl",
+      "retailer": "amazon",
+      "slug": "amazon",
+      "variant": "",
+      "isPrimary": true
+    }
+  ],
+  "url": "/hubs/mouse/corsair/m55-rgb-pro",
+  "gamesRecommended": [],
+  "media": {
+    "defaultColor": "black",
+    "colors": [
+      "black",
+      "white"
+    ],
+    "editions": [],
+    "images": [
+      {
+        "stem": "feature-image---black",
+        "view": "feature-image",
+        "color": "black"
+      },
+      {
+        "stem": "feature-image---white",
+        "view": "feature-image",
+        "color": "white"
+      },
+      {
+        "stem": "top---black",
+        "view": "top",
+        "color": "black"
+      },
+      {
+        "stem": "top---white",
+        "view": "top",
+        "color": "white"
+      },
+      {
+        "stem": "left---black",
+        "view": "left",
+        "color": "black"
+      },
+      {
+        "stem": "left---white",
+        "view": "left",
+        "color": "white"
+      },
+      {
+        "stem": "right---white",
+        "view": "right",
+        "color": "white"
+      },
+      {
+        "stem": "sangle---black",
+        "view": "sangle",
+        "color": "black"
+      },
+      {
+        "stem": "sangle---white",
+        "view": "sangle",
+        "color": "white"
+      },
+      {
+        "stem": "angle---black",
+        "view": "angle",
+        "color": "black"
+      },
+      {
+        "stem": "angle1---black",
+        "view": "angle",
+        "color": "black",
+        "seq": 1
+      },
+      {
+        "stem": "angle2---black",
+        "view": "angle",
+        "color": "black",
+        "seq": 2
+      },
+      {
+        "stem": "front---black",
+        "view": "front",
+        "color": "black"
+      },
+      {
+        "stem": "front---white",
+        "view": "front",
+        "color": "white"
+      },
+      {
+        "stem": "rear---white",
+        "view": "rear",
+        "color": "white"
+      },
+      {
+        "stem": "bot---black",
+        "view": "bot",
+        "color": "black"
+      },
+      {
+        "stem": "bot---white",
+        "view": "bot",
+        "color": "white"
+      },
+      {
+        "stem": "side",
+        "view": "shape-side"
+      },
+      {
+        "stem": "top",
+        "view": "shape-top"
+      }
+    ]
+  }
+}

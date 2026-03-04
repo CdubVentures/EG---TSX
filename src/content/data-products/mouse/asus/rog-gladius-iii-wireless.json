@@ -1,0 +1,195 @@
+{
+  "slug": "asus-rog-gladius-iii-wireless",
+  "brand": "Asus",
+  "model": "ROG Gladius III Wireless",
+  "baseModel": "ROG Gladius III",
+  "variant": "Wireless",
+  "category": "mouse",
+  "imagePath": "/images/mouse/asus/rog-gladius-iii-wireless",
+  "cardTags": "false",
+  "featured": "",
+  "release_date": "01/2021",
+  "discontinued": "",
+  "sku": "90MP0270-BMUA00 ",
+  "price_range": "Superseded by AimPoint",
+  "colors": [
+    "black"
+  ],
+  "design": [
+    "standard"
+  ],
+  "lighting": "3 zone (rgb)",
+  "rgb": "yes",
+  "connection": "hybrid",
+  "connectivity": "2.4GHz Dongle",
+  "computer_side_connector": "USB-A",
+  "mouse_side_connector": "USB-C",
+  "bluetooth": "yes",
+  "cable_type": "braided",
+  "paracord": "yes",
+  "wireless_charging": "no",
+  "battery_hours": 55,
+  "adjustable_weight": "no",
+  "feet_material": "PTFE (Virgin-Grade)",
+  "coating": "matte",
+  "honeycomb_frame": "no",
+  "silent_clicks": "no",
+  "weight": 89,
+  "material": "plastic",
+  "lngth": 123,
+  "width": 68,
+  "height": 44,
+  "form_factor": "right",
+  "shape": "ergonomic",
+  "hump": "back - front",
+  "front_flare": "outward",
+  "thumb_rest": "no",
+  "grip": [
+    "palm",
+    "claw"
+  ],
+  "hand_size": [
+    "medium",
+    "large"
+  ],
+  "mcu": "STM32L412C8U6",
+  "mcu_link": "https://www.st.com/resource/en/datasheet/stm32l412c8.pdf",
+  "sensor": "PAW3370",
+  "sensor_brand": "PixArt",
+  "sensor_date": "08/2020",
+  "sensor_link": "https://www.pixart.com/products-detail/4/PAW3370DM-T4QU",
+  "sensor_type": "optical",
+  "flawless_sensor": "yes",
+  "sensor_latency": "unk",
+  "sensor_latency_list": [
+    "unk"
+  ],
+  "shift_latency": "unk",
+  "polling_rate": [
+    1000,
+    500,
+    250,
+    125
+  ],
+  "dpi": 26000,
+  "ips": 400,
+  "acceleration": 50,
+  "lift": [
+    1.2
+  ],
+  "lift_settings": "adjustable",
+  "motion_sync": "no",
+  "hardware_acceleration": "no",
+  "smoothing": "no",
+  "nvidia_reflex": "yes",
+  "switch": "ROG Micro Switch",
+  "switch_brand": "asus",
+  "switch_type": "mechanical",
+  "switch_link": "https://rog.asus.com/us/articles/gaming-keyboards-gaming-mice/guide-how-to-replace-the-switches-in-your-rog-gladius-iii-gaming-mouse/",
+  "hot_swappable": "yes",
+  "debounce": "unk",
+  "click_latency": 5.6,
+  "click_latency_list": "3.3 wired, 5.6 wireless, 12.8 bluetooth",
+  "click_force": 5,
+  "encoder": "",
+  "encoder_brand": "",
+  "encoder_link": "",
+  "side_buttons": 2,
+  "middle_buttons": 1,
+  "programmable_buttons": 5,
+  "tilt_scroll_wheel": "no",
+  "adjustable_scroll_wheel": "no",
+  "onboard_memory": "yes",
+  "onboard_memory_value": 5,
+  "profile_switching": "yes",
+  "overall": 7.4,
+  "accuracy": 8.4,
+  "response": 6.1,
+  "quality": 8.4,
+  "comfort": 8.2,
+  "work": 7.4,
+  "feet_score": 8.3,
+  "fps_score": 7,
+  "mmo_score": 5.7,
+  "moba_score": 7.1,
+  "aarpg_score": 7.3,
+  "rts_score": 6.9,
+  "fps": "yes",
+  "mmo": "no",
+  "moba": "yes",
+  "aarpg": "yes",
+  "rts": "yes",
+  "snap_dateUpdated": "12/22/2025",
+  "snap_datePublished": "12/22/2025",
+  "snap_subtitle": "Comfort-first ergo wireless with hot-swap main clicks—still solid, but heavy by 2025 norms.",
+  "hubTags": [
+    "weight",
+    "polling_rate",
+    "connection",
+    "fps",
+    "grip"
+  ],
+  "game1": "Path of Exile",
+  "game2": "StarCraft II",
+  "game3": "League of Legends",
+  "game4": "Valorant",
+  "game5": "Counter-Strike 2",
+  "game6": "",
+  "game7": "",
+  "game8": "",
+  "keytakeaway": "The ASUS ROG Gladius III Wireless (2021) is a right-handed wireless gaming mouse built around a tall ergonomic palm shape, tri‑mode connectivity, and a rare “keep it alive” design thanks to hot‑swappable main click switches. It’s a strong fit for long sessions in games like Counter‑Strike 2, VALORANT, Overwatch 2, and MOBAs where comfort and stable clicks matter, but it’s heavier than modern ultralights and Bluetooth should be treated as a work/travel mode.",
+  "pcard": "The ASUS ROG Gladius III Wireless (2021) is a **tri‑mode wireless gaming mouse** for players who want a tall, supportive right‑hand shape and a mouse you can actually maintain. The hot‑swap main clicks are the whole point—when switches wear out, you replace them instead of replacing the mouse. If you love the Gladius feel but want the modern refresh that effectively replaces this model, the <pop=mouse-59>ROG Gladius III Wireless AimPoint</pop> is the clean step-up; if you want a lighter FPS-first alternative, the <pop=mouse-94>Logitech G Pro X Superlight 2</pop> is the easier “quick corrections” pick.",
+  "verdict": "The **ASUS ROG Gladius III Wireless (2021)** is a **right‑handed ergonomic wireless gaming mouse** for players who want a classic, palm-friendly shape with “daily driver” versatility. The headline is feel: a tall **123 × 68 × 44 mm** shell that fills the hand, stays steady under pressure, and makes long sessions (MOBA matches, ARPG farming, RTS macro) feel less fussy than low-profile shapes that keep you hovering and re-gripping.\r\n\r\n#### What it feels like\r\nThis is a high-hump, supportive mouse that encourages a relaxed palm grip (or a settled claw). At roughly **88–89 g**, it doesn’t feel clumsy, but it does feel **planted**—smooth for steady tracking, a bit slower to start/stop when you’re doing rapid direction changes and tiny aim corrections back-to-back.\r\n\r\n#### Performance and “use the right mode”\r\nConfigured properly, it still performs at a level that makes sense for competitive play. The PAW3370-class sensor setup (up to **26K tuned DPI**, **400 IPS**, **50 G**) tracks cleanly at **1,000 Hz** in the modes that matter. It also supports adjustable **lift‑off distance**, which is a real quality-of-life win if you play low sensitivity and lift/reposition often.\r\n\r\n| Mode | Best use | What you’ll notice |\r\n|---|---|---|\r\n| **2.4 GHz dongle** | Gaming (FPS / everything) | Snappiest and most consistent feel |\r\n| **USB‑C wired** | Charging + “no wireless variables” | Predictable, steady input |\r\n| **Bluetooth** | Laptop / travel / office | Noticeably slower response; not ideal for competitive play |\r\n\r\n> The easy rule: **2.4 GHz for games, Bluetooth for work.** Treat it that way and the mouse makes a lot more sense.\r\n\r\nOne extra “2021 reality” note: firmware maturity matters on this model. If you’re picking it up now (especially second-hand), it’s worth updating once so you’re not living with early behavior that doesn’t represent how the mouse performs after fixes.\r\n\r\n#### The ownership perk that still stands out\r\nWhat keeps the Gladius III Wireless (2021) relevant isn’t that it’s the lightest or newest—it’s that it’s built around **Push‑Fit Switch Socket II**. The main clicks are hot‑swappable, so you can change click feel, sidestep double-click headaches, and extend the life of the chassis without soldering. If you’ve ever had a mouse die from worn clicks and thought “this is such a waste,” this is one of the rare designs that actually addresses that frustration.\r\n\r\n#### Trade-offs to know before you buy\r\nThere are two consistent caveats in 2025:\r\n\r\n- **Weight vs modern FPS trends:** 89 g is simply heavier than today’s ultralight options. If your playstyle leans heavily on fast start/stop control and repeated micro-adjustments, you’ll likely prefer something lighter.\r\n- **Software + long-term watch item:** Armoury Crate is usually best as a one-time setup tool (DPI, LOD, buttons, firmware, save to onboard profiles), not something you run forever. Over long ownership, the most common durability complaint is **scroll wheel encoder behavior** (skips/jumps). The upside is that this chassis is more service-friendly than most, so cleaning/repair isn’t a lost cause.\r\n\r\n#### Bottom line\r\nWe like the Gladius III Wireless (2021) most as a comfort-first, serviceable ergo mouse: stable, supportive in-hand, and unusually easy to keep running. If you want the same Gladius shape philosophy with fewer compromises—and the version that effectively replaces it—go straight to the <pop=mouse-59>ROG Gladius III Wireless AimPoint</pop>. If you’re chasing lighter, more modern ergonomic speed for FPS, the <pop=mouse-128>Razer Deathadder V3 Pro</pop> fits that lane better, and if you want an ultralight “get out of the way” feel, the <pop=mouse-94>Logitech G Pro X Superlight 2</pop> is the cleaner match.",
+  "pros": [
+    "Push-Fit Switch Socket II allows instant, solder-free switch replacement",
+    "Top-tier sensor performance (tuned PAW3370) with 26K DPI headroom\\",
+    "Clean 1,000 Hz feel in 2.4 GHz/wired, with adjustable lift‑off distance for frequent lift-and-reset playstyles",
+    "Solid shell construction feels sturdy and consistent under pressure (no honeycomb flex vibes)"
+  ],
+  "cons": [
+    "Armoury Crate software is resource-heavy and often buggy",
+    "High profile shape may not suit small hands or fingertip grip",
+    "Heavier than direct competitors like the Glorious Model D"
+  ],
+  "youtube": "https://www.youtube.com/watch?v=0KrJiKVirr8",
+  "affiliateLinks": [],
+  "url": "/hubs/mouse/asus/rog-gladius-iii-wireless",
+  "gamesRecommended": [],
+  "media": {
+    "defaultColor": "black",
+    "colors": [
+      "black"
+    ],
+    "editions": [],
+    "images": [
+      {
+        "stem": "feature-image",
+        "view": "feature-image"
+      },
+      {
+        "stem": "top",
+        "view": "top"
+      },
+      {
+        "stem": "left",
+        "view": "left"
+      },
+      {
+        "stem": "sangle",
+        "view": "sangle"
+      },
+      {
+        "stem": "bot",
+        "view": "bot"
+      },
+      {
+        "stem": "side",
+        "view": "shape-side"
+      },
+      {
+        "stem": "top",
+        "view": "shape-top"
+      }
+    ]
+  }
+}

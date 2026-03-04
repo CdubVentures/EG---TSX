@@ -1,0 +1,210 @@
+{
+  "slug": "alienware-aw320m",
+  "brand": "Alienware",
+  "model": "AW320M",
+  "baseModel": "AW320M",
+  "variant": "",
+  "category": "mouse",
+  "imagePath": "/images/mouse/alienware/aw320m",
+  "cardTags": "false",
+  "featured": "",
+  "release_date": "04/2022",
+  "discontinued": "",
+  "sku": "570-ABMQ",
+  "price_range": 69.99,
+  "colors": [
+    "black"
+  ],
+  "design": [
+    "standard"
+  ],
+  "lighting": "1 zone (rgb)",
+  "rgb": "yes",
+  "connection": "wired",
+  "connectivity": "n/a",
+  "computer_side_connector": "USB-A",
+  "mouse_side_connector": "n/a",
+  "bluetooth": "no",
+  "cable_type": "braided",
+  "paracord": "yes",
+  "wireless_charging": "no",
+  "battery_hours": "n/a",
+  "adjustable_weight": "no",
+  "feet_material": "PTFE",
+  "coating": "matte",
+  "honeycomb_frame": "no",
+  "silent_clicks": "no",
+  "weight": 74,
+  "material": "plastic",
+  "lngth": 124.8,
+  "width": 62.4,
+  "height": 38,
+  "form_factor": "right",
+  "shape": "symmetrical",
+  "hump": "middle",
+  "front_flare": "outward",
+  "thumb_rest": "no",
+  "grip": [
+    "palm",
+    "claw"
+  ],
+  "hand_size": [
+    "medium"
+  ],
+  "mcu": "unk",
+  "mcu_link": "",
+  "sensor": "PAW3370",
+  "sensor_brand": "PixArt",
+  "sensor_date": "08/2020",
+  "sensor_link": "https://www.pixart.com/products-detail/4/PAW3370DM-T4QU",
+  "sensor_type": "optical",
+  "flawless_sensor": "yes",
+  "sensor_latency": "unk",
+  "sensor_latency_list": [
+    "unk"
+  ],
+  "shift_latency": "unk",
+  "polling_rate": [
+    1000,
+    500,
+    250,
+    125
+  ],
+  "dpi": 19000,
+  "ips": 400,
+  "acceleration": 50,
+  "lift": [
+    2
+  ],
+  "lift_settings": "fixed low",
+  "motion_sync": "no",
+  "hardware_acceleration": "no",
+  "smoothing": "no",
+  "nvidia_reflex": "yes",
+  "switch": "D2FC -F-K(50M)",
+  "switch_brand": "unk",
+  "switch_type": "mechanical",
+  "switch_link": "",
+  "hot_swappable": "no",
+  "debounce": "unk",
+  "click_latency": "unk",
+  "click_latency_list": "unk",
+  "click_force": "unk",
+  "encoder": "",
+  "encoder_brand": "",
+  "encoder_link": "",
+  "side_buttons": 2,
+  "middle_buttons": 0,
+  "programmable_buttons": 6,
+  "tilt_scroll_wheel": "no",
+  "adjustable_scroll_wheel": "no",
+  "onboard_memory": "yes",
+  "onboard_memory_value": "unk",
+  "profile_switching": "no",
+  "overall": 8,
+  "accuracy": 8.46,
+  "response": 6.7,
+  "quality": 8.2,
+  "comfort": 8.1,
+  "work": 7,
+  "feet_score": 7.8,
+  "fps_score": 7.4,
+  "mmo_score": 7.4,
+  "moba_score": 6.9,
+  "aarpg_score": 7.6,
+  "rts_score": 7.2,
+  "fps": "yes",
+  "mmo": "no",
+  "moba": "yes",
+  "aarpg": "yes",
+  "rts": "yes",
+  "snap_dateUpdated": "11/21/2025",
+  "snap_datePublished": "11/21/2025",
+  "snap_subtitle": "",
+  "hubTags": [
+    "price_range",
+    "weight",
+    "polling_rate",
+    "connection"
+  ],
+  "game1": "Counter-Strike 2",
+  "game2": "Valorant",
+  "game3": "Apex Legends",
+  "game4": "Overwatch 2",
+  "game5": "Fortnite",
+  "game6": "Call of Duty: Warzone",
+  "game7": "Rainbow Six Siege",
+  "game8": "Destiny 2",
+  "keytakeaway": "",
+  "pcard": "",
+  "verdict": "The Alienware AW320M presents a compelling option for budget-focused FPS gamers, particularly at its discounted $39.99 price point. Its 19,000 DPI optical sensor and 400 IPS tracking deliver reliable performance in fast-paced titles like CS2 and Valorant, with no observable spinouts during rapid flicks or tracking scenarios. The inclusion of NVIDIA Reflex is noteworthy at this price tier, reducing system latency to levels typically seen in mice costing twice as much, such as the Razer DeathAdder V3.\r\n\r\nThe 74g ambidextrous design suits claw and hybrid grips comfortably, and PTFE skates provide consistent glide on both cloth and hybrid pads. However, the 1,000Hz polling rate falls short of competitors like the <pop=mouse-85>HyperX Pulsefire Haste 2</pop>, which offers 8K wireless connectivity at a similar price—a critical consideration for users with high-refresh-rate monitors. Additionally, Alienware’s decision not to disclose the switch brand may concern MOBA players who prioritize durability for ability-heavy games like League of Legends.\r\n\r\n#### Key Takeaways\r\n* **Strengths** - NVIDIA Reflex support, lightweight ergonomics, and precise sensor performance make it ideal for tactical shooters\r\n* **Limitations** - No wireless option, fixed weight, and undisclosed switches reduce versatility for customization-focused users\r\n\r\nWhen compared to the <pop=mouse-78>Glorious Model D 2 (1k Wired, $64.99)</pop> or the SteelSeries Aerox 5 (1k Wired, $79.99), the AW320M excels as a budget FPS tool but lacks modern features for esports enthusiasts. If your priority is cost-effective precision over cutting-edge specs, this mouse warrants consideration. For those seeking higher polling rates or genre-specific customization, alternatives may better suit your needs.",
+  "pros": [
+    "$39.99 price tag delivers NVIDIA Reflex optimization for competitive latency cuts",
+    "74g ambidextrous shell excels in flick-heavy titles like Valorant and CS2",
+    "PTFE skates offer near-frictionless glide on hybrid/hard pads",
+    "400 IPS tracking ensures no spinouts during Apex Legends strafe battles",
+    "Lightweight paracord cable avoids drag during high-sens tracking scenarios",
+    "Durable matte coating resists sweat buildup"
+  ],
+  "cons": [
+    "1K polling rate trails 8K wireless rivals at this price point",
+    "No wireless option, limits desk mobility"
+  ],
+  "youtube": "https://www.youtube.com/watch?v=vjZsHX_jGX8",
+  "affiliateLinks": [
+    {
+      "url": "https://www.amazon.com/Alienware-AW320M-Optical-Configurable-Buttons/dp/B09V1CDRRR?crid=4BBKDYMW47EF&dib=eyJ2IjoiMSJ9.9QIZfEsr9GlTZk10jA9Z5SV6iiDUbMxUu-KIZwuN4jteZn2IIT70esiOoxX1eEm4PaEBrtSm8N9TTGG3l9oPxPqW_nJ3SG99vgYueNEUz1I.bR0EFigmG9OKA5pWz2rpJ7eIthPIzddvwBgxuEg89nI&dib_tag=se&keywords=AW320M&qid=1765310982&s=electronics&sprefix=aw320m%2Caps%2C278&sr=1-2&th=1&linkCode=ll1&tag=eggear-20&linkId=d0531a98538ebd5b2da9b7454cb98e5a&language=en_US&ref_=as_li_ss_tl",
+      "retailer": "amazon",
+      "slug": "amazon",
+      "variant": "",
+      "isPrimary": true
+    }
+  ],
+  "url": "/hubs/mouse/alienware/aw320m",
+  "gamesRecommended": [],
+  "media": {
+    "defaultColor": "black",
+    "colors": [
+      "black"
+    ],
+    "editions": [],
+    "images": [
+      {
+        "stem": "feature-image",
+        "view": "feature-image"
+      },
+      {
+        "stem": "top",
+        "view": "top"
+      },
+      {
+        "stem": "left",
+        "view": "left"
+      },
+      {
+        "stem": "sangle",
+        "view": "sangle"
+      },
+      {
+        "stem": "angle",
+        "view": "angle"
+      },
+      {
+        "stem": "front",
+        "view": "front"
+      },
+      {
+        "stem": "rear",
+        "view": "rear"
+      },
+      {
+        "stem": "side",
+        "view": "shape-side"
+      },
+      {
+        "stem": "top",
+        "view": "shape-top"
+      }
+    ]
+  }
+}

@@ -1,0 +1,212 @@
+{
+  "slug": "corsair-m55-wireless",
+  "brand": "Corsair",
+  "model": "M55 Wireless",
+  "baseModel": "M55",
+  "variant": "Wireless",
+  "category": "mouse",
+  "imagePath": "/images/mouse/corsair/m55-wireless",
+  "cardTags": "false",
+  "featured": "",
+  "release_date": "08/2024",
+  "discontinued": "",
+  "sku": "CH-931F000-WW",
+  "price_range": 49.99,
+  "colors": [
+    "black"
+  ],
+  "design": [
+    "standard"
+  ],
+  "lighting": "none",
+  "rgb": "no",
+  "connection": "wireless",
+  "connectivity": "2.4GHz Dongle",
+  "computer_side_connector": "USB-A",
+  "mouse_side_connector": "n/a",
+  "bluetooth": "yes",
+  "cable_type": "braided",
+  "paracord": "no",
+  "wireless_charging": "no",
+  "battery_hours": "n/a",
+  "adjustable_weight": "no",
+  "feet_material": "PTFE (Virgin-Grade)",
+  "coating": "matte",
+  "honeycomb_frame": "no",
+  "silent_clicks": "no",
+  "weight": 83,
+  "material": "plastic",
+  "lngth": 118.7,
+  "width": 62.15,
+  "height": 38.25,
+  "form_factor": "right",
+  "shape": "symmetrical",
+  "hump": "middle",
+  "front_flare": "inward",
+  "thumb_rest": "no",
+  "grip": [
+    "palm",
+    "claw",
+    "fingertip"
+  ],
+  "hand_size": [
+    "small",
+    "medium"
+  ],
+  "mcu": "unk",
+  "mcu_link": "",
+  "sensor": "unk",
+  "sensor_brand": "",
+  "sensor_date": "",
+  "sensor_link": "",
+  "sensor_type": "optical",
+  "flawless_sensor": "unk",
+  "sensor_latency": "unk",
+  "sensor_latency_list": [
+    "unk"
+  ],
+  "shift_latency": "unk",
+  "polling_rate": [
+    1000,
+    500,
+    250,
+    125
+  ],
+  "dpi": 24000,
+  "ips": 300,
+  "acceleration": 35,
+  "lift": [],
+  "lift_settings": "unk",
+  "motion_sync": "unk",
+  "hardware_acceleration": "no",
+  "smoothing": "no",
+  "nvidia_reflex": "no",
+  "switch": "unk",
+  "switch_brand": "unk",
+  "switch_type": "mechanical",
+  "switch_link": "",
+  "hot_swappable": "no",
+  "debounce": "unk",
+  "click_latency": "unk",
+  "click_latency_list": "unk",
+  "click_force": "unk",
+  "encoder": "",
+  "encoder_brand": "",
+  "encoder_link": "",
+  "side_buttons": 2,
+  "middle_buttons": 1,
+  "programmable_buttons": 6,
+  "tilt_scroll_wheel": "no",
+  "adjustable_scroll_wheel": "no",
+  "onboard_memory": "yes",
+  "onboard_memory_value": "unk",
+  "profile_switching": "no",
+  "overall": 7,
+  "accuracy": 8.1,
+  "response": 5.8,
+  "quality": 8,
+  "comfort": 7.8,
+  "work": 7.8,
+  "feet_score": 8,
+  "fps_score": 6.1,
+  "mmo_score": 7,
+  "moba_score": 6.3,
+  "aarpg_score": 7.1,
+  "rts_score": 5.9,
+  "fps": "no",
+  "mmo": "no",
+  "moba": "no",
+  "aarpg": "no",
+  "rts": "yes",
+  "snap_dateUpdated": "11/21/2025",
+  "snap_datePublished": "11/21/2025",
+  "snap_subtitle": "AA-powered compact wireless take on the M55 shape with long battery life and dependable FPS performance.",
+  "hubTags": [
+    "price_range",
+    "weight",
+    "polling_rate",
+    "connection",
+    "fps"
+  ],
+  "game1": "Counter-Strike 2",
+  "game2": "Valorant",
+  "game3": "Fortnite",
+  "game4": "",
+  "game5": "",
+  "game6": "",
+  "game7": "",
+  "game8": "",
+  "keytakeaway": "The Corsair M55 Wireless is a compact, symmetrical mouse that feels stable and predictable in CS2, Valorant, and Fortnite. Its 24,000 DPI optical sensor, 1,000 Hz polling, and smooth PTFE feet keep flicks and tracking clean on 144–240 Hz screens, while the AA-powered design delivers hundreds of hours of use between swaps in either SLIPSTREAM 2.4 GHz or Bluetooth mode. You give up 4K-class polling and ultralight weight that pro-focused mice chase, but in return you get a versatile main mouse with genuinely long battery life, easy multi-device pairing, and pricing that often undercuts most esports-branded alternatives.",
+  "pcard": "Corsair’s M55 Wireless is a **compact, mid-weight wireless FPS/MOBA mouse** with a 24K DPI optical sensor, SLIPSTREAM 2.4 GHz, Bluetooth, and an AA-powered shell that ends up around the mid-80 g mark. It feels more like a dependable daily driver than a cutting-edge esports wand: 1,000 Hz polling, six programmable buttons, and PTFE feet cover the fundamentals for ranked shooters and battle royale without demanding constant charging. If you eventually want to chase pro-grade ultralights, the <pop=mouse-94>Logitech G Pro X Superlight 2</pop> or <pop=mouse-285>Pulsar X2 v2</pop> bring far lower weight and higher polling at a much higher price.",
+  "verdict": "The Corsair M55 Wireless is a compact, symmetrical wireless mouse aimed at players who care more about reliable tracking, long battery life, and a familiar six-button layout than about shaving every last gram off the shell. With a 24,000 DPI optical sensor, SLIPSTREAM 2.4 GHz or Bluetooth, and an AA-powered design that lands around the mid-80 g range with the included battery, it feels like a “main mouse” you can put on any desk and trust to just work.\r\n\r\n#### What You Need To Know\r\n\r\nCorsair builds the M55 Wireless around the same compact shell as the wired M55, adds dual-mode wireless, and upgrades the sensor to 24K DPI with 300 IPS tracking and 35G acceleration. On paper it tops out at a standard 1,000 Hz polling rate, but the real story is endurance: up to 185 hours on SLIPSTREAM and up to 400 hours on Bluetooth from a single AA, plus 100% PTFE feet and six programmable buttons.\r\n\r\n| Aspect | What you’ll notice |\r\n|--------|--------------------|\r\n| Weight & balance | Around mid-80 g with AA; more planted than ultralights but still easy to move |\r\n| Sensor & polling | 24K DPI, 300 IPS, 35G at 1,000 Hz for consistent competitive play |\r\n| Wireless & battery | SLIPSTREAM 2.4 GHz for low-latency PC play, Bluetooth for laptops/tablets, with truly long runtimes |\r\n\r\n> A compact AA-powered shell with a modern 24K sensor makes the M55 Wireless feel like a trustworthy daily driver, not just a budget backup.\r\n\r\n#### In-Game Performance\r\n\r\nIn CS2 and Valorant, the M55 Wireless feels predictable rather than flashy. Low- and mid-DPI players can swing across the pad for wide peeks without seeing spin-outs, and the 24K sensor keeps micro-corrections precise when you’re dialing in headshots or tracking strafes. Input latency at 1,000 Hz over SLIPSTREAM lands comfortably in the “good enough for ranked” tier on 144–240 Hz displays, even if tournament grinders chasing 4K polling on 360 Hz panels will want something more specialised.\r\n\r\nFortnite-style tracking and building feel similarly consistent. Glide from the PTFE feet is smooth without being slippery, helped by the extra mass from the AA battery which gives you a slightly more planted feel than true ultralights. DPI can be stepped through five presets via the top button, and there’s a single on-board profile so your sensitivity and basic remaps travel with you between PCs via iCUE. With six total buttons (two main, wheel, DPI button, and a pair of left-side thumb buttons) it covers the fundamentals for FPS, MOBAs, and ARPGs, but it’s not trying to stand in for a dedicated MMO grid mouse.\r\n\r\n#### Comfort, Shape, and Everyday Use\r\n\r\nThe M55 Wireless keeps the same compact symmetrical shape as its wired sibling, which works well for claw and fingertip grips on small and medium hands and for relaxed palm grip if you’re comfortable with a lower hump. Textured tri-hex side panels give your thumb and ring finger a bit of extra purchase without feeling rubbery, and the understated design (no RGB, simple logo) looks fine in an office environment.\r\n\r\nThe AA battery adds a noticeable chunk of weight versus the 59 g bare shell, but it also helps the mouse feel more controlled; if you’re coming from heavier mainstream mice, the mid-80 g total still feels reasonably light. The trade-off is that it will never feel as “floaty” as sub-60 g esports mice and can be a bit more tiring for ultra-low-DPI flick play. The underside POWER/WIRELESS MODE button handles on/off and switching between 2.4 GHz and Bluetooth. It keeps the top shell clean, but the press-and-hold combinations for pairing take a little memorisation, and with only one on-board profile you’ll rely on iCUE if you want different mappings per game.\r\n\r\n#### Where It Fits vs Other Mice\r\n\r\nWithin Corsair’s lineup, the M55 Wireless is the everyday symmetrical sibling to the ultra-light <pop=mouse-24>M75 Air Wireless</pop>, which cuts weight to around 60 g and adds a flagship 26K sensor at a higher price, but also has much shorter maximum battery life. If you’re content to stick with a cable, the wired M55 variants give you nearly the same shape in an even lighter, cheaper package, but drop multi-device wireless entirely.\r\n\r\nIn our wider catalog, it slots below dedicated esports mice like the <pop=mouse-94>Logitech G Pro X Superlight 2</pop> and <pop=mouse-285>Pulsar X2 v2</pop>. Those mice shave roughly 20–30 grams off the weight and unlock optional 4K polling at significantly higher price points, but they trade away the AA “drop in a new battery and forget about it” convenience and the hundreds-of-hours battery life that define the M55 Wireless. \r\n\r\n**Bottom line:** if you want an affordable, compact wireless mouse that feels secure in hand, works across multiple devices, and is more about reliability and comfort than chasing pro-tournament specs, the M55 Wireless is an easy recommend; if you already know you’re highly sensitive to weight and polling rate, you’ll be happier jumping straight to one of the ultralight esports models instead.",
+  "pros": [
+    "Compact symmetrical shell suits small–medium hands for claw, fingertip, and relaxed palm grips.",
+    "24,000 DPI optical sensor (300 IPS, 35G) and 1,000 Hz polling deliver consistent tracking for ranked FPS and battle royale.",
+    "Dual-mode wireless (SLIPSTREAM 2.4 GHz + Bluetooth) with AA power and battery life rated in the hundreds of hours.",
+    "Six programmable buttons plus one on-board profile via iCUE cover the basics for FPS, MOBA, and general desktop use.",
+    "100% PTFE feet and a mid-80 g overall weight give a smooth yet controlled glide on mainstream cloth pads."
+  ],
+  "cons": [
+    "AA battery keeps total weight in the mid-80 g range, noticeably heavier than modern 50–60 g ultralight esports mice.",
+    "Limited to 1,000 Hz polling, so it won’t fully satisfy players chasing 4K-class mice for 360 Hz+ monitors.",
+    "Power and wireless-mode controls live on a single underside button with multi-step press/hold combos that aren’t very intuitive at first.",
+    "Symmetrical shell but thumb buttons only on the left side, so left-handed players can’t take full advantage of the layout."
+  ],
+  "youtube": "",
+  "affiliateLinks": [
+    {
+      "url": "https://www.amazon.com/Corsair-Wired-Lightweight-Gaming-Mouse/dp/B0D9M58Y1T?crid=3TOU491LXA2N1&dib=eyJ2IjoiMSJ9.CqBc4CsopWclBq_IzYP4npzlk5viko4U6SVZWojidqwMpN9dka2fl_X4Qq6OPwW0S8wNx8xg2PA8vvzFLS5XikakJYxnI_r0DNKuWZOpbw_lUlr2QNPtPhRqX9V5vsSBoFxpywZJp9J7FN5gpc3ypDiPKPUy-pzGHk-9N_ASzxvg0__m5jFtAuKN5BqT8RdRvM5GZj-Q4m869LINpD-z1c0GU9tBu0wvpmqhOuSt0bw.IhaE7Gh9w5UGzVgOiDgUN1qRSW1qlEBz2T28ajDsEBs&dib_tag=se&keywords=m55%2Bcorsair&qid=1765321143&sprefix=m55%2Bcorsair%2Caps%2C150&sr=8-3&th=1&linkCode=ll1&tag=eggear-20&linkId=c0d3d914a215c49526d82aa16c87376f&language=en_US&ref_=as_li_ss_tl",
+      "retailer": "amazon",
+      "slug": "amazon",
+      "variant": "",
+      "isPrimary": true
+    }
+  ],
+  "url": "/hubs/mouse/corsair/m55-wireless",
+  "gamesRecommended": [],
+  "media": {
+    "defaultColor": "black",
+    "colors": [
+      "black"
+    ],
+    "editions": [],
+    "images": [
+      {
+        "stem": "feature-image",
+        "view": "feature-image"
+      },
+      {
+        "stem": "top",
+        "view": "top"
+      },
+      {
+        "stem": "left",
+        "view": "left"
+      },
+      {
+        "stem": "sangle",
+        "view": "sangle"
+      },
+      {
+        "stem": "angle",
+        "view": "angle"
+      },
+      {
+        "stem": "front",
+        "view": "front"
+      },
+      {
+        "stem": "bot",
+        "view": "bot"
+      },
+      {
+        "stem": "side",
+        "view": "shape-side"
+      },
+      {
+        "stem": "top",
+        "view": "shape-top"
+      }
+    ]
+  }
+}

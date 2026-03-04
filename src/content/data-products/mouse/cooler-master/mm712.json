@@ -1,0 +1,258 @@
+{
+  "slug": "cooler-master-mm712",
+  "brand": "Cooler Master",
+  "model": "MM712",
+  "baseModel": "MM712",
+  "variant": "",
+  "category": "mouse",
+  "imagePath": "/images/mouse/cooler-master/mm712",
+  "cardTags": "false",
+  "featured": "Best Budget",
+  "release_date": "09/2022",
+  "discontinued": "",
+  "sku": "MM-712-KKOH1",
+  "price_range": 59.99,
+  "colors": [
+    "black",
+    "white"
+  ],
+  "design": [
+    "standard"
+  ],
+  "lighting": "1 zone (rgb)",
+  "rgb": "yes",
+  "connection": "hybrid",
+  "connectivity": "2.4GHz Dongle",
+  "computer_side_connector": "USB-A",
+  "mouse_side_connector": "USB-C",
+  "bluetooth": "yes",
+  "cable_type": "ultraweave",
+  "paracord": "yes",
+  "wireless_charging": "no",
+  "battery_hours": 80,
+  "adjustable_weight": "no",
+  "feet_material": "PTFE (Virgin-Grade)",
+  "coating": "matte",
+  "honeycomb_frame": "no",
+  "silent_clicks": "no",
+  "weight": 57,
+  "material": "plastic",
+  "lngth": 116.6,
+  "width": 62.2,
+  "height": 38.2,
+  "form_factor": "right",
+  "shape": "symmetrical",
+  "hump": "back mid",
+  "front_flare": "flat",
+  "thumb_rest": "no",
+  "grip": [
+    "palm",
+    "claw",
+    "fingertip"
+  ],
+  "hand_size": [
+    "small",
+    "medium"
+  ],
+  "mcu": "Nordic nRF52833",
+  "mcu_link": "https://www.nordicsemi.com/Products/nRF52833",
+  "sensor": "PAW3370",
+  "sensor_brand": "PixArt",
+  "sensor_date": "08/2020",
+  "sensor_link": "https://www.pixart.com/products-detail/4/PAW3370DM-T4QU",
+  "sensor_type": "optical",
+  "flawless_sensor": "yes",
+  "sensor_latency": "unk",
+  "sensor_latency_list": [
+    "unk"
+  ],
+  "shift_latency": "unk",
+  "polling_rate": [
+    1000,
+    500,
+    250,
+    125
+  ],
+  "dpi": 19000,
+  "ips": 400,
+  "acceleration": 50,
+  "lift": [
+    1.2
+  ],
+  "lift_settings": "adjustable",
+  "motion_sync": "unk",
+  "hardware_acceleration": "no",
+  "smoothing": "no",
+  "nvidia_reflex": "yes",
+  "switch": "Optical V2",
+  "switch_brand": "lk",
+  "switch_type": "optical",
+  "switch_link": "",
+  "hot_swappable": "no",
+  "debounce": 1,
+  "click_latency": 3,
+  "click_latency_list": "3 wireless",
+  "click_force": "unk",
+  "encoder": "",
+  "encoder_brand": "",
+  "encoder_link": "",
+  "side_buttons": 2,
+  "middle_buttons": 0,
+  "programmable_buttons": 5,
+  "tilt_scroll_wheel": "no",
+  "adjustable_scroll_wheel": "no",
+  "onboard_memory": "yes",
+  "onboard_memory_value": "unk",
+  "profile_switching": "yes",
+  "overall": 8.2,
+  "accuracy": 8.5,
+  "response": 7.2,
+  "quality": 8.5,
+  "comfort": 8.4,
+  "work": 8.1,
+  "feet_score": 9.2,
+  "fps_score": 7.6,
+  "mmo_score": 7.6,
+  "moba_score": 7.4,
+  "aarpg_score": 7.6,
+  "rts_score": 7.3,
+  "fps": "yes",
+  "mmo": "yes",
+  "moba": "yes",
+  "aarpg": "yes",
+  "rts": "yes",
+  "snap_dateUpdated": "12/10/2025",
+  "snap_datePublished": "12/10/2025",
+  "snap_subtitle": "Budget ultralight wireless for fast flicks and smooth tracking.",
+  "hubTags": [
+    "price_range",
+    "weight",
+    "polling_rate",
+    "connection",
+    "nvidia_reflex",
+    "fps",
+    "overall"
+  ],
+  "game1": "Counter-Strike 2",
+  "game2": "Valorant",
+  "game3": "Apex Legends",
+  "game4": "Overwatch 2",
+  "game5": "Fortnite",
+  "game6": "",
+  "game7": "",
+  "game8": "",
+  "keytakeaway": "The Cooler Master MM712 is an ultralight wireless mouse that keeps the beloved MM710/711 shape but finally closes the shell. At around 57 g with a high-end 19K sensor and hybrid wired/2.4 GHz/Bluetooth connection, it feels quick, accurate, and flexible for ranked FPS sessions and everyday desktop use. It sits in a “budget flagship” lane: not the absolute lightest or most overbuilt mouse on the market, but a very compelling choice if you want serious competitive performance around the $60 price point without paying true flagship premiums.",
+  "pcard": "Cooler Master’s MM712 is a **sub-60 g hybrid wireless ultralight** that finally ditches the honeycomb shell while keeping a familiar, easy-to-aim shape. A 19K sensor, optical main switches, and 1,000 Hz wireless polling make it more than capable for ranked FPS and MOBA play at a price that feels firmly “budget flagship” rather than disposable. If you want a more polished but much pricier pure-FPS upgrade, the <pop=mouse-94>Logitech G Pro X Superlight 2</pop> still leads on refinement, while the <pop=mouse-287>Pulsar X2 v1</pop> offers a similarly nimble alternative in a different hump and button layout.",
+  "verdict": "The Cooler Master MM712 is what many fans wanted the MM710 and MM711 to become: the same nimble, low-profile shell, but **fully closed, wireless, and still extremely light**. At roughly 57 g, it feels almost weightless in claw and fingertip grips without the honeycomb cutouts or cable drag that turned some people away from the originals. You get hybrid connectivity (wired, 2.4 GHz, and Bluetooth), a modern 19K-class sensor, and optical main switches that keep click feel crisp and consistent over time. All of that lands in a price band that’s closer to “upper-midrange” than true flagship, which is what makes the MM712 so easy to recommend as a budget-friendly competitive option.\r\n\r\n#### Lineup context\r\nWithin Cooler Master’s own lineup, the MM712 effectively acts as their **budget flagship ultralight**, sitting above older wired shells and below the most premium esports mice from other brands. It trades away ultra-high polling rates and tank-like build for a leaner spec sheet that still nails the fundamentals: low weight, strong sensor, and lag-free wireless. If you liked the idea of the MM710/711 but wanted a more conventional, closed shell and wireless freedom, this is the version that finally aligns with modern expectations.\r\n\r\n> A sub-60 g, hole-free shell with hybrid wireless at this price pushes the MM712 straight into “serious ranked play on a budget” territory.\r\n\r\n#### The Good\r\nIn-game, the MM712 feels very much at home in tactical shooters and arena titles. The weight and balance make it easy to snap between angles or micro-adjust on heads without feeling floaty. The hump is modest and the sides are easy to grip, which works especially well for small-to-medium hands using claw or fingertip. The sensor tracks cleanly even during fast flicks, and the 1,000 Hz wireless link keeps inputs responsive enough for high-refresh monitors without obvious jitter or delay.\r\n\r\nThe **hybrid connectivity** is a clear highlight. 2.4 GHz wireless covers serious gaming with a 1 ms report rate, Bluetooth gives you easy pairing to a laptop or work machine, and the soft cable keeps things usable if you need to plug in mid-session. Battery life is solid rather than spectacular, but turning RGB off and staying on 2.4 GHz still gets you many evenings of play between charges, and you can fall back to Bluetooth for travel or low-stakes use.\r\n\r\nCooler Master also includes **nice extras in the box**: pre-cut grip tape and spare PTFE feet let you tweak the feel without aftermarket hunting. Taken together with the street price sitting around the $60 range, the MM712 stacks up very well against more expensive ultralights. For example, the <pop=mouse-94>Logitech G Pro X Superlight 2</pop> is lighter and more refined overall, but it costs significantly more and lacks Bluetooth. On the other end, the <pop=mouse-287>Pulsar X2 v1</pop> offers a similarly low weight and strong sensor in a different shape if you prefer a slightly taller hump.\r\n\r\n| Aspect            | What You’ll Notice                                      |\r\n|-------------------|---------------------------------------------------------|\r\n| Weight & Shell    | Feels almost weightless, closed shell, no flex in normal use. |\r\n| Sensor & Clicks   | Smooth tracking with crisp optical main clicks.        |\r\n| Wireless Options  | 2.4 GHz feels wired-like; Bluetooth is handy for work. |\r\n\r\n#### The Bad\r\nFor a mouse aimed at enthusiasts, the MM712’s **build quality is good but not exceptional**. If you squeeze the shell hard you can feel some flex, and it doesn’t have the same solid brick-like confidence of heavier, more expensive esports mice. It’s not a problem in regular use, but it’s one of the tradeoffs that keeps the price down and the weight low.\r\n\r\nThe **scroll wheel** is another weak spot. It works reliably, but the steps are light and a bit vague, and the middle click can feel hollow compared to the main buttons. If you lean on the wheel for weapon swaps or abilities, you may notice that it doesn’t feel as premium as the rest of the experience. Battery life is fine for its class, but with 2.4 GHz and any lighting enabled you should expect to charge every few days of heavy play rather than once a week or more.\r\n\r\nOn the software side, Cooler Master’s configuration utility is functional but not particularly polished. You can set DPI stages, polling, and button assignments, then save profiles to onboard memory, but the UI doesn’t have the slick, deeply integrated feel of some bigger brands. The upside is that once you dial it in, you rarely need to open it again.\r\n\r\n#### Bottom line\r\nIf you want a **hole-free, hybrid wireless ultralight** that doesn’t blow up your budget, the MM712 is one of the most balanced options available. It delivers the core that matters—shape, weight, sensor, and latency—while accepting a few compromises in shell rigidity, wheel feel, and software gloss to keep pricing friendly. Players who insist on the absolute lightest possible shell, higher polling, or tank-like construction may still gravitate toward pricier options like the <pop=mouse-94>Logitech G Pro X Superlight 2</pop> or heavier premium shells such as the <pop=mouse-3>Alienware Pro Wireless Gaming Mouse</pop>. But for most competitive-minded FPS and MOBA players shopping in this price band, the MM712 hits a very sweet spot and easily earns a spot on the shortlist.",
+  "pros": [
+    "Ultralight ~57 g design with a fully closed, hole-free shell.",
+    "Hybrid connectivity (wired, 2.4 GHz, and Bluetooth) adds flexibility across gaming and work setups.",
+    "High-end 19K-class sensor and optical main switches provide crisp, low-latency clicks and tracking.",
+    "Shape works very well for claw and fingertip grips on small-to-medium hands.",
+    "Strong value positioning as a “budget flagship” ultralight around the $60 price point.",
+    "Includes extras like grip tape and spare PTFE feet to fine-tune feel out of the box."
+  ],
+  "cons": [
+    "Max polling rate tops out at 1,000 Hz (no 2K/4K/8K options)",
+    "Scroll wheel has light, somewhat vague steps and a hollow middle click feel.",
+    "Battery life is decent but not class-leading; frequent competitive play will require regular charging.",
+    "Configuration software is functional but less polished and streamlined than big-brand suites."
+  ],
+  "youtube": "https://www.youtube.com/watch?v=DSg0UqTrg14",
+  "affiliateLinks": [
+    {
+      "url": "https://www.amazon.com/Cooler-Master-Adjustable-Ultraweave-MasterPlus/dp/B0BGYB8DBC?dib=eyJ2IjoiMSJ9.xQyGbOIyTrWUwoTnkrSSbVXNEy_vrJExbeWbrBOyQb_GjHj071QN20LucGBJIEps.TLpwW12U5q23ObUxPefgl8hNDa32dzo9QJHpQfn_krc&dib_tag=se&keywords=mm712%2Bwireless&qid=1765423952&sr=8-3&th=1&linkCode=ll1&tag=eggear-20&linkId=9cb7a49c3c35067b4d12507596cd975e&language=en_US&ref_=as_li_ss_tl",
+      "retailer": "amazon",
+      "slug": "amazon",
+      "variant": "black",
+      "isPrimary": true
+    },
+    {
+      "url": "https://www.amazon.com/Cooler-Master-Adjustable-Ultraweave-MasterPlus/dp/B0BGY8MSYT?dib=eyJ2IjoiMSJ9.xQyGbOIyTrWUwoTnkrSSbVXNEy_vrJExbeWbrBOyQb_GjHj071QN20LucGBJIEps.TLpwW12U5q23ObUxPefgl8hNDa32dzo9QJHpQfn_krc&dib_tag=se&keywords=mm712%2Bwireless&qid=1765423952&sr=8-4&th=1&linkCode=ll1&tag=eggear-20&linkId=c950bacf47b0ab5d840aa576bc16060b&language=en_US&ref_=as_li_ss_tl",
+      "retailer": "amazon",
+      "slug": "amazon",
+      "variant": "white",
+      "isPrimary": false
+    }
+  ],
+  "url": "/hubs/mouse/cooler-master/mm712",
+  "gamesRecommended": [],
+  "media": {
+    "defaultColor": "black",
+    "colors": [
+      "black",
+      "white"
+    ],
+    "editions": [],
+    "images": [
+      {
+        "stem": "feature-image---black",
+        "view": "feature-image",
+        "color": "black"
+      },
+      {
+        "stem": "feature-image---white",
+        "view": "feature-image",
+        "color": "white"
+      },
+      {
+        "stem": "top---black",
+        "view": "top",
+        "color": "black"
+      },
+      {
+        "stem": "top---white",
+        "view": "top",
+        "color": "white"
+      },
+      {
+        "stem": "left---black",
+        "view": "left",
+        "color": "black"
+      },
+      {
+        "stem": "left---white",
+        "view": "left",
+        "color": "white"
+      },
+      {
+        "stem": "sangle---black",
+        "view": "sangle",
+        "color": "black"
+      },
+      {
+        "stem": "sangle---white",
+        "view": "sangle",
+        "color": "white"
+      },
+      {
+        "stem": "angle---black",
+        "view": "angle",
+        "color": "black"
+      },
+      {
+        "stem": "angle---white",
+        "view": "angle",
+        "color": "white"
+      },
+      {
+        "stem": "bot---black",
+        "view": "bot",
+        "color": "black"
+      },
+      {
+        "stem": "bot---white",
+        "view": "bot",
+        "color": "white"
+      },
+      {
+        "stem": "side",
+        "view": "shape-side"
+      },
+      {
+        "stem": "top",
+        "view": "shape-top"
+      }
+    ]
+  }
+}

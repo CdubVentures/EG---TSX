@@ -1,0 +1,179 @@
+{
+  "slug": "corsair-nightsword-rgb-tunable",
+  "brand": "Corsair",
+  "model": "Nightsword RGB Tunable",
+  "baseModel": "Nightsword",
+  "variant": "RGB Tunable",
+  "category": "mouse",
+  "imagePath": "/images/mouse/corsair/nightsword-rgb-tunable",
+  "cardTags": "false",
+  "featured": "",
+  "release_date": "06/2019",
+  "discontinued": "",
+  "sku": "CH-9306011-NA",
+  "price_range": 99.99,
+  "colors": [
+    "black"
+  ],
+  "design": [
+    "standard"
+  ],
+  "lighting": "4 zone (rgb)",
+  "rgb": "yes",
+  "connection": "wired",
+  "connectivity": "n/a",
+  "computer_side_connector": "USB-A",
+  "mouse_side_connector": "n/a",
+  "bluetooth": "no",
+  "cable_type": "braided",
+  "paracord": "yes",
+  "wireless_charging": "no",
+  "battery_hours": "n/a",
+  "adjustable_weight": "yes",
+  "feet_material": "PTFE (Black-Dyed)",
+  "coating": "rubber grips",
+  "honeycomb_frame": "no",
+  "silent_clicks": "no",
+  "weight": 119,
+  "material": "plastic",
+  "lngth": 129,
+  "width": 86,
+  "height": 43.8,
+  "form_factor": "right",
+  "shape": "ergonomic",
+  "hump": "middle",
+  "front_flare": "inward",
+  "thumb_rest": "yes",
+  "grip": [
+    "palm",
+    "claw"
+  ],
+  "hand_size": [
+    "large"
+  ],
+  "mcu": "unk",
+  "mcu_link": "",
+  "sensor": "PMW3391",
+  "sensor_brand": "PixArt",
+  "sensor_date": "",
+  "sensor_link": "https://www.corsair.com/newsroom/press-release/corsair-launches-three-new-gaming-mice-alongside-slipstream-corsair-wireless-technology",
+  "sensor_type": "optical",
+  "flawless_sensor": "yes",
+  "sensor_latency": "unk",
+  "sensor_latency_list": [
+    "unk"
+  ],
+  "shift_latency": "unk",
+  "polling_rate": [
+    1000,
+    500,
+    250,
+    125
+  ],
+  "dpi": 18000,
+  "ips": 400,
+  "acceleration": 50,
+  "lift": [
+    2.4
+  ],
+  "lift_settings": "adjustable",
+  "motion_sync": "unk",
+  "hardware_acceleration": "unk",
+  "smoothing": "unk",
+  "nvidia_reflex": "yes",
+  "switch": "D2FC -F-K(50M)",
+  "switch_brand": "omron",
+  "switch_type": "mechanical",
+  "switch_link": "",
+  "hot_swappable": "no",
+  "debounce": "unk",
+  "click_latency": 11,
+  "click_latency_list": "11 wired",
+  "click_force": "unk",
+  "encoder": "",
+  "encoder_brand": "",
+  "encoder_link": "",
+  "side_buttons": 5,
+  "middle_buttons": 2,
+  "programmable_buttons": 5,
+  "tilt_scroll_wheel": "no",
+  "adjustable_scroll_wheel": "no",
+  "onboard_memory": "yes",
+  "onboard_memory_value": 3,
+  "profile_switching": "yes",
+  "overall": 6.4,
+  "accuracy": 8.2,
+  "response": 4.9,
+  "quality": 8.5,
+  "comfort": 8.5,
+  "work": 7.4,
+  "feet_score": 7.1,
+  "fps_score": 6.1,
+  "mmo_score": 6.5,
+  "moba_score": 6.1,
+  "aarpg_score": 6.5,
+  "rts_score": 6,
+  "fps": "no",
+  "mmo": "yes",
+  "moba": "yes",
+  "aarpg": "yes",
+  "rts": "no",
+  "snap_dateUpdated": "12/13/2025",
+  "snap_datePublished": null,
+  "snap_subtitle": "",
+  "hubTags": [],
+  "game1": "",
+  "game2": "",
+  "game3": "",
+  "game4": "",
+  "game5": "",
+  "game6": "",
+  "game7": "",
+  "game8": "",
+  "keytakeaway": "",
+  "pcard": "",
+  "verdict": "",
+  "pros": [],
+  "cons": [],
+  "youtube": "https://www.youtube.com/watch?v=oY1wNTdxJd4&embeds_referring_euri=https%3A%2F%2Fwww.corsair.com%2F&source_ve_path=OTY3MTQ",
+  "affiliateLinks": [
+    {
+      "url": "https://www.amazon.com/CORSAIR-NIGHTSWORD-Gaming-Mouse-MOBA/dp/B07QX9C9WH?adgrpid=181532387034&hvpone=&hvptwo=&hvadid=748029726673&hvpos=&hvnetw=g&hvrand=2907064210666091624&hvqmt=&hvdev=c&hvdvcmdl=&hvlocint=&hvlocphy=9031993&hvtargid=dsa-1463395464853&hydadcr=&mcid=&hvocijid=2907064210666091624--&hvexpln=m-dsad&hvsb=Electronics_d&hvcampaign=dsadesk&th=1&linkCode=ll1&tag=eggear-20&linkId=a866d8bb0ad641746d21e7d8f18cecf5&language=en_US&ref_=as_li_ss_tl",
+      "retailer": "amazon",
+      "slug": "amazon",
+      "variant": "",
+      "isPrimary": true
+    }
+  ],
+  "url": "/hubs/mouse/corsair/nightsword-rgb-tunable",
+  "gamesRecommended": [],
+  "media": {
+    "defaultColor": "black",
+    "colors": [
+      "black"
+    ],
+    "editions": [],
+    "images": [
+      {
+        "stem": "top",
+        "view": "top"
+      },
+      {
+        "stem": "left",
+        "view": "left"
+      },
+      {
+        "stem": "sangle",
+        "view": "sangle"
+      },
+      {
+        "stem": "side",
+        "view": "shape-side"
+      },
+      {
+        "stem": "top",
+        "view": "shape-top"
+      }
+    ]
+  }
+}

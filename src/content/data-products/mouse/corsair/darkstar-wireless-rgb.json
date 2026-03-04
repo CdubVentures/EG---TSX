@@ -1,0 +1,181 @@
+{
+  "slug": "corsair-darkstar-wireless-rgb",
+  "brand": "Corsair",
+  "model": "Darkstar Wireless RGB",
+  "baseModel": "Darkstar",
+  "variant": "Wireless RGB",
+  "category": "mouse",
+  "imagePath": "/images/mouse/corsair/darkstar-wireless-rgb",
+  "cardTags": "false",
+  "featured": "",
+  "release_date": "06/2023",
+  "discontinued": "",
+  "sku": "CH-931B011-NA",
+  "price_range": 149.99,
+  "colors": [
+    "black"
+  ],
+  "design": [
+    "standard"
+  ],
+  "lighting": "7 zone (rgb)",
+  "rgb": "yes",
+  "connection": "hybrid",
+  "connectivity": "2.4GHz Dongle",
+  "computer_side_connector": "USB-A",
+  "mouse_side_connector": "USB-C",
+  "bluetooth": "yes",
+  "cable_type": "braided",
+  "paracord": "no",
+  "wireless_charging": "no",
+  "battery_hours": 80,
+  "adjustable_weight": "no",
+  "feet_material": "PTFE (Virgin-Grade)",
+  "coating": "matte",
+  "honeycomb_frame": "no",
+  "silent_clicks": "no",
+  "weight": 98.3,
+  "material": "plastic",
+  "lngth": 129.5,
+  "width": 67.9,
+  "height": 43.64,
+  "form_factor": "right",
+  "shape": "symmetrical",
+  "hump": "middle",
+  "front_flare": "flat",
+  "thumb_rest": "no",
+  "grip": [
+    "palm",
+    "claw"
+  ],
+  "hand_size": [
+    "medium",
+    "large"
+  ],
+  "mcu": "unk",
+  "mcu_link": "",
+  "sensor": "MARKSMAN 26K",
+  "sensor_brand": "corsair",
+  "sensor_date": "",
+  "sensor_link": "",
+  "sensor_type": "optical",
+  "flawless_sensor": "unk",
+  "sensor_latency": "unk",
+  "sensor_latency_list": [
+    "unk"
+  ],
+  "shift_latency": "unk",
+  "polling_rate": [
+    2000,
+    1000,
+    500,
+    250,
+    125
+  ],
+  "dpi": 26000,
+  "ips": 650,
+  "acceleration": 50,
+  "lift": [
+    1.2
+  ],
+  "lift_settings": "adjustable",
+  "motion_sync": "no",
+  "hardware_acceleration": "no",
+  "smoothing": "no",
+  "nvidia_reflex": "no",
+  "switch": "Optical Microswitch",
+  "switch_brand": "ttc",
+  "switch_type": "optical",
+  "switch_link": "",
+  "hot_swappable": "no",
+  "debounce": "unk",
+  "click_latency": 2.4,
+  "click_latency_list": " 2.5 wired, 2.4 wireless, 7.8 bluetooth",
+  "click_force": "unk",
+  "encoder": "",
+  "encoder_brand": "",
+  "encoder_link": "",
+  "side_buttons": 6,
+  "middle_buttons": 2,
+  "programmable_buttons": 15,
+  "tilt_scroll_wheel": "yes",
+  "adjustable_scroll_wheel": "no",
+  "onboard_memory": "yes",
+  "onboard_memory_value": 6,
+  "profile_switching": "yes",
+  "overall": 8.8,
+  "accuracy": 9,
+  "response": 8.2,
+  "quality": 8.2,
+  "comfort": 8.5,
+  "work": 9,
+  "feet_score": 9,
+  "fps_score": 6.8,
+  "mmo_score": 8.4,
+  "moba_score": 8.7,
+  "aarpg_score": 9.2,
+  "rts_score": 7.7,
+  "fps": "no",
+  "mmo": "yes",
+  "moba": "yes",
+  "aarpg": "yes",
+  "rts": "yes",
+  "snap_dateUpdated": "11/20/2025",
+  "snap_datePublished": null,
+  "snap_subtitle": "",
+  "hubTags": [],
+  "game1": "",
+  "game2": "",
+  "game3": "",
+  "game4": "",
+  "game5": "",
+  "game6": "",
+  "game7": "",
+  "game8": "",
+  "keytakeaway": "",
+  "pcard": "",
+  "verdict": "",
+  "pros": [],
+  "cons": [],
+  "youtube": "https://www.youtube.com/watch?v=WUtGxFXRusM",
+  "affiliateLinks": [
+    {
+      "url": "https://www.amazon.com/Corsair-DARKSTAR-Wireless-Gaming-Mouse/dp/B0CCVXDLGG?crid=MTXBFU7R3GPR&dib=eyJ2IjoiMSJ9.jx6th7pUUqAxWM6APWbXMgd1SCj-XzBfDiwsfTYNlLTGjHj071QN20LucGBJIEps.bI7pXvK2zpI85Go8DnQlZ6M_w5wc_FbMzNERxvJ9agM&dib_tag=se&keywords=Darkstar%2BWireless%2BRGB&qid=1765321769&sprefix=darkstar%2Bwireless%2Brgb%2Caps%2C276&sr=8-2&th=1&linkCode=ll1&tag=eggear-20&linkId=3352fad5bfb0c2f9243ed9c00b4976a6&language=en_US&ref_=as_li_ss_tl",
+      "retailer": "amazon",
+      "slug": "amazon",
+      "variant": "",
+      "isPrimary": true
+    }
+  ],
+  "url": "/hubs/mouse/corsair/darkstar-wireless-rgb",
+  "gamesRecommended": [],
+  "media": {
+    "defaultColor": "black",
+    "colors": [
+      "black"
+    ],
+    "editions": [],
+    "images": [
+      {
+        "stem": "feature-image",
+        "view": "feature-image"
+      },
+      {
+        "stem": "top",
+        "view": "top"
+      },
+      {
+        "stem": "left",
+        "view": "left"
+      },
+      {
+        "stem": "side",
+        "view": "shape-side"
+      },
+      {
+        "stem": "top",
+        "view": "shape-top"
+      }
+    ]
+  }
+}

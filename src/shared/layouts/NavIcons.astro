@@ -1,0 +1,464 @@
+---
+/**
+ * NavIcons.astro — Right-side nav icon cluster.
+ *
+ * Matches HBS `.top-bar-right > .nav-icons` exactly.
+ * All SVGs are inline with gradient defs for hover effects.
+ *
+ * Auth state: CSS class `.logged` on <html> toggles visibility.
+ * Real auth logic deferred to Phase 9 — for now, CSS-only states.
+ */
+import VaultCount from '@features/vault/components/VaultCount';
+---
+
+<div class="nav-icons">
+  {/* Vault mobile icon — visible ≤1150px only */}
+  <div class="nav-icon vault-mobile-icon">
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" class="svg-base" viewBox="1 0.25 14 15.5">
+      <defs>
+        <linearGradient id="neutralGradient-2" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" style="stop-color: var(--site-start-color);" />
+          <stop offset="100%" style="stop-color: var(--site-end-color);" />
+        </linearGradient>
+      </defs>
+      <g fill="url(#neutralGradient-2)">
+        <path d="M8.088 12.098l3.185-1.81a.178.178 0 01.176 0l2.843 1.615a.172.172 0 010 .3l-6.204 3.524a.178.178 0 01-.176 0L1.088 11.85A.173.173 0 011 11.7V3.947c0-.061.033-.118.088-.15L7.292.274a.176.176 0 01.264.15v3.23a.172.172 0 01-.088.15l-3.186 1.81a.173.173 0 00-.088.149v4.124c0 .062.034.119.088.15l3.63 2.062c.054.03.122.03.176 0z" />
+        <path d="M8.532 3.803l3.186 1.81a.173.173 0 01.088.149v3.62c0 .06.033.118.088.149l2.842 1.615a.176.176 0 00.264-.15V3.947a.173.173 0 00-.088-.15L8.708.274a.176.176 0 00-.264.15v3.23c0 .062.034.119.088.150z" />
+        <path d="M4 2h8a2 2 0 012 2v8a2 2 0 01-2 2H4a2 2 0 01-2-2V4a2 2 0 012-2z" fill="#000000" opacity="0.1" />
+        <path d="M5.9 6.2l2.1 4.2h0l2.1-4.2H8l-2.1 0z" fill="#FFFFFF" />
+      </g>
+    </svg>
+    <div class="nav-vault-item-count-wrapper mobile-vault-badge">
+      <VaultCount client:only="react" />
+    </div>
+  </div>
+
+  {/* Sign Up button — hidden when logged in */}
+  <div class="nav-icon signup-nav-icon logged-hide">Sign Up</div>
+
+  {/* Log In — hidden when logged in */}
+  <div class="nav-icon login-nav-icon logged-hide">
+    <span>Log in</span>
+    <svg xmlns="http://www.w3.org/2000/svg" class="nav-svg" viewBox="0 0 512 512">
+      <defs>
+        <linearGradient id="navbarThemeGradient1" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" style="stop-color: var(--site-gradient-start);" />
+          <stop offset="100%" style="stop-color: var(--site-gradient-end);" />
+        </linearGradient>
+      </defs>
+      <path
+        d="M256 2.7C116.3 2.7 2.6 116.3 2.6 256.1c0 138.2 112.1 252.9 252.7 253.2h.7c70.2 0 133.6-28.6 179.3-74.5 45.8-45.9 74-109.3 74-178.7C509.4 116.3 395.8 2.7 256 2.7zm42.4 265.5c26.2-14.8 44-42.9 44-75.1 0-47.7-38.8-86.4-86.5-86.4-47.6 0-86.4 38.7-86.4 86.4 0 32.2 17.8 60.3 44 75.1-68.3 14.8-124.2 64.5-145.8 132.4-30.9-40.1-49.3-90.2-49.3-144.5C18.5 125 125 18.5 256 18.5c131 0 237.5 106.5 237.5 237.5 0 54.3-18.4 104.4-49.2 144.5-21.7-67.8-77.6-117.6-145.9-132.4z"
+        fill="currentColor"
+      />
+    </svg>
+  </div>
+
+  {/* My Account — visible when logged in */}
+  <div class="nav-icon account-nav-icon logged-show">
+    <span>My&nbsp;Account</span>
+    <svg xmlns="http://www.w3.org/2000/svg" class="nav-svg" viewBox="0 0 512 512">
+      <defs>
+        <linearGradient id="navbarThemeGradient2" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" style="stop-color: var(--site-gradient-start);" />
+          <stop offset="100%" style="stop-color: var(--site-gradient-end);" />
+        </linearGradient>
+      </defs>
+      <path
+        d="M256 2.7C116.3 2.7 2.6 116.3 2.6 256.1S116.3 509.5 256 509.5 509.4 395.9 509.4 256 395.7 2.7 256 2.7zm0 76a86.4 86.4 0 1 1 0 172.8 86.4 86.4 0 0 1 0-172.8zm0 215.1c70.6 0 132.3 32.1 172.2 82.4-36.2 60.3-101.2 100.4-172.2 100.4S119.9 436.5 83.8 374.2c39.8-50.3 101.5-82.4 172.2-82.4z"
+        fill="currentColor"
+      />
+    </svg>
+  </div>
+
+  {/* Search */}
+  <div class="nav-icon search-nav-icon">
+    <svg fill="none" xmlns="http://www.w3.org/2000/svg" class="nav-svg" viewBox="4.5 4.5 15.53 15.53">
+      <defs>
+        <linearGradient id="navbarThemeGradient3" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" style="stop-color: var(--site-gradient-start);" />
+          <stop offset="100%" style="stop-color: var(--site-gradient-end);" />
+        </linearGradient>
+      </defs>
+      <path
+        fill-rule="evenodd"
+        clip-rule="evenodd"
+        d="M15 10.5C15 12.9853 12.9853 15 10.5 15C8.01472 15 6 12.9853 6 10.5C6 8.01472 8.01472 6 10.5 6C12.9853 6 15 8.01472 15 10.5ZM14.1793 15.2399C13.1632 16.0297 11.8865 16.5 10.5 16.5C7.18629 16.5 4.5 13.8137 4.5 10.5C4.5 7.18629 7.18629 4.5 10.5 4.5C13.8137 4.5 16.5 7.18629 16.5 10.5C16.5 11.8865 16.0297 13.1632 15.2399 14.1792L20.0304 18.9697L18.9697 20.0303L14.1793 15.2399Z"
+        fill="currentColor"
+      />
+    </svg>
+  </div>
+
+  {/* Settings */}
+  <div class="nav-icon settings-nav-icon">
+    <svg fill="#ffffff" xmlns="http://www.w3.org/2000/svg" class="nav-svg" viewBox="32.02 26 447.96 460">
+      <defs>
+        <linearGradient id="navbarThemeGradient4" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" style="stop-color: var(--site-gradient-start);" />
+          <stop offset="100%" style="stop-color: var(--site-gradient-end);" />
+        </linearGradient>
+      </defs>
+      <path
+        d="M256,176a80,80,0,1,0,80,80A80.24,80.24,0,0,0,256,176Zm172.72,80a165.53,165.53,0,0,1-1.64,22.34l48.69,38.12a11.59,11.59,0,0,1,2.63,14.78l-46.06,79.52a11.64,11.64,0,0,1-14.14,4.93l-57.25-23a176.56,176.56,0,0,1-38.82,22.67l-8.56,60.78A11.93,11.93,0,0,1,302.06,486H209.94a12,12,0,0,1-11.51-9.53l-8.56-60.78A169.3,169.3,0,0,1,151.05,393L93.8,416a11.64,11.64,0,0,1-14.14-4.92L33.6,331.57a11.59,11.59,0,0,1,2.63-14.78l48.69-38.12A174.58,174.58,0,0,1,83.28,256a165.53,165.53,0,0,1,1.64-22.34L36.23,195.54a11.59,11.59,0,0,1-2.63-14.78l46.06-79.52A11.64,11.64,0,0,1,93.8,96.31l57.25,23a176.56,176.56,0,0,1,38.82-22.67l8.56-60.78A11.93,11.93,0,0,1,209.94,26h92.12a12,12,0,0,1,11.51,9.53l8.56,60.78A169.3,169.3,0,0,1,361,119L418.2,96a11.64,11.64,0,0,1,14.14,4.92l46.06,79.52a11.59,11.59,0,0,1-2.63,14.78l-48.69,38.12A174.58,174.58,0,0,1,428.72,256Z"
+        fill="currentColor"
+      />
+    </svg>
+  </div>
+</div>
+
+{/* Account dropdown — visible when logged in */}
+<div class="account-dropdown logged-show">
+  <a href="/account" class="account-dd-link">My&nbsp;Profile</a>
+  <a href="#" class="account-dd-link account-logout">
+    Sign&nbsp;out
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+      <path
+        d="M255.15 468.625H63.787c-11.737 0-21.262-9.526-21.262-21.262V64.638c0-11.737 9.526-21.262 21.262-21.262H255.15c11.758 0 21.262-9.504 21.262-21.262S266.908.85 255.15.85H63.787C28.619.85 0 29.47 0 64.638v382.724c0 35.168 28.619 63.787 63.787 63.787H255.15c11.758 0 21.262-9.504 21.262-21.262 0-11.758-9.504-21.262-21.262-21.262z"
+        fill="currentColor"
+      />
+      <path
+        d="M505.664 240.861 376.388 113.286c-8.335-8.25-21.815-8.143-30.065.213s-8.165 21.815.213 30.065l92.385 91.173H191.362c-11.758 0-21.262 9.504-21.262 21.262 0 11.758 9.504 21.263 21.262 21.263h247.559l-92.385 91.173c-8.377 8.25-8.441 21.709-.213 30.065a21.255 21.255 0 0 0 15.139 6.336c5.401 0 10.801-2.041 14.926-6.124l129.276-127.575A21.303 21.303 0 0 0 512 255.998c0-5.696-2.275-11.118-6.336-15.137z"
+        fill="currentColor"
+      />
+    </svg>
+  </a>
+</div>
+
+<style>
+  /* Icon cluster layout */
+  .nav-icons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    gap: clamp(1.5rem, 1.5rem + 0.957vw, 2.5rem);
+  }
+
+  .nav-icon {
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--white-color-1);
+    font-size: 1rem;
+    font-family: var(--identity-font);
+    font-weight: var(--font-weight5);
+    white-space: nowrap;
+  }
+
+  /* WHY font-size: HBS sets font-size on .nav-icon svg so height:1em = 22px */
+  .nav-svg {
+    font-size: var(--font-size-22px);
+    fill: #ffffff;
+    width: auto;
+    height: 1em;
+  }
+
+  /* Sign Up button — subtle two-color gradient, intensifies on hover */
+  .signup-nav-icon {
+    border-radius: 4px;
+    padding: 0.65rem 1.25rem;
+    font-size: var(--font-size-14px);
+    background: linear-gradient(to right, var(--site-start-color) 30%, var(--site-end-color));
+    background-size: 200% 100%;
+    background-position: 0% 0%;
+    transition: background-position 0.35s ease, filter 0.35s ease;
+  }
+
+  /* Text labels next to icons */
+  .account-nav-icon span,
+  .login-nav-icon span,
+  .signup-nav-icon span {
+    font-size: var(--font-size-14px);
+    margin-right: 0.5em;
+  }
+
+  /* Login icon */
+  .login-nav-icon {
+    position: relative;
+    font-size: var(--font-size-14px);
+    font-family: var(--identity-font);
+    font-weight: var(--font-weight5);
+    color: var(--white-color-1);
+    white-space: nowrap;
+    height: 100%;
+    display: flex;
+    align-items: center;
+  }
+
+  /* Account icon */
+  .account-nav-icon {
+    position: relative;
+    display: flex;
+    align-items: center;
+    font-size: var(--font-size-14px);
+    font-family: var(--identity-font);
+    font-weight: var(--font-weight5);
+    color: var(--white-color-1);
+    cursor: pointer;
+    white-space: nowrap;
+    height: 100%;
+  }
+
+  /* ─── Auth state switches ─── */
+  .logged-hide {
+    display: flex !important;
+  }
+  .logged-show {
+    display: none !important;
+  }
+  :global(html.logged) .logged-hide {
+    display: none !important;
+  }
+  :global(html.logged) .logged-show {
+    display: flex !important;
+  }
+
+  /* Account dropdown hidden unless logged in */
+  :global(html:not(.logged)) .account-dropdown {
+    display: none !important;
+  }
+
+  /* ─── Hover effects ─── */
+  @media (hover: hover) and (pointer: fine) {
+    .signup-nav-icon:hover {
+      background-position: 100% 0%;
+      filter: brightness(1.15);
+    }
+
+    .login-nav-icon:hover {
+      background: linear-gradient(to right, var(--site-end-color), var(--site-end-color));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .login-nav-icon:hover .nav-svg path {
+      fill: url(#navbarThemeGradient1) !important;
+    }
+
+    .account-nav-icon:hover,
+    .account-nav-icon.locked {
+      background: linear-gradient(to right, var(--site-end-color), var(--site-start-color));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .account-nav-icon:hover .nav-svg path,
+    .account-nav-icon.locked .nav-svg path {
+      fill: url(#navbarThemeGradient2) !important;
+    }
+
+    .search-nav-icon:hover .nav-svg path {
+      fill: url(#navbarThemeGradient3) !important;
+    }
+
+    .settings-nav-icon:hover .nav-svg path {
+      fill: url(#navbarThemeGradient4) !important;
+    }
+  }
+
+  /* ─── Account dropdown ─── */
+  .account-dropdown {
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    min-width: 11rem;
+    max-width: 90vw;
+    background-color: var(--nav-surface);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+    z-index: 99560;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.15s ease;
+    background-image: linear-gradient(to right, var(--site-start-color), var(--site-end-color));
+    background-repeat: no-repeat;
+    background-position: bottom left;
+    background-size: 100% 1px;
+  }
+
+  .account-dropdown.open {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .account-dd-link {
+    display: block;
+    padding: 1rem 2rem;
+    font-size: var(--font-size-14px);
+    font-family: var(--identity-font);
+    font-weight: var(--font-weight4);
+    color: var(--white-color-1);
+    text-decoration: none;
+    white-space: nowrap;
+  }
+
+  .account-dd-link:last-child {
+    background-image: linear-gradient(to right, var(--site-start-color), var(--site-end-color));
+    background-repeat: no-repeat;
+    background-position: bottom left;
+    background-size: 100% 1px;
+  }
+
+  .account-dd-link svg {
+    width: auto;
+    height: 1.15em;
+    margin-left: 0.75em;
+    flex-shrink: 0;
+  }
+
+  .account-logout {
+    display: flex;
+    align-items: center;
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .account-dd-link:hover,
+    .account-dd-link:focus {
+      background-color: #2e343b;
+    }
+  }
+
+  /* ─── Vault mobile icon ─── */
+  .vault-mobile-icon {
+    display: none;
+    position: relative;
+    cursor: pointer;
+    padding: 0 0.25rem;
+  }
+
+  .vault-mobile-icon svg {
+    width: auto;
+    height: var(--font-size-22px);
+    transition: transform 0.3s ease;
+  }
+
+  .mobile-vault-badge {
+    position: absolute;
+    top: -0.35em;
+    right: -0.35em;
+    transform: none;
+    width: 1.35em;
+    font-size: var(--font-size-11px);
+  }
+
+  /* WHY: reuse .nav-vault-item-count-wrapper from NavLinks global styles.
+     Show badge when React island renders content. */
+  .mobile-vault-badge:has(.nav-vault-item-count) {
+    display: flex;
+  }
+
+  @media (max-width: 1150px) {
+    .vault-mobile-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Rotate icon when vault dropdown is open */
+    :global(.top-bar:has(.vault-bin-menu.locked.active)) .vault-mobile-icon svg {
+      transform: rotate(180deg);
+    }
+  }
+
+  /* ─── Responsive ─── */
+  @media (max-width: 1600px) {
+    .signup-nav-icon.logged-hide {
+      display: none !important;
+    }
+
+    .account-nav-icon span {
+      display: none;
+    }
+  }
+
+  @media (max-width: 1150px) {
+    .account-nav-icon span,
+    .login-nav-icon span,
+    .signup-nav-icon span {
+      display: none;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .nav-icon {
+      font-size: var(--font-size-21px);
+    }
+  }
+</style>
+
+{/* WHY Vite-bundled: imports nanostores so the atom is the same singleton
+    as AuthDialog.tsx. Replaces document-level event delegation from old popup controller. */}
+<script>
+  import { openLogin, openSignup } from '@features/auth/store';
+  document.querySelector('.login-nav-icon')?.addEventListener('click', () => openLogin());
+  document.querySelector('.signup-nav-icon')?.addEventListener('click', () => openSignup());
+</script>
+
+{/* Account dropdown logic — absorbed from old popup controller.
+    Uses is:inline because it doesn't need module imports. */}
+<script is:inline>
+(function () {
+  var ready = function (cb) {
+    document.readyState === 'loading'
+      ? document.addEventListener('DOMContentLoaded', cb, { once: true })
+      : cb();
+  };
+
+  ready(function () {
+    var btn = document.querySelector('.account-nav-icon');
+    var dd = document.querySelector('.account-dropdown');
+    if (!btn || !dd) return;
+
+    var bar = document.querySelector('.top-bar-right');
+    var place = function () {
+      var br = btn.getBoundingClientRect();
+      var tr = bar ? bar.getBoundingClientRect() : br;
+      var dw = dd.offsetWidth;
+      var left = br.left + br.width / 2 - dw / 2;
+      left = Math.max(8, Math.min(left, window.innerWidth - dw - 8));
+      dd.style.left = left + 'px';
+      dd.style.top = tr.bottom + 'px';
+    };
+
+    var locked = false;
+    var showDD = function () {
+      if (window.closeSearchPopup) window.closeSearchPopup();
+      if (window.closeSettingsPopup) window.closeSettingsPopup();
+      dd.classList.add('open');
+      place();
+    };
+    var hideDD = function () { if (!locked) dd.classList.remove('open'); };
+    window.closeAccountDropdown = function () {
+      locked = false;
+      btn.classList.remove('locked');
+      hideDD();
+    };
+
+    var inside = function (n) { return n === btn || btn.contains(n) || dd.contains(n); };
+    btn.addEventListener('mouseenter', showDD);
+    dd.addEventListener('mouseenter', showDD);
+    dd.addEventListener('mouseleave', function (e) { if (!inside(e.relatedTarget)) hideDD(); });
+    btn.addEventListener('click', function (e) {
+      e.stopPropagation();
+      locked = !locked;
+      btn.classList.toggle('locked', locked);
+      if (locked) showDD(); else hideDD();
+    });
+    document.addEventListener('click', function (e) {
+      if (!inside(e.target)) { if (window.closeAccountDropdown) window.closeAccountDropdown(); }
+    });
+    dd.addEventListener('click', function (e) { e.stopPropagation(); });
+
+    dd.querySelector('.account-logout')?.addEventListener('click', function (e) {
+      e.preventDefault();
+      window.location.href = '/logout';
+    });
+
+    new ResizeObserver(place).observe(btn);
+    window.addEventListener('scroll', function () {
+      if (dd.classList.contains('open')) place();
+    }, { passive: true });
+  });
+})();
+</script>

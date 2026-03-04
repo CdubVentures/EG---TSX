@@ -1,0 +1,208 @@
+{
+  "slug": "acer-cestus-310",
+  "brand": "Acer",
+  "model": "Cestus 310",
+  "baseModel": "Cestus",
+  "variant": "310",
+  "category": "mouse",
+  "imagePath": "/images/mouse/acer/cestus-310",
+  "cardTags": "false",
+  "featured": "",
+  "release_date": "07/2019",
+  "discontinued": "",
+  "sku": "NP.MCE11.00U",
+  "price_range": 34.99,
+  "colors": [
+    "black"
+  ],
+  "design": [
+    "standard"
+  ],
+  "lighting": "3 zone (led)",
+  "rgb": "no",
+  "connection": "wired",
+  "connectivity": "n/a",
+  "computer_side_connector": "USB-A",
+  "mouse_side_connector": "n/a",
+  "bluetooth": "no",
+  "cable_type": "braided",
+  "paracord": "no",
+  "wireless_charging": "no",
+  "battery_hours": "n/a",
+  "adjustable_weight": "no",
+  "feet_material": "PTFE (Black-Dyed)",
+  "coating": "matte",
+  "honeycomb_frame": "no",
+  "silent_clicks": "no",
+  "weight": 133,
+  "material": "plastic",
+  "lngth": 121,
+  "width": 67,
+  "height": 39,
+  "form_factor": "right",
+  "shape": "ergonomic",
+  "hump": "middle",
+  "front_flare": "flat",
+  "thumb_rest": "no",
+  "grip": [
+    "palm"
+  ],
+  "hand_size": [
+    "medium",
+    "large"
+  ],
+  "mcu": "unk",
+  "mcu_link": "",
+  "sensor": "PAW3519",
+  "sensor_brand": "PixArt",
+  "sensor_date": "08/2017",
+  "sensor_link": "https://www.pixart.com/products-detail/22/PAW3519DL-TKST",
+  "sensor_type": "optical",
+  "flawless_sensor": "no",
+  "sensor_latency": "unk",
+  "sensor_latency_list": [
+    "unk"
+  ],
+  "shift_latency": "unk",
+  "polling_rate": [
+    1000,
+    500,
+    250,
+    125
+  ],
+  "dpi": 4200,
+  "ips": 48,
+  "acceleration": 10,
+  "lift": [],
+  "lift_settings": "unk",
+  "motion_sync": "no",
+  "hardware_acceleration": "no",
+  "smoothing": "no",
+  "nvidia_reflex": "no",
+  "switch": "D2FC -F-7N(10M)",
+  "switch_brand": "unk",
+  "switch_type": "mechanical",
+  "switch_link": "",
+  "hot_swappable": "no",
+  "debounce": "unk",
+  "click_latency": "unk",
+  "click_latency_list": "unk",
+  "click_force": "unk",
+  "encoder": "",
+  "encoder_brand": "",
+  "encoder_link": "",
+  "side_buttons": 2,
+  "middle_buttons": 1,
+  "programmable_buttons": 0,
+  "tilt_scroll_wheel": "no",
+  "adjustable_scroll_wheel": "no",
+  "onboard_memory": "yes",
+  "onboard_memory_value": 5,
+  "profile_switching": "no",
+  "overall": 4.9,
+  "accuracy": 4.2,
+  "response": 5.7,
+  "quality": 6.5,
+  "comfort": 7,
+  "work": 6.4,
+  "feet_score": 5,
+  "fps_score": 3.7,
+  "mmo_score": 5,
+  "moba_score": 4.3,
+  "aarpg_score": 5.8,
+  "rts_score": 4,
+  "fps": "yes",
+  "mmo": "no",
+  "moba": "no",
+  "aarpg": "yes",
+  "rts": "no",
+  "snap_dateUpdated": "11/21/2025",
+  "snap_datePublished": "11/21/2025",
+  "snap_subtitle": "",
+  "hubTags": [
+    "price_range",
+    "weight",
+    "polling_rate",
+    "connection"
+  ],
+  "game1": "World of Warcraft",
+  "game2": "Final Fantasy XIV",
+  "game3": "Diablo IV",
+  "game4": "Path of Exile",
+  "game5": "League of Legends",
+  "game6": "Dota 2",
+  "game7": "Minecraft",
+  "game8": "Baldur's Gate 3",
+  "keytakeaway": "",
+  "pcard": "",
+  "verdict": "The Acer Predator Cestus 310 is a budget-friendly gaming mouse tailored for palm-grip enthusiasts who value simplicity and durability over flashy customization. Its ergonomic design and textured grips make it a reliable companion for extended Diablo IV marathons or casual Minecraft sessions, though its 48 IPS sensor falls short for competitive titles like Counter-Strike 2. Priced at $34.99, this mouse delivers plug-and-play convenience with four preset DPI settings (800–4,200) and switches rated for 10 million clicks—ideal for MOBA players spamming abilities in League of Legends.\r\n\r\n**Programmability Notes:** The two side buttons and middle click lack native remapping capabilities, requiring third-party software like [AutoHotKey](https://www.autohotkey.com/) for customization. This limitation hampers MMO or RPG players needing quick-access macros in games like Final Fantasy XIV. While the side buttons register as XButton1 and XButton2, their fixed functions (forward/backward navigation) limit tactical flexibility compared to rivals like the Redragon <pop=mouse-159>K1NG M996  (8KHz polling)</pop> or the <pop=mouse-184>Cougar Minos XT</pop>, both offering programmable buttons.\r\n\r\nFor casual gamers, the Cestus 310’s no-frills approach shines—no software bloat, no RGB distractions. Yet, its 133g weight and dated sensor make it a poor fit for esports. Think of it as a nostalgic gateway for budget setups or secondary rigs, not a tournament-ready tool.",
+  "pros": [
+    "Ergonomic palm grip design reduces fatigue during extended sessions",
+    "10M-click switches ensure longevity for MOBA/MMO gameplay",
+    "Plug-and-play simplicity with four preset DPI settings (800–4,200)",
+    "Sturdy ABS construction avoids creaks/flex common in budget mice",
+    "1ms/1000Hz polling rate meets baseline competitive standards for wired mice"
+  ],
+  "cons": [
+    "48 IPS tracking falls below modern esports requirements (250+ IPS)",
+    "133g weight feels cumbersome vs. ultralight competitors",
+    "No native button remapping for side/middle buttons"
+  ],
+  "youtube": "",
+  "affiliateLinks": [
+    {
+      "url": "https://www.amazon.com/Acer-Predator-Cestus-Gaming-Mouse/dp/B07VLJ1DJG?crid=2PV75RPT74MLR&dib=eyJ2IjoiMSJ9.A4upSKmG_28-dQkg13M4ew.OhrXRbD5JeiLAtxw1aP0yUVWb0ItiGprKl4Ayh6QcGg&dib_tag=se&keywords=Cestus+310&qid=1765311273&s=electronics&sprefix=cestus+310%2Caps%2C147&sr=1-1&linkCode=ll1&tag=eggear-20&linkId=bceb24827585a1aae7824ebec3c68087&language=en_US&ref_=as_li_ss_tl",
+      "retailer": "amazon",
+      "slug": "amazon",
+      "variant": "",
+      "isPrimary": true
+    }
+  ],
+  "url": "/hubs/mouse/acer/cestus-310",
+  "gamesRecommended": [],
+  "media": {
+    "defaultColor": "black",
+    "colors": [
+      "black"
+    ],
+    "editions": [],
+    "images": [
+      {
+        "stem": "feature-image",
+        "view": "feature-image"
+      },
+      {
+        "stem": "top",
+        "view": "top"
+      },
+      {
+        "stem": "left",
+        "view": "left"
+      },
+      {
+        "stem": "right",
+        "view": "right"
+      },
+      {
+        "stem": "sangle",
+        "view": "sangle"
+      },
+      {
+        "stem": "angle",
+        "view": "angle"
+      },
+      {
+        "stem": "bot",
+        "view": "bot"
+      },
+      {
+        "stem": "side",
+        "view": "shape-side"
+      },
+      {
+        "stem": "top",
+        "view": "shape-top"
+      }
+    ]
+  }
+}

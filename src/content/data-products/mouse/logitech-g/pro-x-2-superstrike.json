@@ -1,0 +1,186 @@
+{
+  "slug": "logitech-g-pro-x-2-superstrike",
+  "brand": "Logitech G",
+  "model": "Pro X 2 Superstrike",
+  "baseModel": "Pro X",
+  "variant": "2 Superstrike",
+  "category": "mouse",
+  "imagePath": "/images/mouse/logitech-g/pro-x-2-superstrike",
+  "cardTags": "false",
+  "featured": "",
+  "release_date": "01/2026",
+  "discontinued": "",
+  "sku": "910-007778",
+  "price_range": 179.99,
+  "colors": [
+    "white+black"
+  ],
+  "design": [
+    "standard"
+  ],
+  "lighting": "none",
+  "rgb": "no",
+  "connection": "hybrid",
+  "connectivity": "2.4GHz Dongle",
+  "computer_side_connector": "USB-A",
+  "mouse_side_connector": "USB-C",
+  "bluetooth": "no",
+  "cable_type": "unk",
+  "paracord": "unk",
+  "wireless_charging": "",
+  "battery_hours": 90,
+  "adjustable_weight": "no",
+  "feet_material": "PTFE (Virgin-Grade)",
+  "coating": "matte",
+  "honeycomb_frame": "no",
+  "silent_clicks": "no",
+  "weight": 65,
+  "material": "plastic",
+  "lngth": 125,
+  "width": 63.5,
+  "height": 40,
+  "form_factor": "right",
+  "shape": "symmetrical",
+  "hump": "middle",
+  "front_flare": "outward",
+  "thumb_rest": "no",
+  "grip": [
+    "palm",
+    "claw",
+    "fingertip"
+  ],
+  "hand_size": [
+    "medium",
+    "large"
+  ],
+  "mcu": "unk",
+  "mcu_link": "",
+  "sensor": "Logitech HERO 2",
+  "sensor_brand": "",
+  "sensor_date": "",
+  "sensor_link": "",
+  "sensor_type": "",
+  "flawless_sensor": "",
+  "sensor_latency": "unk",
+  "sensor_latency_list": [
+    "unk"
+  ],
+  "shift_latency": "unk",
+  "polling_rate": [
+    8000,
+    4000,
+    2000,
+    1000,
+    500,
+    250,
+    125
+  ],
+  "dpi": 44000,
+  "ips": 888,
+  "acceleration": 88,
+  "lift": [],
+  "lift_settings": "unk",
+  "motion_sync": "unk",
+  "hardware_acceleration": "no",
+  "smoothing": "no",
+  "nvidia_reflex": "unk",
+  "switch": "Haptic Inductive Trigger System",
+  "switch_brand": "",
+  "switch_type": "optical",
+  "switch_link": "",
+  "hot_swappable": "no",
+  "debounce": "unk",
+  "click_latency": "unk",
+  "click_latency_list": "unk",
+  "click_force": "unk",
+  "encoder": "",
+  "encoder_brand": "",
+  "encoder_link": "",
+  "side_buttons": 2,
+  "middle_buttons": 0,
+  "programmable_buttons": 5,
+  "tilt_scroll_wheel": "no",
+  "adjustable_scroll_wheel": "no",
+  "onboard_memory": "yes",
+  "onboard_memory_value": "unk",
+  "profile_switching": "yes",
+  "overall": "",
+  "accuracy": "",
+  "response": "",
+  "quality": "",
+  "comfort": "",
+  "work": "",
+  "feet_score": "",
+  "fps_score": "",
+  "mmo_score": "",
+  "moba_score": "",
+  "aarpg_score": "",
+  "rts_score": "",
+  "fps": "",
+  "mmo": "",
+  "moba": "",
+  "aarpg": "",
+  "rts": "",
+  "snap_dateUpdated": "12/20/2025",
+  "snap_datePublished": null,
+  "snap_subtitle": "",
+  "hubTags": [],
+  "game1": "",
+  "game2": "",
+  "game3": "",
+  "game4": "",
+  "game5": "",
+  "game6": "",
+  "game7": "",
+  "game8": "",
+  "keytakeaway": "",
+  "pcard": "",
+  "verdict": "",
+  "pros": [],
+  "cons": [],
+  "youtube": "",
+  "affiliateLinks": [],
+  "url": "/hubs/mouse/logitech-g/pro-x-2-superstrike",
+  "gamesRecommended": [],
+  "media": {
+    "defaultColor": "white+black",
+    "colors": [
+      "white+black"
+    ],
+    "editions": [],
+    "images": [
+      {
+        "stem": "feature-image",
+        "view": "feature-image"
+      },
+      {
+        "stem": "top",
+        "view": "top"
+      },
+      {
+        "stem": "left",
+        "view": "left"
+      },
+      {
+        "stem": "right",
+        "view": "right"
+      },
+      {
+        "stem": "sangle",
+        "view": "sangle"
+      },
+      {
+        "stem": "bot",
+        "view": "bot"
+      },
+      {
+        "stem": "side",
+        "view": "shape-side"
+      },
+      {
+        "stem": "top",
+        "view": "shape-top"
+      }
+    ]
+  }
+}

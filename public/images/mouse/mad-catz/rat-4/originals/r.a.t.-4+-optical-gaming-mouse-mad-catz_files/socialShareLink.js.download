@@ -1,0 +1,64 @@
+﻿const appkey = '3636263056';
+function shareTo(types) {
+    var title, imageUrl, url, description, keywords;
+
+    title = document.title;
+    url = document.location.href;
+
+    //imageUrl
+    var preview = $('.js-share-preview');
+    if (preview.length>0) {
+        var bg = preview.css('background-image');
+        imageUrl = bg.replace('url(', '').replace(')', '').replace(/\"/gi, "");
+    }
+    if (typeof imageUrl === 'undefined') {
+        imageUrl = 'https://' + window.location.host + '/Content/img/Imgog.jpg';
+    }
+
+    var shareLink;
+
+    if (types === 'log-fb') {        
+        shareLink = `https://www.facebook.com/sharer/sharer.php?u=${url}`;     
+    }
+
+    if (types === 'twitter') {
+        shareLink = `https://twitter.com/intent/tweet?url=${url}&text=${title}`;
+    }
+
+    if (types === 'linkedin') {
+        shareLink = `https://www.linkedin.com/shareArticle?url=${url}`;        
+    }
+
+    if (types === 'reddit') {
+        shareLink = `http://www.reddit.com/submit?url=${url}&title=${title}`;        
+    }
+
+    if (types === 'vk') {
+        url = encodeURI(url);
+        shareLink = url;       
+    }
+
+    if (types === 'mail') {
+        shareLink = `mailto:?subject:${title}&body=${url}`;
+    }
+
+    //QQ空間
+    if (types === 'z') {
+        shareLink = `https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=${url}&sharesource=qzone&title=${title}&pics=${imageUrl}`;
+    }
+    //新浪微博
+    if (types === 'weibo') {
+        shareLink = `http://service.weibo.com/share/share.php?url=${url}&sharesource=weibo&title=${title}&pic=${imageUrl}&appkey=${appkey}`;        
+    }
+    //qq
+    if (types === 'qq') {
+        shareLink = `http://connect.qq.com/widget/shareqq/index.html?url=${url}&sharesource=qzone&title=${title}&pics=${imageUrl}`;        
+    }
+    //wechat
+    if (types === 'log-wechat') {       
+        shareLink = `https://www.shareaholic.com/share/wechat/?link=${url}&title=${title}`;        
+    }
+
+    //console.log(shareLink);
+    window.open(shareLink);      
+}

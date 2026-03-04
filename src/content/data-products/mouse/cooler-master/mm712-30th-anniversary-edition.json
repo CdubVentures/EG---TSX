@@ -1,0 +1,216 @@
+{
+  "slug": "cooler-master-mm712-30th-anniversary-edition",
+  "brand": "Cooler Master",
+  "model": "MM712 30th Anniversary Edition",
+  "baseModel": "MM712",
+  "variant": "30th Anniversary Edition",
+  "category": "mouse",
+  "imagePath": "/images/mouse/cooler-master/mm712-30th-anniversary-edition",
+  "cardTags": "false",
+  "featured": "",
+  "release_date": "11/2022",
+  "discontinued": "",
+  "sku": "MM-712-KCOH1",
+  "price_range": 59.99,
+  "colors": [
+    "black"
+  ],
+  "design": [
+    "limited edition"
+  ],
+  "lighting": "1 zone (rgb)",
+  "rgb": "yes",
+  "connection": "hybrid",
+  "connectivity": "2.4GHz Dongle",
+  "computer_side_connector": "USB-A",
+  "mouse_side_connector": "USB-C",
+  "bluetooth": "yes",
+  "cable_type": "ultraweave",
+  "paracord": "yes",
+  "wireless_charging": "no",
+  "battery_hours": 80,
+  "adjustable_weight": "no",
+  "feet_material": "PTFE (Virgin-Grade)",
+  "coating": "matte",
+  "honeycomb_frame": "no",
+  "silent_clicks": "no",
+  "weight": 57,
+  "material": "plastic",
+  "lngth": 116.6,
+  "width": 62.2,
+  "height": 38.2,
+  "form_factor": "right",
+  "shape": "symmetrical",
+  "hump": "back mid",
+  "front_flare": "flat",
+  "thumb_rest": "no",
+  "grip": [
+    "palm",
+    "claw",
+    "fingertip"
+  ],
+  "hand_size": [
+    "small",
+    "medium"
+  ],
+  "mcu": "Nordic nRF52833",
+  "mcu_link": "https://www.nordicsemi.com/Products/nRF52833",
+  "sensor": "PAW3370",
+  "sensor_brand": "PixArt",
+  "sensor_date": "08/2020",
+  "sensor_link": "https://www.pixart.com/products-detail/4/PAW3370DM-T4QU",
+  "sensor_type": "optical",
+  "flawless_sensor": "yes",
+  "sensor_latency": "unk",
+  "sensor_latency_list": [
+    "unk"
+  ],
+  "shift_latency": "unk",
+  "polling_rate": [
+    1000,
+    500,
+    250,
+    125
+  ],
+  "dpi": 19000,
+  "ips": 400,
+  "acceleration": 50,
+  "lift": [
+    1.2
+  ],
+  "lift_settings": "adjustable",
+  "motion_sync": "unk",
+  "hardware_acceleration": "no",
+  "smoothing": "no",
+  "nvidia_reflex": "yes",
+  "switch": "Optical V2",
+  "switch_brand": "lk",
+  "switch_type": "optical",
+  "switch_link": "",
+  "hot_swappable": "no",
+  "debounce": 1,
+  "click_latency": 3,
+  "click_latency_list": "3 wireless",
+  "click_force": "unk",
+  "encoder": "",
+  "encoder_brand": "",
+  "encoder_link": "",
+  "side_buttons": 2,
+  "middle_buttons": 0,
+  "programmable_buttons": 5,
+  "tilt_scroll_wheel": "no",
+  "adjustable_scroll_wheel": "no",
+  "onboard_memory": "yes",
+  "onboard_memory_value": "unk",
+  "profile_switching": "yes",
+  "overall": 8.1,
+  "accuracy": 8.5,
+  "response": 7.2,
+  "quality": 8.6,
+  "comfort": 8.5,
+  "work": 8.2,
+  "feet_score": 9.2,
+  "fps_score": 7.7,
+  "mmo_score": 7.7,
+  "moba_score": 7.5,
+  "aarpg_score": 7.7,
+  "rts_score": 7.4,
+  "fps": "yes",
+  "mmo": "yes",
+  "moba": "yes",
+  "aarpg": "yes",
+  "rts": "yes",
+  "snap_dateUpdated": "11/25/2025",
+  "snap_datePublished": "11/25/2025",
+  "snap_subtitle": "Limited-edition MM712 for small–medium hands that live in claw and fingertip FPS.",
+  "hubTags": [
+    "price_range",
+    "weight",
+    "polling_rate",
+    "connection",
+    "fps",
+    "overall"
+  ],
+  "game1": "Counter-Strike 2",
+  "game2": "Valorant",
+  "game3": "Apex Legends",
+  "game4": "Overwatch 2",
+  "game5": "Fortnite",
+  "game6": "",
+  "game7": "",
+  "game8": "",
+  "keytakeaway": "The MM712 30th Anniversary Edition takes Cooler Master’s lightweight hybrid shell and dresses it up in a limited gray finish without touching the core formula: a ~57 g, right-handed symmetrical mouse with a back-mid hump, PAW3370 sensor, optical switches, and smooth PTFE feet. It feels quick and controlled in tactical shooters like Counter-Strike 2 and Valorant, but still relaxed enough to grind Apex, Overwatch, or battle royale nights without wrecking your hand. Small to medium hands get the best fit in claw or fingertip; if you palm with larger hands, this will feel more like a compact aim tool than a full-hand pillow. If you want a safe, modern hybrid wireless shape with a bit of collector energy, this is the angle.",
+  "pcard": "The MM712 30th Anniversary Edition is a **limited-run spin on Cooler Master’s 57 g hybrid wireless mouse**, pairing a compact right-handed symmetrical shell with PAW3370, optical switches, and pure PTFE feet. It’s built for small–medium hands that play mostly claw or fingertip in ranked FPS, but it’s still versatile enough to cover MOBAs, ARPGs, and everyday desktop work. At around $59.99, it undercuts many ultralight esports mice; if you want a lighter, 4K-ready upgrade and don’t mind spending more, the <pop=mouse-131>Razer Viper V3 Pro</pop> is the natural next step.",
+  "verdict": "The Cooler Master MM712 30th Anniversary Edition is a celebration shell on top of a very practical core. Under the gray limited-edition finish you’re getting the same basic package as the standard MM712: a sub-60 g, right-handed symmetrical mouse with hybrid wireless, a PAW3370 sensor, optical main switches, and pure PTFE feet. That combination puts it squarely in the “serious but sane” lightweight tier—fast and light enough for ranked play without jumping into ultra-niche, ultra-expensive territory.\r\n\r\n#### Shape, Grip, and Hand Fit\r\n\r\nThe MM712 chassis lands in the small-to-medium range with a back-mid hump and fairly flat top, which naturally encourages claw and fingertip grips. The gentle inward curves on the sides make it easy to pinch and “drive from the fingertips,” and the low overall height keeps your wrist relaxed when you’re micro-adjusting in tactical shooters.\r\n\r\nSmall and medium hands can palm it if they like compact shapes; large hands will mostly treat this as a purpose-built aim mouse rather than a “lean back and browse” shell. The matte coating has a neutral, lightly grippy feel, and the solid, hole-free body avoids the dust and flex issues that perforated ultralights can have.\r\n\r\n#### Performance & Wireless Behavior\r\n\r\nOn paper and in play, the MM712’s PAW3370 + 1,000 Hz combo does exactly what it should for a mid-range competitive mouse. You get up to 19,000 DPI, 400 IPS tracking, and a low, adjustable lift-off distance, so low-sens flicks and long tracking arcs feel predictable rather than jittery. It won’t match true 4K/8K esports mice for raw latency or motion smoothness on 240–360 Hz panels, but for most players the ceiling here is already comfortably above their own consistency.\r\n\r\nTriple-mode connectivity (2.4 GHz dongle, Bluetooth, wired USB-C) covers the usual scenarios: 2.4 GHz for gaming, Bluetooth for laptops and travel, wired when you’re charging or just prefer a cable. The included Ultraweave cable stays out of the way if you do play wired, and the PTFE feet give the ~57 g shell an easy, controlled glide on cloth or hybrid pads.\r\n\r\n#### Genre Fit & Everyday Use\r\n\r\nThe MM712 30th Anniversary Edition is clearly built around FPS and general gaming rather than MMO hotbar duty. Six buttons give you primary, wheel, and a sensible pair of side buttons for reload/ping/melee/utility binds without clutter. It feels particularly at home in Counter-Strike 2, Valorant, Apex Legends, Overwatch 2, and Fortnite, where precise tracking and fast repositioning matter more than having a dozen thumb buttons.\r\n\r\nOutside of shooters, it’s still a solid everyday driver: MOBAs, ARPGs, and light MMO play feel fine as long as you don’t depend on a full thumb grid. The compact, low-fatigue shape and hybrid wireless make it a good “single mouse for home and work” choice if your hand size matches the shell.\r\n\r\n#### Value & Alternatives\r\n\r\nAt around $59.99, the 30th Anniversary Edition sits in a sweet spot: you get a modern sensor, optical switches, hybrid wireless, and a sub-60 g, hole-free shell at a price where some competitors still lock you into wired-only or heavier designs. The limited colorway adds personality without sacrificing practicality.\r\n\r\nIf you’re chasing every last millisecond of latency or want something even lighter, options like the <pop=mouse-94>Logitech G Pro X Superlight 2</pop>, <pop=mouse-131>Razer Viper V3 Pro</pop>, or <pop=mouse-287>Pulsar X2</pop> push weight and wireless performance further—but at noticeably higher prices and without the anniversary branding. If your priorities are a proven shape, hybrid flexibility, and good FPS performance at a mid-range price, the MM712 30th Anniversary Edition earns an easy recommendation for small to medium hands.",
+  "pros": [
+    "Max polling rate of 1000 Hz can’t match newer 4K/8K esports mice for absolute lowest latency.",
+    "Small shell and back‑mid hump can feel short or cramped for large hands, especially in full palm grip.",
+    "Only six buttons and no dedicated sniper/DPI‑shift button, which may be limiting for some competitive FPS players.",
+    "RGB lighting is minimal and mostly cosmetic; those wanting more lighting customization may find it understated.",
+    "Anniversary variant is essentially cosmetic—owners of the standard MM712 won’t gain new features or performance.oth modes when lighting is disabled.rts pricing."
+  ],
+  "cons": [
+    "Capped at 1,000 Hz polling, so it won’t satisfy players chasing 4K/8K and 360 Hz+ “maxed out” responsiveness.",
+    "Compact shell can feel cramped for large hands, particularly in full palm grip.",
+    "Six-button layout is versatile, but not ideal if you rely on dense MMO thumb grids or heavy macro setups.",
+    "Battery life is solid rather than exceptional if you play long hours on 2.4 GHz with lighting enabled.",
+    "Limited-edition nature may make it harder to find or replace than the standard MM712 variants."
+  ],
+  "youtube": "https://www.youtube.com/watch?v=H5KF5PBJM9M",
+  "affiliateLinks": [
+    {
+      "url": "https://www.amazon.com/Cooler-Master-Adjustable-Ultraweave-MasterPlus/dp/B0BGYB8DBC?crid=JZ1VKPC48CIL&dib=eyJ2IjoiMSJ9.-nfrNgRJfoF4LYDxyJNLh7GJGrO7uazI_-85nIV1S4AIWuhulirJo42mdON_Fc7HRa4a4dWifc-qpafpkFE3QAGpf1x0JpTkmuXiAn8nmWH_zHyNd_ymI9WgGUMpRvNumWVWTFptBxvLpwm3xonOwV0BaKDaA1Zx1JfoKaNSWV_ljj5hPR9GMKzKHHifNG4BFbdXEKaDJi4pHWNHe7f8q2oyCO4e4AQJqvhLEqCNW4Y.rahe7sV_6dPZQr7_mB6mIlHUa1Fsiw4d5kERYokwsuc&dib_tag=se&keywords=Cooler%2BMaster%2BMM712&qid=1765320983&sprefix=cooler%2Bmaster%2Bmm712%2Caps%2C146&sr=8-1&th=1&linkCode=ll1&tag=eggear-20&linkId=9105056d4a7151e1b80f3a3dda725f58&language=en_US&ref_=as_li_ss_tl",
+      "retailer": "amazon",
+      "slug": "amazon",
+      "variant": "",
+      "isPrimary": true
+    }
+  ],
+  "url": "/hubs/mouse/cooler-master/mm712-30th-anniversary-edition",
+  "gamesRecommended": [],
+  "media": {
+    "defaultColor": "black",
+    "colors": [
+      "black"
+    ],
+    "editions": [],
+    "images": [
+      {
+        "stem": "feature-image",
+        "view": "feature-image"
+      },
+      {
+        "stem": "top",
+        "view": "top"
+      },
+      {
+        "stem": "left",
+        "view": "left"
+      },
+      {
+        "stem": "sangle",
+        "view": "sangle"
+      },
+      {
+        "stem": "angle",
+        "view": "angle"
+      },
+      {
+        "stem": "rear",
+        "view": "rear"
+      },
+      {
+        "stem": "bottom",
+        "view": "bottom"
+      },
+      {
+        "stem": "side",
+        "view": "shape-side"
+      },
+      {
+        "stem": "top",
+        "view": "shape-top"
+      }
+    ]
+  }
+}

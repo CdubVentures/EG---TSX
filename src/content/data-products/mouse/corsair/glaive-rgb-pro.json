@@ -1,0 +1,182 @@
+{
+  "slug": "corsair-glaive-rgb-pro",
+  "brand": "Corsair",
+  "model": "Glaive RGB Pro",
+  "baseModel": "Glaive",
+  "variant": "RGB Pro",
+  "category": "mouse",
+  "imagePath": "/images/mouse/corsair/glaive-rgb-pro",
+  "cardTags": "false",
+  "featured": "",
+  "release_date": "04/2019",
+  "discontinued": "",
+  "sku": "CH-9302311-NA",
+  "price_range": 69.99,
+  "colors": [
+    "black+gray-light"
+  ],
+  "design": [
+    "standard"
+  ],
+  "lighting": "3 zone (rgb)",
+  "rgb": "yes",
+  "connection": "wired",
+  "connectivity": "n/a",
+  "computer_side_connector": "USB-A",
+  "mouse_side_connector": "n/a",
+  "bluetooth": "no",
+  "cable_type": "braided",
+  "paracord": "yes",
+  "wireless_charging": "no",
+  "battery_hours": "n/a",
+  "adjustable_weight": "no",
+  "feet_material": "PTFE (Black-Dyed)",
+  "coating": "matte, rubber grips",
+  "honeycomb_frame": "no",
+  "silent_clicks": "no",
+  "weight": 115,
+  "material": "plastic, aluminum",
+  "lngth": 124.5,
+  "width": 70,
+  "height": 45.5,
+  "form_factor": "right",
+  "shape": "ergonomic",
+  "hump": "middle",
+  "front_flare": "flat",
+  "thumb_rest": "yes",
+  "grip": [
+    "palm",
+    "claw",
+    "fingertip"
+  ],
+  "hand_size": [
+    "small",
+    "medium",
+    "large"
+  ],
+  "mcu": "unk",
+  "mcu_link": "",
+  "sensor": "PMW3391",
+  "sensor_brand": "PixArt",
+  "sensor_date": "",
+  "sensor_link": "https://www.corsair.com/newsroom/press-release/corsair-launches-three-new-gaming-mice-alongside-slipstream-corsair-wireless-technology",
+  "sensor_type": "optical",
+  "flawless_sensor": "yes",
+  "sensor_latency": "unk",
+  "sensor_latency_list": [
+    "unk"
+  ],
+  "shift_latency": "unk",
+  "polling_rate": [
+    1000,
+    500,
+    250,
+    125
+  ],
+  "dpi": 18000,
+  "ips": 400,
+  "acceleration": 50,
+  "lift": [
+    2.4
+  ],
+  "lift_settings": "adjustable",
+  "motion_sync": "unk",
+  "hardware_acceleration": "unk",
+  "smoothing": "unk",
+  "nvidia_reflex": "no",
+  "switch": "D2FC -F-K(50M)",
+  "switch_brand": "omron",
+  "switch_type": "mechanical",
+  "switch_link": "",
+  "hot_swappable": "no",
+  "debounce": "unk",
+  "click_latency": 5,
+  "click_latency_list": "5 wired",
+  "click_force": "unk",
+  "encoder": "",
+  "encoder_brand": "",
+  "encoder_link": "",
+  "side_buttons": 2,
+  "middle_buttons": 2,
+  "programmable_buttons": 7,
+  "tilt_scroll_wheel": "no",
+  "adjustable_scroll_wheel": "no",
+  "onboard_memory": "yes",
+  "onboard_memory_value": 1,
+  "profile_switching": "no",
+  "overall": 6.9,
+  "accuracy": 8.2,
+  "response": 4.9,
+  "quality": 7.5,
+  "comfort": 8.1,
+  "work": 7.3,
+  "feet_score": 6.8,
+  "fps_score": 6.1,
+  "mmo_score": 6.3,
+  "moba_score": 6.2,
+  "aarpg_score": 6.4,
+  "rts_score": 6,
+  "fps": "no",
+  "mmo": "no",
+  "moba": "yes",
+  "aarpg": "yes",
+  "rts": "no",
+  "snap_dateUpdated": "12/14/2025",
+  "snap_datePublished": null,
+  "snap_subtitle": "",
+  "hubTags": [],
+  "game1": "",
+  "game2": "",
+  "game3": "",
+  "game4": "",
+  "game5": "",
+  "game6": "",
+  "game7": "",
+  "game8": "",
+  "keytakeaway": "",
+  "pcard": "",
+  "verdict": "",
+  "pros": [],
+  "cons": [],
+  "youtube": "https://www.youtube.com/watch?v=2j7OUUCnWTI",
+  "affiliateLinks": [
+    {
+      "url": "https://www.amazon.com/CORSAIR-Glaive-Pro-Comfortable-Interchangeable/dp/B07PWJ43MB?crid=1CGS46DFJ09FB&dib=eyJ2IjoiMSJ9.2avdD77Rpp2s5EVGWpYuyvhV6x3ZtXtQpAzwbp1uZ68.UuIothZo7Wx2QL1LHlZ2GRhTJHRm7dYxFILsG1kOSts&dib_tag=se&keywords=Glaive%2BRGB%2BPro&qid=1765856675&s=electronics&sprefix=glaive%2Brgb%2Bpro%2Caps%2C149&sr=1-1&th=1&linkCode=ll1&tag=eggear-20&linkId=e4233f6f1d812a1ba2da8cdaf432b198&language=en_US&ref_=as_li_ss_tl",
+      "retailer": "amazon",
+      "slug": "amazon",
+      "variant": "",
+      "isPrimary": true
+    }
+  ],
+  "url": "/hubs/mouse/corsair/glaive-rgb-pro",
+  "gamesRecommended": [],
+  "media": {
+    "defaultColor": "black+gray-light",
+    "colors": [
+      "black+gray-light"
+    ],
+    "editions": [],
+    "images": [
+      {
+        "stem": "top",
+        "view": "top"
+      },
+      {
+        "stem": "left",
+        "view": "left"
+      },
+      {
+        "stem": "sangle",
+        "view": "sangle"
+      },
+      {
+        "stem": "side",
+        "view": "shape-side"
+      },
+      {
+        "stem": "top",
+        "view": "shape-top"
+      }
+    ]
+  }
+}

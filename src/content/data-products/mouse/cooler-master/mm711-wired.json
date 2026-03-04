@@ -1,0 +1,346 @@
+{
+  "slug": "cooler-master-mm711-wired",
+  "brand": "Cooler Master",
+  "model": "MM711 Wired",
+  "baseModel": "MM711",
+  "variant": "Wired",
+  "category": "mouse",
+  "imagePath": "/images/mouse/cooler-master/mm711-wired",
+  "cardTags": "false",
+  "featured": "",
+  "release_date": "11/2019",
+  "discontinued": "",
+  "sku": "MM-711-KKOL1",
+  "price_range": 24.99,
+  "colors": [
+    "black",
+    "white",
+    "dark-green",
+    "gold+red",
+    "blue"
+  ],
+  "design": [
+    "standard"
+  ],
+  "lighting": "2 zone (rgb)",
+  "rgb": "yes",
+  "connection": "wired",
+  "connectivity": "n/a",
+  "computer_side_connector": "USB-A",
+  "mouse_side_connector": "n/a",
+  "bluetooth": "no",
+  "cable_type": "ultraweave",
+  "paracord": "yes",
+  "wireless_charging": "no",
+  "battery_hours": "n/a",
+  "adjustable_weight": "no",
+  "feet_material": "PTFE (Virgin-Grade)",
+  "coating": "matte",
+  "honeycomb_frame": "yes",
+  "silent_clicks": "no",
+  "weight": 60,
+  "material": "plastic",
+  "lngth": 116.5,
+  "width": 62.4,
+  "height": 38.2,
+  "form_factor": "right",
+  "shape": "symmetrical",
+  "hump": "back mid",
+  "front_flare": "flat",
+  "thumb_rest": "no",
+  "grip": [
+    "palm",
+    "claw",
+    "fingertip"
+  ],
+  "hand_size": [
+    "small",
+    "medium"
+  ],
+  "mcu": "Holtek HT32F52352",
+  "mcu_link": "https://www.holtek.com/page/vg/HT32F52352",
+  "sensor": "PMW3389",
+  "sensor_brand": "PixArt",
+  "sensor_date": "01/2018",
+  "sensor_link": "https://www.pixart.com/products-detail/4/PMW3389DM-T3QU",
+  "sensor_type": "optical",
+  "flawless_sensor": "yes",
+  "sensor_latency": "unk",
+  "sensor_latency_list": [
+    "unk"
+  ],
+  "shift_latency": "unk",
+  "polling_rate": [
+    1000,
+    500,
+    250,
+    125
+  ],
+  "dpi": 16000,
+  "ips": 400,
+  "acceleration": 50,
+  "lift": [
+    2
+  ],
+  "lift_settings": "fixed low",
+  "motion_sync": "unk",
+  "hardware_acceleration": "no",
+  "smoothing": "no",
+  "nvidia_reflex": "no",
+  "switch": "D2FC -F-7N",
+  "switch_brand": "omron",
+  "switch_type": "mechanical",
+  "switch_link": "",
+  "hot_swappable": "no",
+  "debounce": 4,
+  "click_latency": 11,
+  "click_latency_list": "11 wired",
+  "click_force": "unk",
+  "encoder": "",
+  "encoder_brand": "",
+  "encoder_link": "",
+  "side_buttons": 2,
+  "middle_buttons": 1,
+  "programmable_buttons": 6,
+  "tilt_scroll_wheel": "no",
+  "adjustable_scroll_wheel": "no",
+  "onboard_memory": "yes",
+  "onboard_memory_value": "unk",
+  "profile_switching": "yes",
+  "overall": 6.9,
+  "accuracy": 8.2,
+  "response": 5.8,
+  "quality": 6.6,
+  "comfort": 7.3,
+  "work": 5.8,
+  "feet_score": 5.9,
+  "fps_score": 6.7,
+  "mmo_score": 6.8,
+  "moba_score": 6.6,
+  "aarpg_score": 6.8,
+  "rts_score": 6.4,
+  "fps": "yes",
+  "mmo": "yes",
+  "moba": "yes",
+  "aarpg": "yes",
+  "rts": "yes",
+  "snap_dateUpdated": "11/21/2025",
+  "snap_datePublished": null,
+  "snap_subtitle": "",
+  "hubTags": [],
+  "game1": "",
+  "game2": "",
+  "game3": "",
+  "game4": "",
+  "game5": "",
+  "game6": "",
+  "game7": "",
+  "game8": "",
+  "keytakeaway": "",
+  "pcard": "",
+  "verdict": "",
+  "pros": [],
+  "cons": [],
+  "youtube": "https://www.youtube.com/watch?v=7gy39u4rZ8o",
+  "affiliateLinks": [
+    {
+      "url": "https://www.amazon.com/Cooler-Master-RGB-LED-Lightweight-Gaming/dp/B07ZGG7GSY?crid=9DRCX7H8ZQLM&dib=eyJ2IjoiMSJ9.5fMP6LHVmNyc6mRZvwdXCGF-tNGU34dfHg8_nqV0x7ff_jpd_iTLyuZr-QZok1PNOyP-XApkcFJUMMgV5d1_ASs5gF4Z7wjXMNOzN8HJzG_MMldNZwWt_Pi8Z-nLpV0iL6sGyg8iSaUEZ04acORkQ1ndgc5oQ-xqRYmmXEyEBJ-_l3eJr2foR9znv1j2IEPL912GAYOf2VtSt6vKf4B1dsaxNzy9iPfcx8q0FS8K6W4.dKpTPvl7B8UKqXlgXG4XsD40QQmyBvvGOQ43pnocVmA&dib_tag=se&keywords=Cooler+Master+MM711&qid=1765320944&sprefix=cooler+master+mm711%2Caps%2C148&sr=8-1&linkCode=ll1&tag=eggear-20&linkId=094860f792d0df944f3b804006bbe182&language=en_US&ref_=as_li_ss_tl",
+      "retailer": "amazon",
+      "slug": "amazon",
+      "variant": "black",
+      "isPrimary": true
+    },
+    {
+      "url": "https://www.amazon.com/Cooler-Master-Lightweight-Honeycomb-Ultraweave/dp/B07Z9RQLDL?crid=9DRCX7H8ZQLM&dib=eyJ2IjoiMSJ9.5fMP6LHVmNyc6mRZvwdXCGF-tNGU34dfHg8_nqV0x7ff_jpd_iTLyuZr-QZok1PNOyP-XApkcFJUMMgV5d1_ASs5gF4Z7wjXMNOzN8HJzG_MMldNZwWt_Pi8Z-nLpV0iL6sGyg8iSaUEZ04acORkQ1ndgc5oQ-xqRYmmXEyEBJ-_l3eJr2foR9znv1j2IEPL912GAYOf2VtSt6vKf4B1dsaxNzy9iPfcx8q0FS8K6W4.dKpTPvl7B8UKqXlgXG4XsD40QQmyBvvGOQ43pnocVmA&dib_tag=se&keywords=Cooler+Master+MM711&qid=1765320944&sprefix=cooler+master+mm711%2Caps%2C148&sr=8-4&linkCode=ll1&tag=eggear-20&linkId=888cc7d4e00ac709d4a51395038745a5&language=en_US&ref_=as_li_ss_tl",
+      "retailer": "amazon",
+      "slug": "amazon",
+      "variant": "white",
+      "isPrimary": false
+    }
+  ],
+  "url": "/hubs/mouse/cooler-master/mm711-wired",
+  "gamesRecommended": [],
+  "media": {
+    "defaultColor": "black",
+    "colors": [
+      "black",
+      "white",
+      "dark-green",
+      "gold+red",
+      "blue"
+    ],
+    "editions": [
+      "wilderness"
+    ],
+    "images": [
+      {
+        "stem": "feature-image---black",
+        "view": "feature-image",
+        "color": "black"
+      },
+      {
+        "stem": "feature-image---gold+red",
+        "view": "feature-image",
+        "color": "gold+red"
+      },
+      {
+        "stem": "feature-image---white",
+        "view": "feature-image",
+        "color": "white"
+      },
+      {
+        "stem": "top",
+        "view": "top"
+      },
+      {
+        "stem": "top---black",
+        "view": "top",
+        "color": "black"
+      },
+      {
+        "stem": "top---blue",
+        "view": "top",
+        "color": "blue"
+      },
+      {
+        "stem": "top---gold+red",
+        "view": "top",
+        "color": "gold+red"
+      },
+      {
+        "stem": "top---white",
+        "view": "top",
+        "color": "white"
+      },
+      {
+        "stem": "top___wilderness---dark-green",
+        "view": "top",
+        "color": "dark-green",
+        "edition": "wilderness"
+      },
+      {
+        "stem": "left",
+        "view": "left"
+      },
+      {
+        "stem": "left---black",
+        "view": "left",
+        "color": "black"
+      },
+      {
+        "stem": "left---blue",
+        "view": "left",
+        "color": "blue"
+      },
+      {
+        "stem": "left---gold+red",
+        "view": "left",
+        "color": "gold+red"
+      },
+      {
+        "stem": "left---white",
+        "view": "left",
+        "color": "white"
+      },
+      {
+        "stem": "left___wilderness---dark-green",
+        "view": "left",
+        "color": "dark-green",
+        "edition": "wilderness"
+      },
+      {
+        "stem": "right---black",
+        "view": "right",
+        "color": "black"
+      },
+      {
+        "stem": "right---gold+red",
+        "view": "right",
+        "color": "gold+red"
+      },
+      {
+        "stem": "right---white",
+        "view": "right",
+        "color": "white"
+      },
+      {
+        "stem": "sangle",
+        "view": "sangle"
+      },
+      {
+        "stem": "sangle---black",
+        "view": "sangle",
+        "color": "black"
+      },
+      {
+        "stem": "sangle---blue",
+        "view": "sangle",
+        "color": "blue"
+      },
+      {
+        "stem": "sangle---gold+red",
+        "view": "sangle",
+        "color": "gold+red"
+      },
+      {
+        "stem": "sangle---white",
+        "view": "sangle",
+        "color": "white"
+      },
+      {
+        "stem": "sangle___wilderness---dark-green",
+        "view": "sangle",
+        "color": "dark-green",
+        "edition": "wilderness"
+      },
+      {
+        "stem": "angle",
+        "view": "angle"
+      },
+      {
+        "stem": "angle---black",
+        "view": "angle",
+        "color": "black"
+      },
+      {
+        "stem": "angle---blue",
+        "view": "angle",
+        "color": "blue"
+      },
+      {
+        "stem": "angle---gold+red",
+        "view": "angle",
+        "color": "gold+red"
+      },
+      {
+        "stem": "angle---white",
+        "view": "angle",
+        "color": "white"
+      },
+      {
+        "stem": "angle___wilderness---dark-green",
+        "view": "angle",
+        "color": "dark-green",
+        "edition": "wilderness"
+      },
+      {
+        "stem": "bot---black",
+        "view": "bot",
+        "color": "black"
+      },
+      {
+        "stem": "bot---white",
+        "view": "bot",
+        "color": "white"
+      },
+      {
+        "stem": "side",
+        "view": "shape-side"
+      },
+      {
+        "stem": "top",
+        "view": "shape-top"
+      }
+    ]
+  }
+}

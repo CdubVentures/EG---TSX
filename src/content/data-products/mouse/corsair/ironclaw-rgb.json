@@ -1,0 +1,176 @@
+{
+  "slug": "corsair-ironclaw-rgb",
+  "brand": "Corsair",
+  "model": "Ironclaw RGB",
+  "baseModel": "Ironclaw",
+  "variant": "RGB",
+  "category": "mouse",
+  "imagePath": "/images/mouse/corsair/ironclaw-rgb",
+  "cardTags": "false",
+  "featured": "",
+  "release_date": "01/2019",
+  "discontinued": "",
+  "sku": "CH-9307011-NA",
+  "price_range": 64.99,
+  "colors": [
+    "black"
+  ],
+  "design": [
+    "standard"
+  ],
+  "lighting": "2 zone (rgb)",
+  "rgb": "yes",
+  "connection": "wired",
+  "connectivity": "n/a",
+  "computer_side_connector": "USB-A",
+  "mouse_side_connector": "n/a",
+  "bluetooth": "no",
+  "cable_type": "braided",
+  "paracord": "yes",
+  "wireless_charging": "no",
+  "battery_hours": "n/a",
+  "adjustable_weight": "no",
+  "feet_material": "PTFE (Black-Dyed)",
+  "coating": "rubber grips",
+  "honeycomb_frame": "no",
+  "silent_clicks": "no",
+  "weight": 105,
+  "material": "plastic / rubber",
+  "lngth": 130,
+  "width": 80,
+  "height": 45,
+  "form_factor": "right",
+  "shape": "ergonomic",
+  "hump": "middle",
+  "front_flare": "flat",
+  "thumb_rest": "yes",
+  "grip": [
+    "palm"
+  ],
+  "hand_size": [
+    "large"
+  ],
+  "mcu": "unk",
+  "mcu_link": "",
+  "sensor": "PMW3391",
+  "sensor_brand": "PixArt",
+  "sensor_date": "",
+  "sensor_link": "https://www.corsair.com/newsroom/press-release/corsair-launches-three-new-gaming-mice-alongside-slipstream-corsair-wireless-technology",
+  "sensor_type": "optical",
+  "flawless_sensor": "yes",
+  "sensor_latency": "unk",
+  "sensor_latency_list": [
+    "unk"
+  ],
+  "shift_latency": "unk",
+  "polling_rate": [
+    1000,
+    500,
+    250,
+    125
+  ],
+  "dpi": 18000,
+  "ips": 400,
+  "acceleration": 50,
+  "lift": [],
+  "lift_settings": "surface-tuned",
+  "motion_sync": "unk",
+  "hardware_acceleration": "no",
+  "smoothing": "unk",
+  "nvidia_reflex": "no",
+  "switch": "D2FC -F-K(50M)",
+  "switch_brand": "omron",
+  "switch_type": "mechanical",
+  "switch_link": "",
+  "hot_swappable": "no",
+  "debounce": "unk",
+  "click_latency": "unk",
+  "click_latency_list": "unk",
+  "click_force": "unk",
+  "encoder": "",
+  "encoder_brand": "",
+  "encoder_link": "",
+  "side_buttons": 2,
+  "middle_buttons": 2,
+  "programmable_buttons": 7,
+  "tilt_scroll_wheel": "no",
+  "adjustable_scroll_wheel": "no",
+  "onboard_memory": "yes",
+  "onboard_memory_value": 3,
+  "profile_switching": "yes",
+  "overall": 6.5,
+  "accuracy": 8.2,
+  "response": 4.9,
+  "quality": 7.4,
+  "comfort": 8.3,
+  "work": 7.6,
+  "feet_score": 7.1,
+  "fps_score": 6.1,
+  "mmo_score": 5.4,
+  "moba_score": 6.2,
+  "aarpg_score": 5.9,
+  "rts_score": 5.8,
+  "fps": "yes",
+  "mmo": "no",
+  "moba": "yes",
+  "aarpg": "yes",
+  "rts": "yes",
+  "snap_dateUpdated": "11/27/2025",
+  "snap_datePublished": null,
+  "snap_subtitle": "",
+  "hubTags": [],
+  "game1": "",
+  "game2": "",
+  "game3": "",
+  "game4": "",
+  "game5": "",
+  "game6": "",
+  "game7": "",
+  "game8": "",
+  "keytakeaway": "",
+  "pcard": "",
+  "verdict": "",
+  "pros": [],
+  "cons": [],
+  "youtube": "https://www.youtube.com/watch?v=JDAFRz7F2Mw",
+  "affiliateLinks": [
+    {
+      "url": "https://www.amazon.com/CORSAIR-IRONCLAW-RGB-Optical-Backlit/dp/B07KKZB9LM?crid=AE9KFVG1QOZI&dib=eyJ2IjoiMSJ9.nSUhTHRNyseUAXiCBGgqDAaJrUj0H-QDMZ127l8qRyroHYIsaLsFLrDHH8jnVR_e8I0IUo9bLqoDtPVuZMtwxb2cDszjjhb19M0gA9azgnYE9VA7M8wNhJlQmdDj3e-okhVpyeFGHNQ-hg_NYQU54SESNOgOHL-46zAwIR2y8bRjNMxEJquf-jfRvQBbbVnKirH0F8e5R9q29c6UKdrYLg.8lcdOQ72PDoUNlPIgkY9wQcizBgL7WWcUFKXBZLmXhs&dib_tag=se&keywords=Ironclaw%2BRGB&qid=1765258960&sprefix=ironclaw%2Brgb%2Caps%2C148&sr=8-1&th=1&linkCode=ll1&tag=eggear-20&linkId=51f030bd3d221b07649fa60fa7e559ea&language=en_US&ref_=as_li_ss_tl",
+      "retailer": "amazon",
+      "slug": "amazon",
+      "variant": "",
+      "isPrimary": true
+    }
+  ],
+  "url": "/hubs/mouse/corsair/ironclaw-rgb",
+  "gamesRecommended": [],
+  "media": {
+    "defaultColor": "black",
+    "colors": [
+      "black"
+    ],
+    "editions": [],
+    "images": [
+      {
+        "stem": "top",
+        "view": "top"
+      },
+      {
+        "stem": "left",
+        "view": "left"
+      },
+      {
+        "stem": "sangle",
+        "view": "sangle"
+      },
+      {
+        "stem": "side",
+        "view": "shape-side"
+      },
+      {
+        "stem": "top",
+        "view": "shape-top"
+      }
+    ]
+  }
+}

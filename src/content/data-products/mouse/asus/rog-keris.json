@@ -1,0 +1,184 @@
+{
+  "slug": "asus-rog-keris",
+  "brand": "Asus",
+  "model": "ROG Keris",
+  "baseModel": "ROG Keris",
+  "variant": "",
+  "category": "mouse",
+  "imagePath": "/images/mouse/asus/rog-keris",
+  "cardTags": "false",
+  "featured": "",
+  "release_date": "03/2021",
+  "discontinued": "",
+  "sku": "90MP01R0-B0UA00",
+  "price_range": 59.99,
+  "colors": [
+    "black"
+  ],
+  "design": [
+    "standard"
+  ],
+  "lighting": "2 zone (rgb)",
+  "rgb": "yes",
+  "connection": "wired",
+  "connectivity": "n/a",
+  "computer_side_connector": "USB-A",
+  "mouse_side_connector": "n/a",
+  "bluetooth": "no",
+  "cable_type": "braided",
+  "paracord": "yes",
+  "wireless_charging": "no",
+  "battery_hours": 119,
+  "adjustable_weight": "no",
+  "feet_material": "PTFE (Virgin-Grade)",
+  "coating": "matte",
+  "honeycomb_frame": "no",
+  "silent_clicks": "no",
+  "weight": 62,
+  "material": "plastic",
+  "lngth": 118,
+  "width": 62,
+  "height": 39,
+  "form_factor": "right",
+  "shape": "ergonomic",
+  "hump": "back - front",
+  "front_flare": "outward",
+  "thumb_rest": "no",
+  "grip": [
+    "palm",
+    "claw"
+  ],
+  "hand_size": [
+    "small",
+    "medium"
+  ],
+  "mcu": "unk",
+  "mcu_link": "",
+  "sensor": "PMW3389",
+  "sensor_brand": "PixArt",
+  "sensor_date": "01/2018",
+  "sensor_link": "https://www.pixart.com/products-detail/4/PMW3389DM-T3QU",
+  "sensor_type": "optical",
+  "flawless_sensor": "yes",
+  "sensor_latency": "unk",
+  "sensor_latency_list": [
+    "unk"
+  ],
+  "shift_latency": "unk",
+  "polling_rate": [
+    1000,
+    500,
+    250,
+    125
+  ],
+  "dpi": 16000,
+  "ips": 400,
+  "acceleration": 50,
+  "lift": [
+    1.2
+  ],
+  "lift_settings": "adjustable",
+  "motion_sync": "no",
+  "hardware_acceleration": "no",
+  "smoothing": "no",
+  "nvidia_reflex": "yes",
+  "switch": "ROG Micro Switch",
+  "switch_brand": "asus",
+  "switch_type": "optical / mechanical",
+  "switch_link": "https://rog.asus.com/us/articles/gaming-keyboards-gaming-mice/guide-how-to-replace-the-switches-in-your-rog-gladius-iii-gaming-mouse/",
+  "hot_swappable": "yes",
+  "debounce": 0,
+  "click_latency": 9.5,
+  "click_latency_list": "9.5 wired",
+  "click_force": "unk",
+  "encoder": "",
+  "encoder_brand": "",
+  "encoder_link": "",
+  "side_buttons": 2,
+  "middle_buttons": 0,
+  "programmable_buttons": 5,
+  "tilt_scroll_wheel": "no",
+  "adjustable_scroll_wheel": "no",
+  "onboard_memory": "yes",
+  "onboard_memory_value": 3,
+  "profile_switching": "yes",
+  "overall": 7.6,
+  "accuracy": 8.1,
+  "response": 6.1,
+  "quality": 8.5,
+  "comfort": 8,
+  "work": 7.1,
+  "feet_score": 8.6,
+  "fps_score": 6.6,
+  "mmo_score": 6,
+  "moba_score": 6.6,
+  "aarpg_score": 6.6,
+  "rts_score": 6.5,
+  "fps": "yes",
+  "mmo": "no",
+  "moba": "yes",
+  "aarpg": "yes",
+  "rts": "yes",
+  "snap_dateUpdated": "12/18/2025",
+  "snap_datePublished": null,
+  "snap_subtitle": "",
+  "hubTags": [],
+  "game1": "",
+  "game2": "",
+  "game3": "",
+  "game4": "",
+  "game5": "",
+  "game6": "",
+  "game7": "",
+  "game8": "",
+  "keytakeaway": "",
+  "pcard": "",
+  "verdict": "",
+  "pros": [],
+  "cons": [],
+  "youtube": "https://www.youtube.com/watch?v=D3DVOsPRXYw",
+  "affiliateLinks": [
+    {
+      "url": "https://www.amazon.com/ASUS-ROG-Lightweight-Hot-Swappable-Swappable/dp/B08XYHJS98?crid=1TYJNJNBLHTS4&dib=eyJ2IjoiMSJ9.9zmBidZPMZbBnb-iIE_a-eVZ60A8RurRa2-4jdRBJtFb4P41oNuFfkiEo6Fly89xOr2ddYfke1UEnWubL3d0My7rAn3zNJ4AI9Y0J5IUBnMLZlNJOtSqAMu7pTYCYeom8ovJ71wxy5Y2iZn66n_mCUWWlKNuwEesfl9wKoyEYBUBHpNTnw1E4tMC5Y-Lo1Seu-bU2uzmgssegXwwXM_p3nDXawGkB2AiMXEyvYXhhrCd_d9V6eCy8DWx4MiZ0PRYn7W9rMOj19SLk4mFNeIJ0yW5khNweLp8xM5AbLp-qiU.yyHayOsolTgkcALOLSq3veHoOSa-UMejKV9BwII4ckU&dib_tag=se&keywords=rog%2Bkeris&qid=1766195594&s=electronics&sprefix=rog%2Bkeris%2Caps%2C203&sr=1-4&th=1&linkCode=ll1&tag=eggear-20&linkId=d3660fda03040e2e30c50628da20c6ed&language=en_US&ref_=as_li_ss_tl",
+      "retailer": "amazon",
+      "slug": "amazon",
+      "variant": "",
+      "isPrimary": true
+    }
+  ],
+  "url": "/hubs/mouse/asus/rog-keris",
+  "gamesRecommended": [],
+  "media": {
+    "defaultColor": "black",
+    "colors": [
+      "black"
+    ],
+    "editions": [],
+    "images": [
+      {
+        "stem": "top",
+        "view": "top"
+      },
+      {
+        "stem": "left",
+        "view": "left"
+      },
+      {
+        "stem": "sangle",
+        "view": "sangle"
+      },
+      {
+        "stem": "bot",
+        "view": "bot"
+      },
+      {
+        "stem": "side",
+        "view": "shape-side"
+      },
+      {
+        "stem": "top",
+        "view": "shape-top"
+      }
+    ]
+  }
+}

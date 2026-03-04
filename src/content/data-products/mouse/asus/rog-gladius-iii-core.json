@@ -1,0 +1,214 @@
+{
+  "slug": "asus-rog-gladius-iii-core",
+  "brand": "Asus",
+  "model": "ROG Gladius III Core",
+  "baseModel": "ROG Gladius III",
+  "variant": "Core",
+  "category": "mouse",
+  "imagePath": "/images/mouse/asus/rog-gladius-iii-core",
+  "cardTags": "false",
+  "featured": "",
+  "release_date": "09/2025",
+  "discontinued": "",
+  "sku": "90MP04E0-BMAA00",
+  "price_range": 69.99,
+  "colors": [
+    "black"
+  ],
+  "design": [
+    "standard"
+  ],
+  "lighting": "2 zone (rgb)",
+  "rgb": "yes",
+  "connection": "wired",
+  "connectivity": "n/a",
+  "computer_side_connector": "USB-A",
+  "mouse_side_connector": "n/a",
+  "bluetooth": "no",
+  "cable_type": "braided",
+  "paracord": "yes",
+  "wireless_charging": "no",
+  "battery_hours": "n/a",
+  "adjustable_weight": "no",
+  "feet_material": "PTFE (Virgin-Grade)",
+  "coating": "matte",
+  "honeycomb_frame": "no",
+  "silent_clicks": "no",
+  "weight": 72,
+  "material": "plastic",
+  "lngth": 123,
+  "width": 68,
+  "height": 44,
+  "form_factor": "right",
+  "shape": "ergonomic",
+  "hump": "back - front",
+  "front_flare": "outward",
+  "thumb_rest": "no",
+  "grip": [
+    "palm",
+    "claw"
+  ],
+  "hand_size": [
+    "medium",
+    "large"
+  ],
+  "mcu": "unk",
+  "mcu_link": "",
+  "sensor": "PAW3311",
+  "sensor_brand": "pixart",
+  "sensor_date": "11/2022",
+  "sensor_link": "https://www.pixart.com/products-detail/131/PAW3311DB-T2MU",
+  "sensor_type": "optical",
+  "flawless_sensor": "yes",
+  "sensor_latency": "unk",
+  "sensor_latency_list": [
+    "unk"
+  ],
+  "shift_latency": "unk",
+  "polling_rate": [
+    1000,
+    500,
+    250,
+    125
+  ],
+  "dpi": 12000,
+  "ips": 300,
+  "acceleration": 35,
+  "lift": [
+    1.2
+  ],
+  "lift_settings": "adjustable",
+  "motion_sync": "no",
+  "hardware_acceleration": "unk",
+  "smoothing": "unk",
+  "nvidia_reflex": "unk",
+  "switch": "ROG Micro Switch II",
+  "switch_brand": "asus",
+  "switch_type": "mechanical",
+  "switch_link": "",
+  "hot_swappable": "yes",
+  "debounce": "unk",
+  "click_latency": "unk",
+  "click_latency_list": "unk",
+  "click_force": "unk",
+  "encoder": "",
+  "encoder_brand": "",
+  "encoder_link": "",
+  "side_buttons": 2,
+  "middle_buttons": 1,
+  "programmable_buttons": 5,
+  "tilt_scroll_wheel": "no",
+  "adjustable_scroll_wheel": "no",
+  "onboard_memory": "yes",
+  "onboard_memory_value": 5,
+  "profile_switching": "yes",
+  "overall": 7.3,
+  "accuracy": 7.8,
+  "response": 7.2,
+  "quality": 8.2,
+  "comfort": 8.4,
+  "work": 7.1,
+  "feet_score": 8.2,
+  "fps_score": 7.4,
+  "mmo_score": 5.5,
+  "moba_score": 7.3,
+  "aarpg_score": 7.3,
+  "rts_score": 7.2,
+  "fps": "yes",
+  "mmo": "no",
+  "moba": "yes",
+  "aarpg": "yes",
+  "rts": "yes",
+  "snap_dateUpdated": "12/22/2025",
+  "snap_datePublished": "12/22/2025",
+  "snap_subtitle": "A wired ergonomic “forever mouse” that prioritizes hot-swap switches over spec-sheet flex.",
+  "hubTags": [
+    "price_range",
+    "weight",
+    "polling_rate",
+    "connection",
+    "fps",
+    "grip"
+  ],
+  "game1": "Cyberpunk 2077",
+  "game2": "Valorant",
+  "game3": "League of Legends",
+  "game4": "Apex Legends",
+  "game5": "Dota 2",
+  "game6": "",
+  "game7": "",
+  "game8": "",
+  "keytakeaway": "The ASUS ROG Gladius III Core is a wired ergonomic gaming mouse built for players who want a stable palm-friendly shape and a mouse that won’t be “done” the moment it develops a double-click. For CS2 and Valorant it’s a competent 1,000 Hz performer at sensible DPI steps, but its real advantage shows up in spam-click games like League of Legends and Dota 2—because Push-Fit Switch Socket II lets you swap in fresh mechanical or optical switches in minutes instead of replacing the whole mouse.",
+  "pcard": "The ASUS ROG Gladius III Core is a 72 g wired ergonomic gaming mouse built around longevity: **Push-Fit Switch Socket II** lets you hot-swap switches (mechanical or optical) instead of retiring the mouse. If you want the same shape philosophy but *pure* FPS-first specs, the <pop=mouse-131>Razer DeathAdder V3 Wired is the faster-on-paper alternative—this one wins on repairability.",
+  "verdict": "\r\nThe **ASUS ROG Gladius III Core** is a [**wired ergonomic gaming mouse**](/hubs/mouse?connection=wired&shape=ergonomic) built for players who value comfort, consistency, and long-term reliability over chasing the newest spec-sheet arms race. Instead of going ultralight or wireless, ASUS doubles down on a proven right-handed shape and a rare feature in 2025: **true user repairability**.\r\n\r\nAt **72 g**, the Gladius III Core feels planted rather than twitchy. The tall **123 × 68 × 44 mm** shell fills the palm well, making it especially comfortable for long sessions in games like *League of Legends*, *Dota 2*, and *Overwatch 2*, where steady tracking and frequent clicking matter more than raw flick speed. Palm and relaxed claw grips feel natural; pure fingertip grip is the outlier, as the volume and weight make constant lift-and-reset more work than on smaller mice.\r\n\r\n> If you’ve ever replaced a mouse because the main clicks started double-clicking, this one is designed to be fixed, not tossed.\r\n\r\n#### Sensor & performance reality check\r\nThe **PixArt PAW3311** sensor runs at [**1,000 Hz**](/hubs/mouse?connection=wired&polling_rate=1000) and tops out at **12,000 DPI**. On paper, that puts it behind many similarly priced competitors in 2025. In practice, tracking at common settings (400–1600 DPI) is clean, predictable, and stable for shooters like *CS2* and *Valorant*. The limitation shows up mostly at the extremes: higher DPI typically adds smoothing earlier than flagship sensors, and lift-off distance tuning is simpler than premium implementations.\r\n\r\n| Key trait | What it means day-to-day |\r\n|---|---|\r\n| **72 g solid shell (no holes)** | Feels stable and supportive for palm/relaxed claw |\r\n| **PAW3311 @ 1,000 Hz** | Plenty for most players, but not a spec-sheet leader |\r\n| **Push-Fit Switch Socket II** | Swap switches without soldering—huge longevity win |\r\n\r\n#### Push-Fit Switch Socket II: the reason this mouse exists\r\nWhat truly separates the Gladius III Core from its rivals is **Push-Fit Switch Socket II**. Switch failure is one of the most common reasons gaming mice get replaced, and this design all but eliminates that problem. You can hot-swap worn switches in minutes—no soldering, no replacement mouse. It supports both **3-pin mechanical** and **5-pin optical** switches, letting you tune click feel or reduce debounce-related delay entirely.\r\n\r\nStock **ROG Micro Switch II** clicks feel crisp and consistent thanks to the zero-gap, pivoted button structure. Side buttons are functional but not the highlight; a common complaint is a slightly hollow feel and extra post-travel compared to the main clicks.\r\n\r\n#### Cable, glide, and software\r\nThe **ROG Paracord** cable is flexible enough that, with a bungee, the mouse feels close to wireless while keeping [wired](/hubs/mouse?connection=wired) reliability. **100% PTFE feet** help the 72 g shell glide smoothly and make it feel lighter in motion than the scale suggests.\r\n\r\nSoftware is a tale of two options: **Gear Link** is the clean, web-based setup for quick changes and onboard saves, while **Armoury Crate** is feature-rich but heavier than many players want for a “Core” product.\r\n\r\n#### What to cross-shop\r\nAt roughly [**$55–$70**](/hubs/mouse?price_range=50.00-70.00), the Gladius III Core competes directly with the <pop=mouse-131>Razer DeathAdder V3 Wired</pop> and the <pop=mouse-72>Glorious Model D Wired</pop>. The DeathAdder is lighter and brings higher-end sensor/polling specs for competitive FPS. The Model D can be a cheaper ergo alternative, but it lacks the repair-friendly switch platform. And if you love this shape but want ASUS’s premium sensor plus wireless, the <pop=mouse-59>ROG Gladius III Wireless AimPoint</pop> is the step-up.\r\n\r\n**Bottom line:** the **ROG Gladius III Core** trades headline specs for something rarer: **durability you can control**. If you spam clicks in *LoL/Dota 2* or want an ergonomic workhorse you can keep alive for years, it makes a lot of sense. If you’re chasing the lightest build and newest sensor tech for FPS, you’ll likely prefer a different lane.",
+  "pros": [
+    "**Push-Fit Switch Socket II** enables instant hot-swapping of switches (mechanical or optical)",
+    "Zero-gap button mechanism delivers crisp, consistent main clicks",
+    "**Gear Link** web-based configuration avoids installing Armoury Crate for basic setup",
+    "Solid ~72 g shell feels durable without honeycomb cutouts",
+    "ROG Paracord cable is flexible enough to feel close to wireless with a bungee"
+  ],
+  "cons": [
+    "Sensor and polling are “standard” for 2025—great for most, but not built to win the spec war",
+    "Wired-only connection limits freedom vs strong budget wireless options in this price band",
+    "Side buttons can feel less premium (hollow / more travel) than the main clicks",
+    "Textured plastic can feel slippery for very dry hands without added grip tape"
+  ],
+  "youtube": "",
+  "affiliateLinks": [
+    {
+      "url": "https://www.amazon.com/ASUS-ROG-Gladius-III-Gaming/dp/B0FLH3LP3W?th=1&linkCode=ll1&tag=eggear-20&linkId=5f29771c411e6468c95ae471addd48bf&language=en_US&ref_=as_li_ss_tl",
+      "retailer": "amazon",
+      "slug": "amazon",
+      "variant": "",
+      "isPrimary": true
+    }
+  ],
+  "url": "/hubs/mouse/asus/rog-gladius-iii-core",
+  "gamesRecommended": [],
+  "media": {
+    "defaultColor": "black",
+    "colors": [
+      "black"
+    ],
+    "editions": [],
+    "images": [
+      {
+        "stem": "feature-image",
+        "view": "feature-image"
+      },
+      {
+        "stem": "top",
+        "view": "top"
+      },
+      {
+        "stem": "left",
+        "view": "left"
+      },
+      {
+        "stem": "right",
+        "view": "right"
+      },
+      {
+        "stem": "sangle",
+        "view": "sangle"
+      },
+      {
+        "stem": "angle",
+        "view": "angle"
+      },
+      {
+        "stem": "bot",
+        "view": "bot"
+      },
+      {
+        "stem": "side",
+        "view": "shape-side"
+      },
+      {
+        "stem": "top",
+        "view": "shape-top"
+      }
+    ]
+  }
+}

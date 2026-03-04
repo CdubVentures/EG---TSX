@@ -1,0 +1,174 @@
+.theme-store-id-857.spf-layout-theme .gf-block-title h3,
+.theme-store-id-857.spf-layout-theme .gf-block-title .h3 {
+  font-family: revert;
+  letter-spacing: .3em;
+  font-size: .8em;
+  font-weight: 400;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+  
+.theme-store-id-857.spf-layout-theme.gf-left .gf-option-block .gf-block-title h3:after, 
+.theme-store-id-857.spf-layout-theme.gf-offcanvas .gf-option-block .gf-block-title h3:after,
+.theme-store-id-857.spf-layout-theme.gf-left .gf-option-block .gf-block-title .h3:after, 
+.theme-store-id-857.spf-layout-theme.gf-offcanvas .gf-option-block .gf-block-title .h3:after {
+  font-size: 18px;
+  margin-right: 0;
+  float: none;
+  padding-left: 8px;
+}
+  
+.theme-store-id-857.spf-layout-theme .gf-block-title .gf-clear {
+  display: none;
+}
+  
+.theme-store-id-857.spf-layout-theme #gf-tree .gf-label:not(.gf-label-skeleton) {
+  flex: revert;
+  margin-right: 3px;
+}
+  
+.theme-store-id-857.spf-layout-theme .gf-Checkbox, 
+.theme-store-id-857.spf-layout-theme .gf-RadioButton {
+  border-color: #e8e8e1;
+}
+  
+.theme-store-id-857.spf-layout-theme #gf-tree .noUi-marker-horizontal.noUi-marker {
+  display: none;
+}
+  
+.theme-store-id-857.spf-layout-theme #gf-tree .noUi-target {
+    margin-bottom: 40px;
+}
+  
+.theme-store-id-857.spf-layout-theme #gf-tree .noUi-handle,
+.theme-store-id-857.spf-layout-theme #gf-tree .noUi-connect {
+    background: #000;
+}
+
+.theme-store-id-857.spf-layout-theme #gf-tree .noUi-handle {
+  width: 16px;
+  height: 16px;
+  top: -5px;
+  border: 1px solid #fff;
+}
+
+.theme-store-id-857.spf-layout-theme #gf-tree .noUi-handle.noUi-handle-lower {
+  right: -6px;
+}
+
+.theme-store-id-857.spf-layout-theme #gf-tree .noUi-connects {
+  height: 6px;
+}
+  
+.theme-store-id-857.spf-layout-theme #gf-tree .noUi-value-large,
+.theme-store-id-857.spf-layout-theme .gf-range-inputs input[type=text] {
+    font-size: 16px;
+    color: #000;
+}
+
+.theme-store-id-857.spf-layout-theme .gf-option-block-swatch a>span:not(.gf-option-value,.gf-label) {
+  overflow: visible;
+  border: 0;
+}
+
+.theme-store-id-857.spf-layout-theme .gf-option-block-swatch a>span:not(.gf-option-value,.gf-label):after {
+  content: "";
+  position: absolute;
+  width: calc(100% + 8px);
+  height: calc(100% + 8px);
+  top: -4px;
+  left: -4px;
+  border: 1px solid #e8e8e1;
+}
+
+.theme-store-id-857.spf-layout-theme .gf-option-block-swatch.swatch-round a>span:not(.gf-option-value,.gf-label):after {
+  border-radius: 50%;
+  -moz-border-radius: 50%;
+  -webkit-border-radius: 50%;	
+}
+
+.theme-store-id-857.spf-layout-theme .gf-option-block.gf-option-block-swatch ul li a {
+  padding: 0;
+}
+
+.theme-store-id-857.spf-layout-theme .gf-option-block.gf-option-block-swatch .gf-option-box li {
+  margin: 7px 5px 7px 5px;
+}
+
+.theme-store-id-857.spf-layout-theme .gf-option-block-swatch a.checked>span:not(.gf-option-value) {
+border: 0;
+}
+
+.theme-store-id-857.spf-layout-theme .gf-option-block-swatch a:hover>span:not(.gf-option-value):after {
+border: 1px solid #000000;
+}  
+
+.theme-store-id-857.spf-layout-theme .gf-option-block-swatch a.checked>span:not(.gf-option-value):after {
+border: 2px solid #000000;
+}
+
+.theme-store-id-857.spf-layout-theme .gf-block-scroll {
+  max-height: 232px;
+}
+
+.theme-store-id-857.spf-layout-theme .checked .gf-Checkbox {
+  background: transparent;
+}
+
+.theme-store-id-857.spf-layout-theme .checked .gf-Checkbox:after {
+  content: '';
+  width: 10px;
+  height: 10px;
+  background-color: #000;
+  position: absolute;
+  top: 2px;
+  left: 2px;
+}
+
+.theme-store-id-857.spf-layout-theme.gf-left .sort-by {
+  background: #fff;
+  border: 1px solid #e8e8e1;
+}
+
+.theme-store-id-857.spf-layout-theme.gf-left .sort-by label {
+  font-size: 16px;
+  text-transform: none;
+  letter-spacing: 0;
+  height: 44px;
+  line-height: 44px;
+}
+
+.theme-store-id-857.spf-layout-theme.gf-left .globo-dropdown-custom__options span {
+  font-size: 16px;
+}
+
+  
+@media only screen and (min-width: 768px) {
+  .theme-store-id-857.spf-layout-theme .gf-option-block ul li a {
+    font-size: 16px;
+    color: #000;
+  }
+
+  .theme-store-id-857.spf-layout-theme.gf-left label.sort-by-toggle {
+    min-width: 250px;
+  }
+  
+  .theme-store-id-857.spf-layout-theme span.gf-count {
+    opacity: 1;
+    font-size: 16px;
+  }
+
+  .theme-store-id-857.spf-layout-theme.gf-left #gf-tree .selected-item.gf-option-label {
+    text-transform: uppercase;
+    background-color: #000;
+    padding: 8px 14px;
+  }
+  
+  .theme-store-id-857.spf-layout-theme.gf-left .selected-item.gf-option-label a {
+    color: #fff !important;
+    font-weight: 700 !important;
+    font-size: 12px !important;
+    letter-spacing: .1em !important;
+  }
+}

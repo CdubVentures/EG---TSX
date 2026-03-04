@@ -1,0 +1,267 @@
+{
+  "slug": "logitech-g-pro-x-superlight-2",
+  "brand": "Logitech G",
+  "model": "Pro X Superlight 2",
+  "baseModel": "Pro X",
+  "variant": "Superlight 2",
+  "category": "mouse",
+  "imagePath": "/images/mouse/logitech-g/pro-x-superlight-2",
+  "cardTags": "false",
+  "featured": "",
+  "release_date": "09/2023",
+  "discontinued": "",
+  "sku": "910-006628",
+  "price_range": 179.99,
+  "colors": [
+    "black",
+    "white",
+    "pink",
+    "light-blue"
+  ],
+  "design": [
+    "standard"
+  ],
+  "lighting": "none",
+  "rgb": "no",
+  "connection": "hybrid",
+  "connectivity": "2.4GHz Dongle",
+  "computer_side_connector": "USB-A",
+  "mouse_side_connector": "USB-C",
+  "bluetooth": "yes",
+  "cable_type": "rubber",
+  "paracord": "no",
+  "wireless_charging": "",
+  "battery_hours": 95,
+  "adjustable_weight": "no",
+  "feet_material": "PTFE (Virgin-Grade)",
+  "coating": "matte",
+  "honeycomb_frame": "no",
+  "silent_clicks": "no",
+  "weight": 51,
+  "material": "plastic",
+  "lngth": 125,
+  "width": 63.5,
+  "height": 40,
+  "form_factor": "right",
+  "shape": "symmetrical",
+  "hump": "middle",
+  "front_flare": "outward",
+  "thumb_rest": "no",
+  "grip": [
+    "palm",
+    "claw"
+  ],
+  "hand_size": [
+    "medium",
+    "large"
+  ],
+  "mcu": "Nordic nRF52833",
+  "mcu_link": "https://www.nordicsemi.com/Products/nRF52833",
+  "sensor": "Logitech HERO 2",
+  "sensor_brand": "",
+  "sensor_date": "",
+  "sensor_link": "",
+  "sensor_type": "",
+  "flawless_sensor": "",
+  "sensor_latency": "unk",
+  "sensor_latency_list": [
+    "unk"
+  ],
+  "shift_latency": "unk",
+  "polling_rate": [
+    8000,
+    4000,
+    2000,
+    1000,
+    500,
+    250,
+    125
+  ],
+  "dpi": 44000,
+  "ips": 888,
+  "acceleration": 88,
+  "lift": [
+    1.2
+  ],
+  "lift_settings": "adjustable",
+  "motion_sync": "unk",
+  "hardware_acceleration": "no",
+  "smoothing": "no",
+  "nvidia_reflex": "yes",
+  "switch": "Logitech LIGHTFORCE (Omron (70M) - D2FP-FH1)",
+  "switch_brand": "",
+  "switch_type": "optical-mechanical",
+  "switch_link": "https://www.logitechg.com/en-us/discover/technology/lightforce",
+  "hot_swappable": "no",
+  "debounce": "unk",
+  "click_latency": 0.9,
+  "click_latency_list": "0.9 wireless",
+  "click_force": "unk",
+  "encoder": "",
+  "encoder_brand": "",
+  "encoder_link": "",
+  "side_buttons": 2,
+  "middle_buttons": 0,
+  "programmable_buttons": 5,
+  "tilt_scroll_wheel": "no",
+  "adjustable_scroll_wheel": "no",
+  "onboard_memory": "yes",
+  "onboard_memory_value": 5,
+  "profile_switching": "yes",
+  "overall": 9.2,
+  "accuracy": 9.9,
+  "response": 9.5,
+  "quality": 9,
+  "comfort": 9.3,
+  "work": 7,
+  "feet_score": 8.2,
+  "fps_score": 9.6,
+  "mmo_score": 6.8,
+  "moba_score": 8.8,
+  "aarpg_score": 7.4,
+  "rts_score": 9,
+  "fps": "yes",
+  "mmo": "no",
+  "moba": "yes",
+  "aarpg": "yes",
+  "rts": "yes",
+  "snap_dateUpdated": "12/20/2025",
+  "snap_datePublished": "12/21/2025",
+  "snap_subtitle": "The esports gold standard gets an 8K Hz engine swap.",
+  "hubTags": [
+    "price_range",
+    "weight",
+    "polling_rate",
+    "connection",
+    "fps",
+    "grip"
+  ],
+  "game1": "Valorant",
+  "game2": "Counter-Strike 2",
+  "game3": "PUBG",
+  "game4": "Valorant",
+  "game5": "Apex Legends",
+  "game6": "",
+  "game7": "",
+  "game8": "",
+  "keytakeaway": "The Logitech G Pro X Superlight 2 is a ~60 g wireless esports mouse built for competitive FPS players who want a proven, “safe” shape (125 × 63.5 × 40 mm) that works across claw, relaxed claw, and some palm grips. It modernizes the classic Superlight formula with the HERO 2 sensor (up to 44K DPI, >888 IPS, >88G), LIGHTFORCE hybrid optical-mechanical switches for double-click immunity, USB-C charging, and an upgrade path to higher wireless polling—including 8K via G HUB and a compatible receiver. Expect elite tracking fidelity, neutral weight balance, and standout battery efficiency (~95 h at 1K), plus deep G HUB tuning (50-step DPI, 125–8000 Hz, LOD, onboard memory). Trade-offs remain: primary clicks are stiffer and louder than many rivals, the smooth matte coating often benefits from grip tape, and the stock PTFE feet trail premium aftermarket skates—but for tactical shooters, it’s still the most reliable, tournament-ready baseline.",
+  "pcard": "The Logitech G Pro X Superlight 2 is a **wireless competitive FPS gaming mouse** that modernizes the classic Superlight without changing the familiar “do-it-all” shape. It adds the HERO 2 sensor (up to 44K DPI, >888 IPS, >88G), **LIGHTFORCE** optical-mechanical switches, **USB-C** charging, and a firmware-enabled **8K polling** upgrade path via G HUB and a compatible receiver. At ~60 g with neutral weight balance, it stays steady for micro-corrections in CS2 or Valorant and delivers class-leading battery efficiency (~95 h @1K). If you want the same internals in a right-hand shell or a smaller body, compare the <pop=mouse-91>Superlight 2 Dex</pop> and <pop=mouse-336>Superlight 2c</pop>.",
+  "verdict": "### Overview\r\nThe **[Logitech G Pro X Superlight 2](/reviews/mouse/logitech-g/pro-x-superlight-2)** refines rather than reinvents one of [esports](/guides/mouse/best-high-end)’ most trusted [mice](/hubs/mouse). Maintaining the iconic “safe” [symmetrical shape](/guides/mouse/top-10-ambidextrous), Logitech updates its flagship with the **HERO 2 sensor**, **LIGHTFORCE hybrid switches**, and firmware-unlocked **8,000 Hz wireless polling**. It’s a precision instrument that prioritizes reliability, endurance, and latency efficiency, though not without trade-offs in click stiffness and surface grip.\r\n\r\n### Key Upgrades\r\n- **HERO 2 Sensor** – New versus the original Superlight’s HERO 25K; tracks beyond 888 IPS and 88 G, with a ceiling of 44,000 DPI. The improved accuracy and signal-to-noise ratio provide flawless tracking across any sensitivity range. Learn more in our [mouse sensor guide](/guides/mouse/mice-sensor-technology).  \r\n- **Polling Evolution** – Shipped at 2 K Hz, firmware now enables **4 K/8 K Hz**. At 8 K, data reports every **0.125 ms**, delivering visibly smoother motion on 360–540 Hz displays while keeping click latency under **1 ms**.  \r\n- **LIGHTFORCE Switches** – Hybrid optical-mechanical design removes double-click issues and ensures consistent actuation. Downsides: **stiffer, louder** primary clicks that may fatigue high-APM players.\r\n\r\n### Design & Ergonomics\r\n- **Shape:** Retains the beloved GPX “potato” profile (125 × 63.5 × 40 mm). Universal comfort across [palm, claw, and hybrid grips](/guides/mouse/grip-guide).  \r\n- **Weight:** ~**60 g**, 3 g lighter than GPX 1—exceptionally balanced but no longer “ultralight” against [sub-50 g mice](/guides/mouse/top-10-ultralight) rivals.  \r\n- **Coating:** Smooth matte finish can feel **slippery** with dry hands; grip tape recommended. White version may **yellow** over time.  \r\n- **Feet:** Pure PTFE with decent glide, though thinner and scratchier than aftermarket Corepads or Tiger Ice.\r\n\r\n### Wireless Performance & Battery\r\n- **Battery life:** ~**95 h @ 1 K Hz**, **35–40 h @ 4 K Hz**, and **≈ 20 h @ 8 K Hz**—still among the most efficient in class.  \r\n- **USB-C port:** Finally replaces micro-USB, wide enough for third-party cables.  \r\n- **[G HUB software](https://www.logitechg.com/en-us/software/ghub):** Fine DPI tuning (50-step), selectable polling rates (125–8 K Hz), adjustable LOD, onboard profiles, and sensor-feel calibration for consistent cross-device DPI.\r\n\r\n### Build Quality\r\nSturdy and refined, but community feedback flags **occasional shell flex**, **scroll-wheel rattle**, and **minor base wobble** on some units. Side buttons are firmer than GPX 1 yet retain slight pre/post-travel.\r\n\r\n### Competitive Context\r\n| Feature | Logitech G Pro X Superlight 2 | <pop=mouse-131>Razer Viper V3 Pro</pop> | <pop=mouse-236>Lamzu Maya (4 K)</pop> | <pop=mouse-284>Pulsar X2 V2 Mini</pop> |\r\n|----------|------------------------------|--------------------|------------------|--------------------|\r\n| Weight | ~60 g | ~54 g | ~45 g | ~51 g |\r\n| Polling | 8 K Hz | 8 K Hz | 4 K Hz | 4 K Hz |\r\n| Switch | Optical-Mech | Optical Gen-3 | Mechanical | Optical |\r\n| Battery @ 1 K Hz | 95 h | 95 h | 80 h | 80 h |\r\n\r\n**Internal Variants:**  \r\n- **Superlight 2 Dex** – [Ergonomic](/guides/mouse/top-10-ergonomic) right-hand tilt for palm/claw users.  \r\n- **Superlight 2 c** – Compact 49–51 g design for [fingertip grip](/guides/mouse/grip-guide) and smaller hands.\r\n\r\n### Real-World Use\r\n- **[Tactical FPS](/guides/mouse/top-10-fps) (CS2/Valorant):** Exceptional control; weight balance aids micro-adjustments, stiff clicks prevent misfires, 8 K Hz polling complements 360 Hz monitors.  \r\n- **Tracking Shooters (Apex/OW2):** HERO 2 ensures flawless tracking; coating can hinder grip in sweaty sessions.  \r\n- **MOBA/RTS:** Click stiffness increases finger fatigue—lighter optical options suit better.\r\n\r\n### Verdict\r\n✅ **Buy it if:** you want top-tier [wireless reliability](/guides/mouse/top-10-wireless), elite battery efficiency, and the proven GPX shape for [competitive FPS](/guides/mouse/top-10-fps).  \r\n❌ **Skip it if:** you need feather-light clicks, an [ergonomic curve](/guides/mouse/top-10-ergonomic), or the [lightest possible weight](/guides/mouse/top-10-ultralight).  \r\n\r\nThe **Logitech G Pro X Superlight 2** doesn’t chase trends—it perfects stability. Still the **fortified standard** of [esports](/guides/mouse/best-high-end) mice: not the lightest, but the one you can trust to perform flawlessly every match.",
+  "pros": [
+    "HERO 2 sensor: 44K DPI, >888 IPS, >88G — flawless tracking",
+    "Firmware 8K wireless polling; sub-1 ms click latency",
+    "LIGHTFORCE hybrid switches prevent double-clicks",
+    "“Safe” shape suits most grips and hand sizes",
+    "~60 g with excellent balance and control",
+    "Class-leading battery: ~95h @1K, 35–40h @4K, ~20h @8K",
+    "G HUB depth: DPI/LOD/polling, onboard memory, DPI deviation",
+    "Solid overall shell and chassis build"
+  ],
+  "cons": [
+    "$179.99 price is steep vs. lighter 4K competitors like Lamzu/Pulsar",
+    "Coating can be slippery; white  can yellow",
+    "Thin/scratchy stock feet",
+    "QC variances (flex, wobble, scroll)",
+    "Side buttons: hollow, travel"
+  ],
+  "youtube": "https://www.youtube.com/watch?v=gOksrbyaGF4",
+  "affiliateLinks": [
+    {
+      "url": "https://www.amazon.com/Logitech-Superlight-Lightspeed-Lightweight-Programmable/dp/B09NBWL8J5?dib=eyJ2IjoiMSJ9.NLmUyjvMaVUmzrd62Txz4NPEMDRNatT8Ev22SCBHRWKoeYEG_ANuKudOxYUvjlFVePmCAZFB8VovnRJMQnHHHzp6JLcSLaof5A9jFBeBR4mCUQSugSU1mJe--be81b0AjJSFxzzcx8pG_w1e8y2RUg0DTiFTI1clcd59Kh_Eh4pmkwFkY2DnTqN9dj9QJatAb5KSxntV5oZ4vc-keIudhpmOhUpPT240f8ig3yagUW4.mDef0hB7IpIvO04NicdT1GIhRFn3G2_rPoWBWbocBjs&dib_tag=se&keywords=Logitech%2BG%2BPro%2BX%2BSuperlight%2B2&qid=1709837632&sr=8-3&th=1&linkCode=ll1&tag=eggear-20&linkId=033b9896f88872ce70eb7f3e81f09daf&language=en_US&ref_=as_li_ss_tl",
+      "retailer": "amazon",
+      "slug": "amazon",
+      "variant": "black",
+      "isPrimary": true
+    },
+    {
+      "url": "https://www.amazon.com/Logitech-G-Bazooka-2/dp/B0B1S4FH69?crid=31CCOZ27VZVNM&dib=eyJ2IjoiMSJ9.CBvzNfOEVrvNRpW8aYlZcQiebt_pN5HFdHrf5912xuQuJBD7C_KuTUumOa1hGYFB_JRoi8Y0GfibLRu4uUzupjwWp6ZtUJHzp7FLqe9T8_XKN9UVk1CGFSrSTS_8QhS-ezqkqPbz7jOgDrtl9OwC0G9h9MtMA_Q7Dk5Mt1vyn3YoLfMf8Z1mKTMc4OE6RNrAN7YuOdSYVUw3hujQW9seFiX9iAbrEJtlVKl13FbTmpQ.46mxa4-DiEu-jcXg_TFBNSweLxgM7Xm3SgXmBnXqACc&dib_tag=se&keywords=Logitech+G+PRO+X+SUPERLIGHT+2&qid=1766376556&sprefix=logitech+g+pro+x+superlight+2%2Caps%2C223&sr=8-14&linkCode=ll1&tag=eggear-20&linkId=a944f4f0bfb31b6671fcb2e151221425&language=en_US&ref_=as_li_ss_tl",
+      "retailer": "amazon",
+      "slug": "amazon",
+      "variant": "pink",
+      "isPrimary": false
+    },
+    {
+      "url": "https://www.amazon.com/Logitech-Superlight-Lightspeed-Lightweight-Programmable/dp/B09NBWQDKX?dib=eyJ2IjoiMSJ9.NLmUyjvMaVUmzrd62Txz4NPEMDRNatT8Ev22SCBHRWKoeYEG_ANuKudOxYUvjlFVePmCAZFB8VovnRJMQnHHHzp6JLcSLaof5A9jFBeBR4mCUQSugSU1mJe--be81b0AjJSFxzzcx8pG_w1e8y2RUg0DTiFTI1clcd59Kh_Eh4pmkwFkY2DnTqN9dj9QJatAb5KSxntV5oZ4vc-keIudhpmOhUpPT240f8ig3yagUW4.mDef0hB7IpIvO04NicdT1GIhRFn3G2_rPoWBWbocBjs&dib_tag=se&keywords=Logitech%2BG%2BPro%2BX%2BSuperlight%2B2&qid=1709837632&sr=8-3&th=1&linkCode=ll1&tag=eggear-20&linkId=762ed0c411fae3f478f5fb87d0743f7e&language=en_US&ref_=as_li_ss_tl",
+      "retailer": "amazon",
+      "slug": "amazon",
+      "variant": "white",
+      "isPrimary": false
+    }
+  ],
+  "url": "/hubs/mouse/logitech-g/pro-x-superlight-2",
+  "gamesRecommended": [],
+  "media": {
+    "defaultColor": "black",
+    "colors": [
+      "black",
+      "white",
+      "pink",
+      "light-blue"
+    ],
+    "editions": [],
+    "images": [
+      {
+        "stem": "feature-image",
+        "view": "feature-image"
+      },
+      {
+        "stem": "top",
+        "view": "top"
+      },
+      {
+        "stem": "top---light-blue",
+        "view": "top",
+        "color": "light-blue"
+      },
+      {
+        "stem": "top---pink",
+        "view": "top",
+        "color": "pink"
+      },
+      {
+        "stem": "top---white",
+        "view": "top",
+        "color": "white"
+      },
+      {
+        "stem": "left",
+        "view": "left"
+      },
+      {
+        "stem": "left---light-blue",
+        "view": "left",
+        "color": "light-blue"
+      },
+      {
+        "stem": "left---pink",
+        "view": "left",
+        "color": "pink"
+      },
+      {
+        "stem": "left---white",
+        "view": "left",
+        "color": "white"
+      },
+      {
+        "stem": "right",
+        "view": "right"
+      },
+      {
+        "stem": "sangle",
+        "view": "sangle"
+      },
+      {
+        "stem": "bot",
+        "view": "bot"
+      },
+      {
+        "stem": "side",
+        "view": "shape-side"
+      },
+      {
+        "stem": "top",
+        "view": "shape-top"
+      }
+    ]
+  }
+}

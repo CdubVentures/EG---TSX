@@ -1,0 +1,46 @@
+flowchart TB
+  subgraph REVIEW["REVIEW FRONTMATTER"]
+    direction TB
+    RF1["alienware-aw610m-review.md"]
+    RF2["EDITORIAL DATA\ntitle: Alienware AW610M Review...\nverdict: The AW610M's bold design...\npros: Daring design, Well built...\ncons: Heavy, Awkward buttons...\nauthor: Maze"]
+    RF3["BRIDGE FIELD\nproductId: alienware-aw610m"]
+    RF1 --> RF2
+    RF1 --> RF3
+  end
+
+  subgraph LOOKUP["PRODUCT LOOKUP"]
+    direction TB
+    L1["products.find(\n  p => p.slug ===\n  'alienware-aw610m'\n)"]
+  end
+
+  subgraph PRODUCT["PRODUCT OBJECT (from mouse.json)"]
+    direction TB
+    P1["ALL DATA\nbrand: Alienware\nmodel: AW610M\nweight: 120g\noverall: 7.4\nsensor: PMW3389\nclick_latency: 14ms"]
+    P2["MEDIA OBJECT\nimagePath: /images/mouse/\nalienware/aw610m\nmedia.images: [\n  { stem: top, view: top },\n  { stem: feature-image,\n    view: feature-image },\n  ...\n]"]
+  end
+
+  subgraph PAGE["REVIEW PAGE RENDERS BOTH"]
+    direction TB
+    PG1["EDITORIAL\n(from frontmatter)\nTitle, verdict,\npros, cons, body"]
+    PG2["SPECS + SCORES\n(from product)\nWeight, sensor,\nclick latency, overall"]
+    PG3["PRODUCT PHOTOS\n(from product.imagePath)\nTop view, angle view,\nfeature image"]
+  end
+
+  RF3 ==>|"productId\nlookup key"| LOOKUP
+  LOOKUP ==>|"find by slug"| PRODUCT
+  REVIEW -->|"editorial\ncontent"| PAGE
+  PRODUCT -->|"data +\nimages"| PAGE
+
+  style REVIEW fill:#7f1d1d,stroke:#ef4444,color:#eee
+  style LOOKUP fill:#16213e,stroke:#0f3460,color:#eee
+  style PRODUCT fill:#064e3b,stroke:#10b981,color:#eee
+  style PAGE fill:#2d1b69,stroke:#8b5cf6,color:#eee
+  style RF1 fill:#7f1d1d,stroke:#ef4444,color:#eee
+  style RF2 fill:#7f1d1d,stroke:#ef4444,color:#eee
+  style RF3 fill:#92400e,stroke:#f59e0b,color:#eee
+  style L1 fill:#16213e,stroke:#0f3460,color:#eee
+  style P1 fill:#1a4731,stroke:#10b981,color:#eee
+  style P2 fill:#92400e,stroke:#f59e0b,color:#eee
+  style PG1 fill:#7f1d1d,stroke:#ef4444,color:#eee
+  style PG2 fill:#1a4731,stroke:#10b981,color:#eee
+  style PG3 fill:#92400e,stroke:#f59e0b,color:#eee

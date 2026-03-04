@@ -1,0 +1,221 @@
+{
+  "slug": "asus-rog-gladius-iii-wireless-aimpoint-eva-02",
+  "brand": "Asus",
+  "model": "ROG Gladius III Wireless AimPoint EVA-02",
+  "baseModel": "ROG Gladius III",
+  "variant": "Wireless AimPoint EVA-02",
+  "category": "mouse",
+  "imagePath": "/images/mouse/asus/rog-gladius-iii-wireless-aimpoint-eva-02",
+  "cardTags": "false",
+  "featured": "",
+  "release_date": "10/2023",
+  "discontinued": "",
+  "sku": "90MP03F0-BMUA00",
+  "price_range": 129.99,
+  "colors": [
+    "red+yellow"
+  ],
+  "design": [
+    "collaboration"
+  ],
+  "lighting": "1 zone (rgb)",
+  "rgb": "yes",
+  "connection": "hybrid",
+  "connectivity": "2.4GHz Dongle",
+  "computer_side_connector": "USB-A",
+  "mouse_side_connector": "USB-C",
+  "bluetooth": "yes",
+  "cable_type": "braided",
+  "paracord": "yes",
+  "wireless_charging": "no",
+  "battery_hours": 119,
+  "adjustable_weight": "no",
+  "feet_material": "PTFE (Virgin-Grade)",
+  "coating": "matte",
+  "honeycomb_frame": "no",
+  "silent_clicks": "no",
+  "weight": 79,
+  "material": "plastic",
+  "lngth": 123,
+  "width": 68,
+  "height": 44,
+  "form_factor": "right",
+  "shape": "ergonomic",
+  "hump": "back - front",
+  "front_flare": "outward",
+  "thumb_rest": "no",
+  "grip": [
+    "palm",
+    "claw"
+  ],
+  "hand_size": [
+    "medium",
+    "large"
+  ],
+  "mcu": "unk",
+  "mcu_link": "",
+  "sensor": "AimPoint (PixArt PAW3395)",
+  "sensor_brand": "PixArt",
+  "sensor_date": "01/2022",
+  "sensor_link": "https://www.pixart.com/products-detail/129/PAW3395DM-T6QU",
+  "sensor_type": "optical",
+  "flawless_sensor": "yes",
+  "sensor_latency": "unk",
+  "sensor_latency_list": [
+    "unk"
+  ],
+  "shift_latency": "unk",
+  "polling_rate": [
+    1000,
+    500,
+    250,
+    125
+  ],
+  "dpi": 36000,
+  "ips": 650,
+  "acceleration": 50,
+  "lift": [
+    1.2
+  ],
+  "lift_settings": "adjustable",
+  "motion_sync": "no",
+  "hardware_acceleration": "no",
+  "smoothing": "no",
+  "nvidia_reflex": "yes",
+  "switch": "ROG Micro Switch",
+  "switch_brand": "asus",
+  "switch_type": "optical / mechanical",
+  "switch_link": "https://rog.asus.com/us/articles/gaming-keyboards-gaming-mice/guide-how-to-replace-the-switches-in-your-rog-gladius-iii-gaming-mouse/",
+  "hot_swappable": "yes",
+  "debounce": "unk",
+  "click_latency": 4.5,
+  "click_latency_list": "4.5 wireless",
+  "click_force": 5,
+  "encoder": "",
+  "encoder_brand": "",
+  "encoder_link": "",
+  "side_buttons": 2,
+  "middle_buttons": 1,
+  "programmable_buttons": 5,
+  "tilt_scroll_wheel": "no",
+  "adjustable_scroll_wheel": "no",
+  "onboard_memory": "yes",
+  "onboard_memory_value": 5,
+  "profile_switching": "yes",
+  "overall": 8.3,
+  "accuracy": 9.1,
+  "response": 7.2,
+  "quality": 8.4,
+  "comfort": 8.6,
+  "work": 7.8,
+  "feet_score": 7.9,
+  "fps_score": 8,
+  "mmo_score": 6,
+  "moba_score": 7.7,
+  "aarpg_score": 7.7,
+  "rts_score": 7.5,
+  "fps": "yes",
+  "mmo": "no",
+  "moba": "yes",
+  "aarpg": "yes",
+  "rts": "yes",
+  "snap_dateUpdated": "12/22/2025",
+  "snap_datePublished": "12/22/2025",
+  "snap_subtitle": "A true Evangelion collab that performs as hard as it looks.",
+  "hubTags": [
+    "price_range",
+    "weight",
+    "polling_rate",
+    "connection",
+    "form_factor",
+    "design"
+  ],
+  "game1": "Warframe",
+  "game2": "Zone of the Enders: The 2nd Runner",
+  "game3": "Cyberpunk 2077",
+  "game4": "Apex Legends",
+  "game5": "Overwatch 2",
+  "game6": "",
+  "game7": "",
+  "game8": "",
+  "keytakeaway": "The ROG Gladius III Wireless AimPoint EVA-02 Edition is a rare example of a collaboration that keeps *all* the flagship hardware intact. Built on ASUS’s AimPoint sensor platform and featuring the Push-Fit Switch Socket II, it pairs top-tier performance with Evangelion collector styling that feels authentic to the series. A true “usable merch” mouse—comfortable, repairable, and competitive enough for ranked play—scoring **0.1 higher** than the standard AimPoint for its cohesive EVA execution and included grip tape.",
+  "pcard": "The ROG Gladius III Wireless AimPoint EVA-02 Edition merges flagship gaming hardware with Evangelion-grade style. You get the same 36,000 DPI AimPoint sensor, Tri-mode SpeedNova wireless, and **Push-Fit Switch Socket II** system found in ASUS’s top models—wrapped in Unit-02 reds and oranges with matching grip tape for traction and display value. It’s not just a paint job; it’s a continuation of ASUS’s Evangelion collaboration series (EVA-01 → EVA-02), and a rare collab that’s as functional as it is collectible. If you prefer a lighter pure-performance alternative, check the <pop=mouse-123>Razer DeathAdder V3 Pro</pop>, but for repairability and style, this one stands alone.",
+  "verdict": "The ROG Gladius III Wireless AimPoint EVA-02 is a wireless ergonomic gaming mouse built for players who want collectible design **and** dependable performance in shooters and MOBAs. Under the Asuka-coded reds/oranges sits ASUS’s AimPoint optical sensor (tuned PAW3395) with steady 1,000 Hz wireless behavior, tri-mode connectivity, and the brand’s unique **Push-Fit Switch Socket II** for solder-free main-switch swaps (mechanical *or* optical). Battery life is a highlight too, comfortably stretching past the 100-hour mark in 2.4 GHz mode with lighting off.\r\n\r\n#### What you’ll feel\r\nThis is a tall, palm-filling right-hand shape (123 × 68 × 44 mm) that favors comfort and stability over “featherweight twitch.” At **79 g**, glide feels planted and predictable—great for [**Overwatch 2**](/games/overwatch-2) style tracking and angle-holding in [**Valorant**](/games/valorant). The higher click height and rear hump support medium-to-large hands in relaxed palm or a laid-back claw. Fingertip users or smaller hands may feel guided by the shell rather than fully in control.\r\n\r\n| Aspect | What you’ll notice |\r\n|---|---|\r\n| Shape/weight | More anchored than hyper-nimble; aids smooth tracking and long sessions |\r\n| Sensor feel | Consistent across common DPI (400–1600) with stable motion at 1K polling (capped at 1000 Hz) |\r\n| Connectivity | SpeedNova 2.4 for games, Bluetooth for work, USB-C for play-and-charge |\r\n| Endurance | Real-world “charge once a week+” usage with RGB off |\r\n\r\n> Hot-swappable main switches make this one of the few “collector” mice you can realistically keep alive for years.\r\n\r\n#### Highlights\r\n- **AimPoint sensor + SpeedNova 2.4 GHz:** dependable, drama-free tracking at 1K polling.  \r\n- **Tri-mode (2.4 / BT / USB-C):** bounce between a gaming rig and a laptop with zero hassle.  \r\n- **Push-Fit Switch Socket II:** drop in mechanical **or** optical switches to customize feel or kill double-clicks.  \r\n- **EVA-02 execution:** themed shell plus matching grip tape that actually boosts traction.  \r\n- **Battery life:** rated ~119 hours on 2.4 GHz (lighting off) reduces charge anxiety.  \r\n\r\n#### Why this collab matters (rarity & execution)\r\n- **True collaboration, not a reskin:** you’re getting the *full* Gladius III AimPoint hardware with cohesive EVA-02 theming (colors, typography, in-box grip tape).  \r\n- **Part of an ongoing ASUS x Evangelion partnership:** following the earlier **EVA-01 Edition**, the EVA-02 AimPoint continues the themed ROG lineup (GPUs, boards, and peripherals) that blend performance with anime heritage.  \r\n- **Collector-first details:** included tape adds real traction and preserves the aesthetic; the theme extends beyond a shell swap.  \r\n- **Usable merch:** unlike many collabs, this is spec-complete for ranked play—so it’s display-worthy *and* mainable.  \r\n\r\n#### Tradeoffs to know\r\n- **Mass & posture:** at 79 g with a tall hump, it won’t feel as effortless to lift/redirect as sub-60 g esport shells.  \r\n- **Scroll wheel lottery:** the encoder isn’t part of the hotswap system and can develop “kickback” over time on some units.  \r\n- **Armoury Crate heft:** great for firmware/profiles; most players will set onboard memory then close it.  \r\n- **Polling headroom:** capped at 1000 Hz—fine for most, but not for 4K/8K chasers.  \r\n\r\n#### Who it suits best\r\n- **EVA fans & collectors** who actually main their gear.  \r\n- **Palm grippers / medium-to-large hands** wanting all-day comfort.  \r\n- **Reliability hunters** who value repairability and switch customization.  \r\n\r\n#### Designed alternatives\r\nIf the EVA-02 collab vibe is the whole point, but you want to browse other designed wireless mice:\r\n\r\n- <pop=mouse-209>Fnatic x Lamzu THORN</pop> — esports-leaning styling in a lighter, more “aim-tuned” ergonomic shell.  \r\n- <pop=mouse-323>Pwnage StormBreaker X BLG Valorant</pop> — a flashier collab build aimed at collectors who still queue.  \r\n- <pop=mouse-127>Razer Viper Mini Signature Edition</pop> — boutique, smaller ambi shape that feels more like a “display piece” flex pick.  \r\n\r\n**Bottom line:** If you want Unit-02 desk art you can main in ranked, this is one of the few collab mice that doesn’t force a choice between looks and capability. We scored it **slighly higher** than the standard Gladius III Wireless AimPoint for the excellent design execution and included grip tape—just keep an eye on the scroll wheel over time.",
+  "pros": [
+    "ASUS’s official Evangelion collaboration series (EVA-01 → EVA-02)",
+    "EVA-02 aesthetics and included grip tape add real collector and practical value",
+    "**Push-Fit Switch Socket II** allows instant, solder-free switch replacement (mechanical or optical)",
+    "**AimPoint sensor (650 IPS, 50 G)** delivers class-leading wireless tracking",
+    "**Tri-mode connectivity (2.4 GHz, Bluetooth, USB-C)**",
+    "Excellent battery life (~119 hours 2.4 GHz with RGB off)"
+  ],
+  "cons": [
+    "Scroll wheel encoder can develop reverse-scroll “kickback” over time and is not hot-swappable",
+    "79 g weight, on the heaver side",
+    "Armoury Crate software remains resource-heavy; best used for initial setup only",
+    "High button profile (44 mm) can feel awkward for small hands or fingertip grips",
+    "Polling rate capped at 1000 Hz (no 4 K/8 K support)"
+  ],
+  "youtube": "",
+  "affiliateLinks": [
+    {
+      "url": "https://www.amazon.com/ASUS-Bluetooth-programmable-SpeedNova-Replaceable/dp/B0CJQTTL52?dib=eyJ2IjoiMSJ9.z6C6gRVu6GNFRrEs_-kQbq3cbmlobwo8RwZj7LA2A9hvSAT3EXKhVxfK5lgMND4-2xP9qMN9EqEMtOvRh25ugOSQFgT5bc--CKHZXv9wEZSZtSm_tP9jyZ97hlF3mpsXzpHtPJWxiPCh4QqoMpb9bbRGFm7LCwDRIVnKrCO8P-K2ucexyDCWKiCs10JUyB_zuU0o17RdPoi7T4tSF-eBYvOF2G4-cbNeNa7Lr8_R4uc.sSR7UzLkEIXIxA-9CZBMRUvtxAY2pjz8GUdIEUADynU&dib_tag=se&keywords=asus%2Brog%2Beva-02&qid=1766450039&sr=8-8&th=1&linkCode=ll1&tag=eggear-20&linkId=c6997eebe5f1fad98fe0f61c3ed535ad&language=en_US&ref_=as_li_ss_tl",
+      "retailer": "amazon",
+      "slug": "amazon",
+      "variant": "",
+      "isPrimary": true
+    }
+  ],
+  "url": "/hubs/mouse/asus/rog-gladius-iii-wireless-aimpoint-eva-02",
+  "gamesRecommended": [],
+  "media": {
+    "defaultColor": "red+yellow",
+    "colors": [
+      "red+yellow"
+    ],
+    "editions": [],
+    "images": [
+      {
+        "stem": "feature-image",
+        "view": "feature-image"
+      },
+      {
+        "stem": "top",
+        "view": "top"
+      },
+      {
+        "stem": "left",
+        "view": "left"
+      },
+      {
+        "stem": "right",
+        "view": "right"
+      },
+      {
+        "stem": "sangle",
+        "view": "sangle"
+      },
+      {
+        "stem": "angle",
+        "view": "angle"
+      },
+      {
+        "stem": "bot",
+        "view": "bot"
+      },
+      {
+        "stem": "img1",
+        "view": "img",
+        "seq": 1
+      },
+      {
+        "stem": "side",
+        "view": "shape-side"
+      },
+      {
+        "stem": "top",
+        "view": "shape-top"
+      }
+    ]
+  }
+}

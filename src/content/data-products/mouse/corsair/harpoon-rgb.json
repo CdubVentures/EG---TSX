@@ -1,0 +1,181 @@
+{
+  "slug": "corsair-harpoon-rgb",
+  "brand": "Corsair",
+  "model": "Harpoon RGB",
+  "baseModel": "Harpoon",
+  "variant": "RGB",
+  "category": "mouse",
+  "imagePath": "/images/mouse/corsair/harpoon-rgb",
+  "cardTags": "false",
+  "featured": "",
+  "release_date": "11/2016",
+  "discontinued": "",
+  "sku": "CH-9301011-NA",
+  "price_range": 39.99,
+  "colors": [
+    "black"
+  ],
+  "design": [
+    "standard"
+  ],
+  "lighting": "1 zone (rgb)",
+  "rgb": "yes",
+  "connection": "wired",
+  "connectivity": "n/a",
+  "computer_side_connector": "USB-A",
+  "mouse_side_connector": "n/a",
+  "bluetooth": "no",
+  "cable_type": "rubber",
+  "paracord": "no",
+  "wireless_charging": "no",
+  "battery_hours": "n/a",
+  "adjustable_weight": "no",
+  "feet_material": "PTFE (Black-Dyed)",
+  "coating": "rubber grips",
+  "honeycomb_frame": "no",
+  "silent_clicks": "no",
+  "weight": 85,
+  "material": "plastic / rubber",
+  "lngth": 115.5,
+  "width": 68.3,
+  "height": 40.4,
+  "form_factor": "right",
+  "shape": "ergonomic",
+  "hump": "back mid",
+  "front_flare": "outward",
+  "thumb_rest": "no",
+  "grip": [
+    "palm",
+    "claw",
+    "fingertip"
+  ],
+  "hand_size": [
+    "small",
+    "medium"
+  ],
+  "mcu": "unk",
+  "mcu_link": "",
+  "sensor": "PMW3320",
+  "sensor_brand": "pixart",
+  "sensor_date": "",
+  "sensor_link": "https://www.corsair.com/newsroom/press-release/corsair-launches-three-new-gaming-mice-alongside-slipstream-corsair-wireless-technology",
+  "sensor_type": "optical",
+  "flawless_sensor": "yes",
+  "sensor_latency": "unk",
+  "sensor_latency_list": [
+    "unk"
+  ],
+  "shift_latency": "unk",
+  "polling_rate": [
+    1000,
+    500,
+    250,
+    125
+  ],
+  "dpi": 6000,
+  "ips": 80,
+  "acceleration": 20,
+  "lift": [
+    2.4
+  ],
+  "lift_settings": "fixed high",
+  "motion_sync": "unk",
+  "hardware_acceleration": "unk",
+  "smoothing": "unk",
+  "nvidia_reflex": "no",
+  "switch": "D2FC -F-7N(20M)",
+  "switch_brand": "omron",
+  "switch_type": "mechanical",
+  "switch_link": "",
+  "hot_swappable": "no",
+  "debounce": "unk",
+  "click_latency": 19.7,
+  "click_latency_list": "19.7 wired",
+  "click_force": "unk",
+  "encoder": "",
+  "encoder_brand": "",
+  "encoder_link": "",
+  "side_buttons": 2,
+  "middle_buttons": 1,
+  "programmable_buttons": 6,
+  "tilt_scroll_wheel": "no",
+  "adjustable_scroll_wheel": "no",
+  "onboard_memory": "yes",
+  "onboard_memory_value": 1,
+  "profile_switching": "yes",
+  "overall": 6.82,
+  "accuracy": 6.6,
+  "response": 5.58,
+  "quality": 6.5,
+  "comfort": 6.9,
+  "work": 6.6,
+  "feet_score": 6.3,
+  "fps_score": 5.17,
+  "mmo_score": 4.6,
+  "moba_score": 5.3,
+  "aarpg_score": 5.3,
+  "rts_score": 5.23,
+  "fps": "yes",
+  "mmo": "no",
+  "moba": "yes",
+  "aarpg": "yes",
+  "rts": "yes",
+  "snap_dateUpdated": "12/8/2025",
+  "snap_datePublished": null,
+  "snap_subtitle": "",
+  "hubTags": [],
+  "game1": "",
+  "game2": "",
+  "game3": "",
+  "game4": "",
+  "game5": "",
+  "game6": "",
+  "game7": "",
+  "game8": "",
+  "keytakeaway": "",
+  "pcard": "",
+  "verdict": "",
+  "pros": [],
+  "cons": [],
+  "youtube": "https://www.youtube.com/watch?v=iUR5C3QjuXw",
+  "affiliateLinks": [
+    {
+      "url": "https://www.amazon.com/Corsair-Harpoon-Wireless-Lightweight-Gaming/dp/B0FWRVG3TP?crid=1KHPNU0Y0BV50&dib=eyJ2IjoiMSJ9.3uZ6CgCIBm5R3z-5kjHsC9E2gcAdD2cINKn17aSfBpNTfDWVswSArjt8VkueGTemwBYt05uhiJiq_BOywylq91y1NQFB1GMwmu_p2PqlQAwtzyCwEVTjTTzrFZDWCtcTALrLD3PCf57dNrBIP3C5a8eTOudG3WOObiTzdnb1zeDn8FLm0664t0iHNWnA4kJNYtKvM--Z2zR3QRo0-mCk1j67TJH2ThGXElm5eeNLB5A.tCJ3GSV_b45RVcfPOkZnszvh9DJY16Zaxd8ghQHAh-s&dib_tag=se&keywords=Corsair+Harpoon+Wireless&qid=1765419451&sprefix=corsair+harpoon+wireless%2Caps%2C160&sr=8-1&linkCode=ll1&tag=eggear-20&linkId=138bd61f272572d3ea2464d6bca4671a&language=en_US&ref_=as_li_ss_tl",
+      "retailer": "amazon",
+      "slug": "amazon",
+      "variant": "",
+      "isPrimary": true
+    }
+  ],
+  "url": "/hubs/mouse/corsair/harpoon-rgb",
+  "gamesRecommended": [],
+  "media": {
+    "defaultColor": "black",
+    "colors": [
+      "black"
+    ],
+    "editions": [],
+    "images": [
+      {
+        "stem": "top",
+        "view": "top"
+      },
+      {
+        "stem": "left",
+        "view": "left"
+      },
+      {
+        "stem": "sangle",
+        "view": "sangle"
+      },
+      {
+        "stem": "side",
+        "view": "shape-side"
+      },
+      {
+        "stem": "top",
+        "view": "shape-top"
+      }
+    ]
+  }
+}

@@ -1,0 +1,200 @@
+{
+  "slug": "corsair-nightsabre-wireless",
+  "brand": "Corsair",
+  "model": "Nightsabre Wireless",
+  "baseModel": "Nightsabre",
+  "variant": "Wireless",
+  "category": "mouse",
+  "imagePath": "/images/mouse/corsair/nightsabre-wireless",
+  "cardTags": "false",
+  "featured": "",
+  "release_date": "07/2023",
+  "discontinued": "",
+  "sku": "CH-931B011-NA",
+  "price_range": 149.99,
+  "colors": [
+    "black"
+  ],
+  "design": [
+    "standard"
+  ],
+  "lighting": "7 zone (rgb)",
+  "rgb": "yes",
+  "connection": "hybrid",
+  "connectivity": "2.4GHz Dongle",
+  "computer_side_connector": "USB-A",
+  "mouse_side_connector": "USB-C",
+  "bluetooth": "yes",
+  "cable_type": "braided",
+  "paracord": "no",
+  "wireless_charging": "no",
+  "battery_hours": 100,
+  "adjustable_weight": "no",
+  "feet_material": "PTFE (Virgin-Grade)",
+  "coating": "matte",
+  "honeycomb_frame": "no",
+  "silent_clicks": "no",
+  "weight": 99,
+  "material": "plastic",
+  "lngth": 129.4,
+  "width": 63,
+  "height": 40.11,
+  "form_factor": "right",
+  "shape": "symmetrical",
+  "hump": "middle",
+  "front_flare": "inward",
+  "thumb_rest": "no",
+  "grip": [
+    "palm",
+    "claw",
+    "fingertip"
+  ],
+  "hand_size": [
+    "medium",
+    "large"
+  ],
+  "mcu": "unk",
+  "mcu_link": "",
+  "sensor": "MARKSMAN 26K",
+  "sensor_brand": "corsair",
+  "sensor_date": "",
+  "sensor_link": "",
+  "sensor_type": "optical",
+  "flawless_sensor": "unk",
+  "sensor_latency": "unk",
+  "sensor_latency_list": [
+    "unk"
+  ],
+  "shift_latency": "unk",
+  "polling_rate": [
+    8000,
+    4000,
+    2000,
+    1000,
+    500,
+    250,
+    125
+  ],
+  "dpi": 26000,
+  "ips": 650,
+  "acceleration": 50,
+  "lift": [
+    1.2
+  ],
+  "lift_settings": "adjustable",
+  "motion_sync": "no",
+  "hardware_acceleration": "no",
+  "smoothing": "no",
+  "nvidia_reflex": "no",
+  "switch": "Optical Microswitch",
+  "switch_brand": "ttc",
+  "switch_type": "optical",
+  "switch_link": "",
+  "hot_swappable": "no",
+  "debounce": "unk",
+  "click_latency": 2.5,
+  "click_latency_list": "3.0 ms wired, 2.5 ms wireless, 8.4 ms bluetooth",
+  "click_force": "unk",
+  "encoder": "",
+  "encoder_brand": "",
+  "encoder_link": "",
+  "side_buttons": 2,
+  "middle_buttons": 4,
+  "programmable_buttons": 10,
+  "tilt_scroll_wheel": "yes",
+  "adjustable_scroll_wheel": "no",
+  "onboard_memory": "yes",
+  "onboard_memory_value": 5,
+  "profile_switching": "yes",
+  "overall": 8.3,
+  "accuracy": 9,
+  "response": 8.2,
+  "quality": 8.3,
+  "comfort": 8.4,
+  "work": 8,
+  "feet_score": 9,
+  "fps_score": 7.4,
+  "mmo_score": 8,
+  "moba_score": 8.7,
+  "aarpg_score": 8.2,
+  "rts_score": 7.8,
+  "fps": "yes",
+  "mmo": "yes",
+  "moba": "yes",
+  "aarpg": "yes",
+  "rts": "yes",
+  "snap_dateUpdated": "11/20/2025",
+  "snap_datePublished": "11/20/2025",
+  "snap_subtitle": "Triple-mode, 11-button powerhouse—just not exactly a lightweight.",
+  "hubTags": [
+    "price_range",
+    "weight",
+    "polling_rate",
+    "connection",
+    "mmo",
+    "moba",
+    "aarpg"
+  ],
+  "game1": "World of Warcraft",
+  "game2": "League of Legends",
+  "game3": "Diablo IV",
+  "game4": "",
+  "game5": "",
+  "game6": "",
+  "game7": "",
+  "game8": "",
+  "keytakeaway": "Built for MMO and MOBA gamers who want top-tier sensor performance, low-latency wireless, and 11-button versatility in a comfortable medium-large shell—so long as you can manage its 99g weight for faster-paced play.",
+  "pcard": "Corsair’s feature-packed wireless for multi-genre play: a 26K sensor, 11 programmable buttons, and tri-mode connectivity offer premium versatility. Heavier than a pure FPS option like the <pop=mouse-94>Logitech G Pro X Superlight 2</pop>, but ideal if you value all-around capability over ultralight weight.",
+  "verdict": "#### What You Need To Know  \r\nCorsair’s Nightsabre Wireless is a **jack-of-all-trades gaming mouse** aimed at covering FPS, MOBA, MMO, and more in one package. It combines high-end specs – a 26,000 DPI sensor, optical main switches, and **Slipstream** wireless tech – with a generous **11-button** layout and **tri-mode connectivity** (USB dongle, Bluetooth, or wired). The trade-off? **Weight.** At about **99 g**, it’s noticeably heavier than modern ultra-light FPS mice, which can affect quick flicks and rapid aim adjustments.  \r\n\r\n> **“11-button all-rounder done right, if you can handle a little extra weight.”**  \r\n\r\nIn practice, the Nightsabre’s performance **feels crisp and responsive**. The **MARKSMAN 26K** optical sensor tracks flawlessly across fast flicks and fine movements (rated 650 IPS, 50G acceleration), so you won’t outrun its accuracy. Corsair’s wireless implementation delivers **near-wired latency** – no lag or stutters were noticed in 2.4 GHz mode. You can also plug in via USB-C to play and charge simultaneously with **zero performance compromise**.  \r\n\r\n**Shape & Comfort:** The Nightsabre uses a long, symmetrical shape with a mid-height hump, tailored for **medium to large hands**. It’s a right-handed design (side buttons on the left) that suits palm or claw grips comfortably. The textured matte finish and **virgin PTFE feet** provide a stable, smooth glide despite the weight. Build quality is excellent overall – no creaking in normal use, though the left side panel does flex slightly if squeezed hard. The 99 g heft gives it a planted, controlled feel on swipes.  \r\n\r\n**Buttons & Features:** With **11 programmable buttons**, this mouse offers plenty of in-game and productivity shortcuts. You get the usual two main clicks (fast **optical switches** with a snappy feel), two thumb buttons, a clickable scroll wheel with **left/right tilt** (great for extra inputs like leaning or panning), plus additional top buttons (DPI/profile toggles). The lack of a dedicated sniper button or free-spin scroll mode is a minor omission, but the tilt wheel and five onboard profiles still add versatility. As with other Corsair gear, all customization (button maps, macros, RGB across six zones) happens in the iCUE software. It’s powerful but a bit overwhelming; the upside is you can save settings to onboard memory and close the software after setup.  \r\n\r\n**Battery & Connectivity:** One strength of the Nightsabre is its **flexible connectivity**. The sub-1ms Slipstream wireless gives you competitive-grade performance, while Bluetooth mode conserves battery for casual use or multi-device convenience. Expect around **65 hours** on the 2.4 GHz dongle (with RGB off) and up to **100 hours** on Bluetooth – excellent longevity for a mouse with this many features. And if you do run low, a quick 15-minute charge via USB-C provides several hours of play.  \r\n\r\n#### Who Should Buy  \r\nThe Nightsabre Wireless shines as an **all-in-one** for multi-genre gamers – especially MMO, MOBA, or ARPG players who can utilize its extra buttons and don’t mind a bit of extra weight. Serious competitive FPS purists will still gravitate to lighter mice (at 99 g, this is roughly double the weight of a <pop=mouse-94>Superlight 2</pop>), but for everyone else the Nightsabre’s rock-solid tracking and comfort can still deliver even in shooters at a casual to semi-competitive level.  \r\n\r\nIn the premium wireless market (~$150 MSRP), the Nightsabre holds its own. One close rival is the <pop=mouse-137>Razer Basilisk V3 Pro</pop>, which offers a similar flagship sensor and build quality in an ergonomic shape (with a free-spinning scroll), but it’s even heavier and lacks Bluetooth. If you prioritize versatility and top-tier performance across multiple game types, the Nightsabre Wireless is a **strong choice** that *justifies its weight* with its capabilities. You’re getting a flagship sensor, flexible wireless modes, and a ton of customization in one package – as long as you’re okay with a mouse that isn’t built for pure speed runs.",
+  "pros": [
+    "MARKSMAN 26K optical sensor and optical main switches deliver fast, accurate input",
+    "Slipstream 2.4 GHz wireless (sub-1 ms) feels effectively as responsive as wired",
+    "11 programmable buttons, including tilt wheel, support MMO, MOBA, and productivity use",
+    "Strong battery life (up to ~65 hours 2.4 GHz / ~100 hours Bluetooth with RGB off)",
+    "Solid build quality and a comfortable medium–large hand shape"
+  ],
+  "cons": [
+    "Heavy ~99 g frame is not ideal for low-DPI, quick-twitch FPS aim",
+    "Only two primary side buttons, so it’s less specialized than full 12-button MMO grids",
+    "No infinite/free-scroll mode; scroll wheel uses a clicky, stepped feel only",
+    "Left side panel can flex slightly under a strong squeeze",
+    "Premium launch MSRP around $149.99, even if discounts appear over time"
+  ],
+  "youtube": "https://www.youtube.com/watch?v=3CqFa0H5DMk",
+  "affiliateLinks": [
+    {
+      "url": "https://www.amazon.com/Corsair-NIGHTSABRE-Wireless-Gaming-Mouse/dp/B0CHN1DKLV?crid=2UL5ALQXW45VM&dib=eyJ2IjoiMSJ9.sLKuXu8ZWngFRV5KHqkstA.1u_SbWyyhWrWHA2j2zVxAaxeHNKykOA5whOD1MexfGc&dib_tag=se&keywords=Nightsabre%2BWireless&qid=1765321745&sprefix=nightsabre%2Bwireless%2Caps%2C210&sr=8-1&th=1&linkCode=ll1&tag=eggear-20&linkId=7a918fb192a46125f5222d519a7eb947&language=en_US&ref_=as_li_ss_tl",
+      "retailer": "amazon",
+      "slug": "amazon",
+      "variant": "",
+      "isPrimary": true
+    }
+  ],
+  "url": "/hubs/mouse/corsair/nightsabre-wireless",
+  "gamesRecommended": [],
+  "media": {
+    "defaultColor": "black",
+    "colors": [
+      "black"
+    ],
+    "editions": [],
+    "images": [
+      {
+        "stem": "top",
+        "view": "top"
+      },
+      {
+        "stem": "left",
+        "view": "left"
+      },
+      {
+        "stem": "side",
+        "view": "shape-side"
+      },
+      {
+        "stem": "top",
+        "view": "shape-top"
+      }
+    ]
+  }
+}

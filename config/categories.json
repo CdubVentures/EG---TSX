@@ -1,0 +1,148 @@
+{
+  "siteColors": {
+    "primary": "#394cc8",
+    "secondary": "#00aeff"
+  },
+  "categories": [
+    {
+      "id": "mouse",
+      "label": "Mouse",
+      "plural": "Mice",
+      "color": "#00aeff",
+      "product": {
+        "production": true,
+        "vite": true
+      },
+      "content": {
+        "production": true,
+        "vite": true
+      }
+    },
+    {
+      "id": "keyboard",
+      "label": "Keyboard",
+      "plural": "Keyboards",
+      "color": "#EE8B22",
+      "product": {
+        "production": true,
+        "vite": true
+      },
+      "content": {
+        "production": true,
+        "vite": true
+      }
+    },
+    {
+      "id": "monitor",
+      "label": "Monitor",
+      "plural": "Monitors",
+      "color": "#ff69b3",
+      "product": {
+        "production": true,
+        "vite": true
+      },
+      "content": {
+        "production": true,
+        "vite": true
+      }
+    },
+    {
+      "id": "headset",
+      "label": "Headset",
+      "plural": "Headsets",
+      "color": "#a855f7",
+      "product": {
+        "production": false,
+        "vite": false
+      },
+      "content": {
+        "production": false,
+        "vite": false
+      }
+    },
+    {
+      "id": "mousepad",
+      "label": "Mousepad",
+      "plural": "Mousepads",
+      "color": "#22c55e",
+      "product": {
+        "production": false,
+        "vite": false
+      },
+      "content": {
+        "production": false,
+        "vite": false
+      }
+    },
+    {
+      "id": "controller",
+      "label": "Controller",
+      "plural": "Controllers",
+      "color": "#ef4444",
+      "product": {
+        "production": false,
+        "vite": false
+      },
+      "content": {
+        "production": false,
+        "vite": false
+      }
+    },
+    {
+      "id": "hardware",
+      "label": "Hardware",
+      "plural": "Hardware",
+      "color": "#a6e3a1",
+      "product": {
+        "production": false,
+        "vite": false
+      },
+      "content": {
+        "production": true,
+        "vite": true
+      }
+    },
+    {
+      "id": "game",
+      "label": "Game",
+      "plural": "Games",
+      "color": "#f9e2af",
+      "product": {
+        "production": false,
+        "vite": false
+      },
+      "content": {
+        "production": false,
+        "vite": true
+      }
+    },
+    {
+      "id": "gpu",
+      "label": "GPU",
+      "plural": "GPUs",
+      "color": "#74c7ec",
+      "product": {
+        "production": false,
+        "vite": false
+      },
+      "content": {
+        "production": true,
+        "vite": true
+      }
+    },
+    {
+      "id": "ai",
+      "label": "AI",
+      "plural": "AI",
+      "color": "#cba6f7",
+      "product": {
+        "production": false,
+        "vite": false
+      },
+      "content": {
+        "production": true,
+        "vite": true
+      }
+    }
+  ]
+}

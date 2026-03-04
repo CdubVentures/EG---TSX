@@ -1,0 +1,180 @@
+{
+  "slug": "corsair-katar-pro-xt",
+  "brand": "Corsair",
+  "model": "Katar Pro XT",
+  "baseModel": "Katar",
+  "variant": "Pro XT",
+  "category": "mouse",
+  "imagePath": "/images/mouse/corsair/katar-pro-xt",
+  "cardTags": "false",
+  "featured": "",
+  "release_date": "02/2021",
+  "discontinued": "",
+  "sku": "CH-930C111-NA",
+  "price_range": 24.99,
+  "colors": [
+    "black"
+  ],
+  "design": [
+    "standard"
+  ],
+  "lighting": "1 zone (rgb)",
+  "rgb": "yes",
+  "connection": "wired",
+  "connectivity": "n/a",
+  "computer_side_connector": "USB-A",
+  "mouse_side_connector": "n/a",
+  "bluetooth": "no",
+  "cable_type": "braided",
+  "paracord": "yes",
+  "wireless_charging": "no",
+  "battery_hours": "n/a",
+  "adjustable_weight": "no",
+  "feet_material": "PTFE (Black-Dyed)",
+  "coating": "matte",
+  "honeycomb_frame": "no",
+  "silent_clicks": "no",
+  "weight": 73,
+  "material": "plastic",
+  "lngth": 115.8,
+  "width": 64.2,
+  "height": 37.8,
+  "form_factor": "right",
+  "shape": "symmetrical",
+  "hump": "back - front",
+  "front_flare": "inward",
+  "thumb_rest": "no",
+  "grip": [
+    "claw",
+    "fingertip"
+  ],
+  "hand_size": [
+    "small",
+    "medium"
+  ],
+  "mcu": "NXP LPC11U68",
+  "mcu_link": "https://www.nxp.com/docs/en/data-sheet/LPC11U6X.pdf?utm_source=chatgpt.com",
+  "sensor": "PMW3391",
+  "sensor_brand": "PixArt",
+  "sensor_date": "",
+  "sensor_link": "",
+  "sensor_type": "optical",
+  "flawless_sensor": "yes",
+  "sensor_latency": "unk",
+  "sensor_latency_list": [
+    "unk"
+  ],
+  "shift_latency": "unk",
+  "polling_rate": [
+    1000,
+    500,
+    250,
+    125
+  ],
+  "dpi": 18000,
+  "ips": 400,
+  "acceleration": 40,
+  "lift": [
+    1.2
+  ],
+  "lift_settings": "surface-tuned",
+  "motion_sync": "no",
+  "hardware_acceleration": "no",
+  "smoothing": "no",
+  "nvidia_reflex": "no",
+  "switch": "D2FC -F-K(50M)",
+  "switch_brand": "omron",
+  "switch_type": "optical",
+  "switch_link": "",
+  "hot_swappable": "no",
+  "debounce": "unk",
+  "click_latency": 5.4,
+  "click_latency_list": "5.4 wired",
+  "click_force": "unk",
+  "encoder": "",
+  "encoder_brand": "",
+  "encoder_link": "",
+  "side_buttons": 2,
+  "middle_buttons": 1,
+  "programmable_buttons": 6,
+  "tilt_scroll_wheel": "no",
+  "adjustable_scroll_wheel": "no",
+  "onboard_memory": "yes",
+  "onboard_memory_value": 1,
+  "profile_switching": "yes",
+  "overall": 7.1,
+  "accuracy": 8.2,
+  "response": 5,
+  "quality": 8.2,
+  "comfort": 7.8,
+  "work": 6.8,
+  "feet_score": 7.5,
+  "fps_score": 6.3,
+  "mmo_score": 6.1,
+  "moba_score": 6.3,
+  "aarpg_score": 6.5,
+  "rts_score": 6.2,
+  "fps": "yes",
+  "mmo": "no",
+  "moba": "yes",
+  "aarpg": "no",
+  "rts": "no",
+  "snap_dateUpdated": "11/26/2025",
+  "snap_datePublished": null,
+  "snap_subtitle": "",
+  "hubTags": [],
+  "game1": "",
+  "game2": "",
+  "game3": "",
+  "game4": "",
+  "game5": "",
+  "game6": "",
+  "game7": "",
+  "game8": "",
+  "keytakeaway": "",
+  "pcard": "",
+  "verdict": "",
+  "pros": [],
+  "cons": [],
+  "youtube": "https://www.youtube.com/watch?v=LzcRNgZEn-s",
+  "affiliateLinks": [
+    {
+      "url": "https://www.amazon.com/Corsair-Katar-Ultra-Light-Gaming-Mouse/dp/B08SHCKVTG?crid=B4AFSSXWJXW0&dib=eyJ2IjoiMSJ9.CZ9Qv_zgnZ2TJ0ZCwDofuhZolBX4Arj2rDzD9dTt5JzHWDMR3zEISJzBtTaFrG5xUkOANGWwLvzCWNRLPYQ4IQUmF-juLdI-SLj1-VB8jQjVqw3LHRb55O1ChmOr_2-V5u7xBrs702hhPiYFiGIzff0HAMhagdTSzUZpBrTCXKzAQvgvIuFmgC0J9vA8w38oBAYz_mCqdAzR1ZZleHgzaODET7-3sfRVE3WHyBgBp-E.XaEySrHo3a5KR4DM0VYuJ0IT5pb0KpOQ4w1puJyKBhA&dib_tag=se&keywords=Katar+Pro+Wireless&qid=1765258803&sprefix=katar+pro+wireless%2Caps%2C150&sr=8-1&linkCode=ll1&tag=eggear-20&linkId=c3a4480397201509e6792e8e4db68f8e&language=en_US&ref_=as_li_ss_tl",
+      "retailer": "amazon",
+      "slug": "amazon",
+      "variant": "",
+      "isPrimary": true
+    }
+  ],
+  "url": "/hubs/mouse/corsair/katar-pro-xt",
+  "gamesRecommended": [],
+  "media": {
+    "defaultColor": "black",
+    "colors": [
+      "black"
+    ],
+    "editions": [],
+    "images": [
+      {
+        "stem": "top",
+        "view": "top"
+      },
+      {
+        "stem": "left",
+        "view": "left"
+      },
+      {
+        "stem": "sangle",
+        "view": "sangle"
+      },
+      {
+        "stem": "side",
+        "view": "shape-side"
+      },
+      {
+        "stem": "top",
+        "view": "shape-top"
+      }
+    ]
+  }
+}

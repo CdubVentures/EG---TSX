@@ -1,0 +1,271 @@
+---
+/**
+ * GlobalNav.astro — Top-bar orchestrator.
+ *
+ * Phase 4.2–4.5: Fixed header with logo, desktop nav links, icons, mobile drawer,
+ * and mega menu dropdowns (Games, Guides, Brands, Hubs).
+ * Matches HBS `<nav class="mainNav">` wrapping `<header class="top-bar">`.
+ *
+ * WHY: All children are inside one <header class="top-bar"> grid, exactly
+ * like HBS. Hidden items (hamburger, side-menu) don't participate in layout
+ * at desktop, so visible grid children are: logo | main-nav | top-bar-right.
+ */
+
+import { getCollection } from 'astro:content';
+import { CONFIG } from '@core/config';
+import NavLogo from './NavLogo.astro';
+import NavLinks from './NavLinks.astro';
+import NavIcons from './NavIcons.astro';
+import NavMobile from './NavMobile.tsx';
+/* ─── Build-time data ─── */
+const allGames = await getCollection('games');
+const allGuides = await getCollection('guides');
+const allBrands = await getCollection('brands');
+
+// WHY CONFIG.categories: filtered by environment (production + vite flags)
+const hubsData = CONFIG.categories.map((c) => ({ category: c }));
+
+/* ─── Mobile nav data (simple shapes) ─── */
+
+/* WHY navbar filter: only games with navbar:true appear in the games menu */
+const gamesData = allGames
+  .filter((g) => g.data.navbar && g.data.fullArticle !== false)
+  .sort((a, b) => a.data.title.localeCompare(b.data.title))
+  .map((g) => ({ title: g.data.title, url: `/games/${g.id}` }));
+
+const guidesMap = new Map<string, Array<{ title: string; url: string }>>();
+for (const g of allGuides) {
+  const cat = g.data.category;
+  if (!cat || g.data.fullArticle === false) continue;
+  if (!guidesMap.has(cat)) guidesMap.set(cat, []);
+  // WHY guide || title: use the short nav-friendly name, same as the desktop mega menu
+  guidesMap.get(cat)!.push({ title: g.data.guide || g.data.title, url: `/guides/${g.id}` });
+}
+const guidesData = Array.from(guidesMap.entries()).map(([category, items]) => ({
+  category,
+  items: items.sort((a, b) => a.title.localeCompare(b.title)),
+}));
+
+const brandsMap = new Map<string, Array<{ brand: string; url: string }>>();
+for (const b of allBrands) {
+  if (b.data.fullArticle === false) continue;
+  const cats = b.data.navbar ?? [];
+  for (const cat of cats) {
+    if (!brandsMap.has(cat)) brandsMap.set(cat, []);
+    brandsMap.get(cat)!.push({ brand: b.data.brand, url: `/brands/${b.id}` });
+  }
+}
+const brandsData = Array.from(brandsMap.entries()).map(([category, items]) => ({
+  category,
+  items: items.sort((a, b) => a.brand.localeCompare(b.brand)),
+}));
+
+/* ─── Mega menu data (richer shapes for desktop dropdowns) ─── */
+
+/* Games: need slug for image paths. Only navbar:true games appear. */
+const gamesMega = allGames
+  .filter((g) => g.data.navbar && g.data.fullArticle !== false)
+  .sort((a, b) => a.data.title.localeCompare(b.data.title))
+  .map((g) => ({
+    title: g.data.title,
+    slug: g.id,
+    url: `/games/${g.id}`,
+  }));
+
+/* Guides: grouped by category, then by section name (from navbar field).
+   WHY sections: HBS renders guides as titled columns ("Best In Classes",
+   "Educational Guides", etc.) — not balanced anonymous columns. */
+type GuideItem = { guide: string; url: string };
+type GuideSection = { title: string; items: GuideItem[] };
+type GuideCategoryMega = { category: string; sections: GuideSection[] };
+
+const guidesByCatSection = new Map<string, Map<string, GuideItem[]>>();
+for (const g of allGuides) {
+  const cat = g.data.category;
+  if (!cat || g.data.fullArticle === false) continue;
+  const navbar = g.data.navbar ?? [];
+  /* WHY: only guides with a non-empty navbar field appear in the mega menu.
+     Guides with navbar:[] are "unassigned" and don't show up. */
+  if (navbar.length === 0) continue;
+  const section = String(navbar[0]);
+  if (!guidesByCatSection.has(cat)) guidesByCatSection.set(cat, new Map());
+  const catMap = guidesByCatSection.get(cat)!;
+  if (!catMap.has(section)) catMap.set(section, []);
+  catMap.get(section)!.push({
+    guide: g.data.guide || g.data.title,
+    url: `/guides/${g.id}`,
+  });
+}
+/* WHY explicit ordering: controls column order in the guides mega menu. */
+const sectionOrder: Record<string, string[]> = {
+  mouse: ['best in classes', 'educational guides', 'top 10 speciality picks', 'top 10 genere picks'],
+  keyboard: ['best in classes'],
+  monitor: ['best in classes'],
+};
+
+const guidesMega: GuideCategoryMega[] = Array.from(guidesByCatSection.entries())
+  .sort(([a], [b]) => a.localeCompare(b))
+  .map(([category, sectionMap]) => {
+    const order = sectionOrder[category] ?? [];
+    const allSections = Array.from(sectionMap.keys());
+    // Ordered sections first, then any not in the order file
+    const sorted = [
+      ...order.filter((s) => allSections.includes(s)),
+      ...allSections.filter((s) => !order.includes(s)),
+    ];
+    return {
+      category,
+      sections: sorted.map((title) => ({
+        title,
+        items: (sectionMap.get(title) ?? []).sort((a, b) => a.guide.localeCompare(b.guide)),
+      })),
+    };
+  });
+
+/* Brands: grouped by category, split into 4 balanced columns (HBS style) */
+const brandsMegaMap = new Map<string, Array<{ brand: string; slug: string; url: string }>>();
+for (const b of allBrands) {
+  if (b.data.fullArticle === false) continue;
+  const cats = b.data.navbar ?? [];
+  for (const cat of cats) {
+    if (!brandsMegaMap.has(cat)) brandsMegaMap.set(cat, []);
+    brandsMegaMap.get(cat)!.push({
+      brand: b.data.brand,
+      slug: b.id,
+      url: `/brands/${b.id}`,
+    });
+  }
+}
+const brandsMega = Array.from(brandsMegaMap.entries())
+  .sort(([a], [b]) => a.localeCompare(b))
+  .map(([category, items]) => {
+    const sorted = items.sort((a, b) => a.brand.localeCompare(b.brand));
+    const rows = Math.ceil(sorted.length / 4) || 1;
+    const columns = Array.from({ length: 4 }, (_, i) =>
+      sorted.slice(i * rows, (i + 1) * rows)
+    ).filter((c) => c.length > 0);
+    return { category, columns };
+  });
+---
+
+<nav class="mainNav" aria-label="Main navigation">
+  <header class="top-bar">
+    {/* NavMobile renders: hamburger button + side menu + shade overlay */}
+    <NavMobile
+      client:visible
+      games={gamesData}
+      guides={guidesData}
+      brands={brandsData}
+      hubs={hubsData}
+    />
+
+    <div class="nav-logo-wrapper">
+      <NavLogo />
+    </div>
+
+    <NavLinks
+      games={gamesMega}
+      guides={guidesMega}
+      brands={brandsMega}
+      hubs={hubsData}
+    />
+
+    <div class="top-bar-right">
+      <NavIcons />
+    </div>
+  </header>
+</nav>
+
+<style>
+  .mainNav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: auto;
+    background-color: var(--nav-bg);
+    z-index: var(--nav-z);
+    padding: 0;
+    box-sizing: border-box;
+    margin: 0;
+  }
+
+  .top-bar {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    grid-template-rows: 1fr;
+    align-items: center;
+    width: 100%;
+    min-height: var(--nav-height);
+    margin: 0;
+    box-sizing: border-box;
+    overflow-y: hidden;
+    overflow-x: auto;
+    background: var(--nav-bg);
+  }
+
+  /* WHY: navbar-specific sizing for logo — NavLogo itself is context-agnostic
+     (inherits font-size from parent). Auth dialog uses a different font-size. */
+  .nav-logo-wrapper {
+    font-size: var(--font-size-28px);
+    padding: 0.5rem 2rem;
+  }
+
+  .top-bar-right {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding: 0 2rem;
+    align-self: stretch;
+    box-sizing: border-box;
+  }
+
+  @media (max-width: 1600px) {
+    .top-bar {
+      grid-template-columns: auto 1fr 1fr;
+    }
+    .nav-logo-wrapper {
+      padding: 0.5rem 0 0.5rem 2rem;
+    }
+  }
+
+  @media (max-width: 1150px) {
+    .top-bar {
+      overflow-y: visible;
+      overflow-x: auto;
+      grid-template-columns: 1fr auto 1fr;
+    }
+    .nav-logo-wrapper {
+      padding: 0;
+    }
+  }
+
+  @media (max-width: 825px) {
+    .top-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      min-height: var(--nav-height);
+      z-index: var(--nav-z);
+    }
+
+    .top-bar-right {
+      order: 3;
+      margin-left: auto;
+    }
+
+    .nav-logo-wrapper {
+      font-size: var(--font-size-24px);
+    }
+  }
+
+  @media (max-width: 600px) {
+    .top-bar {
+      overflow-x: auto;
+      width: 100vw;
+    }
+    .nav-logo-wrapper {
+      font-size: var(--font-size-22px);
+    }
+  }
+</style>
