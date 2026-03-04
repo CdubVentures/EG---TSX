@@ -1,12 +1,17 @@
 /**
- * LoginView.tsx — Login panel content (left + right columns).
- * Matches HBS #loginPopup markup exactly.
+ * LoginView.tsx — Login panel with inline email/password form.
+ * Right column: Google OAuth + email/password form (replaces Hosted UI redirect).
  */
 
+import { useState } from 'react';
+import { useStore } from '@nanostores/react';
 import { cva } from 'class-variance-authority';
 import { cn } from '@shared/lib/cn';
-import { switchView } from '../store';
-import { openHostedUI } from '../hosted-ui';
+import {
+  switchView, setAuthenticated, setFormEmail, setFormError,
+  $authForm,
+} from '../store';
+import { openOAuthPopup } from '../oauth-popup';
 import BrandLogo from './BrandLogo';
 import GoogleIcon from './GoogleIcon';
 
@@ -25,7 +30,57 @@ const authButton = cva(
   }
 );
 
+const inputClass = 'bg-[#111118] border border-[#38404b] text-[#e5e7eb] rounded-[5px] px-4 py-3 w-full focus:border-[var(--site-start-color)] focus:outline-none transition-colors text-[length:var(--font-size-14px)]';
+const labelClass = 'text-[length:var(--font-size-13px)] text-[#9ba2ab] font-semibold mb-2 block';
+
 export default function LoginView() {
+  const form = useStore($authForm);
+  const [password, setPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
+  const [loading, setLoading] = useState(false);
+
+  async function handleSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    if (loading) return;
+
+    const email = form.email.trim();
+    if (!email || !password) {
+      setFormError('Please enter your email and password');
+      return;
+    }
+
+    setLoading(true);
+    setFormError(null);
+
+    try {
+      const res = await fetch('/api/auth/sign-in', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password }),
+      });
+
+      const json = await res.json();
+
+      if (!res.ok) {
+        // WHY: UserNotConfirmedException → switch to confirm-signup flow
+        if (json.error?.code === 'UserNotConfirmedException') {
+          setFormEmail(email);
+          switchView('confirm-signup');
+          return;
+        }
+        setFormError(json.error?.message ?? 'Sign-in failed');
+        return;
+      }
+
+      // Success — set authenticated state (dialog auto-closes via AuthDialog effect)
+      setAuthenticated(json.uid, json.email, json.username);
+    } catch {
+      setFormError('Network error — please try again');
+    } finally {
+      setLoading(false);
+    }
+  }
+
   return (
     <div className="flex flex-row items-center overflow-hidden max-[600px]:flex-col-reverse max-[600px]:items-stretch">
       {/* Left column — branding */}
@@ -106,31 +161,97 @@ export default function LoginView() {
           className={cn(authButton({ intent: 'provider' }), 'mb-5')}
           onClick={(e) => {
             e.preventDefault();
-            openHostedUI('/login/google');
+            openOAuthPopup('/login/google');
           }}
         >
           <GoogleIcon />
           Continue with Google
         </a>
 
-        {/* Divider (hidden by default, matches HBS) */}
-        <div className="hidden items-center w-full gap-3 my-8">
+        {/* Divider */}
+        <div className="flex items-center w-full gap-3 my-5">
           <span className="flex-1 h-px bg-[#38404b]" />
           <span className="text-[length:var(--font-size-13px)] text-[#9ba2ab] font-semibold">or</span>
           <span className="flex-1 h-px bg-[#38404b]" />
         </div>
 
-        {/* Email button */}
-        <a
-          href="/login"
-          className={authButton({ intent: 'submit' })}
-          onClick={(e) => {
-            e.preventDefault();
-            openHostedUI('/login');
-          }}
-        >
-          Sign in with e-mail
-        </a>
+        {/* Success message */}
+        {form.successMessage && (
+          <p className="text-[color:var(--success-color)] text-[length:var(--font-size-13px)] mb-4 text-center w-full">
+            {form.successMessage}
+          </p>
+        )}
+
+        {/* Email/password form */}
+        <form onSubmit={handleSubmit} className="w-full">
+          <div className="mb-4">
+            <label htmlFor="login-email" className={labelClass}>Email</label>
+            <input
+              id="login-email"
+              type="email"
+              autoComplete="email"
+              value={form.email}
+              onChange={(e) => setFormEmail(e.target.value)}
+              className={inputClass}
+              disabled={loading}
+              placeholder="email@example.com"
+            />
+          </div>
+
+          <div className="mb-3">
+            <label htmlFor="login-password" className={labelClass}>Password</label>
+            <div className="relative">
+              <input
+                id="login-password"
+                type={showPassword ? 'text' : 'password'}
+                autoComplete="current-password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                className={cn(inputClass, 'pr-12')}
+                disabled={loading}
+              />
+              <button
+                type="button"
+                onClick={() => setShowPassword(!showPassword)}
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-[#9ba2ab] hover:text-[#e5e7eb] bg-transparent border-none cursor-pointer p-0 text-[length:var(--font-size-14px)]"
+                aria-label={showPassword ? 'Hide password' : 'Show password'}
+                tabIndex={-1}
+              >
+                {showPassword ? '\u{1F441}' : '\u{1F441}\u{200D}\u{1F5E8}'}
+              </button>
+            </div>
+          </div>
+
+          {/* Forgot password link */}
+          <div className="text-right mb-5">
+            <a
+              href="#"
+              onClick={(e) => {
+                e.preventDefault();
+                setFormEmail(form.email);
+                switchView('forgot-password');
+              }}
+              className="text-[color:var(--site-start-color)] text-[length:var(--font-size-13px)] no-underline hover:underline"
+            >
+              Forgot password?
+            </a>
+          </div>
+
+          <button
+            type="submit"
+            disabled={loading}
+            className={cn(authButton({ intent: 'submit' }), loading && 'opacity-60 cursor-not-allowed')}
+          >
+            {loading ? 'Signing in\u2026' : 'Sign in'}
+          </button>
+
+          {/* Error message */}
+          {form.error && (
+            <p className="text-[#f87171] text-[length:var(--font-size-13px)] mt-3 text-center">
+              {form.error}
+            </p>
+          )}
+        </form>
 
         {/* Legal */}
         <p className="text-[length:var(--font-size-12px)] text-[#9ba2ab] mt-3 mb-0 leading-[1.45]">
@@ -146,7 +267,7 @@ export default function LoginView() {
         </p>
 
         {/* Switch to signup */}
-        <p className="text-[length:var(--font-size-14px)] mt-12 text-[#9ba2ab]">
+        <p className="text-[length:var(--font-size-14px)] mt-8 text-[#9ba2ab]">
           Don&apos;t have an account?{' '}
           <a
             href="#"

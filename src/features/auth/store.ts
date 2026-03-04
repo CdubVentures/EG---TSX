@@ -54,7 +54,11 @@ export function logout(): void {
 }
 
 /* ── Auth Dialog State ─── */
-export type AuthDialogView = 'login' | 'signup';
+export type AuthDialogView =
+  | 'login'
+  | 'signup'
+  | 'confirm-signup'
+  | 'forgot-password';
 
 export const $authDialog = atom<{ open: boolean; view: AuthDialogView }>({
   open: false, view: 'login'
@@ -62,8 +66,43 @@ export const $authDialog = atom<{ open: boolean; view: AuthDialogView }>({
 
 export function openLogin(): void  { $authDialog.set({ open: true, view: 'login' }); }
 export function openSignup(): void { $authDialog.set({ open: true, view: 'signup' }); }
-export function closeAuth(): void  { $authDialog.set({ open: false, view: 'login' }); }
-export function switchView(v: AuthDialogView): void { $authDialog.set({ open: true, view: v }); }
+export function closeAuth(): void  {
+  $authDialog.set({ open: false, view: 'login' });
+  clearForm();
+}
+export function switchView(v: AuthDialogView): void {
+  $authDialog.set({ open: true, view: v });
+  setFormError(null);
+  setFormLoading(false);
+}
+
+/* ── Auth Form State (email/error/loading for inline forms) ─── */
+interface AuthFormState {
+  email: string;
+  error: string | null;
+  successMessage: string | null;
+  loading: boolean;
+}
+
+export const $authForm = atom<AuthFormState>({
+  email: '', error: null, successMessage: null, loading: false,
+});
+
+export function setFormEmail(email: string): void {
+  $authForm.set({ ...$authForm.get(), email });
+}
+export function setFormError(error: string | null): void {
+  $authForm.set({ ...$authForm.get(), error, successMessage: null });
+}
+export function setFormLoading(loading: boolean): void {
+  $authForm.set({ ...$authForm.get(), loading });
+}
+export function setFormSuccess(message: string): void {
+  $authForm.set({ ...$authForm.get(), successMessage: message, error: null });
+}
+export function clearForm(): void {
+  $authForm.set({ email: '', error: null, successMessage: null, loading: false });
+}
 
 /* ── BroadcastChannel cross-tab sync ─── */
 const AUTH_CHANNEL = 'eg-auth-sync';

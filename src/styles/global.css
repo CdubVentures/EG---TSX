@@ -800,7 +800,6 @@ html.logged .side-auth-logged-show { display: flex !important; }
 }
 
 .hamburger-menu-icon svg {
-  transition: fill 0.3s ease;
   width: 3.1rem;
   height: 3.1rem;
   transform-box: fill-box;
@@ -850,8 +849,7 @@ html.logged .side-auth-logged-show { display: flex !important; }
      menu is always in the DOM but off-screen (left: -70vw) and invisible. */
   display: flex;
   visibility: hidden;
-  overflow: visible;
-  overflow-y: hidden;
+  overflow: hidden;
   overscroll-behavior: contain;
   transition: left 0.4s ease-in-out, visibility 0s linear 0.4s;
   z-index: 97525;
@@ -876,43 +874,44 @@ html.logged .side-auth-logged-show { display: flex !important; }
 
 /* Menu items */
 .main-menu {
-  padding-bottom: 5rem;
+  padding: 0 0 5rem 0;
   height: 100%;
   box-sizing: border-box;
   overflow-y: auto;
   list-style: none;
   margin: 0;
-  padding-left: 0;
+}
+
+/* WHY grouped: all menu tiers share text-wrap behavior for long labels */
+.menu-item1,
+.menu-item2,
+.menu-item3 {
+  white-space: normal;
+  overflow-wrap: anywhere;
+  word-break: break-word;
 }
 
 .menu-item1 {
-  font-size: 1.54545rem; /* --font-size-17px */
-  white-space: normal;
-  overflow-wrap: anywhere;
-  word-break: break-word;
+  font-size: var(--font-size-17px);
 }
 
 .menu-item2 {
-  font-size: 1.36364rem; /* --font-size-15px */
+  font-size: var(--font-size-15px);
   margin-left: 2rem;
-  white-space: normal;
-  overflow-wrap: anywhere;
-  word-break: break-word;
 }
 
 .menu-item3 {
-  font-size: 1.27273rem; /* --font-size-14px */
+  font-size: var(--font-size-14px);
   font-weight: 600;
   margin-left: 3rem;
-  white-space: normal;
-  overflow-wrap: anywhere;
-  word-break: break-word;
 }
 
-.explore-all-link {
-  font-size: 1.18182rem !important; /* --font-size-13px */
+/* WHY scoped: .side-menu prefix beats the .side-menu ul li a rule below
+   without needing !important */
+.side-menu .explore-all-link {
+  font-size: var(--font-size-13px);
   font-weight: 600;
-  color: #b0b0b0 !important; /* --grey-color-3 */
+  color: var(--grey-color-3);
 }
 
 .side-menu ul {
@@ -926,7 +925,7 @@ html.logged .side-auth-logged-show { display: flex !important; }
   align-items: center;
   gap: 1rem;
   padding: 1.5rem 0;
-  color: #dddad5; /* --white-color-2 */
+  color: var(--white-color-2);
   text-decoration: none;
   text-transform: capitalize;
   transition: background-color 0.3s ease;
@@ -939,10 +938,10 @@ html.logged .side-auth-logged-show { display: flex !important; }
 .side-menu .menu-item2:has(.side-sub-menu) > a::after {
   content: '\276F';
   position: absolute;
-  right: 15px;
+  right: 1.36rem;
   top: 50%;
   transform: translateY(-50%) rotate(0deg);
-  font-size: 1.36364rem;
+  font-size: var(--font-size-15px);
   background: linear-gradient(to right, var(--site-gradient-start), var(--site-gradient-end));
   -webkit-background-clip: text;
   background-clip: text;
@@ -963,7 +962,7 @@ html.logged .side-auth-logged-show { display: flex !important; }
 /* Sub-menus hidden by default, shown when .active */
 .side-sub-menu {
   display: none;
-  background-color: #000000; /* --main-background-color */
+  background-color: var(--main-background-color);
   border-top: 1px solid;
   border-image: linear-gradient(to top, var(--site-gradient-start), var(--site-gradient-end)) 1;
 }
@@ -982,6 +981,25 @@ html.logged .side-auth-logged-show { display: flex !important; }
   font-weight: 700;
 }
 
+/* Side-menu brand logos (smaller than desktop mega menu) */
+.side-brand-logo-container {
+  flex: 0 0 2em;
+  width: 2em;
+  height: 2em;
+  border-radius: 50%;
+  background-color: var(--section-darkestdark-background-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.side-brand-logo {
+  width: 1.5em;
+  height: 1.5em;
+  object-fit: contain;
+  filter: brightness(0) invert(1);
+}
+
 /* Shade overlay */
 .shade-overlay {
   position: fixed;
@@ -997,7 +1015,7 @@ html.logged .side-auth-logged-show { display: flex !important; }
 
 .shade-overlay.active {
   left: 0;
-  pointer-events: all;
+  pointer-events: auto;
 }
 
 /* Side auth footer */
@@ -1020,10 +1038,10 @@ html.logged .side-auth-logged-show { display: flex !important; }
   justify-content: center;
   font-family: "Open Sans", sans-serif;
   font-weight: 700;
-  font-size: 1.27273rem;
-  color: #ffffff;
+  font-size: var(--font-size-14px);
+  color: var(--white-color-1);
   text-decoration: none;
-  background-color: #3A3F41; /* --section-medium-background-color */
+  background-color: var(--section-medium-background-color);
   border-radius: 7px;
   padding: 0.75rem 1rem;
   box-sizing: border-box;
@@ -1032,7 +1050,7 @@ html.logged .side-auth-logged-show { display: flex !important; }
 }
 
 .side-auth-link:hover {
-  background-color: #2e343b;
+  background-color: var(--nav-surface-medium);
 }
 
 .side-auth-avatar {

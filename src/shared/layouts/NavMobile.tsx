@@ -13,7 +13,7 @@
  * which at desktop (>1150px) never happens — zero JS shipped on desktop.
  */
 
-import { useState, useCallback, useEffect, useRef } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 import { plural } from '@core/config';
 import { openLogin } from '@features/auth/store';
 
@@ -21,14 +21,13 @@ import { openLogin } from '@features/auth/store';
 interface NavMobileProps {
   games: Array<{ title: string; url: string }>;
   guides: Array<{ category: string; items: Array<{ title: string; url: string }> }>;
-  brands: Array<{ category: string; items: Array<{ brand: string; url: string }> }>;
+  brands: Array<{ category: string; items: Array<{ brand: string; slug: string; url: string }> }>;
   hubs: Array<{ category: string }>;
 }
 
 export default function NavMobile({ games, guides, brands, hubs }: NavMobileProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [openMenus, setOpenMenus] = useState<Set<string>>(new Set());
-  const sideMenuRef = useRef<HTMLDivElement>(null);
 
   const toggleMenu = useCallback(() => {
     setIsOpen((prev) => !prev);
@@ -57,6 +56,12 @@ export default function NavMobile({ games, guides, brands, hubs }: NavMobileProp
     return () => window.removeEventListener('resize', handleResize);
   }, [isOpen, closeMenu]);
 
+  /* WHY: prevent background scroll while drawer is open — standard mobile nav UX */
+  useEffect(() => {
+    document.body.style.overflow = isOpen ? 'hidden' : '';
+    return () => { document.body.style.overflow = ''; };
+  }, [isOpen]);
+
   /* Toggle accordion sub-menu */
   const toggleSubmenu = useCallback((key: string, e: React.MouseEvent) => {
     e.preventDefault();
@@ -74,7 +79,15 @@ export default function NavMobile({ games, guides, brands, hubs }: NavMobileProp
   return (
     <>
       {/* ─── Hamburger button ─── */}
-      <div className="mobile-hamburger-menu-icon" onClick={toggleMenu}>
+      <div
+        className="mobile-hamburger-menu-icon"
+        role="button"
+        tabIndex={0}
+        aria-expanded={isOpen}
+        aria-label={isOpen ? 'Close menu' : 'Open menu'}
+        onClick={toggleMenu}
+        onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggleMenu(); } }}
+      >
         <div className={`hamburger-menu-icon${isOpen ? ' open' : ''}`}>
           <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M20 7L4 7" stroke="#ffffff" strokeWidth="1.5" strokeLinecap="round" />
@@ -86,8 +99,8 @@ export default function NavMobile({ games, guides, brands, hubs }: NavMobileProp
 
       {/* ─── Side menu drawer ─── */}
       <div
-        ref={sideMenuRef}
         className={`side-menu${isOpen ? ' active' : ''}`}
+        aria-label="Mobile navigation"
       >
         <ul className="main-menu">
           <li className="menu-item1"><a href="/" onClick={closeMenu}>Home</a></li>
@@ -122,6 +135,7 @@ export default function NavMobile({ games, guides, brands, hubs }: NavMobileProp
                 {guides.map((cat) => (
                   <li key={cat.category} className={`menu-item2${openMenus.has(`guides-${cat.category}`) ? ' sub-open' : ''}`}>
                     <a href="#" onClick={(e) => toggleSubmenu(`guides-${cat.category}`, e)}>
+                      <span className={`category-icon icon-${cat.category}`} />
                       {plural(cat.category)}
                     </a>
                     <ul className={`side-sub-menu${openMenus.has(`guides-${cat.category}`) ? ' active' : ''}`}>
@@ -151,6 +165,7 @@ export default function NavMobile({ games, guides, brands, hubs }: NavMobileProp
                 {brands.map((cat) => (
                   <li key={cat.category} className={`menu-item2${openMenus.has(`brands-${cat.category}`) ? ' sub-open' : ''}`}>
                     <a href="#" onClick={(e) => toggleSubmenu(`brands-${cat.category}`, e)}>
+                      <span className={`category-icon icon-${cat.category}`} />
                       {plural(cat.category)}
                     </a>
                     <ul className={`side-sub-menu${openMenus.has(`brands-${cat.category}`) ? ' active' : ''}`}>
@@ -159,7 +174,17 @@ export default function NavMobile({ games, guides, brands, hubs }: NavMobileProp
                       </li>
                       {cat.items.map((item) => (
                         <li key={item.url} className="menu-item3">
-                          <a href={item.url} onClick={closeMenu}>{item.brand}</a>
+                          <a href={item.url} onClick={closeMenu}>
+                            <div className="brand-logo-container side-brand-logo-container">
+                              <img
+                                src={`/images/brands/${item.slug}/brand-logo-horizontal-mono-black_xs.png`}
+                                alt={`${item.brand} logo`}
+                                className="brand-logo side-brand-logo"
+                                loading="lazy"
+                              />
+                            </div>
+                            {item.brand}
+                          </a>
                         </li>
                       ))}
                     </ul>
@@ -171,17 +196,18 @@ export default function NavMobile({ games, guides, brands, hubs }: NavMobileProp
 
           {/* Hubs */}
           {hubs.length > 0 && (
-            <li className={`menu-item1${openMenus.has('hubs') ? ' sub-open' : ''}`}>
+            <li className={`menu-item1 hubs-dropdown${openMenus.has('hubs') ? ' sub-open' : ''}`}>
               <a href="#" onClick={(e) => toggleSubmenu('hubs', e)}>
-                Hubs <span className="navbar-new-badge">&nbsp;New!</span>
+                Hubs <span className="navbar-new-badge" data-neutral="true">&nbsp;New!</span>
               </a>
               <ul className={`side-sub-menu${openMenus.has('hubs') ? ' active' : ''}`}>
                 <li className="menu-item3">
                   <a href="/hubs" className="explore-all-link" onClick={closeMenu}>Explore All</a>
                 </li>
                 {hubs.map((h) => (
-                  <li key={h.category} className="menu-item2">
+                  <li key={h.category} className={`menu-item2 ${h.category}-color`}>
                     <a href={`/hubs/${h.category}`} onClick={closeMenu}>
+                      <span className={`category-icon icon-${h.category} ${h.category}-color`} />
                       {h.category.charAt(0).toUpperCase() + h.category.slice(1)}
                     </a>
                   </li>

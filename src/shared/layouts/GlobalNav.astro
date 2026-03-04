@@ -37,6 +37,9 @@ const guidesMap = new Map<string, Array<{ title: string; url: string }>>();
 for (const g of allGuides) {
   const cat = g.data.category;
   if (!cat || g.data.fullArticle === false) continue;
+  // WHY navbar check: match desktop mega menu — only guides with a navbar assignment appear
+  const navbar = g.data.navbar ?? [];
+  if (navbar.length === 0) continue;
   if (!guidesMap.has(cat)) guidesMap.set(cat, []);
   // WHY guide || title: use the short nav-friendly name, same as the desktop mega menu
   guidesMap.get(cat)!.push({ title: g.data.guide || g.data.title, url: `/guides/${g.id}` });
@@ -46,13 +49,13 @@ const guidesData = Array.from(guidesMap.entries()).map(([category, items]) => ({
   items: items.sort((a, b) => a.title.localeCompare(b.title)),
 }));
 
-const brandsMap = new Map<string, Array<{ brand: string; url: string }>>();
+const brandsMap = new Map<string, Array<{ brand: string; slug: string; url: string }>>();
 for (const b of allBrands) {
   if (b.data.fullArticle === false) continue;
   const cats = b.data.navbar ?? [];
   for (const cat of cats) {
     if (!brandsMap.has(cat)) brandsMap.set(cat, []);
-    brandsMap.get(cat)!.push({ brand: b.data.brand, url: `/brands/${b.id}` });
+    brandsMap.get(cat)!.push({ brand: b.data.brand, slug: b.id, url: `/brands/${b.id}` });
   }
 }
 const brandsData = Array.from(brandsMap.entries()).map(([category, items]) => ({

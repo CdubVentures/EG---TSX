@@ -1,7 +1,7 @@
 /**
  * AuthDialog.tsx — `<dialog>` shell for auth popups.
  *
- * React island (client:load). Single <dialog> with two content views.
+ * React island (client:load). Single <dialog> with multiple content views.
  * Uses native showModal() for FREE: focus trap, scroll lock, inert
  * background, ::backdrop, Escape key, top layer, aria-modal.
  *
@@ -15,6 +15,8 @@ import { $auth, $authDialog, closeAuth } from '../store';
 import { cn } from '@shared/lib/cn';
 import LoginView from './LoginView';
 import SignupView from './SignupView';
+import ConfirmSignupView from './ConfirmSignupView';
+import ForgotPasswordView from './ForgotPasswordView';
 
 export default function AuthDialog() {
   const dialogRef = useRef<HTMLDialogElement>(null);
@@ -89,7 +91,10 @@ export default function AuthDialog() {
         &times;
       </button>
 
-      {view === 'login' ? <LoginView /> : <SignupView />}
+      {view === 'login' && <LoginView />}
+      {view === 'signup' && <SignupView />}
+      {view === 'confirm-signup' && <ConfirmSignupView />}
+      {view === 'forgot-password' && <ForgotPasswordView />}
     </dialog>
   );
 }

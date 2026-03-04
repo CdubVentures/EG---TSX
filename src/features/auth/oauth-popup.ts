@@ -1,4 +1,4 @@
-/** Hosted UI popup/redirect logic. */
+/** OAuth popup/redirect logic — Google and Discord only. */
 
 import { hydrateAuth, closeAuth, $auth } from './store';
 
@@ -16,11 +16,11 @@ function isMobile(): boolean {
 }
 
 /**
- * Open Cognito Hosted UI.
+ * Open OAuth popup for Google/Discord login.
  * Desktop: popup → postMessage from callback → hydrates → closes popup.
  * Mobile/tablet: sets eg_return cookie → full-page redirect → callback 302s back.
  */
-export function openHostedUI(path: string): void {
+export function openOAuthPopup(path: string): void {
   if (isMobile()) {
     // WHY: store current page so callback can 302 back here instead of /
     document.cookie = `eg_return=${encodeURIComponent(
