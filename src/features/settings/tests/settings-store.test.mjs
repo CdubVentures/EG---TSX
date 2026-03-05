@@ -27,6 +27,24 @@ globalThis.dispatchEvent = globalThis.dispatchEvent ?? _eventTarget.dispatchEven
 // In Node tests we need this to be truthy so window.closeSettingsPopup is set.
 globalThis.window = globalThis.window ?? globalThis;
 
+// WHY: auth store's $auth.listen() toggles document.documentElement.classList.
+// setTheme() uses setAttribute on documentElement and querySelector for meta[name="theme-color"].
+globalThis.document = globalThis.document ?? {
+  documentElement: {
+    classList: { toggle() {}, contains() { return false; } },
+    setAttribute(name, value) { this[`_${name}`] = value; },
+    getAttribute(name) { return this[`_${name}`] ?? null; },
+  },
+  readyState: 'complete',
+  addEventListener() {},
+  cookie: '',
+  querySelector(sel) {
+    // WHY: setTheme() updates <meta name="theme-color">. Return a mock element.
+    if (sel === 'meta[name="theme-color"]') return globalThis._mockThemeMeta;
+    return null;
+  },
+};
+
 // ─── Dynamic import (fresh module per test) ─────────────────────────────────
 // WHY: nanostores atoms are module-level singletons. Cache-bust to get fresh state.
 
@@ -259,8 +277,8 @@ describe('auth namespace isolation', () => {
   });
 
   it('authenticated user prefs use "{uid}|" prefix', async () => {
-    // Import auth store to set authenticated state
-    const authMod = await import(`../../auth/store.ts?ns=${importCounter}`);
+    // WHY: import auth WITHOUT cache-bust — settings store shares this singleton
+    const authMod = await import('../../auth/store.ts');
     authMod.setAuthenticated('user-42', 'test@test.com', 'tester');
 
     const { setPref, loadPrefs } = await freshStore();
@@ -275,6 +293,10 @@ describe('auth namespace isolation', () => {
   });
 
   it('switching from guest to authenticated loads user-scoped prefs', async () => {
+    // WHY: import auth WITHOUT cache-bust — settings store shares this singleton
+    const authMod = await import('../../auth/store.ts');
+    authMod.setGuest(); // ensure guest state first
+
     // Seed guest prefs
     globalThis.localStorage.setItem('guest|usePopupSnapshot', 'true');
     // Seed user prefs (different values)
@@ -286,7 +308,6 @@ describe('auth namespace isolation', () => {
     assert.strictEqual($userPrefs.get().usePopupSnapshot, true);
 
     // Now simulate auth change — store should read user-42 namespace
-    const authMod = await import(`../../auth/store.ts?ns=${importCounter}`);
     authMod.setAuthenticated('user-42', 'test@test.com', 'tester');
 
     // loadPrefs must be called after auth change
@@ -327,5 +348,119 @@ describe('window.closeSettingsPopup', () => {
     assert.strictEqual($settingsDialog.get().open, true);
     globalThis.closeSettingsPopup();
     assert.strictEqual($settingsDialog.get().open, false);
+  });
+});
+
+// ─── Theme Tests ────────────────────────────────────────────────────────────
+// Contract: $theme atom + setTheme()/loadTheme() for device-level theme.
+// Theme is NOT uid-scoped — stored as 'eg-theme' in localStorage.
+// Mapping: 'light' → data-theme='default', 'dark' → data-theme='gaming'.
+
+describe('$theme atom', () => {
+  beforeEach(() => {
+    globalThis.localStorage = new MockStorage();
+  });
+
+  it('initial state is "dark"', async () => {
+    const { $theme } = await freshStore();
+    assert.strictEqual($theme.get(), 'dark');
+  });
+});
+
+describe('setTheme()', () => {
+  /** @type {{ setAttribute(n: string, v: string): void, getAttribute(n: string): string | null }} */
+  let docEl;
+
+  beforeEach(() => {
+    globalThis.localStorage = new MockStorage();
+    // WHY: reset documentElement attrs before each test
+    docEl = globalThis.document.documentElement;
+    delete docEl['_data-theme'];
+    // Mock meta[name="theme-color"]
+    globalThis._mockThemeMeta = { setAttribute(_, v) { this._content = v; }, _content: null };
+  });
+
+  afterEach(() => {
+    globalThis._mockThemeMeta = undefined;
+  });
+
+  it('setTheme("light") updates atom to "light"', async () => {
+    const { $theme, setTheme } = await freshStore();
+    setTheme('light');
+    assert.strictEqual($theme.get(), 'light');
+  });
+
+  it('setTheme("dark") updates atom to "dark"', async () => {
+    const { $theme, setTheme } = await freshStore();
+    setTheme('light');
+    setTheme('dark');
+    assert.strictEqual($theme.get(), 'dark');
+  });
+
+  it('setTheme("light") writes eg-theme="default" to localStorage', async () => {
+    const { setTheme } = await freshStore();
+    setTheme('light');
+    assert.strictEqual(globalThis.localStorage.getItem('eg-theme'), 'default');
+  });
+
+  it('setTheme("dark") writes eg-theme="gaming" to localStorage', async () => {
+    const { setTheme } = await freshStore();
+    setTheme('dark');
+    assert.strictEqual(globalThis.localStorage.getItem('eg-theme'), 'gaming');
+  });
+
+  it('setTheme() sets data-theme attribute on documentElement', async () => {
+    const { setTheme } = await freshStore();
+    setTheme('light');
+    assert.strictEqual(docEl.getAttribute('data-theme'), 'default');
+    setTheme('dark');
+    assert.strictEqual(docEl.getAttribute('data-theme'), 'gaming');
+  });
+
+  it('setTheme() updates meta[name="theme-color"] content', async () => {
+    const { setTheme } = await freshStore();
+    setTheme('light');
+    assert.ok(globalThis._mockThemeMeta._content, 'meta theme-color should be set');
+    const lightColor = globalThis._mockThemeMeta._content;
+
+    setTheme('dark');
+    const darkColor = globalThis._mockThemeMeta._content;
+
+    // Light and dark should produce different theme-color values
+    assert.notStrictEqual(lightColor, darkColor);
+  });
+});
+
+describe('loadTheme()', () => {
+  beforeEach(() => {
+    globalThis.localStorage = new MockStorage();
+  });
+
+  it('reads "default" from localStorage and sets atom to "light"', async () => {
+    globalThis.localStorage.setItem('eg-theme', 'default');
+    const { $theme, loadTheme } = await freshStore();
+    loadTheme();
+    assert.strictEqual($theme.get(), 'light');
+  });
+
+  it('reads "gaming" from localStorage and sets atom to "dark"', async () => {
+    globalThis.localStorage.setItem('eg-theme', 'gaming');
+    const { $theme, loadTheme } = await freshStore();
+    loadTheme();
+    assert.strictEqual($theme.get(), 'dark');
+  });
+
+  it('defaults to "dark" when no saved value', async () => {
+    // localStorage has no 'eg-theme' key
+    const { $theme, loadTheme } = await freshStore();
+    loadTheme();
+    assert.strictEqual($theme.get(), 'dark');
+  });
+
+  it('defaults to "dark" for unknown saved value', async () => {
+    globalThis.localStorage.setItem('eg-theme', 'garbage');
+    const { $theme, loadTheme } = await freshStore();
+    loadTheme();
+    assert.strictEqual($theme.get(), 'dark');
   });
 });

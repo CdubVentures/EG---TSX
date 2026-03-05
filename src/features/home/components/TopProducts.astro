@@ -1,0 +1,377 @@
+---
+/**
+ * TopProducts.astro — Top products section with slideshow,
+ * category dropdown, and tools sidebar shell.
+ * Port of HBS .home-page-intro (lines 300–386).
+ */
+import SectionDivider from '@shared/ui/SectionDivider.astro';
+import HomeSlideshow from './HomeSlideshow.astro';
+import CategoryDropdown from './CategoryDropdown';
+import { CONFIG } from '@core/config';
+import categoriesData from '../../../../config/categories.json';
+
+// WHY: HBS categoryCSSAttributes reads hardcoded --global-{cat}-hover values
+// from global.css. These are NOT computed — they're manually chosen colors.
+type CatEntry = { id: string; color: string };
+const cats = (categoriesData.categories as CatEntry[]);
+
+const hbsHoverMap: Record<string, string> = {
+  mouse: '#0077b3',
+  keyboard: '#b35a0c',
+  monitor: '#e75ba6',
+};
+
+const categoryOptions = CONFIG.categories.map(id => {
+  const cat = cats.find(c => c.id === id);
+  return {
+    id,
+    color: cat?.color,
+    hover: hbsHoverMap[id],
+  };
+});
+---
+
+<div class="home-page-intro">
+
+  {/* ── Section Divider with Dropdown ── */}
+  <SectionDivider
+    title="Top Deals"
+    titleHref="/guides/hardware/highlighted-products"
+    subtitle="Fresh Drops: Today's Top Gear"
+    class="top-products"
+  >
+    <div slot="actions">
+      <CategoryDropdown client:load categories={categoryOptions} />
+    </div>
+  </SectionDivider>
+
+  {/* ── Content Row: Slideshow + Tools ── */}
+  <div class="home-page-intro-wrapper">
+
+    {/* Slideshow (Embla carousel) */}
+    <HomeSlideshow />
+
+    {/* Tools sidebar shell */}
+    <div class="home-intro-right">
+      <a href="/hubs/" class="home-intro-right-title">Hubs</a>
+
+      <div class="home-tools-wrapper desktop-tools">
+        {/* Tool items will be populated when hub pages are built */}
+      </div>
+
+      <div class="home-tools-wrapper mobile-tools">
+        {/* Mobile tools will be populated when hub pages are built */}
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<style>
+  /* ── Top Products Section ── */
+  .home-page-intro {
+    display: flex;
+    flex-direction: column;
+    width: calc(100% - 3rem);
+    max-width: var(--home-width);
+    margin: 0 auto;
+    order: 1;
+  }
+
+  .home-page-intro-wrapper {
+    display: flex;
+    flex-direction: row;
+    gap: 2rem;
+    align-items: stretch;
+  }
+
+  /* ── Slideshow Wrapper ── */
+  /* WHY no flex ratio: HBS .home-top-slides-wrapper has NO flex property.
+     The inner .home-top-slides uses clamp() for responsive sizing.
+     Sidebar gets flex:1 and fills remaining space. */
+  .home-top-slides-wrapper {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    box-sizing: border-box;
+  }
+
+  /* ── Tools Sidebar ── */
+  .home-intro-right {
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+    contain: size;
+    flex: 1;
+  }
+
+  .home-intro-right-title {
+    position: relative;
+    text-align: center;
+    font-weight: var(--font-weight8);
+    font-family: var(--identity-font);
+    color: var(--white-color-1);
+    letter-spacing: -0.25px;
+    line-height: 1;
+    font-size: var(--font-size-20px);
+    text-transform: uppercase;
+    text-decoration: none;
+    padding: 1rem 1.25rem;
+    background: none;
+    border-bottom: 1px solid var(--section-medium-background-color);
+    border-top: 1px solid var(--section-medium-background-color);
+  }
+
+  .home-intro-right:hover .home-intro-right-title {
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  /* Downward arrow pseudo-element */
+  .home-intro-right-title::after {
+    content: '';
+    position: absolute;
+    bottom: -0.7rem;
+    left: 78%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 0.7rem solid transparent;
+    border-right: 0.7rem solid transparent;
+    border-top: 0.7rem solid var(--section-medium-background-color);
+  }
+
+  .home-tools-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    width: auto;
+    margin-top: 1rem;
+    overflow-y: auto;
+    scrollbar-width: thin;
+  }
+
+  .home-tools-wrapper.mobile-tools {
+    display: none;
+  }
+
+  /* ── Dropdown Styles (global — targets React island DOM) ── */
+  :global(.custom-dropdown) {
+    position: relative;
+    display: inline-block;
+  }
+
+  :global(.custom-dropdown-button) {
+    padding: 0.75rem 1.75rem;
+    border: 1px solid var(--section-medium-background-color);
+    border-radius: 8px;
+    background-color: transparent;
+    color: var(--white-color-1);
+    font-size: var(--font-size-14px);
+    font-family: var(--identity-font);
+    font-weight: var(--font-weight6);
+    cursor: pointer;
+    text-decoration: none;
+    position: relative;
+    text-transform: uppercase;
+  }
+
+  :global(.custom-dropdown-button)::after {
+    content: '\25BC';
+    display: inline-block;
+    margin-left: 0.5rem;
+    color: var(--white-color-1);
+    transform-origin: center;
+    transition: transform 0.3s ease;
+  }
+
+  :global(.custom-dropdown-menu) {
+    position: absolute;
+    top: calc(100% + 1px);
+    z-index: 1000;
+    background-color: var(--section-dark-background-color);
+    border: 1px solid var(--section-dark-background-color);
+    margin-top: 0;
+    padding: 0.5rem 0;
+    list-style: none;
+    min-width: 180px;
+    display: none;
+  }
+
+  :global(.custom-dropdown-menu li) {
+    background-color: transparent;
+    border: none;
+    padding: 0.75rem 1.25rem;
+    color: var(--white-color-2);
+    font-size: var(--font-size-14px);
+    cursor: pointer;
+    text-transform: uppercase;
+    font-family: var(--identity-font);
+    font-weight: var(--font-weight6);
+    letter-spacing: 0.05rem;
+    outline: none;
+  }
+
+  :global(.custom-dropdown-menu li[aria-selected="true"]),
+  :global(.custom-dropdown-menu li.selected) {
+    border-left: 4px solid var(--card-hover, var(--site-start-color));
+    color: var(--card-hover, var(--site-start-color));
+    background-color: var(--section-darkest-background-color);
+  }
+
+  :global(.custom-dropdown-menu li:focus-visible) {
+    outline: 2px solid var(--site-start-color);
+    outline-offset: -2px;
+  }
+
+  /* Locked/open state */
+  :global(.custom-dropdown.locked .custom-dropdown-button) {
+    box-shadow: 0 0 0 2px currentColor;
+  }
+
+  :global(.custom-dropdown.locked .custom-dropdown-button)::after {
+    content: '\25B2';
+  }
+
+  :global(.custom-dropdown.locked .custom-dropdown-menu) {
+    display: block;
+  }
+
+  /* Locked button — "All Products" */
+  :global(.custom-dropdown.locked .custom-dropdown-button[data-category="all"]) {
+    border-color: var(--site-start-color);
+    color: var(--site-start-color);
+  }
+
+  :global(.custom-dropdown.locked .custom-dropdown-button[data-category="all"])::after {
+    color: var(--site-start-color);
+  }
+
+  /* Locked button — specific category */
+  :global(.custom-dropdown.locked .custom-dropdown-button:not([data-category="all"])) {
+    border-color: var(--card-color);
+    color: var(--card-color);
+  }
+
+  :global(.custom-dropdown.locked .custom-dropdown-button:not([data-category="all"]))::after {
+    color: var(--card-color);
+  }
+
+  /* Desktop hover interactions */
+  @media (hover: hover) and (pointer: fine) {
+    :global(.custom-dropdown:hover .custom-dropdown-menu) {
+      display: block;
+    }
+
+    :global(.custom-dropdown-button[data-category="all"]:hover) {
+      border-color: var(--site-start-color);
+      color: var(--site-start-color);
+    }
+
+    :global(.custom-dropdown-button[data-category="all"]:hover)::after {
+      color: var(--site-start-color);
+    }
+
+    :global(.custom-dropdown-button:not([data-category="all"]):hover) {
+      border-color: var(--card-color);
+      color: var(--card-color);
+    }
+
+    :global(.custom-dropdown-button:not([data-category="all"]):hover)::after {
+      color: var(--card-color);
+    }
+
+    :global(.custom-dropdown-menu li:hover) {
+      border-left: 4px solid var(--card-hover, var(--site-start-color));
+      color: var(--card-hover, var(--site-start-color));
+      background-color: var(--section-darkest-background-color);
+    }
+  }
+
+  /* ── SectionDivider overrides for .top-products ── */
+  :global(.section-divider.top-products) {
+    margin: 4rem auto 1.75rem auto;
+  }
+
+  :global(.section-divider.top-products .section-divider-actions) {
+    padding-bottom: 0;
+    margin-bottom: 0;
+    margin-top: 0;
+    overflow: visible !important;
+  }
+
+  /* ── Responsive: ≤900px ── */
+  @media (max-width: 900px) {
+    .home-page-intro {
+      width: 100%;
+      margin: 0 auto;
+      padding: 2.5rem 0 0 0;
+      background-color: var(--section-darkestdark-background-color);
+      order: 3;
+    }
+
+    :global(.section-divider.top-products) {
+      margin: 0 auto 1.75rem auto;
+      width: calc(100% - 3rem);
+    }
+
+    .home-page-intro-wrapper {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .home-intro-right {
+      margin: 0 auto;
+      flex-shrink: 0;
+      background-color: var(--section-darkestdarker-background-color);
+      contain: unset;
+      width: 100%;
+      display: flex;
+      align-items: center;
+    }
+
+    .home-intro-right-title::after {
+      display: none;
+    }
+
+    .home-intro-right-title {
+      padding: 0;
+      text-transform: capitalize;
+      margin: 1.5rem 0;
+      text-align: left;
+      background: none;
+      border-bottom: none;
+      border-top: none;
+      font-family: var(--identity-font);
+      font-size: var(--ft-30-24);
+      letter-spacing: -0.5px;
+      color: var(--white-black-color-1);
+      font-weight: var(--font-weight8);
+      line-height: 1.15;
+      width: calc(100% - 3rem);
+    }
+
+    .home-tools-wrapper.desktop-tools {
+      display: none;
+    }
+
+    .home-tools-wrapper.mobile-tools {
+      display: flex;
+      width: calc(100% - 3rem);
+      max-width: calc(100% - 3rem);
+    }
+  }
+
+
+  @media (max-width: 600px) {
+    :global(.custom-dropdown-button) {
+      font-size: var(--fm-14-13);
+    }
+
+    :global(.custom-dropdown-menu li) {
+      font-size: var(--fm-14-13);
+    }
+  }
+</style>
+

@@ -339,6 +339,15 @@ function titleCase(s: string): string {
       }
       item.classList.remove('active', 'locked');
     });
+    /* WHY: vault menu may live in <body> (moved by mobile code), so the
+       querySelectorAll above won't find it. Clean it up explicitly. */
+    const orphanedVault = document.querySelector<HTMLElement>('body > .mega-menu-vault');
+    if (orphanedVault) {
+      orphanedVault.classList.remove('vault-menu-open');
+      orphanedVault.style.opacity = '0';
+      orphanedVault.style.visibility = 'hidden';
+      orphanedVault.style.pointerEvents = 'none';
+    }
     activeDropdown = null;
   }
 
@@ -373,6 +382,32 @@ function titleCase(s: string): string {
   }
 
   const isFinePointer = () => window.matchMedia('(pointer: fine)').matches;
+
+  /* WHY: HBS hideMenuIfWideScreen() — reset all dropdown state when crossing
+     the 1150px mobile breakpoint. Without this, activeDropdown and .locked/.active
+     classes persist across resize, preventing menus from opening on return.
+     Also moves the vault menu back from <body> to its <li> so the desktop
+     hover/click logic can find it. */
+  let wasMobile = window.innerWidth <= 1150;
+  window.addEventListener('resize', () => {
+    const isMobile = window.innerWidth <= 1150;
+    if (isMobile !== wasMobile) {
+      closeAllDropdowns();
+      // Move vault back into its <li> when returning to desktop
+      if (!isMobile) {
+        const vLi = document.querySelector<HTMLElement>('.vault-bin-menu');
+        const vMenu = document.getElementById('mega-menu-vault');
+        if (vLi && vMenu && vMenu.parentElement !== vLi) {
+          vMenu.classList.remove('vault-menu-open');
+          vMenu.style.opacity = '0';
+          vMenu.style.visibility = 'hidden';
+          vMenu.style.pointerEvents = 'none';
+          vLi.appendChild(vMenu);
+        }
+      }
+      wasMobile = isMobile;
+    }
+  });
 
   /* WHY: links that should always navigate (skip dropdown toggling) */
   const BYPASS = '.all-guides-link, .all-hubs-link, .see-all-link, .explore-all-link, .mega-menu-vault-inner';
@@ -472,11 +507,11 @@ function titleCase(s: string): string {
        covers the menu as it slides down, creating the "from under" effect.
        WHY lazy: the move happens on first click, not page load. If the page
        loads at desktop width (e.g. DevTools responsive toggle), the matchMedia
-       check at load time would fail and the menu would stay trapped. */
-    let _vaultMovedToBody = false;
+       check at load time would fail and the menu would stay trapped.
+       WHY resettable: the resize handler moves it back on desktop, so
+       the flag must reset so the next mobile click moves it again. */
     function ensureVaultInBody() {
-      if (_vaultMovedToBody) return;
-      _vaultMovedToBody = true;
+      if (vaultMenu!.parentElement === document.body) return;
       document.body.appendChild(vaultMenu!);
       // WHY: force the browser to compute the initial layout (translateY(-100%))
       // before we add vault-menu-open. Without this, the browser batches the

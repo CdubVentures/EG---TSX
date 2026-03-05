@@ -1,0 +1,1464 @@
+---
+/**
+ * HomeSlideshow.astro — Full-featured product carousel for the home page.
+ * Port of HBS scrollerSlideShow.handlebars + scrollerSlideShow.js + scroller_slideShow.css
+ *
+ * Renders all slides server-side. Embla Carousel initializes client-side
+ * for drag, autoplay, arrows, pause/play, category filtering, lazy loading.
+ */
+import { getCollection } from 'astro:content';
+import { getCarouselImages } from '@core/media';
+import { categoryColor } from '@core/config';
+import type { ProductMedia } from '@core/media';
+
+// ─── Resolve hero image for a product ────────────────────────────────────────
+// WHY: HBS uses hubCards.getImagesArrayXXL + sortImagesForCarousel to pick the
+// best hero shot. We replicate this with the structured media object: pick the
+// first carousel image by view priority.
+const VIEW_PRIORITY = ['feature-image', 'top', 'left', 'right', 'sangle', 'angle', 'front', 'rear', 'bot', 'img'];
+
+function pickHero(media: ProductMedia): { stem: string; objectFit: string } | null {
+  const carousel = getCarouselImages(media);
+  if (carousel.length === 0) return null;
+
+  // Sort by view priority
+  const sorted = [...carousel].sort((a, b) => {
+    const ai = VIEW_PRIORITY.indexOf(a.view);
+    const bi = VIEW_PRIORITY.indexOf(b.view);
+    return (ai === -1 ? 999 : ai) - (bi === -1 ? 999 : bi);
+  });
+
+  const hero = sorted[0];
+  if (!hero) return null;
+  // feature-image and top views use 'cover'; contain only for cutout-style images
+  const objectFit = hero.view === 'top' ? 'contain' : 'cover';
+  return { stem: hero.stem, objectFit };
+}
+
+// ─── Rating bar width calculation (port of HBS calcRatingWidth) ──────────────
+function calcRatingWidth(overall: number | string): string {
+  const score = parseFloat(String(overall));
+  if (isNaN(score)) return '0';
+  return (((score + 0.2) / 10) * 100).toFixed(2);
+}
+
+// ─── Darken hex color (port of HBS darkenCSSHexHelper) ───────────────────────
+function darkenHex(hex: string, factor: number = 0.15): string {
+  const h = hex.replace('#', '');
+  const r = Math.max(0, Math.round(parseInt(h.substring(0, 2), 16) * (1 - factor)));
+  const g = Math.max(0, Math.round(parseInt(h.substring(2, 4), 16) * (1 - factor)));
+  const b = Math.max(0, Math.round(parseInt(h.substring(4, 6), 16) * (1 - factor)));
+  return `#${r.toString(16).padStart(2, '0')}${g.toString(16).padStart(2, '0')}${b.toString(16).padStart(2, '0')}`;
+}
+
+// ─── Build slide data from product collection ────────────────────────────────
+interface SlideData {
+  slug: string;
+  brand: string;
+  model: string;
+  category: string;
+  imagePath: string;
+  heroStem: string;
+  heroObjectFit: string;
+  overall: number;
+  snapSubtitle: string;
+  brandSlug: string;
+}
+
+const allProducts = await getCollection('dataProducts');
+
+// Pick test products: top-scored products with media images, across categories
+const candidates = allProducts
+  .filter(p => {
+    const d = p.data as any;
+    return d.overall && d.overall !== '' && d.media?.images?.length > 0;
+  })
+  .map(p => {
+    const d = p.data as any;
+    return { entry: p, overall: parseFloat(String(d.overall)) };
+  })
+  .filter(c => !isNaN(c.overall))
+  .sort((a, b) => b.overall - a.overall);
+
+// Take top 10 with good category spread
+const slides: SlideData[] = [];
+const catCounts: Record<string, number> = {};
+const MAX_PER_CAT = 5;
+const MAX_SLIDES = 10;
+
+for (const c of candidates) {
+  if (slides.length >= MAX_SLIDES) break;
+  const d = c.entry.data as any;
+  const cat = d.category;
+  if ((catCounts[cat] || 0) >= MAX_PER_CAT) continue;
+
+  const hero = pickHero(d.media);
+  if (!hero) continue;
+
+  // Derive brand slug from imagePath: /images/{cat}/{brandSlug}/{productSlug}
+  const pathParts = d.imagePath.split('/');
+  const brandSlug = pathParts[3] || '';
+
+  slides.push({
+    slug: d.slug,
+    brand: d.brand,
+    model: d.model,
+    category: cat,
+    imagePath: d.imagePath,
+    heroStem: hero.stem,
+    heroObjectFit: hero.objectFit,
+    overall: c.overall,
+    snapSubtitle: d.snap_subtitle || '',
+    brandSlug,
+  });
+
+  catCounts[cat] = (catCounts[cat] || 0) + 1;
+}
+
+const slideCount = slides.length;
+
+// Build srcset helper — all sizes for a product image stem
+function srcSet(imagePath: string, stem: string): string {
+  const sizes = [
+    { suffix: 'xxs', w: 100 },
+    { suffix: 'xs', w: 200 },
+    { suffix: 's', w: 400 },
+    { suffix: 'm', w: 600 },
+    { suffix: 'l', w: 800 },
+    { suffix: 'xl', w: 1000 },
+    { suffix: 'xxl', w: 2000 },
+  ];
+  return sizes.map(s => `${imagePath}/${stem}_${s.suffix}.webp ${s.w}w`).join(', ');
+}
+---
+
+<section class="home-top-slides-wrapper">
+  <div class="home-top-slides" data-slideshow>
+
+    {/* ── Embla track: first child = Embla container ── */}
+    <div class="slideshow-track">
+      {slides.map((slide, idx) => {
+      const catHex = categoryColor(slide.category);
+      const catDark = darkenHex(catHex, 0.15);
+      const ratingWidth = calcRatingWidth(slide.overall);
+      const isFirst = idx === 0;
+      const heroSrc = `${slide.imagePath}/${slide.heroStem}`;
+      const brandLogoPath = `/images/brands/${slide.brandSlug}/brand-logo-horizontal-mono-black_xs.png`;
+
+      return (
+        <a
+          class={`slide-anchor ${slide.category}-color ${isFirst ? 'is-active' : ''}`}
+          data-category={slide.category}
+          data-slide-index={idx}
+          data-id={slide.slug}
+          href={`/hubs/${slide.category}/${slide.brandSlug}/${slide.slug.replace(`${slide.brandSlug}-`, '').replace(`${slide.brand.toLowerCase().replace(/\s+/g, '-')}-`, '')}`}
+          draggable="false"
+        >
+          {/* Main image area */}
+          <div class="image-stretch-container">
+
+            {/* Scoring badges (top-left) */}
+            <div class="scoring-wrapper-top">
+              <div class="scoring-wrapper">
+                {slide.overall ? (
+                  <span class="dexa" style={`color: ${catHex};`}>
+                    {slide.overall}
+                  </span>
+                ) : null}
+              </div>
+
+              {/* Compare toggle (top-right) */}
+              <div
+                class={`compare-toggle ${slide.category}-color`}
+                data-id={slide.slug}
+                data-category={slide.category}
+              >
+                <input
+                  type="checkbox"
+                  class="compare-checkbox"
+                  id={`compare-${slide.category}-${slide.slug}`}
+                  aria-label="Add to Vault"
+                />
+                <label for={`compare-${slide.category}-${slide.slug}`} class="compare-label">
+                  <span class="compare-text">COMPARE</span>
+                  <span class="compare-symbol">
+                    <span class="plus">+</span>
+                    <span class="minus">-</span>
+                  </span>
+                </label>
+              </div>
+            </div>
+
+            {/* Hero image — first slide eager, rest lazy via data-src */}
+            {isFirst ? (
+              <img
+                fetchpriority="high"
+                loading="eager"
+                src={`${heroSrc}_l.webp`}
+                srcset={srcSet(slide.imagePath, slide.heroStem)}
+                sizes="(min-width: 825px) 625px, 100vw"
+                alt={`${slide.brand} ${slide.model} Hero Shot`}
+                class="slide-image"
+                style={`object-fit: ${slide.heroObjectFit};`}
+                draggable="false"
+              />
+            ) : (
+              <img
+                data-src={`${heroSrc}_l.webp`}
+                data-srcset={srcSet(slide.imagePath, slide.heroStem)}
+                data-sizes="(min-width: 825px) 625px, 100vw"
+                alt={`${slide.brand} ${slide.model} Hero Shot`}
+                class="slide-image"
+                style={`object-fit: ${slide.heroObjectFit};`}
+                draggable="false"
+              />
+            )}
+
+            {/* Deal CTA (overlaid bottom of image) */}
+            <div class={`wrapper-cta-details ${slide.category}-color`}>
+              <button
+                class="slide-deal-cta"
+                type="button"
+                aria-label={`View deal for ${slide.brand} ${slide.model}`}
+                title={`View deal for ${slide.brand} ${slide.model}`}
+              >
+                <span class="slide-deal-label">View Deal</span>
+              </button>
+            </div>
+          </div>
+
+          {/* Slide details bar */}
+          <div class="wrapper-details">
+            <div
+              class="detail-container"
+              style={`background: ${catHex};`}
+            >
+              <div class="detail-title-wrapper">
+                <div class="detail-title">
+                  <h3 class="brand-text">{slide.brand} {slide.model}</h3>
+                  {isFirst ? (
+                    <img
+                      loading="eager"
+                      src={brandLogoPath}
+                      alt={`${slide.brand} Logo`}
+                      class="slideShow-brand-logo"
+                    />
+                  ) : (
+                    <img
+                      data-src={brandLogoPath}
+                      alt={`${slide.brand} Logo`}
+                      class="slideShow-brand-logo"
+                    />
+                  )}
+                </div>
+              </div>
+              <div class="detail-title slide-bottom-text">
+                <h4 class="slide-sub-text">
+                  {slide.snapSubtitle || `${slide.brand} ${slide.model} gaming ${slide.category}`}
+                </h4>
+                <div class="learn-more-link">Learn More</div>
+              </div>
+              {/* Rating bar */}
+              <div class="rating-bar">
+                <span class="rating-value">{slide.overall}</span>
+                <div
+                  class="rating-fill"
+                  style={`width: ${ratingWidth}%; background: linear-gradient(180deg, ${catHex}, ${catDark});`}
+                ></div>
+                <div class="rating-separators">
+                  {Array.from({ length: 12 }).map(() => <div class="separator"></div>)}
+                </div>
+              </div>
+            </div>
+          </div>
+        </a>
+      );
+    })}
+    </div>{/* close .slideshow-track */}
+
+    {/* ── Overlay: arrows + counter + pause (absolute, over the track) ── */}
+    <div class="overlay-wrapper-main">
+      <div class="overlay-wrapper-btns">
+        <div class="slide-arrow-container-wrapper">
+          {/* Left arrow */}
+          <div class="slide-card-carousel-arrow-container left-arrow" aria-label="Previous slide" role="button" tabindex="0">
+            <div class="slide-card-carousel-circle-left">
+              <div class="slide-card-carousel-arrow">
+                <svg aria-hidden="true" focusable="false" height="16" class="svg-base" viewBox="0 0 16 16" width="16" xmlns="http://www.w3.org/2000/svg">
+                  <path fill="currentColor" d="M2.38 7.784 8.796 1.37l1.414 1.414-5 5 5 5-1.414 1.414z"></path>
+                </svg>
+              </div>
+            </div>
+          </div>
+          {/* Right arrow */}
+          <div class="slide-card-carousel-arrow-container right-arrow" aria-label="Next slide" role="button" tabindex="0">
+            <div class="slide-card-carousel-circle-right">
+              <div class="slide-card-carousel-arrow">
+                <svg aria-hidden="true" focusable="false" height="16" class="svg-base" viewBox="0 0 16 16" width="16" xmlns="http://www.w3.org/2000/svg">
+                  <path fill="currentColor" d="m13.21 7.784-6.415 6.414-1.414-1.414 5-5-5-5L6.795 1.37z"></path>
+                </svg>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Slide counter + pause button */}
+        <div class="slide-info-overlay">
+          <div class="slide-count-container">
+            <span class="current-slide-number">1</span>
+            <span class="count-separator">of</span>
+            <span class="total-slides">{slideCount}</span>
+          </div>
+          <div class="pause-button" aria-label="Pause Slideshow" role="button" tabindex="0">
+            <span class="pause-icon">
+              <span class="bars">
+                <svg viewBox="-45 0 327 327" xmlns="http://www.w3.org/2000/svg" fill="white" width="100%" height="100%" class="svg-base">
+                  <path d="m158 0h71c4.417969 0 8 3.582031 8 8v311c0 4.417969-3.582031 8-8 8h-71c-4.417969 0-8-3.582031-8-8v-311c0-4.417969 3.582031-8 8-8zm0 0"></path>
+                  <path d="m8 0h71c4.417969 0 8 3.582031 8 8v311c0 4.417969-3.582031 8-8 8h-71c-4.417969 0-8-3.582031-8-8v-311c0-4.417969 3.582031-8 8-8zm0 0"></path>
+                </svg>
+              </span>
+              <span class="arrow">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="white" width="100%" height="100%" class="svg-base">
+                  <path d="M4 2v20l16-10z"></path>
+                </svg>
+              </span>
+            </span>
+          </div>
+        </div>
+      </div>
+
+      {/* Transparent detail placeholder (reserves layout space before Embla mounts) */}
+      <div class="wrapper-details wrapper-details-transparent">
+        <div class="detail-container">
+          <div class="detail-title-wrapper">
+            <div class="detail-title">
+              <h3 class="brand-text">&nbsp;</h3>
+            </div>
+          </div>
+          <div class="detail-title slide-bottom-text">
+            <h4 class="slide-sub-text">&nbsp;</h4>
+          </div>
+          <div class="rating-bar">
+            <span class="rating-value">&mdash;</span>
+            <div class="rating-fill" style="width:50%;background:transparent;"></div>
+            <div class="rating-separators">
+              {Array.from({ length: 12 }).map(() => <div class="separator"></div>)}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<script>
+  import EmblaCarousel from 'embla-carousel';
+
+  // ─── Constants ──────────────────────────────────────────────────────────────
+  const AUTO_INTERVAL = 5000;
+  const RESET_AFTER_INTERACTION = 5000;
+
+  // ─── State ──────────────────────────────────────────────────────────────────
+  let embla: ReturnType<typeof EmblaCarousel> | null = null;
+  let autoID: ReturnType<typeof setInterval> | null = null;
+  let isPaused = false;
+  let isTabPaused = false;
+  const lastSelectedPerCategory: Record<string, string> = {};
+
+  // ─── Lazy-load helpers ──────────────────────────────────────────────────────
+  function loadImgIfNeeded(img: HTMLImageElement | null) {
+    if (!img) return;
+    if (img.dataset.src) { img.src = img.dataset.src; delete img.dataset.src; }
+    if (img.dataset.srcset) { img.srcset = img.dataset.srcset; delete img.dataset.srcset; }
+    if (img.dataset.sizes) { img.sizes = img.dataset.sizes; delete img.dataset.sizes; }
+  }
+
+  function loadAllImgs(el: Element) {
+    el.querySelectorAll<HTMLImageElement>('img[data-src], img[data-srcset]').forEach(loadImgIfNeeded);
+  }
+
+  // ─── Autoplay controls ─────────────────────────────────────────────────────
+  function clearAutoplay() { if (autoID) { clearInterval(autoID); autoID = null; } }
+
+  function startAuto() {
+    clearAutoplay();
+    if (!isPaused && !isTabPaused && embla) {
+      autoID = setInterval(() => embla?.scrollNext(), AUTO_INTERVAL);
+    }
+  }
+
+  function pauseAuto(ms: number) {
+    clearAutoplay();
+    if (!isPaused && !isTabPaused && embla) {
+      setTimeout(() => startAuto(), ms);
+    }
+  }
+
+  function fullPause() { clearAutoplay(); }
+  function fullResume() { if (!isPaused && !isTabPaused && embla) startAuto(); }
+
+  // ─── Press effect on arrows ─────────────────────────────────────────────────
+  function pressFX(el: Element | null) {
+    if (!el) return;
+    const add = () => el.classList.add('active');
+    const rem = () => el.classList.remove('active');
+    ['mousedown', 'touchstart', 'pointerdown'].forEach(ev => el.addEventListener(ev, add));
+    ['mouseup', 'touchend', 'pointerup', 'mouseleave', 'touchcancel', 'pointercancel']
+      .forEach(ev => el.addEventListener(ev, rem));
+  }
+
+  // ─── Overlay counter + pause icon ──────────────────────────────────────────
+  function getOverlayEls() {
+    const overlay = document.querySelector('.slide-info-overlay');
+    return {
+      curEl: overlay?.querySelector<HTMLElement>('.current-slide-number'),
+      totalEl: overlay?.querySelector<HTMLElement>('.total-slides'),
+      pauseBtn: overlay?.querySelector<HTMLElement>('.pause-button'),
+      barsEl: overlay?.querySelector<HTMLElement>('.bars'),
+      playEl: overlay?.querySelector<HTMLElement>('.arrow'),
+    };
+  }
+
+  function updatePauseIcon(barsEl: HTMLElement | null | undefined, playEl: HTMLElement | null | undefined) {
+    if (!barsEl || !playEl) return;
+    barsEl.style.display = isPaused ? 'none' : 'flex';
+    playEl.style.display = isPaused ? 'flex' : 'none';
+  }
+
+  // ─── Category color propagation ────────────────────────────────────────────
+  function updateColor(slideEl: Element | null) {
+    const cat = slideEl?.querySelector<HTMLElement>('.compare-toggle')?.dataset.category;
+    if (!cat) return;
+    document.querySelectorAll(
+      '.slide-card-carousel-circle-left, .slide-card-carousel-circle-right, .pause-button'
+    ).forEach(el => {
+      el.classList.forEach(c => c.endsWith('-color') && el.classList.remove(c));
+      el.classList.add(`${cat}-color`);
+    });
+  }
+
+  // ─── Prefetch adjacent slide images ────────────────────────────────────────
+  function prefetch(idx: number, slides: Element[]) {
+    if (!slides.length) return;
+    const n = (idx + 1) % slides.length;
+    const p = (idx - 1 + slides.length) % slides.length;
+    [n, p].forEach(i => { const s = slides[i]; if (s) loadAllImgs(s); });
+  }
+
+  // ─── Pristine clone storage for category filtering ─────────────────────────
+  let cleanClones: HTMLElement[] = [];
+
+  // ─── Get current category from dropdown ────────────────────────────────────
+  function getCategory(): string {
+    return document.querySelector<HTMLElement>('.custom-dropdown-button')?.dataset.category || 'all';
+  }
+
+  // ─── Init / rebuild carousel ───────────────────────────────────────────────
+  function initCarousel(category: string, isFirstRun = false) {
+    const root = document.querySelector<HTMLElement>('[data-slideshow]');
+    if (!root) return;
+    const track = root.querySelector<HTMLElement>('.slideshow-track');
+    if (!track) return;
+
+    // Store pristine clones on first run
+    if (cleanClones.length === 0) {
+      cleanClones = Array.from(track.querySelectorAll<HTMLElement>('.slide-anchor')).map(
+        n => n.cloneNode(true) as HTMLElement
+      );
+    }
+
+    // Destroy existing instance
+    if (embla) {
+      embla.destroy();
+      embla = null;
+    }
+
+    // Remove old slides from track
+    track.querySelectorAll('.slide-anchor').forEach(el => el.remove());
+
+    if (isFirstRun) root.style.opacity = '0';
+
+    // Filter clones by category
+    const source = category === 'all'
+      ? cleanClones
+      : cleanClones.filter(c => c.dataset.category === category);
+
+    // Insert fresh clones into track (Embla container)
+    source.forEach(c => track.appendChild(c.cloneNode(true)));
+
+    // Force reflow before Embla init
+    void root.offsetHeight;
+
+    // Init Embla
+    embla = EmblaCarousel(root, {
+      loop: true,
+      dragFree: false,
+      containScroll: false,
+      align: 'start',
+      skipSnaps: false,
+      dragThreshold: 10,
+    });
+
+    const leftArrow = root.querySelector<HTMLElement>('.left-arrow');
+    const rightArrow = root.querySelector<HTMLElement>('.right-arrow');
+    const { curEl, totalEl, pauseBtn, barsEl, playEl } = getOverlayEls();
+
+    // Reset pause state
+    isPaused = false;
+    updatePauseIcon(barsEl, playEl);
+    startAuto();
+
+    // Drag pauses autoplay
+    embla.on('pointerDown', () => pauseAuto(RESET_AFTER_INTERACTION));
+
+    // Pause button
+    if (pauseBtn) {
+      pauseBtn.onclick = () => {
+        isPaused = !isPaused;
+        updatePauseIcon(barsEl, playEl);
+        isPaused ? fullPause() : fullResume();
+      };
+    }
+
+    // Arrow buttons
+    pressFX(leftArrow);
+    pressFX(rightArrow);
+
+    if (leftArrow) {
+      leftArrow.onclick = (e) => {
+        e.preventDefault();
+        embla?.scrollPrev();
+        pauseAuto(AUTO_INTERVAL);
+      };
+    }
+    if (rightArrow) {
+      rightArrow.onclick = (e) => {
+        e.preventDefault();
+        embla?.scrollNext();
+        pauseAuto(AUTO_INTERVAL);
+      };
+    }
+
+    // Compare toggle pauses
+    root.onclick = (e) => {
+      if ((e.target as Element)?.closest('.compare-label, .compare-toggle')) {
+        pauseAuto(RESET_AFTER_INTERACTION);
+      }
+    };
+
+    // Update overlay counter
+    function updateOverlayCounter() {
+      if (!embla) return;
+      const total = embla.slideNodes().length;
+      const idx = embla.selectedScrollSnap();
+      if (curEl) curEl.textContent = String(total ? idx + 1 : 0);
+      if (totalEl) totalEl.textContent = String(total);
+    }
+
+    // On slide change
+    embla.on('select', () => {
+      const slides = Array.from(root.querySelectorAll('.slide-anchor'));
+      const idx = embla!.selectedScrollSnap();
+      updateOverlayCounter();
+
+      // Lazy-load current slide
+      const current = slides[idx];
+      if (current) {
+        loadAllImgs(current);
+        updateColor(current);
+      }
+
+      // Prefetch adjacent
+      prefetch(idx, slides);
+    });
+
+    // First-run fade-in
+    if (isFirstRun) {
+      embla.on('settle', () => {
+        root.style.opacity = '';
+        updateOverlayCounter();
+      });
+    }
+
+    updateOverlayCounter();
+
+    // Load first slide images immediately
+    const firstSlide = root.querySelector('.slide-anchor');
+    if (firstSlide) {
+      loadAllImgs(firstSlide);
+      updateColor(firstSlide);
+    }
+
+    // Restore remembered position
+    const remembered = lastSelectedPerCategory[category];
+    if (remembered) {
+      const slides = Array.from(root.querySelectorAll<HTMLElement>('.slide-anchor'));
+      const idx = slides.findIndex(a => a.dataset.id === remembered);
+      if (idx !== -1) {
+        embla.scrollTo(idx, true);
+        updateOverlayCounter();
+      }
+    }
+
+    // Hover on current slide pauses briefly
+    root.querySelectorAll<HTMLElement>('.slide-anchor').forEach((a, i) => {
+      a.onmouseenter = () => {
+        if (embla && i === embla.selectedScrollSnap()) pauseAuto(AUTO_INTERVAL);
+      };
+    });
+
+    // Drag suppression — prevent link activation during drag
+    let pointerStartX = 0;
+    let wasDragged = false;
+
+    root.addEventListener('pointerdown', (e) => {
+      pointerStartX = e.clientX;
+      wasDragged = false;
+    }, { passive: true });
+
+    root.addEventListener('pointermove', (e) => {
+      if (Math.abs(e.clientX - pointerStartX) > 3) wasDragged = true;
+    }, { passive: true });
+
+    root.addEventListener('click', (e) => {
+      const anchor = (e.target as Element)?.closest('.slide-anchor');
+      if (anchor && wasDragged) {
+        e.preventDefault();
+        e.stopPropagation();
+      }
+    }, true);
+  }
+
+  // ─── Public refresh (called by dropdown) ───────────────────────────────────
+  (window as any).refreshSlider = function () {
+    if (embla) {
+      const slides = document.querySelectorAll<HTMLElement>('[data-slideshow] .slide-anchor');
+      const idx = embla.selectedScrollSnap();
+      const curAnchor = slides[idx];
+      if (curAnchor?.dataset.id && curAnchor.dataset.category) {
+        lastSelectedPerCategory[curAnchor.dataset.category] = curAnchor.dataset.id;
+      }
+    }
+    initCarousel(getCategory());
+  };
+
+  // ─── Tab visibility pause/resume ───────────────────────────────────────────
+  document.addEventListener('visibilitychange', () => {
+    if (!embla) return;
+    if (document.hidden) {
+      isTabPaused = true;
+      fullPause();
+    } else {
+      isTabPaused = false;
+      fullResume();
+    }
+  });
+
+  // ─── Init on DOM ready ─────────────────────────────────────────────────────
+  function boot() {
+    initCarousel('all', true);
+
+    // Load all images after page load (background prefetch)
+    window.addEventListener('load', () => {
+      document.querySelectorAll<HTMLElement>('[data-slideshow] .slide-anchor').forEach(a => {
+        loadAllImgs(a);
+      });
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', boot);
+  } else {
+    boot();
+  }
+</script>
+
+<style is:global>
+  /* ══════════════════════════════════════════════════════════════════════════════
+     HOME SLIDESHOW — Port of scroller_slideShow.css
+     ══════════════════════════════════════════════════════════════════════════════ */
+
+  /* ── Container ── */
+  .home-top-slides {
+    position: relative;
+    width: clamp(500px, 363.6364px + 22.7273vw, 625px);
+    height: clamp(380px, 276.3636px + 17.2727vw, 475px);
+    margin: 0 auto;
+    overflow: hidden;
+    box-sizing: border-box;
+    z-index: 1;
+    cursor: grab;
+    user-select: none;
+    -webkit-user-select: none;
+    border-radius: 0;
+  }
+
+  /* ── Slideshow track: Embla uses this as the container (flex row of slides) ── */
+  .slideshow-track {
+    display: flex;
+    width: 100%;
+    height: 100%;
+  }
+
+  /* ── Slide anchor ── */
+  .slide-anchor {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex: 0 0 100%;
+    min-width: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--section-dark-background-color);
+    cursor: pointer;
+    user-select: none;
+    -webkit-user-drag: none;
+    text-decoration: none;
+  }
+
+  .slide-anchor.dragging { transition: none; }
+
+  .image-stretch-container,
+  .blurred-image,
+  .wrapper-details {
+    pointer-events: none;
+  }
+
+  /* ── Image stretch container ── */
+  .image-stretch-container {
+    flex: 1 1 auto;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-items: center;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    overflow: hidden;
+    box-sizing: border-box;
+  }
+
+  /* ── Slide image ── */
+  .home-top-slides .slide-image {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  /* ── Wrapper details (bottom bar) ── */
+  .wrapper-details {
+    flex: 0 0 auto;
+    width: 100%;
+    height: auto;
+    overflow: hidden;
+    z-index: 1000;
+  }
+
+  .detail-container {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    box-sizing: border-box;
+    z-index: 3000;
+    padding: .65rem 1.65rem 1.35rem 1.65rem;
+    font-family: var(--identity-font);
+    letter-spacing: 0px;
+    text-align: left;
+    cursor: pointer;
+    width: 100%;
+    max-width: 100%;
+    box-shadow: none;
+    pointer-events: auto;
+  }
+
+  .detail-title-wrapper {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    box-sizing: border-box;
+    flex-wrap: wrap;
+    width: 100%;
+    column-gap: 1rem;
+    justify-content: space-between;
+  }
+
+  .detail-title {
+    display: flex;
+    width: 100%;
+    min-width: 0;
+    overflow: hidden;
+    justify-content: space-between;
+    align-items: center;
+    font-size: clamp(var(--font-size-24px), 1.325rem + 1.143vw, var(--font-size-26px));
+  }
+
+  /* Brand logo in slide detail bar */
+  .slideShow-brand-logo {
+    position: relative !important;
+    z-index: 9999;
+    height: calc(1em * 1.1);
+    filter: brightness(0) invert(1);
+  }
+
+  .detail-container .brand-text {
+    font-weight: var(--font-weight7);
+    letter-spacing: -.5px !important;
+    font-family: var(--identity-font);
+    color: var(--white-color-1);
+    line-height: 1.4;
+    display: inline-block;
+    max-width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    box-sizing: border-box;
+    text-overflow: ellipsis;
+    text-transform: capitalize;
+  }
+
+  .slide-bottom-text { margin-bottom: .55rem; }
+
+  .detail-container .slide-sub-text {
+    font-size: clamp(var(--font-size-18px), 0.779rem + 1.143vw, var(--font-size-20px));
+    font-weight: var(--font-weight4);
+    letter-spacing: -.5px !important;
+    font-family: var(--identity-font);
+    color: var(--white-color-1);
+    line-height: 1.3;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis !important;
+    margin-right: 1rem;
+  }
+
+  .learn-more-link {
+    display: inline-flex;
+    align-items: center;
+    white-space: nowrap;
+    width: auto;
+    margin: 0;
+    margin-right: .5rem;
+    padding: 0;
+    font-size: clamp(var(--font-size-17px), 1.117rem + 0.571vw, var(--font-size-18px));
+    color: var(--white-color-1);
+    text-decoration: none;
+    text-align: left;
+    font-weight: 400;
+    letter-spacing: -.5px;
+    position: relative;
+  }
+
+  .learn-more-link::after {
+    content: '\276F';
+    position: relative;
+    font-family: var(--identity-font);
+    font-weight: 400;
+    color: var(--white-color-1);
+    margin-left: .5rem;
+    line-height: .9;
+    font-size: clamp(var(--font-size-17px), 1.117rem + 0.571vw, var(--font-size-18px));
+  }
+
+  /* Hover underline on slide text */
+  .slide-anchor:hover .detail-container .brand-text,
+  .slide-anchor:hover .detail-container .slide-sub-text,
+  .slide-anchor:hover .detail-container .learn-more-link {
+    text-decoration-line: underline;
+    text-decoration-thickness: 1.25px;
+    text-decoration-color: var(--white-color-1);
+    text-underline-offset: 2px;
+  }
+
+  /* ── Rating bar ── */
+  .rating-bar {
+    position: relative;
+    width: calc(100% - .1rem) !important;
+    height: clamp(var(--font-size-23px), 18.2857px + 0.5714vw, var(--font-size-24px)) !important;
+    background-color: #646464;
+    border-radius: 2px;
+    overflow: hidden;
+    margin-left: 0rem !important;
+    margin-bottom: .1rem;
+    box-shadow: inset 0 0 2px rgba(0, 0, 0, 0.6), 0 1px 2px rgba(0, 0, 0, 0.4);
+    border: 1px solid rgba(0, 0, 0, 0.5);
+  }
+
+  .rating-fill {
+    height: 100%;
+    width: 0%;
+    position: relative;
+    transition: width 0.5s ease-in-out;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.5);
+    border-radius: 2px 0 0 2px;
+    clip-path: polygon(0 0, 100% 0, calc(100% - 10px) 100%, 0% 100%);
+  }
+
+  .rating-separators {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .separator {
+    width: 1px;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    transform: rotate(25deg);
+    transform-origin: center;
+    flex-shrink: 0;
+    box-shadow: inset 1px 0 3px rgba(255, 255, 255, 0.2), inset -1px 0 3px rgba(0, 0, 0, 0.6);
+  }
+
+  .rating-value { display: none; }
+
+  /* ── Scoring badges ── */
+  .scoring-wrapper-top {
+    padding: 1rem;
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .scoring-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    gap: .75rem;
+  }
+
+  :root {
+    --slideShow-card-score-fs: var(--font-size-30px);
+  }
+
+  .slide-anchor .dexa {
+    font-size: var(--slideShow-card-score-fs);
+    font-weight: var(--font-weight8);
+    font-family: var(--identity-font);
+    position: relative;
+    z-index: 1000;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6);
+  }
+
+  /* ── Compare toggle ── */
+  .slide-anchor .compare-toggle {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    box-sizing: border-box;
+    z-index: 1000;
+    -webkit-tap-highlight-color: transparent;
+    pointer-events: auto;
+    overflow: hidden;
+  }
+
+  .slide-anchor .compare-checkbox { display: none; }
+
+  .slide-anchor .compare-label {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: max-content;
+    height: max-content;
+    aspect-ratio: 1;
+    padding: .25rem .25rem;
+    min-width: clamp(var(--font-size-26px), 22.8px + 0.8vw, var(--font-size-32px));
+    min-height: clamp(var(--font-size-26px), 22.8px + 0.8vw, var(--font-size-32px));
+    background-color: var(--card-color);
+    color: var(--white-color-1);
+    font-family: var(--identity-font);
+    font-size: var(--font-size-16px);
+    font-weight: 600;
+    letter-spacing: -1px;
+    text-transform: capitalize;
+    border-radius: 2px;
+    cursor: pointer;
+    box-sizing: border-box;
+    overflow: hidden;
+    position: relative;
+    transition: background-color 0.3s;
+  }
+
+  .slide-anchor .compare-symbol {
+    position: relative;
+    display: inline-flex;
+    font-size: var(--font-size-18px);
+    width: 1.15em;
+    height: 1.15em;
+    flex: 0 0 1.15em;
+    align-items: center;
+    justify-content: center;
+    user-select: none;
+    box-sizing: content-box;
+  }
+
+  .slide-anchor .compare-symbol .minus {
+    display: none;
+    justify-content: center;
+    margin-bottom: .2rem;
+    width: 1.15em;
+  }
+
+  .slide-anchor .compare-symbol .plus {
+    display: flex;
+    justify-content: center;
+    width: 1.15em;
+  }
+
+  .slide-anchor .compare-text {
+    display: flex;
+    max-width: 0;
+    white-space: nowrap;
+    overflow: hidden;
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .slide-anchor .compare-label:hover,
+    .slide-anchor .compare-label:active,
+    .slide-anchor .compare-checkbox:focus + .compare-label {
+      width: fit-content;
+      padding: .25rem .5rem .25rem 1.25rem;
+      aspect-ratio: unset;
+      justify-content: space-between;
+    }
+
+    .slide-anchor .compare-label:hover .compare-text {
+      display: flex;
+      align-items: flex-start;
+      max-width: fit-content;
+      min-height: fit-content;
+      margin-right: 1.25rem;
+    }
+  }
+
+  @media (hover: none) and (pointer: coarse) {
+    .slide-anchor .compare-label.touch-open {
+      width: fit-content;
+      padding: .25rem .5rem .25rem 1.25rem;
+      aspect-ratio: unset;
+      justify-content: space-between;
+    }
+
+    .slide-anchor .compare-label.touch-open .compare-text {
+      display: inline-block;
+      max-width: fit-content;
+      opacity: 1;
+      margin-right: 1rem;
+    }
+  }
+
+  /* ── Overlay (arrows + counter + pause) ── */
+  .overlay-wrapper-main {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    z-index: 4000;
+    pointer-events: none;
+  }
+
+  .overlay-wrapper-btns {
+    display: flex;
+    flex-direction: row-reverse;
+    padding: 6px 10px;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+
+  .wrapper-details-transparent {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    z-index: -10;
+  }
+
+  /* ── Arrows ── */
+  .slide-arrow-container-wrapper {
+    gap: .6rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    z-index: 4000;
+    pointer-events: auto;
+  }
+
+  .slide-card-carousel-arrow-container {
+    width: auto;
+    height: auto;
+    display: grid;
+    z-index: 200;
+    cursor: pointer;
+    background-color: transparent;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .slide-card-carousel-circle-left,
+  .slide-card-carousel-circle-right {
+    font-size: var(--ft-44-35, 2.5rem);
+    width: 1em;
+    height: 1em;
+    border-radius: 50%;
+    background-color: var(--section-darkest-background-color);
+    opacity: .6;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .slide-card-carousel-circle-right { justify-self: end; }
+  .slide-card-carousel-circle-left { justify-self: start; }
+
+  .slide-card-carousel-arrow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    aspect-ratio: 1 / 1;
+    box-sizing: border-box;
+    background-size: 100%;
+    height: 100%;
+    width: 100%;
+    color: var(--white-color-1);
+    background-color: transparent;
+  }
+
+  .slide-card-carousel-arrow svg {
+    height: 50%;
+    width: 50%;
+    flex-shrink: 0;
+  }
+
+  /* Arrow press + hover states */
+  .slide-card-carousel-arrow-container.active .slide-card-carousel-circle-right,
+  .slide-card-carousel-arrow-container.active .slide-card-carousel-circle-left {
+    background-color: var(--card-color);
+    opacity: 1;
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .slide-card-carousel-arrow-container.active .slide-card-carousel-circle-right,
+    .slide-card-carousel-arrow-container.active .slide-card-carousel-circle-left {
+      background-color: var(--section-darkest-background-color);
+    }
+
+    .slide-card-carousel-arrow-container.right-arrow:hover .slide-card-carousel-circle-right,
+    .slide-card-carousel-arrow-container.left-arrow:hover .slide-card-carousel-circle-left {
+      background-color: var(--card-color);
+      opacity: 1;
+    }
+
+    .slide-card-carousel-arrow-container.active:hover .slide-card-carousel-circle-right,
+    .slide-card-carousel-arrow-container.active:hover .slide-card-carousel-circle-left {
+      background-color: var(--section-darkest-background-color);
+    }
+  }
+
+  /* ── Slide info overlay (counter + pause) ── */
+  .slide-info-overlay {
+    color: var(--white-color-1);
+    font-family: var(--identity-font);
+    padding: 0.3rem 0.4rem .3rem .6rem;
+    border-radius: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    z-index: 4000;
+    pointer-events: auto;
+  }
+
+  .slide-info-overlay .slide-count-container {
+    padding: 0 1rem;
+    border-radius: 80px;
+    font-weight: 600;
+    background-color: var(--section-darkest-background-color);
+    display: flex;
+    opacity: .6;
+    align-items: center;
+    gap: 0.25rem;
+    font-size: var(--ft-14-13, 0.82rem);
+    min-height: var(--ft-26-24, 1.5rem);
+  }
+
+  .slide-count-container .current-slide-number { font-weight: 700; }
+  .slide-count-container .count-separator,
+  .slide-count-container .total-slides { font-weight: 400; }
+
+  .slide-info-overlay .pause-button {
+    font-size: var(--ft-26-24, 1.5rem);
+    width: 1em;
+    height: 1em;
+    background-color: var(--section-darkest-background-color);
+    border-radius: 50%;
+    opacity: .6;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    user-select: none;
+    transition: background-color 0.2s ease;
+  }
+
+  .pause-button:hover {
+    background-color: var(--card-color);
+    opacity: 1;
+  }
+
+  .pause-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+  }
+
+  .pause-icon .bars,
+  .pause-icon .arrow {
+    display: none;
+    width: 100%;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .pause-icon .bars { display: flex; }
+
+  .pause-icon .bars svg {
+    display: block;
+    width: 42.5%;
+    height: auto;
+    margin: auto;
+  }
+
+  .pause-icon .arrow svg {
+    display: block;
+    width: 55%;
+    height: auto;
+    margin: auto;
+  }
+
+  .pause-button svg { color: var(--white-color-1); }
+
+  /* ── Deal CTA ── */
+  .wrapper-cta-details {
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+    padding: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transform: translateY(5rem);
+    transition: opacity 0.18s ease-out, visibility 0.18s ease-out, transform 0.18s ease-out;
+    height: calc(var(--ft-44-35, 2.5rem) + 4px);
+  }
+
+  .slide-deal-cta {
+    border: 0;
+    margin: 0;
+    padding: 0.45rem 1.15rem;
+    border-radius: 999px;
+    background-color: var(--section-darkest-background-color);
+    color: var(--white-color-1);
+    font-family: var(--identity-font);
+    font-weight: 600;
+    font-size: var(--font-size-18px);
+    line-height: 1;
+    opacity: .9;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    box-sizing: border-box;
+    cursor: pointer;
+    -webkit-appearance: none;
+    appearance: none;
+    -webkit-tap-highlight-color: transparent;
+    transition: background-color 0.18s ease-out, transform 0.18s ease-out, opacity 0.18s ease-out;
+  }
+
+  .slide-deal-cta:hover,
+  .slide-deal-cta:focus-visible {
+    background-color: var(--card-color);
+    opacity: 1;
+  }
+
+  /* Desktop: show CTA on hover */
+  @media (min-width: 1151px) and (hover: hover) and (pointer: fine) {
+    .home-top-slides-wrapper:hover .wrapper-cta-details,
+    .home-top-slides-wrapper:focus-within .wrapper-cta-details {
+      opacity: 0.95;
+      visibility: visible;
+      pointer-events: auto;
+      transform: translateY(0);
+    }
+  }
+
+  /* Mobile/tablet: CTA always visible */
+  @media (max-width: 1150px) {
+    .wrapper-cta-details {
+      opacity: 0.95;
+      visibility: visible;
+      pointer-events: auto;
+      transform: translateY(0);
+    }
+  }
+
+  /* ══════════════════════════════════════════════════════════════════════════════
+     RESPONSIVE BREAKPOINTS
+     ══════════════════════════════════════════════════════════════════════════════ */
+
+  @media (max-width: 900px) {
+    .home-top-slides-wrapper {
+      width: calc(100% - 3rem);
+      margin: 0rem auto 0rem auto;
+    }
+
+    .home-top-slides {
+      width: 100%;
+      height: auto;
+      aspect-ratio: 16 / 11;
+      margin: 0 auto;
+      border-radius: 0;
+    }
+
+    .detail-container {
+      padding: .75rem 1.5rem 1.0rem 1.5rem;
+    }
+
+    .detail-container h2,
+    .detail-container .brand-text {
+      font-size: var(--ftm-24-21, 1.5rem);
+    }
+
+    .detail-container .slide-sub-text {
+      font-size: var(--ftm-18-16, 1.1rem);
+    }
+
+    .learn-more-link,
+    .learn-more-link::after {
+      font-size: var(--ftm-17-15, 1rem);
+    }
+
+    .rating-bar {
+      height: clamp(var(--font-size-20px), 16.2353px + 0.9412vw, var(--font-size-23px)) !important;
+    }
+
+    :root {
+      --slideShow-card-score-fs: var(--ft-44-30, 2rem);
+    }
+
+    .slide-card-carousel-circle-left,
+    .slide-card-carousel-circle-right {
+      font-size: var(--ft-58-39, 3rem);
+    }
+
+    .slide-info-overlay .slide-count-container {
+      min-height: var(--ft-40-24, 2rem);
+      font-size: var(--ft-21-14, 1rem);
+    }
+
+    .slide-info-overlay .pause-button {
+      font-size: var(--ft-40-24, 2rem);
+      width: 1em;
+      height: 1em;
+    }
+
+    .slide-anchor .compare-label {
+      min-width: clamp(3.182rem, 2.273rem + 1.667vw, 3.636rem);
+      min-height: clamp(3.182rem, 2.273rem + 1.667vw, 3.636rem);
+    }
+
+    .slide-anchor .compare-symbol {
+      font-size: var(--ft-21-18, 1.2rem);
+    }
+
+    .slide-deal-cta {
+      font-size: var(--ft-23-15, 1.2rem);
+      min-height: var(--ft-40-24, 2rem);
+    }
+
+    .wrapper-cta-details {
+      height: calc(var(--ft-58-39, 3rem) + 4px);
+    }
+  }
+
+  @media (max-width: 700px) {
+    .home-top-slides {
+      aspect-ratio: 16 / 13;
+    }
+  }
+
+  @media (max-width: 600px) {
+    :root {
+      --slideShow-card-score-fs: var(--fm-30-22, 1.6rem);
+    }
+
+    .detail-container h2,
+    .detail-container .brand-text {
+      font-size: var(--fm-21-19, 1.3rem);
+    }
+
+    .detail-container .slide-sub-text {
+      font-size: var(--fm-16-15, 0.95rem);
+    }
+
+    .learn-more-link,
+    .learn-more-link::after {
+      font-size: var(--fm-15-14, 0.9rem);
+    }
+
+    .slide-card-carousel-circle-left,
+    .slide-card-carousel-circle-right {
+      font-size: var(--fm-39-32, 2rem);
+    }
+
+    .slide-info-overlay .slide-count-container {
+      min-height: var(--fm-24-21, 1.3rem);
+      font-size: var(--fm-14-13, 0.8rem);
+    }
+
+    .slide-info-overlay .pause-button {
+      font-size: var(--fm-24-21, 1.3rem);
+      width: 1em;
+      height: 1em;
+    }
+
+    .slide-anchor .compare-label {
+      min-width: var(--fm-35-28, 2rem);
+      min-height: var(--fm-35-28, 2rem);
+    }
+
+    .slide-anchor .compare-symbol {
+      font-size: var(--fm-18-17, 1rem);
+    }
+
+    .slide-deal-cta {
+      font-size: var(--fm-15-13, 0.85rem);
+      min-height: var(--fm-24-21, 1.3rem);
+    }
+
+    .wrapper-cta-details {
+      height: calc(var(--fm-39-32, 2rem) + 2px);
+    }
+  }
+</style>

@@ -1,0 +1,142 @@
+---
+/**
+ * AnnouncementBar.astro — Top promo strip with responsive text.
+ * Port of HBS adbar.handlebars + partial_ad_bar.css.
+ */
+interface Props {
+  href?: string;
+}
+
+const { href = '/hubs' } = Astro.props;
+---
+
+<div class="site-bul-bar">
+  <div class="site-bul-bar-content">
+
+    {/* ≥1920px */}
+    <p class="site-bul-bar-text site-bul-bar-text-1920">
+      Verified specs and hard-to-find details on every PC peripheral—no gaps or guesswork.
+      Normalized data for mice, keyboards, monitors, and more: compare shapes, sensors, and quirks side-by-side.
+      <a href={href} class="site-bul-bar-link">Explore All Hubs &gt;</a>
+    </p>
+
+    {/* ≥1600px & <1920px */}
+    <p class="site-bul-bar-text site-bul-bar-text-1600">
+      Detailed, verified specs for all gear—covering what manufacturers often skip.
+      Searchable comparisons tailored to your setup and needs.
+      <a href={href} class="site-bul-bar-link">All Hubs &gt;</a>
+    </p>
+
+    {/* ≥825px & <1600px */}
+    <p class="site-bul-bar-text site-bul-bar-text-825">
+      Core specs. Obscure details. Standardized for easy comparison.
+      Find what fits your playstyle and budget.
+      <a href={href} class="site-bul-bar-link">Hubs &gt;</a>
+    </p>
+
+    {/* ≥600px & <825px */}
+    <p class="site-bul-bar-text site-bul-bar-text-600">
+      Verified details. No fluff. Built for quick picks.
+      <a href={href} class="site-bul-bar-link">Hubs &gt;</a>
+    </p>
+
+    {/* <600px */}
+    <p class="site-bul-bar-text site-bul-bar-text-default">
+      Specs that matter. Compare fast.
+      <a href={href} class="site-bul-bar-link">Hubs &gt;</a>
+    </p>
+
+  </div>
+</div>
+
+<style>
+  .site-bul-bar {
+    position: relative;
+    width: 100%;
+    min-height: 48px;
+    height: auto;
+    background: linear-gradient(to right, var(--site-start-color), var(--site-end-color));
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    z-index: 1;
+    box-sizing: border-box;
+    margin: 0 auto;
+    padding: 1.25rem 2rem 1rem 2rem;
+  }
+
+  .site-bul-bar-content {
+    margin: 0 auto;
+    color: var(--white-color-1);
+    font-family: var(--identity-font);
+    font-size: var(--font-size-15px);
+    line-height: 1.3;
+    display: inline-block;
+    box-sizing: border-box;
+    white-space: nowrap;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scrollbar-width: thin;
+  }
+
+  .site-bul-bar-text {
+    display: none;
+    margin: 0;
+    white-space: nowrap;
+  }
+
+  .site-bul-bar-link {
+    display: inline-block;
+    color: var(--white-color-1);
+    font-family: var(--identity-font);
+    text-decoration: underline;
+    white-space: nowrap;
+    margin-left: 0.5rem;
+  }
+
+  .site-bul-bar-link:hover {
+    text-decoration: underline;
+  }
+
+  /* ≥1920px (default) */
+  .site-bul-bar-text-1920 {
+    display: inline;
+    font-size: var(--font-size-15px);
+  }
+
+  /* ≥1600px & <1920px */
+  @media (max-width: 1919px) {
+    .site-bul-bar-text-1920 { display: none; }
+    .site-bul-bar-text-1600 {
+      display: inline;
+      font-size: var(--font-size-15px);
+    }
+  }
+
+  /* ≥825px & <1600px */
+  @media (max-width: 1599px) {
+    .site-bul-bar-text-1600 { display: none; }
+    .site-bul-bar-text-825 {
+      display: inline;
+      font-size: var(--font-size-14px);
+    }
+  }
+
+  /* ≥600px & <825px */
+  @media (max-width: 824px) {
+    .site-bul-bar-text-825 { display: none; }
+    .site-bul-bar-text-600 {
+      display: inline;
+      font-size: var(--font-size-14px);
+    }
+  }
+
+  /* <600px */
+  @media (max-width: 599px) {
+    .site-bul-bar-text-600 { display: none; }
+    .site-bul-bar-text-default {
+      display: inline;
+      font-size: var(--font-size-14px);
+    }
+  }
+</style>

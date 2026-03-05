@@ -1,20 +1,13 @@
 ---
 import MainLayout from '@shared/layouts/MainLayout.astro';
+import AnnouncementBar from '@shared/ui/AnnouncementBar.astro';
+import HomeHero from '@features/home/components/HomeHero.astro';
+import TopProducts from '@features/home/components/TopProducts.astro';
 import { CONFIG } from '@core/config';
 import { getCollection } from 'astro:content';
-import ProductTestSection from '@features/vault/components/ProductTestSection';
 
 const allProducts = await getCollection('dataProducts');
-
-// Serialize to VaultProduct shape (only identity + imagePath, no specs)
-const products = allProducts.map(p => ({
-  id: p.id,
-  slug: p.data.slug,
-  brand: p.data.brand,
-  model: p.data.model,
-  category: p.data.category,
-  imagePath: p.data.imagePath,
-}));
+const productCount = allProducts.length;
 ---
 
 <MainLayout
@@ -22,180 +15,118 @@ const products = allProducts.map(p => ({
   description={CONFIG.site.defaultDescription}
   theme="gaming"
 >
-  <ProductTestSection client:load products={products} />
+  <AnnouncementBar />
+
+  <section class="home-rail-anchor -bg -pad-top" style="--home-rail-bg: var(--section-darkestdarker-background-color)">
+    <div class="home-rail-main">
+      <div class="home-top-wrapper">
+        <HomeHero productCount={productCount} />
+        <TopProducts />
+      </div>
+    </div>
+
+    {/* Right ad rail (empty structural slot) */}
+    <aside class="home-rail -right">
+      <div class="sticky-stack" data-sticky="true">
+        {/* Ad slot wired in Phase 5+ */}
+      </div>
+    </aside>
+  </section>
 </MainLayout>
 
 <style is:global>
-  /* ═══════════════════════════════════════════════════════════════════════════
-     PRODUCT TEST SECTION (temporary — Phase 4.3)
-     ═══════════════════════════════════════════════════════════════════════════ */
-  .product-test-section {
-    padding: 2rem;
-    max-width: 1600px;
-    margin: 0 auto;
+  /* ══════════════════════════════════════════════════════════════════════════
+     HOME PAGE — Layout Grid & Section Ordering
+     Port of view_index.css lines 22–162
+     ══════════════════════════════════════════════════════════════════════════ */
+
+  :root {
+    --home-width: 1075px;
   }
 
-  .product-test-title {
-    font-family: var(--identity-font);
-    font-size: var(--font-size-22px);
-    font-weight: var(--font-weight7);
-    color: var(--white-color-1);
-    margin: 0 0 0.5rem;
-  }
-
-  .product-test-subtitle {
-    font-family: var(--identity-font);
-    font-size: var(--font-size-13px);
-    color: var(--grey-color-2, #8a8f98);
-    margin: 0 0 1.5rem;
-  }
-
-  /* Category tabs */
-  .product-test-tabs {
-    display: flex;
-    gap: 0;
-    border-bottom: 1px solid #333;
-    margin-bottom: 1.5rem;
-    overflow-x: auto;
-  }
-
-  .product-test-tab {
-    background: none;
-    border: none;
-    border-bottom: 3px solid transparent;
-    color: var(--grey-color-2, #8a8f98);
-    font-family: var(--identity-font);
-    font-size: var(--font-size-14px);
-    font-weight: var(--font-weight5);
-    padding: 0.75rem 1.25rem;
-    cursor: pointer;
-    white-space: nowrap;
-    transition: color 0.2s ease;
-  }
-
-  .product-test-tab:hover {
-    color: var(--white-color-1);
-  }
-
-  .product-test-tab.active {
-    font-weight: var(--font-weight7);
-  }
-
-  .product-test-tab-count {
-    margin-left: 0.4em;
-    font-size: var(--font-size-11px);
-    opacity: 0.6;
-  }
-
-  /* Product grid */
-  .product-test-grid {
+  /* ── Full-bleed section wrapper with right rail ── */
+  .home-rail-anchor {
+    position: relative;
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-    gap: 1rem;
+    grid-template-columns:
+      1fr minmax(0, var(--home-width)) 30px 300px 1fr;
+    background: var(--home-rail-bg, transparent);
+    padding-top: var(--home-rail-pad-top, 0);
+    padding-bottom: var(--home-rail-pad-bottom, 0);
+    isolation: isolate;
+    padding-left: clamp(0px, -1650px + 103.125vw, 330px);
+    padding-right: 2rem;
   }
 
-  .product-test-card {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 1rem 0.75rem;
-    background: var(--nav-surface-dark, #161718);
-    border-radius: 8px;
-    gap: 0.5rem;
+  .home-rail-anchor:last-of-type {
+    margin-bottom: 4rem;
   }
 
-  .product-test-card:hover {
-    background: var(--nav-surface-medium, #2e343b);
-  }
-
-  .product-test-card-img {
-    width: 100%;
-    aspect-ratio: 1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
-  }
-
-  .product-test-card-img img {
-    max-width: 100%;
-    max-height: 100%;
-    object-fit: contain;
-  }
-
-  .product-test-card-info {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    gap: 0.1rem;
+  .home-rail-main {
+    grid-column: 2;
     min-width: 0;
-    width: 100%;
   }
 
-  .product-test-card-brand {
-    font-family: var(--identity-font);
-    font-size: var(--font-size-11px);
-    font-weight: var(--font-weight4);
-    color: var(--grey-color-2, #8a8f98);
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    max-width: 100%;
+  .home-rail.-right {
+    grid-column: 4;
+    width: 300px;
+    max-width: 300px;
+    padding-top: var(--rail-pad-top, 0);
+    padding-bottom: var(--rail-pad-bottom, 0);
   }
 
-  .product-test-card-model {
-    font-family: var(--identity-font);
-    font-size: var(--font-size-12px);
-    font-weight: var(--font-weight7);
-    color: var(--white-color-1);
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    max-width: 100%;
+  /* Sticky opt-in */
+  .home-rail.-right .sticky-stack {
+    position: static;
   }
 
-  .product-test-empty {
-    text-align: center;
-    color: var(--grey-color-2, #8a8f98);
-    font-family: var(--identity-font);
-    font-size: var(--font-size-14px);
-    padding: 2rem;
+  .home-rail.-right .sticky-stack[data-sticky="true"] {
+    position: sticky;
+    top: var(--rail-sticky-top, calc(var(--top-bar-H, 64px) + 32px));
+    will-change: top;
+    isolation: isolate;
+    z-index: 1000;
   }
 
-  /* Vault toggle button on cards */
-  .vault-toggle-btn {
+  /* ── Hide rail on narrow viewports ── */
+  @media (max-width: 1425px) {
+    .home-rail-anchor {
+      grid-template-columns: 1fr minmax(0, var(--home-width)) 1fr;
+      padding-left: 0;
+      padding-right: 0;
+    }
+
+    .home-rail.-right {
+      display: none;
+    }
+  }
+
+  /* Prevent horizontal scrollbars when rail shows */
+  @media (min-width: 1351px) {
+    body {
+      overflow-x: clip;
+    }
+  }
+
+  /* ── Home top wrapper (dark hero area) ── */
+  .home-top-wrapper {
     display: flex;
-    align-items: center;
-    gap: 0.3em;
-    background: var(--nav-surface-medium, #2e343b);
-    border: 1px solid #444;
-    border-radius: 4px;
-    color: var(--white-color-1);
-    font-family: var(--identity-font);
-    font-size: var(--font-size-11px);
-    font-weight: var(--font-weight7);
-    padding: 0.35rem 0.6rem;
-    cursor: pointer;
-    transition: background-color 0.2s ease, border-color 0.2s ease;
-    white-space: nowrap;
+    flex-direction: column;
+    background-color: var(--section-darkestdarker-background-color);
+    padding-bottom: 4rem;
   }
 
-  .vault-toggle-btn:hover {
-    border-color: var(--site-gradient-end);
-  }
+  /* ── Desktop section ordering ── */
+  /* Default order set in child components:
+     .home-page-intro: order 1  (TopProducts)
+     .home-title: order 2       (HomeHero title)
+     .home-title-stats-container: order 3 (HomeHero buttons)
+  */
 
-  .vault-toggle-btn.vault-toggle-active {
-    background: linear-gradient(to right, var(--site-gradient-start), var(--site-gradient-end));
-    border-color: transparent;
-  }
-
-  .vault-toggle-icon {
-    font-size: 1.1em;
-    line-height: 1;
-  }
-
-  .vault-toggle-label {
-    letter-spacing: 0.5px;
+  /* ── Mobile section reordering ── */
+  @media (max-width: 900px) {
+    .home-top-wrapper {
+      padding-bottom: 0;
+    }
   }
 </style>

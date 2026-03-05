@@ -10,6 +10,7 @@ import { CONFIG } from '@core/config';
 import categoriesData from '../../../config/categories.json';
 import GlobalNav from './GlobalNav.astro';
 import AuthDialog from '@features/auth/components/AuthDialog';
+import SettingsDialog from '@features/settings/components/SettingsDialog';
 
 // ─── Category color derivation engine ──────────────────────────────────────
 // WHY: categories.json stores ONE base hex per category. All variants (accent,
@@ -270,13 +271,19 @@ import '@/styles/global.css';
   {/* Auth dialog — React island replaces old popup divs + overlay + controller */}
   <AuthDialog client:load />
 
+  {/* Settings dialog — React island for user preferences popup */}
+  <SettingsDialog client:load />
+
   {/* AUTH HYDRATION — Vite-bundled module. Fetches /api/auth/me to hydrate
-      $auth store with server-verified user data. */}
+      $auth store with server-verified user data. Settings prefs loaded after auth. */}
   <script>
     import { hydrateAuth } from '@features/auth/store';
     import { initVaultSync } from '@features/vault/sync';
+    import { loadPrefs, loadTheme } from '@features/settings/store';
     hydrateAuth();
     initVaultSync();
+    loadPrefs();
+    loadTheme();
   </script>
 
   <main>

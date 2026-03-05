@@ -1,5 +1,7 @@
 /** Settings types — SSOT for all settings consumers. */
 
+export type ThemeMode = 'light' | 'dark';
+
 export type PreferenceKey = 'usePopupSnapshot' | 'displayHubResults' | 'defaultHubDisplay';
 
 export type HubDisplayMode = 'grid' | 'brandRows';

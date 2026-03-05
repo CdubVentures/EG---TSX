@@ -6,18 +6,14 @@
 
 import { useState } from 'react';
 import { useStore } from '@nanostores/react';
-import { cva } from 'class-variance-authority';
 import { cn } from '@shared/lib/cn';
 import {
   switchView, setFormEmail, setFormError, setFormSuccess, $authForm,
 } from '../store';
-
-const submitButton = cva(
-  'w-full flex items-center justify-center gap-3 font-semibold transition-[background] duration-150 no-underline cursor-pointer bg-gradient-to-r from-[var(--site-start-color)] to-[var(--site-end-color)] text-white hover:to-[var(--site-start-color)] py-5 px-[2rem] border-none rounded-[6px] text-[15px] box-border',
-);
-
-const inputClass = 'bg-[#111118] border border-[#38404b] text-[#e5e7eb] rounded-[5px] px-4 py-3 w-full focus:border-[var(--site-start-color)] focus:outline-none transition-colors text-[length:var(--font-size-14px)]';
-const labelClass = 'text-[length:var(--font-size-13px)] text-[#9ba2ab] font-semibold mb-2 block';
+import {
+  authButton, inputClass, labelClass,
+  PasswordInput, FormError, Spinner,
+} from './auth-ui';
 
 export default function ForgotPasswordView() {
   const form = useStore($authForm);
@@ -25,8 +21,6 @@ export default function ForgotPasswordView() {
   const [code, setCode] = useState('');
   const [newPassword, setNewPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
-  const [showPassword, setShowPassword] = useState(false);
-  const [showConfirm, setShowConfirm] = useState(false);
   const [loading, setLoading] = useState(false);
 
   async function handleRequestCode(e: React.FormEvent) {
@@ -99,7 +93,6 @@ export default function ForgotPasswordView() {
         return;
       }
 
-      // Success → switch to login with success banner
       setFormSuccess('Password reset! Sign in with your new password.');
       switchView('login');
     } catch {
@@ -129,7 +122,6 @@ export default function ForgotPasswordView() {
       )}
 
       {step === 1 ? (
-        /* Step 1 — Request code */
         <form onSubmit={handleRequestCode} className="w-full max-w-[360px]">
           <div className="mb-5">
             <label htmlFor="forgot-email" className={labelClass}>Email</label>
@@ -149,19 +141,15 @@ export default function ForgotPasswordView() {
           <button
             type="submit"
             disabled={loading}
-            className={cn(submitButton(), loading && 'opacity-60 cursor-not-allowed')}
+            className={cn(authButton({ intent: 'submit' }), loading && 'opacity-60 cursor-not-allowed')}
           >
+            {loading && <Spinner />}
             {loading ? 'Sending code\u2026' : 'Send reset code'}
           </button>
 
-          {form.error && (
-            <p className="text-[#f87171] text-[length:var(--font-size-13px)] mt-3 text-center">
-              {form.error}
-            </p>
-          )}
+          <FormError message={form.error} />
         </form>
       ) : (
-        /* Step 2 — Enter code + new password */
         <form onSubmit={handleResetPassword} className="w-full max-w-[360px]">
           <div className="mb-4">
             <label htmlFor="reset-code" className={labelClass}>Verification Code</label>
@@ -182,66 +170,37 @@ export default function ForgotPasswordView() {
           </div>
 
           <div className="mb-4">
-            <label htmlFor="reset-password" className={labelClass}>New Password</label>
-            <div className="relative">
-              <input
-                id="reset-password"
-                type={showPassword ? 'text' : 'password'}
-                autoComplete="new-password"
-                value={newPassword}
-                onChange={(e) => setNewPassword(e.target.value)}
-                className={cn(inputClass, 'pr-12')}
-                disabled={loading}
-              />
-              <button
-                type="button"
-                onClick={() => setShowPassword(!showPassword)}
-                className="absolute right-3 top-1/2 -translate-y-1/2 text-[#9ba2ab] hover:text-[#e5e7eb] bg-transparent border-none cursor-pointer p-0 text-[length:var(--font-size-14px)]"
-                aria-label={showPassword ? 'Hide password' : 'Show password'}
-                tabIndex={-1}
-              >
-                {showPassword ? '\u{1F441}' : '\u{1F441}\u{200D}\u{1F5E8}'}
-              </button>
-            </div>
+            <PasswordInput
+              id="reset-password"
+              label="New Password"
+              value={newPassword}
+              onChange={setNewPassword}
+              disabled={loading}
+              autoComplete="new-password"
+            />
           </div>
 
           <div className="mb-5">
-            <label htmlFor="reset-confirm" className={labelClass}>Confirm Password</label>
-            <div className="relative">
-              <input
-                id="reset-confirm"
-                type={showConfirm ? 'text' : 'password'}
-                autoComplete="new-password"
-                value={confirmPassword}
-                onChange={(e) => setConfirmPassword(e.target.value)}
-                className={cn(inputClass, 'pr-12')}
-                disabled={loading}
-              />
-              <button
-                type="button"
-                onClick={() => setShowConfirm(!showConfirm)}
-                className="absolute right-3 top-1/2 -translate-y-1/2 text-[#9ba2ab] hover:text-[#e5e7eb] bg-transparent border-none cursor-pointer p-0 text-[length:var(--font-size-14px)]"
-                aria-label={showConfirm ? 'Hide password' : 'Show password'}
-                tabIndex={-1}
-              >
-                {showConfirm ? '\u{1F441}' : '\u{1F441}\u{200D}\u{1F5E8}'}
-              </button>
-            </div>
+            <PasswordInput
+              id="reset-confirm"
+              label="Confirm Password"
+              value={confirmPassword}
+              onChange={setConfirmPassword}
+              disabled={loading}
+              autoComplete="new-password"
+            />
           </div>
 
           <button
             type="submit"
             disabled={loading}
-            className={cn(submitButton(), loading && 'opacity-60 cursor-not-allowed')}
+            className={cn(authButton({ intent: 'submit' }), loading && 'opacity-60 cursor-not-allowed')}
           >
+            {loading && <Spinner />}
             {loading ? 'Resetting\u2026' : 'Reset password'}
           </button>
 
-          {form.error && (
-            <p className="text-[#f87171] text-[length:var(--font-size-13px)] mt-3 text-center">
-              {form.error}
-            </p>
-          )}
+          <FormError message={form.error} />
         </form>
       )}
 

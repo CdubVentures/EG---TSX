@@ -308,17 +308,26 @@
 
   /* HBS site color aliases — SSOT: categories.json siteColors, injected by MainLayout.astro */
 
-  /* HBS grey / utility aliases (used by auth popups, future components) */
+  /* HBS grey / utility aliases (used by auth popups, settings, future components) */
   --grey-color-1: #e5e7eb;
   --grey-color-2: #9ba2ab;
   --grey-color-4: #6b7280;
+  --accent-color-3: #e65443;
+  --link-color: #FFD700;
   --semi-transparent-black: rgba(0, 0, 0, 0.75);
   --success-color: #00d26a;
+  --site-background-gradient: linear-gradient(to right, var(--site-start-color), var(--site-end-color));
 
-  /* Responsive clamp font sizes (used by auth popups) */
+  /* Responsive clamp font sizes (used by auth + settings popups) */
   --ft-40-31: clamp(2.81818rem, 2.27273rem + 1.1364vw, 3.63636rem);
-  --ft-28-20: clamp(1.81818rem, 1.45455rem + 0.7273vw, 2.54545rem);
   --ft-30-24: clamp(2.18182rem, 1.81818rem + 0.7273vw, 2.72727rem);
+  --ft-28-20: clamp(1.81818rem, 1.45455rem + 0.7273vw, 2.54545rem);
+  --ft-24-21: clamp(var(--font-size-21px), 1.612rem + 0.545vw, var(--font-size-24px));
+  --ft-19-18: clamp(var(--font-size-18px), 1.537rem + 0.182vw, var(--font-size-19px));
+  --ft-17-16: clamp(var(--font-size-16px), 1.355rem + 0.182vw, var(--font-size-17px));
+  --ft-15-14: clamp(var(--font-size-14px), 1.174rem + 0.182vw, var(--font-size-15px));
+  --ft-14-13: clamp(var(--font-size-13px), 1.083rem + 0.182vw, var(--font-size-14px));
+  --ft-13-12: clamp(var(--font-size-12px), 0.992rem + 0.182vw, var(--font-size-13px));
 
   /* HBS font weight aliases */
   --font-weight3: 300;
@@ -695,6 +704,36 @@ html {
   }
 }
 
+/* ─── Responsive clamp font sizes (desktop → tablet) ─── */
+:root {
+  --ft-55-40: clamp(var(--font-size-40px), 2.149rem + 2.727vw, var(--font-size-55px));
+  --ft-34-28: clamp(var(--font-size-28px), 1.95rem + 1.091vw, var(--font-size-34px));
+  --ft-32-24: clamp(var(--font-size-24px), 1.388rem + 1.455vw, var(--font-size-32px));
+  --ft-18-15: clamp(var(--font-size-15px), 1.066rem + 0.545vw, var(--font-size-18px));
+  --ft-12-11: clamp(var(--font-size-11px), 0.901rem + 0.182vw, var(--font-size-12px));
+}
+
+/* ─── Responsive clamp font sizes (mobile) ─── */
+:root {
+  --fm-40-35: clamp(var(--font-size-35px), 2.5rem + 2.5vw, var(--font-size-40px));
+  --fm-24-21: clamp(var(--font-size-21px), 1.5rem + 1.5vw, var(--font-size-24px));
+  --fm-15-14: clamp(var(--font-size-14px), 1.2rem + 0.5vw, var(--font-size-15px));
+  --fm-18-17: clamp(var(--font-size-17px), 1.1rem + 1vw, var(--font-size-18px));
+  --fm-16-15: clamp(var(--font-size-15px), 1.3rem + 0.5vw, var(--font-size-16px));
+  --fm-14-13: clamp(var(--font-size-13px), 1.1rem + 0.5vw, var(--font-size-14px));
+  --fm-13-12: clamp(var(--font-size-12px), 1rem + 0.5vw, var(--font-size-13px));
+  --fm-11-10: clamp(var(--font-size-10px), 0.8rem + 0.5vw, var(--font-size-11px));
+  --fm-35-32: clamp(var(--font-size-32px), 2.6rem + 1.5vw, var(--font-size-35px));
+  --ftm-15-13: clamp(var(--font-size-13px), 0.697rem + 0.889vw, var(--font-size-15px));
+}
+
+/* ─── Additional HBS background color aliases ─── */
+:root {
+  --section-darkestdarker-background-color: #080808;
+  --white-black-color-1: #fff;
+  --white-black-color-2: #dddad5;
+}
+
 /* ─────────────────────────────────────────────────────────────────────────────
    BASE STYLES
    ───────────────────────────────────────────────────────────────────────── */
@@ -1000,7 +1039,11 @@ html.logged .side-auth-logged-show { display: flex !important; }
   filter: brightness(0) invert(1);
 }
 
-/* Shade overlay */
+/* Shade overlay
+   WHY visibility: left:100vw is "offscreen" but still painted by the browser.
+   During resize, the transition on left animates the changing 100vw value,
+   causing a visible flash. visibility:hidden prevents painting entirely.
+   Same pattern as .side-menu above. */
 .shade-overlay {
   position: fixed;
   top: var(--nav-height);
@@ -1009,12 +1052,15 @@ html.logged .side-auth-logged-show { display: flex !important; }
   height: 100dvh;
   background-color: rgba(0, 0, 0, 0.5);
   z-index: 97500;
-  transition: left 0.4s ease-in-out;
+  visibility: hidden;
+  transition: left 0.4s ease-in-out, visibility 0s linear 0.4s;
   pointer-events: none;
 }
 
 .shade-overlay.active {
   left: 0;
+  visibility: visible;
+  transition: left 0.4s ease-in-out, visibility 0s linear 0s;
   pointer-events: auto;
 }
 
@@ -1154,6 +1200,52 @@ dialog.auth-dialog::backdrop {
 /* Mobile: narrower dialog */
 @media (max-width: 600px) {
   dialog.auth-dialog {
+    width: clamp(390px, 270px + 30vw, 450px);
+    max-width: 95%;
+  }
+}
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   SETTINGS DIALOG — reuses dialogSlideOut / dialogBackdropOut keyframes
+   ───────────────────────────────────────────────────────────────────────── */
+
+/* Entry animation */
+dialog.settings-dialog[open] {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.25s ease-out, transform 0.25s ease-out;
+}
+
+@starting-style {
+  dialog.settings-dialog[open] {
+    opacity: 0;
+    transform: translateY(-8%);
+  }
+  dialog.settings-dialog[open]::backdrop {
+    opacity: 0;
+  }
+}
+
+/* Exit animation — reuses existing keyframes */
+dialog.settings-dialog[data-closing] {
+  animation: dialogSlideOut 0.2s ease-in forwards;
+}
+
+dialog.settings-dialog[data-closing]::backdrop {
+  animation: dialogBackdropOut 0.2s ease-in forwards;
+}
+
+/* Backdrop styling */
+dialog.settings-dialog::backdrop {
+  background: rgba(0, 0, 0, 0.75);
+  -webkit-backdrop-filter: blur(10px) brightness(0.8) contrast(1.05);
+  backdrop-filter: blur(10px) brightness(0.8) contrast(1.05);
+  transition: opacity 0.25s ease-out;
+}
+
+/* Mobile: narrower dialog */
+@media (max-width: 600px) {
+  dialog.settings-dialog {
     width: clamp(390px, 270px + 30vw, 450px);
     max-width: 95%;
   }

@@ -1,0 +1,161 @@
+---
+/**
+ * SectionDivider.astro — Section heading with title, subtitle, and actions slot.
+ * Faithful port of HBS site_shared.css .section-divider (lines 418–622).
+ */
+interface Props {
+  title: string;
+  titleHref?: string;
+  subtitle?: string;
+  class?: string;
+}
+
+const { title, titleHref, subtitle, class: className } = Astro.props;
+---
+
+<div class:list={['section-divider', className]}>
+  <div class="section-divider-heading">
+    <h2 class="section-divider-title">
+      {titleHref ? (
+        <a href={titleHref} class="section-divider-link" aria-label={title}>{title}</a>
+      ) : (
+        title
+      )}
+    </h2>
+    {subtitle && <span class="section-divider-subtitle">{subtitle}</span>}
+  </div>
+  <div class="section-divider-actions">
+    <slot name="actions" />
+  </div>
+</div>
+
+<style>
+  /* ── Base layout ── */
+  .section-divider {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    margin: 2.75rem auto 2.25rem auto;
+    max-width: var(--home-width);
+    row-gap: 0.5rem;
+  }
+
+  .section-divider-heading {
+    flex: 1 1 auto;
+    min-width: 0;
+    margin: 0 1rem 0 0;
+  }
+
+  .section-divider-title {
+    font-family: var(--identity-font);
+    font-size: var(--ft-34-28);
+    letter-spacing: -0.75px;
+    color: var(--white-black-color-1);
+    font-weight: 900;
+    margin: 0;
+    line-height: 1.3;
+  }
+
+  .section-divider-subtitle {
+    font-size: var(--ftm-15-13);
+    font-family: var(--identity-font);
+    font-weight: var(--font-weight4);
+    color: var(--grey-color-3);
+    margin: 0;
+    line-height: 1.4;
+    letter-spacing: -0.25px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    display: block;
+  }
+
+  /* ── Actions area ── */
+  .section-divider-actions {
+    flex: 0 1 auto;
+    display: flex;
+    gap: 4px;
+    white-space: nowrap;
+    overflow-x: auto;
+    overflow-y: hidden;
+    margin-top: 1rem;
+    margin-bottom: -6px;
+    padding-bottom: 6px;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255, 255, 255, 0.2) transparent;
+  }
+
+  .section-divider-actions::-webkit-scrollbar {
+    height: 6px;
+  }
+
+  .section-divider-actions::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .section-divider-actions::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 4px;
+  }
+
+  /* ── Title link with caret ── */
+  .section-divider-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
+    font: inherit;
+    color: var(--white-color-1);
+    text-decoration: none;
+    cursor: pointer;
+    transition: color 0.18s ease, transform 0.12s ease, background 0.18s ease;
+    will-change: color, transform, background;
+  }
+
+  .section-divider-link::after {
+    content: "›";
+    display: inline-block;
+    line-height: 1;
+    font-weight: 500;
+    font-size: 1.6em;
+    margin-left: 0.1rem;
+    transform: translateY(-0.04em);
+    color: var(--site-color);
+    transition: transform 0.14s ease, color 0.18s ease;
+  }
+
+  /* Fallback hover */
+  .section-divider-link:hover {
+    color: var(--site-color);
+  }
+
+  .section-divider-link:hover::after {
+    transform: translateX(6px) translateY(-0.04em);
+  }
+
+  /* Gradient text hover */
+  @supports ((-webkit-background-clip: text) or (background-clip: text)) {
+    .section-divider-link:hover {
+      background: var(--site-gradient-text);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .section-divider-link:hover::after {
+      background: var(--site-gradient-text);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      transform: translateX(6px) translateY(-0.04em);
+    }
+  }
+
+  /* Focus ring */
+  .section-divider-link:focus-visible {
+    outline: 2px solid var(--site-color);
+    outline-offset: 3px;
+    border-radius: 6px;
+  }
+</style>

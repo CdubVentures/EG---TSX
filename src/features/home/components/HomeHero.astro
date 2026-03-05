@@ -1,0 +1,614 @@
+---
+/**
+ * HomeHero.astro — h1, subtitle with product count, 6 stat buttons.
+ * Port of HBS .home-title + .home-title-stats-container (lines 28–291).
+ */
+interface Props {
+  productCount: number;
+}
+
+const { productCount } = Astro.props;
+---
+
+{/* ── Hero Title ── */}
+<div class="home-title">
+  <h1>
+    <span class="home-title-main-text">The Smarter Way to Compare PC Gear</span>
+  </h1>
+  <div class="home-title-sub-texts">
+    <h2>
+      <a href="/hubs" class="home-title-h2-link">
+        Compare
+        <span class="home-hero-countWrap">
+          <span class="home-hero-count" data-home-count={productCount}>{productCount}</span>
+        </span>
+        products—verified specs, reviews, and guides that actually help
+      </a>
+    </h2>
+  </div>
+</div>
+
+{/* ── Stat Buttons ── */}
+<div class="home-title-stats-container">
+
+  {/* Shared gradient defs — rendered once, referenced by all buttons */}
+  {/* WHY: Gradient defs for non-Hubs button hover. Hubs gradient is inside its own SVG (matching HBS). */}
+  <svg xmlns="http://www.w3.org/2000/svg" style="position:absolute;width:0;height:0;overflow:hidden" aria-hidden="true">
+    <defs>
+      <linearGradient id="homeButtonsThemeGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+        <stop offset="0%" style="stop-color: var(--site-start-color);" />
+        <stop offset="100%" style="stop-color: var(--site-end-color);" />
+      </linearGradient>
+    </defs>
+  </svg>
+
+  {/* NEWS */}
+  <a href="/news" class="home-title-stats-button tools-button">
+    <div class="home-title-stats-content">
+      <span class="home-title-stats-left">
+        <span class="home-title-stats-icon tools-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="svg-base">
+            <g><g>
+              <path d="m121 250.24h90v90h-90z" />
+              <path d="m426 0h-340c-30.327 0-55 24.673-55 55v402c0 30.327 24.673 55 55 55h340c30.327 0 55-24.673 55-55v-402c0-30.327-24.673-55-55-55zm-273.746 93.759c-.029-4.416 3.543-8.011 7.96-8.011h3.527c4.396 0 7.96 3.564 7.96 7.96v69.236c0 4.396-3.564 7.96-7.96 7.96h-8.197c-2.699 0-5.215-1.368-6.682-3.634l-35.042-54.124.319 49.747c.028 4.416-3.544 8.011-7.96 8.011h-3.529c-4.396 0-7.96-3.564-7.96-7.96v-69.237c0-4.396 3.564-7.96 7.96-7.96h9.027c2.718 0 5.249 1.387 6.711 3.679l34.184 53.585zm-46.254 126.481h120c8.284 0 15 6.716 15 15v120c0 8.284-6.716 15-15 15h-120c-8.284 0-15-6.716-15-15v-120c0-8.284 6.716-15 15-15zm121.552-101.171c4.396 0 7.96 3.564 7.96 7.96 0 4.396-3.564 7.96-7.96 7.96h-25.363v19.747h28.447c4.396 0 7.96 3.564 7.96 7.96v.247c0 4.396-3.564 7.96-7.96 7.96h-40.357c-4.396 0-7.96-3.564-7.96-7.96v-69.236c0-4.396 3.564-7.96 7.96-7.96h39.247c4.396 0 7.96 3.564 7.96 7.96s-3.564 7.96-7.96 7.96h-27.337v17.402zm20.902-33.322h4.096c3.63 0 6.8 2.456 7.708 5.971l13.269 51.417 13.727-51.479c.929-3.485 4.085-5.909 7.691-5.909h7.775c3.6 0 6.752 2.417 7.687 5.894l13.842 51.494 13.154-51.401c.901-3.522 4.075-5.986 7.711-5.986h4.083c5.301 0 9.121 5.084 7.645 10.176l-20.068 69.236c-.986 3.403-4.103 5.744-7.645 5.744h-8.081c-3.578 0-6.716-2.387-7.671-5.835l-14.552-52.54-14.551 52.54c-.955 3.448-4.094 5.835-7.671 5.835h-8.081c-3.543 0-6.659-2.341-7.645-5.744l-20.068-69.236c-1.476-5.092 2.344-10.177 7.645-10.177zm-142.454 314.493h293c8.284 0 15 6.716 15 15s-6.716 15-15 15h-293c-8.284 0-15-6.716-15-15s6.716-15 15-15zm293-30h-109c-8.284 0-15-6.716-15-15s6.716-15 15-15h109c8.284 0 15 6.716 15 15s-6.716 15-15 15zm0-60h-109c-8.284 0-15-6.716-15-15s6.716-15 15-15h109c8.284 0 15 6.716 15 15s-6.716 15-15 15zm0-60h-109c-8.284 0-15-6.716-15-15s6.716-15 15-15h109c8.284 0 15 6.716 15 15s-6.716 15-15 15zm-14.766-77.856c-9.061 0-17.39-3.459-23.913-7.837-3.677-2.468-4.67-7.439-2.185-11.104l.853-1.259c2.466-3.637 7.377-4.536 11.05-2.123 5.35 3.515 11.434 5.662 16.045 5.662 6.417 0 11.354-3.086 11.354-8.762 0-5.801-6.294-8.022-9.997-9.38-3.702-1.357-10.119-3.579-12.958-4.813-2.098-.987-6.418-2.591-10.12-6.17-3.702-3.456-6.664-8.392-6.664-16.414 0-8.146 3.949-14.563 8.886-18.635 4.813-4.073 12.588-6.788 22.461-6.788 6.916 0 14.557 2.301 20.509 5.672 3.864 2.189 5.058 7.211 2.743 11.001l-.174.285c-2.259 3.698-7.057 4.905-10.802 2.722-4.075-2.375-8.674-3.884-12.771-3.884-6.417 0-11.106 2.468-11.106 7.652s4.813 7.158 8.639 8.639c3.702 1.481 9.997 3.703 12.712 4.814 10.861 3.949 18.512 10.983 18.512 23.325.001 18.388-16.536 27.397-33.074 27.397z" fill="currentColor" />
+            </g></g>
+          </svg>
+        </span>
+        <span class="home-title-stats-text">News</span>
+      </span>
+      <span class="home-title-home-arrow-right">&#10095;</span>
+    </div>
+  </a>
+
+  {/* GUIDES */}
+  <a href="/guides" class="home-title-stats-button guides-button">
+    <div class="home-title-stats-content">
+      <span class="home-title-stats-left">
+        <span class="home-title-stats-icon guides-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 957.599 957.6" class="svg-base">
+            <g>
+              <path d="M817.9,108.4h-28v687.901c0,45.699-37.2,82.898-82.899,82.898H423.3H197.7v25.5c0,29.201,23.7,52.9,52.9,52.9h283.6H817.8c29.2,0,52.899-23.699,52.899-52.9V161.3C870.7,132.1,847.1,108.4,817.9,108.4z" fill="currentColor" />
+              <path d="M423.3,849.199h283.6c29.2,0,52.9-23.699,52.9-52.898V108.4V52.9c0-29.2-23.7-52.9-52.9-52.9H423.3H329v17.5c0.199,1.8,0.3,3.7,0.3,5.6v115.3V168c0,41.1-33.4,74.5-74.5,74.5h-29.6H109.9c-1.5,0-3.1-0.1-4.6-0.2H86.9v554.001c0,29.199,23.7,52.898,52.9,52.898h58H423.3L423.3,849.199z M434,669.4H249.1c-13.8,0-25-11.201-25-25c0-13.801,11.2-25,25-25h185c13.8,0,25,11.199,25,25C459.1,658.199,447.8,669.4,434,669.4z M619,541.801H249.1c-13.8,0-25-11.201-25-25c0-13.801,11.2-25,25-25H619c13.8,0,25,11.199,25,25C644,530.6,632.8,541.801,619,541.801z M249.1,356.3H619c13.8,0,25,11.2,25,25c0,13.8-11.2,25-25,25H249.1c-13.8,0-25-11.2-25-25C224.1,367.5,235.3,356.3,249.1,356.3z" fill="currentColor" />
+              <path d="M109.9,212.5h144.9c0.1,0,0.3,0,0.4,0c24.2-0.2,43.8-19.8,44-44c0-0.1,0-0.3,0-0.4v-145c0-13.4-11-22.3-22.399-22.3c-5.5,0-11,2-15.6,6.6L94.1,174.5C80.1,188.5,90,212.5,109.9,212.5z" fill="currentColor" />
+            </g>
+          </svg>
+        </span>
+        <span class="home-title-stats-text">Guides</span>
+      </span>
+      <span class="home-title-home-arrow-right">&#10095;</span>
+    </div>
+  </a>
+
+  {/* REVIEWS */}
+  <a href="/reviews" class="home-title-stats-button reviews-button">
+    <div class="home-title-stats-content">
+      <span class="home-title-stats-left">
+        <span class="home-title-stats-icon reviews-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500" class="svg-base">
+            <g fill="currentColor">
+              <path d="m429.053 146.624-179.055-103.377-179.051 103.377v206.751l179.051 103.378 179.055-103.378z" />
+              <path d="m46.054 381.748 191.819 110.753v-14.75l-179.05-103.378z" />
+              <path d="m46.698 146.62-12.768-7.37v221.5l12.768-7.37z" />
+              <path d="m237.873 22.249v-14.75l-191.819 110.753 12.764 7.37z" />
+              <path d="m453.951 118.252-191.824-110.753v14.75l179.05 103.377z" />
+              <path d="m262.127 477.751v14.75l191.824-110.753-12.769-7.37z" />
+              <path d="m453.302 146.62v206.76l12.768 7.37v-221.5z" />
+            </g>
+          </svg>
+        </span>
+        <span class="home-title-stats-text">Reviews</span>
+      </span>
+      <span class="home-title-home-arrow-right">&#10095;</span>
+    </div>
+  </a>
+
+  {/* GAMES */}
+  <a href="/games" class="home-title-stats-button games-button">
+    <div class="home-title-stats-content">
+      <span class="home-title-stats-left">
+        <span class="home-title-stats-icon games-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="svg-base">
+            <g>
+              <path d="m27.73 148.457v100.353l91.589 52.885v-105.804l-91.239-52.667c-.231 1.722-.35 3.47-.35 5.233z" fill="currentColor" />
+              <path d="m149.319 319.018 91.681 52.937v-105.824l-91.681-52.923z" fill="currentColor" />
+              <path d="m256 134.326-91.667 52.909 91.667 52.915 91.667-52.915z" fill="currentColor" />
+              <path d="m271 371.955 91.681-52.937v-105.81l-91.681 52.923z" fill="currentColor" />
+              <path d="m483.919 143.224-91.239 52.667v105.804l91.589-52.885v-100.353c.001-1.763-.118-3.511-.35-5.233z" fill="currentColor" />
+              <path d="m464.539 114.271c-21.002-12.136-53.397-30.848-86.865-50.175l-91.668 52.91 91.666 52.909 91.273-52.687c-1.392-1.076-2.861-2.067-4.406-2.957z" fill="currentColor" />
+              <path d="m347.673 46.774c-27.225-15.718-53.099-30.652-71.925-41.509-6.089-3.51-12.918-5.265-19.747-5.265-6.83 0-13.66 1.755-19.752 5.267-18.411 10.639-44.358 25.619-71.902 41.518l91.653 52.902z" fill="currentColor" />
+              <path d="m134.342 64.105c-32.938 19.013-65.136 37.6-86.866 50.157-1.551.894-3.024 1.888-4.419 2.968l91.271 52.686 91.666-52.909z" fill="currentColor" />
+              <path d="m27.73 366.482c0 14.073 7.561 27.172 19.731 34.187l.015.009c18.407 10.636 44.326 25.601 71.843 41.485v-105.826l-91.589-52.885z" fill="currentColor" />
+              <path d="m149.319 459.48c32.965 19.029 65.197 37.635 86.944 50.201 1.536.885 3.119 1.657 4.737 2.319v-105.403l-91.681-52.938z" fill="currentColor" />
+              <path d="m271 511.998c1.623-.663 3.211-1.437 4.751-2.325 22.261-12.839 54.378-31.377 86.929-50.172v-105.842l-91.68 52.938z" fill="currentColor" />
+              <path d="m392.681 442.177c27.952-16.142 54.009-31.194 71.843-41.5 12.186-7.023 19.747-20.123 19.747-34.195v-83.031l-91.589 52.885v105.841z" fill="currentColor" />
+            </g>
+          </svg>
+        </span>
+        <span class="home-title-stats-text">Games</span>
+      </span>
+      <span class="home-title-home-arrow-right">&#10095;</span>
+    </div>
+  </a>
+
+  {/* BRANDS */}
+  <a href="/brands" class="home-title-stats-button brands-button">
+    <div class="home-title-stats-content">
+      <span class="home-title-stats-left">
+        <span class="home-title-stats-icon brands-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" class="svg-base">
+            <path d="m89.890358 2.5116255-27.0675698 1.8203337c-1.7355957.1436372-3.3631477.9012885-4.5904045 2.1369128l-53.6206917 53.5811234c-2.7865462 2.7458382-2.8195453 7.2307281-.0737066 10.0172729.0243888.0247498.0489569.0493164.0737066.0737l25.2472324 25.2472382c2.7458382 2.7865448 7.2307205 2.8195419 10.0172691.0737152.0247498-.0243988.049324-.0489655.0737114-.0737152l53.5811157-53.6206932c1.2066116-1.2390366 1.9355927-2.8652458 2.0577698-4.5904083l1.8994827-27.0675659c.2249146-3.9712949-2.8121262-7.3729973-6.7834244-7.5979137-.2712778-.0153645-.5432047-.0153645-.8144907.0000001zm-8.2310715 23.0311735c-2.4040833 2.386631-6.2877274 2.3724899-8.6743546-.0315914s-2.3724823-6.2877197.0315933-8.6743507c2.3917084-2.3743467 6.2510452-2.3743467 8.6427612 0 2.3945848 2.4080066 2.3945848 6.2979373.0000001 8.7059421z" fill="currentColor" />
+          </svg>
+        </span>
+        <span class="home-title-stats-text">Brands</span>
+      </span>
+      <span class="home-title-home-arrow-right">&#10095;</span>
+    </div>
+  </a>
+
+  {/* HUBS — special attention animation */}
+  <a href="/hubs" class="home-title-stats-button hubs-button">
+    <div class="home-title-stats-content">
+      <span class="home-title-stats-left">
+        <span class="home-title-stats-icon hubs-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="12.28 0 487.43 512" class="svg-base">
+            <defs>
+              <linearGradient id="homeButtonsThemeGradientHubs" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" style="stop-color: var(--hubs-grad-a, var(--site-start-color));" />
+                <stop offset="100%" style="stop-color: var(--hubs-grad-b, var(--site-end-color));" />
+              </linearGradient>
+            </defs>
+            <g>
+              <path fill="currentColor" d="M109.874,148.471c2.846-6.353,4.442-13.382,4.442-20.78c0-3.636-0.389-7.182-1.116-10.605c-4.896-23.057-25.406-40.41-49.899-40.41c-28.131,0-51.016,22.885-51.016,51.015c0,28.13,22.885,51.016,51.016,51.016c9.833,0,19.021-2.804,26.819-7.643l20.294,17.739c5.694-8.279,12.33-15.863,19.759-22.587L109.874,148.471z" />
+              <path fill="currentColor" d="M372.788,0c-34.139,0-61.913,27.774-61.913,61.914c0,4.413,0.473,8.717,1.354,12.871c1.973,9.291,6.04,17.811,11.676,25.058l-40.901,52.059c8.575,5.261,16.488,11.5,23.58,18.562l40.905-52.063c7.73,3.476,16.289,5.427,25.299,5.427c34.139,0,61.914-27.774,61.914-61.914S406.927,0,372.788,0z" />
+              <path fill="currentColor" d="M122.267,411.12l29.354-39.044c-8.689-5.08-16.733-11.146-23.97-18.056l-29.349,39.037c-7.412-3.144-15.558-4.885-24.103-4.885c-34.139,0-61.914,27.774-61.914,61.914S40.059,512,74.198,512s61.914-27.774,61.914-61.914c0-4.057-0.404-8.02-1.152-11.863C132.985,428.093,128.538,418.841,122.267,411.12z" />
+              <path fill="currentColor" d="M216.14,163.059c-54.164,0-98.231,44.066-98.231,98.23c0,54.163,44.066,98.23,98.231,98.23c54.164,0,98.23-44.066,98.23-98.23C314.37,207.125,270.305,163.059,216.14,163.059z" />
+              <path fill="currentColor" d="M417.658,300.976c-24.328,0-46.206,10.652-61.247,27.525l-23.509-14.203c-4.185,9.183-9.424,17.786-15.559,25.661l23.515,14.206c-3.389,8.986-5.258,18.711-5.258,28.868c0,5.378,0.535,10.63,1.527,15.722c7.357,37.75,40.66,66.336,80.53,66.336c45.247,0,82.058-36.811,82.058-82.058C499.716,337.787,462.905,300.976,417.658,300.976z" />
+            </g>
+          </svg>
+        </span>
+        <span class="home-title-stats-text hubs-text">
+          Hub<span class="home-hubs-sWrap">s
+            <span class="home-hubs-badge">
+              <span class="home-hubs-badgeNum" data-home-count={productCount}>{productCount}</span>
+            </span>
+          </span>
+        </span>
+      </span>
+      <span class="home-title-home-arrow-right">&#10095;</span>
+    </div>
+  </a>
+
+</div>
+
+<style>
+  /* ── Hero Title ── */
+  .home-title {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    width: calc(100% - 3rem);
+    max-width: var(--home-width);
+    margin: 5rem auto 0 auto;
+    order: 2;
+  }
+
+  .home-title h1 {
+    font-size: var(--ft-55-40);
+    font-weight: 900;
+    font-family: var(--identity-font);
+    color: var(--white-color-1);
+    letter-spacing: -0.5px;
+    line-height: 1.2;
+    padding: 0;
+    margin: 0 0 1rem 0;
+    text-transform: uppercase;
+    position: relative;
+    white-space: normal;
+    overflow-wrap: break-word;
+  }
+
+  .home-title-sub-texts {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    column-gap: 1.5rem;
+    letter-spacing: -0.5px;
+    row-gap: 2em;
+  }
+
+  .home-title-sub-texts h2 {
+    font-size: var(--ft-32-24);
+    text-shadow: none;
+    text-transform: capitalize;
+    margin-right: 1rem;
+    flex: 0 1 auto;
+  }
+
+  .home-title h2 {
+    font-weight: 700;
+    font-family: var(--identity-font);
+    color: var(--grey-color-3);
+    letter-spacing: -0.5px;
+    line-height: 1.2;
+    padding: 0;
+    margin: 0;
+  }
+
+  /* ── Count badge with gradient text ── */
+  .home-hero-countWrap {
+    position: relative;
+    display: inline-block;
+    padding: 0 0.12em;
+    margin: 0 0.06em;
+    border-radius: 4px;
+  }
+
+  .home-hero-count {
+    display: inline-block;
+    position: relative;
+    font-variant-numeric: tabular-nums;
+    color: var(--white-color-1);
+    will-change: transform, opacity, filter;
+  }
+
+  @supports ((-webkit-background-clip: text) or (background-clip: text)) {
+    .home-hero-count {
+      background: var(--site-gradient-text);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+  }
+
+  .home-hero-count.is-animating {
+    animation: homeHeroCountIn 720ms cubic-bezier(0.18, 0.9, 0.22, 1) both;
+  }
+
+  .home-hero-countWrap.is-shine::after {
+    content: "";
+    position: absolute;
+    inset: -20% -40%;
+    pointer-events: none;
+    border-radius: inherit;
+    background: linear-gradient(110deg,
+      transparent 0%,
+      rgba(255, 255, 255, 0) 42%,
+      rgba(255, 255, 255, 0.18) 50%,
+      rgba(255, 255, 255, 0) 58%,
+      transparent 100%);
+    transform: translateX(-140%) rotate(10deg);
+    opacity: 0;
+    animation: homeHeroCountShine 1100ms cubic-bezier(0.2, 0.85, 0.2, 1) both;
+  }
+
+  @keyframes homeHeroCountIn {
+    0%   { opacity: 0; transform: translateY(6px); filter: blur(10px); }
+    70%  { opacity: 1; transform: translateY(-1px); filter: blur(0px); }
+    100% { opacity: 1; transform: translateY(0px); filter: none; }
+  }
+
+  @keyframes homeHeroCountShine {
+    0%   { opacity: 0; transform: translateX(-140%) rotate(10deg); }
+    20%  { opacity: 0.9; }
+    70%  { opacity: 0.18; }
+    100% { opacity: 0; transform: translateX(140%) rotate(10deg); }
+  }
+
+  /* ── h2 link hover underline ── */
+  .home-title-h2-link {
+    position: relative;
+    display: inline;
+    color: inherit;
+    text-decoration: none;
+    background-image: linear-gradient(var(--site-start-color), var(--site-end-color));
+    background-repeat: no-repeat;
+    background-size: 0% 2px;
+    background-position: 0 100%;
+  }
+
+  .home-title-h2-link:hover,
+  .home-title-h2-link:focus-visible {
+    background-size: 100% 2px;
+    filter: brightness(1.06);
+  }
+
+  .home-title-h2-link:focus-visible {
+    outline: 2px solid rgba(255, 255, 255, 0.35);
+    outline-offset: 4px;
+  }
+
+  /* ── Stat Buttons Container ── */
+  .home-title-stats-container {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    width: calc(100% - 3rem);
+    max-width: var(--home-width);
+    margin: 2rem auto 0 auto;
+    order: 3;
+  }
+
+  .home-title-stats-button {
+    flex: 1 1 calc(33% - 10px);
+    min-inline-size: max-content;
+    box-sizing: border-box;
+    text-decoration: none;
+    border-radius: 6px;
+    background-color: var(--section-dark-background-color);
+    color: var(--grey-color-1);
+    padding: 1.6rem 1.35rem;
+    transition: background-color 0.3s ease;
+  }
+
+  .home-title-stats-content {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .home-title-stats-left {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  /* ── Icon sizing ── */
+  .games-icon,
+  .brands-icon,
+  .reviews-icon,
+  .guides-icon,
+  .tools-icon,
+  .hubs-icon {
+    font-size: var(--font-size-24px);
+    width: 1em;
+    height: 1em;
+    background-color: transparent;
+    fill: var(--white-color-1);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .games-icon svg,
+  .brands-icon svg,
+  .reviews-icon svg,
+  .guides-icon svg,
+  .tools-icon svg,
+  .hubs-icon svg {
+    width: 1em;
+    height: 1em;
+  }
+
+  .home-title-stats-text {
+    font-family: var(--identity-font);
+    font-weight: var(--font-weight8);
+    text-transform: uppercase;
+    margin: 0;
+    font-size: var(--ft-18-15);
+  }
+
+  .home-title-home-arrow-right {
+    color: var(--grey-color-1);
+    font-size: var(--ft-18-15);
+    margin-left: 1rem;
+  }
+
+  /* ── Hover: icon gradient fill ── */
+  .home-title-stats-button:hover .home-title-stats-icon svg path {
+    fill: url("#homeButtonsThemeGradient");
+  }
+
+  /* ── Hover: text gradient ── */
+  .home-title-stats-button:hover .home-title-stats-text,
+  .home-title-stats-button:hover .home-title-stats-text * {
+    background: var(--site-gradient-text);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  /* ── Hover: arrow slides right ── */
+  .home-title-stats-button:hover .home-title-home-arrow-right {
+    transform: translateX(5px);
+    color: var(--site-end-color);
+    transition: all 0.3s ease;
+  }
+
+  /* ══════════════════════════════════════════════════════
+     HUBS BUTTON — attention animation + special styling
+     ══════════════════════════════════════════════════════ */
+
+  @property --hubs-grad-a {
+    syntax: '<color>';
+    inherits: true;
+    initial-value: #ffffff;
+  }
+
+  @property --hubs-grad-b {
+    syntax: '<color>';
+    inherits: true;
+    initial-value: #ffffff;
+  }
+
+  .home-title-stats-button.hubs-button {
+    --hubs-grad-a: var(--site-start-color);
+    --hubs-grad-b: var(--site-end-color);
+    position: relative;
+    overflow: hidden;
+    will-change: transform;
+    animation: homeHubsAttention 6.2s cubic-bezier(0.2, 0.9, 0.2, 1) infinite;
+  }
+
+  /* Shine pseudo-element */
+  .home-title-stats-button.hubs-button::after {
+    content: "";
+    position: absolute;
+    inset: -45% -60%;
+    pointer-events: none;
+    background: linear-gradient(115deg,
+      transparent 0%,
+      rgba(255, 255, 255, 0) 38%,
+      rgba(255, 255, 255, 0.14) 50%,
+      rgba(255, 255, 255, 0) 62%,
+      transparent 100%);
+    transform: translateX(-140%) rotate(12deg);
+    opacity: 0;
+    animation: homeHubsShine 6.2s cubic-bezier(0.2, 0.85, 0.2, 1) infinite;
+  }
+
+  /* Floating icon */
+  .home-title-stats-button.hubs-button .hubs-icon svg {
+    will-change: transform;
+    animation: homeHubsIconFloat 2.25s ease-in-out infinite;
+  }
+
+  .home-title-stats-button.hubs-button .hubs-icon svg path {
+    fill: url(#homeButtonsThemeGradientHubs) !important;
+  }
+
+  @keyframes homeHubsIconFloat {
+    0%   { transform: translateY(0px); }
+    50%  { transform: translateY(-3px); }
+    100% { transform: translateY(0px); }
+  }
+
+  @keyframes homeHubsAttention {
+    0%   { transform: translateY(0) rotate(0deg); }
+    68%  { transform: translateY(0) rotate(0deg); }
+    72%  { transform: translateY(-3px) rotate(-0.6deg); }
+    76%  { transform: translateY(0) rotate(0.4deg); }
+    80%  { transform: translateY(-2px) rotate(-0.3deg); }
+    84%  { transform: translateY(0) rotate(0deg); }
+    100% { transform: translateY(0) rotate(0deg); }
+  }
+
+  @keyframes homeHubsShine {
+    0%   { opacity: 0; transform: translateX(-140%) rotate(12deg); }
+    7%   { opacity: 0.85; }
+    17%  { opacity: 0; transform: translateX(140%) rotate(12deg); }
+    100% { opacity: 0; transform: translateX(140%) rotate(12deg); }
+  }
+
+  /* ── Hubs badge ── */
+  .home-title-stats-text.hubs-text {
+    position: relative;
+    display: inline-flex;
+    align-items: baseline;
+  }
+
+  .home-hubs-sWrap {
+    position: relative;
+    display: inline-block;
+  }
+
+  .home-hubs-badge {
+    position: absolute;
+    top: -0.85em;
+    right: -1.15em;
+    padding: 0.18em 0.42em;
+    text-decoration: underline;
+    line-height: 1;
+    transform: translateZ(0);
+    will-change: transform;
+    animation: homeHubsBadgePulse 2.9s ease-in-out infinite;
+  }
+
+  .home-hubs-badgeNum {
+    display: inline-block;
+    font-variant-numeric: tabular-nums;
+    font-size: 0.725em;
+    font-weight: 900;
+    letter-spacing: 0.02em;
+    color: var(--white-color-1);
+    will-change: transform, opacity, filter;
+  }
+
+  @supports ((-webkit-background-clip: text) or (background-clip: text)) {
+    .home-hubs-badgeNum {
+      background: var(--site-gradient-text);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+  }
+
+  @keyframes homeHubsBadgePulse {
+    0%   { transform: translateZ(0) scale(1); }
+    55%  { transform: translateZ(0) scale(1); }
+    70%  { transform: translateZ(0) scale(1.06); }
+    85%  { transform: translateZ(0) scale(1); }
+    100% { transform: translateZ(0) scale(1); }
+  }
+
+  /* ── Reduced motion ── */
+  @media (prefers-reduced-motion: reduce) {
+    .home-hero-count.is-animating,
+    .home-hero-countWrap.is-shine::after,
+    .home-title-stats-button.hubs-button,
+    .home-title-stats-button.hubs-button::after,
+    .home-title-stats-button.hubs-button .hubs-icon svg,
+    .home-hubs-badge,
+    .home-hubs-badge.is-shine::after,
+    .home-hubs-badgeNum.is-animating {
+      animation: none !important;
+      transform: none !important;
+      filter: none !important;
+    }
+  }
+
+  /* ── Responsive: ≤900px ── */
+  @media (max-width: 900px) {
+    .home-title {
+      margin: 3rem auto 1.5rem auto;
+      order: 1;
+    }
+
+    .home-title-stats-container {
+      margin: 0.75rem auto 2.5rem auto;
+      gap: 0.75rem;
+      order: 2;
+    }
+
+    .home-title-stats-button {
+      display: flex;
+      align-items: center;
+      max-width: 100%;
+      flex: 1 1 calc(33% - 0.75rem);
+    }
+  }
+
+  /* ── Responsive: ≤600px ── */
+  @media (max-width: 600px) {
+    .home-title h1 {
+      font-size: var(--fm-40-35);
+    }
+
+    .home-title-sub-texts h2 {
+      font-size: var(--fm-24-21);
+    }
+
+    .home-title-stats-button {
+      padding: 1.5rem 1.25rem;
+      flex: 1 1 calc(33% - 0.65rem);
+    }
+
+    .home-title-stats-container {
+      margin: 0.65rem auto 2.5rem auto;
+      row-gap: 0.65rem;
+      column-gap: 0.65rem;
+    }
+
+    .home-title-stats-text {
+      font-size: var(--fm-15-14);
+    }
+
+    .home-title-home-arrow-right {
+      font-size: var(--fm-15-14);
+    }
+  }
+</style>

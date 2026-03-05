@@ -5,18 +5,13 @@
 
 import { useState } from 'react';
 import { useStore } from '@nanostores/react';
-import { cva } from 'class-variance-authority';
 import { cn } from '@shared/lib/cn';
 import {
   switchView, setFormError, setFormSuccess, $authForm,
 } from '../store';
-
-const submitButton = cva(
-  'w-full flex items-center justify-center gap-3 font-semibold transition-[background] duration-150 no-underline cursor-pointer bg-gradient-to-r from-[var(--site-start-color)] to-[var(--site-end-color)] text-white hover:to-[var(--site-start-color)] py-5 px-[2rem] border-none rounded-[6px] text-[15px] box-border',
-);
-
-const inputClass = 'bg-[#111118] border border-[#38404b] text-[#e5e7eb] rounded-[5px] px-4 py-3 w-full focus:border-[var(--site-start-color)] focus:outline-none transition-colors text-[length:var(--font-size-14px)] text-center tracking-[0.3em]';
-const labelClass = 'text-[length:var(--font-size-13px)] text-[#9ba2ab] font-semibold mb-2 block';
+import {
+  authButton, inputClass, labelClass, FormError, FormSuccess, Spinner,
+} from './auth-ui';
 
 export default function ConfirmSignupView() {
   const form = useStore($authForm);
@@ -51,7 +46,6 @@ export default function ConfirmSignupView() {
         return;
       }
 
-      // Success → switch to login with success banner
       setFormSuccess('Email verified! Sign in to continue.');
       switchView('login');
     } catch {
@@ -106,12 +100,7 @@ export default function ConfirmSignupView() {
         <span className="text-[#e5e7eb] font-semibold">{form.email}</span>
       </p>
 
-      {/* Success message */}
-      {form.successMessage && (
-        <p className="text-[color:var(--success-color)] text-[length:var(--font-size-13px)] mb-4 text-center w-full">
-          {form.successMessage}
-        </p>
-      )}
+      <FormSuccess message={form.successMessage} />
 
       <form onSubmit={handleSubmit} className="w-full max-w-[360px]">
         <div className="mb-5">
@@ -125,7 +114,7 @@ export default function ConfirmSignupView() {
             autoComplete="one-time-code"
             value={code}
             onChange={(e) => setCode(e.target.value.replace(/\D/g, ''))}
-            className={inputClass}
+            className={cn(inputClass, 'text-center tracking-[0.3em]')}
             disabled={loading}
             placeholder="123456"
             autoFocus
@@ -135,17 +124,13 @@ export default function ConfirmSignupView() {
         <button
           type="submit"
           disabled={loading}
-          className={cn(submitButton(), loading && 'opacity-60 cursor-not-allowed')}
+          className={cn(authButton({ intent: 'submit' }), loading && 'opacity-60 cursor-not-allowed')}
         >
+          {loading && <Spinner />}
           {loading ? 'Verifying\u2026' : 'Verify'}
         </button>
 
-        {/* Error message */}
-        {form.error && (
-          <p className="text-[#f87171] text-[length:var(--font-size-13px)] mt-3 text-center">
-            {form.error}
-          </p>
-        )}
+        <FormError message={form.error} />
       </form>
 
       {/* Resend code */}
@@ -162,6 +147,7 @@ export default function ConfirmSignupView() {
             resending && 'opacity-60 pointer-events-none'
           )}
         >
+          {resending && <Spinner size={12} className="inline-block align-[-2px] mr-1" />}
           {resending ? 'Sending\u2026' : 'Resend code'}
         </a>
       </p>

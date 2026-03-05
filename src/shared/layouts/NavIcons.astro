@@ -395,6 +395,12 @@ import VaultCount from '@features/vault/components/VaultCount';
   document.querySelector('.signup-nav-icon')?.addEventListener('click', () => openSignup());
 </script>
 
+{/* Settings icon trigger — opens SettingsDialog via shared atom */}
+<script>
+  import { openSettings } from '@features/settings/store';
+  document.querySelector('.settings-nav-icon')?.addEventListener('click', () => openSettings());
+</script>
+
 {/* Account dropdown logic — absorbed from old popup controller.
     Uses is:inline because it doesn't need module imports. */}
 <script is:inline>

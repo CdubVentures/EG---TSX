@@ -8,9 +8,9 @@
 import { atom } from 'nanostores';
 import { $auth } from '../auth/store.ts';
 import { DEFAULT_PREFS, prefsStorageKey } from './types.ts';
-import type { PreferenceKey, HubDisplayMode, UserPreferences } from './types.ts';
+import type { PreferenceKey, HubDisplayMode, UserPreferences, ThemeMode } from './types.ts';
 
-export type { PreferenceKey, HubDisplayMode, UserPreferences };
+export type { PreferenceKey, HubDisplayMode, UserPreferences, ThemeMode };
 export { DEFAULT_PREFS };
 
 /* ── Settings Dialog State ─── */
@@ -87,10 +87,43 @@ export async function pushPrefs(_partial: Partial<UserPreferences>): Promise<voi
   // Phase 9: PUT /api/user/prefs
 }
 
+/* ── Theme State ─── */
+// WHY: Theme is device-level (not uid-scoped). Maps 'light'→'default', 'dark'→'gaming'
+// to match existing data-theme values and flash-prevention script in MainLayout.astro.
+
+const THEME_KEY = 'eg-theme';
+const THEME_TO_DATA: Record<ThemeMode, string> = { light: 'default', dark: 'gaming' };
+const DATA_TO_THEME: Record<string, ThemeMode> = { default: 'light', gaming: 'dark' };
+const THEME_COLORS: Record<ThemeMode, string> = { light: '#ffffff', dark: '#141617' };
+
+export const $theme = atom<ThemeMode>('dark');
+
+/** Set theme: updates atom + DOM + localStorage. */
+export function setTheme(mode: ThemeMode): void {
+  $theme.set(mode);
+
+  if (typeof localStorage === 'undefined') return;
+  localStorage.setItem(THEME_KEY, THEME_TO_DATA[mode]);
+
+  if (typeof document !== 'undefined') {
+    document.documentElement.setAttribute('data-theme', THEME_TO_DATA[mode]);
+    const meta = document.querySelector('meta[name="theme-color"]');
+    if (meta) meta.setAttribute('content', THEME_COLORS[mode]);
+  }
+}
+
+/** Read saved theme from localStorage into atom. */
+export function loadTheme(): void {
+  if (typeof localStorage === 'undefined') return;
+  const saved = localStorage.getItem(THEME_KEY);
+  const mapped = saved ? DATA_TO_THEME[saved] : undefined;
+  $theme.set(mapped ?? 'dark');
+}
+
 /* ── Global integration ─── */
 
 // WHY: guard against SSR (no window/localStorage on server)
 if (typeof window !== 'undefined') {
   // Expose for account dropdown integration (NavIcons.astro:427)
-  (window as Record<string, unknown>).closeSettingsPopup = closeSettings;
+  (window as unknown as Record<string, unknown>).closeSettingsPopup = closeSettings;
 }
