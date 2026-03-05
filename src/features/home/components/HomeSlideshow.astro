@@ -6,10 +6,11 @@
  * Renders all slides server-side. Embla Carousel initializes client-side
  * for drag, autoplay, arrows, pause/play, category filtering, lazy loading.
  */
-import { getCollection } from 'astro:content';
+import { getProducts } from '@core/products';
 import { getCarouselImages } from '@core/media';
 import { categoryColor } from '@core/config';
 import type { ProductMedia } from '@core/media';
+import DexaBadge from '@shared/ui/DexaBadge.astro';
 
 // ─── Resolve hero image for a product ────────────────────────────────────────
 // WHY: HBS uses hubCards.getImagesArrayXXL + sortImagesForCarousel to pick the
@@ -65,7 +66,7 @@ interface SlideData {
   brandSlug: string;
 }
 
-const allProducts = await getCollection('dataProducts');
+const allProducts = await getProducts();
 
 // Pick test products: top-scored products with media images, across categories
 const candidates = allProducts
@@ -161,9 +162,7 @@ function srcSet(imagePath: string, stem: string): string {
             <div class="scoring-wrapper-top">
               <div class="scoring-wrapper">
                 {slide.overall ? (
-                  <span class="dexa" style={`color: ${catHex};`}>
-                    {slide.overall}
-                  </span>
+                  <DexaBadge score={slide.overall} />
                 ) : null}
               </div>
 
@@ -946,12 +945,9 @@ function srcSet(imagePath: string, stem: string): string {
   }
 
   .slide-anchor .dexa {
-    font-size: var(--slideShow-card-score-fs);
-    font-weight: var(--font-weight8);
-    font-family: var(--identity-font);
+    --dexa-size: var(--slideShow-card-score-fs);
     position: relative;
     z-index: 1000;
-    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6);
   }
 
   /* ── Compare toggle ── */

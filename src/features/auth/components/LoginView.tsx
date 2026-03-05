@@ -91,17 +91,17 @@ export default function LoginView() {
         <h3
           className={cn(
             '[font-weight:700] [font-size:var(--ft-30-24)] [font-family:var(--identity-font)]',
-            'm-0 mb-2 text-[#e5e7eb]'
+            'm-0 mb-2 text-[var(--auth-heading-text)]'
           )}
         >
           Welcome back!
         </h3>
 
         {/* Benefits row */}
-        <p className="flex flex-wrap items-center justify-center gap-2 text-[length:var(--font-size-14px)] text-[#9ba2ab] m-0 mb-7 text-center">
+        <p className="flex flex-wrap items-center justify-center gap-2 text-[length:var(--font-size-14px)] text-[var(--auth-subtitle-text)] m-0 mb-7 text-center">
           <span className="inline-flex items-center gap-2 whitespace-nowrap">
             <span className="w-5 h-5 rounded-full bg-[var(--success-color)] inline-flex items-center justify-center shrink-0">
-              <span className="text-[0.75rem] leading-none text-[#101214]">&#10004;</span>
+              <span className="text-[0.75rem] leading-none text-[var(--auth-check-text)]">&#10004;</span>
             </span>
             Unlimited&nbsp;Access
           </span>
@@ -190,7 +190,7 @@ export default function LoginView() {
         <AuthLegal />
 
         {/* Switch to signup */}
-        <p className="text-[length:var(--font-size-14px)] mt-8 text-[#9ba2ab]">
+        <p className="text-[length:var(--font-size-14px)] mt-8 text-[var(--auth-subtitle-text)]">
           Don&apos;t have an account?{' '}
           <a
             href="#"

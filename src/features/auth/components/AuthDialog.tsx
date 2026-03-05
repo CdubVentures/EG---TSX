@@ -60,9 +60,9 @@ export default function AuthDialog() {
       className={cn(
         'auth-dialog',
         'w-[90%] max-w-[960px] max-h-[80vh]',
-        'bg-[#1d2021] rounded-[7px] overflow-x-hidden overflow-y-auto',
-        'text-[#e5e7eb] [font-family:var(--identity-font,_"Open_Sans",_sans-serif)] leading-[normal]',
-        'shadow-[0_12px_32px_rgba(0,0,0,0.6)]',
+        'bg-[var(--auth-dialog-bg)] rounded-[7px] overflow-x-hidden overflow-y-auto',
+        'text-[var(--auth-dialog-text)] [font-family:var(--identity-font,_"Open_Sans",_sans-serif)] leading-[normal]',
+        'shadow-[var(--auth-dialog-shadow)]',
         'p-0 border-none m-auto'
       )}
       onCancel={(e) => {
@@ -80,10 +80,10 @@ export default function AuthDialog() {
       <button
         className={cn(
           'absolute top-[8px] right-[9px]',
-          'text-[26px] leading-[26px] text-[#6b7280]',
+          'text-[26px] leading-[26px] text-[var(--auth-close-color)]',
           'appearance-none bg-transparent border-none cursor-pointer p-0',
           'pointer-events-auto z-10',
-          'hover:text-[#d1d5db]'
+          'hover:text-[var(--auth-close-hover)]'
         )}
         onClick={handleClose}
         aria-label="Close"

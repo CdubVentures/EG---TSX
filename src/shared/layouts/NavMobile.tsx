@@ -15,7 +15,7 @@
 
 import { useState, useCallback, useEffect } from 'react';
 import { plural } from '@core/config';
-import { openLogin } from '@features/auth/store';
+import { openLogin } from '@features/auth';
 
 /* ─── Data passed from Astro parent ─── */
 interface NavMobileProps {

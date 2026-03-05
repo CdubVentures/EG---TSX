@@ -107,17 +107,17 @@ export default function ForgotPasswordView() {
       <h3
         className={cn(
           '[font-weight:700] [font-size:var(--ft-28-20)] [font-family:var(--identity-font)]',
-          'm-0 mb-3 text-[#e5e7eb] text-center'
+          'm-0 mb-3 text-[var(--auth-heading-text)] text-center'
         )}
       >
         Reset your password
       </h3>
 
       {step === 2 && (
-        <p className="text-[length:var(--font-size-14px)] text-[#9ba2ab] m-0 mb-4 text-center">
+        <p className="text-[length:var(--font-size-14px)] text-[var(--auth-subtitle-text)] m-0 mb-4 text-center">
           Code sent to
           <br />
-          <span className="text-[#e5e7eb] font-semibold">{form.email}</span>
+          <span className="text-[var(--auth-heading-text)] font-semibold">{form.email}</span>
         </p>
       )}
 
@@ -205,7 +205,7 @@ export default function ForgotPasswordView() {
       )}
 
       {/* Back to login */}
-      <p className="text-[length:var(--font-size-13px)] text-[#9ba2ab] mt-6 text-center">
+      <p className="text-[length:var(--font-size-13px)] text-[var(--auth-subtitle-text)] mt-6 text-center">
         <a
           href="#"
           onClick={(e) => {

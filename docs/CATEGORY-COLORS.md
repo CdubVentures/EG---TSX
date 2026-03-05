@@ -15,8 +15,8 @@ All site-wide and per-category colors are managed through a single JSON config. 
 ```json
 {
   "siteColors": {
-    "primary": "#394cc8",
-    "secondary": "#00aeff"
+    "primary": "#a6e3a1",
+    "secondary": "#21c55e"
   },
   "categories": [
     {

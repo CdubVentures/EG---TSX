@@ -84,7 +84,7 @@ const { title, titleHref, subtitle, class: className } = Astro.props;
     margin-bottom: -6px;
     padding-bottom: 6px;
     scrollbar-width: thin;
-    scrollbar-color: rgba(255, 255, 255, 0.2) transparent;
+    scrollbar-color: var(--scrollbar-thumb) transparent;
   }
 
   .section-divider-actions::-webkit-scrollbar {
@@ -96,7 +96,7 @@ const { title, titleHref, subtitle, class: className } = Astro.props;
   }
 
   .section-divider-actions::-webkit-scrollbar-thumb {
-    background: rgba(255, 255, 255, 0.2);
+    background: var(--scrollbar-thumb);
     border-radius: 4px;
   }
 

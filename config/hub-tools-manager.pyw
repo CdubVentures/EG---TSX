@@ -4,9 +4,15 @@
 hub-tools-manager.py -- GUI for managing hub sidebar tools per category.
 
 Each product category (mouse, keyboard, monitor) has multiple tool links
-(Hub, Database, Shapes, Versus, Radars) displayed in the home page sidebar
-and hub pages. This tool lets you configure: label, url, description,
-subtitle, and SVG icon for each tool entry.
+(Hub, Database, Shapes, Versus, Radars) displayed in the home page sidebar,
+hub index page (/hubs/), and hub pages. This tool lets you configure:
+label, url, description, subtitle, SVG icon, hero image path,
+navbar visibility, and dashboard slot assignments for each tool entry.
+
+Used by:
+  - Home page sidebar (.home-intro-right tools section)
+  - /hubs/ index page (tools matrix grid + dashboard)
+  - /hubs/:tool/ filtered views (filtered tool list + dashboard)
 
 Reads/writes config/hub-tools.json.
 Reads config/categories.json for category list and colors.
@@ -18,7 +24,7 @@ import ctypes
 import json
 import sys
 import tkinter as tk
-from tkinter import messagebox, filedialog
+from tkinter import ttk, messagebox, filedialog
 from pathlib import Path
 from datetime import datetime
 from textwrap import shorten
@@ -34,6 +40,7 @@ if sys.platform == "win32":
 ROOT = Path(__file__).resolve().parent.parent
 CATEGORIES_JSON = ROOT / "config" / "categories.json"
 HUB_TOOLS_JSON = ROOT / "config" / "hub-tools.json"
+CONTENT = ROOT / "src" / "content"
 
 
 # -- Design System (shared with category-manager / navbar-manager) -----------
@@ -263,15 +270,55 @@ def load_categories() -> list[dict]:
     return []
 
 
-def get_product_categories() -> list[dict]:
-    """Get only categories that have products (product.vite or product.production is true)."""
-    cats = load_categories()
-    result = []
-    for cat in cats:
-        prod = cat.get("product", {})
-        if prod.get("vite", False) or prod.get("production", False):
-            result.append(cat)
-    return result
+def _scan_content_only_cats() -> set[str]:
+    """Scan filesystem: categories that have articles but NO data-products folder."""
+    import re
+    dp = CONTENT / "data-products"
+    product_dirs: set[str] = set()
+    if dp.is_dir():
+        product_dirs = {d.name for d in dp.iterdir() if d.is_dir()}
+
+    article_cats: set[str] = set()
+    for dirname in ("reviews", "guides", "news"):
+        d = CONTENT / dirname
+        if not d.is_dir():
+            continue
+        for f in d.rglob("*"):
+            if f.suffix in (".md", ".mdx") and f.is_file():
+                try:
+                    text = f.read_text(encoding="utf-8", errors="replace")
+                    parts = text.split("---", 2)
+                    if len(parts) >= 3:
+                        for line in parts[1].splitlines():
+                            m = re.match(r"^category:\s*(.+)", line)
+                            if m:
+                                article_cats.add(m.group(1).strip().strip("'\""))
+                                break
+                except Exception:
+                    pass
+
+    return article_cats - product_dirs
+
+
+# WHY: cached at module load — filesystem doesn't change during a session
+_CONTENT_ONLY: set[str] = _scan_content_only_cats()
+
+
+def is_product_active(cat: dict) -> bool:
+    """True if this category's product flags are enabled (production OR vite).
+
+    WHY: Mirrors the same activation logic as CONFIG.categories in config.ts:
+      isActive(sub) = sub.production || (isDev && sub.vite)
+    Since the Python GUI is a dev tool, both flags are checked.
+    This is the product gateway chain — categories.json flags are SSOT.
+    """
+    product = cat.get("product", {})
+    return product.get("production", False) or product.get("vite", False)
+
+
+def get_hub_categories() -> list[dict]:
+    """Get categories that have (or will have) hub pages — excludes content-only."""
+    return [c for c in load_categories() if c["id"] not in _CONTENT_ONLY]
 
 
 def load_hub_tools() -> dict:
@@ -295,6 +342,8 @@ def make_default_tool(category_id: str, tool_type: str) -> dict:
             or f"Explore {category_id} {tool_type}")
     subtitle = (DEFAULT_SUBTITLES.get(category_id, {}).get(tool_type)
                 or f"{category_id.capitalize()} {TOOL_TYPE_LABELS.get(tool_type, tool_type)}")
+    # WHY: heroImg used by /hubs/ dashboard for hero images. Only hub-type tools have hero images.
+    hero_img = f"/images/tools/{category_id}/{tool_type}/hero-img" if tool_type == "hub" else ""
     return {
         "tool": tool_type,
         "title": TOOL_TYPE_LABELS.get(tool_type, tool_type.capitalize()),
@@ -303,21 +352,27 @@ def make_default_tool(category_id: str, tool_type: str) -> dict:
         "url": DEFAULT_URLS.get(tool_type, f"/hubs/{category_id}").replace("{cat}", category_id),
         "svg": "",
         "enabled": True,
+        "navbar": tool_type == "hub",
+        "heroImg": hero_img,
     }
 
 
 def ensure_defaults(data: dict, categories: list[dict]) -> dict:
-    """Ensure every product category has entries for all tool types."""
+    """Ensure every category has entries for all tool types."""
     for cat in categories:
         cat_id = cat["id"]
+        active = is_product_active(cat)
         if cat_id not in data:
             data[cat_id] = []
         existing_tools = {t["tool"] for t in data[cat_id]}
         for tool_type in TOOL_TYPES:
             if tool_type not in existing_tools:
                 entry = make_default_tool(cat_id, tool_type)
+                # Non-product categories: all tools disabled by default
+                if not active:
+                    entry["enabled"] = False
                 # Shapes only enabled for mouse by default
-                if tool_type == "shapes" and cat_id != "mouse":
+                elif tool_type == "shapes" and cat_id != "mouse":
                     entry["enabled"] = False
                 data[cat_id].append(entry)
         # Sort tools by TOOL_TYPES order
@@ -514,6 +569,41 @@ class SvgEditor(tk.Toplevel):
         self.destroy()
 
 
+# -- HoverListbox (drag-drop target) ----------------------------------------
+class HoverListbox(tk.Listbox):
+    """Listbox with per-row hover highlighting (matches navbar-manager pattern)."""
+    _global_drag = False
+
+    def __init__(self, parent, **kw):
+        hover_bg = kw.pop("hover_bg", C.SURFACE1)
+        item_bg = kw.pop("item_bg", C.SURFACE0)
+        super().__init__(parent, **kw)
+        self._hover_bg = hover_bg
+        self._item_bg = item_bg
+        self._hover_idx = -1
+        self.bind("<Motion>", self._on_hover)
+        self.bind("<Leave>", self._on_unhover)
+
+    def _on_hover(self, e):
+        if HoverListbox._global_drag:
+            return
+        idx = self.nearest(e.y)
+        if idx == self._hover_idx:
+            return
+        self._clear_hover()
+        if 0 <= idx < self.size() and self.bbox(idx):
+            self._hover_idx = idx
+            self.itemconfigure(idx, bg=self._hover_bg)
+
+    def _on_unhover(self, e):
+        self._clear_hover()
+
+    def _clear_hover(self):
+        if 0 <= self._hover_idx < self.size():
+            self.itemconfigure(self._hover_idx, bg=self._item_bg)
+        self._hover_idx = -1
+
+
 # -- Main Application -------------------------------------------------------
 class HubToolsManager(tk.Tk):
 
@@ -521,10 +611,10 @@ class HubToolsManager(tk.Tk):
         super().__init__()
         self.title("EG Hub Tools Manager")
         sw, sh = self.winfo_screenwidth(), self.winfo_screenheight()
-        win_w, win_h = 1100, 800
+        win_w, win_h = 1536, 864
         self.geometry(f"{win_w}x{win_h}+{(sw-win_w)//2}+{(sh-win_h)//2}")
         self.configure(bg=C.MANTLE)
-        self.minsize(900, 600)
+        self.minsize(900, 700)
 
         dark_title_bar(self)
         try:
@@ -535,43 +625,70 @@ class HubToolsManager(tk.Tk):
         except Exception:
             pass
 
-        self.product_cats = get_product_categories()
+        self.product_cats = get_hub_categories()
         self.data = ensure_defaults(load_hub_tools(), self.product_cats)
         self._original = json.dumps(self.data, sort_keys=True)
         self._selected_cat = self.product_cats[0]["id"] if self.product_cats else ""
         self._card_widgets: list[dict] = []
 
+        # Drag state for Index tab
+        self._drag_src: tk.Listbox | None = None
+        self._drag_idx: int | None = None
+        self._drag_item: dict | None = None
+        self._drag_ghost: tk.Toplevel | None = None
+        self._index_lbs: list[tk.Listbox] = []
+        self._index_filter = "all"
+
+        self._setup_styles()
         self._build_header()
-        self._build_body()
+        self.notebook = ttk.Notebook(self)
+        self.notebook.pack(fill="both", expand=True, padx=0, pady=(0, 0))
+        self._build_home_tab()
+        self._build_index_tab()
         self._build_status_bar()
         self.toast = Toast(self)
         self.bind_all("<Control-s>", lambda e: self._save())
         self.protocol("WM_DELETE_WINDOW", self._on_close)
 
+    def _setup_styles(self):
+        s = ttk.Style(self)
+        s.theme_use("clam")
+        s.configure("TNotebook", background=C.MANTLE, borderwidth=0,
+                     tabmargins=[4, 8, 4, 0])
+        s.configure("TNotebook.Tab",
+                     background=C.SURFACE1, foreground=C.OVERLAY0,
+                     padding=[28, 12], borderwidth=0, font=F.BODY_BOLD,
+                     focuscolor=C.SURFACE1)
+        s.map("TNotebook.Tab",
+              background=[("selected", C.SURFACE0)],
+              foreground=[("selected", C.TEXT)])
+
     # -- Header --------------------------------------------------------------
     def _build_header(self):
-        hdr = tk.Frame(self, bg=C.CRUST, height=58)
+        hdr = tk.Frame(self, bg=C.CRUST, height=56)
         hdr.pack(fill="x")
         hdr.pack_propagate(False)
         tk.Frame(hdr, bg=C.TEAL, height=2).pack(fill="x", side="bottom")
         inner = tk.Frame(hdr, bg=C.CRUST)
-        inner.pack(fill="both", expand=True, padx=24)
+        inner.pack(fill="both", expand=True, padx=20)
         tk.Label(inner, text="EG", bg=C.CRUST, fg=C.TEAL,
-                 font=("Segoe UI", 20, "bold")).pack(side="left")
+                 font=("Segoe UI", 18, "bold")).pack(side="left")
         tk.Label(inner, text="  Hub Tools Manager", bg=C.CRUST, fg=C.TEXT,
                  font=("Segoe UI", 14)).pack(side="left")
         tk.Label(inner, text=f"  \u00b7  {ROOT.name}", bg=C.CRUST, fg=C.OVERLAY0,
-                 font=F.SMALL).pack(side="left", padx=(4, 0))
+                 font=F.BODY).pack(side="left", padx=(4, 0))
         self.save_btn = FlatBtn(inner, text="  Save  ", command=self._save,
                                 bg=C.TEAL, fg=C.CRUST, hover_bg=C.SAPPHIRE,
                                 font=F.BODY_BOLD)
-        self.save_btn.pack(side="right", pady=10)
+        self.save_btn.pack(side="right", pady=4)
         self.changes_lbl = tk.Label(inner, text="", bg=C.CRUST, fg=C.PEACH, font=F.SMALL)
-        self.changes_lbl.pack(side="right", padx=12)
+        self.changes_lbl.pack(side="right", padx=8)
 
-    # -- Body (sidebar + tool cards) -----------------------------------------
-    def _build_body(self):
-        body = tk.Frame(self, bg=C.MANTLE)
+    # -- Home Tab (sidebar + tool cards) -------------------------------------
+    def _build_home_tab(self):
+        frame = ttk.Frame(self.notebook)
+        self.notebook.add(frame, text="  Home  ")
+        body = tk.Frame(frame, bg=C.MANTLE)
         body.pack(fill="both", expand=True)
 
         # Left sidebar: category tabs
@@ -586,20 +703,24 @@ class HubToolsManager(tk.Tk):
         for cat in self.product_cats:
             cat_id = cat["id"]
             color = cat.get("color", C.BLUE)
+            active = is_product_active(cat)
             btn_frame = tk.Frame(sidebar, bg=C.BASE)
             btn_frame.pack(fill="x", padx=4, pady=1)
 
-            accent = tk.Frame(btn_frame, bg=color, width=3)
+            # WHY: dim accent bar for non-product categories
+            accent_color = color if active else C.SURFACE2
+            accent = tk.Frame(btn_frame, bg=accent_color, width=3)
             accent.pack(side="left", fill="y")
 
+            text_fg = C.TEXT if active else C.OVERLAY0
             lbl = tk.Label(btn_frame, text=f"  {cat_id.upper()}",
-                           bg=C.BASE, fg=C.TEXT, font=F.BODY_BOLD,
+                           bg=C.BASE, fg=text_fg, font=F.BODY_BOLD,
                            anchor="w", padx=8, pady=8, cursor="hand2")
             lbl.pack(side="left", fill="both", expand=True)
             lbl.bind("<Button-1>", lambda e, cid=cat_id: self._select_category(cid))
             self._cat_btns[cat_id] = lbl
 
-            # Tool count badge
+            # Tool count badge (enabled tools only)
             tool_count = len([t for t in self.data.get(cat_id, []) if t.get("enabled", True)])
             badge = tk.Label(btn_frame, text=str(tool_count),
                              bg=C.SURFACE1, fg=C.OVERLAY0, font=F.TINY,
@@ -821,7 +942,37 @@ class HubToolsManager(tk.Tk):
                                   highlightbackground=C.SURFACE2)
         subtitle_entry.pack(side="left", fill="x", expand=True, padx=(4, 0))
 
-        # Row 5: SVG actions
+        # Row 5: Hero Image + Navbar toggle
+        row5a = tk.Frame(inner, bg=C.SURFACE0)
+        row5a.pack(fill="x", pady=(4, 0))
+        tk.Label(row5a, text="Hero Image:", bg=C.SURFACE0, fg=C.OVERLAY0,
+                 font=F.SMALL, width=10, anchor="w").pack(side="left")
+        hero_var = tk.StringVar(value=tool.get("heroImg", ""))
+        hero_entry = tk.Entry(row5a, textvariable=hero_var, bg=C.SURFACE1, fg=C.TEXT,
+                              insertbackground=C.TEXT, font=F.BODY, relief="flat", bd=0,
+                              highlightthickness=1, highlightcolor=C.BLUE,
+                              highlightbackground=C.SURFACE2, width=40)
+        hero_entry.pack(side="left", padx=(4, 8))
+        Tip(hero_entry, "Hero image base path for /hubs/ dashboard cards.\n"
+                        "e.g. /images/tools/mouse/hub/hero-img\n"
+                        "Size suffix (_xl, _l, etc.) added automatically.")
+
+        # Navbar toggle
+        nav_val = tool.get("navbar", False)
+        nav_frame = tk.Frame(row5a, bg=C.SURFACE0)
+        nav_frame.pack(side="left", padx=(8, 0))
+        tk.Label(nav_frame, text="Navbar:", bg=C.SURFACE0, fg=C.SUBTEXT0,
+                 font=F.TINY).pack(side="left", padx=(0, 4))
+        nav_canvas = tk.Canvas(nav_frame, width=38, height=20,
+                               highlightthickness=0, bd=0, bg=C.SURFACE0)
+        nav_canvas.pack(side="left")
+        self._draw_toggle(nav_canvas, nav_val)
+        nav_canvas.configure(cursor="hand2")
+        nav_canvas.bind("<Button-1>",
+                        lambda e, i=idx, nc=nav_canvas: self._toggle_field(i, "navbar", nc))
+        Tip(nav_canvas, "Show this tool in the main navigation bar")
+
+        # Row 6: SVG actions
         row5 = tk.Frame(inner, bg=C.SURFACE0)
         row5.pack(fill="x", pady=(6, 0))
         tk.Label(row5, text="SVG Icon:", bg=C.SURFACE0, fg=C.OVERLAY0,
@@ -853,13 +1004,15 @@ class HubToolsManager(tk.Tk):
         url_var.trace_add("write", lambda *a: _on_change(field="url", var=url_var, i=idx))
         desc_var.trace_add("write", lambda *a: _on_change(field="description", var=desc_var, i=idx))
         subtitle_var.trace_add("write", lambda *a: _on_change(field="subtitle", var=subtitle_var, i=idx))
+        hero_var.trace_add("write", lambda *a: _on_change(field="heroImg", var=hero_var, i=idx))
 
         self._card_widgets.append({
             "card": card, "title_var": title_var, "url_var": url_var,
             "desc_var": desc_var, "subtitle_var": subtitle_var,
+            "hero_var": hero_var,
             "icon_canvas": icon_canvas, "accent": accent,
             "svg_status": svg_status, "svg_preview": svg_preview,
-            "enable_canvas": enable_canvas,
+            "enable_canvas": enable_canvas, "nav_canvas": nav_canvas,
         })
 
     def _draw_toggle(self, canvas: tk.Canvas, is_on: bool):
@@ -886,6 +1039,14 @@ class HubToolsManager(tk.Tk):
         # Rebuild to update accent color + icon
         self._rebuild_tool_cards()
         self._update_sidebar_badges()
+
+    def _toggle_field(self, idx: int, field: str, canvas: tk.Canvas):
+        """Toggle an arbitrary boolean field on a tool entry."""
+        tool = self.data[self._selected_cat][idx]
+        new_val = not tool.get(field, False)
+        tool[field] = new_val
+        self._draw_toggle(canvas, new_val)
+        self._update_badge()
 
     def _edit_svg(self, idx: int):
         """Open SVG editor dialog for a tool."""
@@ -1077,17 +1238,25 @@ class HubToolsManager(tk.Tk):
         for cat in self.product_cats:
             cat_id = cat["id"]
             color = cat.get("color", C.BLUE)
+            active = is_product_active(cat)
             btn_frame = tk.Frame(self._sidebar, bg=C.BASE)
             btn_frame.pack(fill="x", padx=4, pady=1)
 
-            accent = tk.Frame(btn_frame, bg=color, width=3)
+            accent_color = color if active else C.SURFACE2
+            accent = tk.Frame(btn_frame, bg=accent_color, width=3)
             accent.pack(side="left", fill="y")
 
             is_selected = cat_id == self._selected_cat
+            if is_selected:
+                text_fg = C.TEXT
+            elif active:
+                text_fg = C.SUBTEXT0
+            else:
+                text_fg = C.OVERLAY0
             lbl = tk.Label(btn_frame,
                            text=f"  {cat_id.upper()}",
                            bg=C.SURFACE0 if is_selected else C.BASE,
-                           fg=C.TEXT if is_selected else C.SUBTEXT0,
+                           fg=text_fg,
                            font=F.BODY_BOLD,
                            anchor="w", padx=8, pady=8, cursor="hand2")
             lbl.pack(side="left", fill="both", expand=True)
@@ -1159,6 +1328,383 @@ class HubToolsManager(tk.Tk):
                     parent=self):
                 return
         self.destroy()
+
+    # ========================================================================
+    # INDEX TAB — drag-and-drop dashboard slot assignment for /hubs/ page
+    #
+    # Each view (All, Hub, Database, Versus, Radar, Shapes) has 6 slots.
+    # Slots start blank. Drag a tool from the unassigned pool into a slot.
+    # Slots take the category color of the tool placed in them.
+    # "All" view: unassigned pool shows all enabled tool types.
+    # Other views: unassigned pool shows only that tool type.
+    # Unfilled slots auto-fill from remaining tools at page build time.
+    # ========================================================================
+
+    def _build_index_tab(self):
+        frame = ttk.Frame(self.notebook)
+        self.notebook.add(frame, text="  Index  ")
+
+        top = tk.Frame(frame, bg=C.MANTLE)
+        top.pack(fill="x", padx=16, pady=(12, 0))
+        tk.Label(top, text="/hubs/ Dashboard Slots", bg=C.MANTLE, fg=C.TEXT,
+                 font=F.HEADING).pack(side="left")
+        tk.Label(top, text="  Drag tools into slots to set featured order  "
+                           "\u00b7  Empty slots auto-fill at build time",
+                 bg=C.MANTLE, fg=C.OVERLAY0, font=F.SMALL).pack(side="left", padx=(8, 0))
+
+        body = tk.Frame(frame, bg=C.MANTLE)
+        body.pack(fill="both", expand=True, padx=0, pady=(4, 0))
+
+        # Left sidebar: view selector (tool type)
+        sidebar = tk.Frame(body, bg=C.BASE, width=160)
+        sidebar.pack(side="left", fill="y", padx=(16, 0), pady=(8, 8))
+        sidebar.pack_propagate(False)
+
+        tk.Label(sidebar, text="VIEW", bg=C.BASE, fg=C.OVERLAY0,
+                 font=F.TINY).pack(fill="x", padx=12, pady=(12, 8))
+
+        self._index_view_btns: dict[str, tk.Label] = {}
+        views = [("all", "All Tools")] + [
+            (t, TOOL_TYPE_LABELS.get(t, t)) for t in TOOL_TYPES
+        ]
+        for vid, vlabel in views:
+            btn_frame = tk.Frame(sidebar, bg=C.BASE)
+            btn_frame.pack(fill="x", padx=4, pady=1)
+            lbl = tk.Label(btn_frame, text=f"  {vlabel}",
+                           bg=C.BASE, fg=C.TEXT, font=F.BODY_BOLD,
+                           anchor="w", padx=8, pady=6, cursor="hand2")
+            lbl.pack(fill="both", expand=True)
+            lbl.bind("<Button-1>", lambda e, v=vid: self._set_index_view(v))
+            self._index_view_btns[vid] = lbl
+
+        # Info label
+        tk.Frame(sidebar, bg=C.SURFACE2, height=1).pack(fill="x", padx=12, pady=(16, 8))
+        tk.Label(sidebar, text="Each view has its own\n6 dashboard slots.\n\n"
+                               "Delete/Backspace\nremoves from slot.",
+                 bg=C.BASE, fg=C.OVERLAY0, font=F.TINY,
+                 justify="left").pack(fill="x", padx=12, pady=(0, 4))
+
+        # Right content: slots + unassigned
+        self._index_area = tk.Frame(body, bg=C.MANTLE)
+        self._index_area.pack(side="left", fill="both", expand=True, padx=(12, 16), pady=(8, 8))
+
+        self._set_index_view("all")
+
+    def _set_index_view(self, view: str):
+        """Switch the active view and rebuild the slots + pool."""
+        self._index_filter = view
+        for vid, lbl in self._index_view_btns.items():
+            if vid == view:
+                lbl.configure(bg=C.SURFACE0, fg=C.TEAL)
+            else:
+                lbl.configure(bg=C.BASE, fg=C.SUBTEXT0)
+        self._refresh_index()
+
+    def _get_cat_color_by_id(self, cat_id: str) -> str:
+        """Get the category color by ID."""
+        for cat in self.product_cats:
+            if cat["id"] == cat_id:
+                return cat.get("color", C.BLUE)
+        return C.OVERLAY0
+
+    def _refresh_index(self):
+        """Rebuild the 6 slots + unassigned pool for the current view."""
+        for w in self._index_area.winfo_children():
+            w.destroy()
+        self._index_lbs = []
+
+        view = self._index_filter
+        index_data = self.data.get("_index", {})
+        assigned_keys = index_data.get(view, [])  # ordered list of "cat:tool" keys
+
+        # Collect ALL tools matching this view (enabled + disabled)
+        pool: list[dict] = []
+        for cat_id in [c["id"] for c in self.product_cats]:
+            for tool in self.data.get(cat_id, []):
+                if view != "all" and tool.get("tool") != view:
+                    continue
+                pool.append({"_cat": cat_id, **tool})
+
+        # Resolve assigned tools (in order)
+        assigned: list[dict | None] = []
+        assigned_set: set[str] = set()
+        for key in assigned_keys:
+            parts = key.split(":", 1)
+            if len(parts) == 2:
+                src_cat, src_tool = parts
+                found = None
+                for t in pool:
+                    if t["_cat"] == src_cat and t.get("tool") == src_tool:
+                        found = t
+                        break
+                assigned.append(found)
+                if found:
+                    assigned_set.add(key)
+            else:
+                assigned.append(None)
+
+        # Pad to 6 slots
+        while len(assigned) < 6:
+            assigned.append(None)
+
+        # Unassigned = pool items not in any slot
+        unassigned = [t for t in pool
+                      if f"{t['_cat']}:{t.get('tool', '')}" not in assigned_set]
+
+        # Layout: slots grid (left) | separator | unassigned pool (right)
+        split = tk.Frame(self._index_area, bg=C.MANTLE)
+        split.pack(fill="both", expand=True)
+
+        # Left: 6 slots in a 3x2 grid
+        left = tk.Frame(split, bg=C.MANTLE)
+        left.pack(side="left", fill="both", expand=True)
+
+        slots_grid = tk.Frame(left, bg=C.MANTLE)
+        slots_grid.pack(fill="both", expand=True)
+        for c in range(3):
+            slots_grid.columnconfigure(c, weight=1)
+        for r in range(2):
+            slots_grid.rowconfigure(r, weight=1)
+
+        for i in range(6):
+            r, c = divmod(i, 3)
+            tool = assigned[i] if i < len(assigned) else None
+            self._build_slot(slots_grid, i, tool, r, c)
+
+        # Separator
+        sep = tk.Frame(split, bg=C.SURFACE2, width=2)
+        sep.pack(side="left", fill="y", padx=12, pady=8)
+
+        # Right: unassigned pool
+        right = tk.Frame(split, bg=C.MANTLE, width=240)
+        right.pack(side="right", fill="y")
+        right.pack_propagate(False)
+        self._build_pool(right, unassigned)
+
+    def _build_slot(self, parent, slot_idx: int, tool: dict | None, row: int, col: int):
+        """Build a single dashboard slot card."""
+        has_tool = tool is not None
+
+        is_disabled = has_tool and not tool.get("enabled", True)
+
+        if has_tool:
+            cat_id = tool["_cat"]
+            color = C.SURFACE2 if is_disabled else self._get_cat_color_by_id(cat_id)
+        else:
+            color = C.SURFACE2
+
+        card = tk.Frame(parent, bg=C.SURFACE0,
+                        highlightthickness=1, highlightbackground=C.CARD_BORDER)
+        card.grid(row=row, column=col, padx=6, pady=6, sticky="nsew")
+
+        # Color accent bar
+        tk.Frame(card, bg=color, height=3).pack(fill="x")
+
+        # Slot number header
+        hdr = tk.Frame(card, bg=C.SURFACE0)
+        hdr.pack(fill="x", padx=12, pady=(8, 4))
+        tk.Label(hdr, text=f"Slot {slot_idx + 1}",
+                 bg=C.SURFACE0, fg=C.OVERLAY0, font=F.TINY).pack(side="left")
+
+        if has_tool:
+            # Remove button
+            rm_btn = FlatBtn(hdr, text="\u00d7",
+                             command=lambda si=slot_idx: self._slot_remove(si),
+                             bg=C.SURFACE0, hover_bg=C.SURFACE1, fg=C.RED,
+                             font=("Segoe UI", 12), padx=4, pady=0)
+            rm_btn.pack(side="right")
+            Tip(rm_btn, "Remove from this slot")
+
+        inner = tk.Frame(card, bg=C.SURFACE0)
+        inner.pack(fill="both", expand=True, padx=12, pady=(0, 10))
+
+        if has_tool:
+            cat_id = tool["_cat"]
+            tool_type = tool.get("tool", "?")
+            title = tool.get("title", "")
+            text_fg = C.OVERLAY0 if is_disabled else C.TEXT
+
+            # Category label (colored) + disabled badge
+            cat_row = tk.Frame(inner, bg=C.SURFACE0)
+            cat_row.pack(anchor="w", fill="x")
+            tk.Label(cat_row, text=cat_id.upper(), bg=C.SURFACE0,
+                     fg=color, font=F.BODY_BOLD).pack(side="left")
+            if is_disabled:
+                tk.Label(cat_row, text="OFF", bg=C.SURFACE2, fg=C.OVERLAY0,
+                         font=F.TINY, padx=4, pady=1).pack(side="left", padx=(6, 0))
+            # Tool type + title
+            tk.Label(inner, text=f"{TOOL_TYPE_LABELS.get(tool_type, tool_type)} — {title}",
+                     bg=C.SURFACE0, fg=text_fg, font=F.BODY).pack(anchor="w")
+            # Description (truncated)
+            desc = tool.get("description", "")
+            if desc:
+                tk.Label(inner, text=shorten(desc, width=40, placeholder="..."),
+                         bg=C.SURFACE0, fg=C.OVERLAY0, font=F.TINY).pack(anchor="w", pady=(2, 0))
+
+            # Tool type icon
+            icon = tk.Canvas(inner, width=24, height=24, highlightthickness=0, bg=C.SURFACE0)
+            icon.pack(anchor="w", pady=(4, 0))
+            draw_tool_icon(icon, tool_type, color)
+        else:
+            # Empty slot
+            tk.Label(inner, text="(empty)", bg=C.SURFACE0,
+                     fg=C.SURFACE2, font=F.BODY).pack(anchor="w", pady=(8, 0))
+            tk.Label(inner, text="Drag a tool here\nor auto-fills at build",
+                     bg=C.SURFACE0, fg=C.SURFACE2, font=F.TINY).pack(anchor="w", pady=(4, 0))
+
+        # Drop target — _slot_at() finds this card by walking the widget tree
+        card._slot_idx = slot_idx
+        card._is_slot = True
+
+    def _build_pool(self, parent, items: list[dict]):
+        """Build the unassigned tools pool."""
+        col = tk.Frame(parent, bg=C.SURFACE0,
+                       highlightthickness=1, highlightbackground=C.CARD_BORDER)
+        col.pack(fill="both", expand=True, padx=0, pady=4)
+
+        # Accent bar
+        tk.Frame(col, bg=C.OVERLAY0, height=3).pack(fill="x")
+
+        # Header
+        hdr = tk.Frame(col, bg=C.SURFACE0)
+        hdr.pack(fill="x", padx=12, pady=(10, 2))
+        tk.Label(hdr, text="Unassigned", bg=C.SURFACE0,
+                 fg=C.OVERLAY0, font=F.BODY_BOLD).pack(side="left")
+        tk.Label(hdr, text=str(len(items)), bg=C.OVERLAY0, fg=C.CRUST,
+                 font=F.TINY, padx=6, pady=2).pack(side="left", padx=6)
+
+        lb = HoverListbox(col, bg=C.SURFACE0, fg=C.SUBTEXT1,
+                          selectbackground=C.TEAL, selectforeground=C.CRUST,
+                          font=F.BODY, width=28, height=24,
+                          activestyle="none", relief="flat", bd=0, highlightthickness=0,
+                          hover_bg=C.SURFACE1, item_bg=C.SURFACE0)
+        lb.pack(fill="both", expand=True, padx=12, pady=(4, 12))
+
+        for idx, t in enumerate(items):
+            cat_id = t["_cat"]
+            tool_type = t.get("tool", "?")
+            title = t.get("title", "")
+            is_off = not t.get("enabled", True)
+            suffix = "  (off)" if is_off else ""
+            display = f"{cat_id}/{tool_type} — {title}{suffix}"
+            lb.insert("end", display)
+            if is_off:
+                lb.itemconfigure(idx, fg=C.SURFACE2)
+
+        lb._items = items
+        lb._is_unassigned = True
+        lb.bind("<ButtonPress-1>", lambda e: self._pool_drag_start(e))
+        lb.bind("<B1-Motion>", self._pool_drag_motion)
+        lb.bind("<ButtonRelease-1>", self._pool_drag_drop)
+        self._index_lbs.append(lb)
+
+    # -- Pool drag-and-drop ---------------------------------------------------
+
+    def _pool_drag_start(self, event):
+        """Start dragging an item from the unassigned pool."""
+        lb = event.widget
+        idx = lb.nearest(event.y)
+        if idx < 0 or idx >= lb.size() or lb.bbox(idx) is None:
+            return
+        HoverListbox._global_drag = True
+        lb.selection_clear(0, "end")
+        lb.selection_set(idx)
+        self._drag_src = lb
+        self._drag_idx = idx
+        self._drag_item = lb._items[idx]
+
+        tool = self._drag_item
+        cat_color = self._get_cat_color_by_id(tool["_cat"])
+        name = f"{tool['_cat']}/{tool.get('tool', '?')}"
+        g = tk.Toplevel(self)
+        g.overrideredirect(True)
+        g.attributes("-alpha", 0.9)
+        g.configure(bg=cat_color)
+        tk.Label(g, text=f"  {name}  ", bg=cat_color, fg=C.CRUST,
+                 font=F.BODY_BOLD, padx=8, pady=4).pack()
+        g.geometry(f"+{event.x_root + 14}+{event.y_root - 10}")
+        self._drag_ghost = g
+
+    def _pool_drag_motion(self, event):
+        """Update drag ghost position."""
+        if not self._drag_ghost or not self._drag_item:
+            return
+        self._drag_ghost.geometry(f"+{event.x_root + 14}+{event.y_root - 10}")
+
+    def _pool_drag_drop(self, event):
+        """Handle dropping a pool item onto a slot."""
+        if not self._drag_item or not self._drag_src:
+            self._pool_drag_cleanup()
+            return
+
+        # Find which slot card is under the cursor
+        slot_idx = self._slot_at(event.x_root, event.y_root)
+        if slot_idx is not None:
+            tool = self._drag_item
+            tool_key = f"{tool['_cat']}:{tool.get('tool', '')}"
+            view = self._index_filter
+            index_data = self.data.setdefault("_index", {})
+            slots = index_data.setdefault(view, [])
+
+            # Don't add duplicates
+            if tool_key not in slots:
+                # Insert at slot position (pad with empty strings if needed)
+                while len(slots) < slot_idx:
+                    slots.append("")
+                if slot_idx < len(slots):
+                    # Replace empty or insert before
+                    if slots[slot_idx] == "":
+                        slots[slot_idx] = tool_key
+                    else:
+                        slots.insert(slot_idx, tool_key)
+                else:
+                    slots.append(tool_key)
+                self._update_badge()
+
+        self._pool_drag_cleanup()
+        self._refresh_index()
+
+    def _pool_drag_cleanup(self):
+        """Clean up drag state."""
+        if self._drag_ghost:
+            self._drag_ghost.destroy()
+            self._drag_ghost = None
+        self._drag_src = self._drag_idx = self._drag_item = None
+        HoverListbox._global_drag = False
+
+    def _slot_at(self, x, y) -> int | None:
+        """Find the slot index under the cursor coordinates."""
+        # Walk through all slot card frames in _index_area
+        for widget in self._index_area.winfo_children():
+            # split frame → left frame → slots_grid
+            for child in widget.winfo_children():
+                for sub in child.winfo_children():
+                    if hasattr(sub, 'grid_slaves'):
+                        # This is the slots_grid
+                        for card in sub.winfo_children():
+                            if hasattr(card, '_is_slot') and card._is_slot:
+                                try:
+                                    cx, cy = card.winfo_rootx(), card.winfo_rooty()
+                                    cw, ch = card.winfo_width(), card.winfo_height()
+                                    if cx <= x <= cx + cw and cy <= y <= cy + ch:
+                                        return card._slot_idx
+                                except tk.TclError:
+                                    pass
+        return None
+
+    def _slot_remove(self, slot_idx: int):
+        """Remove the tool at slot_idx from the current view."""
+        view = self._index_filter
+        index_data = self.data.get("_index", {})
+        slots = index_data.get(view, [])
+        if slot_idx < len(slots):
+            slots.pop(slot_idx)
+            # Clean trailing empty strings
+            while slots and slots[-1] == "":
+                slots.pop()
+            index_data[view] = slots
+            self._update_badge()
+            self._refresh_index()
 
 
 if __name__ == "__main__":

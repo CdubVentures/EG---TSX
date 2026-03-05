@@ -6,7 +6,7 @@
  */
 
 import { useStore } from '@nanostores/react';
-import { $auth, openSignup, openLogin } from '../../auth/store';
+import { $auth, openSignup, openLogin } from '@features/auth';
 import { $userPrefs, $theme, setPref, setTheme } from '../store';
 import { cn } from '@shared/lib/cn';
 import ToggleSwitch from './ToggleSwitch';
@@ -53,7 +53,7 @@ function ThemeToggle({ theme, onSelect }: { theme: ThemeMode; onSelect: (m: Them
   ];
 
   return (
-    <div className="flex rounded-[6px] bg-[rgba(0,0,0,0.3)] p-[3px] gap-[2px]">
+    <div className="flex rounded-[6px] bg-[var(--auth-settings-track)] p-[3px] gap-[2px]">
       {options.map(({ mode, label, Icon }) => {
         const isActive = theme === mode;
         return (
@@ -67,8 +67,8 @@ function ThemeToggle({ theme, onSelect }: { theme: ThemeMode; onSelect: (m: Them
               'transition-all duration-200 border-none cursor-pointer',
               "[font-family:'Open_Sans',_sans-serif]",
               isActive
-                ? 'bg-[image:var(--site-background-gradient)] text-[var(--white-color-1)] shadow-[0_1px_3px_rgba(0,0,0,0.3)]'
-                : 'bg-transparent text-[var(--grey-color-3)] hover:text-[var(--white-color-2)]'
+                ? 'bg-[image:var(--site-background-gradient)] text-[var(--auth-check-text,_#fff)] shadow-[0_1px_3px_rgba(0,0,0,0.3)]'
+                : 'bg-transparent text-[var(--auth-subtitle-text)] hover:text-[var(--auth-heading-text)]'
             )}
           >
             <Icon className="shrink-0" />
@@ -90,7 +90,7 @@ function SectionCard({ title, badge, children }: {
   return (
     <div
       className={cn(
-        'bg-[#1f2223] border border-[#060606] rounded-[6px]',
+        'bg-[var(--auth-branding-bg)] border border-[var(--auth-divider)] rounded-[6px]',
         'shadow-[inset_0_2px_4px_rgba(0,0,0,0.35)]',
         'p-[1.75rem]'
       )}
@@ -99,7 +99,7 @@ function SectionCard({ title, badge, children }: {
         <h4
           className={cn(
             "[font-family:'Futura',_sans-serif] font-semibold text-[length:var(--ft-24-21)]",
-            'text-[var(--white-color-2)]',
+            'text-[var(--auth-heading-text)]',
             'uppercase tracking-[0.5px]',
             'm-0'
           )}
@@ -129,14 +129,14 @@ function GuestCTA({ onClose }: { onClose: (afterClose?: () => void) => void }) {
     <div
       className={cn(
         'mt-6 rounded-[6px] p-4',
-        'border border-[rgba(255,255,255,0.06)]',
-        'bg-[rgba(255,255,255,0.03)]',
+        'border border-[var(--auth-guest-border)]',
+        'bg-[var(--auth-guest-bg)]',
         'text-center'
       )}
     >
       <p
         className={cn(
-          'text-[length:var(--ft-14-13)] text-[var(--grey-color-2)] m-0 mb-3',
+          'text-[length:var(--ft-14-13)] text-[var(--auth-label-text)] m-0 mb-3',
           "[font-family:'Open_Sans',_sans-serif]"
         )}
       >
@@ -198,10 +198,10 @@ export default function SettingsPanel({ onClose }: SettingsPanelProps) {
       <button
         className={cn(
           'absolute top-[8px] right-[9px]',
-          'text-[26px] leading-[26px] text-[var(--white-color-2)]',
+          'text-[26px] leading-[26px] text-[var(--auth-close-color)]',
           'appearance-none bg-transparent border-none cursor-pointer p-0',
           'z-[110]',
-          'hover:text-[#d1d5db]'
+          'hover:text-[var(--auth-close-hover)]'
         )}
         onClick={() => onClose()}
         aria-label="Close Settings"
@@ -213,7 +213,7 @@ export default function SettingsPanel({ onClose }: SettingsPanelProps) {
       <h3
         className={cn(
           '[font-weight:700] [font-size:var(--ft-30-24)] [font-family:var(--identity-font)]',
-          'm-0 mb-8 text-[#e5e7eb] text-center'
+          'm-0 mb-8 text-[var(--auth-heading-text)] text-center'
         )}
       >
         Settings
@@ -229,7 +229,7 @@ export default function SettingsPanel({ onClose }: SettingsPanelProps) {
               className={cn(
                 "font-medium [font-family:'Futura',_sans-serif]",
                 'text-[length:var(--ft-17-16)]',
-                'text-[var(--white-color-2)]'
+                'text-[var(--auth-heading-text)]'
               )}
             >
               Theme
@@ -245,7 +245,7 @@ export default function SettingsPanel({ onClose }: SettingsPanelProps) {
             <span
               className={cn(
                 'inline-flex items-center gap-[5px] px-[10px] py-[2px] rounded-full',
-                'bg-[rgba(255,255,255,0.08)] text-[var(--grey-color-3)]',
+                'bg-[var(--auth-badge-bg)] text-[var(--auth-subtitle-text)]',
                 'text-[length:var(--ft-12-11)]',
                 "[font-family:'Open_Sans',_sans-serif] font-medium"
               )}
@@ -268,7 +268,7 @@ export default function SettingsPanel({ onClose }: SettingsPanelProps) {
                   className={cn(
                     "font-medium [font-family:'Futura',_sans-serif]",
                     'text-[length:var(--ft-19-18)] max-[600px]:text-[length:var(--fm-18-17)]',
-                    'text-[var(--white-color-2)] mb-[0.2rem] min-w-[11rem]'
+                    'text-[var(--auth-heading-text)] mb-[0.2rem] min-w-[11rem]'
                   )}
                 >
                   Use Pop&#x2011;up For Snapshot Reviews
@@ -277,7 +277,7 @@ export default function SettingsPanel({ onClose }: SettingsPanelProps) {
                   className={cn(
                     "font-light [font-family:'Open_Sans',_sans-serif]",
                     'text-[length:var(--ft-14-13)] max-[600px]:text-[length:var(--fm-13-12)]',
-                    'text-[var(--grey-color-2)] leading-[1.2] text-left'
+                    'text-[var(--auth-label-text)] leading-[1.2] text-left'
                   )}
                 >
                   Snapshot reviews open in a pop&#x2011;up if enabled, or a dedicated page if disabled.
@@ -291,7 +291,7 @@ export default function SettingsPanel({ onClose }: SettingsPanelProps) {
                 className={cn(
                   "font-medium [font-family:'Futura',_sans-serif]",
                   'text-[length:var(--ft-19-18)] max-[600px]:text-[length:var(--fm-18-17)]',
-                  'text-[var(--white-color-2)] min-w-[11rem]'
+                  'text-[var(--auth-heading-text)] min-w-[11rem]'
                 )}
               >
                 Display Results
@@ -311,7 +311,7 @@ export default function SettingsPanel({ onClose }: SettingsPanelProps) {
                 className={cn(
                   "font-medium [font-family:'Futura',_sans-serif]",
                   'text-[length:var(--ft-19-18)] max-[600px]:text-[length:var(--fm-18-17)]',
-                  'text-[var(--white-color-2)] min-w-[11rem]'
+                  'text-[var(--auth-heading-text)] min-w-[11rem]'
                 )}
               >
                 Default Display

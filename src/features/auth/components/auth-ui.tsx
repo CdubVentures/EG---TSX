@@ -18,7 +18,7 @@ export const authButton = cva(
     variants: {
       intent: {
         provider:
-          'border border-[#38404b] bg-[#1d2021] text-[#e5e7eb] hover:bg-[#2e343b] py-5 rounded-[5px] text-[length:var(--font-size-15px)]',
+          'border border-[var(--auth-button-border)] bg-[var(--auth-button-bg)] text-[var(--auth-button-text)] hover:bg-[var(--auth-button-hover)] py-5 rounded-[5px] text-[length:var(--font-size-15px)]',
         submit:
           'bg-gradient-to-r from-[var(--site-start-color)] to-[var(--site-end-color)] text-white hover:to-[var(--site-start-color)] py-5 px-[2rem] border-none rounded-[6px] text-[15px] box-border',
       },
@@ -28,12 +28,12 @@ export const authButton = cva(
 );
 
 export const inputClass =
-  'bg-[#111118] border border-[#38404b] text-[#e5e7eb] rounded-[5px] px-4 py-3 w-full' +
+  'bg-[var(--auth-input-bg)] border border-[var(--auth-input-border)] text-[var(--auth-input-text)] rounded-[5px] px-4 py-3 w-full' +
   ' focus:border-[var(--site-start-color)] focus:outline-none transition-colors' +
   ' text-[length:var(--font-size-14px)] disabled:opacity-50 disabled:cursor-not-allowed';
 
 export const labelClass =
-  'text-[length:var(--font-size-13px)] text-[#9ba2ab] font-semibold mb-2 block';
+  'text-[length:var(--font-size-13px)] text-[var(--auth-label-text)] font-semibold mb-2 block';
 
 // ─── Spinner (loading indicator for buttons) ────────────────────────────────
 
@@ -121,7 +121,7 @@ export function PasswordInput({ id, value, onChange, disabled, autoComplete = 'c
         <button
           type="button"
           onClick={() => setShow(!show)}
-          className="absolute right-3 top-1/2 -translate-y-1/2 text-[#9ba2ab] hover:text-[#e5e7eb] bg-transparent border-none cursor-pointer p-0"
+          className="absolute right-3 top-1/2 -translate-y-1/2 text-[var(--auth-label-text)] hover:text-[var(--auth-input-text)] bg-transparent border-none cursor-pointer p-0"
           aria-label={show ? 'Hide password' : 'Show password'}
           tabIndex={-1}
         >
@@ -144,7 +144,7 @@ export function AuthBrandingPanel({ heading, subtitle, bullets }: BrandingPanelP
   return (
     <div
       className={cn(
-        'flex-1 bg-[#25292a] flex flex-col justify-center items-start',
+        'flex-1 bg-[var(--auth-branding-bg)] flex flex-col justify-center items-start',
         'h-full overflow-hidden',
         'py-[clamp(24px,15.2727px+1.4545vw,32px)] px-[clamp(20px,-1.8182px+3.6364vw,40px)]',
         'max-[825px]:py-[clamp(24px,8px+4vw,32px)] max-[825px]:px-[clamp(22px,6px+4vw,30px)]',
@@ -157,13 +157,13 @@ export function AuthBrandingPanel({ heading, subtitle, bullets }: BrandingPanelP
       <h2
         className={cn(
           '[font-weight:700] [font-size:var(--ft-28-20)] [font-family:var(--identity-font)]',
-          'm-0 mb-4 text-[#e5e7eb]'
+          'm-0 mb-4 text-[var(--auth-heading-text)]'
         )}
       >
         {heading}
       </h2>
       {subtitle && (
-        <p className="text-[length:var(--font-size-15px)] text-[#9ba2ab] m-0 mb-4">
+        <p className="text-[length:var(--font-size-15px)] text-[var(--auth-label-text)] m-0 mb-4">
           {subtitle}
         </p>
       )}
@@ -171,7 +171,7 @@ export function AuthBrandingPanel({ heading, subtitle, bullets }: BrandingPanelP
         {bullets.map((text) => (
           <li
             key={text}
-            className="flex items-start gap-4 my-4 text-[length:var(--font-size-14px)] text-[#e5e7eb]"
+            className="flex items-start gap-4 my-4 text-[length:var(--font-size-14px)] text-[var(--auth-heading-text)]"
           >
             <span
               className="text-[color:var(--site-start-color)] text-[length:var(--font-size-18px)] leading-none"
@@ -192,7 +192,7 @@ export function AuthBrandingPanel({ heading, subtitle, bullets }: BrandingPanelP
 export function FormError({ message }: { message: string | null }) {
   if (!message) return null;
   return (
-    <p className="text-[#f87171] text-[length:var(--font-size-13px)] mt-3 text-center">
+    <p className="text-[var(--auth-error)] text-[length:var(--font-size-13px)] mt-3 text-center">
       {message}
     </p>
   );
@@ -209,13 +209,13 @@ export function FormSuccess({ message }: { message: string | null }) {
 
 export function AuthLegal() {
   return (
-    <p className="text-[length:var(--font-size-12px)] text-[#9ba2ab] mt-3 mb-0 leading-[1.45]">
+    <p className="text-[length:var(--font-size-12px)] text-[var(--auth-legal-text)] mt-3 mb-0 leading-[1.45]">
       By continuing, you agree to the EGs&nbsp;
-      <a href="/terms" target="_blank" className="text-[#9ba2ab] underline font-normal">
+      <a href="/terms" target="_blank" className="text-[var(--auth-legal-link)] underline font-normal">
         Terms&nbsp;of&nbsp;Service
       </a>
       . You can also review the EGs&nbsp;
-      <a href="/privacy" target="_blank" className="text-[#9ba2ab] underline font-normal">
+      <a href="/privacy" target="_blank" className="text-[var(--auth-legal-link)] underline font-normal">
         Privacy&nbsp;Policy
       </a>
       .
@@ -226,9 +226,9 @@ export function AuthLegal() {
 export function AuthDivider() {
   return (
     <div className="flex items-center w-full gap-3 my-5">
-      <span className="flex-1 h-px bg-[#38404b]" />
-      <span className="text-[length:var(--font-size-13px)] text-[#9ba2ab] font-semibold">or</span>
-      <span className="flex-1 h-px bg-[#38404b]" />
+      <span className="flex-1 h-px bg-[var(--auth-divider)]" />
+      <span className="text-[length:var(--font-size-13px)] text-[var(--auth-label-text)] font-semibold">or</span>
+      <span className="flex-1 h-px bg-[var(--auth-divider)]" />
     </div>
   );
 }

@@ -4,9 +4,9 @@ import AnnouncementBar from '@shared/ui/AnnouncementBar.astro';
 import HomeHero from '@features/home/components/HomeHero.astro';
 import TopProducts from '@features/home/components/TopProducts.astro';
 import { CONFIG } from '@core/config';
-import { getCollection } from 'astro:content';
+import { getProducts } from '@core/products';
 
-const allProducts = await getCollection('dataProducts');
+const allProducts = await getProducts();
 const productCount = allProducts.length;
 ---
 

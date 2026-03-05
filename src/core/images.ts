@@ -26,27 +26,3 @@ export function contentImage(basePath: string, stem: string, size: ImageSize, ex
 export function collectionImagePath(collection: string, entryId: string): string {
   return `/images/${collection}/${entryId}`;
 }
-
-// ─── Legacy Wrappers (thin aliases during transition) ───────────────────────
-// Components that already use these will continue to work.
-// New code should use contentImage() + collectionImagePath() directly.
-
-/** @deprecated Use contentImage(product.imagePath, stem, size) */
-export function productImage(imagePath: string, stem: string, size: ImageSize): string {
-  return contentImage(imagePath, stem, size);
-}
-
-/** @deprecated Use contentImage(collectionImagePath('brands', slug), variant, size, 'png') */
-export function brandImage(brandSlug: string, variant: string, size: ImageSize): string {
-  return contentImage(collectionImagePath('brands', brandSlug), variant, size, 'png');
-}
-
-/** @deprecated Use contentImage(collectionImagePath('games', slug), stem, size) */
-export function gameImage(gameSlug: string, stem: string, size: ImageSize): string {
-  return contentImage(collectionImagePath('games', gameSlug), stem, size);
-}
-
-/** @deprecated Use contentImage(basePath, stem, size) */
-export function articleImage(articleImagePath: string, stem: string, size: ImageSize): string {
-  return contentImage(articleImagePath, stem, size);
-}

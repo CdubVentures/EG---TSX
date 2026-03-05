@@ -27,15 +27,14 @@ export const POST: APIRoute = async ({ request }) => {
     );
   }
 
-  // WHY: globalThis.__mock* enables unit testing without real Cognito calls
-  const signIn = (globalThis as any).__mockCognitoSignIn ?? cognitoSignIn;
+  const signIn = globalThis.__mockCognitoSignIn ?? cognitoSignIn;
   const result = await signIn(email, password);
 
   if (!result.ok) {
     return Response.json({ error: result.error }, { status: 400 });
   }
 
-  const verify = (globalThis as any).__mockVerifyIdToken ?? verifyIdToken;
+  const verify = globalThis.__mockVerifyIdToken ?? verifyIdToken;
   const claims = await verify(result.data.idToken);
   if (!claims) {
     return Response.json(
@@ -47,7 +46,7 @@ export const POST: APIRoute = async ({ request }) => {
   // First-signup detection
   let isFirstSignup = false;
   try {
-    const vaultRev = (globalThis as any).__mockReadVaultRev ?? readVaultRev;
+    const vaultRev = globalThis.__mockReadVaultRev ?? readVaultRev;
     const rev = await vaultRev(claims.uid);
     isFirstSignup = rev === 0;
   } catch {

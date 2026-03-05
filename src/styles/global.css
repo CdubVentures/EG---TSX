@@ -185,6 +185,38 @@
   --duration-base: 200ms;
   --duration-slow: 350ms;
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+
+  /* Scrollbar — light variant */
+  --scrollbar-track: #f0f2f5;
+  --scrollbar-thumb: #cbd5e0;
+  --scrollbar-thumb-hover: #a0aec0;
+
+  /* Auth / dialog tokens — light variant */
+  --auth-dialog-bg:       #ffffff;
+  --auth-dialog-text:     #1a1a2e;
+  --auth-dialog-shadow:   0 12px 32px rgba(0, 0, 0, 0.12);
+  --auth-input-bg:        #f5f6f8;
+  --auth-input-border:    #d1d5db;
+  --auth-input-text:      #1a1a2e;
+  --auth-button-bg:       #f0f2f5;
+  --auth-button-border:   #d1d5db;
+  --auth-button-hover:    #e5e7eb;
+  --auth-button-text:     #1a1a2e;
+  --auth-label-text:      #4a5568;
+  --auth-heading-text:    #0d0e12;
+  --auth-branding-bg:     #f0f2f5;
+  --auth-divider:         #e2e8f0;
+  --auth-error:           #dc2626;
+  --auth-legal-text:      #718096;
+  --auth-legal-link:      #4a5568;
+  --auth-close-color:     #9ca3af;
+  --auth-close-hover:     #374151;
+  --auth-subtitle-text:   #6b7280;
+  --auth-check-text:      #ffffff;
+  --auth-settings-track:  rgba(0, 0, 0, 0.08);
+  --auth-guest-border:    rgba(0, 0, 0, 0.08);
+  --auth-guest-bg:        rgba(0, 0, 0, 0.03);
+  --auth-badge-bg:        rgba(0, 0, 0, 0.06);
 }
 
 /* ─── Gaming theme ─── */
@@ -216,6 +248,38 @@
   --color-score-good:      #facc15;
   --color-score-fair:      #fb923c;
   --color-score-poor:      #f87171;
+
+  /* Scrollbar — dark variant (matches HBS global.css :647–666) */
+  --scrollbar-track: var(--section-dusk-background-color);
+  --scrollbar-thumb: var(--section-dark-background-color);
+  --scrollbar-thumb-hover: var(--section-medium-background-color);
+
+  /* Auth / dialog tokens — dark variant */
+  --auth-dialog-bg:       #1d2021;
+  --auth-dialog-text:     #e5e7eb;
+  --auth-dialog-shadow:   0 12px 32px rgba(0, 0, 0, 0.6);
+  --auth-input-bg:        #111118;
+  --auth-input-border:    #38404b;
+  --auth-input-text:      #e5e7eb;
+  --auth-button-bg:       #1d2021;
+  --auth-button-border:   #38404b;
+  --auth-button-hover:    #3A3F41;
+  --auth-button-text:     #e5e7eb;
+  --auth-label-text:      #9ba2ab;
+  --auth-heading-text:    #e5e7eb;
+  --auth-branding-bg:     #25292a;
+  --auth-divider:         #38404b;
+  --auth-error:           #f87171;
+  --auth-legal-text:      #9ba2ab;
+  --auth-legal-link:      #9ba2ab;
+  --auth-close-color:     #6b7280;
+  --auth-close-hover:     #d1d5db;
+  --auth-subtitle-text:   #9ba2ab;
+  --auth-check-text:      #101214;
+  --auth-settings-track:  rgba(0, 0, 0, 0.3);
+  --auth-guest-border:    rgba(255, 255, 255, 0.06);
+  --auth-guest-bg:        rgba(255, 255, 255, 0.03);
+  --auth-badge-bg:        rgba(255, 255, 255, 0.08);
 }
 
 /* ─── Workstation theme ─── */
@@ -242,6 +306,9 @@
 
   --color-accent:        #7e22ce;
   --color-accent-surface: #faf5ff;
+  --scrollbar-track: #e4e4e7;
+  --scrollbar-thumb: #a1a1aa;
+  --scrollbar-thumb-hover: #71717a;
 }
 
 /* ─── Review theme ─── */
@@ -268,6 +335,9 @@
 
   --color-accent:        #0891b2;
   --color-accent-surface: #f0f9ff;
+  --scrollbar-track: #f5f4e8;
+  --scrollbar-thumb: #d6d3d1;
+  --scrollbar-thumb-hover: #a8a29e;
 }
 
 /* ─────────────────────────────────────────────────────────────────────────────
@@ -286,12 +356,14 @@
   --nav-surface-medium: #3A3F41;
   --nav-text: #ffffff;
   --nav-text-muted: #dddad5;
+  --nav-separator: #444;
   --nav-z: 95000;
 
-  /* HBS background color aliases — needed by navbar CSS */
+  /* HBS background color aliases — needed by navbar CSS + scrollbar */
   --main-background-color: #000000;
   --section-medium-background-color: #3A3F41;
   --section-dark-background-color: #1d2021;
+  --section-dusk-background-color: #25292a;
   --section-darkest-background-color: #161718;
   --section-darkestdark-background-color: #121212;
 
@@ -311,6 +383,9 @@
   /* HBS grey / utility aliases (used by auth popups, settings, future components) */
   --grey-color-1: #e5e7eb;
   --grey-color-2: #9ba2ab;
+
+  /* Auth / dialog tokens are now in the theme switchboard (data-theme blocks).
+     WHY: auth dialogs must look correct in both light and dark themes. */
   --grey-color-4: #6b7280;
   --accent-color-3: #e65443;
   --link-color: #FFD700;
@@ -707,8 +782,14 @@ html {
 /* ─── Responsive clamp font sizes (desktop → tablet) ─── */
 :root {
   --ft-55-40: clamp(var(--font-size-40px), 2.149rem + 2.727vw, var(--font-size-55px));
+  --ft-58-39: clamp(var(--font-size-39px), 1.661rem + 3.455vw, var(--font-size-58px));
+  --ft-44-30: clamp(var(--font-size-30px), 1.339rem + 2.545vw, var(--font-size-44px));
+  --ft-40-24: clamp(var(--font-size-24px), 0.595rem + 2.909vw, var(--font-size-40px));
   --ft-34-28: clamp(var(--font-size-28px), 1.95rem + 1.091vw, var(--font-size-34px));
   --ft-32-24: clamp(var(--font-size-24px), 1.388rem + 1.455vw, var(--font-size-32px));
+  --ft-23-15: clamp(var(--font-size-15px), 0.57rem + 1.455vw, var(--font-size-23px));
+  --ft-21-18: clamp(var(--font-size-18px), 1.339rem + 0.545vw, var(--font-size-21px));
+  --ft-21-14: clamp(var(--font-size-14px), 0.579rem + 1.273vw, var(--font-size-21px));
   --ft-18-15: clamp(var(--font-size-15px), 1.066rem + 0.545vw, var(--font-size-18px));
   --ft-12-11: clamp(var(--font-size-11px), 0.901rem + 0.182vw, var(--font-size-12px));
 }
@@ -716,14 +797,22 @@ html {
 /* ─── Responsive clamp font sizes (mobile) ─── */
 :root {
   --fm-40-35: clamp(var(--font-size-35px), 2.5rem + 2.5vw, var(--font-size-40px));
+  --fm-39-32: clamp(var(--font-size-32px), 1.8rem + 3.5vw, var(--font-size-39px));
+  --fm-35-32: clamp(var(--font-size-32px), 2.6rem + 1.5vw, var(--font-size-35px));
+  --fm-35-28: clamp(var(--font-size-28px), 1.4rem + 3.5vw, var(--font-size-35px));
+  --fm-30-22: clamp(var(--font-size-22px), 0.6rem + 4vw, var(--font-size-30px));
   --fm-24-21: clamp(var(--font-size-21px), 1.5rem + 1.5vw, var(--font-size-24px));
-  --fm-15-14: clamp(var(--font-size-14px), 1.2rem + 0.5vw, var(--font-size-15px));
+  --fm-21-19: clamp(var(--font-size-19px), 1.5rem + 1vw, var(--font-size-21px));
   --fm-18-17: clamp(var(--font-size-17px), 1.1rem + 1vw, var(--font-size-18px));
   --fm-16-15: clamp(var(--font-size-15px), 1.3rem + 0.5vw, var(--font-size-16px));
+  --fm-15-14: clamp(var(--font-size-14px), 1.2rem + 0.5vw, var(--font-size-15px));
+  --fm-15-13: clamp(var(--font-size-13px), 0.9rem + 1vw, var(--font-size-15px));
   --fm-14-13: clamp(var(--font-size-13px), 1.1rem + 0.5vw, var(--font-size-14px));
   --fm-13-12: clamp(var(--font-size-12px), 1rem + 0.5vw, var(--font-size-13px));
   --fm-11-10: clamp(var(--font-size-10px), 0.8rem + 0.5vw, var(--font-size-11px));
-  --fm-35-32: clamp(var(--font-size-32px), 2.6rem + 1.5vw, var(--font-size-35px));
+  --ftm-24-21: clamp(var(--font-size-21px), 1.182rem + 1.333vw, var(--font-size-24px));
+  --ftm-18-16: clamp(var(--font-size-16px), 0.97rem + 0.889vw, var(--font-size-18px));
+  --ftm-17-15: clamp(var(--font-size-15px), 0.879rem + 0.889vw, var(--font-size-17px));
   --ftm-15-13: clamp(var(--font-size-13px), 0.697rem + 0.889vw, var(--font-size-15px));
 }
 
@@ -751,10 +840,33 @@ html {
   width: 100%;
   height: auto;
   overflow-y: scroll;
-  color-scheme: dark;
+  /* WHY no color-scheme here: each [data-theme] block sets its own
+     color-scheme (light or dark). Hardcoding dark here would fight the theme. */
   scrollbar-gutter: stable;
+  scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track);
   overflow-x: hidden !important;
   text-rendering: optimizeLegibility !important;
+}
+
+/* ─── Global scrollbar — port of HBS global.css :647–666 ─── */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--scrollbar-track);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--scrollbar-thumb);
+  border-radius: 10px;
+  border: 2px solid var(--scrollbar-track);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: var(--scrollbar-thumb-hover);
 }
 
 body {
@@ -762,7 +874,7 @@ body {
   margin: 0;
   padding: 0;
   padding-top: var(--top-bar-H);
-  background-color: var(--section-darkestdark-background-color);
+  background-color: var(--color-bg-base);
 }
 
 /* Theme flash prevention — applied before paint via inline script in <head> */

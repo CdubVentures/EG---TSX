@@ -31,8 +31,8 @@ export default function RadioGroup({ name, options, value, onChange, disabled }:
               disabled ? 'cursor-not-allowed' : 'cursor-pointer',
               "[font-family:'Open_Sans',_sans-serif] font-normal",
               'text-[length:var(--ft-17-16)] max-[600px]:text-[length:var(--fm-16-15)]',
-              'text-[var(--white-color-2)] transition-colors duration-200',
-              !disabled && 'hover:text-[var(--white-color-1)]'
+              'text-[var(--auth-heading-text)] transition-colors duration-200',
+              !disabled && 'hover:text-[var(--auth-dialog-text)]'
             )}
           >
             <input
@@ -50,7 +50,7 @@ export default function RadioGroup({ name, options, value, onChange, disabled }:
                 'transition-[background,border-color] duration-300',
                 isChecked
                   ? 'bg-[image:var(--site-background-gradient)] border-transparent'
-                  : 'bg-transparent border-[var(--grey-color-3)]',
+                  : 'bg-transparent border-[var(--auth-subtitle-text)]',
                 !isChecked && !disabled && 'hover:border-[var(--accent-color-3)]',
                 // Inner dot when checked
                 isChecked && [

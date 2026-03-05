@@ -24,7 +24,7 @@ export const POST: APIRoute = async ({ request }) => {
     );
   }
 
-  const resend = (globalThis as any).__mockCognitoResendCode ?? cognitoResendCode;
+  const resend = globalThis.__mockCognitoResendCode ?? cognitoResendCode;
   const result = await resend(email);
 
   if (!result.ok) {

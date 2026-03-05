@@ -24,7 +24,7 @@ export const POST: APIRoute = async ({ request }) => {
     );
   }
 
-  const signUp = (globalThis as any).__mockCognitoSignUp ?? cognitoSignUp;
+  const signUp = globalThis.__mockCognitoSignUp ?? cognitoSignUp;
   const result = await signUp(email, password);
 
   if (!result.ok) {

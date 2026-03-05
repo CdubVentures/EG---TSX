@@ -7,28 +7,18 @@
 import SectionDivider from '@shared/ui/SectionDivider.astro';
 import HomeSlideshow from './HomeSlideshow.astro';
 import CategoryDropdown from './CategoryDropdown';
-import { CONFIG } from '@core/config';
-import categoriesData from '../../../../config/categories.json';
+import { CONFIG, categoryColor } from '@core/config';
+import { getCategoryColors } from '@core/categories';
+import { getDesktopTools, getMobileTools } from '@core/hub-tools';
 
-// WHY: HBS categoryCSSAttributes reads hardcoded --global-{cat}-hover values
-// from global.css. These are NOT computed — they're manually chosen colors.
-type CatEntry = { id: string; color: string };
-const cats = (categoriesData.categories as CatEntry[]);
+const categoryOptions = CONFIG.categories.map(id => ({
+  id,
+  color: categoryColor(id),
+  hover: getCategoryColors(id).hover,
+}));
 
-const hbsHoverMap: Record<string, string> = {
-  mouse: '#0077b3',
-  keyboard: '#b35a0c',
-  monitor: '#e75ba6',
-};
-
-const categoryOptions = CONFIG.categories.map(id => {
-  const cat = cats.find(c => c.id === id);
-  return {
-    id,
-    color: cat?.color,
-    hover: hbsHoverMap[id],
-  };
-});
+const desktopTools = getDesktopTools();
+const mobileToolGroups = getMobileTools();
 ---
 
 <div class="home-page-intro">
@@ -51,16 +41,50 @@ const categoryOptions = CONFIG.categories.map(id => {
     {/* Slideshow (Embla carousel) */}
     <HomeSlideshow />
 
-    {/* Tools sidebar shell */}
+    {/* Tools sidebar */}
     <div class="home-intro-right">
       <a href="/hubs/" class="home-intro-right-title">Hubs</a>
 
+      {/* Desktop: vertical list sorted by tool type → category */}
       <div class="home-tools-wrapper desktop-tools">
-        {/* Tool items will be populated when hub pages are built */}
+        {desktopTools.map(tool => (
+          <a href={tool.url} class="home-tools-item" data-category={tool.category}>
+            <div class="home-tools-text-content">
+              <div class="home-tools-right-wrapper">
+                <span class="home-tools-tag" style={`color: ${tool.categoryColor}`}>
+                  {tool.category}
+                </span>
+                <h3 class="home-tools-title">{tool.title}</h3>
+                <p class="home-tools-description">{tool.description}</p>
+              </div>
+              <span class="home-tools-arrow">&#10095;</span>
+            </div>
+            <div class="home-tools-image" set:html={tool.svg} />
+          </a>
+        ))}
       </div>
 
+      {/* Mobile: one row per category */}
       <div class="home-tools-wrapper mobile-tools">
-        {/* Mobile tools will be populated when hub pages are built */}
+        {mobileToolGroups.map(group => (
+          <div class="home-tools-row" data-category={group.category}>
+            {group.tools.map(tool => (
+              <a href={tool.url} class="home-tools-item" data-category={tool.category}>
+                <div class="home-tools-text-content">
+                  <div class="home-tools-right-wrapper">
+                    <span class="home-tools-tag" style={`color: ${tool.categoryColor}`}>
+                      {tool.category}
+                    </span>
+                    <h3 class="home-tools-title">{tool.title}</h3>
+                    <p class="home-tools-description">{tool.description}</p>
+                  </div>
+                  <span class="home-tools-arrow">&#10095;</span>
+                </div>
+                <div class="home-tools-image" set:html={tool.svg} />
+              </a>
+            ))}
+          </div>
+        ))}
       </div>
     </div>
 
@@ -154,6 +178,118 @@ const categoryOptions = CONFIG.categories.map(id => {
 
   .home-tools-wrapper.mobile-tools {
     display: none;
+  }
+
+  /* ── Tool Items ── */
+  .home-tools-item {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    text-decoration: none;
+    color: var(--white-color-1);
+    padding: 1rem 1.25rem;
+    margin-right: 0.5rem;
+    border-radius: 6px;
+    box-sizing: border-box;
+    transition: filter 0.2s ease-in-out;
+    background-color: var(--section-dark-background-color);
+  }
+
+  .home-tools-text-content {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    margin-right: 1.5rem;
+    text-overflow: ellipsis;
+    justify-content: space-between;
+  }
+
+  .home-tools-right-wrapper {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .home-tools-tag {
+    font-size: var(--font-size-14px);
+    font-weight: var(--font-weight7);
+    text-transform: uppercase;
+    font-family: var(--identity-font);
+    line-height: 1.2;
+  }
+
+  .home-tools-title {
+    font-size: var(--font-size-20px);
+    font-family: var(--identity-font);
+    font-weight: var(--font-weight7);
+    line-height: 1.3;
+    color: var(--white-black-color-1);
+    margin: 0 0 0.25rem 0;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .home-tools-description {
+    font-size: var(--font-size-13px);
+    font-family: var(--identity-font);
+    font-weight: var(--font-weight4);
+    line-height: 1.3;
+    color: var(--grey-color-4);
+    margin: 0;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .home-tools-arrow {
+    display: none;
+    font-size: var(--ft-18-15);
+    color: var(--grey-color-1);
+    margin-left: 3rem;
+  }
+
+  .home-tools-image {
+    font-size: var(--font-size-55px);
+    max-width: 1em;
+    overflow: hidden;
+    color: var(--grey-color-4);
+  }
+
+  .home-tools-image :global(svg) {
+    width: 100%;
+    height: 100%;
+    aspect-ratio: 16 / 11;
+    object-fit: contain;
+    fill: var(--grey-color-4) !important;
+  }
+
+  /* Desktop hover */
+  @media (hover: hover) and (pointer: fine) {
+    .home-tools-item:hover {
+      background-color: var(--section-medium-background-color);
+    }
+
+    .home-tools-item:hover .home-tools-title {
+      text-decoration: underline;
+      text-decoration-color: var(--white-color-1);
+      text-decoration-thickness: 1px;
+      text-underline-offset: 1px;
+    }
+  }
+
+  /* Mobile tool rows */
+  .home-tools-row {
+    display: flex;
+    flex-direction: row;
+    gap: 0.75rem;
+    overflow-x: auto;
+    scrollbar-width: thin;
+    width: 100%;
   }
 
   /* ── Dropdown Styles (global — targets React island DOM) ── */
@@ -358,8 +494,72 @@ const categoryOptions = CONFIG.categories.map(id => {
 
     .home-tools-wrapper.mobile-tools {
       display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      gap: 0.75rem;
       width: calc(100% - 3rem);
       max-width: calc(100% - 3rem);
+      margin: 0;
+      overflow: hidden;
+    }
+
+    /* WHY row-reverse: on mobile, image sits LEFT, text sits RIGHT */
+    .home-tools-item {
+      flex-direction: row-reverse;
+      justify-content: flex-start;
+      gap: 0.75rem;
+      flex: 1 1 calc(33.333% - 0.75rem);
+      min-width: max-content;
+      margin-right: 0;
+    }
+
+    .home-tools-text-content {
+      display: flex;
+      flex-direction: row;
+      text-overflow: ellipsis;
+      margin: 0;
+    }
+
+    .home-tools-right-wrapper {
+      justify-content: center;
+      min-width: 6rem;
+    }
+
+    .home-tools-title {
+      font-size: var(--ft-18-15);
+      color: var(--grey-color-1);
+      font-weight: var(--font-weight8);
+      margin: 0;
+      display: block;
+      -webkit-line-clamp: unset;
+    }
+
+    .home-tools-description {
+      display: none;
+    }
+
+    .home-tools-tag {
+      font-size: var(--ft-12-11);
+    }
+
+    .home-tools-arrow {
+      display: flex;
+      align-items: center;
+    }
+
+    .home-tools-image {
+      font-size: var(--ftm-38-35);
+      width: 1em;
+      color: var(--grey-color-1);
+      flex-shrink: 0;
+    }
+
+    .home-tools-image :global(svg) {
+      fill: var(--grey-color-1);
+    }
+
+    .home-tools-row {
+      gap: 0.75rem;
     }
   }
 
@@ -371,6 +571,31 @@ const categoryOptions = CONFIG.categories.map(id => {
 
     :global(.custom-dropdown-menu li) {
       font-size: var(--fm-14-13);
+    }
+
+    .home-tools-item {
+      flex: 1 1 calc(33.333% - 0.65rem);
+      padding: 1rem 4rem 1rem 1.25rem;
+    }
+
+    .home-tools-row {
+      gap: 0.65rem;
+    }
+
+    .home-tools-tag {
+      font-size: var(--fm-11-10);
+    }
+
+    .home-tools-title {
+      font-size: var(--fm-15-14);
+    }
+
+    .home-tools-arrow {
+      display: none;
+    }
+
+    .home-tools-image {
+      font-size: var(--fm-35-32);
     }
   }
 </style>

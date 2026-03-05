@@ -14,11 +14,7 @@ import {
 } from '../store';
 import type { VaultEntry } from '../types';
 import { CONFIG, plural } from '@core/config';
-
-/** Category color CSS variable */
-function catVar(cat: string): string {
-  return `var(--cat-${cat})`;
-}
+import { catVar } from '@core/categories';
 
 /** Comparison buttons config — matches HBS getComparisonButtonsForCategory */
 function getComparisonButtons(category: string) {

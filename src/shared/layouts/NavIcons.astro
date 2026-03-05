@@ -29,7 +29,7 @@ import VaultCount from '@features/vault/components/VaultCount';
       </g>
     </svg>
     <div class="nav-vault-item-count-wrapper mobile-vault-badge">
-      <VaultCount client:only="react" />
+      <VaultCount client:idle />
     </div>
   </div>
 
@@ -390,7 +390,7 @@ import VaultCount from '@features/vault/components/VaultCount';
 {/* WHY Vite-bundled: imports nanostores so the atom is the same singleton
     as AuthDialog.tsx. Replaces document-level event delegation from old popup controller. */}
 <script>
-  import { openLogin, openSignup } from '@features/auth/store';
+  import { openLogin, openSignup } from '@features/auth';
   document.querySelector('.login-nav-icon')?.addEventListener('click', () => openLogin());
   document.querySelector('.signup-nav-icon')?.addEventListener('click', () => openSignup());
 </script>

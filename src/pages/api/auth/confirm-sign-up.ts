@@ -24,7 +24,7 @@ export const POST: APIRoute = async ({ request }) => {
     );
   }
 
-  const confirm = (globalThis as any).__mockCognitoConfirmSignUp ?? cognitoConfirmSignUp;
+  const confirm = globalThis.__mockCognitoConfirmSignUp ?? cognitoConfirmSignUp;
   const result = await confirm(email, code);
 
   if (!result.ok) {

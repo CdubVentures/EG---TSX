@@ -44,6 +44,9 @@ const colorMap: Record<string, string> = Object.fromEntries(
   allCategoryDefs.map(c => [c.id, c.color])
 );
 
+// Site gradient colors (primary/secondary) — SSOT for seasonal themes
+export const siteColors = categoriesData.siteColors;
+
 /** Canonical plural function — use this everywhere instead of local copies. */
 export function plural(cat: string): string {
   return pluralMap[cat] ?? (cat.charAt(0).toUpperCase() + cat.slice(1) + 's');

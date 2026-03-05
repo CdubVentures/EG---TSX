@@ -76,6 +76,22 @@ def _load_cat_colors():
 
 CAT_COLORS = _load_cat_colors()
 
+# SSOT: read site accent colors from config/categories.json
+def _load_site_accent():
+    if CATEGORIES_JSON.is_file():
+        data = json.loads(CATEGORIES_JSON.read_text(encoding="utf-8"))
+        sc = data.get("siteColors", {})
+        return sc.get("primary", "#89b4fa")
+    return "#89b4fa"
+
+def _darken(hex_color: str, factor: float = 0.7) -> str:
+    h = hex_color.lstrip("#")
+    r, g, b = int(h[0:2], 16), int(h[2:4], 16), int(h[4:6], 16)
+    return f"#{int(r*factor):02x}{int(g*factor):02x}{int(b*factor):02x}"
+
+ACCENT = _load_site_accent()
+ACCENT_HOVER = _darken(ACCENT)
+
 class F:
     """Font tokens."""
     TITLE = ("Segoe UI", 18, "bold")
@@ -374,7 +390,8 @@ class NavbarManager(tk.Tk):
         super().__init__()
         self.title("EG Navbar Manager")
         sw, sh = self.winfo_screenwidth(), self.winfo_screenheight()
-        self.geometry(f"1440x880+{(sw-1440)//2}+{(sh-880)//2}")
+        win_w, win_h = 1536, 864
+        self.geometry(f"{win_w}x{win_h}+{(sw-win_w)//2}+{(sh-win_h)//2}")
         self.configure(bg=C.MANTLE)
         self.minsize(960, 640)
 
@@ -382,7 +399,7 @@ class NavbarManager(tk.Tk):
         self._dark_titlebar()
         try:
             ico = tk.PhotoImage(width=1, height=1)
-            ico.put(C.BLUE)
+            ico.put(ACCENT)
             self._icon = ico.zoom(32, 32)
             self.iconphoto(True, self._icon)
         except Exception:
@@ -447,24 +464,24 @@ class NavbarManager(tk.Tk):
 
     # -- Header --------------------------------------------------------------
     def _build_header(self):
-        hdr = tk.Frame(self, bg=C.CRUST, height=58)
+        hdr = tk.Frame(self, bg=C.CRUST, height=56)
         hdr.pack(fill="x")
         hdr.pack_propagate(False)
-        tk.Frame(hdr, bg=C.BLUE, height=2).pack(fill="x", side="bottom")
+        tk.Frame(hdr, bg=ACCENT, height=2).pack(fill="x", side="bottom")
         inner = tk.Frame(hdr, bg=C.CRUST)
-        inner.pack(fill="both", expand=True, padx=24)
-        tk.Label(inner, text="EG", bg=C.CRUST, fg=C.BLUE,
-                 font=("Segoe UI", 20, "bold")).pack(side="left")
+        inner.pack(fill="both", expand=True, padx=20)
+        tk.Label(inner, text="EG", bg=C.CRUST, fg=ACCENT,
+                 font=("Segoe UI", 18, "bold")).pack(side="left")
         tk.Label(inner, text="  Navbar Manager", bg=C.CRUST, fg=C.TEXT,
                  font=("Segoe UI", 14)).pack(side="left")
         tk.Label(inner, text=f"  ·  {ROOT.name}", bg=C.CRUST, fg=C.OVERLAY0,
-                 font=F.SMALL).pack(side="left", padx=(4, 0))
+                 font=F.BODY).pack(side="left", padx=(4, 0))
         self.save_btn = FlatBtn(inner, text="  Save All  ", command=self._save_all,
-                                bg=C.BLUE, fg=C.CRUST, hover_bg=C.SAPPHIRE,
+                                bg=ACCENT, fg=C.CRUST, hover_bg=ACCENT_HOVER,
                                 font=F.BODY_BOLD)
-        self.save_btn.pack(side="right", pady=10)
+        self.save_btn.pack(side="right", pady=4)
         self.changes_lbl = tk.Label(inner, text="", bg=C.CRUST, fg=C.PEACH, font=F.SMALL)
-        self.changes_lbl.pack(side="right", padx=12)
+        self.changes_lbl.pack(side="right", padx=8)
 
     # -- Status Bar ----------------------------------------------------------
     def _build_status_bar(self):
@@ -558,8 +575,8 @@ class NavbarManager(tk.Tk):
         g = tk.Toplevel(self)
         g.overrideredirect(True)
         g.attributes("-alpha", 0.9)
-        g.configure(bg=C.BLUE)
-        tk.Label(g, text=f"  {name}  ", bg=C.BLUE, fg=C.CRUST,
+        g.configure(bg=ACCENT)
+        tk.Label(g, text=f"  {name}  ", bg=ACCENT, fg=C.CRUST,
                  font=F.BODY_BOLD, padx=8, pady=4).pack()
         g.geometry(f"+{event.x_root + 14}+{event.y_root - 10}")
         self._drag_ghost = g
@@ -632,7 +649,7 @@ class NavbarManager(tk.Tk):
         self._refresh_guides()
 
     def _make_pill(self, parent, cat, var, cmd):
-        color = CAT_COLORS.get(cat, C.BLUE)
+        color = CAT_COLORS.get(cat, ACCENT)
         pill = tk.Frame(parent, bg=C.MANTLE, cursor="hand2")
         pill.pack(side="left", padx=2)
         dot = tk.Canvas(pill, width=10, height=10, highlightthickness=0, bg=C.MANTLE)
@@ -709,7 +726,7 @@ class NavbarManager(tk.Tk):
         cat = self.guide_cat_var.get()
         sections = self.guide_sections.get(cat, [])
         self._guide_lbs = []
-        accent = CAT_COLORS.get(cat, C.BLUE)
+        accent = CAT_COLORS.get(cat, ACCENT)
 
         # Split layout: scrollable section columns (left) | gap | Unassigned pool (right)
         named = [s for s in sections if s["name"] != "Unassigned"]
@@ -869,7 +886,7 @@ class NavbarManager(tk.Tk):
         FlatBtn(btn_row, text="Cancel", command=dlg.destroy,
                 bg=C.SURFACE1, hover_bg=C.SURFACE2).pack(side="right", padx=(8, 0))
         FlatBtn(btn_row, text="  Add  ", command=do,
-                bg=C.BLUE, fg=C.CRUST, hover_bg=C.SAPPHIRE).pack(side="right")
+                bg=ACCENT, fg=C.CRUST, hover_bg=ACCENT_HOVER).pack(side="right")
 
     def _delete_section(self):
         cat = self.guide_cat_var.get()
@@ -963,7 +980,7 @@ class NavbarManager(tk.Tk):
         FlatBtn(btn_row, text="Cancel", command=dlg.destroy,
                 bg=C.SURFACE1, hover_bg=C.SURFACE2).pack(side="right", padx=(8, 0))
         FlatBtn(btn_row, text="  Rename  ", command=do,
-                bg=C.BLUE, fg=C.CRUST, hover_bg=C.SAPPHIRE).pack(side="right")
+                bg=ACCENT, fg=C.CRUST, hover_bg=ACCENT_HOVER).pack(side="right")
 
     # ========================================================================
     # BRANDS TAB
@@ -974,7 +991,7 @@ class NavbarManager(tk.Tk):
         top = tk.Frame(frame, bg=C.MANTLE)
         top.pack(fill="x", padx=16, pady=(16, 8))
         tk.Label(top, text="Brands", bg=C.MANTLE, fg=C.TEXT, font=F.HEADING).pack(side="left")
-        tk.Label(top, text=str(len(self.brands_data)), bg=C.BLUE, fg=C.CRUST,
+        tk.Label(top, text=str(len(self.brands_data)), bg=ACCENT, fg=C.CRUST,
                  font=F.TINY, padx=6, pady=2).pack(side="left", padx=(10, 0))
 
         self.brands_area = tk.Frame(frame, bg=C.MANTLE)
@@ -1014,7 +1031,7 @@ class NavbarManager(tk.Tk):
 
         for cat in ALL_CATEGORIES:
             items = cat_brands[cat]
-            color = CAT_COLORS.get(cat, C.BLUE)
+            color = CAT_COLORS.get(cat, ACCENT)
             self._brand_column(inner, cat.title(), color, items, cat, False)
 
         # Separator
@@ -1115,7 +1132,7 @@ class NavbarManager(tk.Tk):
         top.pack(fill="x", padx=24, pady=(20, 12))
         tk.Label(top, text="Games", bg=C.MANTLE, fg=C.TEXT,
                  font=F.HEADING).pack(side="left")
-        tk.Label(top, text=str(len(self.games_data)), bg=C.BLUE, fg=C.CRUST,
+        tk.Label(top, text=str(len(self.games_data)), bg=ACCENT, fg=C.CRUST,
                  font=F.TINY, padx=6, pady=2).pack(side="left", padx=(10, 0))
         FlatBtn(top, text="Toggle All", command=self._toggle_all_games).pack(side="right")
 
@@ -1131,7 +1148,7 @@ class NavbarManager(tk.Tk):
             card.grid(row=r, column=c, padx=6, pady=6, sticky="ew")
             grid.columnconfigure(c, weight=1)
             # Left accent
-            tk.Frame(card, bg=C.BLUE, width=3).pack(side="left", fill="y")
+            tk.Frame(card, bg=ACCENT, width=3).pack(side="left", fill="y")
             inner = tk.Frame(card, bg=C.SURFACE0)
             inner.pack(side="left", fill="both", expand=True, padx=16, pady=14)
             tk.Label(inner, text=g["game"], bg=C.SURFACE0, fg=C.TEXT,
@@ -1171,7 +1188,7 @@ class NavbarManager(tk.Tk):
         top.pack(fill="x", padx=24, pady=(20, 12))
         tk.Label(top, text="Hub Categories", bg=C.MANTLE, fg=C.TEXT,
                  font=F.HEADING).pack(side="left")
-        tk.Label(top, text=str(len(ALL_CATEGORIES)), bg=C.BLUE, fg=C.CRUST,
+        tk.Label(top, text=str(len(ALL_CATEGORIES)), bg=ACCENT, fg=C.CRUST,
                  font=F.TINY, padx=6, pady=2).pack(side="left", padx=(10, 0))
 
         container = tk.Frame(frame, bg=C.MANTLE)
@@ -1179,7 +1196,7 @@ class NavbarManager(tk.Tk):
         self.hub_toggles: dict[str, Toggle] = {}
 
         for cat in ALL_CATEGORIES:
-            color = CAT_COLORS.get(cat, C.BLUE)
+            color = CAT_COLORS.get(cat, ACCENT)
             card = tk.Frame(container, bg=C.SURFACE0,
                             highlightthickness=1, highlightbackground=C.CARD_BORDER)
             card.pack(fill="x", pady=5)

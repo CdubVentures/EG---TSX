@@ -217,9 +217,10 @@ class ColorPicker(tk.Toplevel):
     ]
 
     def __init__(self, parent, initial="#ffffff", title="Pick a Color",
-                 category_id="", on_preview=None):
+                 category_id="", on_preview=None, accent=None):
         super().__init__(parent)
         self.title(title)
+        self._accent = accent or C.BLUE
         self.configure(bg=C.SURFACE0)
         self.resizable(False, False)
         self.transient(parent)
@@ -343,8 +344,9 @@ class ColorPicker(tk.Toplevel):
         btn_row.pack(fill="x", padx=16, pady=(0, 16))
         FlatBtn(btn_row, text="Cancel", command=self._cancel,
                 bg=C.SURFACE1, hover_bg=C.SURFACE2).pack(side="right", padx=(8, 0))
+        hover = derive_colors(self._accent).get("hover", self._accent)
         FlatBtn(btn_row, text="  OK  ", command=self._ok,
-                bg=C.BLUE, fg=C.CRUST, hover_bg=C.SAPPHIRE,
+                bg=self._accent, fg=C.CRUST, hover_bg=hover,
                 font=F.BODY_BOLD).pack(side="right")
 
         self.bind("<Return>", lambda e: self._ok())
@@ -501,9 +503,6 @@ class ColorPicker(tk.Toplevel):
 
 
 # -- Data I/O ---------------------------------------------------------------
-DEFAULT_SITE_COLORS = {"primary": "#394cc8", "secondary": "#00aeff"}
-
-
 def _load_raw() -> dict:
     if CATEGORIES_JSON.is_file():
         return json.loads(CATEGORIES_JSON.read_text(encoding="utf-8"))
@@ -515,7 +514,7 @@ def load_categories() -> list[dict]:
 
 
 def load_site_colors() -> dict:
-    return _load_raw().get("siteColors", dict(DEFAULT_SITE_COLORS))
+    return _load_raw().get("siteColors", {"primary": "#ffffff", "secondary": "#ffffff"})
 
 
 def save_all(site_colors: dict, cats: list[dict]):
@@ -578,6 +577,54 @@ def count_articles() -> dict[str, dict[str, int]]:
                 if cat:
                     counts.setdefault(cat, {"reviews": 0, "guides": 0, "news": 0})
                     counts[cat][dirname] += 1
+    return counts
+
+
+def scan_category_presence() -> dict[str, dict[str, bool]]:
+    """Scan filesystem to determine what each category actually has.
+
+    Returns {cat_id: {"has_products": bool, "has_content": bool}}.
+    - has_products: data-products/{cat_id}/ folder exists
+    - has_content: articles reference this category in frontmatter
+    """
+    dp = CONTENT / "data-products"
+    product_dirs: set[str] = set()
+    if dp.is_dir():
+        product_dirs = {d.name for d in dp.iterdir() if d.is_dir()}
+
+    content_cats = scan_content_categories() - product_dirs  # exclude data-products dirs (already counted)
+    # Re-add product dirs that also have articles
+    article_cats: set[str] = set()
+    for dirname in ("reviews", "guides", "news"):
+        d = CONTENT / dirname
+        if not d.is_dir():
+            continue
+        for f in d.rglob("*"):
+            if f.suffix in (".md", ".mdx") and f.is_file():
+                cat = _extract_category_from_frontmatter(f)
+                if cat:
+                    article_cats.add(cat)
+
+    result: dict[str, dict[str, bool]] = {}
+    all_ids = product_dirs | article_cats | content_cats
+    for cat_id in all_ids:
+        result[cat_id] = {
+            "has_products": cat_id in product_dirs,
+            "has_content": cat_id in article_cats,
+        }
+    return result
+
+
+def count_products() -> dict[str, int]:
+    """Count product JSON files per category from data-products/."""
+    dp = CONTENT / "data-products"
+    counts: dict[str, int] = {}
+    if not dp.is_dir():
+        return counts
+    for cat_dir in dp.iterdir():
+        if cat_dir.is_dir():
+            n = sum(1 for f in cat_dir.rglob("*.json") if f.is_file())
+            counts[cat_dir.name] = n
     return counts
 
 
@@ -800,23 +847,26 @@ class CategoryManager(tk.Tk):
         super().__init__()
         self.title("EG Category Manager")
         sw, sh = self.winfo_screenwidth(), self.winfo_screenheight()
-        win_w, win_h = 1250, 920
+        win_w, win_h = 1536, 864
         self.geometry(f"{win_w}x{win_h}+{(sw-win_w)//2}+{(sh-win_h)//2}")
         self.configure(bg=C.MANTLE)
         self.minsize(1000, 700)
 
         dark_title_bar(self)
+
+        self.categories = load_categories()
+        self.site_colors = load_site_colors()
+
         try:
             ico = tk.PhotoImage(width=1, height=1)
-            ico.put(C.BLUE)
+            ico.put(self.site_colors["primary"])
             self._icon = ico.zoom(32, 32)
             self.iconphoto(True, self._icon)
         except Exception:
             pass
-
-        self.categories = load_categories()
-        self.site_colors = load_site_colors()
         self.article_counts = count_articles()
+        self.product_counts = count_products()
+        self.cat_presence = scan_category_presence()
 
         # Auto-discover categories from content that aren't in JSON
         self._auto_discover()
@@ -853,31 +903,36 @@ class CategoryManager(tk.Tk):
 
     # -- Header --------------------------------------------------------------
     def _build_header(self):
-        hdr = tk.Frame(self, bg=C.CRUST, height=58)
+        hdr = tk.Frame(self, bg=C.CRUST, height=56)
         hdr.pack(fill="x")
         hdr.pack_propagate(False)
-        tk.Frame(hdr, bg=C.BLUE, height=2).pack(fill="x", side="bottom")
+        pri = self.site_colors["primary"]
+        self._hdr_border = tk.Frame(hdr, bg=pri, height=2)
+        self._hdr_border.pack(fill="x", side="bottom")
         inner = tk.Frame(hdr, bg=C.CRUST)
-        inner.pack(fill="both", expand=True, padx=24)
-        tk.Label(inner, text="EG", bg=C.CRUST, fg=C.BLUE,
-                 font=("Segoe UI", 20, "bold")).pack(side="left")
+        inner.pack(fill="both", expand=True, padx=20)
+        self._eg_lbl = tk.Label(inner, text="EG", bg=C.CRUST, fg=pri,
+                                font=("Segoe UI", 18, "bold"))
+        self._eg_lbl.pack(side="left")
         tk.Label(inner, text="  Category Manager", bg=C.CRUST, fg=C.TEXT,
                  font=("Segoe UI", 14)).pack(side="left")
         tk.Label(inner, text=f"  ·  {ROOT.name}", bg=C.CRUST, fg=C.OVERLAY0,
-                 font=F.SMALL).pack(side="left", padx=(4, 0))
+                 font=F.BODY).pack(side="left", padx=(4, 0))
+        hover = derive_colors(pri).get("hover", pri)
         self.save_btn = FlatBtn(inner, text="  Save  ", command=self._save,
-                                bg=C.BLUE, fg=C.CRUST, hover_bg=C.SAPPHIRE,
+                                bg=pri, fg=C.CRUST, hover_bg=hover,
                                 font=F.BODY_BOLD)
-        self.save_btn.pack(side="right", pady=10)
+        self.save_btn.pack(side="right", pady=4)
         self.changes_lbl = tk.Label(inner, text="", bg=C.CRUST, fg=C.PEACH, font=F.SMALL)
-        self.changes_lbl.pack(side="right", padx=12)
+        self.changes_lbl.pack(side="right", padx=8)
 
     # -- Site Theme Row ------------------------------------------------------
     def _build_site_theme_row(self):
         """Top row: primary + secondary color pickers, gradient preview, derived swatches."""
         row = tk.Frame(self, bg=C.SURFACE0, highlightthickness=1,
-                       highlightbackground=C.CARD_BORDER)
-        row.pack(fill="x", padx=16, pady=(12, 0))
+                       highlightbackground=C.CARD_BORDER, height=52)
+        row.pack(fill="x", padx=16, pady=(4, 0))
+        row.pack_propagate(False)
 
         # Left accent bar (gradient drawn on canvas)
         accent_bar = tk.Canvas(row, width=4, highlightthickness=0, bg=C.SURFACE0)
@@ -885,59 +940,59 @@ class CategoryManager(tk.Tk):
         self._site_accent_bar = accent_bar
 
         inner = tk.Frame(row, bg=C.SURFACE0)
-        inner.pack(side="left", fill="both", expand=True, padx=12, pady=10)
+        inner.pack(side="left", fill="both", expand=True, padx=8, pady=4)
 
-        # Row A: title + gradient preview
+        # Row A: title + description + gradient preview
         row_a = tk.Frame(inner, bg=C.SURFACE0)
         row_a.pack(fill="x")
 
         tk.Label(row_a, text="Site Theme", bg=C.SURFACE0, fg=C.TEXT,
-                 font=F.HEADING).pack(side="left")
-        tk.Label(row_a, text="  seasonal colors for navbar, gradients, SVGs",
-                 bg=C.SURFACE0, fg=C.OVERLAY0, font=F.TINY).pack(side="left", pady=(2, 0))
+                 font=F.BODY_BOLD).pack(side="left")
+        tk.Label(row_a, text="  seasonal colors", bg=C.SURFACE0,
+                 fg=C.OVERLAY0, font=F.TINY).pack(side="left")
 
-        # Gradient preview bar (wide canvas showing the left-to-right gradient)
-        self._grad_canvas = tk.Canvas(row_a, width=200, height=20,
+        # Gradient preview bar
+        self._grad_canvas = tk.Canvas(row_a, width=200, height=14,
                                       highlightthickness=1, highlightbackground=C.SURFACE2)
-        self._grad_canvas.pack(side="right", padx=(8, 0))
+        self._grad_canvas.pack(side="right")
+
+        # Derived color swatches (on same row as gradient)
+        self._site_derived: dict[str, tk.Canvas] = {}
+        for key in reversed(["accent", "hover", "grad-start", "dark", "soft"]):
+            sw = tk.Canvas(row_a, width=16, height=12, highlightthickness=1,
+                           highlightbackground=C.SURFACE2)
+            sw.pack(side="right", padx=1)
+            self._site_derived[key] = sw
+        tk.Label(row_a, text="Derived:", bg=C.SURFACE0, fg=C.OVERLAY0,
+                 font=F.TINY).pack(side="right", padx=(8, 2))
 
         # Row B: primary + secondary pickers
         row_b = tk.Frame(inner, bg=C.SURFACE0)
-        row_b.pack(fill="x", pady=(6, 0))
+        row_b.pack(fill="x", pady=(2, 0))
 
         # Primary (site-color / gradient start)
         tk.Label(row_b, text="Primary:", bg=C.SURFACE0, fg=C.OVERLAY0,
-                 font=F.SMALL).pack(side="left")
-        self._pri_swatch = tk.Canvas(row_b, width=18, height=18, highlightthickness=1,
+                 font=F.TINY).pack(side="left")
+        self._pri_swatch = tk.Canvas(row_b, width=14, height=14, highlightthickness=1,
                                      highlightbackground=C.SURFACE2,
                                      bg=self.site_colors["primary"], cursor="hand2")
-        self._pri_swatch.pack(side="left", padx=(4, 2))
+        self._pri_swatch.pack(side="left", padx=(3, 2))
         self._pri_lbl = tk.Label(row_b, text=self.site_colors["primary"],
                                  bg=C.SURFACE0, fg=self.site_colors["primary"],
-                                 font=F.BODY_BOLD, cursor="hand2")
-        self._pri_lbl.pack(side="left", padx=(0, 16))
+                                 font=F.SMALL, cursor="hand2")
+        self._pri_lbl.pack(side="left", padx=(0, 12))
 
         # Secondary (brand-color / gradient end)
         tk.Label(row_b, text="Secondary:", bg=C.SURFACE0, fg=C.OVERLAY0,
-                 font=F.SMALL).pack(side="left")
-        self._sec_swatch = tk.Canvas(row_b, width=18, height=18, highlightthickness=1,
+                 font=F.TINY).pack(side="left")
+        self._sec_swatch = tk.Canvas(row_b, width=14, height=14, highlightthickness=1,
                                      highlightbackground=C.SURFACE2,
                                      bg=self.site_colors["secondary"], cursor="hand2")
-        self._sec_swatch.pack(side="left", padx=(4, 2))
+        self._sec_swatch.pack(side="left", padx=(3, 2))
         self._sec_lbl = tk.Label(row_b, text=self.site_colors["secondary"],
                                  bg=C.SURFACE0, fg=self.site_colors["secondary"],
-                                 font=F.BODY_BOLD, cursor="hand2")
-        self._sec_lbl.pack(side="left", padx=(0, 16))
-
-        # Derived color swatches (from primary)
-        tk.Label(row_b, text="Derived:", bg=C.SURFACE0, fg=C.OVERLAY0,
-                 font=F.SMALL).pack(side="left", padx=(8, 4))
-        self._site_derived: dict[str, tk.Canvas] = {}
-        for key in ["accent", "hover", "grad-start", "dark", "soft"]:
-            sw = tk.Canvas(row_b, width=20, height=14, highlightthickness=1,
-                           highlightbackground=C.SURFACE2)
-            sw.pack(side="left", padx=1)
-            self._site_derived[key] = sw
+                                 font=F.SMALL, cursor="hand2")
+        self._sec_lbl.pack(side="left")
 
         # Bind click handlers
         self._pri_swatch.bind("<Button-1>", lambda e: self._pick_site_color("primary"))
@@ -969,7 +1024,7 @@ class CategoryManager(tk.Tk):
             g = int(pg + (sg - pg) * t)
             b = int(pb + (sb - pb) * t)
             color = f"#{r:02x}{g:02x}{b:02x}"
-            gc.create_line(x, 0, x, 20, fill=color)
+            gc.create_line(x, 0, x, 14, fill=color)
 
         # Accent bar (simple vertical gradient)
         ab = self._site_accent_bar
@@ -991,11 +1046,20 @@ class CategoryManager(tk.Tk):
             if not val.startswith("rgba"):
                 canvas.configure(bg=val)
 
+        # Update header widgets to match primary site color
+        self._hdr_border.configure(bg=pri)
+        self._eg_lbl.configure(fg=pri)
+        hover = derived.get("hover", pri)
+        self.save_btn.configure(bg=pri)
+        self.save_btn._bg = pri
+        self.save_btn._hover = hover
+
     def _pick_site_color(self, which: str):
         """Open color picker for primary or secondary site color."""
         current = self.site_colors[which]
         label = "Primary (site-color)" if which == "primary" else "Secondary (brand-color)"
-        picker = ColorPicker(self, initial=current, title=f"Site {label}")
+        picker = ColorPicker(self, initial=current, title=f"Site {label}",
+                             accent=self.site_colors["primary"])
         self.wait_window(picker)
         if picker.result:
             self.site_colors[which] = picker.result
@@ -1067,7 +1131,7 @@ class CategoryManager(tk.Tk):
         self._update_badge()
 
     def _build_card(self, idx: int, cat: dict):
-        color = cat.get("color", C.BLUE)
+        color = cat.get("color", self.site_colors["primary"])
         cat_id = cat.get("id", "")
         grid_row, grid_col = divmod(idx, self.COLS)
 
@@ -1117,7 +1181,7 @@ class CategoryManager(tk.Tk):
                  highlightthickness=1, highlightcolor=C.BLUE,
                  highlightbackground=C.SURFACE2, width=10).pack(side="left", padx=(4, 0))
 
-        # Row 3: Product + Content toggles (compact, vertically centered)
+        # Row 3: Product + Content toggles — only show what exists on disk
         row3 = tk.Frame(inner, bg=C.SURFACE0)
         row3.pack(fill="x", pady=(5, 0))
 
@@ -1132,36 +1196,52 @@ class CategoryManager(tk.Tk):
             t.pack(side="left")
             return t
 
-        tk.Label(row3, text="Product", bg=C.SURFACE0, fg=C.TEXT,
-                 font=F.SMALL).pack(side="left", padx=(0, 6))
+        presence = self.cat_presence.get(cat_id, {"has_products": False, "has_content": False})
+        has_products = presence["has_products"]
+        has_content = presence["has_content"]
+        # WHY: if neither exists on disk, show both toggle rows (future/manual category)
+        show_product = has_products or (not has_products and not has_content)
+        show_content = has_content or (not has_products and not has_content)
 
-        prod_prod = _toggle_pair(row3, "Prod", cat.get("product", {}).get("production", False),
-                                 lambda v, i=idx: self._on_toggle(i, "product", "production", v))
-        prod_vite = _toggle_pair(row3, "Vite", cat.get("product", {}).get("vite", False),
-                                 lambda v, i=idx: self._on_toggle(i, "product", "vite", v))
+        prod_prod = prod_vite = cont_prod = cont_vite = None
 
-        tk.Frame(row3, bg=C.SURFACE2, width=1, height=20).pack(side="left", fill="y", padx=(8, 8))
+        if show_product:
+            tk.Label(row3, text="Product", bg=C.SURFACE0, fg=C.TEXT,
+                     font=F.SMALL).pack(side="left", padx=(0, 6))
+            prod_prod = _toggle_pair(row3, "Prod", cat.get("product", {}).get("production", False),
+                                     lambda v, i=idx: self._on_toggle(i, "product", "production", v))
+            prod_vite = _toggle_pair(row3, "Vite", cat.get("product", {}).get("vite", False),
+                                     lambda v, i=idx: self._on_toggle(i, "product", "vite", v))
 
-        tk.Label(row3, text="Content", bg=C.SURFACE0, fg=C.TEXT,
-                 font=F.SMALL).pack(side="left", padx=(0, 6))
+        if show_product and show_content:
+            tk.Frame(row3, bg=C.SURFACE2, width=1, height=20).pack(side="left", fill="y", padx=(8, 8))
 
-        cont_prod = _toggle_pair(row3, "Prod", cat.get("content", {}).get("production", False),
-                                 lambda v, i=idx: self._on_toggle(i, "content", "production", v))
-        cont_vite = _toggle_pair(row3, "Vite", cat.get("content", {}).get("vite", False),
-                                 lambda v, i=idx: self._on_toggle(i, "content", "vite", v))
+        if show_content:
+            tk.Label(row3, text="Content", bg=C.SURFACE0, fg=C.TEXT,
+                     font=F.SMALL).pack(side="left", padx=(0, 6))
+            cont_prod = _toggle_pair(row3, "Prod", cat.get("content", {}).get("production", False),
+                                     lambda v, i=idx: self._on_toggle(i, "content", "production", v))
+            cont_vite = _toggle_pair(row3, "Vite", cat.get("content", {}).get("vite", False),
+                                     lambda v, i=idx: self._on_toggle(i, "content", "vite", v))
 
-        # Row 4: Article counts + icon status
+        # Row 4: Product count + Article counts + icon status
         row4 = tk.Frame(inner, bg=C.SURFACE0)
         row4.pack(fill="x", pady=(4, 0))
+
+        parts: list[str] = []
+        p_count = self.product_counts.get(cat_id, 0)
+        if p_count > 0:
+            parts.append(f"{p_count} products")
 
         counts = self.article_counts.get(cat_id, {})
         r_count = counts.get("reviews", 0)
         g_count = counts.get("guides", 0)
         n_count = counts.get("news", 0)
-        total = r_count + g_count + n_count
-        count_text = f"{r_count} reviews · {g_count} guides · {n_count} news"
-        if total == 0:
-            count_text = "no articles found"
+        a_total = r_count + g_count + n_count
+        if a_total > 0:
+            parts.append(f"{r_count} reviews · {g_count} guides · {n_count} news")
+
+        count_text = "  |  ".join(parts) if parts else "no data found"
 
         tk.Label(row4, text=count_text, bg=C.SURFACE0, fg=C.OVERLAY0,
                  font=F.TINY).pack(side="left")
@@ -1230,7 +1310,8 @@ class CategoryManager(tk.Tk):
             current = self.categories[i].get("color", "#ffffff")
             picker = ColorPicker(self, initial=current,
                                  title=f"Color for {self.categories[i]['id']}",
-                                 category_id=self.categories[i]["id"])
+                                 category_id=self.categories[i]["id"],
+                                 accent=self.site_colors["primary"])
             self.wait_window(picker)
             if picker.result:
                 new_color = picker.result
@@ -1349,7 +1430,9 @@ class CategoryManager(tk.Tk):
         FlatBtn(btn_row, text="Cancel", command=dlg.destroy,
                 bg=C.SURFACE1, hover_bg=C.SURFACE2).pack(side="right", padx=(8, 0))
         FlatBtn(btn_row, text="  Add  ", command=do_add,
-                bg=C.BLUE, fg=C.CRUST, hover_bg=C.SAPPHIRE).pack(side="right")
+                bg=self.site_colors["primary"], fg=C.CRUST,
+                hover_bg=derive_colors(self.site_colors["primary"]).get("hover",
+                self.site_colors["primary"])).pack(side="right")
 
     # -- Save ----------------------------------------------------------------
     def _save(self):

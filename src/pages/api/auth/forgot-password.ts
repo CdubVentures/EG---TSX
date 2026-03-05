@@ -24,7 +24,7 @@ export const POST: APIRoute = async ({ request }) => {
     );
   }
 
-  const forgotPw = (globalThis as any).__mockCognitoForgotPassword ?? cognitoForgotPassword;
+  const forgotPw = globalThis.__mockCognitoForgotPassword ?? cognitoForgotPassword;
   const result = await forgotPw(email);
 
   if (!result.ok) {

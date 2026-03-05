@@ -31,6 +31,40 @@ Copy `.env.example` to `.env` and fill in Cognito + DynamoDB values.
 | `npm run preview` | Preview production build locally |
 | `node --import tsx --test src/features/auth/tests/*.test.mjs` | Run auth tests (69 tests) |
 
+## Data Gateways (How to Access Products & Articles)
+
+Full contract: [`docs/DATA-GATEWAY-CONTRACT.md`](docs/DATA-GATEWAY-CONTRACT.md)
+
+**Products** and **articles** are accessed exclusively through gateway functions that respect category visibility flags from `config/categories.json`. This is enforced project-wide.
+
+```typescript
+// PRODUCTS — always use this, never raw getCollection('dataProducts')
+import { getProducts } from '@core/products';
+const products = await getProducts();
+
+// ARTICLES — always use this, never raw getCollection('reviews')
+import { getReviews, getGuides, getNews, getBrands, getGames } from '@core/content';
+const reviews = await getReviews();   // filtered by flags, drafts excluded, sorted by date
+const news    = await getNews();
+```
+
+**How category control works:**
+
+```
+categories.json (flags)  →  CONFIG.categories / CONFIG.contentCategories  →  gateway functions
+       ↑
+category-manager.py GUI
+```
+
+Disable a category in `category-manager.py` (or edit JSON directly) and that category's products/articles vanish from the entire site — no code changes required.
+
+**Adding a new category:** See [`docs/DATA-GATEWAY-CONTRACT.md`](docs/DATA-GATEWAY-CONTRACT.md#adding-a-new-category)
+
+**Tests:**
+```sh
+node --test test/products-gateway.test.mjs test/content-filter.test.mjs  # 28 tests
+```
+
 ## Architecture
 
 Full documentation: [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md)

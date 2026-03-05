@@ -54,9 +54,9 @@ export default function SettingsDialog() {
         'w-[90%] max-w-[520px] max-h-[80vh]',
         'max-[825px]:max-w-[90%]',
         'max-[600px]:w-[clamp(320px,85vw,450px)] max-[600px]:max-w-[95%]',
-        'bg-[#1d2021] rounded-[7px] overflow-hidden overflow-y-auto',
-        'text-[#e5e7eb] [font-family:var(--identity-font,_"Open_Sans",_sans-serif)] leading-[normal]',
-        'shadow-[0_12px_32px_rgba(0,0,0,0.6)]',
+        'bg-[var(--auth-dialog-bg)] rounded-[7px] overflow-hidden overflow-y-auto',
+        'text-[var(--auth-dialog-text)] [font-family:var(--identity-font,_"Open_Sans",_sans-serif)] leading-[normal]',
+        'shadow-[var(--auth-dialog-shadow)]',
         'p-0 border-none m-auto'
       )}
       onCancel={(e) => {

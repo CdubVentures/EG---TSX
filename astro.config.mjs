@@ -29,8 +29,17 @@ export default defineConfig({
     optimizeDeps: {
       include: ['react', 'react-dom', 'nanostores', '@nanostores/react'],
     },
+    build: {
+      rollupOptions: {
+        output: {
+          manualChunks(id) {
+            if (id.includes('node_modules')) {
+              if (id.includes('react') || id.includes('nanostores')) return 'vendor';
+              if (id.includes('jose') || id.includes('@aws-sdk')) return 'auth-vendor';
+            }
+          },
+        },
+      },
+    },
   },
-
-  // Enable content collections
-  experimental: {},
 });

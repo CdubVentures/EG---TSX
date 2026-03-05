@@ -4,7 +4,7 @@
 // server sync, cross-tab broadcast, and first-login merge.
 
 import { atom } from 'nanostores';
-import { $auth } from '@features/auth/store';
+import { $auth } from '@features/auth';
 import {
   $vault,
   switchPersona,

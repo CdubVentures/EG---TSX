@@ -79,7 +79,7 @@ function titleCase(s: string): string {
       {/* ─── Games mega menu ─── */}
       {games.length > 0 && (
         <li class="sub-menu">
-          <a href="#" class="nav-link">Games</a>
+          <a href="#" class="nav-link" aria-haspopup="true" aria-expanded="false">Games</a>
           <div class="mega-menu games-menu" style="opacity: 0; visibility: hidden; pointer-events: none;">
             <div class="nav-game-grid">
               {/* Explore All card */}
@@ -121,7 +121,7 @@ function titleCase(s: string): string {
       {/* ─── Guides mega menu ─── */}
       {guides.length > 0 && (
         <li class="sub-menu">
-          <a href="#" class="nav-link">Guides</a>
+          <a href="#" class="nav-link" aria-haspopup="true" aria-expanded="false">Guides</a>
           <div class="mega-menu mega-menu-guides" id="mega-menu-guides" style="opacity: 0; visibility: hidden; pointer-events: none;">
             <div class="mega-menu-inner">
               {/* Left column: category tabs */}
@@ -188,7 +188,7 @@ function titleCase(s: string): string {
       {/* ─── Brands mega menu ─── */}
       {brands.length > 0 && (
         <li class="sub-menu">
-          <a href="#" class="nav-link">Brands</a>
+          <a href="#" class="nav-link" aria-haspopup="true" aria-expanded="false">Brands</a>
           <div class="mega-menu mega-menu-brands" id="mega-menu-brands" style="opacity: 0; visibility: hidden; pointer-events: none;">
             <div class="mega-menu-inner">
               {/* Left column: category tabs */}
@@ -260,7 +260,7 @@ function titleCase(s: string): string {
       {/* ─── Hubs mega menu ─── */}
       {hubs.length > 0 && (
         <li class="sub-menu hubs-dropdown">
-          <a href="#" class="nav-link">
+          <a href="#" class="nav-link" aria-haspopup="true" aria-expanded="false">
             Hubs <span class="nav-dropdown-arrow"></span>
             <span class="navbar-new-badge" data-neutral="true">&nbsp;New!</span>
           </a>
@@ -292,7 +292,7 @@ function titleCase(s: string): string {
 
       {/* ─── Vault mega menu (LAST item in nav — matches HBS navbar.handlebars line 400) ─── */}
       <li class="sub-menu vault-bin-menu">
-        <a href="#" class="vault-bin-button nav-link">
+        <a href="#" class="vault-bin-button nav-link" aria-haspopup="true" aria-expanded="false" aria-label="Comparison Vault">
           <span class="vault-bin-icon">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" class="svg-base" fill="none">
               <defs>
@@ -310,7 +310,7 @@ function titleCase(s: string): string {
             </svg>
           </span>
           <div class="nav-vault-item-count-wrapper">
-            <VaultCount client:only="react" />
+            <VaultCount client:idle />
           </div>
           Comparison Vault
         </a>
@@ -338,6 +338,7 @@ function titleCase(s: string): string {
         dropdown.style.pointerEvents = 'none';
       }
       item.classList.remove('active', 'locked');
+      setAriaExpanded(item, false);
     });
     /* WHY: vault menu may live in <body> (moved by mobile code), so the
        querySelectorAll above won't find it. Clean it up explicitly. */
@@ -357,11 +358,17 @@ function titleCase(s: string): string {
     return parentLi?.classList.contains('locked') ?? false;
   }
 
+  function setAriaExpanded(item: HTMLElement, expanded: boolean) {
+    const trigger = item.querySelector<HTMLElement>(':scope > a[aria-haspopup]');
+    if (trigger) trigger.setAttribute('aria-expanded', String(expanded));
+  }
+
   function openMegaMenu(item: HTMLElement, dropdown: HTMLElement) {
     dropdown.style.opacity = '1';
     dropdown.style.visibility = 'visible';
     dropdown.style.pointerEvents = 'auto';
     item.classList.add('active');
+    setAriaExpanded(item, true);
     activeDropdown = dropdown;
   }
 
@@ -370,6 +377,7 @@ function titleCase(s: string): string {
     dropdown.style.visibility = 'visible';
     dropdown.style.pointerEvents = 'auto';
     item.classList.add('active', 'locked');
+    setAriaExpanded(item, true);
     activeDropdown = dropdown;
   }
 
@@ -378,6 +386,7 @@ function titleCase(s: string): string {
     dropdown.style.visibility = 'hidden';
     dropdown.style.pointerEvents = 'none';
     item.classList.remove('active', 'locked');
+    setAriaExpanded(item, false);
     if (activeDropdown === dropdown) activeDropdown = null;
   }
 
@@ -850,6 +859,12 @@ function titleCase(s: string): string {
     position: relative;
   }
 
+  .nav-link:focus-visible {
+    outline: 2px solid var(--site-start-color);
+    outline-offset: -2px;
+    border-radius: 2px;
+  }
+
   .nav-link:hover {
     background: linear-gradient(to right, var(--site-gradient-start), var(--site-gradient-end));
     -webkit-background-clip: text;
@@ -1110,7 +1125,7 @@ function titleCase(s: string): string {
     top: 0;
     bottom: 2rem;
     width: 1px;
-    background: #444;
+    background: var(--nav-separator, #444);
     pointer-events: none;
   }
 
@@ -1230,6 +1245,11 @@ function titleCase(s: string): string {
   .icon-ai {
     -webkit-mask-image: url('/images/navbar/ai.svg');
     mask-image: url('/images/navbar/ai.svg');
+  }
+
+  .mega-menu-left-nav li a:focus-visible {
+    outline: 2px solid var(--card-color, var(--site-start-color));
+    outline-offset: -2px;
   }
 
   /* Hover states */
@@ -1387,6 +1407,11 @@ function titleCase(s: string): string {
     word-break: break-word;
   }
 
+  .dropdown-column1 ul li a:focus-visible {
+    outline: 2px solid var(--site-start-color);
+    outline-offset: -2px;
+  }
+
   /* Underline wrapper */
   .nav-underline {
     position: relative;
@@ -1433,6 +1458,11 @@ function titleCase(s: string): string {
     box-sizing: border-box;
     border-radius: 4px;
     transition: background-color 0.2s ease, color 0.2s ease;
+  }
+
+  .mega-menu-bottom-link:focus-visible {
+    outline: 2px solid var(--site-start-color);
+    outline-offset: -2px;
   }
 
   .all-guides-link {
@@ -1496,7 +1526,7 @@ function titleCase(s: string): string {
     height: 2.5em;
     margin-right: 0.5rem;
     border-radius: 50%;
-    background-color: #121212; /* HBS --section-darkestdark-background-color */
+    background-color: var(--section-darkestdark-background-color, #121212);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -1835,7 +1865,7 @@ function titleCase(s: string): string {
   .vault-clear-section {
     margin-top: auto;
     padding-top: 0.5rem;
-    border-top: 1px solid #444;
+    border-top: 1px solid var(--nav-separator, #444);
   }
 
   .vault-clear-all-link {
@@ -2093,6 +2123,11 @@ function titleCase(s: string): string {
     transition: background-color 0.2s ease, color 0.2s ease;
     box-sizing: border-box;
     line-height: 1.25;
+  }
+
+  .vault-compare-link:focus-visible {
+    outline: 2px solid var(--navbar-vault-color, var(--site-start-color));
+    outline-offset: -2px;
   }
 
   @media (hover: hover) and (pointer: fine) {
