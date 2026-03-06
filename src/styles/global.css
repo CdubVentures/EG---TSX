@@ -140,10 +140,10 @@
 :root,
 [data-theme="default"] {
   color-scheme: light;
-  --color-bg-base:      #ffffff;
-  --color-bg-surface:   #f8f9fa;
+  --color-bg-base:      #f8f9fa;
+  --color-bg-surface:   #f0f2f5;
   --color-bg-elevated:  #ffffff;
-  --color-bg-inset:     #f0f2f5;
+  --color-bg-inset:     #e8eaed;
   --color-bg-overlay:   rgba(0, 0, 0, 0.5);
 
   --color-text-primary:   #0d0e12;
@@ -217,6 +217,42 @@
   --auth-guest-border:    rgba(0, 0, 0, 0.08);
   --auth-guest-bg:        rgba(0, 0, 0, 0.03);
   --auth-badge-bg:        rgba(0, 0, 0, 0.06);
+
+  /* Nav tokens — light variant */
+  --nav-bg: #f0f2f5;
+  --nav-surface: #f0f2f5;
+  --nav-surface-dark: #e8eaed;
+  --nav-surface-medium: #dfe2e6;
+  --nav-text: #1a1a2e;
+  --nav-text-muted: #4a5568;
+  --nav-separator: #d1d5db;
+  --nav-brand-logo-filter: brightness(0);
+  --nav-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+  --card-shadow: 0 1px 3px rgba(0, 0, 0, 0.08), 0 1px 2px rgba(0, 0, 0, 0.06);
+  --card-shadow-hover: 0 4px 12px rgba(0, 0, 0, 0.1), 0 2px 4px rgba(0, 0, 0, 0.06);
+  --card-container-bg: var(--section-dark-background-color);
+
+  /* HBS legacy bridge — color variables (theme-switched) */
+  --color-text-on-accent: #ffffff;
+  --section-darkestdarker-background-color: #ffffff;
+  --section-darkestdark-background-color:   #f8f9fa;
+  --section-darkest-background-color:       #f4f5f7;
+  --section-dark-background-color:          #f0f2f5;
+  --section-dark-bg-on-white:               #f0f2f5;
+  --section-dusk-background-color:          #e8eaed;
+  --section-dusker-background-color:        #e5e9ee;
+  --section-medium-background-color:        #e2e8f0;
+  --section-light-background-color:         #c8cdd3;
+  --white-color-1:       var(--color-text-primary);
+  --white-color-2:       var(--color-text-secondary);
+  --white-black-color-1: var(--color-text-primary);
+  --white-black-color-2: #6b7280;
+  --grey-color-1: #374151;
+  --grey-color-2: #6b7280;
+  --grey-color-3: #718096;
+  --grey-color-4: #9ca3af;
+  --accent-color-3: #e65443;
+  --success-color:  #16a34a;
 }
 
 /* ─── Gaming theme ─── */
@@ -250,9 +286,9 @@
   --color-score-poor:      #f87171;
 
   /* Scrollbar — dark variant (matches HBS global.css :647–666) */
-  --scrollbar-track: var(--section-dusk-background-color);
-  --scrollbar-thumb: var(--section-dark-background-color);
-  --scrollbar-thumb-hover: var(--section-medium-background-color);
+  --scrollbar-track: #25292a;
+  --scrollbar-thumb: #1d2021;
+  --scrollbar-thumb-hover: #3A3F41;
 
   /* Auth / dialog tokens — dark variant */
   --auth-dialog-bg:       #1d2021;
@@ -280,13 +316,49 @@
   --auth-guest-border:    rgba(255, 255, 255, 0.06);
   --auth-guest-bg:        rgba(255, 255, 255, 0.03);
   --auth-badge-bg:        rgba(255, 255, 255, 0.08);
+
+  /* Nav tokens — dark variant */
+  --nav-bg: #000000;
+  --nav-surface: #1d2021;
+  --nav-surface-dark: #161718;
+  --nav-surface-medium: #3A3F41;
+  --nav-text: #ffffff;
+  --nav-text-muted: #dddad5;
+  --nav-separator: #444;
+  --nav-brand-logo-filter: brightness(0) invert(1);
+  --nav-shadow: none;
+  --card-shadow: none;
+  --card-shadow-hover: none;
+  --card-container-bg: transparent;
+
+  /* HBS legacy bridge — color variables (theme-switched) */
+  --color-text-on-accent: #ffffff;
+  --section-darkestdarker-background-color: #080808;
+  --section-darkestdark-background-color:   #121212;
+  --section-darkest-background-color:       #161718;
+  --section-dark-background-color:          #1d2021;
+  --section-dark-bg-on-white:               #1d2021;
+  --section-dusk-background-color:          #25292a;
+  --section-dusker-background-color:        #2a2d2d;
+  --section-medium-background-color:        #3A3F41;
+  --section-light-background-color:         #4d5557;
+  --white-color-1:       #ffffff;
+  --white-color-2:       #dddad5;
+  --white-black-color-1: #ffffff;
+  --white-black-color-2: #dddad5;
+  --grey-color-1: #cccccc;
+  --grey-color-2: #bbbbbb;
+  --grey-color-3: #b0b0b0;
+  --grey-color-4: #909090;
+  --accent-color-3: #e65443;
+  --success-color:  #00d26a;
 }
 
 /* ─── Workstation theme ─── */
 [data-theme="workstation"] {
   color-scheme: light;
-  --color-bg-base:      #fafafa;
-  --color-bg-surface:   #f4f4f5;
+  --color-bg-base:      #f4f4f5;
+  --color-bg-surface:   #ececed;
   --color-bg-elevated:  #ffffff;
   --color-bg-inset:     #e4e4e7;
   --color-bg-overlay:   rgba(0, 0, 0, 0.4);
@@ -309,15 +381,51 @@
   --scrollbar-track: #e4e4e7;
   --scrollbar-thumb: #a1a1aa;
   --scrollbar-thumb-hover: #71717a;
+
+  /* Nav tokens — workstation light variant */
+  --nav-bg: #f4f4f5;
+  --nav-surface: #f4f4f5;
+  --nav-surface-dark: #e4e4e7;
+  --nav-surface-medium: #d4d4d8;
+  --nav-text: #18181b;
+  --nav-text-muted: #52525b;
+  --nav-separator: #d4d4d8;
+  --nav-brand-logo-filter: brightness(0);
+  --nav-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+  --card-shadow: 0 1px 3px rgba(0, 0, 0, 0.08), 0 1px 2px rgba(0, 0, 0, 0.06);
+  --card-shadow-hover: 0 4px 12px rgba(0, 0, 0, 0.1), 0 2px 4px rgba(0, 0, 0, 0.06);
+  --card-container-bg: var(--section-dark-background-color);
+
+  /* HBS legacy bridge — color variables (theme-switched) */
+  --color-text-on-accent: #ffffff;
+  --section-darkestdarker-background-color: #fafafa;
+  --section-darkestdark-background-color:   #f4f4f5;
+  --section-darkest-background-color:       #ececed;
+  --section-dark-background-color:          #e4e4e7;
+  --section-dark-bg-on-white:               #e4e4e7;
+  --section-dusk-background-color:          #dcdce0;
+  --section-dusker-background-color:        #d8d8dc;
+  --section-medium-background-color:        #d4d4d8;
+  --section-light-background-color:         #b4b4b8;
+  --white-color-1:       var(--color-text-primary);
+  --white-color-2:       var(--color-text-secondary);
+  --white-black-color-1: var(--color-text-primary);
+  --white-black-color-2: #71717a;
+  --grey-color-1: #3f3f46;
+  --grey-color-2: #71717a;
+  --grey-color-3: #a1a1aa;
+  --grey-color-4: #a1a1aa;
+  --accent-color-3: #e65443;
+  --success-color:  #16a34a;
 }
 
 /* ─── Review theme ─── */
 [data-theme="review"] {
   color-scheme: light;
-  --color-bg-base:      #fffef7;
-  --color-bg-surface:   #faf9f0;
+  --color-bg-base:      #faf9f0;
+  --color-bg-surface:   #f5f4e8;
   --color-bg-elevated:  #ffffff;
-  --color-bg-inset:     #f5f4e8;
+  --color-bg-inset:     #edece0;
   --color-bg-overlay:   rgba(0, 0, 0, 0.4);
 
   --color-text-primary:   #1c1917;
@@ -338,39 +446,56 @@
   --scrollbar-track: #f5f4e8;
   --scrollbar-thumb: #d6d3d1;
   --scrollbar-thumb-hover: #a8a29e;
+
+  /* Nav tokens — review light variant */
+  --nav-bg: #faf9f0;
+  --nav-surface: #faf9f0;
+  --nav-surface-dark: #f5f4e8;
+  --nav-surface-medium: #e7e5e4;
+  --nav-text: #1c1917;
+  --nav-text-muted: #57534e;
+  --nav-separator: #e7e5e4;
+  --nav-brand-logo-filter: brightness(0);
+  --nav-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+  --card-shadow: 0 1px 3px rgba(0, 0, 0, 0.06), 0 1px 2px rgba(0, 0, 0, 0.04);
+  --card-shadow-hover: 0 4px 12px rgba(0, 0, 0, 0.08), 0 2px 4px rgba(0, 0, 0, 0.04);
+  --card-container-bg: var(--section-dark-background-color);
+
+  /* HBS legacy bridge — color variables (theme-switched) */
+  --color-text-on-accent: #ffffff;
+  --section-darkestdarker-background-color: #fffef7;
+  --section-darkestdark-background-color:   #faf9f0;
+  --section-darkest-background-color:       #f7f6ec;
+  --section-dark-background-color:          #f5f4e8;
+  --section-dark-bg-on-white:               #f5f4e8;
+  --section-dusk-background-color:          #edece0;
+  --section-dusker-background-color:        #eae8e2;
+  --section-medium-background-color:        #e7e5e4;
+  --section-light-background-color:         #c8c4be;
+  --white-color-1:       var(--color-text-primary);
+  --white-color-2:       var(--color-text-secondary);
+  --white-black-color-1: var(--color-text-primary);
+  --white-black-color-2: #78716c;
+  --grey-color-1: #44403c;
+  --grey-color-2: #78716c;
+  --grey-color-3: #a8a29e;
+  --grey-color-4: #a8a29e;
+  --accent-color-3: #e65443;
+  --success-color:  #16a34a;
 }
 
 /* ─────────────────────────────────────────────────────────────────────────────
    SITE IDENTITY — gradient / category colours
-   These are global (not theme-switched) because the navbar is always dark.
+   Dark defaults for nav are in [data-theme="gaming"]. Light variants in
+   default/workstation/review.
    ───────────────────────────────────────────────────────────────────────── */
 :root {
   /* Site gradient — SSOT: categories.json siteColors, injected by MainLayout.astro */
 
-  /* Navbar layout */
+  /* Navbar layout (global — not theme-switched) */
   --nav-height: clamp(55px, 5rem, 8rem);
   --top-bar-H: clamp(55px, 5rem, 8rem); /* HBS alias */
-  --nav-bg: #000000;
-  --nav-surface: #1d2021;
-  --nav-surface-dark: #161718;
-  --nav-surface-medium: #3A3F41;
-  --nav-text: #ffffff;
-  --nav-text-muted: #dddad5;
-  --nav-separator: #444;
   --nav-z: 95000;
-
-  /* HBS background color aliases — needed by navbar CSS + scrollbar */
-  --main-background-color: #000000;
-  --section-medium-background-color: #3A3F41;
-  --section-dark-background-color: #1d2021;
-  --section-dusk-background-color: #25292a;
-  --section-darkest-background-color: #161718;
-  --section-darkestdark-background-color: #121212;
-
-  /* HBS text color aliases */
-  --white-color-1: #ffffff;
-  --white-color-2: #dddad5;
-  --grey-color-3: #b0b0b0;
 
   /* HBS font aliases */
   --identity-font: "Open Sans", sans-serif;
@@ -380,29 +505,92 @@
 
   /* HBS site color aliases — SSOT: categories.json siteColors, injected by MainLayout.astro */
 
-  /* HBS grey / utility aliases (used by auth popups, settings, future components) */
-  --grey-color-1: #e5e7eb;
-  --grey-color-2: #9ba2ab;
-
-  /* Auth / dialog tokens are now in the theme switchboard (data-theme blocks).
-     WHY: auth dialogs must look correct in both light and dark themes. */
-  --grey-color-4: #6b7280;
-  --accent-color-3: #e65443;
-  --link-color: #FFD700;
-  --semi-transparent-black: rgba(0, 0, 0, 0.75);
-  --success-color: #00d26a;
   --site-background-gradient: linear-gradient(to right, var(--site-start-color), var(--site-end-color));
 
-  /* Responsive clamp font sizes (used by auth + settings popups) */
-  --ft-40-31: clamp(2.81818rem, 2.27273rem + 1.1364vw, 3.63636rem);
-  --ft-30-24: clamp(2.18182rem, 1.81818rem + 0.7273vw, 2.72727rem);
-  --ft-28-20: clamp(1.81818rem, 1.45455rem + 0.7273vw, 2.54545rem);
+  /* ─── Fluid typography: 1150–600px range @11px ─── */
+  --ft-58-39: clamp(var(--font-size-39px), 1.661rem + 3.455vw, var(--font-size-58px));
+  --ft-56-38: clamp(var(--font-size-38px), 1.669rem + 3.273vw, var(--font-size-56px));
+  --ft-52-34: clamp(var(--font-size-34px), 0.926rem + 3.636vw, var(--font-size-52px));
+  --ft-56-42: clamp(var(--font-size-42px), 2.43rem + 2.545vw, var(--font-size-56px));
+  --ft-55-40: clamp(var(--font-size-40px), 2.149rem + 2.727vw, var(--font-size-55px));
+  --ft-44-35: clamp(var(--font-size-35px), 2.289rem + 1.636vw, var(--font-size-44px));
+  --ft-42-32: clamp(var(--font-size-32px), 1.917rem + 1.818vw, var(--font-size-42px));
+  --ft-44-30: clamp(var(--font-size-30px), 1.339rem + 2.545vw, var(--font-size-44px));
+  --ft-44-27: clamp(var(--font-size-27px), 0.769rem + 3.091vw, var(--font-size-44px));
+  --ft-42-34: clamp(var(--font-size-34px), 2.298rem + 1.455vw, var(--font-size-42px));
+  --ft-42-30: clamp(var(--font-size-30px), 1.537rem + 2.182vw, var(--font-size-42px));
+  --ft-42-28: clamp(var(--font-size-28px), 1.157rem + 2.545vw, var(--font-size-42px));
+  --ft-42-27: clamp(var(--font-size-27px), 0.967rem + 2.727vw, var(--font-size-42px));
+  --ft-40-32: clamp(var(--font-size-32px), 2.116rem + 1.455vw, var(--font-size-40px));
+  --ft-40-35: clamp(var(--font-size-35px), 2.686rem + 0.909vw, var(--font-size-40px));
+  --ft-40-34: clamp(var(--font-size-34px), 2.496rem + 1.091vw, var(--font-size-40px));
+  --ft-40-33: clamp(var(--font-size-33px), 2.306rem + 1.273vw, var(--font-size-40px));
+  --ft-40-31: clamp(var(--font-size-31px), 1.926rem + 1.636vw, var(--font-size-40px));
+  --ft-40-27: clamp(var(--font-size-27px), 1.165rem + 2.364vw, var(--font-size-40px));
+  --ft-40-24: clamp(var(--font-size-24px), 0.595rem + 2.909vw, var(--font-size-40px));
+  --ft-38-24: clamp(var(--font-size-24px), 0.793rem + 2.545vw, var(--font-size-38px));
+  --ft-38-20: clamp(var(--font-size-20px), 0.033rem + 3.273vw, var(--font-size-38px));
+  --ft-36-22: clamp(var(--font-size-22px), 0.612rem + 2.545vw, var(--font-size-36px));
+  --ft-36-24: clamp(var(--font-size-24px), 0.992rem + 2.182vw, var(--font-size-36px));
+  --ft-34-28: clamp(var(--font-size-28px), 1.95rem + 1.091vw, var(--font-size-34px));
+  --ft-32-28: clamp(var(--font-size-28px), 2.149rem + 0.727vw, var(--font-size-32px));
+  --ft-32-26: clamp(var(--font-size-26px), 1.769rem + 1.091vw, var(--font-size-32px));
+  --ft-32-25: clamp(var(--font-size-25px), 1.579rem + 1.273vw, var(--font-size-32px));
+  --ft-32-24: clamp(var(--font-size-24px), 1.388rem + 1.455vw, var(--font-size-32px));
+  --ft-30-26: clamp(var(--font-size-26px), 1.967rem + 0.727vw, var(--font-size-30px));
+  --ft-30-24: clamp(var(--font-size-24px), 1.587rem + 1.091vw, var(--font-size-30px));
+  --ft-28-21: clamp(var(--font-size-21px), 1.215rem + 1.273vw, var(--font-size-28px));
+  --ft-28-20: clamp(var(--font-size-20px), 1.025rem + 1.455vw, var(--font-size-28px));
+  --ft-28-19: clamp(var(--font-size-19px), 0.835rem + 1.636vw, var(--font-size-28px));
+  --ft-26-20: clamp(var(--font-size-20px), 1.223rem + 1.091vw, var(--font-size-26px));
+  --ft-27-21: clamp(var(--font-size-21px), 1.314rem + 1.091vw, var(--font-size-27px));
+  --ft-26-24: clamp(var(--font-size-24px), 1.983rem + 0.364vw, var(--font-size-26px));
+  --ft-26-23: clamp(var(--font-size-23px), 1.793rem + 0.545vw, var(--font-size-26px));
+  --ft-25-22: clamp(var(--font-size-22px), 1.702rem + 0.545vw, var(--font-size-25px));
   --ft-24-21: clamp(var(--font-size-21px), 1.612rem + 0.545vw, var(--font-size-24px));
+  --ft-24-20: clamp(var(--font-size-20px), 1.421rem + 0.727vw, var(--font-size-24px));
+  --ft-24-17: clamp(var(--font-size-17px), 0.851rem + 1.273vw, var(--font-size-24px));
+  --ft-24-16: clamp(var(--font-size-16px), 0.661rem + 1.455vw, var(--font-size-24px));
+  --ft-24-14: clamp(var(--font-size-14px), 0.281rem + 1.818vw, var(--font-size-24px));
+  --ft-23-21: clamp(var(--font-size-21px), 1.711rem + 0.364vw, var(--font-size-23px));
+  --ft-23-20: clamp(var(--font-size-20px), 1.521rem + 0.545vw, var(--font-size-23px));
+  --ft-23-16: clamp(var(--font-size-16px), 0.851rem + 1.273vw, var(--font-size-23px));
+  --ft-23-15: clamp(var(--font-size-15px), 0.57rem + 1.455vw, var(--font-size-23px));
+  --ft-22-21: clamp(var(--font-size-21px), 1.81rem + 0.182vw, var(--font-size-22px));
+  --ft-22-19: clamp(var(--font-size-19px), 1.43rem + 0.545vw, var(--font-size-22px));
+  --ft-22-18: clamp(var(--font-size-18px), 1.24rem + 0.727vw, var(--font-size-22px));
+  --ft-21-18: clamp(var(--font-size-18px), 1.339rem + 0.545vw, var(--font-size-21px));
+  --ft-21-16: clamp(var(--font-size-16px), 0.959rem + 0.909vw, var(--font-size-21px));
+  --ft-21-14: clamp(var(--font-size-14px), 0.579rem + 1.273vw, var(--font-size-21px));
+  --ft-20-19: clamp(var(--font-size-19px), 1.628rem + 0.182vw, var(--font-size-20px));
+  --ft-20-18: clamp(var(--font-size-18px), 1.438rem + 0.364vw, var(--font-size-20px));
+  --ft-20-17: clamp(var(--font-size-17px), 1.248rem + 0.545vw, var(--font-size-20px));
+  --ft-20-15: clamp(var(--font-size-15px), 0.868rem + 0.909vw, var(--font-size-20px));
+  --ft-20-14: clamp(var(--font-size-14px), 0.678rem + 1.091vw, var(--font-size-20px));
   --ft-19-18: clamp(var(--font-size-18px), 1.537rem + 0.182vw, var(--font-size-19px));
+  --ft-19-17: clamp(var(--font-size-17px), 1.347rem + 0.364vw, var(--font-size-19px));
+  --ft-19-16: clamp(var(--font-size-16px), 1.157rem + 0.545vw, var(--font-size-19px));
+  --ft-19-15: clamp(var(--font-size-15px), 0.967rem + 0.727vw, var(--font-size-19px));
+  --ft-19-14: clamp(var(--font-size-14px), 0.777rem + 0.909vw, var(--font-size-19px));
+  --ft-18-16: clamp(var(--font-size-16px), 1.256rem + 0.364vw, var(--font-size-18px));
+  --ft-18-17: clamp(var(--font-size-17px), 1.446rem + 0.182vw, var(--font-size-18px));
+  --ft-18-15: clamp(var(--font-size-15px), 1.066rem + 0.545vw, var(--font-size-18px));
   --ft-17-16: clamp(var(--font-size-16px), 1.355rem + 0.182vw, var(--font-size-17px));
+  --ft-17-15: clamp(var(--font-size-15px), 1.165rem + 0.364vw, var(--font-size-17px));
+  --ft-17-14: clamp(var(--font-size-14px), 0.975rem + 0.545vw, var(--font-size-17px));
+  --ft-16-15: clamp(var(--font-size-15px), 1.264rem + 0.182vw, var(--font-size-16px));
+  --ft-16-14: clamp(var(--font-size-14px), 1.074rem + 0.364vw, var(--font-size-16px));
+  --ft-16-13: clamp(var(--font-size-13px), 0.884rem + 0.545vw, var(--font-size-16px));
+  --ft-16-12: clamp(var(--font-size-12px), 0.694rem + 0.727vw, var(--font-size-16px));
   --ft-15-14: clamp(var(--font-size-14px), 1.174rem + 0.182vw, var(--font-size-15px));
+  --ft-15-13: clamp(var(--font-size-13px), 0.983rem + 0.364vw, var(--font-size-15px));
   --ft-14-13: clamp(var(--font-size-13px), 1.083rem + 0.182vw, var(--font-size-14px));
+  --ft-14-12: clamp(var(--font-size-12px), 0.893rem + 0.364vw, var(--font-size-14px));
+  --ft-14-11: clamp(var(--font-size-11px), 0.702rem + 0.545vw, var(--font-size-14px));
   --ft-13-12: clamp(var(--font-size-12px), 0.992rem + 0.182vw, var(--font-size-13px));
+  --ft-12-11: clamp(var(--font-size-11px), 0.901rem + 0.182vw, var(--font-size-12px));
+  --ft-12-10: clamp(var(--font-size-10px), 0.711rem + 0.364vw, var(--font-size-12px));
+  --ft-10-8: clamp(var(--font-size-8px), 0.529rem + 0.364vw, var(--font-size-10px));
 
   /* HBS font weight aliases */
   --font-weight3: 300;
@@ -415,6 +603,10 @@
 
   /* HBS letter spacing */
   --letter-spacing: 0px;
+
+  /* HBS border / accent — sub-section-dividers, card outlines */
+  --border: 0px;
+  --brand-accent: #00a0eb;
 
   /* Category colors — SSOT: injected from categories.json via MainLayout.astro.
      Legacy --global-{cat}-color vars removed; use --cat-{id} instead. */
@@ -464,6 +656,14 @@
   --color-success: var(--color-success);
   --color-warning: var(--color-warning);
   --color-danger:  var(--color-danger);
+
+  /* Text on accent/gradient surfaces (always white, all themes) */
+  --color-text-on-accent: var(--color-text-on-accent);
+
+  /* Card shadows & containers (none/transparent in dark, subtle in light) */
+  --card-shadow: var(--card-shadow);
+  --card-shadow-hover: var(--card-shadow-hover);
+  --card-container-bg: var(--card-container-bg);
 
   /* Radius */
   --radius-sm:   var(--radius-sm);
@@ -779,48 +979,77 @@ html {
   }
 }
 
-/* ─── Responsive clamp font sizes (desktop → tablet) ─── */
+/* ─── Fluid typography: 825–600px range ─── */
 :root {
-  --ft-55-40: clamp(var(--font-size-40px), 2.149rem + 2.727vw, var(--font-size-55px));
-  --ft-58-39: clamp(var(--font-size-39px), 1.661rem + 3.455vw, var(--font-size-58px));
-  --ft-44-30: clamp(var(--font-size-30px), 1.339rem + 2.545vw, var(--font-size-44px));
-  --ft-40-24: clamp(var(--font-size-24px), 0.595rem + 2.909vw, var(--font-size-40px));
-  --ft-34-28: clamp(var(--font-size-28px), 1.95rem + 1.091vw, var(--font-size-34px));
-  --ft-32-24: clamp(var(--font-size-24px), 1.388rem + 1.455vw, var(--font-size-32px));
-  --ft-23-15: clamp(var(--font-size-15px), 0.57rem + 1.455vw, var(--font-size-23px));
-  --ft-21-18: clamp(var(--font-size-18px), 1.339rem + 0.545vw, var(--font-size-21px));
-  --ft-21-14: clamp(var(--font-size-14px), 0.579rem + 1.273vw, var(--font-size-21px));
-  --ft-18-15: clamp(var(--font-size-15px), 1.066rem + 0.545vw, var(--font-size-18px));
-  --ft-12-11: clamp(var(--font-size-11px), 0.901rem + 0.182vw, var(--font-size-12px));
-}
-
-/* ─── Responsive clamp font sizes (mobile) ─── */
-:root {
-  --fm-40-35: clamp(var(--font-size-35px), 2.5rem + 2.5vw, var(--font-size-40px));
-  --fm-39-32: clamp(var(--font-size-32px), 1.8rem + 3.5vw, var(--font-size-39px));
-  --fm-35-32: clamp(var(--font-size-32px), 2.6rem + 1.5vw, var(--font-size-35px));
-  --fm-35-28: clamp(var(--font-size-28px), 1.4rem + 3.5vw, var(--font-size-35px));
-  --fm-30-22: clamp(var(--font-size-22px), 0.6rem + 4vw, var(--font-size-30px));
-  --fm-24-21: clamp(var(--font-size-21px), 1.5rem + 1.5vw, var(--font-size-24px));
-  --fm-21-19: clamp(var(--font-size-19px), 1.5rem + 1vw, var(--font-size-21px));
-  --fm-18-17: clamp(var(--font-size-17px), 1.1rem + 1vw, var(--font-size-18px));
-  --fm-16-15: clamp(var(--font-size-15px), 1.3rem + 0.5vw, var(--font-size-16px));
-  --fm-15-14: clamp(var(--font-size-14px), 1.2rem + 0.5vw, var(--font-size-15px));
-  --fm-15-13: clamp(var(--font-size-13px), 0.9rem + 1vw, var(--font-size-15px));
-  --fm-14-13: clamp(var(--font-size-13px), 1.1rem + 0.5vw, var(--font-size-14px));
-  --fm-13-12: clamp(var(--font-size-12px), 1rem + 0.5vw, var(--font-size-13px));
-  --fm-11-10: clamp(var(--font-size-10px), 0.8rem + 0.5vw, var(--font-size-11px));
+  --ftm-56-42: clamp(var(--font-size-42px), 0.424rem + 6.222vw, var(--font-size-56px));
+  --ftm-38-35: clamp(var(--font-size-35px), 2.455rem + 1.333vw, var(--font-size-38px));
+  --ftm-30-26: clamp(var(--font-size-26px), 1.394rem + 1.778vw, var(--font-size-30px));
+  --ftm-28-21: clamp(var(--font-size-21px), 0.212rem + 3.111vw, var(--font-size-28px));
+  --ftm-26-24: clamp(var(--font-size-24px), 1.697rem + 0.889vw, var(--font-size-26px));
+  --ftm-26-23: clamp(var(--font-size-23px), 1.364rem + 1.333vw, var(--font-size-26px));
+  --ftm-24-22: clamp(var(--font-size-22px), 1.515rem + 0.889vw, var(--font-size-24px));
   --ftm-24-21: clamp(var(--font-size-21px), 1.182rem + 1.333vw, var(--font-size-24px));
+  --ftm-21-18: clamp(var(--font-size-18px), 0.909rem + 1.333vw, var(--font-size-21px));
+  --ftm-21-17: clamp(var(--font-size-17px), 0.576rem + 1.778vw, var(--font-size-21px));
+  --ftm-20-17: clamp(var(--font-size-17px), 0.818rem + 1.333vw, var(--font-size-20px));
   --ftm-18-16: clamp(var(--font-size-16px), 0.97rem + 0.889vw, var(--font-size-18px));
+  --ftm-17-16: clamp(var(--font-size-16px), 1.212rem + 0.444vw, var(--font-size-17px));
   --ftm-17-15: clamp(var(--font-size-15px), 0.879rem + 0.889vw, var(--font-size-17px));
   --ftm-15-13: clamp(var(--font-size-13px), 0.697rem + 0.889vw, var(--font-size-15px));
+  --ftm-14-13: clamp(var(--font-size-13px), 0.939rem + 0.444vw, var(--font-size-14px));
 }
 
-/* ─── Additional HBS background color aliases ─── */
+/* ─── Fluid typography: 600–400px range @10px ─── */
 :root {
-  --section-darkestdarker-background-color: #080808;
-  --white-black-color-1: #fff;
-  --white-black-color-2: #dddad5;
+  --fm-42-40: clamp(var(--font-size-40px), 2.5rem + 2.5vw, var(--font-size-42px));
+  --fm-42-38: clamp(var(--font-size-38px), 3rem + 2vw, var(--font-size-42px));
+  --fm-40-35: clamp(var(--font-size-35px), 2.5rem + 2.5vw, var(--font-size-40px));
+  --fm-39-32: clamp(var(--font-size-32px), 1.8rem + 3.5vw, var(--font-size-39px));
+  --fm-38-32: clamp(var(--font-size-32px), 2rem + 3vw, var(--font-size-38px));
+  --fm-36-32: clamp(var(--font-size-32px), 2.4rem + 2vw, var(--font-size-36px));
+  --fm-35-32: clamp(var(--font-size-32px), 2.6rem + 1.5vw, var(--font-size-35px));
+  --fm-35-30: clamp(var(--font-size-30px), 2rem + 2.5vw, var(--font-size-35px));
+  --fm-35-28: clamp(var(--font-size-28px), 1.4rem + 3.5vw, var(--font-size-35px));
+  --fm-34-32: clamp(var(--font-size-32px), 2.8rem + 1vw, var(--font-size-34px));
+  --fm-30-26: clamp(var(--font-size-26px), 1.8rem + 2vw, var(--font-size-30px));
+  --fm-30-24: clamp(var(--font-size-24px), 1.2rem + 3vw, var(--font-size-30px));
+  --fm-30-23: clamp(var(--font-size-23px), 0.9rem + 3.5vw, var(--font-size-30px));
+  --fm-30-22: clamp(var(--font-size-22px), 0.6rem + 4vw, var(--font-size-30px));
+  --fm-28-26: clamp(var(--font-size-26px), 2.2rem + 1vw, var(--font-size-28px));
+  --fm-27-20: clamp(var(--font-size-20px), 0.6rem + 3.5vw, var(--font-size-27px));
+  --fm-26-22: clamp(var(--font-size-22px), 1.4rem + 2vw, var(--font-size-26px));
+  --fm-25-22: clamp(var(--font-size-22px), 1.6rem + 1.5vw, var(--font-size-25px));
+  --fm-24-22: clamp(var(--font-size-22px), 1.8rem + 1vw, var(--font-size-24px));
+  --fm-24-20: clamp(var(--font-size-20px), 1.2rem + 2vw, var(--font-size-24px));
+  --fm-24-18: clamp(var(--font-size-18px), 0.6rem + 3vw, var(--font-size-24px));
+  --fm-24-21: clamp(var(--font-size-21px), 1.5rem + 1.5vw, var(--font-size-24px));
+  --fm-23-22: clamp(var(--font-size-22px), 2rem + 0.5vw, var(--font-size-23px));
+  --fm-23-20: clamp(var(--font-size-20px), 1.4rem + 1.5vw, var(--font-size-23px));
+  --fm-22-21: clamp(var(--font-size-21px), 1.9rem + 0.5vw, var(--font-size-22px));
+  --fm-21-20: clamp(var(--font-size-20px), 1.8rem + 0.5vw, var(--font-size-21px));
+  --fm-21-19: clamp(var(--font-size-19px), 1.5rem + 1vw, var(--font-size-21px));
+  --fm-21-18: clamp(var(--font-size-18px), 1.2rem + 1.5vw, var(--font-size-21px));
+  --fm-20-18: clamp(var(--font-size-18px), 1.4rem + 1vw, var(--font-size-20px));
+  --fm-18-17: clamp(var(--font-size-17px), 1.1rem + 1vw, var(--font-size-18px));
+  --fm-18-16: clamp(var(--font-size-16px), 1.2rem + 1vw, var(--font-size-18px));
+  --fm-17-15: clamp(var(--font-size-15px), 1.1rem + 1vw, var(--font-size-17px));
+  --fm-17-14: clamp(var(--font-size-14px), 0.8rem + 1.5vw, var(--font-size-17px));
+  --fm-17-13: clamp(var(--font-size-13px), 0.5rem + 2vw, var(--font-size-17px));
+  --fm-16-15: clamp(var(--font-size-15px), 1.3rem + 0.5vw, var(--font-size-16px));
+  --fm-16-14: clamp(var(--font-size-14px), 1rem + 1vw, var(--font-size-16px));
+  --fm-16-13: clamp(var(--font-size-13px), 0.7rem + 1.5vw, var(--font-size-16px));
+  --fm-16-12: clamp(var(--font-size-14px), 0.4rem + 2vw, var(--font-size-16px));
+  --fm-15-14: clamp(var(--font-size-14px), 1.2rem + 0.5vw, var(--font-size-15px));
+  --fm-15-13: clamp(var(--font-size-13px), 0.9rem + 1vw, var(--font-size-15px));
+  --fm-15-12: clamp(var(--font-size-12px), 0.6rem + 1.5vw, var(--font-size-15px));
+  --fm-15-11: clamp(var(--font-size-11px), 0.3rem + 2vw, var(--font-size-15px));
+  --fm-15-10: clamp(var(--font-size-10px), 0rem + 2.5vw, var(--font-size-15px));
+  --fm-14-13: clamp(var(--font-size-13px), 1.1rem + 0.5vw, var(--font-size-14px));
+  --fm-14-12: clamp(var(--font-size-12px), 0.8rem + 1vw, var(--font-size-14px));
+  --fm-14-11: clamp(var(--font-size-11px), 0.5rem + 1.5vw, var(--font-size-14px));
+  --fm-13-12: clamp(var(--font-size-12px), 1rem + 0.5vw, var(--font-size-13px));
+  --fm-12-11: clamp(var(--font-size-11px), 0.9rem + 0.5vw, var(--font-size-12px));
+  --fm-11-10: clamp(var(--font-size-10px), 0.8rem + 0.5vw, var(--font-size-11px));
 }
 
 /* ─────────────────────────────────────────────────────────────────────────────
@@ -874,7 +1103,54 @@ body {
   margin: 0;
   padding: 0;
   padding-top: var(--top-bar-H);
-  background-color: var(--color-bg-base);
+  /* WHY bridge var, not --color-bg-base: HBS sets body bg to
+     --section-darkestdark-background-color, with per-page overrides via
+     body:has(). Using the bridge var keeps parity and auto-theme-switches. */
+  background-color: var(--section-darkestdark-background-color);
+}
+
+/* ── Per-page body background (port of HBS view_articles.css:21) ── */
+@supports selector(body:has(*)) {
+  body:has(.article) {
+    background-color: var(--section-darkest-background-color);
+  }
+}
+
+/* ── Per-page footer background (port of HBS site_shared.css:1481–1508) ── */
+:root {
+  --eg-footer-background: var(--section-dark-background-color);
+}
+
+@supports selector(body:has(*)) {
+  body:has(.home-rail-anchor) {
+    --eg-footer-background: var(--section-darkestdarker-background-color);
+  }
+
+  body:has(.article) {
+    --eg-footer-background: var(--section-darkest-background-color);
+  }
+
+  body:has(.card-rows) {
+    --eg-footer-background: var(--section-darkestdark-background-color);
+  }
+}
+
+/* ── Light theme card elevation (context-based) ──
+   On grey body canvas: cards become white (#ffffff) for elevation.
+   Inside white-bg sections (home hero): cards stay at original value for contrast.
+   Gaming: no override (dark cards, no shadows). */
+[data-theme="default"] body,
+[data-theme="workstation"] body,
+[data-theme="review"] body {
+  --section-dark-background-color: #ffffff;
+}
+
+/* White-bg sections → revert cards to original grey for contrast.
+   Add .-on-white-bg to any future section with a white/bright bg
+   that contains elements using --section-dark-background-color. */
+.home-top-wrapper,
+.-on-white-bg {
+  --section-dark-background-color: var(--section-dark-bg-on-white);
 }
 
 /* Theme flash prevention — applied before paint via inline script in <head> */
@@ -924,301 +1200,6 @@ html:not([data-theme]) {
   background: var(--color-text-muted);
 }
 
-/* ─────────────────────────────────────────────────────────────────────────────
-   MOBILE NAV (NavMobile.tsx React island styles)
-   WHY global: React islands can't use Astro scoped styles.
-   These only activate at ≤1150px via the hamburger display rule.
-   ───────────────────────────────────────────────────────────────────────── */
-
-/* Auth state switches for side menu */
-.side-auth-logged-hide { display: flex !important; }
-.side-auth-logged-show { display: none !important; }
-html.logged .side-auth-logged-hide { display: none !important; }
-html.logged .side-auth-logged-show { display: flex !important; }
-
-/* Hamburger */
-.mobile-hamburger-menu-icon {
-  display: none;
-}
-
-.hamburger-menu-icon {
-  width: 3.1rem;
-  height: 3.1rem;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.hamburger-menu-icon svg {
-  width: 3.1rem;
-  height: 3.1rem;
-  transform-box: fill-box;
-  transform-origin: center;
-}
-
-.hamburger-menu-icon svg path {
-  transform-box: fill-box;
-  transform-origin: center;
-  transition: transform 0.3s, opacity 0.3s;
-}
-
-.hamburger-menu-icon.open svg path:nth-child(1) {
-  transform: translateY(5px) rotate(45deg);
-}
-.hamburger-menu-icon.open svg path:nth-child(2) {
-  opacity: 0;
-}
-.hamburger-menu-icon.open svg path:nth-child(3) {
-  transform: translateY(-5px) rotate(-45deg);
-}
-
-@media (max-width: 1150px) {
-  .mobile-hamburger-menu-icon {
-    display: inline-flex;
-    align-items: center;
-    justify-content: flex-start;
-    text-decoration: none;
-    cursor: pointer;
-    max-width: fit-content;
-    padding: 0.5rem 0.5rem 0.5rem 2rem;
-  }
-}
-
-/* Side menu drawer */
-.side-menu {
-  position: absolute;
-  top: 100%;
-  width: 70vw;
-  height: calc(100dvh - 100%);
-  background-color: var(--nav-surface-dark);
-  left: -70vw;
-  font-family: "Open Sans", sans-serif;
-  font-weight: 400;
-  /* WHY no display:none — display toggling kills CSS transitions because
-     the browser has no "from" layout state to animate from. Instead, the
-     menu is always in the DOM but off-screen (left: -70vw) and invisible. */
-  display: flex;
-  visibility: hidden;
-  overflow: hidden;
-  overscroll-behavior: contain;
-  transition: left 0.4s ease-in-out, visibility 0s linear 0.4s;
-  z-index: 97525;
-  border-right: 1px solid;
-  border-image: linear-gradient(to top, var(--site-gradient-start), var(--site-gradient-end)) 1;
-  flex-direction: column;
-  justify-content: space-between;
-}
-
-.side-menu.active {
-  left: 0;
-  visibility: visible;
-  transition: left 0.4s ease-in-out, visibility 0s linear 0s;
-}
-
-@media (max-width: 600px) {
-  .side-menu {
-    width: 80vw;
-    left: -80vw;
-  }
-}
-
-/* Menu items */
-.main-menu {
-  padding: 0 0 5rem 0;
-  height: 100%;
-  box-sizing: border-box;
-  overflow-y: auto;
-  list-style: none;
-  margin: 0;
-}
-
-/* WHY grouped: all menu tiers share text-wrap behavior for long labels */
-.menu-item1,
-.menu-item2,
-.menu-item3 {
-  white-space: normal;
-  overflow-wrap: anywhere;
-  word-break: break-word;
-}
-
-.menu-item1 {
-  font-size: var(--font-size-17px);
-}
-
-.menu-item2 {
-  font-size: var(--font-size-15px);
-  margin-left: 2rem;
-}
-
-.menu-item3 {
-  font-size: var(--font-size-14px);
-  font-weight: 600;
-  margin-left: 3rem;
-}
-
-/* WHY scoped: .side-menu prefix beats the .side-menu ul li a rule below
-   without needing !important */
-.side-menu .explore-all-link {
-  font-size: var(--font-size-13px);
-  font-weight: 600;
-  color: var(--grey-color-3);
-}
-
-.side-menu ul {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-
-.side-menu ul li a {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  padding: 1.5rem 0;
-  color: var(--white-color-2);
-  text-decoration: none;
-  text-transform: capitalize;
-  transition: background-color 0.3s ease;
-  position: relative;
-  margin-left: 1.5rem;
-}
-
-/* Chevron arrow on items with sub-menus */
-.side-menu .menu-item1:has(.side-sub-menu) > a::after,
-.side-menu .menu-item2:has(.side-sub-menu) > a::after {
-  content: '\276F';
-  position: absolute;
-  right: 1.36rem;
-  top: 50%;
-  transform: translateY(-50%) rotate(0deg);
-  font-size: var(--font-size-15px);
-  background: linear-gradient(to right, var(--site-gradient-start), var(--site-gradient-end));
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  transition: transform 0.3s ease;
-}
-
-/* Rotate chevron when sub-menu is open */
-.side-menu .sub-open > a::after {
-  transform: translateY(-50%) rotate(90deg) !important;
-}
-
-/* No chevron for leaf items */
-.side-menu ul li:not(:has(.side-sub-menu)) > a::after {
-  content: none;
-}
-
-/* Sub-menus hidden by default, shown when .active */
-.side-sub-menu {
-  display: none;
-  background-color: var(--main-background-color);
-  border-top: 1px solid;
-  border-image: linear-gradient(to top, var(--site-gradient-start), var(--site-gradient-end)) 1;
-}
-
-.side-sub-menu.active {
-  display: block;
-}
-
-/* "New!" badge for Hubs (mobile side menu only) */
-/* WHY no font-size: HBS has none — badge inherits from parent */
-.navbar-new-badge {
-  background: linear-gradient(to right, var(--site-gradient-start), var(--site-gradient-end));
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  font-weight: 700;
-}
-
-/* Side-menu brand logos (smaller than desktop mega menu) */
-.side-brand-logo-container {
-  flex: 0 0 2em;
-  width: 2em;
-  height: 2em;
-  border-radius: 50%;
-  background-color: var(--section-darkestdark-background-color);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.side-brand-logo {
-  width: 1.5em;
-  height: 1.5em;
-  object-fit: contain;
-  filter: brightness(0) invert(1);
-}
-
-/* Shade overlay
-   WHY visibility: left:100vw is "offscreen" but still painted by the browser.
-   During resize, the transition on left animates the changing 100vw value,
-   causing a visible flash. visibility:hidden prevents painting entirely.
-   Same pattern as .side-menu above. */
-.shade-overlay {
-  position: fixed;
-  top: var(--nav-height);
-  left: 100vw;
-  width: 100vw;
-  height: 100dvh;
-  background-color: rgba(0, 0, 0, 0.5);
-  z-index: 97500;
-  visibility: hidden;
-  transition: left 0.4s ease-in-out, visibility 0s linear 0.4s;
-  pointer-events: none;
-}
-
-.shade-overlay.active {
-  left: 0;
-  visibility: visible;
-  transition: left 0.4s ease-in-out, visibility 0s linear 0s;
-  pointer-events: auto;
-}
-
-/* Side auth footer */
-.side-auth-footer {
-  width: 100%;
-  box-sizing: border-box;
-  background-color: var(--nav-surface-dark);
-  box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.75), 0px 17px 24px rgba(0, 0, 0, 0.3);
-  padding: 1.5rem;
-  display: flex;
-  justify-content: center;
-  z-index: 2;
-}
-
-.side-auth-link {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  width: 100%;
-  justify-content: center;
-  font-family: "Open Sans", sans-serif;
-  font-weight: 700;
-  font-size: var(--font-size-14px);
-  color: var(--white-color-1);
-  text-decoration: none;
-  background-color: var(--section-medium-background-color);
-  border-radius: 7px;
-  padding: 0.75rem 1rem;
-  box-sizing: border-box;
-  white-space: nowrap;
-  transition: background-color 0.2s ease;
-}
-
-.side-auth-link:hover {
-  background-color: var(--nav-surface-medium);
-}
-
-.side-auth-avatar {
-  width: 1.65em;
-  height: 1.65em;
-  flex-shrink: 0;
-  border-radius: 6px;
-  object-fit: contain;
-  display: block;
-}
 
 /* ─────────────────────────────────────────────────────────────────────────────
    SHARED LOGO — "EG GEAR" wordmark
@@ -1232,7 +1213,7 @@ html.logged .side-auth-logged-show { display: flex !important; }
   align-items: center;
   font-family: var(--logo-font1);
   font-weight: 700;
-  color: var(--white-color-1);
+  color: var(--nav-text);
   letter-spacing: -0.65px;
   overflow: hidden;
   border-radius: 2px;
@@ -1242,6 +1223,7 @@ html.logged .side-auth-logged-show { display: flex !important; }
 .navsitename1 {
   padding: 0.15em;
   background: linear-gradient(to right, var(--site-start-color), var(--site-end-color));
+  color: var(--nav-text);
   text-box-trim: trim-both;
   text-box-edge: cap alphabetic;
 }
@@ -1262,104 +1244,55 @@ html.logged .side-auth-logged-show { display: flex !important; }
 }
 
 /* ─────────────────────────────────────────────────────────────────────────────
-   AUTH DIALOG — <dialog> element animations
-   Uses @starting-style for entry (Chrome 117+, Firefox 129+, Safari 17.5+).
-   Uses data-closing attribute for exit (works in ALL browsers).
+   SHARED SCROLLER ARROW — used by GamesScroller, FeaturedScroller
+   Circular nav arrows for horizontal scrollers.
+   Dark theme values are LOCKED — match HBS exactly.
    ───────────────────────────────────────────────────────────────────────── */
-
-/* Entry animation — progressive enhancement */
-dialog.auth-dialog[open] {
-  opacity: 1;
-  transform: translateY(0);
-  transition: opacity 0.25s ease-out, transform 0.25s ease-out;
+.scroller-arrow {
+  position: absolute;
+  width: 3.5rem;
+  height: 3.5rem;
+  top: calc(50% - 3.5rem / 2);
+  font-size: 1.75rem;
+  color: var(--white-color-1);
+  z-index: 200;
+  cursor: pointer;
+  transition: color 0.3s ease, transform 0.3s ease;
+  line-height: 1;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  -webkit-tap-highlight-color: transparent;
+  aspect-ratio: 1 / 1;
+  box-sizing: border-box;
+  background-color: var(--section-dark-background-color);
+  border: 1px solid var(--section-light-background-color);
 }
 
-@starting-style {
-  dialog.auth-dialog[open] {
-    opacity: 0;
-    transform: translateY(-8%);
+.scroller-arrow svg {
+  height: 50%;
+  width: 50%;
+}
+
+.scroller-arrow.active {
+  background: var(--card-color, var(--site-background-gradient));
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .scroller-arrow:hover {
+    background: var(--card-color, var(--site-background-gradient));
   }
-  dialog.auth-dialog[open]::backdrop {
-    opacity: 0;
-  }
-}
 
-/* Exit animation — data-closing triggers reverse */
-dialog.auth-dialog[data-closing] {
-  animation: dialogSlideOut 0.2s ease-in forwards;
-}
-
-dialog.auth-dialog[data-closing]::backdrop {
-  animation: dialogBackdropOut 0.2s ease-in forwards;
-}
-
-@keyframes dialogSlideOut {
-  to { opacity: 0; transform: translateY(-8%); }
-}
-
-@keyframes dialogBackdropOut {
-  to { opacity: 0; }
-}
-
-/* Backdrop styling */
-dialog.auth-dialog::backdrop {
-  background: rgba(0, 0, 0, 0.75);
-  -webkit-backdrop-filter: blur(10px) brightness(0.8) contrast(1.05);
-  backdrop-filter: blur(10px) brightness(0.8) contrast(1.05);
-  transition: opacity 0.25s ease-out;
-}
-
-/* Mobile: narrower dialog */
-@media (max-width: 600px) {
-  dialog.auth-dialog {
-    width: clamp(390px, 270px + 30vw, 450px);
-    max-width: 95%;
+  .scroller-arrow.active {
+    background: none;
+    background-color: var(--section-dark-background-color);
   }
 }
 
-/* ─────────────────────────────────────────────────────────────────────────────
-   SETTINGS DIALOG — reuses dialogSlideOut / dialogBackdropOut keyframes
-   ───────────────────────────────────────────────────────────────────────── */
-
-/* Entry animation */
-dialog.settings-dialog[open] {
-  opacity: 1;
-  transform: translateY(0);
-  transition: opacity 0.25s ease-out, transform 0.25s ease-out;
-}
-
-@starting-style {
-  dialog.settings-dialog[open] {
-    opacity: 0;
-    transform: translateY(-8%);
-  }
-  dialog.settings-dialog[open]::backdrop {
-    opacity: 0;
-  }
-}
-
-/* Exit animation — reuses existing keyframes */
-dialog.settings-dialog[data-closing] {
-  animation: dialogSlideOut 0.2s ease-in forwards;
-}
-
-dialog.settings-dialog[data-closing]::backdrop {
-  animation: dialogBackdropOut 0.2s ease-in forwards;
-}
-
-/* Backdrop styling */
-dialog.settings-dialog::backdrop {
-  background: rgba(0, 0, 0, 0.75);
-  -webkit-backdrop-filter: blur(10px) brightness(0.8) contrast(1.05);
-  backdrop-filter: blur(10px) brightness(0.8) contrast(1.05);
-  transition: opacity 0.25s ease-out;
-}
-
-/* Mobile: narrower dialog */
-@media (max-width: 600px) {
-  dialog.settings-dialog {
-    width: clamp(390px, 270px + 30vw, 450px);
-    max-width: 95%;
-  }
+.scroller-arrow.inactive {
+  background-color: var(--section-dark-background-color);
+  opacity: 0.5;
+  cursor: not-allowed;
 }
 

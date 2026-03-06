@@ -1,4 +1,4 @@
----
+﻿---
 game: Rainbow Six Siege
 navbar: true
 guide: Rainbow Six Siege
@@ -23,7 +23,8 @@ game_facebook: 'https://www.facebook.com/Rainbow6'
 game_x: 'https://x.com/Rainbow6Game'
 game_instagram: 'https://www.instagram.com/rainbow6game/'
 game_youtube: 'https://www.youtube.com/@Rainbow6'
-fullArticle: true
+publish: true
 toc: false
+hero: box-art-cover
 ---
 

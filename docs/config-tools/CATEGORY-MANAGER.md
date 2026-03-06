@@ -1,7 +1,7 @@
 # Category Manager — `config/category-manager.py`
 
 Manages the master category list, colors, labels, and product/content flags.
-Reads/writes `config/categories.json`.
+Reads/writes `config/data/categories.json`.
 
 Launch: `python config/category-manager.py`
 
@@ -92,7 +92,7 @@ Clicking the color swatch or hex label opens a full color picker dialog with:
 - Category icon preview in the new color
 - Derived color preview (base, accent, hover, etc.)
 
-## Data File — `config/categories.json`
+## Data File — `config/data/categories.json`
 
 ```json
 {

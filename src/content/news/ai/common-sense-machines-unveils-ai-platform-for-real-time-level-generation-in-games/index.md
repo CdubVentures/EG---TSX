@@ -1,4 +1,4 @@
----
+﻿---
 title: >-
   Common Sense Machines Unveils AI Platform for Real-Time Level Generation in
   Games
@@ -22,9 +22,10 @@ datePublished: '2024-03-22'
 dateUpdated: '2025-12-09'
 author: Newsroom
 heroCredit: Common Sense Machines / YouTube
+hero: hero-img
 category: ai
 draft: false
-fullArticle: true
+publish: true
 ---
 # Common Sense Machines Unveils AI Platform for Real-Time Level Generation in Games
 

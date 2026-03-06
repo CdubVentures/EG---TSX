@@ -201,7 +201,7 @@ Offset: +14px right, -10px up from cursor.
 
 ## Data Flow & Save Behavior
 
-### SSOT: `config/categories.json`
+### SSOT: `config/data/categories.json`
 
 ```json
 {

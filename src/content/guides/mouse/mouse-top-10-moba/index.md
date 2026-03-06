@@ -1,4 +1,4 @@
----
+﻿---
 category: mouse
 navbar:
   - top 10 genere picks
@@ -10,8 +10,8 @@ description: >-
   response times, ideal for pinpoint ability casts and precise unit control in
   MOBAs.
 tags: []
-heroImg: title
-fullArticle: true
+hero: title
+publish: true
 toc: false
 draft: false
 ---

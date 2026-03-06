@@ -1,0 +1,58 @@
+---
+/**
+ * PinTag.astro — Pin icon overlay for editorially pinned cards.
+ * Port of HBS .pinned-tag + .pin-icon (site_shared.css:698-723).
+ *
+ * Reusable across dashboard, snapshot, hub pages.
+ * Positioned absolute top-left inside the parent card's <a> tag.
+ * The parent <a> must have position: relative.
+ */
+interface Props {
+  categoryColor?: string;
+}
+
+const { categoryColor } = Astro.props;
+---
+
+<span
+  class="pinned-tag"
+  style={categoryColor ? `background-color: ${categoryColor}` : undefined}
+  aria-label="Pinned"
+>
+  <img
+    src="/images/shared/pin.svg"
+    alt=""
+    class="pin-icon"
+    width="16"
+    height="16"
+  />
+</span>
+
+<style>
+  /* Port of site_shared.css:698-723 */
+  .pinned-tag {
+    position: absolute;
+    top: 0.75rem;
+    left: 0.75rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    color: var(--white-color-1);
+    font-family: var(--identity-font);
+    font-size: var(--ft-15-13);
+    font-weight: var(--font-weight7);
+    width: auto;
+    height: 2em;
+    aspect-ratio: 1;
+    border-radius: 4px;
+    z-index: 10;
+  }
+
+  .pin-icon {
+    width: auto;
+    height: 1em;
+    vertical-align: middle;
+    filter: invert(100%);
+  }
+</style>

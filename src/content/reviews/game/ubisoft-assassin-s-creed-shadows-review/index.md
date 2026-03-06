@@ -1,9 +1,9 @@
----
+﻿---
 category: game
 brand: Ubisoft
 model: Assassin’s Creed Shadows
 author: EG Team
-fullArticle: false
+publish: false
 draft: false
 title: 'Assassin’s Creed Shadows: Feudal Japan Awaits'
 subtitle: 'Dual Protagonists, Dense Castles, and Ninja Stealth'
@@ -13,7 +13,7 @@ description: >-
   despite launch hiccups, captivating FPS and RPG players in a 2025 blockbuster.
 tags:
   - Stealth Action
-heroImg: feature-image
+hero: feature-image
 toc: false
 ---
 

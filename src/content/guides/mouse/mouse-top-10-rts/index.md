@@ -1,4 +1,4 @@
----
+﻿---
 category: mouse
 navbar:
   - top 10 genere picks
@@ -10,8 +10,8 @@ description: >-
   commands, ensuring you outmaneuver and outmicromanage your opponents in
   real-time strategy titles.
 tags: []
-heroImg: title
-fullArticle: true
+hero: title
+publish: true
 toc: false
 draft: false
 ---

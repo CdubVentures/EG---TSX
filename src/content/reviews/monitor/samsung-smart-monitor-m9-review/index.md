@@ -1,9 +1,9 @@
----
+﻿---
 category: monitor
 brand: Samsung
 model: Smart Monitor M9
 author: EG Team
-fullArticle: true
+publish: true
 draft: false
 title: 'Samsung Smart Monitor M9: Gaming Meets Smart Features'
 subtitle: 'Experience 4K Resolution, 120Hz Refresh Rate, and OLED Smartness'
@@ -13,7 +13,7 @@ description: >-
   multimedia use in 2025.
 tags:
   - Smart Monitor
-heroImg: feature-image
+hero: feature-image
 productId: samsung-smart-monitor-m9
 toc: false
 ---

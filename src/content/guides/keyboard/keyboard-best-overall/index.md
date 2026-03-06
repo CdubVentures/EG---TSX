@@ -1,4 +1,4 @@
----
+﻿---
 category: keyboard
 navbar:
   - best in classes
@@ -8,8 +8,8 @@ description: >-
   Identify the one keyboard that brings together exceptional ergonomics,
   advanced features, and top-tier performance, perfect for any workflow or task.
 tags: []
-heroImg: title
-fullArticle: true
+hero: title
+publish: true
 toc: false
 draft: false
 ---

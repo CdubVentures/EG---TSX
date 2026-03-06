@@ -1,4 +1,4 @@
----
+﻿---
 brand: Razer
 displayName: Razer
 title: 'Razer: Performance and Style in Perfect Harmony'
@@ -18,6 +18,7 @@ navbar:
   - keyboard
   - mouse
 toc: false
-fullArticle: true
+publish: true
+hero: brand-logo-horizontal-index
 ---
 

@@ -1,4 +1,4 @@
----
+﻿---
 category: mouse
 navbar:
   - top 10 speciality picks
@@ -9,8 +9,8 @@ description: >-
   Find symmetrical designs that cater to both left- and right-handed gamers,
   guaranteeing flawless control and comfort regardless of your dominant hand.
 tags: []
-heroImg: title
-fullArticle: true
+hero: title
+publish: true
 toc: false
 draft: false
 ---

@@ -23,7 +23,7 @@ function makeTool(overrides = {}) {
     svg: '<svg></svg>',
     enabled: true,
     navbar: true,
-    heroImg: '',
+    hero: '',
     category: 'mouse',
     ...overrides,
   };

@@ -733,4 +733,14 @@ describe('buildLoginRedirect', () => {
     const location = res.headers.get('Location');
     assert.ok(location.includes('screen_hint=signup'));
   });
+
+  it('passes extraParams (prompt=select_account) into Location URL', () => {
+    const res = mod.buildLoginRedirect({
+      provider: 'Google',
+      isProd: false,
+      extraParams: { prompt: 'select_account' },
+    });
+    const location = res.headers.get('Location');
+    assert.ok(location.includes('prompt=select_account'));
+  });
 });

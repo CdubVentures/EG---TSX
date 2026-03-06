@@ -1,0 +1,293 @@
+---
+/**
+ * DashboardLargeTile.astro — Full-width cinematic card (slot index 4).
+ * Image fills container (max-height 525px). Overlaid content panel at bottom-left.
+ * Faithful port of HBS .dashboard-grid-large-tile CSS.
+ */
+import { articleUrl, resolveHero, articleSrcSet, formatArticleDate } from '@core/article-helpers';
+import type { DashboardEntry } from '@core/article-helpers';
+import type { DashboardMeta } from '@core/dashboard';
+import { categoryColor } from '@core/config';
+import PinTag from '@shared/ui/PinTag.astro';
+import EditorsBadge from '@shared/ui/EditorsBadge.astro';
+
+interface Props {
+  item: DashboardEntry;
+  meta?: DashboardMeta;
+}
+
+const { item, meta } = Astro.props;
+const url = articleUrl(item._collection, item.id);
+const heroPath = item.data.hero
+  ? resolveHero(item._collection, item.id, item.data.hero)
+  : null;
+const catColor = item.data.category ? categoryColor(item.data.category) : undefined;
+---
+
+<a href={url} class="dashboard-grid-large-tile">
+  {meta?.isPinned && <PinTag categoryColor={catColor} />}
+  {meta?.badgeText && <EditorsBadge badgeText={meta.badgeText} category={item.data.category} />}
+  {heroPath && (
+    <img
+      loading="lazy"
+      src={`${heroPath}_xl.webp`}
+      srcset={articleSrcSet(heroPath)}
+      sizes="(min-width: 1150px) 1000px, clamp(200px, 400px, 500px)"
+      alt={item.data.title}
+      class="dashboard-grid-large-tile-image"
+    />
+  )}
+  <div class="dashboard-grid-large-tile-content">
+    <div class="dashboard-content-top">
+      {item.data.category && (
+        <span class="dashboard-item-type item-tag" style={catColor ? `color: ${catColor}` : undefined}>
+          {item.data.category}
+        </span>
+      )}
+      <h3 class="dashboard-grid-large-tile-title">{item.data.title}</h3>
+      {item.data.description && (
+        <p class="dashboard-grid-large-tile-description">{item.data.description}</p>
+      )}
+    </div>
+    <p class="dashboard-grid-large-tile-date item-date">
+      {formatArticleDate(item.data.datePublished, item.data.dateUpdated)}
+    </p>
+  </div>
+</a>
+
+<style>
+  .dashboard-grid-large-tile {
+    position: relative;
+    height: 100%;
+    max-height: 525px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border-radius: 6px;
+    text-decoration: none;
+    /* WHY --color-text-on-accent: desktop layout overlays content on dark rgba bg.
+       Bridge vars flip to dark text in light themes = unreadable. ≤1150px reverts
+       to bridge vars when the layout becomes a themed card. */
+    color: var(--color-text-on-accent);
+    margin-bottom: 0.75rem;
+    box-shadow: var(--card-shadow);
+    transition: box-shadow 0.2s ease;
+  }
+
+  .dashboard-grid-large-tile:hover {
+    box-shadow: var(--card-shadow-hover);
+  }
+
+  .dashboard-grid-large-tile-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    flex-shrink: 0;
+  }
+
+  .dashboard-grid-large-tile-content {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    font-family: var(--identity-font);
+    background-color: rgba(8, 8, 8, 0.65);
+    padding: 1.5rem;
+    color: var(--color-text-on-accent);
+    text-align: left;
+    width: 65%;
+    max-width: 100%;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    border-radius: 0 8px 8px 0;
+  }
+
+  .dashboard-content-top {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .dashboard-grid-large-tile-title {
+    font-size: var(--font-size-36px);
+    margin: 0.5rem 0;
+    letter-spacing: -0.5px;
+    line-height: 1.25;
+    font-weight: bold;
+    color: var(--color-text-on-accent);
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .dashboard-grid-large-tile-description {
+    margin: 0;
+    line-height: 1.5;
+    font-size: var(--font-size-16px);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: var(--grey-color-3);
+    font-family: var(--identity-font);
+    font-weight: var(--font-weight4);
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    /* Hidden by default on desktop (HBS does this) */
+    display: none;
+  }
+
+  .dashboard-grid-large-tile-date {
+    color: var(--grey-color-3);
+    margin: 0;
+    font-family: var(--identity-font);
+    font-weight: var(--font-weight6);
+    /* Hidden by default on desktop (HBS does this) */
+    display: none;
+  }
+
+  /* ── Hover ── */
+  .dashboard-grid-large-tile:hover .dashboard-grid-large-tile-title {
+    text-decoration: underline;
+    text-decoration-color: var(--color-text-on-accent);
+    text-decoration-thickness: clamp(1.25px, 0.45px + 0.2vw, 2.75px);
+    text-underline-offset: clamp(1.25px, 1.1167px + 0.0333vw, 1.5px);
+  }
+
+  /* ── ≤1150px: becomes horizontal layout ── */
+  @media (max-width: 1150px) {
+    .dashboard-grid-large-tile {
+      margin-bottom: 0;
+      width: 100%;
+      flex-direction: row;
+      align-items: stretch;
+      border-radius: 5px;
+      background: var(--section-dark-background-color);
+      color: var(--white-color-1);
+    }
+
+    .dashboard-grid-large-tile-image {
+      order: 1;
+      width: 40%;
+      height: var(--font-size-215px);
+      object-fit: cover;
+    }
+
+    .dashboard-grid-large-tile-content {
+      position: static;
+      width: 100%;
+      box-sizing: border-box;
+      height: 100%;
+      box-shadow: none;
+      gap: 0.5rem;
+      order: 2;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      border-radius: 0;
+      background: var(--section-dark-background-color);
+      color: var(--white-color-1);
+      padding: 20px;
+    }
+
+    .dashboard-grid-large-tile-title {
+      font-size: var(--ft-21-16);
+      color: var(--white-black-color-1);
+      line-height: 1.4;
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 3;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .dashboard-grid-large-tile-description {
+      font-size: var(--font-size-15px);
+      color: var(--grey-color-4);
+      line-height: 1.4;
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 2;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .dashboard-grid-large-tile-date {
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 1;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .dashboard-grid-large-tile .item-tag {
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 1;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .dashboard-grid-large-tile:hover .dashboard-grid-large-tile-title {
+      text-decoration-color: var(--white-black-color-1);
+    }
+  }
+
+  /* ── ≤825px ── */
+  @media (max-width: 825px) {
+    .dashboard-grid-large-tile-image {
+      height: var(--font-size-165px);
+    }
+
+    .dashboard-grid-large-tile-content {
+      padding: clamp(12px, 9.1765px + 0.7059vw, 15px) 15px;
+    }
+
+    .dashboard-grid-large-tile-title {
+      margin: 0.45rem 0 0.7rem 0;
+      line-height: 1.4;
+      -webkit-line-clamp: 2;
+    }
+
+    .dashboard-grid-large-tile-description {
+      line-height: 1.4;
+      -webkit-line-clamp: 1;
+      margin-bottom: 0.25rem;
+    }
+  }
+
+  /* ── ≤600px ── */
+  @media (max-width: 600px) {
+    .dashboard-grid-large-tile-image {
+      height: clamp(var(--font-size-125px), 7.5rem + 12.5vw, var(--font-size-150px));
+    }
+
+    .dashboard-grid-large-tile-title {
+      font-size: var(--fm-16-14);
+      line-height: 1.4;
+      -webkit-line-clamp: 3;
+    }
+
+    .dashboard-grid-large-tile-content {
+      gap: 0;
+    }
+
+    .dashboard-grid-large-tile-description {
+      display: none;
+    }
+
+    .dashboard-grid-large-tile-date {
+      overflow: visible;
+    }
+  }
+
+  /* ── ≤400px ── */
+  @media (max-width: 400px) {
+    .dashboard-grid-large-tile-image {
+      height: var(--font-size-120px);
+    }
+  }
+</style>

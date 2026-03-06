@@ -1,9 +1,9 @@
----
+﻿---
 category: monitor
 brand: LG
 model: 27GR95QE-B
 author: EG Team
-fullArticle: true
+publish: true
 draft: false
 title: 'LG 27GR95QE-B: Compact OLED Powerhouse for 2025'
 subtitle: 'Get 1440p Resolution, 240Hz Speed, and WOLED Precision'
@@ -13,7 +13,7 @@ description: >-
   in 2025 demanding crisp visuals.
 tags:
   - Best OLED Monitor
-heroImg: feature-image
+hero: feature-image
 productId: lg-27gr95qe-b
 toc: false
 ---

@@ -1,0 +1,330 @@
+/* ─────────────────────────────────────────────────────────────────────────────
+   MOBILE NAV (NavMobile.tsx React island styles)
+   WHY global: React islands can't use Astro scoped styles.
+   These only activate at ≤1150px via the hamburger display rule.
+   ───────────────────────────────────────────────────────────────────────── */
+
+/* Auth state switches for side menu */
+.side-auth-logged-hide { display: flex !important; }
+.side-auth-logged-show { display: none !important; }
+html.logged .side-auth-logged-hide { display: none !important; }
+html.logged .side-auth-logged-show { display: flex !important; }
+
+/* Hamburger */
+.mobile-hamburger-menu-icon {
+  display: none;
+  color: var(--nav-text);
+}
+
+.hamburger-menu-icon {
+  width: 3.1rem;
+  height: 3.1rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hamburger-menu-icon svg {
+  width: 3.1rem;
+  height: 3.1rem;
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+.hamburger-menu-icon svg path {
+  transform-box: fill-box;
+  transform-origin: center;
+  transition: transform 0.3s, opacity 0.3s;
+}
+
+.hamburger-menu-icon.open svg path:nth-child(1) {
+  transform: translateY(5px) rotate(45deg);
+}
+.hamburger-menu-icon.open svg path:nth-child(2) {
+  opacity: 0;
+}
+.hamburger-menu-icon.open svg path:nth-child(3) {
+  transform: translateY(-5px) rotate(-45deg);
+}
+
+@media (max-width: 1150px) {
+  .mobile-hamburger-menu-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: flex-start;
+    text-decoration: none;
+    cursor: pointer;
+    max-width: fit-content;
+    padding: 0.5rem 0.5rem 0.5rem 2rem;
+  }
+}
+
+/* Side menu drawer */
+.side-menu {
+  position: absolute;
+  top: 100%;
+  width: 70vw;
+  height: calc(100dvh - 100%);
+  background-color: var(--nav-surface-dark);
+  left: -70vw;
+  font-family: "Open Sans", sans-serif;
+  font-weight: 400;
+  /* WHY no display:none — display toggling kills CSS transitions because
+     the browser has no "from" layout state to animate from. Instead, the
+     menu is always in the DOM but off-screen (left: -70vw) and invisible. */
+  display: flex;
+  visibility: hidden;
+  overflow: hidden;
+  overscroll-behavior: contain;
+  transition: left 0.4s ease-in-out, visibility 0s linear 0.4s;
+  z-index: 97525;
+  border-right: 1px solid;
+  border-image: linear-gradient(to top, var(--site-gradient-start), var(--site-gradient-end)) 1;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.side-menu.active {
+  left: 0;
+  visibility: visible;
+  transition: left 0.4s ease-in-out, visibility 0s linear 0s;
+}
+
+@media (max-width: 600px) {
+  .side-menu {
+    width: 80vw;
+    left: -80vw;
+  }
+}
+
+/* Menu items */
+.main-menu {
+  padding: 0 0 5rem 0;
+  height: 100%;
+  box-sizing: border-box;
+  overflow-y: auto;
+  list-style: none;
+  margin: 0;
+}
+
+/* WHY grouped: all menu tiers share text-wrap behavior for long labels */
+.menu-item1,
+.menu-item2,
+.menu-item3 {
+  white-space: normal;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+.menu-item1 {
+  font-size: var(--font-size-17px);
+}
+
+.menu-item2 {
+  font-size: var(--font-size-15px);
+  margin-left: 2rem;
+}
+
+.menu-item3 {
+  font-size: var(--font-size-14px);
+  font-weight: 600;
+  margin-left: 3rem;
+}
+
+/* WHY scoped: .side-menu prefix beats the .side-menu ul li a rule below
+   without needing !important */
+.side-menu .explore-all-link {
+  font-size: var(--font-size-13px);
+  font-weight: 600;
+  color: var(--nav-text-muted);
+}
+
+.side-menu ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.side-menu ul li a {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.5rem 0;
+  color: var(--nav-text-muted);
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+  position: relative;
+  margin-left: 1.5rem;
+}
+
+/* Chevron arrow on items with sub-menus */
+.side-menu .menu-item1:has(.side-sub-menu) > a::after,
+.side-menu .menu-item2:has(.side-sub-menu) > a::after {
+  content: '\276F';
+  position: absolute;
+  right: 1.36rem;
+  top: 50%;
+  transform: translateY(-50%) rotate(0deg);
+  font-size: var(--font-size-15px);
+  background: linear-gradient(to right, var(--site-gradient-start), var(--site-gradient-end));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  transition: transform 0.3s ease;
+}
+
+/* Rotate chevron when sub-menu is open */
+.side-menu .sub-open > a::after {
+  transform: translateY(-50%) rotate(90deg) !important;
+}
+
+/* No chevron for leaf items */
+.side-menu ul li:not(:has(.side-sub-menu)) > a::after {
+  content: none;
+}
+
+/* Sub-menus hidden by default, shown when .active */
+.side-sub-menu {
+  display: none;
+  background-color: var(--nav-bg);
+  border-top: 1px solid;
+  border-image: linear-gradient(to top, var(--site-gradient-start), var(--site-gradient-end)) 1;
+}
+
+.side-sub-menu.active {
+  display: block;
+}
+
+/* "New!" badge for Hubs (mobile side menu only) */
+/* WHY no font-size: HBS has none — badge inherits from parent */
+.navbar-new-badge {
+  background: linear-gradient(to right, var(--site-gradient-start), var(--site-gradient-end));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  font-weight: 700;
+}
+
+/* Side-menu brand logos (smaller than desktop mega menu) */
+.side-brand-logo-container {
+  flex: 0 0 2em;
+  width: 2em;
+  height: 2em;
+  border-radius: 50%;
+  background-color: var(--nav-surface-dark);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.side-brand-logo {
+  width: 1.5em;
+  height: 1.5em;
+  object-fit: contain;
+  filter: var(--nav-brand-logo-filter);
+}
+
+/* ─── Disabled categories in mobile nav ─── */
+/* WHY: mobile nav uses .nav-disabled-link spans instead of <a> for disabled items */
+.side-menu .nav-disabled {
+  opacity: 0.45;
+}
+
+.side-menu .nav-disabled-link {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.5rem 0;
+  color: var(--nav-text-muted);
+  position: relative;
+  margin-left: 1.5rem;
+  cursor: default;
+}
+
+.side-menu .nav-disabled-link .category-icon {
+  background-color: var(--nav-text-muted);
+}
+
+.side-menu .nav-coming-soon {
+  font-size: var(--font-size-10px);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--nav-text-muted);
+  background-color: var(--nav-surface-dark);
+  padding: 0.2em 0.5em;
+  border-radius: 3px;
+  margin-left: auto;
+  margin-right: 1.5rem;
+  white-space: nowrap;
+}
+
+/* Shade overlay
+   WHY visibility: left:100vw is "offscreen" but still painted by the browser.
+   During resize, the transition on left animates the changing 100vw value,
+   causing a visible flash. visibility:hidden prevents painting entirely.
+   Same pattern as .side-menu above. */
+.shade-overlay {
+  position: fixed;
+  top: var(--nav-height);
+  left: 100vw;
+  width: 100vw;
+  height: 100dvh;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 97500;
+  visibility: hidden;
+  transition: left 0.4s ease-in-out, visibility 0s linear 0.4s;
+  pointer-events: none;
+}
+
+.shade-overlay.active {
+  left: 0;
+  visibility: visible;
+  transition: left 0.4s ease-in-out, visibility 0s linear 0s;
+  pointer-events: auto;
+}
+
+/* Side auth footer */
+.side-auth-footer {
+  width: 100%;
+  box-sizing: border-box;
+  background-color: var(--nav-surface-dark);
+  box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.75), 0px 17px 24px rgba(0, 0, 0, 0.3);
+  padding: 1.5rem;
+  display: flex;
+  justify-content: center;
+  z-index: 2;
+}
+
+.side-auth-link {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  width: 100%;
+  justify-content: center;
+  font-family: "Open Sans", sans-serif;
+  font-weight: 700;
+  font-size: var(--font-size-14px);
+  color: var(--nav-text);
+  text-decoration: none;
+  background-color: var(--nav-surface-medium);
+  border-radius: 7px;
+  padding: 0.75rem 1rem;
+  box-sizing: border-box;
+  white-space: nowrap;
+  transition: background-color 0.2s ease;
+}
+
+.side-auth-link:hover {
+  background-color: var(--nav-surface-medium);
+}
+
+.side-auth-avatar {
+  width: 1.65em;
+  height: 1.65em;
+  flex-shrink: 0;
+  border-radius: 6px;
+  object-fit: contain;
+  display: block;
+}

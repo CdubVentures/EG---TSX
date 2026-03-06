@@ -1,4 +1,4 @@
----
+﻿---
 title: >-
   Metal Gear Solid Delta: Snake Eater Confirms August 28 Release Date, Hype
   Builds
@@ -11,9 +11,9 @@ tags:
   - Stealth Game Update
 datePublished: '2025-12-16'
 author: EG Team
-heroImg: feature-image
+hero: feature-image
 category: game
 draft: false
-fullArticle: false
+publish: false
 ---
 

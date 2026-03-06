@@ -1,9 +1,9 @@
----
+﻿---
 category: keyboard
 brand: Logitech G
 model: G915 TKL
 author: EG Team
-fullArticle: true
+publish: true
 draft: false
 title: 'Logitech G915 TKL Review: Sleek Speed for 2025'
 subtitle: 'Experience Low-Profile Switches, Wireless Tech, and TKL Style'
@@ -13,7 +13,7 @@ description: >-
   and RTS players in 2025 seeking a slim setup.
 tags:
   - Low-Profile Keyboard
-heroImg: feature-image
+hero: feature-image
 productId: logitech-g-g915-tkl
 toc: false
 ---

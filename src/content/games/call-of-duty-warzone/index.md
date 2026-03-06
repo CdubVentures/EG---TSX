@@ -1,4 +1,4 @@
----
+﻿---
 game: Call of Duty Warzone
 navbar: true
 guide: Call of Duty Warzone
@@ -25,7 +25,8 @@ game_facebook: 'https://www.facebook.com/CallofDuty/'
 game_x: 'https://x.com/CallofDuty'
 game_instagram: 'https://www.instagram.com/callofduty/'
 game_youtube: 'https://www.youtube.com/@CallofDuty'
-fullArticle: true
+publish: true
 toc: false
+hero: box-art-cover
 ---
 

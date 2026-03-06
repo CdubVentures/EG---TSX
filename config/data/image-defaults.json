@@ -1,0 +1,104 @@
+{
+  "defaults": {
+    "defaultImageView": ["top", "left", "feature-image", "sangle"],
+    "listThumbKeyBase": ["left", "top", "sangle"],
+    "coverImageView": ["feature-image", "sangle", "angle", "top", "left"],
+    "headerGame": [
+      "left",
+      "top"
+    ],
+    "viewPriority": [
+      "feature-image",
+      "top",
+      "left",
+      "right",
+      "sangle",
+      "angle",
+      "front",
+      "rear",
+      "bot",
+      "img"
+    ],
+    "imageDisplayOptions": [
+      {
+        "view": "feature-image",
+        "labelFull": "Showcase",
+        "labelShort": "Showcase"
+      },
+      {
+        "view": "top",
+        "labelFull": "Top View (Default)",
+        "labelShort": "Top"
+      },
+      {
+        "view": "left",
+        "labelFull": "Side View",
+        "labelShort": "Side"
+      },
+      {
+        "view": "sangle",
+        "labelFull": "Dynamic View",
+        "labelShort": "Dynamic"
+      }
+    ],
+    "viewMeta": {
+      "top": {
+        "objectFit": "contain",
+        "label": "Top View",
+        "labelShort": "Top"
+      },
+      "left": {
+        "objectFit": "contain",
+        "label": "Side View",
+        "labelShort": "Side"
+      },
+      "right": {
+        "objectFit": "contain",
+        "label": "Right Side",
+        "labelShort": "Right"
+      },
+      "sangle": {
+        "objectFit": "contain",
+        "label": "Dynamic View",
+        "labelShort": "Dynamic"
+      },
+      "angle": {
+        "objectFit": "contain",
+        "label": "Angled View",
+        "labelShort": "Angle"
+      },
+      "front": {
+        "objectFit": "contain",
+        "label": "Front View",
+        "labelShort": "Front"
+      },
+      "rear": {
+        "objectFit": "contain",
+        "label": "Rear View",
+        "labelShort": "Rear"
+      },
+      "bot": {
+        "objectFit": "contain",
+        "label": "Bottom View",
+        "labelShort": "Bottom"
+      },
+      "img": {
+        "objectFit": "cover",
+        "label": "Studio Shot",
+        "labelShort": "Studio"
+      },
+      "feature-image": {
+        "objectFit": "cover",
+        "label": "Showcase",
+        "labelShort": "Showcase"
+      }
+    }
+  },
+  "categories": {
+    "mouse": {
+      "defaultImageView": ["right", "top", "left", "sangle"]
+    },
+    "keyboard": {},
+    "monitor": {}
+  }
+}

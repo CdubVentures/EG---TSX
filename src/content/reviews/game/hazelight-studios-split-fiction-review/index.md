@@ -1,9 +1,9 @@
----
+﻿---
 category: game
 brand: Hazelight Studios
 model: Split Fiction
 author: EG Team
-fullArticle: false
+publish: false
 draft: false
 title: 'Split Fiction: Dual Worlds, One Epic Tale'
 subtitle: Blend Sci‑Fi and Fantasy in Co‑op Puzzle Perfection
@@ -14,7 +14,7 @@ description: >-
   for co‑op fans this year.
 tags:
   - Best Co‑op Game
-heroImg: feature-image
+hero: feature-image
 toc: false
 ---
 

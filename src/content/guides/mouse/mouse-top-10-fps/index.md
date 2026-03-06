@@ -1,4 +1,4 @@
----
+﻿---
 category: mouse
 navbar:
   - top 10 genere picks
@@ -10,8 +10,8 @@ description: >-
   responsive buttons, helping you land headshots and dominate in fast-paced
   shooters.
 tags: []
-heroImg: title
-fullArticle: true
+hero: title
+publish: true
 toc: false
 draft: false
 ---

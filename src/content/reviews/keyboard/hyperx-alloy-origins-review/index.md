@@ -1,9 +1,9 @@
----
+﻿---
 category: keyboard
 brand: HyperX
 model: Alloy Origins
 author: EG Team
-fullArticle: true
+publish: true
 draft: false
 title: 'HyperX Alloy Origins Review: Affordable Excellence in 2025'
 subtitle: 'Get Cherry MX Red, RGB Lighting, and Solid Build'
@@ -13,7 +13,7 @@ description: >-
   FPS, MOBA, and RTS gamers in 2025.
 tags:
   - Budget Keyboard
-heroImg: feature-image
+hero: feature-image
 productId: hyperx-alloy-origins
 toc: false
 ---

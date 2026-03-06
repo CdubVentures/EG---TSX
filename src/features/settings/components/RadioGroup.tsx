@@ -56,7 +56,7 @@ export default function RadioGroup({ name, options, value, onChange, disabled }:
                 isChecked && [
                   "after:content-[''] after:absolute after:top-1/2 after:left-1/2",
                   'after:-translate-x-1/2 after:-translate-y-1/2',
-                  'after:w-[0.4rem] after:h-[0.4rem] after:rounded-full after:bg-[var(--white-color-1)]',
+                  'after:w-[0.4rem] after:h-[0.4rem] after:rounded-full after:bg-[var(--color-text-on-accent)]',
                 ]
               )}
             />

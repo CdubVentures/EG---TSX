@@ -1,4 +1,4 @@
----
+﻿---
 brand: Finalmouse
 displayName: Finalmouse
 title: 'Finalmouse: Ultra-Lightweight, Ultra-Elite'
@@ -22,6 +22,7 @@ brand_tiktok: ''
 navbar:
   - mouse
 toc: false
-fullArticle: true
+publish: true
+hero: brand-logo-horizontal-index
 ---
 

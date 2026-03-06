@@ -1,9 +1,9 @@
----
+﻿---
 category: keyboard
 brand: ASUS
 model: ROG Strix Scope II 96 Wireless
 author: EG Team
-fullArticle: true
+publish: true
 draft: false
 title: 'ASUS ROG Strix Scope II 96 Wireless Review: Precision Without Wires'
 subtitle: 'Enjoy Wireless Freedom, Mechanical Switches, and RGB Brilliance'
@@ -13,7 +13,7 @@ description: >-
   compact 96% layout perfect for FPS, MOBA, RTS, and MMO gamers in 2025.
 tags:
   - Wireless Keyboard
-heroImg: feature-image
+hero: feature-image
 productId: asus-rog-strix-scope-ii-96-wireless
 toc: false
 ---

@@ -1,4 +1,4 @@
----
+﻿---
 brand: Endgame Gear
 displayName: Endgame Gear
 title: 'Endgame Gear: Redefining Ultralight Excellence'
@@ -24,6 +24,7 @@ navbar:
   - keyboard
   - mouse
 toc: false
-fullArticle: true
+publish: true
+hero: brand-logo-horizontal-index
 ---
 

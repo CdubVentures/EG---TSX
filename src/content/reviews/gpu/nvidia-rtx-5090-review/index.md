@@ -1,9 +1,9 @@
----
+﻿---
 category: gpu
 brand: Nvidia
 model: RTX 5090
 author: EG Team
-fullArticle: false
+publish: false
 draft: false
 title: 'Nvidia RTX 5090: The Ultimate Powerhouse for 2025'
 subtitle: 'Unleash 4K Gaming with 32GB GDDR7, 600Hz Potential, and AI Mastery'
@@ -14,7 +14,7 @@ description: >-
   rendering in 2025.
 tags:
   - Top Flagship GPU
-heroImg: feature-image
+hero: feature-image
 toc: false
 ---
 

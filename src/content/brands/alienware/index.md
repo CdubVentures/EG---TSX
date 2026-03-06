@@ -1,4 +1,4 @@
----
+﻿---
 brand: Alienware
 displayName: Alienware
 title: 'Alienware: Premium Gaming with Seamless Integration'
@@ -42,7 +42,7 @@ tags:
 datePublished: '2025-10-16'
 dateUpdated: '2025-10-16'
 overall: 9
-heroImg: brand-logo-horizontal-mono-white
+hero: brand-logo-horizontal-mono-white
 brand_website: 'https://www.dell.com/en-us/gaming/alienware'
 brand_facebook: 'https://www.facebook.com/Alienware/'
 brand_x: 'https://twitter.com/Alienware'
@@ -59,7 +59,7 @@ product_2: keyboard "alienware" "aw920k"
 product_3: monitor "alienware" "aw3423dwf"
 product_4: headset "alienware" "aw920h"
 toc: false
-fullArticle: true
+publish: true
 ---
 > **Takeaway:** Alienware’s bold designs, unified software, and high-performance hardware create a seamless gaming ecosystem for enthusiasts and creators alike.
 

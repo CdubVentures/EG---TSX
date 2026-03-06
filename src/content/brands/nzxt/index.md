@@ -1,4 +1,4 @@
----
+﻿---
 brand: NZXT
 displayName: NZXT
 title: 'NZXT: Precision Engineered for Gamers'
@@ -25,6 +25,7 @@ navbar:
   - monitor
   - mouse
 toc: false
-fullArticle: true
+publish: true
+hero: brand-logo-horizontal-index
 ---
 

@@ -1,0 +1,143 @@
+---
+/**
+ * DashboardHeroCard.astro — Row 1 hero card (single large image + content).
+ * Faithful port of HBS .dashboard-row1-item/image/content/title CSS.
+ */
+import { articleUrl, resolveHero, articleSrcSet, formatArticleDate } from '@core/article-helpers';
+import type { DashboardEntry } from '@core/article-helpers';
+import type { DashboardMeta } from '@core/dashboard';
+import { categoryColor } from '@core/config';
+import PinTag from '@shared/ui/PinTag.astro';
+import EditorsBadge from '@shared/ui/EditorsBadge.astro';
+
+interface Props {
+  item: DashboardEntry;
+  meta?: DashboardMeta;
+}
+
+const { item, meta } = Astro.props;
+const url = articleUrl(item._collection, item.id);
+const heroPath = item.data.hero
+  ? resolveHero(item._collection, item.id, item.data.hero)
+  : null;
+const catColor = item.data.category ? categoryColor(item.data.category) : undefined;
+---
+
+<a href={url} class="dashboard-grid-item dashboard-row1-item">
+  {meta?.isPinned && <PinTag categoryColor={catColor} />}
+  {meta?.badgeText && <EditorsBadge badgeText={meta.badgeText} category={item.data.category} />}
+  {heroPath && (
+    <img
+      loading="eager"
+      src={`${heroPath}_l.webp`}
+      srcset={articleSrcSet(heroPath)}
+      sizes="(min-width: 825px) 575px, 100vw"
+      alt={item.data.title}
+      class="dashboard-grid-image dashboard-row1-image"
+    />
+  )}
+  <div class="dashboard-grid-item-content dashboard-row1-content">
+    <div>
+      {item.data.category && (
+        <span class="dashboard-item-type item-tag" style={catColor ? `color: ${catColor}` : undefined}>
+          {item.data.category}
+        </span>
+      )}
+      <h3 class="dashboard-row1-title">{item.data.title}</h3>
+    </div>
+    <p class="dashboard-row1-date item-date">
+      {formatArticleDate(item.data.datePublished, item.data.dateUpdated)}
+    </p>
+  </div>
+</a>
+
+<style>
+  .dashboard-row1-item {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    background: var(--section-dark-background-color);
+    overflow: hidden;
+    border-radius: 6px;
+    text-decoration: none;
+    color: var(--white-color-1);
+    box-shadow: var(--card-shadow);
+    transition: box-shadow 0.2s ease;
+  }
+
+  .dashboard-row1-item:hover {
+    box-shadow: var(--card-shadow-hover);
+  }
+
+  .dashboard-row1-image {
+    width: 100%;
+    aspect-ratio: 16/9;
+    object-fit: cover;
+  }
+
+  .dashboard-row1-content {
+    flex: 1;
+    padding: 1.25rem 1.65rem;
+    box-sizing: border-box;
+    background: transparent;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .dashboard-row1-title {
+    font-size: var(--font-size-25px);
+    font-weight: var(--font-weight7);
+    margin: 0.5rem 0 0.75rem 0;
+    line-height: 1.3;
+    letter-spacing: -0.5px;
+    color: var(--white-black-color-1);
+    overflow: hidden;
+    font-family: var(--identity-font);
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    text-overflow: ellipsis;
+  }
+
+  .dashboard-row1-date {
+    margin: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: var(--grey-color-3);
+  }
+
+  /* ── Hover ── */
+  .dashboard-grid-item:hover .dashboard-row1-title {
+    text-decoration: underline;
+    text-decoration-color: var(--white-black-color-1);
+    text-decoration-thickness: clamp(1.25px, 1.1167px + 0.0333vw, 1.5px);
+    text-underline-offset: 1.25px;
+  }
+
+  /* ── ≤1150px ── */
+  @media (max-width: 1150px) {
+    .dashboard-row1-title {
+      font-size: var(--ft-25-22);
+      -webkit-line-clamp: 3;
+    }
+  }
+
+  /* ── ≤825px ── */
+  @media (max-width: 825px) {
+    .dashboard-row1-image {
+      aspect-ratio: 16/9;
+    }
+
+    .dashboard-row1-title {
+      line-height: 1.25;
+    }
+  }
+
+  /* ── ≤600px ── */
+  @media (max-width: 600px) {
+    .dashboard-row1-title {
+      font-size: var(--fm-22-21);
+    }
+  }
+</style>

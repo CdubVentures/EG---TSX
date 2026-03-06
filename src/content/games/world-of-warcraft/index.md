@@ -1,4 +1,4 @@
----
+﻿---
 game: World of Warcraft
 navbar: true
 guide: World of Warcraft
@@ -27,7 +27,8 @@ game_facebook: 'https://www.facebook.com/Warcraft/'
 game_x: 'https://x.com/Warcraft'
 game_instagram: 'https://www.instagram.com/warcraft/'
 game_youtube: 'https://www.youtube.com/@Warcraft'
-fullArticle: true
+publish: true
 toc: false
+hero: box-art-cover
 ---
 

@@ -1,9 +1,9 @@
----
+﻿---
 category: keyboard
 brand: Razer
 model: Huntsman V2 Analog
 author: EG Team
-fullArticle: true
+publish: true
 draft: false
 title: 'Razer Huntsman V2 Analog Review: Precision Meets Innovation'
 subtitle: 'Get Analog Switches, Rapid Trigger, and Premium Feel'
@@ -13,7 +13,7 @@ description: >-
   control for FPS, MMO, MOBA, and AARPG in 2025.
 tags:
   - Analog Keyboard
-heroImg: feature-image
+hero: feature-image
 productId: razer-huntsman-v2-analog
 toc: false
 ---

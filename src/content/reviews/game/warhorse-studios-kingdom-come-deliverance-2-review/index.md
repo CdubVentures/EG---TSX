@@ -1,9 +1,9 @@
----
+﻿---
 category: game
 brand: Warhorse Studios
 model: 'Kingdom Come: Deliverance 2'
 author: EG Team
-fullArticle: false
+publish: false
 draft: false
 title: 'Kingdom Come: Deliverance 2: Rule Your Destiny'
 subtitle: Forge History with Realistic Combat and Open-World Freedom
@@ -14,7 +14,7 @@ description: >-
   immersive storytelling.
 tags:
   - Medieval RPG
-heroImg: feature-image
+hero: feature-image
 toc: false
 ---
 

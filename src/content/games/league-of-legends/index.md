@@ -1,4 +1,4 @@
----
+﻿---
 game: League of Legends
 navbar: true
 guide: League of Legends
@@ -23,7 +23,8 @@ game_facebook: 'https://www.facebook.com/leagueoflegends/'
 game_x: 'https://x.com/LeagueOfLegends'
 game_instagram: 'https://www.instagram.com/leagueoflegends/'
 game_youtube: 'https://www.youtube.com/leagueoflegends'
-fullArticle: true
+publish: true
 toc: false
+hero: box-art-cover
 ---
 

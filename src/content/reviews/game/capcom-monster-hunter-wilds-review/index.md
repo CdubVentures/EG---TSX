@@ -1,9 +1,9 @@
----
+﻿---
 category: game
 brand: Capcom
 model: Monster Hunter Wilds
 author: EG Team
-fullArticle: false
+publish: false
 draft: false
 title: 'Monster Hunter Wilds: Hunt the Forbidden Lands'
 subtitle: 'Master Dynamic Ecosystems, 14 Weapon Types, and Epic Co-op Battles'
@@ -14,7 +14,7 @@ description: >-
   biggest hit, dominating FPS, MMO, and co‑op gaming scenes in 2025.
 tags:
   - Top Action RPG
-heroImg: feature-image
+hero: feature-image
 toc: false
 ---
 

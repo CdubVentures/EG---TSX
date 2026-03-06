@@ -1,4 +1,4 @@
----
+﻿---
 brand: Glorious
 displayName: Glorious
 title: 'Glorious: Lightweight Builds with Modular Freedom'
@@ -18,6 +18,7 @@ navbar:
   - keyboard
   - mouse
 toc: false
-fullArticle: true
+publish: true
+hero: brand-logo-horizontal-index
 ---
 

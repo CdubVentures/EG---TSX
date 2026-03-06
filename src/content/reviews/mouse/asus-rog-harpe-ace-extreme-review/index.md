@@ -1,9 +1,9 @@
----
+﻿---
 category: mouse
 brand: Asus
 model: ROG Harpe Ace Extreme
 author: EG Team
-fullArticle: true
+publish: true
 draft: false
 title: 'Asus ROG Harpe Ace Extreme Review: Lightweight Elite for 2025'
 subtitle: 'Experience Carbon Fiber Build, High DPI, and Precision'
@@ -13,7 +13,7 @@ description: >-
   choice for FPS and MOBA pros in 2025 esports.
 tags:
   - Premium Mouse
-heroImg: feature-image
+hero: feature-image
 productId: asus-rog-harpe-ace-extreme
 toc: false
 ---

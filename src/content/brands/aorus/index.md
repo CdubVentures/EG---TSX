@@ -1,4 +1,4 @@
----
+﻿---
 brand: Aorus
 displayName: Aorus
 title: 'AORUS: Competitive Gear for Serious Gamers'
@@ -18,6 +18,7 @@ navbar:
   - keyboard
   - mouse
 toc: false
-fullArticle: true
+publish: true
+hero: brand-logo-horizontal-index
 ---
 

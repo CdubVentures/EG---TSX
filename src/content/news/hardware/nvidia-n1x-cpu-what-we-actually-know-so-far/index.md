@@ -1,4 +1,4 @@
----
+﻿---
 title: 'NVIDIA N1X CPU: What We Actually Know So Far'
 description: >-
   Nvidia’s N1X Arm CPU is still unannounced, but the GB10 Grace Blackwell
@@ -21,9 +21,10 @@ tags:
 datePublished: '2025-12-09'
 dateUpdated: '2025-12-09'
 author: Technology Newsroom
+hero: hero-img
 category: hardware
 draft: false
-fullArticle: true
+publish: true
 ---
 Nvidia’s much‑talked‑about N1X CPU isn’t a real, buyable product yet — but the silicon everyone expects to sit at its core **does** exist, and it’s already shipping inside Nvidia’s new DGX Spark personal AI systems.
 

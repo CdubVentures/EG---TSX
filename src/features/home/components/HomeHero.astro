@@ -341,7 +341,12 @@ const { productCount } = Astro.props;
     background-color: var(--section-dark-background-color);
     color: var(--grey-color-1);
     padding: 1.6rem 1.35rem;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s ease, box-shadow 0.2s ease;
+    box-shadow: var(--card-shadow);
+  }
+
+  .home-title-stats-button:hover {
+    box-shadow: var(--card-shadow-hover);
   }
 
   .home-title-stats-content {

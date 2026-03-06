@@ -1,0 +1,102 @@
+/* ─────────────────────────────────────────────────────────────────────────────
+   AUTH DIALOG — <dialog> element animations
+   Uses @starting-style for entry (Chrome 117+, Firefox 129+, Safari 17.5+).
+   Uses data-closing attribute for exit (works in ALL browsers).
+   ───────────────────────────────────────────────────────────────────────── */
+
+/* Entry animation — progressive enhancement */
+dialog.auth-dialog[open] {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.25s ease-out, transform 0.25s ease-out;
+}
+
+@starting-style {
+  dialog.auth-dialog[open] {
+    opacity: 0;
+    transform: translateY(-8%);
+  }
+  dialog.auth-dialog[open]::backdrop {
+    opacity: 0;
+  }
+}
+
+/* Exit animation — data-closing triggers reverse */
+dialog.auth-dialog[data-closing] {
+  animation: dialogSlideOut 0.2s ease-in forwards;
+}
+
+dialog.auth-dialog[data-closing]::backdrop {
+  animation: dialogBackdropOut 0.2s ease-in forwards;
+}
+
+@keyframes dialogSlideOut {
+  to { opacity: 0; transform: translateY(-8%); }
+}
+
+@keyframes dialogBackdropOut {
+  to { opacity: 0; }
+}
+
+/* Backdrop styling */
+dialog.auth-dialog::backdrop {
+  background: rgba(0, 0, 0, 0.75);
+  -webkit-backdrop-filter: blur(10px) brightness(0.8) contrast(1.05);
+  backdrop-filter: blur(10px) brightness(0.8) contrast(1.05);
+  transition: opacity 0.25s ease-out;
+}
+
+/* Mobile: narrower dialog */
+@media (max-width: 600px) {
+  dialog.auth-dialog {
+    width: clamp(390px, 270px + 30vw, 450px);
+    max-width: 95%;
+  }
+}
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   SETTINGS DIALOG — reuses dialogSlideOut / dialogBackdropOut keyframes
+   ───────────────────────────────────────────────────────────────────────── */
+
+/* Entry animation */
+dialog.settings-dialog[open] {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.25s ease-out, transform 0.25s ease-out;
+}
+
+@starting-style {
+  dialog.settings-dialog[open] {
+    opacity: 0;
+    transform: translateY(-8%);
+  }
+  dialog.settings-dialog[open]::backdrop {
+    opacity: 0;
+  }
+}
+
+/* Exit animation — reuses existing keyframes */
+dialog.settings-dialog[data-closing] {
+  animation: dialogSlideOut 0.2s ease-in forwards;
+}
+
+dialog.settings-dialog[data-closing]::backdrop {
+  animation: dialogBackdropOut 0.2s ease-in forwards;
+}
+
+/* Backdrop styling */
+dialog.settings-dialog::backdrop {
+  background: rgba(0, 0, 0, 0.75);
+  -webkit-backdrop-filter: blur(10px) brightness(0.8) contrast(1.05);
+  backdrop-filter: blur(10px) brightness(0.8) contrast(1.05);
+  transition: opacity 0.25s ease-out;
+}
+
+/* Mobile: narrower dialog */
+@media (max-width: 600px) {
+  dialog.settings-dialog {
+    width: clamp(390px, 270px + 30vw, 450px);
+    max-width: 95%;
+  }
+}
+

@@ -149,7 +149,7 @@ function GuestCTA({ onClose }: { onClose: (afterClose?: () => void) => void }) {
           className={cn(
             'px-5 py-[6px] rounded-[5px] border-none cursor-pointer',
             'bg-[image:var(--site-background-gradient)]',
-            'text-[var(--white-color-1)] font-semibold',
+            'text-[var(--color-text-on-accent)] font-semibold',
             'text-[length:var(--ft-14-13)]',
             "[font-family:'Open_Sans',_sans-serif]",
             'transition-[filter] duration-200 hover:brightness-[1.15]'

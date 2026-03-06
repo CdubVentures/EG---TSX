@@ -1,9 +1,9 @@
----
+﻿---
 category: monitor
 brand: Acer
 model: Predator X34 OLED
 author: EG Team
-fullArticle: true
+publish: true
 draft: false
 title: 'Acer Predator X34 OLED: Immersive Curved Excellence'
 subtitle: 'Get 3440x1440 Resolution, 175Hz Refresh Rate, and OLED Depth'
@@ -13,7 +13,7 @@ description: >-
   AARPG gaming in 2025.
 tags:
   - Curved Monitor
-heroImg: feature-image
+hero: feature-image
 productId: acer-predator-x34-oled
 toc: false
 ---

@@ -1,4 +1,4 @@
----
+﻿---
 category: keyboard
 navbar:
   - best in classes
@@ -8,8 +8,8 @@ description: >-
   Stay ahead of the curve with the latest keyboards on the market, featuring
   groundbreaking features and modern aesthetics.
 tags: []
-heroImg: title
-fullArticle: true
+hero: title
+publish: true
 toc: false
 draft: false
 ---

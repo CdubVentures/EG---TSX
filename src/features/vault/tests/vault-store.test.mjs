@@ -15,6 +15,7 @@ function makeProduct(overrides = {}) {
     model: 'Viper V3 Pro',
     category: 'mouse',
     imagePath: '/images/data-products/mouse/razer/viper-v3-pro',
+    thumbnailStem: 'top',
     ...overrides,
   };
 }

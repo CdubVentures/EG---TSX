@@ -1,4 +1,4 @@
----
+﻿---
 brand: Cooler Master
 displayName: Cooler Master
 title: 'Cooler Master: Ergonomics and Value Combined'
@@ -19,6 +19,7 @@ navbar:
   - monitor
   - mouse
 toc: false
-fullArticle: true
+publish: true
+hero: brand-logo-horizontal-index
 ---
 

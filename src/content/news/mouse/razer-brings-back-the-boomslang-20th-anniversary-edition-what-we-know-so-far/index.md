@@ -1,4 +1,4 @@
----
+﻿---
 title: >-
   Razer brings back the Boomslang (20th Anniversary Edition): what we know so
   far
@@ -22,12 +22,11 @@ tags:
 datePublished: '2025-12-12'
 dateUpdated: '2025-12-12'
 author: EG Gear Staff
-heroImg: >-
-  /images/news/mouse/razer-brings-back-the-boomslang-20th-anniversary-edition-what-we-know-so-far/hero-img
+hero: boomslang-20th-bottom-serial
 heroCredit: Courtesy of Razer
 category: mouse
 draft: false
-fullArticle: true
+publish: true
 ---
 # Razer brings back the Boomslang (20th Anniversary Edition): what we know so far
 

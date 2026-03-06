@@ -1,9 +1,9 @@
----
+﻿---
 category: keyboard
 brand: NuPhy
 model: Field75HE
 author: EG Team
-fullArticle: true
+publish: true
 draft: false
 title: 'NuPhy Field75HE Review: The Ultimate Adjustable Gamer’s Keyboard'
 subtitle: 'Experience Customizable Actuation, Hall-Effect Switches, and Premium Build'
@@ -14,7 +14,7 @@ description: >-
   players in 2025.
 tags:
   - Top Adjustable Keyboard
-heroImg: feature-image
+hero: feature-image
 productId: nuphy-field75he
 toc: false
 ---

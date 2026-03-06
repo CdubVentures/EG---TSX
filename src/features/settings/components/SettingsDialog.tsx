@@ -50,7 +50,7 @@ export default function SettingsDialog() {
       ref={dialogRef}
       className={cn(
         'settings-dialog',
-        'flex flex-col',
+        'open:flex open:flex-col',
         'w-[90%] max-w-[520px] max-h-[80vh]',
         'max-[825px]:max-w-[90%]',
         'max-[600px]:w-[clamp(320px,85vw,450px)] max-[600px]:max-w-[95%]',

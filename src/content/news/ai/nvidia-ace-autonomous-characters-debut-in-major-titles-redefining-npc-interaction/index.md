@@ -1,4 +1,4 @@
----
+﻿---
 title: >-
   NVIDIA ACE Autonomous Characters Debut in Major Titles, Redefining NPC
   Interaction
@@ -22,9 +22,10 @@ datePublished: '2025-03-09'
 dateUpdated: '2025-12-09'
 author: EG Gear Staff
 heroCredit: NVIDIA
+hero: ace-autonomous-characters-diagram
 category: ai
 draft: false
-fullArticle: true
+publish: true
 ---
 NVIDIA’s ACE “autonomous game characters” are no longer just a stage demo: the first real implementations have landed in shipping games, and they’re redefining what “NPC interaction” can mean in 2025.
 

@@ -1,4 +1,4 @@
----
+﻿---
 brand: Redragon
 displayName: Redragon
 title: 'Redragon: Essential Features at Budget-Friendly Prices'
@@ -19,6 +19,7 @@ navbar:
   - mouse
 iDashboard: all_1
 toc: false
-fullArticle: true
+publish: true
+hero: brand-logo-horizontal-index
 ---
 

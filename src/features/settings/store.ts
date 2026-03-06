@@ -85,6 +85,10 @@ export function setPref<K extends PreferenceKey>(
 /** Stub — no-op until Phase 9 server sync. */
 export async function pushPrefs(_partial: Partial<UserPreferences>): Promise<void> {
   // Phase 9: PUT /api/user/prefs
+  // Phase 9: sync theme preference to DynamoDB on login — on authenticated
+  // session start, read user's saved theme from profile and apply it (overrides
+  // localStorage). On theme change while logged in, push to profile so it
+  // follows the user across devices.
 }
 
 /* ── Theme State ─── */
@@ -96,7 +100,16 @@ const THEME_TO_DATA: Record<ThemeMode, string> = { light: 'default', dark: 'gami
 const DATA_TO_THEME: Record<string, ThemeMode> = { default: 'light', gaming: 'dark' };
 const THEME_COLORS: Record<ThemeMode, string> = { light: '#ffffff', dark: '#141617' };
 
-export const $theme = atom<ThemeMode>('dark');
+/** WHY eager read: the atom must match the actual DOM theme at creation time.
+ *  If we default to 'dark' and let loadTheme() fix it later, any component
+ *  that renders before loadTheme() (e.g. SettingsPanel) shows the wrong state. */
+function getInitialTheme(): ThemeMode {
+  if (typeof localStorage === 'undefined') return 'dark';
+  const saved = localStorage.getItem(THEME_KEY);
+  return saved ? (DATA_TO_THEME[saved] ?? 'dark') : 'dark';
+}
+
+export const $theme = atom<ThemeMode>(getInitialTheme());
 
 /** Set theme: updates atom + DOM + localStorage. */
 export function setTheme(mode: ThemeMode): void {

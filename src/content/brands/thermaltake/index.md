@@ -1,4 +1,4 @@
----
+﻿---
 brand: Thermaltake
 displayName: Thermaltake
 title: 'Thermaltake: Innovation and Cooling-Inspired Design'
@@ -18,6 +18,7 @@ navbar:
   - keyboard
   - mouse
 toc: false
-fullArticle: true
+publish: true
+hero: brand-logo-horizontal-index
 ---
 

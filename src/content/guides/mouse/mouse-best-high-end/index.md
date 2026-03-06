@@ -1,4 +1,4 @@
----
+﻿---
 category: mouse
 navbar:
   - best in classes
@@ -9,8 +9,8 @@ description: >-
   Explore gaming mice that push the boundaries of performance with cutting-edge
   sensors, luxurious materials, and precision engineering.
 tags: []
-heroImg: title
-fullArticle: true
+hero: title
+publish: true
 toc: false
 draft: false
 ---

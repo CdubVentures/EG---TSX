@@ -1,9 +1,9 @@
----
+﻿---
 category: keyboard
 brand: Corsair
 model: K100 RGB
 author: EG Team
-fullArticle: true
+publish: true
 draft: false
 title: 'Corsair K100 RGB Review: The RGB Performance Beast'
 subtitle: 'Enjoy Axon Processing, Cherry MX Speed, and Macro Power'
@@ -13,7 +13,7 @@ description: >-
   RTS, and AARPG gamers in 2025.
 tags:
   - RGB Keyboard
-heroImg: feature-image
+hero: feature-image
 productId: corsair-k100-rgb
 toc: false
 ---

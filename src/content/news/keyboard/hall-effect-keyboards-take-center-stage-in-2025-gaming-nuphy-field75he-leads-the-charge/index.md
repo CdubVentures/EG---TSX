@@ -1,4 +1,4 @@
----
+﻿---
 title: >-
   Hall-Effect Keyboards Take Center Stage in 2025 Gaming: NuPhy Field75HE Leads
   the Charge
@@ -11,9 +11,9 @@ tags:
   - Tech Trend Keyboard
 datePublished: '2025-12-09'
 author: EG Team
-heroImg: feature-image
+hero: feature-image
 category: keyboard
 draft: false
-fullArticle: true
+publish: true
 ---
 

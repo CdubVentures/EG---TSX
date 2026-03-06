@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="970" height="250" viewBox="0 0 970 250">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0f172a"/>
+      <stop offset="100%" stop-color="#1e293b"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#10b981"/>
+      <stop offset="100%" stop-color="#06b6d4"/>
+    </linearGradient>
+  </defs>
+  <rect width="970" height="250" fill="url(#bg)"/>
+  <rect width="970" height="3" fill="url(#accent)"/>
+  <line x1="0" y1="125" x2="970" y2="110" stroke="#1e3a5f" stroke-width="1" opacity="0.4"/>
+  <line x1="0" y1="180" x2="970" y2="195" stroke="#1e3a5f" stroke-width="1" opacity="0.3"/>
+  <circle cx="850" cy="125" r="80" fill="#10b981" opacity="0.04"/>
+  <circle cx="850" cy="125" r="55" fill="#10b981" opacity="0.06"/>
+  <text x="50" y="65" font-family="system-ui, sans-serif" font-size="12" font-weight="700" fill="#10b981" letter-spacing="3">TOURNAMENT SERIES 2025</text>
+  <text x="50" y="115" font-family="system-ui, sans-serif" font-size="44" font-weight="900" fill="#ffffff" letter-spacing="1">COMPETE</text>
+  <text x="310" y="115" font-family="system-ui, sans-serif" font-size="44" font-weight="900" fill="#10b981" letter-spacing="1">GLOBALLY</text>
+  <text x="50" y="150" font-family="system-ui, sans-serif" font-size="16" font-weight="400" fill="#94a3b8">$50,000 prize pool · Open registration · All skill levels</text>
+  <rect x="50" y="175" width="140" height="42" rx="21" fill="#10b981"/>
+  <text x="120" y="202" font-family="system-ui, sans-serif" font-size="14" font-weight="800" fill="#0f172a" text-anchor="middle" letter-spacing="1">REGISTER</text>
+  <rect x="210" y="175" width="140" height="42" rx="21" fill="none" stroke="#10b981" stroke-width="2"/>
+  <text x="280" y="202" font-family="system-ui, sans-serif" font-size="14" font-weight="700" fill="#10b981" text-anchor="middle" letter-spacing="1">LEARN MORE</text>
+  <text x="800" y="105" font-family="system-ui, sans-serif" font-size="60" font-weight="900" fill="#ffffff" text-anchor="middle" opacity="0.06">ESL</text>
+  <text x="940" y="18" font-family="system-ui, sans-serif" font-size="9" font-weight="500" fill="#4a5568" text-anchor="end">Sponsored</text>
+  <rect y="247" width="970" height="3" fill="url(#accent)"/>
+</svg>

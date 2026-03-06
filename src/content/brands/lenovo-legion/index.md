@@ -1,4 +1,4 @@
----
+﻿---
 brand: Lenovo Legion
 displayName: Lenovo Legion
 title: 'Lenovo Legion: Power, Precision, and Performance'
@@ -23,6 +23,7 @@ navbar:
   - monitor
   - mouse
 toc: false
-fullArticle: true
+publish: true
+hero: brand-logo-horizontal-index
 ---
 

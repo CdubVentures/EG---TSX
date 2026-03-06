@@ -1,9 +1,9 @@
----
+﻿---
 category: monitor
 brand: Alienware
 model: AW3423DWF
 author: EG Team
-fullArticle: true
+publish: true
 draft: false
 title: 'Alienware AW3423DWF: Ultrawide Immersion Redefined'
 subtitle: 'Enjoy Curved OLED Brilliance, 165Hz Refresh Rate, and Wide Color Gamut'
@@ -13,7 +13,7 @@ description: >-
   players seeking immersive gameplay in 2025.
 tags:
   - Top Ultrawide Monitor
-heroImg: feature-image
+hero: feature-image
 productId: alienware-aw3423dwf
 toc: false
 ---

@@ -17,7 +17,7 @@ function articleLoader(base: string) {
 // ─── Shared validators ─────────────────────────────────────────────────────
 
 // ─── Category enums ─────────────────────────────────────────────────────────
-// SSOT: config/categories.json is the single source of truth for category IDs,
+// SSOT: config/data/categories.json is the single source of truth for category IDs,
 // labels, colors, and product/content flags.
 // Zod requires static string literals — these enums CANNOT be derived at runtime.
 // When adding/removing a category in categories.json, update these enums to match.
@@ -47,7 +47,7 @@ const newsCategories = z.enum([
 // WHY: If someone edits categories.json but forgets to update the enums above,
 // Astro build will fail here with a clear message instead of silently dropping
 // content or producing validation errors deep in the pipeline.
-import categoriesJson from '../config/categories.json';
+import categoriesJson from '../config/data/categories.json';
 const jsonIds = new Set(categoriesJson.categories.map((c: { id: string }) => c.id));
 const newsEnumIds = new Set(newsCategories.options);
 const missing = [...jsonIds].filter(id => !newsEnumIds.has(id));
@@ -71,7 +71,7 @@ const reviews = defineCollection({
 
     // Authoring
     author:      z.string().default('EG Team'),
-    fullArticle: z.boolean().default(true),
+    publish: z.boolean().default(true),
     draft:       z.boolean().default(false),
 
     // SEO / display
@@ -85,12 +85,15 @@ const reviews = defineCollection({
     dateUpdated:   z.coerce.date().optional(),
 
     // Hero media
-    heroImg:     z.string().optional(),
+    hero:        z.string().optional(),
     heroAspect:  z.string().optional(),
     heroCredit:  z.string().optional(),
 
     // Links to product data (slug from products registry)
     productId:   z.string().optional(),
+
+    // Badges
+    egbadge:     z.string().optional(),
 
     // Layout
     toc:         z.boolean().default(false),
@@ -121,7 +124,7 @@ const brands = defineCollection({
     overall:     z.number().min(0).max(10).optional(),
 
     // Hero
-    heroImg:     z.string().optional(),
+    hero:        z.string().optional(),
     heroCredit:  z.string().optional(),
 
     // Social links
@@ -146,7 +149,7 @@ const brands = defineCollection({
     product_6:    z.string().optional(),
 
     toc:          z.boolean().default(false),
-    fullArticle:  z.boolean().default(true),
+    publish:  z.boolean().default(true),
   }),
 });
 
@@ -177,8 +180,8 @@ const games = defineCollection({
     overall:     z.number().min(0).max(10).optional(),
 
     // Hero
-    heroImg:     z.string().optional(),
-    heroAltImg:  z.string().optional(),
+    hero:        z.string().optional(),
+    heroAlt:     z.string().optional(),
     heroCredit:  z.string().optional(),
     boxCoverArt: z.string().optional(),
 
@@ -192,7 +195,7 @@ const games = defineCollection({
     // Hub
     iDashboard:  z.string().optional(),
     author:      z.string().optional(),
-    fullArticle: z.boolean().default(true),
+    publish: z.boolean().default(true),
     toc:         z.boolean().default(false),
   }),
 });
@@ -218,11 +221,14 @@ const guides = defineCollection({
     dateUpdated:   z.coerce.date().optional(),
 
     // Hero
-    heroImg:     z.string().optional(),
+    hero:        z.string().optional(),
     heroCredit:  z.string().optional(),
 
+    // Badges
+    egbadge:     z.string().optional(),
+
     author:      z.string().optional(),
-    fullArticle: z.boolean().default(true),
+    publish: z.boolean().default(true),
     toc:         z.boolean().default(false),
     draft:       z.boolean().default(false),
   }),
@@ -240,12 +246,12 @@ const news = defineCollection({
     dateUpdated:   z.coerce.date().optional(),
 
     author:      z.string().default('EG Team'),
-    heroImg:     z.string().optional(),
+    hero:        z.string().optional(),
     heroCredit:  z.string().optional(),
 
     category:    newsCategories.optional(),
     draft:       z.boolean().default(false),
-    fullArticle: z.boolean().default(true),
+    publish: z.boolean().default(true),
   }),
 });
 
@@ -271,7 +277,7 @@ const productMedia = z.object({
 // ─── Data: Products (headless product DB) ───────────────────────────────────
 // Source: split from src/data/products/{category}.json → individual files
 // Each file = one product: src/content/data-products/{category}/{brand}/{slug}.json
-// entry.id = "mouse/razer/viper-v3-pro" (path segments = category/brand/product)
+// entry.id = "razer-viper-v3-pro" (glob loader joins {brand}-{slug}, no category prefix)
 const dataProducts = defineCollection({
   loader: glob({ pattern: '**/*.json', base: './src/content/data-products' }),
   schema: z.object({

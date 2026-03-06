@@ -6,6 +6,7 @@ import node from '@astrojs/node';
 import tailwindcss from '@tailwindcss/vite';
 import mdx from '@astrojs/mdx';
 import sitemap from '@astrojs/sitemap';
+import { rehypeInlineAds } from './src/features/ads/inline/rehype-inline-ads';
 
 // https://astro.build/config
 export default defineConfig({
@@ -14,6 +15,10 @@ export default defineConfig({
   // WHY adapter: all existing pages stay static (prerender: true by default).
   // Only auth endpoints opt in to SSR with `export const prerender = false`.
   adapter: node({ mode: 'standalone' }),
+
+  markdown: {
+    rehypePlugins: [rehypeInlineAds],
+  },
 
   integrations: [
     react(),

@@ -35,7 +35,7 @@ Copy `.env.example` to `.env` and fill in Cognito + DynamoDB values.
 
 Full contract: [`docs/DATA-GATEWAY-CONTRACT.md`](docs/DATA-GATEWAY-CONTRACT.md)
 
-**Products** and **articles** are accessed exclusively through gateway functions that respect category visibility flags from `config/categories.json`. This is enforced project-wide.
+**Products** and **articles** are accessed exclusively through gateway functions that respect category visibility flags from `config/data/categories.json`. This is enforced project-wide.
 
 ```typescript
 // PRODUCTS — always use this, never raw getCollection('dataProducts')

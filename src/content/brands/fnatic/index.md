@@ -1,4 +1,4 @@
----
+﻿---
 brand: Fnatic
 displayName: Fnatic
 title: 'Fnatic Gear: Built for Champions'
@@ -24,6 +24,7 @@ navbar:
   - keyboard
   - mouse
 toc: false
-fullArticle: true
+publish: true
+hero: brand-logo-horizontal-index
 ---
 

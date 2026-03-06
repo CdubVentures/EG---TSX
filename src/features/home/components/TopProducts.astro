@@ -7,9 +7,9 @@
 import SectionDivider from '@shared/ui/SectionDivider.astro';
 import HomeSlideshow from './HomeSlideshow.astro';
 import CategoryDropdown from './CategoryDropdown';
-import { CONFIG, categoryColor } from '@core/config';
+import { CONFIG, categoryColor, label } from '@core/config';
 import { getCategoryColors } from '@core/categories';
-import { getDesktopTools, getMobileTools } from '@core/hub-tools';
+import { getMobileTools } from '@core/hub-tools';
 
 const categoryOptions = CONFIG.categories.map(id => ({
   id,
@@ -17,8 +17,10 @@ const categoryOptions = CONFIG.categories.map(id => ({
   hover: getCategoryColors(id).hover,
 }));
 
-const desktopTools = getDesktopTools();
-const mobileToolGroups = getMobileTools();
+const toolGroups = getMobileTools();
+/** Desktop: ≤3 categories → top 2 open, 4-5 → top 1 open, 6+ → all closed. */
+const n = toolGroups.length;
+const desktopExpandCount = n <= 3 ? 2 : n <= 5 ? 1 : 0;
 ---
 
 <div class="home-page-intro">
@@ -45,46 +47,45 @@ const mobileToolGroups = getMobileTools();
     <div class="home-intro-right">
       <a href="/hubs/" class="home-intro-right-title">Hubs</a>
 
-      {/* Desktop: vertical list sorted by tool type → category */}
-      <div class="home-tools-wrapper desktop-tools">
-        {desktopTools.map(tool => (
-          <a href={tool.url} class="home-tools-item" data-category={tool.category}>
-            <div class="home-tools-text-content">
-              <div class="home-tools-right-wrapper">
-                <span class="home-tools-tag" style={`color: ${tool.categoryColor}`}>
-                  {tool.category}
-                </span>
-                <h3 class="home-tools-title">{tool.title}</h3>
-                <p class="home-tools-description">{tool.description}</p>
+      {/* Accordion: Hub prominent per category, secondary tools expand */}
+      <div class="tools-accordion">
+        {toolGroups.map((group, i) => {
+          const hubTool = group.tools.find(t => t.tool === 'hub');
+          const secondaryTools = group.tools.filter(t => t.tool !== 'hub');
+          const catLabel = label(group.category);
+          const panelClasses = ['accordion-panel-outer', 'auto-expand',
+            ...(i < desktopExpandCount ? ['auto-expand-desktop'] : [])
+          ].join(' ');
+          return (
+            <div class="accordion-category" data-category={group.category}>
+              <div class="accordion-header">
+                <a href={hubTool?.url ?? `/hubs/${group.category}`} class="accordion-hub-link">
+                  <div class="accordion-icon" style={`color: ${group.tools[0]?.categoryColor}`} set:html={hubTool?.svg ?? ''} />
+                  <span class="accordion-label">{catLabel} Hub</span>
+                  <span class="accordion-hub-arrow">&#10095;</span>
+                </a>
+                {secondaryTools.length > 0 && (
+                  <button class="accordion-toggle" aria-expanded="false" aria-label={`Show ${catLabel} tools`}>
+                    <span class="accordion-chevron">&#10095;</span>
+                  </button>
+                )}
               </div>
-              <span class="home-tools-arrow">&#10095;</span>
-            </div>
-            <div class="home-tools-image" set:html={tool.svg} />
-          </a>
-        ))}
-      </div>
-
-      {/* Mobile: one row per category */}
-      <div class="home-tools-wrapper mobile-tools">
-        {mobileToolGroups.map(group => (
-          <div class="home-tools-row" data-category={group.category}>
-            {group.tools.map(tool => (
-              <a href={tool.url} class="home-tools-item" data-category={tool.category}>
-                <div class="home-tools-text-content">
-                  <div class="home-tools-right-wrapper">
-                    <span class="home-tools-tag" style={`color: ${tool.categoryColor}`}>
-                      {tool.category}
-                    </span>
-                    <h3 class="home-tools-title">{tool.title}</h3>
-                    <p class="home-tools-description">{tool.description}</p>
+              {secondaryTools.length > 0 && (
+                <div class={panelClasses}>
+                  <div class="accordion-panel">
+                    {secondaryTools.map(tool => (
+                      <a href={tool.url} class="accordion-sub-row">
+                        <div class="accordion-sub-icon" set:html={tool.svg} />
+                        <span class="accordion-sub-title">{tool.title}</span>
+                        <span class="accordion-sub-arrow">&#10095;</span>
+                      </a>
+                    ))}
                   </div>
-                  <span class="home-tools-arrow">&#10095;</span>
                 </div>
-                <div class="home-tools-image" set:html={tool.svg} />
-              </a>
-            ))}
-          </div>
-        ))}
+              )}
+            </div>
+          );
+        })}
       </div>
     </div>
 
@@ -107,6 +108,7 @@ const mobileToolGroups = getMobileTools();
     flex-direction: row;
     gap: 2rem;
     align-items: stretch;
+    min-height: 475px;
   }
 
   /* ── Slideshow Wrapper ── */
@@ -122,9 +124,13 @@ const mobileToolGroups = getMobileTools();
   }
 
   /* ── Tools Sidebar ── */
+  /* WHY contain:size — locks sidebar to slideshow height via align-items:stretch,
+     so inner .tools-accordion scrolls instead of growing unbounded. Matches HBS.
+     WHY grid — grid-template-rows: auto 1fr gives the accordion a definite track
+     height (unlike flex:1), so overflow-y:auto actually scrolls. */
   .home-intro-right {
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-rows: auto 1fr;
     min-height: 0;
     contain: size;
     flex: 1;
@@ -166,130 +172,201 @@ const mobileToolGroups = getMobileTools();
     border-top: 0.7rem solid var(--section-medium-background-color);
   }
 
-  .home-tools-wrapper {
+  /* ── Tools Accordion ── */
+  .tools-accordion {
     display: flex;
     flex-direction: column;
     gap: 1rem;
-    width: auto;
     margin-top: 1rem;
+    padding: 0.25rem;
+    min-height: 0;
     overflow-y: auto;
     scrollbar-width: thin;
   }
 
-  .home-tools-wrapper.mobile-tools {
-    display: none;
+  .accordion-category {
+    border-radius: 6px;
+    background-color: var(--section-dark-background-color);
+    overflow: hidden;
+    flex-shrink: 0;
+    box-shadow: var(--card-shadow);
   }
 
-  /* ── Tool Items ── */
-  .home-tools-item {
-    position: relative;
+  .accordion-header {
     display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+    align-items: stretch;
+  }
+
+  .accordion-hub-link {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    flex: 1;
+    padding: 0.85rem 1rem;
     text-decoration: none;
     color: var(--white-color-1);
-    padding: 1rem 1.25rem;
-    margin-right: 0.5rem;
-    border-radius: 6px;
-    box-sizing: border-box;
-    transition: filter 0.2s ease-in-out;
-    background-color: var(--section-dark-background-color);
+    min-width: 0;
   }
 
-  .home-tools-text-content {
-    display: flex;
-    flex-direction: column;
-    flex: 1;
-    margin-right: 1.5rem;
-    text-overflow: ellipsis;
-    justify-content: space-between;
-  }
-
-  .home-tools-right-wrapper {
-    display: flex;
-    flex-direction: column;
-  }
-
-  .home-tools-tag {
-    font-size: var(--font-size-14px);
-    font-weight: var(--font-weight7);
-    text-transform: uppercase;
-    font-family: var(--identity-font);
-    line-height: 1.2;
-  }
-
-  .home-tools-title {
+  .accordion-icon {
+    flex-shrink: 0;
+    width: 1.6em;
+    height: 1.6em;
     font-size: var(--font-size-20px);
-    font-family: var(--identity-font);
-    font-weight: var(--font-weight7);
-    line-height: 1.3;
-    color: var(--white-black-color-1);
-    margin: 0 0 0.25rem 0;
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 3;
-    overflow: hidden;
-    text-overflow: ellipsis;
   }
 
-  .home-tools-description {
-    font-size: var(--font-size-13px);
-    font-family: var(--identity-font);
-    font-weight: var(--font-weight4);
-    line-height: 1.3;
-    color: var(--grey-color-4);
-    margin: 0;
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 3;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-
-  .home-tools-arrow {
-    display: none;
-    font-size: var(--ft-18-15);
-    color: var(--grey-color-1);
-    margin-left: 3rem;
-  }
-
-  .home-tools-image {
-    font-size: var(--font-size-55px);
-    max-width: 1em;
-    overflow: hidden;
-    color: var(--grey-color-4);
-  }
-
-  .home-tools-image :global(svg) {
+  .accordion-icon :global(svg) {
     width: 100%;
     height: 100%;
-    aspect-ratio: 16 / 11;
-    object-fit: contain;
-    fill: var(--grey-color-4) !important;
+    fill: currentColor;
   }
 
-  /* Desktop hover */
+  .accordion-label {
+    font-family: var(--identity-font);
+    font-weight: var(--font-weight7);
+    font-size: var(--font-size-17px);
+    text-transform: uppercase;
+    letter-spacing: -0.25px;
+    white-space: nowrap;
+  }
+
+  .accordion-hub-arrow {
+    color: var(--grey-color-3);
+    font-size: var(--font-size-13px);
+    margin-left: auto;
+    transition: transform 0.15s ease;
+  }
+
+  /* WHY 4rem: minimum 44px touch target (4 × 11px base) per Apple HIG */
+  .accordion-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 4rem;
+    flex-shrink: 0;
+    background-color: var(--section-darkest-background-color);
+    border: none;
+    border-left: 1px solid var(--section-medium-background-color);
+    cursor: pointer;
+    padding: 0;
+    color: var(--grey-color-3);
+    transition: background-color 0.15s ease;
+  }
+
+  .accordion-chevron {
+    display: inline-block;
+    font-size: var(--font-size-12px);
+    transition: transform 0.25s ease;
+    transform: rotate(90deg);
+  }
+
+  .accordion-toggle[aria-expanded="true"] .accordion-chevron {
+    transform: rotate(-90deg);
+  }
+
+  /* ── Grid animation wrapper (0fr → 1fr for smooth height) ── */
+  .accordion-panel-outer {
+    display: grid;
+    grid-template-rows: 0fr;
+  }
+
+  .accordion-panel-outer[data-open] {
+    grid-template-rows: 1fr;
+  }
+
+  /* Desktop: server marks first N panels with .auto-expand-desktop — zero flicker */
+  @media (min-width: 901px) {
+    .accordion-panel-outer.auto-expand-desktop {
+      grid-template-rows: 1fr;
+    }
+  }
+
+  /* Mobile: panels start collapsed, user toggles open (matches original) */
+
+  /* Transitions enabled by JS after first paint — prevents load animation */
+  .accordion-panel-outer.animate {
+    transition: grid-template-rows 0.3s ease;
+  }
+
+  .accordion-panel {
+    overflow: hidden;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* ── Desktop sub-rows (SVG icon + title + arrow) ── */
+  .accordion-sub-row {
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+    padding: 0.5rem 1rem 0.5rem 1.25rem;
+    text-decoration: none;
+    color: var(--grey-color-2);
+    font-family: var(--identity-font);
+    font-weight: var(--font-weight6);
+    font-size: var(--font-size-14px);
+    transition: background-color 0.15s ease, color 0.15s ease;
+  }
+
+  .accordion-sub-row:first-child {
+    padding-top: 0.65rem;
+    border-top: 1px solid var(--section-medium-background-color);
+  }
+
+  .accordion-sub-row:last-child {
+    padding-bottom: 0.65rem;
+  }
+
+  .accordion-sub-icon {
+    flex-shrink: 0;
+    width: 1.2em;
+    height: 1.2em;
+    color: var(--grey-color-4);
+  }
+
+  .accordion-sub-icon :global(svg) {
+    width: 100%;
+    height: 100%;
+    fill: currentColor;
+  }
+
+  .accordion-sub-title {
+    flex: 1;
+  }
+
+  .accordion-sub-arrow {
+    color: var(--grey-color-4);
+    font-size: var(--font-size-11px);
+    transition: transform 0.15s ease;
+  }
+
   @media (hover: hover) and (pointer: fine) {
-    .home-tools-item:hover {
+    .accordion-hub-link:hover .accordion-label {
+      text-decoration: underline;
+      text-underline-offset: 2px;
+    }
+
+    .accordion-hub-link:hover .accordion-hub-arrow {
+      transform: translateX(3px);
+    }
+
+    .accordion-toggle:hover {
       background-color: var(--section-medium-background-color);
     }
 
-    .home-tools-item:hover .home-tools-title {
-      text-decoration: underline;
-      text-decoration-color: var(--white-color-1);
-      text-decoration-thickness: 1px;
-      text-underline-offset: 1px;
+    .accordion-sub-row:hover {
+      background-color: var(--section-medium-background-color);
+      color: var(--white-color-1);
     }
-  }
 
-  /* Mobile tool rows */
-  .home-tools-row {
-    display: flex;
-    flex-direction: row;
-    gap: 0.75rem;
-    overflow-x: auto;
-    scrollbar-width: thin;
-    width: 100%;
+    .accordion-sub-row:hover .accordion-sub-icon {
+      color: var(--grey-color-2);
+    }
+
+    .accordion-sub-row:hover .accordion-sub-arrow {
+      transform: translateX(3px);
+    }
   }
 
   /* ── Dropdown Styles (global — targets React island DOM) ── */
@@ -455,6 +532,7 @@ const mobileToolGroups = getMobileTools();
     .home-page-intro-wrapper {
       display: flex;
       flex-direction: column;
+      min-height: auto;
     }
 
     .home-intro-right {
@@ -464,6 +542,7 @@ const mobileToolGroups = getMobileTools();
       contain: unset;
       width: 100%;
       display: flex;
+      flex-direction: column;
       align-items: center;
     }
 
@@ -488,78 +567,53 @@ const mobileToolGroups = getMobileTools();
       width: calc(100% - 3rem);
     }
 
-    .home-tools-wrapper.desktop-tools {
+    .tools-accordion {
+      width: calc(100% - 3rem);
+      margin: 0.5rem auto 1.5rem auto;
+      gap: 0.65rem;
+      padding: 0;
+    }
+
+    /* Mobile: hide/show instead of 0fr animation (avoids padding leak) */
+    .accordion-panel-outer {
       display: none;
     }
 
-    .home-tools-wrapper.mobile-tools {
+    .accordion-panel-outer[data-open] {
+      display: block;
+    }
+
+    /* Sub-rows become pills on mobile */
+    .accordion-panel {
       display: flex;
       flex-direction: row;
       flex-wrap: wrap;
-      gap: 0.75rem;
-      width: calc(100% - 3rem);
-      max-width: calc(100% - 3rem);
-      margin: 0;
-      overflow: hidden;
+      gap: 0.5rem;
+      padding: 0.5rem 1rem 0.75rem;
     }
 
-    /* WHY row-reverse: on mobile, image sits LEFT, text sits RIGHT */
-    .home-tools-item {
-      flex-direction: row-reverse;
-      justify-content: flex-start;
-      gap: 0.75rem;
-      flex: 1 1 calc(33.333% - 0.75rem);
-      min-width: max-content;
-      margin-right: 0;
+    .accordion-sub-row {
+      padding: 0.35rem 0.85rem;
+      border-radius: 4px;
+      background-color: var(--section-medium-background-color);
+      font-size: var(--font-size-12px);
+      text-transform: uppercase;
+      letter-spacing: 0.02em;
+      gap: 0;
     }
 
-    .home-tools-text-content {
-      display: flex;
-      flex-direction: row;
-      text-overflow: ellipsis;
-      margin: 0;
+    .accordion-sub-row:first-child {
+      padding-top: 0.35rem;
+      border-top: none;
     }
 
-    .home-tools-right-wrapper {
-      justify-content: center;
-      min-width: 6rem;
+    .accordion-sub-row:last-child {
+      padding-bottom: 0.35rem;
     }
 
-    .home-tools-title {
-      font-size: var(--ft-18-15);
-      color: var(--grey-color-1);
-      font-weight: var(--font-weight8);
-      margin: 0;
-      display: block;
-      -webkit-line-clamp: unset;
-    }
-
-    .home-tools-description {
+    .accordion-sub-icon,
+    .accordion-sub-arrow {
       display: none;
-    }
-
-    .home-tools-tag {
-      font-size: var(--ft-12-11);
-    }
-
-    .home-tools-arrow {
-      display: flex;
-      align-items: center;
-    }
-
-    .home-tools-image {
-      font-size: var(--ftm-38-35);
-      width: 1em;
-      color: var(--grey-color-1);
-      flex-shrink: 0;
-    }
-
-    .home-tools-image :global(svg) {
-      fill: var(--grey-color-1);
-    }
-
-    .home-tools-row {
-      gap: 0.75rem;
     }
   }
 
@@ -573,30 +627,58 @@ const mobileToolGroups = getMobileTools();
       font-size: var(--fm-14-13);
     }
 
-    .home-tools-item {
-      flex: 1 1 calc(33.333% - 0.65rem);
-      padding: 1rem 4rem 1rem 1.25rem;
-    }
-
-    .home-tools-row {
-      gap: 0.65rem;
-    }
-
-    .home-tools-tag {
-      font-size: var(--fm-11-10);
-    }
-
-    .home-tools-title {
+    .accordion-label {
       font-size: var(--fm-15-14);
     }
 
-    .home-tools-arrow {
-      display: none;
-    }
-
-    .home-tools-image {
-      font-size: var(--fm-35-32);
+    .accordion-sub-row {
+      font-size: var(--fm-11-10);
     }
   }
 </style>
+
+<script>
+  const isDesktop = window.matchMedia('(min-width: 901px)').matches;
+
+  // Phase 1: Convert CSS auto-expand classes to data-open state, sync aria
+  // Desktop: .auto-expand-desktop panels open. Mobile: all start collapsed.
+  document.querySelectorAll('.accordion-panel-outer').forEach(el => {
+    if (isDesktop && el.classList.contains('auto-expand-desktop')) {
+      el.setAttribute('data-open', '');
+      const btn = el.closest('.accordion-category')?.querySelector('.accordion-toggle');
+      if (btn) btn.setAttribute('aria-expanded', 'true');
+    }
+    el.classList.remove('auto-expand', 'auto-expand-desktop');
+  });
+
+  // Phase 2: Enable transitions after first paint — prevents load flicker
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => {
+      document.querySelectorAll('.accordion-panel-outer').forEach(el => {
+        el.classList.add('animate');
+      });
+    });
+  });
+
+  // Phase 3: Toggle handler — scroll opened category into view after animation
+  document.querySelectorAll('.accordion-toggle').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const category = btn.closest('.accordion-category');
+      const outer = category?.querySelector('.accordion-panel-outer');
+      if (!outer) return;
+
+      const isOpen = outer.hasAttribute('data-open');
+      if (isOpen) {
+        outer.removeAttribute('data-open');
+      } else {
+        outer.setAttribute('data-open', '');
+        // After expand animation, scroll so the full category is visible
+        outer.addEventListener('transitionend', () => {
+          category?.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }, { once: true });
+      }
+      btn.setAttribute('aria-expanded', String(!isOpen));
+    });
+  });
+</script>
 

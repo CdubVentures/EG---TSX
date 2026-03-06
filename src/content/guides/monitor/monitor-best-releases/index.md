@@ -1,4 +1,4 @@
----
+﻿---
 category: monitor
 navbar:
   - best in classes
@@ -9,8 +9,8 @@ description: >-
   state-of-the-art display technology, vibrant colors, and ultra-smooth
   performance to transform your viewing experience.
 tags: []
-heroImg: title
-fullArticle: true
+hero: title
+publish: true
 toc: false
 draft: false
 ---

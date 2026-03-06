@@ -1,4 +1,4 @@
----
+﻿---
 brand: Zowie
 displayName: Zowie
 title: 'Zowie: No-Nonsense eSports Performance'
@@ -18,6 +18,7 @@ navbar:
   - keyboard
   - mouse
 toc: false
-fullArticle: true
+publish: true
+hero: brand-logo-horizontal-index
 ---
 

@@ -1,4 +1,4 @@
----
+﻿---
 title: 'OLED Monitors in 2025: Market Status and Key Releases'
 description: >-
   A March 31, 2025, update from Display Ninja highlights the thriving OLED
@@ -9,9 +9,9 @@ tags:
   - OLED Monitor Trends
 datePublished: '2025-12-09'
 author: EG Team
-heroImg: feature-image
+hero: feature-image
 category: monitor
 draft: false
-fullArticle: true
+publish: true
 ---
 

@@ -1,9 +1,9 @@
----
+﻿---
 category: monitor
 brand: ViewSonic
 model: Elite XG321UG
 author: EG Team
-fullArticle: true
+publish: true
 draft: false
 title: 'ViewSonic Elite XG321UG: Stunning 4K Visuals'
 subtitle: 'Enjoy 4K Resolution, 144Hz Refresh Rate, and IPS Color Accuracy'
@@ -13,7 +13,7 @@ description: >-
   casual FPS gaming in 2025.
 tags:
   - Top 4K Monitor
-heroImg: feature-image
+hero: feature-image
 productId: viewsonic-elite-xg321ug
 toc: false
 ---

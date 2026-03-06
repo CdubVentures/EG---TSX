@@ -3,11 +3,63 @@ import MainLayout from '@shared/layouts/MainLayout.astro';
 import AnnouncementBar from '@shared/ui/AnnouncementBar.astro';
 import HomeHero from '@features/home/components/HomeHero.astro';
 import TopProducts from '@features/home/components/TopProducts.astro';
+import Dashboard from '@features/home/components/Dashboard.astro';
+import AdSlot from '@features/ads/components/AdSlot.astro';
+import SectionDivider from '@shared/ui/SectionDivider.astro';
+import GamesScroller from '@features/home/components/GamesScroller.astro';
+import FeaturedScroller from '@features/home/components/FeaturedScroller.astro';
+import LatestNews from '@features/home/components/LatestNews.astro';
 import { CONFIG } from '@core/config';
 import { getProducts } from '@core/products';
+import { getReviews, getGuides, getNews, getGames } from '@core/content';
+import { buildDashboard } from '@core/dashboard';
+import type { DashboardEntry } from '@core/article-helpers';
+import { toFeaturedItem, groupByCategory, getActiveCategories } from '@features/home/featured-scroller-utils';
 
 const allProducts = await getProducts();
 const productCount = allProducts.length;
+
+// ── Dashboard data: merge reviews + guides + news ──
+const [reviews, guides, news] = await Promise.all([
+  getReviews(),
+  getGuides(),
+  getNews(),
+]);
+
+// Tag each entry with _collection so components know which collection it came from
+const taggedReviews = reviews.map(e => ({ ...e, _collection: 'reviews' })) as DashboardEntry[];
+const taggedGuides  = guides.map(e => ({ ...e, _collection: 'guides' })) as DashboardEntry[];
+const taggedNews    = news.map(e => ({ ...e, _collection: 'news' })) as DashboardEntry[];
+
+const allArticles = [...taggedReviews, ...taggedGuides, ...taggedNews];
+
+// Dashboard: editorial slot control, pins, badges from config/data/dashboard.json
+const dashboardItems = buildDashboard(allArticles);
+
+// News sidebar: first 3 news items with hero image (from original news list, not merged)
+const newsItems = taggedNews.filter(e => e.data.hero).slice(0, 3);
+
+// Dedup set: IDs already used in dashboard
+const _usedIds = new Set(dashboardItems.map(e => e.entry.id));
+
+// ── Games data ──
+const games = await getGames();
+
+// ── Featured Reviews + Highlighted Guides data ──
+const availableReviews = taggedReviews.filter(e => !_usedIds.has(e.id));
+const availableGuides  = taggedGuides.filter(e => !_usedIds.has(e.id));
+
+const reviewItems = availableReviews.filter(e => e.data.hero).map(toFeaturedItem);
+const guideItems  = availableGuides.filter(e => e.data.hero).map(toFeaturedItem);
+
+const reviewsByCategory = groupByCategory(reviewItems);
+const guidesByCategory  = groupByCategory(guideItems);
+const reviewActiveCats  = getActiveCategories(reviewsByCategory, CONFIG.contentCategories);
+const guideActiveCats   = getActiveCategories(guidesByCategory, CONFIG.contentCategories);
+
+// ── Latest News data (scroller4x4 section) ──
+const availableNews = taggedNews.filter(e => !_usedIds.has(e.id) && e.data.hero);
+const latestNewsItems = availableNews.map(toFeaturedItem);
 ---
 
 <MainLayout
@@ -25,10 +77,92 @@ const productCount = allProducts.length;
       </div>
     </div>
 
-    {/* Right ad rail (empty structural slot) */}
-    <aside class="home-rail -right">
+    <aside class="home-rail -right" style="--rail-pad-top: 5rem;">
       <div class="sticky-stack" data-sticky="true">
-        {/* Ad slot wired in Phase 5+ */}
+        <AdSlot campaign="home-rail-top" />
+      </div>
+    </aside>
+  </section>
+
+  {/* ── Dashboard section ── */}
+  <section class="home-rail-anchor">
+    <div class="home-rail-main">
+      <Dashboard items={dashboardItems} newsItems={newsItems} />
+      <div class="home-ad">
+        <AdSlot campaign="inline-ad" />
+      </div>
+    </div>
+
+    <aside class="home-rail -right" style="--rail-pad-top: 3.75rem;">
+      <div class="sticky-stack" data-sticky="true">
+        <AdSlot campaign="home-rail-body-1" />
+      </div>
+    </aside>
+  </section>
+
+  {/* ── Games + Featured Reviews section (shared rail) ── */}
+  <section class="home-rail-anchor">
+    <div class="home-rail-main">
+      {games.length > 0 && (
+        <div class="home-page-body">
+          <SectionDivider
+            title="Game Gear Picks"
+            subtitle="Reviewed and Pro-Tested"
+            seeMoreHref="/games"
+          />
+          <GamesScroller games={games} />
+        </div>
+      )}
+
+      <div class="home-page-body">
+        <FeaturedScroller
+          prefix="reviews"
+          sectionTitle="Featured Reviews"
+          sectionSubtitle="In-depth reviews of the latest gaming products"
+          seeMoreHref="/reviews"
+          allItems={reviewItems}
+          itemsByCategory={reviewsByCategory}
+          activeCategories={reviewActiveCats}
+        />
+      </div>
+
+      <div class="home-ad">
+        <AdSlot campaign="inline-ad" />
+      </div>
+    </div>
+
+    <aside class="home-rail -right" style="--rail-pad-top: 4rem;">
+      <div class="sticky-stack" data-sticky="true">
+        <AdSlot campaign="home-rail-body-2" />
+      </div>
+    </aside>
+  </section>
+
+  {/* ── Highlighted Guides + Latest News section (shared rail) ── */}
+  <section class="home-rail-anchor">
+    <div class="home-rail-main">
+      <div class="home-page-body">
+        <FeaturedScroller
+          prefix="guides"
+          sectionTitle="Highlighted Guides"
+          sectionSubtitle="Expert guides to elevate your game"
+          seeMoreHref="/guides"
+          allItems={guideItems}
+          itemsByCategory={guidesByCategory}
+          activeCategories={guideActiveCats}
+        />
+      </div>
+
+      {latestNewsItems.length > 0 && (
+        <div class="home-page-body home-news">
+          <LatestNews items={latestNewsItems} />
+        </div>
+      )}
+    </div>
+
+    <aside class="home-rail -right" style="--rail-pad-top: 4rem;">
+      <div class="sticky-stack" data-sticky="true">
+        <AdSlot campaign="home-rail-body-3" />
       </div>
     </aside>
   </section>
@@ -108,6 +242,21 @@ const productCount = allProducts.length;
     }
   }
 
+  /* ── Home page body wrapper (port of view_index.css lines 115–127) ── */
+  .home-page-body {
+    width: calc(100% - 3rem);
+    max-width: var(--home-width);
+    margin: 2rem auto;
+  }
+
+  .home-page-body.home-news {
+    margin: 5rem auto 2rem auto;
+  }
+
+  .home-page-body--first {
+    margin-top: 2rem;
+  }
+
   /* ── Home top wrapper (dark hero area) ── */
   .home-top-wrapper {
     display: flex;
@@ -128,5 +277,36 @@ const productCount = allProducts.length;
     .home-top-wrapper {
       padding-bottom: 0;
     }
+  }
+
+  /* ── Shared item-tag / item-date (port of site_shared.css lines 386–410) ── */
+  .item-tag {
+    font-family: var(--identity-font);
+    font-weight: var(--font-weight7);
+    font-size: var(--ft-14-12);
+    text-transform: uppercase;
+    display: inline-block;
+  }
+
+  .item-date {
+    line-height: 1.5;
+    font-size: var(--ft-12-11);
+    font-family: var(--identity-font);
+    font-weight: var(--font-weight6);
+  }
+
+  @media (max-width: 600px) {
+    .item-tag {
+      font-size: var(--fm-12-11);
+    }
+  }
+
+  /* ── Inline ad spacing + centering (port of HBS widget_ads.css lines 19–23, 96–98) ── */
+  .home-ad {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 42px 0 0;
+    width: 100%;
   }
 </style>

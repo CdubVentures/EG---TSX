@@ -1,4 +1,4 @@
----
+﻿---
 brand: Pulsar
 displayName: Pulsar
 title: 'Pulsar: Cutting-Edge Innovation, Unmatched Speed'
@@ -21,6 +21,7 @@ brand_tiktok: ''
 navbar:
   - mouse
 toc: false
-fullArticle: true
+publish: true
+hero: brand-logo-horizontal-index
 ---
 

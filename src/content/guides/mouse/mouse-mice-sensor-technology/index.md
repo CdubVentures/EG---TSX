@@ -1,4 +1,4 @@
----
+﻿---
 category: mouse
 navbar:
   - educational guides
@@ -10,8 +10,8 @@ description: >-
   days to sleek AI-driven precision—and learn how each advancement continues to
   shape modern computing and gaming performance.
 tags: []
-heroImg: title
-fullArticle: true
+hero: title
+publish: true
 toc: false
 draft: false
 ---

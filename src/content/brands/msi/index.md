@@ -1,4 +1,4 @@
----
+﻿---
 brand: MSI
 displayName: MSI
 title: 'MSI: Integrated Control and Accessibility'
@@ -19,6 +19,7 @@ navbar:
   - monitor
   - mouse
 toc: false
-fullArticle: true
+publish: true
+hero: brand-logo-horizontal-index
 ---
 

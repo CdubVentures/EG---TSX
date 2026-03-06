@@ -120,12 +120,15 @@ export default function CategoryDropdown({ categories }: Props) {
   }
 
   // WHY: slideshow reads category from the DOM button's data-category.
-  // React state must be flushed to DOM before refreshSlider reads it.
+  // React state must be flushed to DOM before the carousel rebuilds.
   // useEffect runs after React commits, so the attribute is current.
+  // WHY isMount skip: on initial render selected='all' — same category the
+  // slideshow already initialized with. Dispatching refresh here would destroy
+  // the first Embla instance before its reveal completes (race condition).
+  const isMount = useRef(true);
   useEffect(() => {
-    if (typeof (window as any).refreshSlider === 'function') {
-      (window as any).refreshSlider();
-    }
+    if (isMount.current) { isMount.current = false; return; }
+    window.dispatchEvent(new CustomEvent('slideshow:refresh'));
   }, [selected]);
 
   /* ── Desktop hover ── */

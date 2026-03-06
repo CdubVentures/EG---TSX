@@ -1,4 +1,4 @@
----
+﻿---
 title: >-
   Custom Keyboards Surge in Popularity: 2025 Trends Embrace Smaller Sizes and
   Personalization
@@ -11,9 +11,9 @@ tags:
   - Community Keyboard Buzz
 datePublished: '2025-12-09'
 author: EG Team
-heroImg: feature-image
+hero: feature-image
 category: keyboard
 draft: false
-fullArticle: true
+publish: true
 ---
 

@@ -1,4 +1,4 @@
----
+﻿---
 title: >-
   Razer BlackWidow V4 Pro 75% Review: Premium Gaming Keyboard with OLED and
   Wireless
@@ -11,9 +11,9 @@ tags:
   - Gaming Keyboard Spotlight
 datePublished: '2025-12-09'
 author: EG Team
-heroImg: feature-image
+hero: feature-image
 category: keyboard
 draft: false
-fullArticle: true
+publish: true
 ---
 

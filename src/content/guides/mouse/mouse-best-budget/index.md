@@ -1,4 +1,4 @@
----
+﻿---
 category: mouse
 navbar:
   - best in classes
@@ -9,8 +9,8 @@ description: >-
   Discover cost-conscious gaming mice with reliable sensors, ergonomic designs,
   and smooth handling, ensuring great performance on any budget.
 tags: []
-heroImg: title
-fullArticle: true
+hero: title
+publish: true
 toc: false
 draft: false
 ---

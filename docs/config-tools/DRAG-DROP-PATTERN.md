@@ -30,14 +30,22 @@ During drag, a `tk.Toplevel` window follows the cursor showing what's being
 dragged. It uses `overrideredirect(True)` so there's no title bar, and
 `attributes("-alpha", 0.9)` for slight transparency.
 
+**Deferred creation:** The ghost is NOT created on `ButtonPress-1`. It is
+created on the first `B1-Motion` event (actual mouse movement). This prevents
+ghost windows from interfering with double-click rename — a double-click has
+no motion, so no ghost ever appears.
+
 ```python
-g = tk.Toplevel(self)
-g.overrideredirect(True)
-g.attributes("-alpha", 0.9)
-g.configure(bg=category_color)
-tk.Label(g, text=f"  {name}  ", bg=category_color, ...).pack()
-g.geometry(f"+{event.x_root + 14}+{event.y_root - 10}")
-self._drag_ghost = g
+# In _drag_motion (NOT _drag_start):
+if not self._drag_ghost:
+    HoverListbox._global_drag = True
+    g = tk.Toplevel(self)
+    g.overrideredirect(True)
+    g.attributes("-alpha", 0.9)
+    g.configure(bg=category_color)
+    tk.Label(g, text=f"  {name}  ", bg=category_color, ...).pack()
+    self._drag_ghost = g
+self._drag_ghost.geometry(f"+{event.x_root + 14}+{event.y_root - 10}")
 ```
 
 The ghost is offset 14px right and 10px up from the cursor so it doesn't
@@ -62,11 +70,16 @@ Widgets that are valid drop targets get custom attributes (e.g., `card._is_slot 
 ### Drag Lifecycle
 
 ```
-ButtonPress-1  -->  _drag_start()   # Record source, create ghost
-B1-Motion      -->  _drag_motion()  # Move ghost to cursor
-ButtonRelease-1 -> _drag_drop()    # Hit test, apply change, cleanup
-                    _drag_cleanup() # Destroy ghost, reset state
+ButtonPress-1   -->  _drag_start()   # Record source + item (no ghost yet)
+B1-Motion       -->  _drag_motion()  # Create ghost on first motion, then track cursor
+ButtonRelease-1 -->  _drag_drop()    # Hit test, apply change if cross-widget drop
+                     _drag_cleanup() # Destroy ghost, reset state
+Double-Button-1 -->  _rename_*()     # Opens rename dialog (no ghost, no refresh)
 ```
+
+**Key distinction:** `_drag_start` only records state — no ghost, no
+`_global_drag`. A double-click (no motion) never creates a ghost and never
+triggers a view refresh on release, so the rename dialog opens cleanly.
 
 State variables (initialized in `__init__`):
 

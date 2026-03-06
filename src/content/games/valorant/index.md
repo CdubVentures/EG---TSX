@@ -1,4 +1,4 @@
----
+﻿---
 game: Valorant
 navbar: true
 guide: Valorant
@@ -25,7 +25,8 @@ game_facebook: 'https://www.facebook.com/PlayVALORANT/'
 game_x: 'https://x.com/PlayVALORANT'
 game_instagram: 'https://www.instagram.com/playvalorantofficial/'
 game_youtube: 'https://www.youtube.com/@PlayVALORANT'
-fullArticle: true
+publish: true
 toc: false
+hero: box-art-cover
 ---
 

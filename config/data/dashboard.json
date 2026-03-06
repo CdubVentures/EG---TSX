@@ -1,0 +1,39 @@
+{
+  "slots": {
+    "1": {
+      "collection": "news",
+      "id": "monitor/msi-unveils-mag-255xf-entry-level-300hz-gaming-monitor-for-budget-gamers"
+    },
+    "2": {
+      "collection": "reviews",
+      "id": "keyboard/asus-rog-strix-scope-ii-96-wireless-review"
+    },
+    "5": {
+      "collection": "guides",
+      "id": "mouse/mouse-best-overall"
+    },
+    "8": {
+      "collection": "news",
+      "id": "ai/common-sense-machines-unveils-ai-platform-for-real-time-level-generation-in-games"
+    },
+    "12": {
+      "collection": "reviews",
+      "id": "mouse/razer-viper-v3-pro-review"
+    }
+  },
+  "pinned": [
+    "news:monitor/msi-unveils-mag-255xf-entry-level-300hz-gaming-monitor-for-budget-gamers",
+    "reviews:keyboard/asus-rog-strix-scope-ii-96-wireless-review",
+    "guides:mouse/mouse-best-overall",
+    "reviews:mouse/razer-viper-v3-pro-review",
+    "news:ai/common-sense-machines-unveils-ai-platform-for-real-time-level-generation-in-games"
+  ],
+  "badges": {
+    "news:monitor/msi-unveils-mag-255xf-entry-level-300hz-gaming-monitor-for-budget-gamers": "Top Pick",
+    "reviews:keyboard/asus-rog-strix-scope-ii-96-wireless-review": "Editors Choice",
+    "guides:mouse/mouse-best-overall": "Best Overall",
+    "news:ai/common-sense-machines-unveils-ai-platform-for-real-time-level-generation-in-games": "Hot Take",
+    "reviews:mouse/razer-viper-v3-pro-review": "Award Winner"
+  },
+  "excluded": []
+}

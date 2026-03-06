@@ -2,12 +2,13 @@ import type { Category } from '@core/config';
 
 /** Minimal product identity needed for vault — no specs, no media details */
 export interface VaultProduct {
-  id: string;        // entry.id from dataProducts (e.g. "mouse/razer/viper-v3-pro")
+  id: string;        // entry.id from dataProducts (e.g. "razer-viper-v3-pro")
   slug: string;      // product slug
   brand: string;     // display brand name
   model: string;     // display model name
   category: Category;
   imagePath: string; // for image resolution
+  thumbnailStem: string; // resolved via getImage() at add-time (e.g. "top" or "top---black")
 }
 
 export interface VaultEntry {
@@ -52,5 +53,5 @@ export interface VaultSyncState {
   error: string | null;
 }
 
-// WHY no VAULT_CATEGORIES here: categories are now driven by config/categories.json
+// WHY no VAULT_CATEGORIES here: categories are now driven by config/data/categories.json
 // via CONFIG.categories (filtered by environment). Use CONFIG.categories everywhere.

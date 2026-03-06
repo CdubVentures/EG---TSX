@@ -1,4 +1,4 @@
----
+﻿---
 game: PUBG
 navbar: true
 guide: PUBG
@@ -25,7 +25,8 @@ game_facebook: 'https://www.facebook.com/PUBG.BATTLEGROUNDS'
 game_x: 'https://x.com/PUBG'
 game_instagram: 'https://www.instagram.com/pubg/'
 game_youtube: 'https://www.youtube.com/@PUBG'
-fullArticle: true
+publish: true
 toc: false
+hero: box-art-cover
 ---
 

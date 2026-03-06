@@ -10,7 +10,7 @@ All site-wide and per-category colors are managed through a single JSON config. 
 
 ## Source of Truth
 
-**`config/categories.json`** contains two top-level keys:
+**`config/data/categories.json`** contains two top-level keys:
 
 ```json
 {
@@ -194,7 +194,7 @@ Each category has a navbar icon displayed in the mega-menu sidebar and vault dro
 `src/content.config.ts` has a build-time assertion:
 
 ```typescript
-import categoriesJson from '../config/categories.json';
+import categoriesJson from '../config/data/categories.json';
 const jsonIds = new Set(categoriesJson.categories.map(c => c.id));
 const newsEnumIds = new Set(newsCategories.options);
 const missing = [...jsonIds].filter(id => !newsEnumIds.has(id));
@@ -245,7 +245,7 @@ If someone adds a category to the JSON but forgets to update the Zod enums, the 
 
 | File | Role |
 |------|------|
-| `config/categories.json` | SSOT: site colors + category definitions (color, flags, labels) |
+| `config/data/categories.json` | SSOT: site colors + category definitions (color, flags, labels) |
 | `config/category-manager.py` | GUI: edit site colors, category colors, flags. Shows icon status, article counts, derived previews |
 | `config/navbar-manager.py` | GUI: edit navbar mega-menu structure. Reads category colors from JSON |
 | `src/shared/layouts/MainLayout.astro` | Build-time: derives 21 site vars + 150 category vars + 10 card classes. Injects via `<style set:html>` |

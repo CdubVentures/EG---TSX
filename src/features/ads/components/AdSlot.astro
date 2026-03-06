@@ -1,0 +1,424 @@
+---
+import { resolveAd, isAdsEnabled, parseLargestSize, parseSmallestSize } from '../resolve';
+import { AD_LABEL, SHOW_PRODUCTION_PLACEHOLDERS, LOAD_SAMPLE_ADS } from '../config';
+import { getSampleAdSvg } from '../sample-images';
+
+interface Props {
+  campaign: string;
+  sticky?: boolean;
+}
+
+const { campaign, sticky = false } = Astro.props;
+
+const placement = resolveAd(campaign);
+const shouldRender = placement != null && placement.display;
+
+const adsEnabled = shouldRender ? isAdsEnabled() : false;
+const placementType = placement?.placementType ?? 'rail';
+const isInline = placementType === 'inline';
+
+const largestSize = shouldRender ? parseLargestSize(placement.sizes) : undefined;
+const smallestSize = shouldRender ? parseSmallestSize(placement.sizes) : undefined;
+const sizeStr = largestSize ? `${largestSize.width}x${largestSize.height}` : '';
+
+const w = largestSize?.width ?? 300;
+const h = largestSize?.height ?? 250;
+const wSm = smallestSize?.width ?? w;
+const hSm = smallestSize?.height ?? h;
+
+const adClient = placement?.adClient ?? '';
+const ariaLabel = `Advertisement: ${campaign}`;
+
+// WHY: sample ads override everything — render SVG ad creatives from config/media/
+const showSample = shouldRender && LOAD_SAMPLE_ADS;
+const sampleSvg = showSample ? getSampleAdSvg(w, h) : undefined;
+// WHY: production placeholders show HBS-style border + "Ad" circle when ads are off
+const showProdPlaceholder = shouldRender && !adsEnabled && !LOAD_SAMPLE_ADS && SHOW_PRODUCTION_PLACEHOLDERS;
+// Dev placeholder: dashed outline + campaign label (existing behavior)
+const showDevPlaceholder = shouldRender && !adsEnabled && !LOAD_SAMPLE_ADS && !SHOW_PRODUCTION_PLACEHOLDERS;
+---
+
+{/* ── Sample Ad: SVG ad creative from config/media/sample-ads/ ── */}
+{showSample && (
+  <div
+    class="ad-slot ad-slot--sample"
+    data-campaign={campaign}
+    data-provider={placement.provider}
+    data-first-size={sizeStr}
+    data-placement-type={placementType}
+    data-sticky={sticky ? 'true' : undefined}
+    style={`--ad-w: ${w}px; --ad-h: ${h}px; --ad-w-sm: ${wSm}px; --ad-h-sm: ${hSm}px;`}
+    role="complementary"
+    aria-label={ariaLabel}
+  >
+    {sampleSvg
+      ? <div class="ad-slot__sample-creative" set:html={sampleSvg} />
+      : <div class="ad-slot__sample-inner">
+          <span class="ad-slot__sample-label">Sample Ad</span>
+          <span class="ad-slot__sample-size">{sizeStr}</span>
+          <span class="ad-slot__sample-campaign">{campaign}</span>
+        </div>
+    }
+  </div>
+)}
+
+{/* ── Production Placeholder: HBS-style top/bottom border + "Ad" circle ── */}
+{showProdPlaceholder && (
+  <div
+    class="ad-slot ad-slot--production"
+    data-campaign={campaign}
+    data-provider={placement.provider}
+    data-first-size={sizeStr}
+    data-placement-type={placementType}
+    data-sticky={sticky ? 'true' : undefined}
+    style={`--ad-w: ${w}px; --ad-h: ${h}px; --ad-w-sm: ${wSm}px; --ad-h-sm: ${hSm}px;`}
+    role="complementary"
+    aria-label={ariaLabel}
+  >
+    <span class="ad-label">{AD_LABEL}</span>
+  </div>
+)}
+
+{/* ── Dev Placeholder: dashed outline + campaign name ── */}
+{showDevPlaceholder && (
+  <div
+    class="ad-slot"
+    data-campaign={campaign}
+    data-provider={placement.provider}
+    data-first-size={sizeStr}
+    data-placeholder="true"
+    data-placement-type={placementType}
+    data-sticky={sticky ? 'true' : undefined}
+    style={`--ad-w: ${w}px; --ad-h: ${h}px; --ad-w-sm: ${wSm}px; --ad-h-sm: ${hSm}px;`}
+    role="complementary"
+    aria-label={ariaLabel}
+  />
+)}
+
+{shouldRender && adsEnabled && !LOAD_SAMPLE_ADS && placement.provider === 'adsense' && !isInline && (
+  <div
+    class="ad-slot"
+    data-campaign={campaign}
+    data-provider={placement.provider}
+    data-first-size={sizeStr}
+    data-placement-type={placementType}
+    data-fill="pending"
+    data-sticky={sticky ? 'true' : undefined}
+    style={`--ad-w: ${w}px; --ad-h: ${h}px;`}
+    role="complementary"
+    aria-label={ariaLabel}
+  >
+    <span class="ad-label">{AD_LABEL}</span>
+    <ins
+      class="adsbygoogle"
+      style={`display:inline-block; width:${w}px; height:${h}px;`}
+      data-ad-client={adClient}
+      data-ad-slot={placement.adSlot}
+    />
+  </div>
+)}
+
+{shouldRender && adsEnabled && !LOAD_SAMPLE_ADS && placement.provider === 'adsense' && isInline && (
+  <div
+    class="ad-slot"
+    data-campaign={campaign}
+    data-provider={placement.provider}
+    data-first-size={sizeStr}
+    data-placement-type={placementType}
+    data-fill="pending"
+    data-sticky={sticky ? 'true' : undefined}
+    style={`--ad-w: ${w}px; --ad-h: ${h}px; --ad-w-sm: ${wSm}px; --ad-h-sm: ${hSm}px;`}
+    role="complementary"
+    aria-label={ariaLabel}
+  >
+    <span class="ad-label">{AD_LABEL}</span>
+    <ins
+      class="adsbygoogle"
+      style="display:block;"
+      data-ad-client={adClient}
+      data-ad-slot={placement.adSlot}
+      data-ad-format="fluid"
+      data-ad-layout="in-article"
+    />
+  </div>
+)}
+
+{/* GPT / direct / native — rendered by bootstrap.ts at runtime */}
+{shouldRender && adsEnabled && !LOAD_SAMPLE_ADS && placement.provider !== 'adsense' && (
+  <div
+    class="ad-slot"
+    data-campaign={campaign}
+    data-provider={placement.provider}
+    data-first-size={sizeStr}
+    data-placement-type={placementType}
+    data-fill="pending"
+    data-sticky={sticky ? 'true' : undefined}
+    style={`--ad-w: ${w}px; --ad-h: ${h}px;`}
+    role="complementary"
+    aria-label={ariaLabel}
+  >
+    <span class="ad-label">{AD_LABEL}</span>
+  </div>
+)}
+
+<style is:global>
+  /* ═══════════════════════════════════════════════════════════════════════════
+     AD SLOT — Base + Placeholder + Live styling
+     Ported from EG-HBS widget_ads.css (lines 131–238)
+     Dark theme values are LOCKED — they match HBS exactly.
+     ═══════════════════════════════════════════════════════════════════════════ */
+
+  /* ── Base slot reset ── */
+  .ad-slot {
+    position: relative;
+    display: block;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    box-sizing: border-box;
+    background: transparent;
+    font-size: 0;
+  }
+
+  /* ── CLS reservation (all live slots) ── */
+  .ad-slot:not([data-placeholder="true"]):not(.ad-slot--sample) {
+    width: var(--ad-w, 300px);
+    max-width: 100%;
+    min-height: var(--ad-h, 250px);
+  }
+
+  /* ═══════════════════════════════════════════════════════════════════════════
+     DEV PLACEHOLDER — dashed outline + campaign label (default when ads off)
+     ═══════════════════════════════════════════════════════════════════════════ */
+  .ad-slot[data-placeholder="true"] {
+    display: none;
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 120ms ease-out;
+    position: relative;
+    width: var(--ad-w, 300px);
+    max-width: var(--ad-w, 300px);
+    min-height: var(--ad-h, 250px);
+    outline: 2px dashed var(--card-color, var(--site-color, #394cc8));
+    padding: 24px 12px 30px;
+    background:
+      repeating-linear-gradient(
+        135deg,
+        color-mix(in oklab, #fff 2%, transparent) 0 12px,
+        color-mix(in oklab, #fff 5%, transparent) 12px 24px
+      );
+  }
+
+  /* Reveal when size is known */
+  .ad-slot[data-placeholder="true"][data-first-size] {
+    display: block;
+    visibility: visible;
+    opacity: 1;
+  }
+
+  /* ── Label: campaign + provider (centered) ── */
+  .ad-slot[data-placeholder="true"]::before {
+    content: attr(data-campaign) " \2022  " attr(data-provider);
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 0 14px;
+    font: 800 clamp(12px, 11px + .25vw, 14px)/1 var(--identity-font, system-ui);
+    letter-spacing: .09em;
+    color: #dbe2ea;
+    text-transform: uppercase;
+    pointer-events: none;
+  }
+
+  /* ── Size chip (bottom-center) ── */
+  .ad-slot[data-placeholder="true"]::after {
+    content: attr(data-first-size);
+    position: absolute;
+    left: 50%;
+    bottom: 8px;
+    transform: translateX(-50%);
+    font: 700 11px/1 var(--identity-font, system-ui);
+    letter-spacing: .06em;
+    color: #b8c1cc;
+    pointer-events: none;
+  }
+
+  /* ═══════════════════════════════════════════════════════════════════════════
+     PRODUCTION PLACEHOLDER — HBS-style top/bottom border + "Ad" circle
+     Matches EG-HBS widget_ads.css lines 303–349 exactly.
+     ═══════════════════════════════════════════════════════════════════════════ */
+  .ad-slot--production {
+    width: var(--ad-w, 300px);
+    max-width: 100%;
+    min-height: var(--ad-h, 250px);
+    background: transparent;
+    border-top: 1px solid var(--section-dusker-background-color, #2a2d2d);
+    border-bottom: 1px solid var(--section-dusker-background-color, #2a2d2d);
+    border-left: 0;
+    border-right: 0;
+    border-radius: 0;
+    outline: 0;
+  }
+
+  /* ═══════════════════════════════════════════════════════════════════════════
+     AD LABEL — "Ad" badge (HBS pattern: 36px circle behind creative)
+     Color values match HBS widget_ads.css lines 330–349 exactly.
+     ═══════════════════════════════════════════════════════════════════════════ */
+  .ad-label {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 9999px;
+    /* WHY: HBS --section-dusker-background-color = #2a2d2d */
+    border: 2px solid var(--section-dusker-background-color, #2a2d2d);
+    font: 800 13px/1 var(--identity-font, system-ui);
+    letter-spacing: .02em;
+    /* WHY: HBS uses rgba white (.65) for text on dark backgrounds.
+       Bridge var --grey-color-3 is muted in all themes:
+       gaming=#b0b0b0, default=#718096, workstation=#a1a1aa, review=#a8a29e */
+    color: var(--grey-color-3, rgba(255, 255, 255, .65));
+    pointer-events: none;
+    opacity: .65;
+  }
+
+  /* ═══════════════════════════════════════════════════════════════════════════
+     SAMPLE ADS — SVG ad creatives from config/media/sample-ads/
+     Falls back to colored dummy rectangle if no SVG matches the display size.
+     ═══════════════════════════════════════════════════════════════════════════ */
+  .ad-slot--sample {
+    width: var(--ad-w, 300px);
+    max-width: 100%;
+    min-height: var(--ad-h, 250px);
+    border: 0;
+    outline: 0;
+    overflow: hidden;
+  }
+
+  /* SVG creative — fill the slot exactly */
+  /* WHY background: when max-width:100% shrinks the slot narrower than the
+     SVG viewBox, preserveAspectRatio creates empty space above/below.
+     Dark bg matches the SVG backgrounds so the gap is invisible. */
+  .ad-slot__sample-creative {
+    width: 100%;
+    height: var(--ad-h, 250px);
+    line-height: 0;
+    font-size: 0;
+    background: #0d1117;
+  }
+
+  .ad-slot__sample-creative svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+
+  /* Fallback colored rectangle (when no SVG matches the size) */
+  .ad-slot__sample-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    width: 100%;
+    min-height: var(--ad-h, 250px);
+    background:
+      linear-gradient(135deg,
+        hsl(220 18% 22%) 0%,
+        hsl(220 14% 28%) 50%,
+        hsl(220 18% 22%) 100%
+      );
+    border: 1px solid hsl(220 12% 32%);
+    border-radius: 4px;
+  }
+
+  .ad-slot__sample-label {
+    font: 800 18px/1 var(--identity-font, system-ui);
+    letter-spacing: .06em;
+    color: rgba(255, 255, 255, .55);
+    text-transform: uppercase;
+  }
+
+  .ad-slot__sample-size {
+    font: 700 13px/1 var(--identity-font, system-ui);
+    letter-spacing: .04em;
+    color: rgba(255, 255, 255, .35);
+  }
+
+  .ad-slot__sample-campaign {
+    font: 600 11px/1 var(--identity-font, system-ui);
+    letter-spacing: .06em;
+    color: rgba(255, 255, 255, .25);
+    text-transform: uppercase;
+  }
+
+  /* ═══════════════════════════════════════════════════════════════════════════
+     ANTI-FLICKER — hide live slot content until fill status is known
+     ═══════════════════════════════════════════════════════════════════════════ */
+  .ad-slot[data-fill="pending"] ins,
+  .ad-slot[data-fill="pending"] iframe {
+    visibility: hidden;
+    opacity: 0;
+  }
+
+  .ad-slot[data-fill="filled"] ins,
+  .ad-slot[data-fill="filled"] iframe {
+    visibility: visible;
+    opacity: 1;
+    transition: opacity 120ms ease-out;
+  }
+
+  /* Hide "Ad" badge once creative fills */
+  .ad-slot[data-fill="filled"] .ad-label {
+    display: none;
+  }
+
+  /* ═══════════════════════════════════════════════════════════════════════════
+     UNFILLED COLLAPSE
+     Rail: hide entirely. Inline: zero-height collapse.
+     ═══════════════════════════════════════════════════════════════════════════ */
+  .ad-slot[data-fill="unfilled"][data-placement-type="rail"] {
+    display: none !important;
+  }
+
+  .ad-slot[data-fill="unfilled"][data-placement-type="inline"] {
+    min-height: 0;
+    height: 0;
+    overflow: hidden;
+  }
+
+  /* ═══════════════════════════════════════════════════════════════════════════
+     INLINE OVERFLOW CLAMP — prevent AdSense from exceeding container width
+     ═══════════════════════════════════════════════════════════════════════════ */
+  .ad-slot[data-placement-type="inline"] ins,
+  .ad-slot[data-placement-type="inline"] div[id^="aswift_"],
+  .ad-slot[data-placement-type="inline"] iframe {
+    max-width: 100% !important;
+  }
+
+  /* Inline filled: remove fixed aspect-ratio, allow content height */
+  .ad-slot[data-fill="filled"][data-placement-type="inline"] {
+    min-height: auto;
+    overflow-y: visible;
+  }
+
+  /* ═══════════════════════════════════════════════════════════════════════════
+     RESPONSIVE — mobile inline uses smallest size reservation
+     ═══════════════════════════════════════════════════════════════════════════ */
+  @media (max-width: 767px) {
+    .ad-slot[data-placement-type="inline"] {
+      --ad-w: var(--ad-w-sm);
+      --ad-h: var(--ad-h-sm);
+    }
+  }
+</style>

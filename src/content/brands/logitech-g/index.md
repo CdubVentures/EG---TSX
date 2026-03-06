@@ -1,4 +1,4 @@
----
+﻿---
 brand: Logitech G
 displayName: Logitech G
 title: 'Logitech G: A Legacy of Precision and Innovation'
@@ -18,6 +18,7 @@ navbar:
   - monitor
   - mouse
 toc: false
-fullArticle: true
+publish: true
+hero: brand-logo-horizontal-index
 ---
 

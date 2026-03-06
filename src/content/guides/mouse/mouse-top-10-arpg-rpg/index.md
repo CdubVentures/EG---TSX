@@ -1,4 +1,4 @@
----
+﻿---
 category: mouse
 navbar:
   - top 10 genere picks
@@ -10,8 +10,8 @@ description: >-
   flexible customization, perfect for navigating sprawling worlds and managing
   complex inventories.
 tags: []
-heroImg: title
-fullArticle: true
+hero: title
+publish: true
 toc: false
 draft: false
 ---

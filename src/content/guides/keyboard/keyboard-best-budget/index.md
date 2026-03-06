@@ -1,4 +1,4 @@
----
+﻿---
 category: keyboard
 navbar:
   - best in classes
@@ -9,8 +9,8 @@ description: >-
   comfortable typing, ensuring you can compete at any level.
 tags:
   - Budget Keyboards
-heroImg: title
-fullArticle: true
+hero: title
+publish: true
 toc: false
 draft: false
 ---

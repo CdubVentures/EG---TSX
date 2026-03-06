@@ -1,6 +1,6 @@
-# Data Gateway Contract — Products & Content
+﻿# Data Gateway Contract â€” Products & Content
 
-> **Status:** Active — all component developers must follow this contract
+> **Status:** Active â€” all component developers must follow this contract
 > **Last updated:** 2026-03-04
 > **Related:** [`DATA-IMAGE-CONTRACT.md`](DATA-IMAGE-CONTRACT.md) (image resolution) | [`ARCHITECTURE.md`](ARCHITECTURE.md) (full system design)
 
@@ -8,13 +8,13 @@
 
 ## Why This Document Exists
 
-Every component that displays products or articles must respect category visibility flags. Without a central gateway, every component would need to independently filter by environment flags, drafts, and stubs — leading to inconsistencies, forgotten filters, and data leaks in production.
+Every component that displays products or articles must respect category visibility flags. Without a central gateway, every component would need to independently filter by environment flags, drafts, and stubs â€” leading to inconsistencies, forgotten filters, and data leaks in production.
 
 The gateway pattern solves this: **one function per data type, called everywhere.**
 
 ---
 
-## The Two Rules
+## The Three Rules
 
 ```
 RULE 1: NEVER call getCollection('dataProducts') directly.
@@ -22,6 +22,9 @@ RULE 1: NEVER call getCollection('dataProducts') directly.
 
 RULE 2: NEVER call getCollection('reviews'|'guides'|'news'|'brands'|'games') directly.
         Always use getArticles() from @core/content.
+
+RULE 3: NEVER read hub-tools.json directly in components.
+        Always use getDesktopTools() / getMobileTools() from @core/hub-tools.
 
 EXCEPTION: GlobalNav may use raw getCollection() for navbar-specific filtering
            (navbar field assignment is a separate concern from content visibility).
@@ -32,34 +35,34 @@ EXCEPTION: GlobalNav may use raw getCollection() for navbar-specific filtering
 ## How It Works
 
 ```
-config/categories.json          ← Single Source of Truth (edited by category-manager.py)
-    │
-    │  Each category has TWO toggle objects:
-    │    "product": { "production": true, "vite": true }
-    │    "content": { "production": true, "vite": true }
-    │
-    ▼
-src/core/config.ts              ← Reads flags at build time
-    │
-    │  CONFIG.categories         → active PRODUCT category IDs
-    │  CONFIG.contentCategories  → active CONTENT category IDs
-    │  CONFIG.allCategories      → ALL category IDs (for schema validation)
-    │
-    │  Environment logic:
-    │    active = production:true  OR  (dev mode AND vite:true)
-    │
-    ├──────────────────────┐
-    ▼                      ▼
-src/core/products.ts    src/core/content.ts     ← The two gateways
-    │                      │
-    │  getProducts()       │  getArticles('reviews')
-    │                      │  getReviews()
-    │                      │  getGuides()
-    │                      │  getNews()
-    │                      │  getBrands()
-    │                      │  getGames()
-    │                      │
-    ▼                      ▼
+config/data/categories.json     â† Single Source of Truth (edited by category-manager.py)
+    â”‚
+    â”‚  Each category has TWO toggle objects:
+    â”‚    "product": { "production": true, "vite": true }
+    â”‚    "content": { "production": true, "vite": true }
+    â”‚
+    â–¼
+src/core/config.ts              â† Reads flags at build time
+    â”‚
+    â”‚  CONFIG.categories         â†’ active PRODUCT category IDs
+    â”‚  CONFIG.contentCategories  â†’ active CONTENT category IDs
+    â”‚  CONFIG.allCategories      â†’ ALL category IDs (for schema validation)
+    â”‚
+    â”‚  Environment logic:
+    â”‚    active = production:true  OR  (dev mode AND vite:true)
+    â”‚
+    â”œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+    â–¼                      â–¼                      â–¼
+src/core/products.ts    src/core/content.ts    src/core/hub-tools.ts
+    â”‚                      â”‚                      â”‚
+    â”‚  getProducts()       â”‚  getArticles(...)    â”‚  getDesktopTools()
+    â”‚                      â”‚  getReviews()        â”‚  getMobileTools()
+    â”‚                      â”‚  getGuides()         â”‚  getToolsForCategory()
+    â”‚                      â”‚  getNews()           â”‚  getToolTooltip()
+    â”‚                      â”‚  getBrands()         â”‚
+    â”‚                      â”‚  getGames()          â”‚
+    â”‚                      â”‚                      â”‚
+    â–¼                      â–¼                      â–¼
 every component site-wide
 ```
 
@@ -86,7 +89,7 @@ const allProducts = await getProducts();
 
 ### What it does NOT filter
 
-Products don't have `draft` or `fullArticle` fields — the category gate is the only filter.
+Products don't have `draft` or `publish` fields â€” the category gate is the only filter.
 
 ---
 
@@ -112,7 +115,7 @@ const articles = await getArticles('reviews');
 
 | # | Rule | Effect |
 |---|------|--------|
-| 1 | `fullArticle !== false` | Exclude stubs (placeholder entries not ready for display) |
+| 1 | `publish !== false` | Exclude stubs (placeholder entries not ready for display) |
 | 2 | `draft !== true` | Exclude drafts (work in progress) |
 | 3 | Category in `CONFIG.contentCategories` | Articles in disabled content categories are invisible |
 | 4 | Sort `datePublished` desc | Newest first, nulls last |
@@ -124,12 +127,12 @@ const articles = await getArticles('reviews');
 | `reviews` | Yes | Filtered by content flags |
 | `guides` | Yes | Filtered by content flags |
 | `news` | Yes | Filtered by content flags |
-| `brands` | No | Skips Rule 3 — always included (if not draft/stub) |
-| `games` | No | Skips Rule 3 — always included (if not draft/stub) |
+| `brands` | No | Skips Rule 3 â€” always included (if not draft/stub) |
+| `games` | No | Skips Rule 3 â€” always included (if not draft/stub) |
 
 ---
 
-## Category Flags — Current State
+## Category Flags â€” Current State
 
 | Category | Product prod/vite | Content prod/vite |
 |----------|:-----------------:|:-----------------:|
@@ -148,19 +151,56 @@ const articles = await getArticles('reviews');
 
 ---
 
+## Hub Tools Gateway
+
+**File:** `src/core/hub-tools.ts`
+**Pure filter:** `src/core/hub-tools-filter.mjs`
+**Type declarations:** `src/core/hub-tools-filter.d.mts`
+**Tests:** `test/hub-tools-filter.test.mjs` (15 tests)
+
+```typescript
+import { getDesktopTools, getMobileTools } from '@core/hub-tools';
+
+const tools = getDesktopTools();   // flat list, sorted by priority
+const groups = getMobileTools();   // grouped by category
+```
+
+### What it filters
+
+| Rule | Effect |
+|------|--------|
+| Category in `CONFIG.categories` | Tools in disabled categories are invisible |
+| `enabled === true` | Disabled tools (toggled off in hub-tools-manager) are excluded |
+
+### Sorting
+
+Tools are sorted by **tool type priority** first, then by **category order**:
+
+```
+Tool priority: hub â†’ database â†’ shapes â†’ versus â†’ radar
+```
+
+Within the same tool type, tools appear in `CONFIG.categories` order (mouse â†’ keyboard â†’ monitor).
+
+### Data source
+
+Reads `config/data/hub-tools.json` (managed by `config/hub-tools-manager.pyw`). The JSON contains tool entries keyed by category ID, plus `_tooltips` and `_index` metadata keys.
+
+---
+
 ## Adding a New Category
 
-1. **Open `category-manager.py`** (or edit `config/categories.json` directly)
+1. **Open `category-manager.py`** (or edit `config/data/categories.json` directly)
 2. **Add the category** with `id`, `label`, `plural`, `color`, and both toggle objects
-3. **Update Zod enums** in `src/content.config.ts` — add the new ID to the appropriate enum(s):
-   - `categories` — if it has products
-   - `reviewCategories` — if it has reviews
-   - `newsCategories` — must include ALL category IDs (build fails otherwise via SSOT drift check)
+3. **Update Zod enums** in `src/content.config.ts` â€” add the new ID to the appropriate enum(s):
+   - `categories` â€” if it has products
+   - `reviewCategories` â€” if it has reviews
+   - `newsCategories` â€” must include ALL category IDs (build fails otherwise via SSOT drift check)
 4. **Create content directories** if needed:
-   - `src/content/data-products/{category}/` — for product JSON
-   - `src/content/{collection}/{category}/` — for articles
-   - `public/images/{category}/` — for images
-5. **No code changes needed** — the gateways read `CONFIG` dynamically
+   - `src/content/data-products/{category}/` â€” for product JSON
+   - `src/content/{collection}/{category}/` â€” for articles
+   - `public/images/{category}/` â€” for images
+5. **No code changes needed** â€” the gateways read `CONFIG` dynamically
 
 ### SSOT drift check
 
@@ -188,7 +228,7 @@ If you need a new content type beyond reviews/guides/news/brands/games:
    ```
 5. **Add content files** in `src/content/{collection}/`
 
-The filter automatically handles the new collection — if it has `category`, `draft`, or `fullArticle` fields they'll be filtered. If not, entries pass through with just the sort applied.
+The filter automatically handles the new collection â€” if it has `category`, `draft`, or `publish` fields they'll be filtered. If not, entries pass through with just the sort applied.
 
 ---
 
@@ -209,7 +249,7 @@ node --test test/products-gateway.test.mjs
 
 ### Test matrix coverage (content)
 
-- fullArticle: `true`, `false`, `undefined`
+- publish: `true`, `false`, `undefined`
 - draft: `true`, `false`, `undefined`
 - category: active, inactive, missing field
 - Combined: all three filters together
@@ -222,13 +262,18 @@ node --test test/products-gateway.test.mjs
 
 | File | Purpose |
 |------|---------|
-| `config/categories.json` | SSOT for all category definitions + flags |
+| `config/data/categories.json` | SSOT for all category definitions + flags |
 | `config/category-manager.py` | GUI tool to edit categories.json |
 | `src/core/config.ts` | Reads JSON, exports `CONFIG.categories` / `CONFIG.contentCategories` |
-| `src/core/products.ts` | Product gateway — `getProducts()` |
+| `src/core/products.ts` | Product gateway â€” `getProducts()` |
 | `src/core/products-filter.mjs` | Pure product filter (testable) |
-| `src/core/content.ts` | Content gateway — `getArticles()` + typed wrappers |
+| `src/core/content.ts` | Content gateway â€” `getArticles()` + typed wrappers |
 | `src/core/content-filter.mjs` | Pure content filter (testable) |
+| `src/core/hub-tools.ts` | Hub tools gateway â€” `getDesktopTools()`, `getMobileTools()`, etc. |
+| `src/core/hub-tools-filter.mjs` | Pure hub tools filter/sort (testable) |
+| `src/core/hub-tools-filter.d.mts` | TypeScript declarations for hub-tools-filter |
+| `config/data/hub-tools.json` | Tool definitions per category (managed by hub-tools-manager) |
 | `src/content.config.ts` | Zod schemas + SSOT drift check |
 | `test/products-gateway.test.mjs` | 7 product filter tests |
 | `test/content-filter.test.mjs` | 21 content filter tests |
+| `test/hub-tools-filter.test.mjs` | 15 hub tools filter tests |

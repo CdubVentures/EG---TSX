@@ -1,9 +1,9 @@
----
+﻿---
 category: gpu
 brand: Intel
 model: Arc B580
 author: EG Team
-fullArticle: false
+publish: false
 draft: false
 title: 'Intel Arc B580: Affordable 1080p Excellence'
 subtitle: 'Get 12GB VRAM, XeSS Upscaling, and Solid Value'
@@ -13,7 +13,7 @@ description: >-
   surprising creative potential.
 tags:
   - Budget Gaming GPU
-heroImg: feature-image
+hero: feature-image
 toc: false
 ---
 

@@ -1,4 +1,4 @@
----
+﻿---
 category: mouse
 navbar:
   - top 10 genere picks
@@ -10,8 +10,8 @@ description: >-
   perfect for juggling complex skill rotations and managing large party raids in
   MMOs.
 tags: []
-heroImg: title
-fullArticle: true
+hero: title
+publish: true
 toc: false
 draft: false
 ---

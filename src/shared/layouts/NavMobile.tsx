@@ -14,14 +14,14 @@
  */
 
 import { useState, useCallback, useEffect } from 'react';
-import { plural } from '@core/config';
+import { label, plural } from '@core/config';
 import { openLogin } from '@features/auth';
 
 /* ─── Data passed from Astro parent ─── */
 interface NavMobileProps {
   games: Array<{ title: string; url: string }>;
-  guides: Array<{ category: string; items: Array<{ title: string; url: string }> }>;
-  brands: Array<{ category: string; items: Array<{ brand: string; slug: string; url: string }> }>;
+  guides: Array<{ category: string; disabled: boolean; items: Array<{ title: string; url: string }> }>;
+  brands: Array<{ category: string; items: Array<{ brand: string; slug: string; url: string; logoUrl: string }> }>;
   hubs: Array<{ category: string }>;
 }
 
@@ -90,9 +90,9 @@ export default function NavMobile({ games, guides, brands, hubs }: NavMobileProp
       >
         <div className={`hamburger-menu-icon${isOpen ? ' open' : ''}`}>
           <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M20 7L4 7" stroke="#ffffff" strokeWidth="1.5" strokeLinecap="round" />
-            <path d="M20 12L4 12" stroke="#ffffff" strokeWidth="1.5" strokeLinecap="round" />
-            <path d="M20 17L4 17" stroke="#ffffff" strokeWidth="1.5" strokeLinecap="round" />
+            <path d="M20 7L4 7" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+            <path d="M20 12L4 12" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+            <path d="M20 17L4 17" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
           </svg>
         </div>
       </div>
@@ -133,21 +133,31 @@ export default function NavMobile({ games, guides, brands, hubs }: NavMobileProp
                   <a href="/guides" className="explore-all-link" onClick={closeMenu}>Explore All</a>
                 </li>
                 {guides.map((cat) => (
-                  <li key={cat.category} className={`menu-item2${openMenus.has(`guides-${cat.category}`) ? ' sub-open' : ''}`}>
-                    <a href="#" onClick={(e) => toggleSubmenu(`guides-${cat.category}`, e)}>
-                      <span className={`category-icon icon-${cat.category}`} />
-                      {plural(cat.category)}
-                    </a>
-                    <ul className={`side-sub-menu${openMenus.has(`guides-${cat.category}`) ? ' active' : ''}`}>
-                      <li className="menu-item3">
-                        <a href={`/guides/${cat.category}`} className="explore-all-link" onClick={closeMenu}>Explore All</a>
-                      </li>
-                      {cat.items.map((item) => (
-                        <li key={item.url} className="menu-item3">
-                          <a href={item.url} onClick={closeMenu}>{item.title}</a>
-                        </li>
-                      ))}
-                    </ul>
+                  <li key={cat.category} className={`menu-item2${cat.disabled ? ' nav-disabled' : ''}${openMenus.has(`guides-${cat.category}`) && !cat.disabled ? ' sub-open' : ''}`}>
+                    {cat.disabled ? (
+                      <span className="nav-disabled-link">
+                        <span className={`category-icon icon-${cat.category}`} />
+                        {plural(cat.category)}
+                        <span className="nav-coming-soon">Coming Soon</span>
+                      </span>
+                    ) : (
+                      <>
+                        <a href="#" onClick={(e) => toggleSubmenu(`guides-${cat.category}`, e)}>
+                          <span className={`category-icon icon-${cat.category}`} />
+                          {plural(cat.category)}
+                        </a>
+                        <ul className={`side-sub-menu${openMenus.has(`guides-${cat.category}`) ? ' active' : ''}`}>
+                          <li className="menu-item3">
+                            <a href={`/guides/${cat.category}`} className="explore-all-link" onClick={closeMenu}>Explore All</a>
+                          </li>
+                          {cat.items.map((item) => (
+                            <li key={item.url} className="menu-item3">
+                              <a href={item.url} onClick={closeMenu}>{item.title}</a>
+                            </li>
+                          ))}
+                        </ul>
+                      </>
+                    )}
                   </li>
                 ))}
               </ul>
@@ -177,7 +187,7 @@ export default function NavMobile({ games, guides, brands, hubs }: NavMobileProp
                           <a href={item.url} onClick={closeMenu}>
                             <div className="brand-logo-container side-brand-logo-container">
                               <img
-                                src={`/images/brands/${item.slug}/brand-logo-horizontal-mono-black_xs.png`}
+                                src={item.logoUrl}
                                 alt={`${item.brand} logo`}
                                 className="brand-logo side-brand-logo"
                                 loading="lazy"
@@ -208,7 +218,7 @@ export default function NavMobile({ games, guides, brands, hubs }: NavMobileProp
                   <li key={h.category} className={`menu-item2 ${h.category}-color`}>
                     <a href={`/hubs/${h.category}`} onClick={closeMenu}>
                       <span className={`category-icon icon-${h.category} ${h.category}-color`} />
-                      {h.category.charAt(0).toUpperCase() + h.category.slice(1)}
+                      {label(h.category)}
                     </a>
                   </li>
                 ))}

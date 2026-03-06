@@ -1,4 +1,4 @@
----
+﻿---
 brand: Acer
 displayName: Acer
 title: 'Acer (Predator): Competitive Gear for Serious Gamers'
@@ -8,7 +8,7 @@ description: >-
   scenario.
 tags:
   - acer
-heroImg: brand-logo-horizontal-mono-white
+hero: brand-logo-horizontal-mono-white
 brand_website: ''
 brand_facebook: ''
 brand_x: ''
@@ -19,6 +19,6 @@ navbar:
   - monitor
   - mouse
 toc: false
-fullArticle: true
+publish: true
 ---
 

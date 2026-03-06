@@ -1,4 +1,4 @@
----
+﻿---
 title: 'Lenovo Unveils Self-Charging Keyboard at CES 2025, Ditching Batteries for Good'
 description: >-
   At CES 2025, Lenovo introduced a groundbreaking self-charging Bluetooth
@@ -10,9 +10,9 @@ tags:
   - Eco-Friendly Keyboard
 datePublished: '2025-12-09'
 author: EG Team
-heroImg: feature-image
+hero: feature-image
 category: keyboard
 draft: false
-fullArticle: true
+publish: true
 ---
 

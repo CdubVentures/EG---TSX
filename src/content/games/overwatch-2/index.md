@@ -1,4 +1,4 @@
----
+﻿---
 game: Overwatch 2
 navbar: true
 guide: Overwatch 2
@@ -23,7 +23,8 @@ game_facebook: 'https://www.facebook.com/PlayOverwatch'
 game_x: 'https://x.com/PlayOverwatch'
 game_instagram: 'https://www.instagram.com/playoverwatch/'
 game_youtube: 'https://www.youtube.com/PlayOverwatch'
-fullArticle: true
+publish: true
 toc: false
+hero: box-art-cover
 ---
 

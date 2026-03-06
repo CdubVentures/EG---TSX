@@ -1,4 +1,4 @@
----
+﻿---
 brand: Corsair
 displayName: Corsair
 title: 'Corsair: Durability and Customizable Comfort'
@@ -18,6 +18,7 @@ navbar:
   - keyboard
   - mouse
 toc: false
-fullArticle: true
+publish: true
+hero: brand-logo-horizontal-index
 ---
 

@@ -1,9 +1,9 @@
----
+﻿---
 category: gpu
 brand: Nvidia
 model: RTX 4080 Super
 author: EG Team
-fullArticle: false
+publish: false
 draft: false
 title: 'Nvidia RTX 4080 Super: Smooth 4K Gaming Perfection'
 subtitle: 'Enjoy 16GB GDDR6X, DLSS 3.5, and High-Efficiency Design'
@@ -13,7 +13,7 @@ description: >-
   efficient Ada Lovelace architecture in 2025.
 tags:
   - Premium 4K GPU
-heroImg: feature-image
+hero: feature-image
 toc: false
 ---
 

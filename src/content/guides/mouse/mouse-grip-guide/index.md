@@ -1,4 +1,4 @@
----
+﻿---
 category: mouse
 navbar:
   - educational guides
@@ -9,8 +9,8 @@ description: >-
   Master the three primary grip styles—palm, claw, and fingertip—to improve
   accuracy, reduce strain, and elevate your overall gaming experience.
 tags: []
-heroImg: title
-fullArticle: true
+hero: title
+publish: true
 toc: false
 draft: false
 ---

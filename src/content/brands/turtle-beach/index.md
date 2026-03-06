@@ -1,4 +1,4 @@
----
+﻿---
 brand: Turtle Beach
 displayName: Turtle Beach
 title: 'Turtle Beach: Game-Changing Audio for Every Gamer'
@@ -23,6 +23,7 @@ navbar:
   - keyboard
   - mouse
 toc: false
-fullArticle: true
+publish: true
+hero: brand-logo-horizontal-index
 ---
 

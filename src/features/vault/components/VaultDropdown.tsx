@@ -206,7 +206,8 @@ function VaultItemCard({ entry }: VaultItemCardProps) {
   const { product } = entry;
 
   // WHY _t suffix: HBS uses NavbarVaultThumbSuffix = '_t' for vault thumbnails
-  const imgSrc = `${product.imagePath}/top_t.webp`;
+  // thumbnailStem resolved via getImageWithFallback(defaultImageView chain) at add-time
+  const imgSrc = `${product.imagePath}/${product.thumbnailStem}_t.webp`;
   const snapshotUrl = `/hubs/${product.category}/${product.slug}`;
 
   return (

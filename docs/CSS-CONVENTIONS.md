@@ -48,17 +48,45 @@ Every font size is a CSS variable. The variable name encodes the **intended pixe
 }
 ```
 
-### Fluid font size variables
+### Fluid font size variables (3-tier system)
 
-Fluid `--ft-{max}-{min}` variables use `clamp()`:
+The site uses **146 fluid typography variables** across three breakpoint tiers. Each uses `clamp()` to scale smoothly between a min and max `--font-size-*` value.
+
+**Tier 1: `--ft-{max}-{min}` (82 variables) — desktop-to-tablet**
+- Viewport range: **1150px → 600px**
+- Preferred value formula: `calc((X)vw + (Y)px)` where X and Y are derived from the min/max pair
+- Used for: headings, hero text, section titles, button labels — anything that needs to scale across the full responsive range
 
 ```css
---ft-80-50: clamp(var(--font-size-50px), ..., var(--font-size-80px));
---ft-72-44: clamp(var(--font-size-44px), ..., var(--font-size-72px));
-/* ... 40+ fluid size definitions */
+--ft-80-50: clamp(var(--font-size-50px), calc(5.4545vw + -0.4545px), var(--font-size-80px));
+--ft-55-40: clamp(var(--font-size-40px), calc(2.7273vw + 10.909px), var(--font-size-55px));
+--ft-32-24: clamp(var(--font-size-24px), calc(1.4545vw + 7.2727px), var(--font-size-32px));
+/* ... 82 total definitions */
 ```
 
-Pattern: `--ft-{max}-{min}` clamps between the min and max font-size variables with a viewport-based preferred value.
+**Tier 2: `--ftm-{max}-{min}` (16 variables) — tablet intermediate**
+- Viewport range: **825px → 600px**
+- Used for: elements that need a secondary scale adjustment in the tablet range (e.g., tool sidebar SVG icons at ≤900px use `--ftm-38-35`)
+
+```css
+--ftm-38-35: clamp(var(--font-size-35px), calc(1.3333vw + 24px), var(--font-size-38px));
+--ftm-16-14: clamp(var(--font-size-14px), calc(0.8889vw + 6.6667px), var(--font-size-16px));
+/* ... 16 total definitions */
+```
+
+**Tier 3: `--fm-{max}-{min}` (48 variables) — mobile**
+- Viewport range: **600px → 400px**
+- Used for: mobile-specific scaling below the 600px breakpoint (e.g., tool titles, tag badges, icon sizes on small screens)
+
+```css
+--fm-35-32: clamp(var(--font-size-32px), calc(1.5vw + 23px), var(--font-size-35px));
+--fm-15-14: clamp(var(--font-size-14px), calc(0.5vw + 11px), var(--font-size-15px));
+/* ... 48 total definitions */
+```
+
+**Naming pattern:** `--ft-{max}-{min}` clamps between `--font-size-{min}px` and `--font-size-{max}px`. The `ft` prefix = full range, `ftm` = tablet-mid range, `fm` = mobile range.
+
+**Critical:** All three tiers must be present in `global.css`. Missing variables cause `font-size: var(--ftm-38-35)` to resolve to nothing — the element gets no font-size and inherits the parent's value, breaking icon/SVG sizing.
 
 ### Rules
 

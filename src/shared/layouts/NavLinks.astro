@@ -13,7 +13,7 @@
  */
 
 import { contentImage, collectionImagePath } from '@core/images';
-import { plural } from '@core/config';
+import { label, plural, CONFIG } from '@core/config';
 import VaultCount from '@features/vault/components/VaultCount';
 import VaultDropdown from '@features/vault/components/VaultDropdown';
 
@@ -21,6 +21,7 @@ interface Props {
   games: Array<{ title: string; slug: string; url: string }>;
   guides: Array<{
     category: string;
+    disabled: boolean;
     sections: Array<{
       title: string;
       items: Array<{ guide: string; url: string }>;
@@ -46,9 +47,6 @@ function isActive(href: string): boolean {
   return pathname.startsWith(href);
 }
 
-function titleCase(s: string): string {
-  return s.charAt(0).toUpperCase() + s.slice(1);
-}
 ---
 
 <nav class="main-nav">
@@ -87,7 +85,7 @@ function titleCase(s: string): string {
                 <a href="/games" class="nav-game-item-link explore-all-link">
                   <div class="nav-game-image-container">
                     <img
-                      src="/images/games/exploreall.webp"
+                      src={`${CONFIG.cdn.baseUrl}/images/games/exploreall.webp`}
                       alt="Explore All Games"
                       class="nav-game-item-image"
                       draggable="false"
@@ -129,14 +127,15 @@ function titleCase(s: string): string {
                 <div class="mega-left-stack">
                   <ul class="mega-menu-left-nav">
                     {guides.map((cat, i) => (
-                      <li>
+                      <li class={cat.disabled ? 'nav-disabled' : ''}>
                         <a
                           href="#"
                           data-category={cat.category}
-                          class={`${cat.category}-color${i === 0 ? ' active' : ''}`}
+                          class={`${cat.category}-color${i === 0 ? ' active' : ''}${cat.disabled ? ' nav-disabled-tab' : ''}`}
                         >
                           <span class={`category-icon icon-${cat.category}`} />
                           {plural(cat.category)}
+                          {cat.disabled && <span class="nav-coming-soon">Coming Soon</span>}
                         </a>
                       </li>
                     ))}
@@ -152,31 +151,41 @@ function titleCase(s: string): string {
               <div class="mega-menu-content">
                 {guides.map((cat, i) => (
                   <div
-                    class="guides-set"
+                    class={`guides-set${cat.disabled ? ' guides-set-disabled' : ''}`}
                     data-category={cat.category}
                     style={i === 0 ? undefined : 'display:none;'}
                   >
-                    <div class="guides-set-inner" style={`grid-template-columns: repeat(${maxGuideSections}, var(--grid-width));`}>
-                      {cat.sections.map((section) => (
-                        <div class="dropdown-column1">
-                          <div class="category-header">
-                            <h4><span class="genre-focused">{section.title}</span></h4>
-                          </div>
-                          <ul>
-                            {section.items.map((item) => (
-                              <li>
-                                <a href={item.url}>
-                                  <span class="nav-underline">{item.guide}</span>
-                                </a>
-                              </li>
-                            ))}
-                          </ul>
+                    {cat.disabled ? (
+                      <div class="nav-disabled-content">
+                        <span class={`category-icon icon-${cat.category}`} />
+                        <p>{plural(cat.category)} guides are not yet available.</p>
+                        <span class="nav-coming-soon">Coming Soon</span>
+                      </div>
+                    ) : (
+                      <>
+                        <div class="guides-set-inner" style={`grid-template-columns: repeat(${maxGuideSections}, var(--grid-width));`}>
+                          {cat.sections.map((section) => (
+                            <div class="dropdown-column1">
+                              <div class="category-header">
+                                <h4><span class="genre-focused">{section.title}</span></h4>
+                              </div>
+                              <ul>
+                                {section.items.map((item) => (
+                                  <li>
+                                    <a href={item.url}>
+                                      <span class="nav-underline">{item.guide}</span>
+                                    </a>
+                                  </li>
+                                ))}
+                              </ul>
+                            </div>
+                          ))}
                         </div>
-                      ))}
-                    </div>
-                    <a href={`/guides/${cat.category}`} class="mega-menu-bottom-link all-guides-link">
-                      <span class="nav-underline">Explore All {plural(cat.category)}</span>
-                    </a>
+                        <a href={`/guides/${cat.category}`} class="mega-menu-bottom-link all-guides-link">
+                          <span class="nav-underline">Explore All {plural(cat.category)}</span>
+                        </a>
+                      </>
+                    )}
                   </div>
                 ))}
               </div>
@@ -270,7 +279,7 @@ function titleCase(s: string): string {
                 <li>
                   <a href={`/hubs/${h.category}`} data-category={h.category}>
                     <span class={`category-icon icon-${h.category} ${h.category}-color`} />
-                    <span class={`nav-underline ${h.category}-color`}>{titleCase(h.category)}</span>
+                    <span class={`nav-underline ${h.category}-color`}>{label(h.category)}</span>
                   </a>
                 </li>
               ))}
@@ -305,7 +314,7 @@ function titleCase(s: string): string {
                 <path d="M8.088 12.098l3.185-1.81a.178.178 0 01.176 0l2.843 1.615a.172.172 0 010 .3l-6.204 3.524a.178.178 0 01-.176 0L1.088 11.85A.173.173 0 011 11.7V3.947c0-.061.033-.118.088-.15L7.292.274a.176.176 0 01.264.15v3.23a.172.172 0 01-.088.15l-3.186 1.81a.173.173 0 00-.088.149v4.124c0 .062.034.119.088.15l3.63 2.062c.054.03.122.03.176 0z" />
                 <path d="M8.532 3.803l3.186 1.81a.173.173 0 01.088.149v3.62c0 .06.033.118.088.149l2.842 1.615a.176.176 0 00.264-.15V3.947a.173.173 0 00-.088-.15L8.708.274a.176.176 0 00-.264.15v3.23c0 .062.034.119.088.150z" />
                 <path d="M4 2h8a2 2 0 012 2v8a2 2 0 01-2 2H4a2 2 0 01-2-2V4a2 2 0 012-2z" fill="#000000" opacity="0.1" />
-                <path d="M5.9 6.2l2.1 4.2h0l2.1-4.2H8l-2.1 0z" fill="#FFFFFF" />
+                <path d="M5.9 6.2l2.1 4.2h0l2.1-4.2H8l-2.1 0z" style="fill: var(--nav-text);" />
               </g>
             </svg>
           </span>
@@ -626,6 +635,8 @@ function titleCase(s: string): string {
   document.querySelectorAll<HTMLElement>('.mega-menu-guides .mega-menu-left-nav a[data-category]').forEach((link) => {
     link.addEventListener('click', (e) => {
       e.preventDefault();
+      /* WHY: disabled tabs (nav-disabled-tab) shouldn't switch content */
+      if (link.classList.contains('nav-disabled-tab')) return;
       const category = link.getAttribute('data-category');
       if (!category) return;
 
@@ -737,8 +748,8 @@ function titleCase(s: string): string {
 
         /* WHY: load script dynamically — matches HBS pattern where
            widget_tile_tilt.js is a global script and navbar uses window.VanillaTilt */
-        if ((window as any).VanillaTilt) {
-          (window as any).VanillaTilt.init(Array.from(tiles), {
+        if (window.VanillaTilt) {
+          window.VanillaTilt.init(Array.from(tiles), {
             max: 15,
             speed: 400,
             scale: 1.025,
@@ -752,8 +763,8 @@ function titleCase(s: string): string {
         const script = document.createElement('script');
         script.src = '/js/widget_tile_tilt.js';
         script.onload = () => {
-          if ((window as any).VanillaTilt) {
-            (window as any).VanillaTilt.init(Array.from(tiles), {
+          if (window.VanillaTilt) {
+            window.VanillaTilt.init(Array.from(tiles), {
               max: 15,
               speed: 400,
               scale: 1.025,
@@ -819,7 +830,6 @@ function titleCase(s: string): string {
     text-align: center;
     justify-content: center;
     height: 100%;
-    text-transform: capitalize;
     width: auto;
     margin: 0;
     padding: 0;
@@ -851,7 +861,7 @@ function titleCase(s: string): string {
   .nav-link {
     display: block;
     font-family: var(--identity-font);
-    color: var(--white-color-1);
+    color: var(--nav-text);
     text-decoration: none;
     padding: 8px 15px;
     font-size: var(--font-size-14px);
@@ -1070,7 +1080,7 @@ function titleCase(s: string): string {
   .nav-game-title {
     font-family: var(--identity-font);
     font-weight: var(--font-weight7);
-    color: var(--white-color-1);
+    color: var(--nav-text);
     font-size: var(--font-size-13px);
     line-height: 1.4;
     text-align: center;
@@ -1161,7 +1171,7 @@ function titleCase(s: string): string {
     gap: 1em;
     position: relative;
     justify-content: flex-start;
-    color: var(--white-color-1);
+    color: var(--nav-text);
     font-family: var(--identity-font);
     font-weight: var(--font-weight7);
     font-size: var(--font-size-15px);
@@ -1362,7 +1372,7 @@ function titleCase(s: string): string {
     font-size: var(--font-size-12px);
     font-family: var(--identity-font);
     font-weight: var(--font-weight4);
-    color: var(--grey-color-2, #8a8f98);
+    color: var(--nav-text-muted);
     text-decoration: none;
     cursor: default;
     display: block;
@@ -1395,7 +1405,7 @@ function titleCase(s: string): string {
     align-items: center;
     flex-wrap: wrap;
     padding: 1.25rem 0;
-    color: var(--white-color-1);
+    color: var(--nav-text);
     text-decoration: none;
     font-size: var(--font-size-14px);
     letter-spacing: -0.5px;
@@ -1454,7 +1464,7 @@ function titleCase(s: string): string {
     width: 100%;
     cursor: pointer;
     text-align: center;
-    background-color: var(--nav-surface-medium, #2e343b);
+    background-color: var(--nav-surface-medium);
     box-sizing: border-box;
     border-radius: 4px;
     transition: background-color 0.2s ease, color 0.2s ease;
@@ -1466,7 +1476,7 @@ function titleCase(s: string): string {
   }
 
   .all-guides-link {
-    color: var(--white-color-1);
+    color: var(--nav-text);
     text-decoration: none;
     font-family: var(--identity-font);
     font-weight: var(--font-weight7);
@@ -1526,7 +1536,7 @@ function titleCase(s: string): string {
     height: 2.5em;
     margin-right: 0.5rem;
     border-radius: 50%;
-    background-color: var(--section-darkestdark-background-color, #121212);
+    background-color: var(--nav-surface-dark);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -1536,7 +1546,7 @@ function titleCase(s: string): string {
     width: 1.85em;
     height: 1.85em;
     object-fit: contain;
-    filter: brightness(0) invert(1);
+    filter: var(--nav-brand-logo-filter);
   }
 
   .brand-item {
@@ -1569,7 +1579,7 @@ function titleCase(s: string): string {
     align-items: center;
     flex-wrap: wrap;
     padding: 1.25rem 0;
-    color: var(--white-color-1);
+    color: var(--nav-text);
     text-decoration: none;
     font-size: var(--font-size-14px);
     letter-spacing: -0.5px;
@@ -1648,6 +1658,97 @@ function titleCase(s: string): string {
   }
 
   /* ═══════════════════════════════════════════════════════════════════════════
+     DISABLED CATEGORIES — grayed out items for inactive product/content flags
+     ═══════════════════════════════════════════════════════════════════════════ */
+
+  /* WHY: disabled categories show in the menu but are non-interactive.
+     Uses the same muted color as the vault empty-cat pattern. */
+  .nav-disabled {
+    opacity: 0.45;
+  }
+
+  /* Non-link span that replaces <a> for disabled hub items */
+  .nav-disabled-link {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    padding: 1.25rem 0;
+    color: var(--nav-text-muted);
+    font-size: var(--font-size-14px);
+    letter-spacing: -0.5px;
+    font-family: var(--identity-font);
+    font-weight: var(--font-weight5);
+    width: 100%;
+    gap: 1rem;
+    cursor: default;
+    white-space: normal;
+  }
+
+  .nav-disabled-link .category-icon {
+    background-color: var(--nav-text-muted);
+  }
+
+  /* "Coming Soon" badge */
+  .nav-coming-soon {
+    font-size: var(--font-size-10px);
+    font-family: var(--identity-font);
+    font-weight: var(--font-weight7);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--nav-text-muted);
+    background-color: var(--nav-surface-dark);
+    padding: 0.2em 0.5em;
+    border-radius: 3px;
+    margin-left: auto;
+    white-space: nowrap;
+  }
+
+  /* Disabled left-nav tab in guides/brands mega menus */
+  .mega-menu-left-nav li.nav-disabled a.nav-disabled-tab {
+    color: var(--nav-text-muted);
+    cursor: default;
+  }
+
+  .mega-menu-left-nav li.nav-disabled a.nav-disabled-tab .category-icon {
+    background-color: var(--nav-text-muted);
+  }
+
+  .mega-menu-left-nav li.nav-disabled a.nav-disabled-tab:hover {
+    color: var(--nav-text-muted);
+  }
+
+  .mega-menu-left-nav li.nav-disabled a.nav-disabled-tab::after {
+    color: var(--nav-text-muted);
+  }
+
+  /* Disabled content panel — centered message */
+  .nav-disabled-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    padding: 3rem 2rem;
+    color: var(--nav-text-muted);
+    font-family: var(--identity-font);
+    font-size: var(--font-size-14px);
+    text-align: center;
+    width: 100%;
+  }
+
+  .nav-disabled-content .category-icon {
+    width: 3em;
+    height: 3em;
+    background-color: var(--nav-text-muted);
+    opacity: 0.5;
+  }
+
+  .nav-disabled-content p {
+    margin: 0;
+    opacity: 0.7;
+  }
+
+  /* ═══════════════════════════════════════════════════════════════════════════
      VAULT MEGA MENU — matches HBS partial_navbar.css vault section exactly
      ═══════════════════════════════════════════════════════════════════════════ */
 
@@ -1659,7 +1760,7 @@ function titleCase(s: string): string {
     align-items: center;
     justify-content: center;
     gap: 0.35rem;
-    border: 3px solid var(--white-color-1);
+    border: 3px solid var(--nav-text);
     border-radius: 0;
     transition: border 0.3s ease-out;
   }
@@ -1745,7 +1846,7 @@ function titleCase(s: string): string {
     right: 0;
     transform: translate(50%, -50%);
     background: linear-gradient(to right, var(--site-start-color), var(--site-end-color));
-    color: var(--white-color-1);
+    color: var(--nav-text);
     width: 1.55em;
     aspect-ratio: 1;
     font-family: var(--identity-font);
@@ -1800,7 +1901,7 @@ function titleCase(s: string): string {
 
   /* ─── Vault-specific left-nav overrides ─── */
   .vault-link-count {
-    color: var(--white-color-1);
+    color: var(--nav-text);
     font-family: var(--identity-font);
     font-weight: var(--font-weight4);
     margin-left: 4px;
@@ -1816,7 +1917,7 @@ function titleCase(s: string): string {
     top: 50% !important;
     right: 1.25rem !important;
     transform: translateY(-50%) !important;
-    color: var(--white-color-1);
+    color: var(--nav-text);
     width: auto !important;
     height: auto !important;
     background: none !important;
@@ -1857,7 +1958,7 @@ function titleCase(s: string): string {
     color: var(--navbar-vault-color, var(--cat-mouse));
   }
   .mega-menu-vault .mega-menu-left-column .mega-menu-left-nav li a.active {
-    background-color: var(--section-darkest-background-color, #0d0e0f);
+    background-color: var(--nav-surface-dark);
     border-left: 3px solid var(--navbar-vault-color, var(--cat-mouse));
   }
 
@@ -1874,7 +1975,7 @@ function titleCase(s: string): string {
     font-family: var(--identity-font);
     font-weight: var(--font-weight7);
     font-size: var(--font-size-15px);
-    color: var(--white-color-1);
+    color: var(--nav-text);
     padding: 1rem;
     white-space: normal;
     overflow-wrap: anywhere;
@@ -1889,7 +1990,7 @@ function titleCase(s: string): string {
     font-weight: 500;
     text-decoration: none;
     text-transform: capitalize;
-    color: var(--white-color-2, #ccc) !important;
+    color: var(--nav-text-muted) !important;
     white-space: normal;
     overflow-wrap: anywhere;
     word-break: break-word;
@@ -1964,10 +2065,10 @@ function titleCase(s: string): string {
     width: 100%;
     margin: auto;
     text-align: center;
-    color: var(--grey-color-2, #8a8f98);
+    color: var(--nav-text-muted);
     font-family: var(--identity-font);
     font-size: var(--font-size-14px);
-    border: 1px dashed var(--accent-color-1, #555);
+    border: 1px dashed var(--nav-separator);
     border-radius: 4px;
     opacity: 0.8;
     padding: 2rem 1rem;
@@ -1980,7 +2081,7 @@ function titleCase(s: string): string {
     width: 100%;
     height: 100%;
     box-sizing: border-box;
-    background-color: var(--section-darkest-background-color, #0d0e0f);
+    background-color: var(--nav-surface-dark);
     border: 1px solid var(--navbar-vault-color, var(--cat-mouse));
     border-radius: 4px;
     padding: 0.75rem;
@@ -2051,7 +2152,7 @@ function titleCase(s: string): string {
     font-family: var(--identity-font);
     font-size: var(--font-size-13px);
     font-weight: 400;
-    color: var(--white-color-2, #ccc);
+    color: var(--nav-text-muted);
     opacity: 0.8;
     margin-bottom: 2px;
   }
@@ -2060,7 +2161,7 @@ function titleCase(s: string): string {
     font-family: var(--identity-font);
     font-size: var(--font-size-15px);
     font-weight: 700;
-    color: var(--white-color-1);
+    color: var(--nav-text);
   }
 
   /* Remove button (trash icon) */
@@ -2078,7 +2179,7 @@ function titleCase(s: string): string {
   .navbar-vault-remove svg {
     width: 100%;
     height: 100%;
-    stroke: var(--white-color-1);
+    stroke: var(--nav-text);
   }
 
   .navbar-vault-remove:hover {
@@ -2112,9 +2213,9 @@ function titleCase(s: string): string {
     text-align: center;
     flex-wrap: wrap;
     max-width: 100%;
-    background-color: var(--nav-surface-medium, #2e343b);
+    background-color: var(--nav-surface-medium);
     border-radius: 4px;
-    color: var(--white-color-1);
+    color: var(--nav-text);
     padding: 0.65rem 1rem;
     font-family: var(--identity-font);
     font-size: var(--font-size-15px);
@@ -2250,7 +2351,7 @@ function titleCase(s: string): string {
     }
 
     .mega-menu-vault .mega-menu-left-column .mega-menu-left-nav li a.active {
-      background-color: var(--section-darkest-background-color, #0d0e0f);
+      background-color: var(--nav-surface-dark);
       border-left: 3px solid var(--navbar-vault-color, var(--cat-mouse));
     }
 

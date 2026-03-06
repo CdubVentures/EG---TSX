@@ -1,4 +1,4 @@
----
+﻿---
 title: How AI is Revolutionizing Gaming Mouse Technology
 description: >-
   From predictive movement algorithms to AI-driven software adjustments, learn
@@ -7,9 +7,9 @@ tags:
   - Tech Update
 datePublished: '2025-12-09'
 author: EG Team
-heroImg: feature-image
+hero: feature-image
 category: mouse
 draft: false
-fullArticle: true
+publish: true
 ---
 

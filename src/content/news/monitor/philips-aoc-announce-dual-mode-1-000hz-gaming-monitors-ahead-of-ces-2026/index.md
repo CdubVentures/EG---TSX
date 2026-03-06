@@ -1,4 +1,4 @@
----
+﻿---
 title: 'Philips & AOC announce dual-mode 1,000Hz gaming monitors ahead of CES 2026'
 description: >-
   Philips and AOC have revealed two dual-mode gaming monitors—the Evnia
@@ -19,11 +19,10 @@ tags:
   - tech
 datePublished: '2025-12-15'
 author: EG Gear Staff
-heroImg: >-
-  /images/news/monitor/philips-aoc-announce-dual-mode-1000hz-gaming-monitors-ahead-of-ces-2026/hero-img
+hero: dual-mode-stage-reveal
 category: monitor
 draft: false
-fullArticle: true
+publish: true
 ---
 Philips and AOC are pushing esports monitors into “kHz refresh” territory. Ahead of CES 2026, the two brands have previewed **27-inch dual-mode** displays designed to run at **2560×1440 up to 500Hz**, then switch to a lower-resolution **HD / 1080p-class mode up to 1,000Hz** at the press of a button.
 

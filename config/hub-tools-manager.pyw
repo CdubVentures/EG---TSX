@@ -14,8 +14,8 @@ Used by:
   - /hubs/ index page (tools matrix grid + dashboard)
   - /hubs/:tool/ filtered views (filtered tool list + dashboard)
 
-Reads/writes config/hub-tools.json.
-Reads config/categories.json for category list and colors.
+Reads/writes config/data/hub-tools.json.
+Reads config/data/categories.json for category list and colors.
 
 Matches the Catppuccin Mocha theme used by category-manager.py and navbar-manager.py.
 """
@@ -38,8 +38,8 @@ if sys.platform == "win32":
 
 # -- Paths -------------------------------------------------------------------
 ROOT = Path(__file__).resolve().parent.parent
-CATEGORIES_JSON = ROOT / "config" / "categories.json"
-HUB_TOOLS_JSON = ROOT / "config" / "hub-tools.json"
+CATEGORIES_JSON = ROOT / "config" / "data" / "categories.json"
+HUB_TOOLS_JSON = ROOT / "config" / "data" / "hub-tools.json"
 CONTENT = ROOT / "src" / "content"
 
 

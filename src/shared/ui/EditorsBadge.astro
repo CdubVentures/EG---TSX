@@ -1,0 +1,132 @@
+---
+/**
+ * EditorsBadge.astro — Editor's Choice badge overlay.
+ * Port of HBS editorsCategoryBadge() (hbs__renderWidgets.js:542-598)
+ * + CSS (site_shared.css:257-326).
+ *
+ * Reusable across dashboard, snapshot, hub pages.
+ * Badge base CSS only — positioning is applied by the consumer
+ * via row-specific selectors (e.g. Dashboard.astro).
+ *
+ * Layout: 2-part CSS Grid
+ *   Left:  EG/GEAR logo on #f0f0f0, text in category color
+ *   Right: badge text on category gradient, text in white
+ *
+ * Alignment rules:
+ *   - Parent grid uses align-items: stretch so both halves share equal height
+ *   - Both left and right use flex column + space-between so top/bottom text aligns
+ *   - "GEAR" is split into individual letter spans with flex space-between
+ *     so G starts flush-left with E and R ends flush-right with G
+ */
+import { splitBadge } from '@core/dashboard-filter.mjs';
+
+interface Props {
+  badgeText: string;
+  category?: string;
+}
+
+const { badgeText, category } = Astro.props;
+
+const [line1, line2] = splitBadge(badgeText);
+
+// WHY: HBS uses var(--global-{category}-color) which maps to our --cat-{category}.
+// Category gradient for the right side background.
+const rightBg = category
+  ? `var(--cat-${category.toLowerCase()})`
+  : 'linear-gradient(to right, var(--site-start-color), var(--site-end-color))';
+
+// Category solid color for logo text on the left side.
+const logoColor = category
+  ? `var(--cat-${category.toLowerCase()})`
+  : 'var(--site-start-color)';
+---
+
+<div class="editors-choice-badge" aria-label="Editor's Choice Badge" itemprop="award">
+  <div class="editors-badge-left" style={`background-color: #f0f0f0;`}>
+    <span class="editors-badge-logo-text1" style={`color: ${logoColor};`}>EG</span>
+    <span class="editors-badge-logo-text2" style={`color: ${logoColor};`}>
+      <span>G</span><span>E</span><span>A</span><span>R</span>
+    </span>
+  </div>
+  <div class="editors-badge-right" style={`background: ${rightBg}; color: #ffffff;`}>
+    <span class="editors-badge-line1" style="color: #ffffff;">{line1}</span>
+    <span class="editors-badge-line2" style="color: #ffffff;">{line2}</span>
+  </div>
+</div>
+
+<style>
+  /* Port of site_shared.css:257-326 */
+  .editors-choice-badge {
+    display: grid;
+    grid-template-columns: auto auto;
+    /* WHY: stretch forces both halves to the same height */
+    align-items: stretch;
+    border-radius: 4px;
+    overflow: hidden;
+  }
+
+  /* WHY: flex column + space-between on BOTH sides pushes top text to
+     the top edge and bottom text to the bottom edge. Since the parent
+     grid stretches both cells to equal height, EG aligns with line1
+     and GEAR aligns with line2 — perfectly flush top and bottom. */
+  .editors-badge-left {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    row-gap: 0.08em;
+    padding: 0.435em 0.425em 0.425em 0.425em;
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px;
+  }
+
+  .editors-badge-right {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    font-family: var(--logo-font1);
+    font-weight: 800;
+    text-transform: uppercase;
+    row-gap: 0.095em;
+    padding: 0.435em 0.425em 0.425em 0.425em;
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px;
+    text-align: center;
+    font-size: 1em;
+  }
+
+  /* Large "EG" text — sits at top of left side */
+  .editors-badge-logo-text1 {
+    font-size: 1.55em;
+    line-height: 0.75;
+    font-family: var(--logo-font1);
+    font-weight: 700;
+    letter-spacing: -1.35px;
+    text-box-trim: trim-end;
+    text-box-edge: cap alphabetic;
+  }
+
+  /* "GEAR" letters — sits at bottom of left side, spans full EG width.
+     WHY: flex + space-between on the individual letter spans stretches
+     G flush-left with E and R flush-right with G, at any font size. */
+  .editors-badge-logo-text2 {
+    font-size: 0.475em;
+    line-height: 0.75;
+    font-family: var(--identity-font);
+    font-weight: 700;
+    display: flex;
+    justify-content: space-between;
+    /* WHY: G starts 5% inward (tucked under E), R stays flush with G */
+    width: 95%;
+    margin-left: 5%;
+    text-box-trim: trim-end;
+    text-box-edge: cap alphabetic;
+  }
+
+  /* Right-hand badge text lines */
+  .editors-badge-line1,
+  .editors-badge-line2 {
+    line-height: 0.75;
+    text-box-trim: trim-both;
+    text-box-edge: cap alphabetic;
+  }
+</style>

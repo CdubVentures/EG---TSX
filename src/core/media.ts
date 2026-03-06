@@ -69,17 +69,57 @@ export function getImage(media: ProductMedia, view: string, color?: string): Pro
   const viewImages = media.images.filter(img => img.view === view);
   if (viewImages.length === 0) return null;
 
-  if (color) {
-    const colorMatch = viewImages.find(img => img.color === color);
+  const targetColor = color ?? media.defaultColor;
+
+  if (targetColor) {
+    const colorMatch = viewImages.find(img => img.color === targetColor);
     if (colorMatch) return colorMatch;
   }
 
-  // Fall back to default (no color)
+  // Fall back to colorless image
   const defaultMatch = viewImages.find(img => !img.color);
   if (defaultMatch) return defaultMatch;
 
   // Last resort: first image for that view
   return viewImages[0];
+}
+
+/**
+ * Try views in order, return the first match or null.
+ * WHY: defaultImageView and listThumbKeyBase are now fallback chains (arrays).
+ */
+export function getImageWithFallback(media: ProductMedia, views: string[], color?: string): ProductImage | null {
+  for (const view of views) {
+    const img = getImage(media, view, color);
+    if (img) return img;
+  }
+  return null;
+}
+
+/**
+ * Try views in order, but only return a match when stemExists confirms the
+ * actual file is on disk at the needed size variant.
+ *
+ * WHY: media.images[] proves a view exists, but specific size variants (_t, _l)
+ * may be missing. This function adds filesystem-aware fallback so consumers
+ * never reference a 404.
+ *
+ * @param stemExists — predicate: receives the stem string, returns true if the
+ *   file exists at the size the consumer needs (e.g. `stem => fs.existsSync(...)`)
+ */
+export function resolveImage(
+  media: ProductMedia,
+  views: string[],
+  stemExists: (stem: string) => boolean,
+  color?: string,
+): ProductImage | null {
+  for (const view of views) {
+    const img = getImage(media, view, color);
+    if (!img) continue;
+    if (!stemExists(img.stem)) continue;
+    return img;
+  }
+  return null;
 }
 
 /**

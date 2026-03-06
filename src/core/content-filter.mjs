@@ -1,11 +1,11 @@
-// ─── Pure filter + sort for article content collections ──────────────────────
+﻿// â”€â”€â”€ Pure filter + sort for article content collections â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 // WHY: Extracted so node:test can verify the logic without Astro's getCollection.
 // The gateway (content.ts) composes: getCollection + this filter.
 //
 // Filter rules (applied in order):
-//   1. fullArticle !== false  (exclude stubs)
+//   1. publish !== false  (exclude stubs)
 //   2. draft !== true         (exclude drafts)
-//   3. If entry has category → must be in activeContentCategories
+//   3. If entry has category â†’ must be in activeContentCategories
 //   4. Sort by datePublished descending (nulls last)
 
 /**
@@ -21,7 +21,7 @@ export function filterArticles(entries, activeContentCategories) {
     const d = entry.data;
 
     // Rule 1: exclude stubs
-    if (d.fullArticle === false) return false;
+    if (d.publish === false) return false;
 
     // Rule 2: exclude drafts
     if (d.draft === true) return false;

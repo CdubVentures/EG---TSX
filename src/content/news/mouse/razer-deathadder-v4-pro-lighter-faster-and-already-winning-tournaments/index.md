@@ -1,4 +1,4 @@
----
+﻿---
 title: 'Razer DeathAdder V4 Pro: lighter, faster, and already winning tournaments'
 description: >-
   The Razer DeathAdder V4 Pro is official: a 56 g wireless ergonomic mouse with
@@ -24,9 +24,10 @@ tags:
 datePublished: '2025-07-02'
 author: Reporting Team
 heroCredit: Razer
+hero: hero-img
 category: mouse
 draft: false
-fullArticle: true
+publish: true
 ---
 Razer has officially unveiled the **DeathAdder V4 Pro**, the latest version of its flagship ergonomic esports mouse — and it’s a big upgrade on paper over the already‑popular [DeathAdder V3 Pro](https://eggear.com/hubs/mouse/razer/deathadder-v3-pro).
 

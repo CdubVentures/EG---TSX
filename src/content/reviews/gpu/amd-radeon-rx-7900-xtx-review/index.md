@@ -1,9 +1,9 @@
----
+﻿---
 category: gpu
 brand: AMD
 model: Radeon RX 7900 XTX
 author: EG Team
-fullArticle: false
+publish: false
 draft: false
 title: 'AMD Radeon RX 7900 XTX: RDNA 3 Powerhouse'
 subtitle: Master 4K with 24GB VRAM and Robust Cooling
@@ -13,7 +13,7 @@ description: >-
   excellent thermal management in 2025.
 tags:
   - High-Performance GPU
-heroImg: feature-image
+hero: feature-image
 toc: false
 ---
 

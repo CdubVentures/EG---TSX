@@ -5,7 +5,7 @@
 //
 // Disable a category in category-manager.py → its tools vanish site-wide.
 
-import hubToolsRaw from '../../config/hub-tools.json';
+import hubToolsRaw from '../../config/data/hub-tools.json';
 import { CONFIG, categoryColor } from './config';
 import {
   filterHubTools,
@@ -24,7 +24,7 @@ export interface HubTool {
   svg: string;
   enabled: boolean;
   navbar: boolean;
-  heroImg: string;
+  hero: string;
   category: string;
   categoryColor: string;
 }

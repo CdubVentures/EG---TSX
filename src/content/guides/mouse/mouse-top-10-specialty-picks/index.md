@@ -1,4 +1,4 @@
----
+﻿---
 category: mouse
 navbar:
   - top 10 speciality picks
@@ -10,8 +10,8 @@ description: >-
   it feather-light builds, ambidextrous designs, or cutting-edge wireless tech.
 tags:
   - Specialty Mice
-heroImg: title
-fullArticle: true
+hero: title
+publish: true
 toc: false
 draft: false
 ---

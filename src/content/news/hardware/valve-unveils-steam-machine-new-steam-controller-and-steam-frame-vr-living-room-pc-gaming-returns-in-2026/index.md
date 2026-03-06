@@ -1,4 +1,4 @@
----
+﻿---
 title: >-
   Valve Unveils Steam Machine, New Steam Controller, and Steam Frame VR –
   Living-Room PC Gaming Returns in 2026
@@ -21,9 +21,10 @@ tags:
 datePublished: '2025-11-20'
 dateUpdated: '2025-11-20'
 author: Tech Desk
+hero: hero-img
 category: hardware
 draft: false
-fullArticle: true
+publish: true
 ---
 Valve just dropped its biggest hardware surprise in years. After a decade away from the living-room PC category, the company is bringing back the **Steam Machine** – this time as a single, Valve-built cube running SteamOS. Alongside it comes a redesigned **Steam Controller** that finally adds dual analog sticks while keeping the signature trackpads, and the **Steam Frame**, a standalone wireless VR headset that doubles as a giant virtual monitor.
 

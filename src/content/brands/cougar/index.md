@@ -1,4 +1,4 @@
----
+﻿---
 brand: Cougar
 displayName: Cougar
 title: 'Cougar Gaming: Durability and Customizable Comfort'
@@ -26,6 +26,7 @@ navbar:
   - keyboard
   - mouse
 toc: false
-fullArticle: true
+publish: true
+hero: brand-logo-horizontal-index
 ---
 

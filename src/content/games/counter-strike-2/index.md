@@ -1,4 +1,4 @@
----
+﻿---
 game: Counter-Strike 2
 navbar: true
 guide: Counter-Strike 2
@@ -26,7 +26,8 @@ game_facebook: 'https://www.facebook.com/CounterStrike/'
 game_x: 'https://x.com/CounterStrike'
 game_instagram: 'https://www.instagram.com/counterstrike/'
 game_youtube: 'https://www.youtube.com/@CounterStrike'
-fullArticle: true
+publish: true
 toc: false
+hero: box-art-cover
 ---
 

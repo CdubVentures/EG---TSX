@@ -1,9 +1,9 @@
----
+﻿---
 category: mouse
 brand: Corsair
 model: M65 RGB Ultra Wireless
 author: EG Team
-fullArticle: true
+publish: true
 draft: false
 title: 'Corsair M65 RGB Ultra Wireless Review: Heavy Duty Precision for 2025'
 subtitle: 'Get Tunable Weight, High DPI, and Wireless Control'
@@ -13,7 +13,7 @@ description: >-
   perfect for FPS, RTS, and AARPG players who crave customization in 2025.
 tags:
   - Customizable Mouse
-heroImg: feature-image
+hero: feature-image
 productId: corsair-m65-rgb-ultra-wireless
 toc: false
 ---

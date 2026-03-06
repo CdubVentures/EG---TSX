@@ -1,8 +1,8 @@
----
+﻿---
 category: game
 brand: Activision
 author: Gaming Desk
-fullArticle: false
+publish: false
 draft: false
 title: 'Call of Duty: Black Ops 7 Review — Fun to Play, Tough to Love'
 subtitle: >-
@@ -26,6 +26,7 @@ tags:
   - skill based matchmaking
   - streaming
 datePublished: '2010-12-07'
+hero: hero-img
 toc: false
 ---
 **Takeaway:** Black Ops 7 is a fast, content-rich Call of Duty that feels great in multiplayer and Zombies, but its experimental co‑op campaign, aggressive matchmaking, and launch drama have made it one of the most divisive entries in the series.

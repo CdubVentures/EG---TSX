@@ -1,9 +1,9 @@
----
+﻿---
 category: monitor
 brand: MSI
 model: MAG 274QRF QD E2
 author: EG Team
-fullArticle: true
+publish: true
 draft: false
 title: 'MSI MAG 274QRF QD E2: Value Meets Performance'
 subtitle: 'Get 1440p Clarity, 165Hz Refresh Rate, and IPS Quality'
@@ -13,7 +13,7 @@ description: >-
   RTS gamers in 2025.
 tags:
   - Budget Monitor
-heroImg: feature-image
+hero: feature-image
 productId: msi-mag-274qrf-qd-e2
 toc: false
 ---

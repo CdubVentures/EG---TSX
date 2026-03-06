@@ -1,4 +1,4 @@
----
+﻿---
 category: mouse
 navbar:
   - top 10 speciality picks
@@ -9,8 +9,8 @@ description: >-
   Choose from mice that feature sculpted shapes, supportive grips, and reduced
   strain on your wrist, ensuring comfort throughout lengthy sessions.
 tags: []
-heroImg: title
-fullArticle: true
+hero: title
+publish: true
 toc: false
 draft: false
 ---

@@ -1,25 +1,25 @@
-import { describe, it } from 'node:test';
+﻿import { describe, it } from 'node:test';
 import assert from 'node:assert/strict';
 
-// ─── Unit test the pure content filtering logic ─────────────────────────────
+// â”€â”€â”€ Unit test the pure content filtering logic â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 // Mirrors products-gateway.test.mjs pattern: test the pure filter predicate
 // without Astro. The gateway (content.ts) composes: getCollection + this filter.
 import { filterArticles } from '../src/core/content-filter.mjs';
 
-// ═══════════════════════════════════════════════════════════════════════════════
-// Contract: filterArticles(entries, activeContentCategories) → filtered + sorted
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// Contract: filterArticles(entries, activeContentCategories) â†’ filtered + sorted
 //
 // Filter rules (applied in order):
-//   1. fullArticle !== false  (exclude stubs)
+//   1. publish !== false  (exclude stubs)
 //   2. draft !== true         (exclude drafts)
-//   3. If entry has category → must be in activeContentCategories
+//   3. If entry has category â†’ must be in activeContentCategories
 //   4. Sort by datePublished descending (nulls last)
 //
 // Invariants:
 //   - Entries without a category field skip rule 3 (brands, games)
-//   - Empty activeContentCategories → all entries with a category are excluded
+//   - Empty activeContentCategories â†’ all entries with a category are excluded
 //   - Does not mutate the input array
-// ═══════════════════════════════════════════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
 /** Factory: minimal article entry shape matching Astro getCollection return. */
 function makeArticle(overrides = {}) {
@@ -27,7 +27,7 @@ function makeArticle(overrides = {}) {
     id: overrides.id ?? 'test-article',
     data: {
       title: 'Test Article',
-      fullArticle: true,
+      publish: true,
       draft: false,
       datePublished: new Date('2025-01-15'),
       ...overrides,
@@ -35,33 +35,33 @@ function makeArticle(overrides = {}) {
   };
 }
 
-// ─── fullArticle filtering ──────────────────────────────────────────────────
+// â”€â”€â”€ publish filtering â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
-describe('filterArticles — fullArticle', () => {
+describe('filterArticles â€” publish', () => {
   const active = ['mouse', 'keyboard', 'monitor'];
 
-  it('keeps entries with fullArticle: true', () => {
-    const entries = [makeArticle({ category: 'mouse', fullArticle: true })];
+  it('keeps entries with publish: true', () => {
+    const entries = [makeArticle({ category: 'mouse', publish: true })];
     const result = filterArticles(entries, active);
     assert.equal(result.length, 1);
   });
 
-  it('excludes entries with fullArticle: false', () => {
-    const entries = [makeArticle({ category: 'mouse', fullArticle: false })];
+  it('excludes entries with publish: false', () => {
+    const entries = [makeArticle({ category: 'mouse', publish: false })];
     const result = filterArticles(entries, active);
     assert.equal(result.length, 0);
   });
 
-  it('keeps entries with fullArticle: undefined (default true)', () => {
-    const entries = [makeArticle({ category: 'mouse', fullArticle: undefined })];
+  it('keeps entries with publish: undefined (default true)', () => {
+    const entries = [makeArticle({ category: 'mouse', publish: undefined })];
     const result = filterArticles(entries, active);
     assert.equal(result.length, 1);
   });
 });
 
-// ─── draft filtering ────────────────────────────────────────────────────────
+// â”€â”€â”€ draft filtering â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
-describe('filterArticles — draft', () => {
+describe('filterArticles â€” draft', () => {
   const active = ['mouse', 'keyboard', 'monitor'];
 
   it('keeps entries with draft: false', () => {
@@ -83,9 +83,9 @@ describe('filterArticles — draft', () => {
   });
 });
 
-// ─── category filtering ─────────────────────────────────────────────────────
+// â”€â”€â”€ category filtering â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
-describe('filterArticles — category', () => {
+describe('filterArticles â€” category', () => {
   it('keeps entries whose category is in the active list', () => {
     const entries = [
       makeArticle({ id: 'a', category: 'mouse' }),
@@ -129,9 +129,9 @@ describe('filterArticles — category', () => {
   });
 });
 
-// ─── combined filtering ─────────────────────────────────────────────────────
+// â”€â”€â”€ combined filtering â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
-describe('filterArticles — combined filters', () => {
+describe('filterArticles â€” combined filters', () => {
   const active = ['mouse', 'keyboard'];
 
   it('excludes draft even if category is active', () => {
@@ -140,25 +140,25 @@ describe('filterArticles — combined filters', () => {
     assert.equal(result.length, 0);
   });
 
-  it('excludes fullArticle:false even if category is active', () => {
-    const entries = [makeArticle({ category: 'mouse', fullArticle: false })];
+  it('excludes publish:false even if category is active', () => {
+    const entries = [makeArticle({ category: 'mouse', publish: false })];
     const result = filterArticles(entries, active);
     assert.equal(result.length, 0);
   });
 
-  it('excludes inactive category even if not draft and fullArticle', () => {
-    const entries = [makeArticle({ category: 'headset', draft: false, fullArticle: true })];
+  it('excludes inactive category even if not draft and publish', () => {
+    const entries = [makeArticle({ category: 'headset', draft: false, publish: true })];
     const result = filterArticles(entries, active);
     assert.equal(result.length, 0);
   });
 
   it('applies all three filters together', () => {
     const entries = [
-      makeArticle({ id: 'a', category: 'mouse', draft: false, fullArticle: true }),  // ✓
-      makeArticle({ id: 'b', category: 'mouse', draft: true, fullArticle: true }),   // ✗ draft
-      makeArticle({ id: 'c', category: 'mouse', draft: false, fullArticle: false }), // ✗ stub
-      makeArticle({ id: 'd', category: 'headset', draft: false, fullArticle: true }),// ✗ inactive
-      makeArticle({ id: 'e', category: 'keyboard', draft: false, fullArticle: true }), // ✓
+      makeArticle({ id: 'a', category: 'mouse', draft: false, publish: true }),  // âœ“
+      makeArticle({ id: 'b', category: 'mouse', draft: true, publish: true }),   // âœ— draft
+      makeArticle({ id: 'c', category: 'mouse', draft: false, publish: false }), // âœ— stub
+      makeArticle({ id: 'd', category: 'headset', draft: false, publish: true }),// âœ— inactive
+      makeArticle({ id: 'e', category: 'keyboard', draft: false, publish: true }), // âœ“
     ];
     const result = filterArticles(entries, active);
     assert.equal(result.length, 2);
@@ -166,9 +166,9 @@ describe('filterArticles — combined filters', () => {
   });
 });
 
-// ─── sorting ────────────────────────────────────────────────────────────────
+// â”€â”€â”€ sorting â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
-describe('filterArticles — sorting', () => {
+describe('filterArticles â€” sorting', () => {
   const active = ['mouse'];
 
   it('sorts by datePublished descending (newest first)', () => {
@@ -200,9 +200,9 @@ describe('filterArticles — sorting', () => {
   });
 });
 
-// ─── edge cases ─────────────────────────────────────────────────────────────
+// â”€â”€â”€ edge cases â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
-describe('filterArticles — edge cases', () => {
+describe('filterArticles â€” edge cases', () => {
   it('returns empty array for empty input', () => {
     const result = filterArticles([], ['mouse']);
     assert.deepEqual(result, []);

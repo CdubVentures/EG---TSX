@@ -1,4 +1,4 @@
----
+﻿---
 title: Razer Viper V4 Pro prototype spotted at IEM Dallas 2025
 description: >-
   A mysterious black-and-white camo Razer mouse seen during IEM Dallas 2025 has
@@ -20,9 +20,10 @@ datePublished: '2025-11-21'
 dateUpdated: '2025-11-21'
 author: Newsroom
 heroCredit: IEM / ESL broadcast
+hero: hero-img
 category: mouse
 draft: false
-fullArticle: true
+publish: true
 ---
 A black-and-white, “car-camo” Razer mouse has quietly appeared on stage at **IEM Dallas 2025**—and the competitive mouse community is already calling it the **Viper V4 Pro**.
 

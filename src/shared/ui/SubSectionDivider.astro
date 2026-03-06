@@ -1,0 +1,78 @@
+---
+/**
+ * SubSectionDivider.astro — Centered text between two horizontal lines.
+ * Faithful port of HBS site_shared.css .sub-section-divider-container (lines 628–691).
+ */
+interface Props {
+  text: string;
+}
+
+const { text } = Astro.props;
+---
+
+<div class="sub-section-divider-container">
+  <div class="sub-section-divider">
+    <span class="divider-text">{text}</span>
+  </div>
+</div>
+
+<style>
+  .sub-section-divider-container {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    max-width: var(--home-width);
+    margin: 4rem auto 2rem auto;
+    padding: 0;
+    align-content: center;
+    overflow-x: hidden;
+    border: var(--border) solid var(--brand-accent);
+    position: relative;
+    flex-direction: column;
+    align-items: stretch;
+    z-index: 4;
+  }
+
+  .sub-section-divider {
+    display: flex;
+    align-items: center;
+    max-width: var(--home-width);
+    justify-content: center;
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+    padding: 1.5rem 0;
+    border: var(--border) solid var(--brand-accent);
+  }
+
+  .sub-section-divider::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    width: 108%;
+    height: 1px;
+    background-color: var(--section-light-background-color);
+    margin: 0 auto;
+  }
+
+  .sub-section-divider::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 1px;
+    background-color: var(--section-light-background-color);
+    margin: 0 auto;
+  }
+
+  .divider-text {
+    font-family: var(--identity-font);
+    font-size: 1.35rem;
+    font-weight: bold;
+    color: var(--white-black-color-2);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    display: flex;
+    align-items: center;
+  }
+</style>

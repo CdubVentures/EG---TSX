@@ -1,4 +1,4 @@
----
+﻿---
 brand: Pwnage
 displayName: Pwnage
 title: 'Pwnage: Precision. Customization. Domination.'
@@ -22,6 +22,7 @@ navbar:
   - keyboard
   - mouse
 toc: false
-fullArticle: true
+publish: true
+hero: brand-logo-horizontal-index
 ---
 

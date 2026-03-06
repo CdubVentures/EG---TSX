@@ -1,0 +1,261 @@
+---
+/**
+ * GamesScroller.astro — Horizontal game card slider with arrows + VanillaTilt.
+ * Port of HBS scrollerGames.handlebars + scroller_games.css + site_arrows.css.
+ * Dark theme values are LOCKED — match HBS exactly.
+ */
+import { resolveHero, articleUrl, articleSrcSet } from '@core/article-helpers';
+
+interface GameEntry {
+  id: string;
+  data: {
+    title: string;
+    hero?: string;
+    publish?: boolean;
+  };
+}
+
+interface Props {
+  games: GameEntry[];
+}
+
+const { games } = Astro.props;
+
+// WHY: If no games, render nothing (invariant from contract)
+if (games.length === 0) return;
+---
+
+<section class="games-scroller-container">
+  <div class="games-scroller">
+    <div class="game-left-arrow game-arrow scroller-arrow">
+      <svg aria-hidden="true" class="svg-base" focusable="false" height="16"
+        viewBox="0 0 16 16" width="16" xmlns="http://www.w3.org/2000/svg">
+        <path fill="currentColor" d="M2.38 7.784 8.796 1.37l1.414 1.414-5 5 5 5-1.414 1.414z"></path>
+      </svg>
+    </div>
+
+    <div class="game-slider">
+      {games.map(game => {
+        const heroStem = game.data.hero ?? 'box-art-cover';
+        const heroPath = resolveHero('games', game.id, heroStem);
+        const srcset = articleSrcSet(heroPath);
+        const url = articleUrl('games', game.id);
+
+        return (
+          <a class="game-slider-item" href={url}>
+            <div class="game-image-container">
+              <img
+                loading="lazy"
+                src={`${heroPath}_s.webp`}
+                srcset={srcset}
+                sizes="(min-width: 1150px) 200px, clamp(125px, 85px + 10vw, 200px)"
+                alt={game.data.title}
+                class="game-image lazy-no-blur"
+                draggable="false"
+              />
+            </div>
+            <h3 class="game-title">{game.data.title}</h3>
+          </a>
+        );
+      })}
+    </div>
+
+    <div class="game-right-arrow game-arrow scroller-arrow">
+      <svg aria-hidden="true" class="svg-base" focusable="false" height="16"
+        viewBox="0 0 16 16" width="16" xmlns="http://www.w3.org/2000/svg">
+        <path fill="currentColor" d="m13.21 7.784-6.415 6.414-1.414-1.414 5-5-5-5L6.795 1.37z"></path>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<script>
+  // ─── Games Slider — Interactive Behavior ────────────────────────────────
+  // Port of HBS scrollerGames.js: grab-and-go + arrows + VanillaTilt.
+  // Slider logic delegated to shared initSlider; VanillaTilt is unique to games.
+
+  import { initSlider } from '@shared/ui/slider-init';
+
+  function initGameSlider() {
+    const slider = document.querySelector('.game-slider') as HTMLElement | null;
+    const leftArrow = document.querySelector('.game-left-arrow') as HTMLElement | null;
+    const rightArrow = document.querySelector('.game-right-arrow') as HTMLElement | null;
+
+    if (!slider || !leftArrow || !rightArrow) return;
+
+    initSlider({ slider, leftArrow, rightArrow });
+
+    // ── VanillaTilt init ──────────────────────────────────────────────────
+    // WHY: NavLinks loads VanillaTilt lazily on hover — may not exist yet.
+    // Load dynamically if needed, same pattern as NavLinks.astro.
+    const tiltEls = document.querySelectorAll('.game-image-container');
+    if (!tiltEls.length) return;
+
+    const TILT_OPTS = {
+      max: 15,
+      speed: 400,
+      scale: 1,
+      perspective: 800,
+      glare: true,
+      'max-glare': 0.35,
+    };
+
+    function applyTilt() {
+      if (window.VanillaTilt) {
+        window.VanillaTilt.init(Array.from(tiltEls), TILT_OPTS);
+      }
+    }
+
+    if (window.VanillaTilt) {
+      applyTilt();
+    } else {
+      const script = document.createElement('script');
+      script.src = '/js/widget_tile_tilt.js';
+      script.onload = applyTilt;
+      document.head.appendChild(script);
+    }
+  }
+
+  // WHY: Astro hoists <script> as deferred ES modules — DOMContentLoaded
+  // may have already fired. Check readyState first (same pattern as HomeSlideshow).
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initGameSlider);
+  } else {
+    initGameSlider();
+  }
+</script>
+
+<style>
+  /* ═══════════════════════════════════════════════════════════════════════════
+     GAMES SCROLLER — Port of scroller_games.css + site_arrows.css (game-arrow)
+     Dark theme values are LOCKED — match HBS exactly.
+     ═══════════════════════════════════════════════════════════════════════════ */
+
+  /* ── Container ── */
+  .games-scroller-container {
+    position: relative;
+    margin: 0 auto;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    height: auto;
+    max-width: 100%;
+    box-sizing: border-box;
+    z-index: 3;
+  }
+
+  .games-scroller {
+    position: relative;
+    margin: 0 auto;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: auto;
+    box-sizing: border-box;
+  }
+
+  /* ── Slider track ── */
+  .game-slider {
+    display: flex;
+    align-items: stretch;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-behavior: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    width: 100%;
+    user-select: none;
+  }
+
+  .game-slider::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* ── Slider item ── */
+  .game-slider-item {
+    flex: 0 0 auto;
+    width: clamp(125px, 85px + 10vw, 200px);
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+    margin: 0 1rem 0 0;
+    position: relative;
+    transition: transform 0.3s ease;
+  }
+
+  /* ── Image container (7:10 poster shape) ── */
+  .game-image-container {
+    width: 100%;
+    aspect-ratio: 7 / 10;
+    flex-shrink: 0;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    border-radius: 8px;
+    will-change: transform;
+    transform-style: preserve-3d;
+  }
+
+  .game-image-container img.game-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+  }
+
+  /* ── Title ── */
+  .game-title {
+    flex: 0 0 auto;
+    display: flex;
+    justify-content: center;
+    font-size: var(--ft-16-14);
+    font-family: var(--identity-font);
+    font-weight: var(--font-weight7);
+    color: var(--white-color-1);
+    margin: 0;
+    text-align: center;
+    line-height: 1.2;
+    padding: 0.7rem 5px;
+    word-break: break-word;
+  }
+
+  @media (max-width: 600px) {
+    .game-title {
+      font-size: var(--fm-14-13);
+    }
+  }
+
+  /* ── Hover effects (pointer devices only) ── */
+  @media (hover: hover) and (pointer: fine) {
+    .game-slider-item:hover {
+      transform: translateY(8px);
+    }
+
+    .game-slider-item:hover .game-title {
+      background: var(--site-gradient-text);
+      -webkit-background-clip: text;
+      -moz-text-fill-color: transparent;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .game-slider-item:hover img.game-image {
+      transform: none;
+    }
+  }
+
+  /* ── Arrow positioning (base styles in global.css .scroller-arrow) ── */
+  .game-left-arrow {
+    left: 0.45rem;
+  }
+
+  .game-right-arrow {
+    right: 0.4rem;
+  }
+</style>

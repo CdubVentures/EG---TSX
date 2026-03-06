@@ -1,4 +1,4 @@
----
+﻿---
 title: >-
   Avowed Breaks Records on Game Pass with High Player Engagement in February
   2025
@@ -11,9 +11,9 @@ tags:
   - RPG Game Success
 datePublished: '2025-12-16'
 author: EG Team
-heroImg: feature-image
+hero: feature-image
 category: game
 draft: false
-fullArticle: false
+publish: false
 ---
 

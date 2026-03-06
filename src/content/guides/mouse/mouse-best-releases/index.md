@@ -1,4 +1,4 @@
----
+﻿---
 category: mouse
 navbar:
   - best in classes
@@ -9,8 +9,8 @@ description: >-
   Stay ahead of the curve with the latest mice on the market, featuring
   groundbreaking technologies and fresh aesthetics.
 tags: []
-heroImg: title
-fullArticle: true
+hero: title
+publish: true
 toc: false
 draft: false
 ---

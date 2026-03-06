@@ -1,4 +1,4 @@
----
+﻿---
 category: mouse
 navbar:
   - educational guides
@@ -9,8 +9,8 @@ description: >-
   Demystify mouse sensitivity settings—understand DPI, IPS, and other metrics to
   achieve pinpoint accuracy tailored to your unique playstyle.
 tags: []
-heroImg: title
-fullArticle: true
+hero: title
+publish: true
 toc: false
 draft: false
 ---

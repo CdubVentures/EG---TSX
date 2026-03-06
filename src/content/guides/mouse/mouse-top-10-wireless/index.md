@@ -1,4 +1,4 @@
----
+﻿---
 category: mouse
 navbar:
   - top 10 speciality picks
@@ -11,8 +11,8 @@ description: >-
   compromising accuracy.
 tags:
   - Wireless Mice
-heroImg: title
-fullArticle: true
+hero: title
+publish: true
 toc: false
 draft: false
 ---

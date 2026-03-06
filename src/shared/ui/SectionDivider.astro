@@ -7,10 +7,11 @@ interface Props {
   title: string;
   titleHref?: string;
   subtitle?: string;
+  seeMoreHref?: string;
   class?: string;
 }
 
-const { title, titleHref, subtitle, class: className } = Astro.props;
+const { title, titleHref, subtitle, seeMoreHref, class: className } = Astro.props;
 ---
 
 <div class:list={['section-divider', className]}>
@@ -25,12 +26,19 @@ const { title, titleHref, subtitle, class: className } = Astro.props;
     {subtitle && <span class="section-divider-subtitle">{subtitle}</span>}
   </div>
   <div class="section-divider-actions">
+    {seeMoreHref && (
+      <a href={seeMoreHref} class="section-divider-link">See More</a>
+    )}
     <slot name="actions" />
   </div>
 </div>
 
-<style>
+<style is:global>
   /* ── Base layout ── */
+  /* WHY is:global: section-divider classes are shared UI used inline by
+     FeaturedScroller (filter tabs) and potentially other components.
+     Scoped styles only apply to elements rendered inside this component,
+     but these classes need to work in any context. */
   .section-divider {
     display: flex;
     flex-wrap: wrap;
@@ -100,8 +108,8 @@ const { title, titleHref, subtitle, class: className } = Astro.props;
     border-radius: 4px;
   }
 
-  /* ── Title link with caret ── */
-  .section-divider-link {
+  /* ── Title link with caret (inside .section-divider-title) ── */
+  .section-divider-title .section-divider-link {
     display: inline-flex;
     align-items: center;
     gap: 0.55rem;
@@ -113,7 +121,7 @@ const { title, titleHref, subtitle, class: className } = Astro.props;
     will-change: color, transform, background;
   }
 
-  .section-divider-link::after {
+  .section-divider-title .section-divider-link::after {
     content: "›";
     display: inline-block;
     line-height: 1;
@@ -125,25 +133,23 @@ const { title, titleHref, subtitle, class: className } = Astro.props;
     transition: transform 0.14s ease, color 0.18s ease;
   }
 
-  /* Fallback hover */
-  .section-divider-link:hover {
+  .section-divider-title .section-divider-link:hover {
     color: var(--site-color);
   }
 
-  .section-divider-link:hover::after {
+  .section-divider-title .section-divider-link:hover::after {
     transform: translateX(6px) translateY(-0.04em);
   }
 
-  /* Gradient text hover */
   @supports ((-webkit-background-clip: text) or (background-clip: text)) {
-    .section-divider-link:hover {
+    .section-divider-title .section-divider-link:hover {
       background: var(--site-gradient-text);
       -webkit-background-clip: text;
       background-clip: text;
       color: transparent;
     }
 
-    .section-divider-link:hover::after {
+    .section-divider-title .section-divider-link:hover::after {
       background: var(--site-gradient-text);
       -webkit-background-clip: text;
       background-clip: text;
@@ -152,10 +158,78 @@ const { title, titleHref, subtitle, class: className } = Astro.props;
     }
   }
 
-  /* Focus ring */
-  .section-divider-link:focus-visible {
+  .section-divider-title .section-divider-link:focus-visible {
     outline: 2px solid var(--site-color);
     outline-offset: 3px;
     border-radius: 6px;
+  }
+
+  /* ── Action button (pill-shaped, inside .section-divider-actions) ── */
+  /* Port of HBS site_shared.css lines 489–550 */
+  .section-divider-actions .section-divider-link {
+    display: inline-block;
+    padding: 0.75rem 1.75rem;
+    margin-top: 0.25em;
+    border: 1px solid var(--section-medium-background-color);
+    font-size: var(--ft-14-13);
+    background-color: transparent;
+    color: var(--white-color-2);
+    font-family: var(--identity-font, sans-serif);
+    font-weight: var(--font-weight6, 600);
+    cursor: pointer;
+    text-decoration: none;
+    transition: background 0.18s ease, color 0.18s ease, border 0.18s ease;
+  }
+
+  .section-divider-actions .section-divider-link:first-child {
+    border-top-left-radius: 80px;
+    border-bottom-left-radius: 80px;
+  }
+
+  .section-divider-actions .section-divider-link:last-child {
+    border-top-right-radius: 80px;
+    border-bottom-right-radius: 80px;
+  }
+
+  /* WHY: single button = both first and last child → fully rounded */
+
+  @media (hover: hover) and (pointer: fine) {
+    .section-divider-actions .section-divider-link[data-product-color="true"]:hover {
+      background-color: transparent;
+      border: 1px solid transparent;
+      border-image: linear-gradient(to right,
+          var(--card-hover),
+          var(--card-hover)) 1;
+      border-image-slice: 1;
+      color: var(--card-hover);
+    }
+
+    .section-divider-actions .section-divider-link:not([data-product-color="true"]):hover {
+      background: var(--site-gradient-text);
+      border-image: var(--site-background-gradient) 1;
+      border-image-slice: 1;
+      -webkit-background-clip: text;
+      -moz-text-fill-color: transparent;
+      background-clip: text;
+      color: transparent;
+    }
+  }
+
+  .section-divider-actions .section-divider-link[data-product-color="true"].active {
+    background-color: var(--card-color, var(--site-color));
+    border: 1px solid var(--card-color, var(--site-color));
+    color: #fff;
+  }
+
+  .section-divider-actions .section-divider-link:not([data-product-color="true"]).active {
+    background: var(--site-background-gradient);
+    border: 1px solid var(--site-start-color);
+    border-image: none;
+    color: #fff;
+  }
+
+  .section-divider-actions .section-divider-link:focus-visible {
+    outline: 2px solid var(--site-color);
+    outline-offset: 3px;
   }
 </style>

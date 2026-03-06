@@ -1,0 +1,86 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="300" height="600" viewBox="0 0 300 600">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0d1117"/>
+      <stop offset="50%" stop-color="#111820"/>
+      <stop offset="100%" stop-color="#0d1117"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#10b981"/>
+      <stop offset="100%" stop-color="#059669"/>
+    </linearGradient>
+    <linearGradient id="glow" x1="0.5" y1="0" x2="0.5" y2="1">
+      <stop offset="0%" stop-color="#10b981" stop-opacity="0.15"/>
+      <stop offset="100%" stop-color="#10b981" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="300" height="600" fill="url(#bg)"/>
+  <rect width="300" height="3" fill="url(#accent)"/>
+
+  <!-- Glow effect -->
+  <ellipse cx="150" cy="180" rx="120" ry="100" fill="url(#glow)"/>
+
+  <!-- Geometric decorations -->
+  <line x1="0" y1="200" x2="300" y2="160" stroke="#1a2332" stroke-width="1"/>
+  <line x1="0" y1="350" x2="300" y2="380" stroke="#1a2332" stroke-width="1"/>
+  <polygon points="260,0 300,0 300,80" fill="#141c26" opacity="0.6"/>
+
+  <!-- Top section — Brand -->
+  <rect x="20" y="22" width="8" height="8" rx="4" fill="#10b981"/>
+  <text x="36" y="31" font-family="system-ui, sans-serif" font-size="11" font-weight="700" fill="#8b949e" letter-spacing="2">SAMPLE BRAND</text>
+
+  <!-- Hero headline -->
+  <text x="20" y="82" font-family="system-ui, -apple-system, sans-serif" font-size="36" font-weight="900" fill="#ffffff" letter-spacing="1">IMMERSIVE</text>
+  <text x="20" y="120" font-family="system-ui, -apple-system, sans-serif" font-size="36" font-weight="900" fill="#10b981" letter-spacing="1">DISPLAY</text>
+  <text x="20" y="148" font-family="system-ui, sans-serif" font-size="14" font-weight="400" fill="#8b949e">32" 4K Gaming Monitor</text>
+
+  <!-- Product silhouette area -->
+  <g transform="translate(30, 170)" opacity="0.07">
+    <rect x="0" y="10" width="240" height="140" rx="4" fill="#10b981"/>
+    <rect x="80" y="150" width="80" height="10" fill="#10b981"/>
+    <rect x="60" y="160" width="120" height="5" rx="2" fill="#10b981"/>
+  </g>
+
+  <!-- Divider -->
+  <rect x="20" y="340" width="260" height="1" fill="#1e2a38"/>
+
+  <!-- Specs section -->
+  <text x="20" y="370" font-family="system-ui, sans-serif" font-size="11" font-weight="700" fill="#6b7280" letter-spacing="2">SPECIFICATIONS</text>
+
+  <!-- Spec rows -->
+  <g font-family="system-ui, sans-serif">
+    <text x="20" y="400" font-size="13" font-weight="500" fill="#8b949e">Resolution</text>
+    <text x="280" y="400" font-size="13" font-weight="700" fill="#10b981" text-anchor="end">3840 x 2160</text>
+
+    <rect x="20" y="412" width="260" height="1" fill="#161d27" opacity="0.6"/>
+
+    <text x="20" y="434" font-size="13" font-weight="500" fill="#8b949e">Refresh Rate</text>
+    <text x="280" y="434" font-size="13" font-weight="700" fill="#10b981" text-anchor="end">240Hz</text>
+
+    <rect x="20" y="446" width="260" height="1" fill="#161d27" opacity="0.6"/>
+
+    <text x="20" y="468" font-size="13" font-weight="500" fill="#8b949e">Response Time</text>
+    <text x="280" y="468" font-size="13" font-weight="700" fill="#10b981" text-anchor="end">0.03ms</text>
+
+    <rect x="20" y="480" width="260" height="1" fill="#161d27" opacity="0.6"/>
+
+    <text x="20" y="502" font-size="13" font-weight="500" fill="#8b949e">Panel</text>
+    <text x="280" y="502" font-size="13" font-weight="700" fill="#10b981" text-anchor="end">OLED</text>
+  </g>
+
+  <!-- Price -->
+  <text x="20" y="545" font-family="system-ui, sans-serif" font-size="14" font-weight="500" fill="#6b7280">Starting at</text>
+  <text x="20" y="572" font-family="system-ui, sans-serif" font-size="32" font-weight="900" fill="#ffffff">$799</text>
+
+  <!-- CTA Button -->
+  <rect x="170" y="540" width="110" height="40" rx="20" fill="#10b981"/>
+  <text x="225" y="566" font-family="system-ui, sans-serif" font-size="13" font-weight="800" fill="#0d1117" text-anchor="middle" letter-spacing="1">LEARN MORE</text>
+
+  <!-- Sponsored -->
+  <text x="280" y="594" font-family="system-ui, sans-serif" font-size="9" font-weight="500" fill="#4a5568" text-anchor="end">Sponsored</text>
+
+  <!-- Bottom accent -->
+  <rect y="597" width="300" height="3" fill="url(#accent)"/>
+</svg>

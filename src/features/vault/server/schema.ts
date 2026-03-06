@@ -11,6 +11,7 @@ export const VaultProductSchema = z.object({
   model: z.string().min(1),
   category: z.string().min(1),
   imagePath: z.string(),
+  thumbnailStem: z.string().min(1),
 });
 
 export const VaultEntrySchema = z.object({

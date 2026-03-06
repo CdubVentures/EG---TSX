@@ -3,7 +3,7 @@
 """
 category-manager.py -- Enhanced GUI for managing category flags, colors, and content.
 
-Reads/writes config/categories.json.
+Reads/writes config/data/categories.json.
 Scans src/content/{reviews,guides,news} for article counts and auto-discovers new categories.
 Matches navbar-manager.py Catppuccin Mocha theme.
 """
@@ -27,7 +27,7 @@ if sys.platform == "win32":
 
 # -- Paths -------------------------------------------------------------------
 ROOT = Path(__file__).resolve().parent.parent
-CATEGORIES_JSON = ROOT / "config" / "categories.json"
+CATEGORIES_JSON = ROOT / "config" / "data" / "categories.json"
 CONTENT = ROOT / "src" / "content"
 NAVBAR_ICONS = ROOT / "public" / "images" / "navbar"
 

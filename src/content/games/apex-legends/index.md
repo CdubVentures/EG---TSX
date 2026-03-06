@@ -1,4 +1,4 @@
----
+﻿---
 game: Apex Legends
 navbar: true
 guide: Apex Legends
@@ -27,7 +27,8 @@ game_x: 'https://x.com/PlayApex'
 game_instagram: 'https://www.instagram.com/playapex/'
 game_youtube: 'https://www.youtube.com/@playapex'
 iDashboard: all_2
-fullArticle: true
+publish: true
 toc: false
+hero: box-art-cover
 ---
 

@@ -1,9 +1,9 @@
----
+﻿---
 category: monitor
 brand: MSI
 model: MPG 321URX QD-OLED
 author: EG Team
-fullArticle: true
+publish: true
 draft: false
 title: 'MSI MPG 321URX QD-OLED: The Pinnacle of Premium Gaming Displays'
 subtitle: >-
@@ -16,7 +16,7 @@ description: >-
   2025.
 tags:
   - Best Premium Monitor
-heroImg: feature-image
+hero: feature-image
 productId: msi-mpg-321urx-qd-oled
 toc: false
 ---

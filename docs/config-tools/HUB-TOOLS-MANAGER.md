@@ -1,7 +1,7 @@
 # Hub Tools Manager — `config/hub-tools-manager.py`
 
 Manages hub sidebar tools configuration for each product category.
-Reads/writes `config/hub-tools.json`.
+Reads/writes `config/data/hub-tools.json`.
 
 Launch: `python config/hub-tools-manager.py`
 
@@ -70,7 +70,7 @@ Each view has its own independent 6-slot arrangement.
 **Auto-fill:** Empty slots are filled automatically at page build time from
 remaining tools. Explicit slot assignments take priority.
 
-## Data Model — `config/hub-tools.json`
+## Data Model — `config/data/hub-tools.json`
 
 ```json
 {
@@ -126,13 +126,29 @@ Keys are **view names** (not categories). Values are ordered arrays of
 
 ## Category Filtering
 
-Uses filesystem scanning (not JSON flags) to determine which categories to show.
+Uses **flag-based detection** from `categories.json` to determine which categories
+to show. The `is_product_active()` function checks `product.production` or
+`product.vite` flags — honoring the same Product Gateway pattern used site-wide.
 See [CATEGORY-TYPES.md](./CATEGORY-TYPES.md).
 
 - **Content-only** categories (hardware, game, gpu, ai) are excluded entirely
 - **Active product** categories (mouse, keyboard, monitor) show with full color
 - **Future product** categories (headset, mousepad, controller) show dimmed,
   all tools disabled by default
+
+### Runtime gateway
+
+Components never read `hub-tools.json` directly. The gateway in `src/core/hub-tools.ts`
+filters tools by `CONFIG.categories` (active product categories) and sorts by tool
+priority. See [`DATA-GATEWAY-CONTRACT.md`](../DATA-GATEWAY-CONTRACT.md) for the
+full gateway pattern.
+
+| Gateway function | Purpose |
+|-----------------|---------|
+| `getDesktopTools()` | Flat list, sorted by tool priority then category order |
+| `getMobileTools()` | Grouped by category, each group sorted by tool priority |
+| `getToolsForCategory(catId)` | Tools for a specific category sidebar |
+| `getToolTooltip(toolType)` | Shared tooltip text |
 
 ## `ensure_defaults()`
 

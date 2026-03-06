@@ -1,4 +1,4 @@
----
+﻿---
 game: Fortnite
 navbar: true
 guide: Fortnite
@@ -25,7 +25,8 @@ game_facebook: 'https://www.facebook.com/FortniteGame/'
 game_x: 'https://x.com/FortniteGame'
 game_instagram: 'https://www.instagram.com/fortnite/'
 game_youtube: 'https://www.youtube.com/@Fortnite'
-fullArticle: true
+publish: true
 toc: false
+hero: box-art-cover
 ---
 

@@ -2,6 +2,7 @@
 // Temporary home page test section to verify the product data pipeline:
 // product JSON -> Astro collection -> component -> images.
 // Will be replaced by real home page sections in Phase 4.6+.
+// TODO: use imageDefaults(category) when permanent card component is built
 
 import { useState } from 'react';
 import { CONFIG, plural } from '@core/config';
@@ -58,7 +59,7 @@ export default function ProductTestSection({ products }: ProductTestSectionProps
           <div key={product.id} className="product-test-card">
             <div className="product-test-card-img">
               <img
-                src={`${product.imagePath}/top_s.webp`}
+                src={`${product.imagePath}/${product.thumbnailStem}_s.webp`}
                 alt={`${product.brand} ${product.model}`}
                 loading="lazy"
                 onError={(e) => {

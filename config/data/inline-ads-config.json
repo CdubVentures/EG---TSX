@@ -1,0 +1,45 @@
+{
+  "defaults": {
+    "campaign": "inline-ad",
+    "desktop": true,
+    "mobile": true
+  },
+  "collections": {
+    "reviews": {
+      "enabled": true,
+      "desktop": { "firstAfter": 3, "every": 5, "max": 8 },
+      "mobile":  { "firstAfter": 3, "every": 4, "max": 10 },
+      "wordScaling": {
+        "enabled": true,
+        "desktopWordsPerAd": 450,
+        "mobileWordsPerAd": 350,
+        "minFirstAdWords": 150
+      }
+    },
+    "guides": {
+      "enabled": true,
+      "desktop": { "firstAfter": 2, "every": 4, "max": 10 },
+      "mobile":  { "firstAfter": 2, "every": 3, "max": 12 },
+      "wordScaling": {
+        "enabled": true,
+        "desktopWordsPerAd": 400,
+        "mobileWordsPerAd": 300,
+        "minFirstAdWords": 150
+      }
+    },
+    "news": {
+      "enabled": true,
+      "desktop": { "firstAfter": 3, "every": 6, "max": 4 },
+      "mobile":  { "firstAfter": 3, "every": 5, "max": 5 },
+      "wordScaling": {
+        "enabled": true,
+        "desktopWordsPerAd": 500,
+        "mobileWordsPerAd": 400,
+        "minFirstAdWords": 200
+      }
+    },
+    "games":  { "enabled": false },
+    "brands": { "enabled": false },
+    "pages":  { "enabled": false }
+  }
+}

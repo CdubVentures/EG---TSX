@@ -1,9 +1,9 @@
-# Navbar Manager — `config/navbar-manager.py`
+# Navbar Manager — `config/navbar-manager.pyw`
 
 Manages navbar link assignments across 4 tabs.
-Reads/writes frontmatter in content files + `src/data/navbar-*.json`.
+Reads/writes frontmatter in content files + `config/data/navbar-guide-sections.json`.
 
-Launch: `python config/navbar-manager.py`
+Launch: `pythonw config/navbar-manager.pyw`
 
 ## Four Tabs
 
@@ -21,10 +21,13 @@ pool (right).
 - Drag between section columns to reassign
 - Updates frontmatter `navbar:` field with section name
 
+**Double-click rename:** Double-click any guide item to rename its `guide`
+frontmatter field (the short nav-friendly display name).
+
 **Section management:**
 - Add/Rename/Delete sections via dialogs
 - Reorder sections with arrow buttons
-- Section order stored in `src/data/navbar-guide-sections.json`
+- Section order stored in `config/data/navbar-guide-sections.json`
 
 ### Brands Tab
 
@@ -38,7 +41,13 @@ Assigns brands to category columns in the navbar.
 - Delete key also removes from current category
 - Brands can belong to **multiple categories** (navbar field is an array)
 
-**Data:** Updates frontmatter `navbar:` field in brand `.md` files as a YAML list.
+**Double-click rename:** Double-click any brand to rename its `displayName`
+frontmatter field. The `brand` field stays stable as an identifier — only
+`displayName` changes. `GlobalNav.astro` reads `displayName ?? brand` so the
+rename propagates to both desktop and mobile nav menus.
+
+**Data:** Updates frontmatter `navbar:` field and `displayName` field in brand
+`.md` files.
 
 ### Games Tab
 
@@ -46,29 +55,41 @@ Toggle games on/off for navbar display. No drag-and-drop.
 
 **Layout:** 3-column card grid with toggle switches.
 
-**Data:** Updates frontmatter `navbar:` boolean in game `.md` files.
+**Double-click rename:** Double-click any game label to rename its `title` (and
+`game`) frontmatter fields.
 
-### Hubs Tab
+**Data:** Updates frontmatter `navbar:` boolean and `title`/`game` fields in
+game `.md` files.
 
-Enable/disable category hub links in navbar dropdown. No drag-and-drop.
+### Hubs Tab (display-only)
 
-**Layout:** Full-width cards per category with toggle switches.
+Read-only view of category activation flags from `config/data/categories.json`.
+Shows which categories have Product/Content enabled (production + vite flags).
 
-**Data:** Writes `src/data/navbar-hubs.json` (array of enabled category IDs).
+**Layout:** Full-width cards per category with status badges.
+
+**No edits here** — use Category Manager (`config/category-manager.pyw`) to
+change activation flags. The navbar hubs dropdown is driven by
+`config.ts → isProductActive()` via `GlobalNav.astro`.
 
 ## Data Files
 
 | File | Format | Tab |
 |------|--------|-----|
-| `src/content/guides/**/index.md` | frontmatter `navbar: section_name` | Guides |
-| `src/content/brands/**/index.md` | frontmatter `navbar: [cat1, cat2]` | Brands |
-| `src/content/games/**/index.md` | frontmatter `navbar: true/false` | Games |
-| `src/data/navbar-hubs.json` | `["mouse", "keyboard", ...]` | Hubs |
-| `src/data/navbar-guide-sections.json` | `{cat: [section_names]}` | Guides |
+| `src/content/guides/**/index.md` | frontmatter `navbar`, `guide` | Guides |
+| `src/content/brands/**/index.md` | frontmatter `navbar`, `displayName` | Brands |
+| `src/content/games/**/index.md` | frontmatter `navbar`, `title`, `game` | Games |
+| `config/data/categories.json` | read-only (activation flags) | Hubs |
+| `config/data/navbar-guide-sections.json` | `{cat: [section_names]}` | Guides |
 
 ## Save Behavior
 
 Changes are batched in memory. `Ctrl+S` writes all pending changes:
-- Frontmatter updates use `write_navbar_field()` which modifies only the
+- Navbar assignment updates use `write_navbar_field()` — modifies only the
   `navbar:` line in the YAML front matter (preserves all other fields)
+- Rename updates use `write_field()` — modifies a single scalar YAML field
+  (e.g., `displayName`, `guide`, `title`). Auto-quotes values with special chars
 - JSON files are written atomically
+- Hubs tab has no save actions (display-only)
+- Two separate pending-change dicts: `pending_changes` (navbar assignments) and
+  `pending_field_changes` (renames). Both clear on save

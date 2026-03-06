@@ -1,4 +1,4 @@
----
+﻿---
 brand: Mad Catz
 displayName: Mad Catz
 title: 'Mad Catz: Bold Designs, High-Octane Performance'
@@ -16,6 +16,7 @@ brand_tiktok: ''
 navbar:
   - mouse
 toc: false
-fullArticle: true
+publish: true
+hero: brand-logo-horizontal-index
 ---
 

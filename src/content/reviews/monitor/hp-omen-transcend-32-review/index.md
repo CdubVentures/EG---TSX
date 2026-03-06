@@ -1,9 +1,9 @@
----
+﻿---
 category: monitor
 brand: HP
 model: Omen Transcend 32
 author: EG Team
-fullArticle: true
+publish: true
 draft: false
 title: 'HP Omen Transcend 32: Edge-of-Your-Seat Gaming'
 subtitle: 'Experience 1440p Resolution, 240Hz Speed, and IPS Precision'
@@ -13,7 +13,7 @@ description: >-
   2025.
 tags:
   - Competitive Monitor
-heroImg: feature-image
+hero: feature-image
 productId: hp-omen-transcend-32
 toc: false
 ---

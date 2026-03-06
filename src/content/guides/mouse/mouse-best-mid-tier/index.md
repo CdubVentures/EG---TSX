@@ -1,4 +1,4 @@
----
+﻿---
 category: mouse
 navbar:
   - best in classes
@@ -9,8 +9,8 @@ description: >-
   Find the sweet spot between features and affordability—these mice deliver
   exceptional performance and reliable ergonomics without breaking the bank.
 tags: []
-heroImg: title
-fullArticle: true
+hero: title
+publish: true
 toc: false
 draft: false
 ---

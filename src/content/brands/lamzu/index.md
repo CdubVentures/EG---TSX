@@ -1,4 +1,4 @@
----
+﻿---
 brand: Lamzu
 displayName: Lamzu
 title: 'Lamzu: The Future of Ultra-Light Gaming'
@@ -23,6 +23,7 @@ navbar:
   - keyboard
   - mouse
 toc: false
-fullArticle: true
+publish: true
+hero: brand-logo-horizontal-index
 ---
 

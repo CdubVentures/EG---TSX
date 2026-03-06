@@ -1,4 +1,4 @@
----
+﻿---
 title: 'Dell AW2725Q 4K 240Hz QD-OLED Now Available: A Game-Changer for 2025 Gaming'
 description: >-
   Dell’s Alienware AW2725Q is now shipping, pairing 27-inch 4K, 240Hz, and
@@ -20,12 +20,11 @@ tags:
 datePublished: '2025-03-04'
 dateUpdated: '2025-12-10'
 author: EG Gear Staff
-heroImg: >-
-  /images/news/monitor/dell-aw2725q-4k-240hz-qd-oled-now-available-a-game-changer-for-2025-gaming/hero-img
+hero: aw2725q-front
 heroCredit: Alienware/Dell (press image)
 category: monitor
 draft: false
-fullArticle: true
+publish: true
 ---
 *Price and availability checked on 12-10-2025. Stock and pricing can vary by region and retailer.*
 

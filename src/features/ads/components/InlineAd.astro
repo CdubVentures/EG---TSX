@@ -1,0 +1,51 @@
+---
+/**
+ * InlineAd.astro — MDX-usable inline ad component.
+ *
+ * Wraps AdSlot with article-specific defaults and device gating.
+ * Used both manually in MDX (<InlineAd />) and auto-injected by
+ * the rehype-inline-ads plugin.
+ */
+import AdSlot from './AdSlot.astro';
+
+interface Props {
+  campaign?: string;
+  desktop?: boolean;
+  mobile?: boolean;
+}
+
+const {
+  campaign = 'inline-ad',
+  desktop = true,
+  mobile = true,
+} = Astro.props;
+---
+
+<div
+  class="article-inline-ad"
+  data-desktop={String(desktop)}
+  data-mobile={String(mobile)}
+>
+  <AdSlot campaign={campaign} />
+</div>
+
+<style>
+  .article-inline-ad {
+    display: flex;
+    justify-content: center;
+    margin: 2rem 0;
+  }
+
+  /* Device gating via CSS — no JS needed */
+  @media (max-width: 767px) {
+    .article-inline-ad[data-mobile="false"] {
+      display: none;
+    }
+  }
+
+  @media (min-width: 768px) {
+    .article-inline-ad[data-desktop="false"] {
+      display: none;
+    }
+  }
+</style>

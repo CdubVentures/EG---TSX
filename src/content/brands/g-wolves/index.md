@@ -1,4 +1,4 @@
----
+﻿---
 brand: G-Wolves
 displayName: G-Wolves
 title: 'G-Wolves: Pushing the Limits of Ultra-Light Gaming'
@@ -24,6 +24,7 @@ navbar:
   - keyboard
   - mouse
 toc: false
-fullArticle: true
+publish: true
+hero: brand-logo-horizontal-index
 ---
 

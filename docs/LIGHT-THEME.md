@@ -3,33 +3,33 @@
 > Tracks light theme readiness for every migrated component.
 > Updated after each phase/milestone. See AGENTS.md theme gate rule.
 >
-> **Last audited:** 2026-03-04
+> **Last audited:** 2026-03-05
 
 ---
 
 ## How the Theme System Works
 
-### Two layers (dark-always + theme-switchable)
+### Three layers
 
 | Layer | Scope | Switches with theme? | Used by |
 |-------|-------|---------------------|---------|
-| **HBS variables** (`--nav-*`, `--site-gradient-*`, `--cat-*`, `--font-size-*`) | `:root` (global) | NO — always dark | Navbar, footer, mega menus, category accents |
-| **Theme tokens** (`--color-bg-*`, `--color-text-*`, `--color-brand-*`, `--radius-*`) | `[data-theme]` selector | YES | Page content, cards, hub grids, article layouts |
-| **Auth tokens** (`--auth-*`) | `[data-theme]` selector | YES | Auth dialog, settings dialog, form controls |
+| **HBS font/layout vars** (`--font-size-*`, `--font-weight*`, `--identity-font`) | `:root` (global) | NO — not color-related | All components |
+| **HBS color bridge vars** (`--section-*`, `--white-color-*`, `--grey-color-*`) | `[data-theme]` blocks | YES | Home page, legacy-ported components |
+| **Theme tokens** (`--color-bg-*`, `--color-text-*`, `--color-brand-*`, `--nav-*`, `--auth-*`, `--card-*`) | `[data-theme]` blocks | YES | Page content, cards, navbar, dialogs |
 
 ### 4 defined themes (`global.css`)
 
 | Theme | `data-theme` | `color-scheme` | `--color-bg-base` | Intent |
 |-------|-------------|----------------|-------------------|--------|
-| **Default** | `default` | `light` | `#ffffff` | Standard light mode |
+| **Default** | `default` | `light` | `#f8f9fa` | Standard light mode (blue brand) |
 | **Gaming** | `gaming` | `dark` | `#0a0a0f` | Dark mode (current default) |
-| **Workstation** | `workstation` | `light` | `#fafafa` | Neutral light, teal brand |
-| **Review** | `review` | `light` | `#fffef7` | Warm light, amber brand |
+| **Workstation** | `workstation` | `light` | `#f4f4f5` | Neutral light (teal brand) |
+| **Review** | `review` | `light` | `#fffef7` | Warm light (amber brand) |
 
 ### Theme switching mechanism
 
 - **SSR default:** `MainLayout.astro` prop `theme = 'default'` (light)
-- **Settings store:** `$theme` atom defaults to `'dark'` — maps `light→default`, `dark→gaming`
+- **Settings store:** `$theme` atom defaults to `'dark'` — maps `light->default`, `dark->gaming`
 - **localStorage key:** `eg-theme` stores the `data-theme` value (`'default'` or `'gaming'`)
 - **Flash prevention:** Inline `<script>` in `<head>` reads localStorage and sets `data-theme` before first paint
 - **Meta theme-color:** Updated to match `--color-bg-base` per theme
@@ -42,23 +42,135 @@
 
 ---
 
-## Resolved Issues (fixed 2026-03-04)
+## Context-Based Card Elevation (site-wide, non-negotiable)
 
-### 1. `color-scheme: dark` removed from `html` base rule
+This is the core light-theme layout system. It determines how card/panel backgrounds adapt based on their surrounding context. **Both halves of every page must follow this rule.**
 
-Was hardcoded on `html` — each `[data-theme]` block already defines its own `color-scheme` (light or dark). Removed the dead override so browser scrollbars and form controls respect the theme.
+### The problem
 
-### 2. `body` background now uses theme token
+HBS components use `--section-dark-background-color` for cards, panels, accordions, and dropdowns (70+ references). In dark theme, this is `#1d2021` — works fine. In light theme, this single variable must serve two contexts:
 
-Changed from `var(--section-darkestdark-background-color)` (always `#121212`) to `var(--color-bg-base)` (switches with theme).
+1. **Cards on grey body canvas** — need to be WHITE (`#ffffff`) so they appear elevated
+2. **Elements on white/bright sections** — need to be GREY (original value) for visual contrast
 
-### 3. Auth tokens moved to theme switchboard
+### The solution: CSS custom property cascading
 
-All 24 `--auth-*` tokens now live inside the `[data-theme]` blocks with proper light/dark values. Workstation and review themes inherit from `:root` (default/light).
+Three rules in `global.css` handle this automatically:
 
-### 4. Auth/settings components de-hardcoded
+```
+[data-theme] block:     --section-dark-background-color: #f0f2f5  (original grey)
+  body override:        --section-dark-background-color: #ffffff  (light themes only)
+    .home-top-wrapper / .-on-white-bg:
+                        --section-dark-background-color: var(--section-dark-bg-on-white)
+                                                         (revert to original grey)
+```
 
-All hardcoded hex values (`#1d2021`, `#e5e7eb`, `#9ba2ab`, `#6b7280`, `#101214`) replaced with `var(--auth-*)` token references across 8 component files.
+- **Level 1 — Theme block** defines the base value (`#f0f2f5` default, `#1d2021` gaming)
+- **Level 2 — Body override** (light themes only): all 3 light themes set `--section-dark` to `#ffffff` on `body`. Dashboard cards, newsfeed wrapper, etc. become white on grey canvas.
+- **Level 3 — White-bg revert**: `.home-top-wrapper` and `.-on-white-bg` revert `--section-dark` to original value via `--section-dark-bg-on-white`. Accordion categories, dropdowns, hero brand cards stay grey for contrast against white.
+- **Gaming**: no body override fires. `--section-dark` stays `#1d2021` everywhere.
+
+### Helper variable
+
+`--section-dark-bg-on-white` stores the original theme-block value in every theme. It exists solely so the revert selectors can reference the "before body override" value:
+
+| Theme | `--section-dark-bg-on-white` |
+|-------|------------------------------|
+| Default | `#f0f2f5` |
+| Gaming | `#1d2021` (same as `--section-dark`, no-op) |
+| Workstation | `#e4e4e7` |
+| Review | `#f5f4e8` |
+
+### How to add new white-bg sections (future pages)
+
+When building a new section with a white or very light background (`--section-darkestdarker` or similar) that contains elements using `--section-dark-background-color`:
+
+1. Add class `.-on-white-bg` to the section wrapper
+2. Cards/panels inside will automatically get the grey value for contrast
+3. No additional CSS needed — the global rule in `global.css` handles it
+
+```html
+<section class="snapshot-hero -on-white-bg">
+  <!-- elements using --section-dark will get grey, not white -->
+</section>
+```
+
+### Visual summary (home page, default light theme)
+
+```
+body  (bg: #f8f9fa grey)
+--section-dark = #ffffff  (body override)
+
+  .home-top-wrapper  (bg: #ffffff white)  .-on-white-bg revert
+  --section-dark = #f0f2f5  (original grey)
+
+    [accordion] [dropdown] [brand cards]  -> grey bg, contrast on white
+
+  Dashboard section  (bg: transparent -> grey body shows through)
+  --section-dark = #ffffff  (inherited from body)
+
+    [cards] [newsfeed]  -> white bg, elevated above grey canvas
+```
+
+### Card shadow tokens
+
+Cards use `--card-shadow` for additional definition in light themes:
+
+| Token | Gaming | Light themes |
+|-------|--------|-------------|
+| `--card-shadow` | `none` | `0 1px 3px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.06)` |
+| `--card-shadow-hover` | `none` | `0 4px 12px rgba(0,0,0,0.1), 0 2px 4px rgba(0,0,0,0.06)` |
+| `--card-container-bg` | `transparent` | `var(--section-dark-background-color)` |
+
+---
+
+## Per-Page Background System
+
+### Body backgrounds (via `body:has()`)
+
+| Page type | Selector | Background var | Default | Gaming |
+|-----------|----------|---------------|---------|--------|
+| Default | `body` | `--section-darkestdark` | `#f8f9fa` | `#121212` |
+| Home | `body` | `--section-darkestdark` | `#f8f9fa` | `#121212` |
+| Article | `body:has(.article)` | `--section-darkest` | `#f4f5f7` | `#161718` |
+| Hub | `body:has(.card-rows)` | `--section-darkestdark` | `#f8f9fa` | `#121212` |
+
+### Footer backgrounds (via `--eg-footer-background`)
+
+Footer bg matches the page section it sits against:
+
+| Page type | Selector | Footer bg var | Default | Gaming |
+|-----------|----------|--------------|---------|--------|
+| Default | `:root` | `--section-dark` | `#ffffff`* | `#1d2021` |
+| Home | `body:has(.home-rail-anchor)` | `--section-darkestdarker` | `#ffffff` | `#080808` |
+| Article | `body:has(.article)` | `--section-darkest` | `#f4f5f7` | `#161718` |
+| Hub | `body:has(.card-rows)` | `--section-darkestdark` | `#f8f9fa` | `#121212` |
+
+*Default footer uses body-overridden value of `--section-dark` in light themes.
+
+---
+
+## Resolved Issues
+
+### 1. `color-scheme: dark` removed from `html` base rule (2026-03-04)
+
+Was hardcoded on `html` — each `[data-theme]` block already defines its own `color-scheme`. Removed so browser scrollbars and form controls respect the theme.
+
+### 2. Auth tokens moved to theme switchboard (2026-03-04)
+
+All 24 `--auth-*` tokens now live inside `[data-theme]` blocks with proper light/dark values.
+
+### 3. Auth/settings components de-hardcoded (2026-03-04)
+
+All hardcoded hex values replaced with `var(--auth-*)` token references across 8 component files.
+
+### 4. HBS color bridge vars moved to theme blocks (2026-03-04)
+
+17 HBS color variables moved from `:root` (hardcoded dark) to `[data-theme]` blocks with per-theme values. See "HBS Bridge Variables" section.
+
+### 5. Context-based card elevation (2026-03-05)
+
+`--section-dark-background-color` is context-scoped in light themes via CSS custom property cascading. Body override sets white; `.home-top-wrapper` / `.-on-white-bg` reverts to original grey. See "Context-Based Card Elevation" section.
 
 ### Remaining: SSR vs client default mismatch
 
@@ -66,7 +178,7 @@ All hardcoded hex values (`#1d2021`, `#e5e7eb`, `#9ba2ab`, `#6b7280`, `#101214`)
 - `$theme` atom defaults to `'dark'`
 - On first visit (no localStorage), SSR renders light, then `loadTheme()` snaps to dark
 
-**Low priority** — flash prevention script mitigates this. The real fix is aligning the SSR default to match the store default, but that's a UX decision (should new visitors see light or dark first?).
+**Low priority** — flash prevention script mitigates this.
 
 ---
 
@@ -76,75 +188,159 @@ All hardcoded hex values (`#1d2021`, `#e5e7eb`, `#9ba2ab`, `#6b7280`, `#101214`)
 
 | Element | Theme-aware? | Notes |
 |---------|-------------|-------|
-| `<html>` background | YES | Uses `var(--color-bg-base)` |
-| `<body>` background | YES | Fixed: now uses `var(--color-bg-base)` |
-| `<body>` text color | YES | `text-text-primary` Tailwind class → theme token |
-| `color-scheme` | YES | Fixed: removed hardcoded dark, each theme block defines its own |
+| `<html>` background | YES | `var(--color-bg-base)` |
+| `<body>` background | YES | `var(--section-darkestdark-background-color)`. Per-page overrides via `body:has()`. |
+| `<body>` text color | YES | `text-text-primary` Tailwind class |
+| `color-scheme` | YES | Each theme block defines its own |
 | `<meta theme-color>` | YES | Flash prevention script + `setTheme()` both update it |
-| Focus rings | YES | `var(--color-brand)` — theme-switchable |
-| Scrollbar track | YES | `var(--color-bg-inset)` |
-| Scrollbar thumb | YES | `var(--scrollbar-thumb)` — defined in all 4 themes |
-| Popover reset | YES | `background: transparent` — inherits from parent |
+| Focus rings | YES | `var(--color-brand)` |
+| Scrollbar | YES | `var(--scrollbar-thumb/track)` — themed per block |
+| Popover reset | YES | `background: transparent` — inherits |
 
-**Verdict:** MainLayout is fully light-theme ready.
+**Verdict:** Fully light-theme ready.
 
 ### Phase 4.2 — Navbar (Desktop)
 
-The navbar is **always dark** by design — it uses HBS variables (`--nav-*`) that never change with theme. This is correct and matches HBS behavior.
+The navbar uses per-theme `--nav-*` tokens. Each theme defines its own nav colors:
 
 | Element | Theme-aware? | Notes |
 |---------|-------------|-------|
-| Navbar background | N/A (always dark) | `--nav-bg: #000000` — intentional |
-| Nav text | N/A (always dark) | `--nav-text: #ffffff` |
-| Mega menu backgrounds | N/A (always dark) | `--nav-surface-dark: #161718` |
-| Mega menu text | N/A (always dark) | Uses `--white-color-1`, `--white-color-2` |
-| Category icons | N/A (always dark) | SVG mask with `--nav-text` background |
-| VanillaTilt game cards | N/A (always dark) | Inside mega menu, always dark context |
-| SVG gradient fills | N/A (always dark) | `--site-gradient-start/end` are global, not themed |
-| Sign-up / login buttons | N/A (always dark) | Navbar context |
-| Account dropdown | N/A (always dark) | `z-index: 99560`, dark surface |
+| Navbar background | YES | `--nav-bg` — `#000000` (gaming), `#f0f2f5` (default), `#f4f4f5` (workstation), `#faf9f0` (review) |
+| Nav text | YES | `--nav-text` — `#ffffff` (gaming), `#1a1a2e` (default) |
+| Mega menu surfaces | YES | `--nav-surface-dark` — dark in gaming, light in light themes |
+| Mega menu text | YES | `--white-color-1`, `--white-color-2` (bridge vars, theme-switched) |
+| Category icons | YES | SVG mask with `--nav-text` background |
+| Brand logo filter | YES | `--nav-brand-logo-filter` — `invert(1)` in gaming, `brightness(0)` in light |
+| Nav shadow | YES | `--nav-shadow` — `none` (gaming), subtle box-shadow (light) |
 
-**Verdict:** Navbar is light-theme safe. No changes needed.
+**Verdict:** Navbar is fully light-theme ready with per-theme nav tokens.
 
 ### Phase 4.3 — NavMobile (Hamburger Drawer)
 
 | Element | Theme-aware? | Notes |
 |---------|-------------|-------|
-| Side menu background | N/A (always dark) | `--nav-surface-dark` — intentional |
-| Side menu text | N/A (always dark) | `--white-color-1` / `--white-color-2` |
-| Shade overlay | N/A (always dark) | `rgba(0,0,0,0.5)` fixed |
-| Hamburger icon | N/A (always dark) | Inside navbar, always dark |
-| Accordion sub-menus | N/A (always dark) | Inside side menu |
-| Auth state buttons | N/A (always dark) | Login/signup in side menu |
-| Border gradient | N/A (always dark) | Uses `--site-gradient-start/end` |
+| Side menu background | YES | `--nav-surface-dark` — themed per block |
+| Side menu text | YES | `--white-color-1` / `--white-color-2` (bridge vars) |
+| Shade overlay | YES | `--color-bg-overlay` — themed per block |
+| Accordion sub-menus | YES | Uses nav tokens |
+| Auth state buttons | YES | Uses nav tokens |
 
-**Verdict:** Mobile nav is light-theme safe. No changes needed.
+**Verdict:** Mobile nav is light-theme ready.
+
+### Phase 4.7 — HomeHero
+
+| Element | Theme-aware? | Notes |
+|---------|-------------|-------|
+| Hero background | YES | `--section-darkestdarker-background-color` (white in light) |
+| Hero text | YES | `--white-color-1` — dark text in light, white in gaming |
+| Stat buttons | YES | `--section-dark-background-color` — grey in hero (via `.home-top-wrapper` revert) |
+| Brand cards | YES | `--section-dark-background-color` — grey in hero |
+| Category accents | N/A | `--cat-*` work on any background |
+
+**Verdict:** Light-theme ready via bridge vars + context-based elevation.
+
+### Phase 4.8 — TopProducts (Accordion + Slideshow)
+
+| Element | Theme-aware? | Notes |
+|---------|-------------|-------|
+| Accordion bg | YES | `--section-dark-background-color` — grey on white hero (`.home-top-wrapper` revert) |
+| Accordion text | YES | `--white-color-1` — dark text in light |
+| Dropdown menus | YES | `--section-dark-background-color` — grey on white hero |
+| Toggle buttons | YES | `--section-darkest-background-color` (themed per block) |
+| Dividers/borders | YES | `--section-medium-background-color` (themed per block) |
+
+**Verdict:** Light-theme ready via bridge vars + context-based elevation.
+
+### Phase 4.10 — DashboardLargeTile (cinematic card)
+
+| Element | Theme-aware? | Notes |
+|---------|-------------|-------|
+| Desktop overlay bg | N/A | `rgba(8, 8, 8, 0.65)` — fixed dark, does NOT change with theme |
+| Overlay title text | YES | `--color-text-on-accent` (always white on dark overlay) |
+| Overlay content text | YES | `--color-text-on-accent` (always white on dark overlay) |
+| Hover underline | YES | `--color-text-on-accent` on desktop; `--white-black-color-1` on mobile |
+| Mobile card bg (≤1150px) | YES | `--section-dark-background-color` — white on grey body (body override) |
+| Mobile title text | YES | `--white-black-color-1` (bridge var, reverts in ≤1150px query) |
+| Mobile description | YES | `--grey-color-4` (bridge var) |
+| Card shadow | YES | `--card-shadow` |
+
+**Pattern:** Desktop uses fixed dark overlay → text MUST be `--color-text-on-accent`. Mobile becomes a themed card → text reverts to bridge vars in ≤1150px media query. See Rule 13.
+
+**Verdict:** Light-theme ready. Dual-mode text handled via media query override.
+
+### Phase 4.4 — FeaturedScroller (Featured Reviews + Highlighted Guides)
+
+| Element | Theme-aware? | Notes |
+|---------|-------------|-------|
+| Desktop overlay bg | N/A | `rgba(8, 8, 8, 0.65)` — fixed dark, does NOT change with theme |
+| Overlay title text | YES | `--color-text-on-accent` (always white on dark overlay) |
+| Overlay content text | YES | `--color-text-on-accent` (always white on dark overlay) |
+| Hover underline | YES | `--white-black-color-1` (bridge var) |
+| Mobile card bg (≤825px) | YES | `--section-dark-background-color` — white on grey body (body override) |
+| Mobile title text | YES | `--white-black-color-1` (bridge var, reverts in ≤825px query) |
+| Mobile content text | YES | `--white-color-1` (bridge var, reverts in ≤825px query) |
+| Scroller card bg | YES | `--section-dark-background-color` — white on grey body (body override) |
+| Scroller card shadow | YES | `--card-shadow` — subtle in light, none in gaming |
+| Large tile shadow | YES | `--card-shadow` |
+| Card dates | YES | `--grey-color-3` (bridge var) |
+| Card titles | YES | `--white-color-1` (bridge var — cards sit on themed bg) |
+| Arrow buttons | YES | `--section-dark-background-color` bg, `--white-color-1` icon color |
+| Category filter tabs | YES | `data-product-color="true"` + `--card-color`/`--card-hover` inline styles |
+
+**Pattern:** Same dual-mode as DashboardLargeTile — desktop uses fixed dark overlay → text MUST be `--color-text-on-accent`. Mobile ≤825px becomes a themed card → text reverts to bridge vars. Scroller cards use bridge vars throughout (no overlay).
+
+**Verdict:** Light-theme ready. Dual-mode overlay text + context-based card elevation + card shadows.
+
+### Phase 4.5 — LatestNews (Latest News 4x4)
+
+| Element | Theme-aware? | Notes |
+|---------|-------------|-------|
+| Top grid card bg | YES | `--section-dark-background-color` — white on grey body (body override) |
+| Bottom feed card bg | YES | `--section-dark-background-color` — white on grey body (body override) |
+| Card shadows | YES | `--card-shadow` / `--card-shadow-hover` — subtle in light, `none` in gaming |
+| Card text (titles) | YES | `--white-color-1` (bridge var — dark in light, white in gaming) |
+| Category tag text | YES | `catVar()` → `--cat-{category}` (global, works on any bg) |
+| Date text | YES | `--grey-color-3` (bridge var) |
+| Description text | YES | `--grey-color-4` (bridge var) |
+| Hover underline (top) | YES | `--white-black-color-1` (bridge var) |
+| Hover underline (feed) | YES | `--white-color-1` (bridge var) |
+
+**Verdict:** Light-theme ready via bridge vars + context-based card elevation + card shadows.
+
+### Phase 4.10 — Dashboard
+
+| Element | Theme-aware? | Notes |
+|---------|-------------|-------|
+| Dashboard cards | YES | `--section-dark-background-color` — white on grey body (body override) |
+| Card shadows | YES | `--card-shadow` — subtle in light, none in gaming |
+| Card text | YES | `--white-color-1` / `--white-black-color-1` (bridge vars) |
+| Card dates | YES | `--grey-color-3` (bridge var) |
+| Section titles | YES | `--white-black-color-1` — dark text in light |
+| Dividers | YES | `--section-medium-background-color` (bridge var) |
+
+**Verdict:** Light-theme ready via bridge vars + context-based elevation.
+
+### Phase 4.10 — NewsFeed (sidebar)
+
+| Element | Theme-aware? | Notes |
+|---------|-------------|-------|
+| Feed title | YES | `--white-color-1` — dark text in light |
+| Item titles | YES | `--white-black-color-1` — dark text in light |
+| Item dates | YES | `--grey-color-3` (bridge var) |
+| Dividers | YES | `--section-light-background-color` / `--section-medium-background-color` |
+| Mobile wrapper bg | YES | `--section-dark-background-color` — white on grey body |
+| Mobile card shadow | YES | `--card-shadow` |
+
+**Verdict:** Light-theme ready via bridge vars + context-based elevation.
 
 ### Phase 9 (partial) — Auth & Vault
 
 | Element | Theme-aware? | Notes |
 |---------|-------------|-------|
-| Auth dialog background | YES | `var(--auth-dialog-bg)` — white in light, `#1d2021` in dark |
-| Auth dialog text | YES | `var(--auth-dialog-text)` — dark in light, `#e5e7eb` in dark |
-| Auth dialog shadow | YES | `var(--auth-dialog-shadow)` — subtle in light, heavy in dark |
-| Auth close button | YES | `var(--auth-close-color/hover)` — gray tones, appropriate per theme |
-| Auth inputs | YES | `var(--auth-input-bg/border/text)` — light fields in light, dark in dark |
-| Auth buttons | YES | `var(--auth-button-bg/border/hover/text)` — themed per mode |
-| Auth branding panel | YES | `var(--auth-branding-bg)` — `#f0f2f5` (light) / `#25292a` (dark) |
-| Auth headings | YES | `var(--auth-heading-text)` — dark in light, light in dark |
-| Auth subtitles | YES | `var(--auth-subtitle-text)` — gray tones per theme |
-| Auth dividers | YES | `var(--auth-divider)` — `#e2e8f0` (light) / `#38404b` (dark) |
-| Auth errors | YES | `var(--auth-error)` — `#dc2626` (light) / `#f87171` (dark) |
-| Auth legal text | YES | `var(--auth-legal-text/link)` — muted per theme |
-| Settings dialog | YES | Same `--auth-*` token system as auth dialog |
-| Settings sections | YES | `var(--auth-branding-bg)` + `var(--auth-divider)` border |
-| Theme toggle track | YES | `var(--auth-settings-track)` — `rgba(0,0,0,0.08/0.3)` |
-| Toggle / radio labels | YES | `var(--auth-heading-text)` — was `--white-color-2` |
-| Toggle / radio descriptions | YES | `var(--auth-label-text)` — was `--grey-color-2` |
-| Guest CTA | YES | `var(--auth-guest-border/bg)` — flips opacity direction |
-| Guest badge | YES | `var(--auth-badge-bg)` + `var(--auth-subtitle-text)` |
-| Vault mega menu | N/A (always dark) | Inside navbar context |
-| Vault count badge | N/A (always dark) | Inside navbar context |
+| Auth dialog | YES | Full `--auth-*` token system (24 tokens) |
+| Settings dialog | YES | Same `--auth-*` tokens |
+| Toggle / radio dots | YES | `--color-text-on-accent` (always white on gradient) |
+| Vault mega menu | YES | Uses nav tokens |
 
 **Verdict:** Auth & Settings fully light-theme ready.
 
@@ -185,7 +381,7 @@ Settings:     rgba(0,0,0,0.3) (track), rgba(255,255,255,0.06/0.03/0.08) (guest b
 ### Default (light)
 
 ```
-Background:   #ffffff (base), #f8f9fa (surface), #ffffff (elevated), #f0f2f5 (inset)
+Background:   #f8f9fa (base), #f0f2f5 (surface), #ffffff (elevated), #e8eaed (inset)
 Text:         #0d0e12 (primary), #4a5568 (secondary), #718096 (muted), #ffffff (inverse)
 Borders:      #e2e8f0 (normal), #cbd5e0 (strong)
 Brand:        #2563eb (base), #1d4ed8 (hover), #eff6ff (surface), #1e40af (text)
@@ -198,7 +394,7 @@ Scrollbar:    rgba(0,0,0,0.2) (thumb)
 ### Workstation (light)
 
 ```
-Background:   #fafafa (base), #f4f4f5 (surface), #ffffff (elevated), #e4e4e7 (inset)
+Background:   #f4f4f5 (base), #ececed (surface), #ffffff (elevated), #e4e4e7 (inset)
 Text:         #18181b (primary), #52525b (secondary), #a1a1aa (muted), #ffffff (inverse)
 Borders:      #d4d4d8 (normal), #a1a1aa (strong)
 Brand:        #0f766e (teal), #0d6b63 (hover), #f0fdfa (surface), #0f766e (text)
@@ -209,7 +405,7 @@ Scrollbar:    rgba(0,0,0,0.2) (thumb)
 ### Review (light)
 
 ```
-Background:   #fffef7 (base), #faf9f0 (surface), #ffffff (elevated), #f5f4e8 (inset)
+Background:   #faf9f0 (base), #f5f4e8 (surface), #ffffff (elevated), #edece0 (inset)
 Text:         #1c1917 (primary), #57534e (secondary), #a8a29e (muted), #ffffff (inverse)
 Borders:      #e7e5e4 (normal), #d6d3d1 (strong)
 Brand:        #b45309 (amber), #92400e (hover), #fffbeb (surface), #92400e (text)
@@ -221,18 +417,117 @@ Scrollbar:    rgba(0,0,0,0.15) (thumb)
 
 ## What Never Changes (global, theme-independent)
 
-These variables are **always dark** and do **not** switch with `data-theme`. This is by design — the navbar and footer are always dark.
+These variables live in `:root` and do **not** switch with `data-theme`.
 
 | Variable group | Example | Why global |
 |---------------|---------|-----------|
-| Nav tokens | `--nav-bg: #000000`, `--nav-text: #fff` | Navbar is always dark |
-| HBS background aliases | `--section-darkestdark-background-color: #121212` | Legacy navbar/footer use these |
-| HBS text aliases | `--white-color-1: #fff`, `--grey-color-3: #b0b0b0` | Mega menu text, toggle/radio dots |
 | Font system | `--font-size-14px: 1.27273rem` | Math-based, no color |
 | Font aliases | `--identity-font`, `--logo-font1` | No color |
 | Weight aliases | `--font-weight3` through `--font-weight9` | No color |
 | Site gradient | `--site-gradient-start/end` | Seasonal, not per-theme |
 | Category colors | `--cat-mouse`, `--cat-keyboard`, etc. | Accent colors work on any background |
+| Nav layout | `--nav-height`, `--top-bar-H`, `--nav-z` | Size/position, no color |
+| HBS spacing | `--border`, `--brand-accent`, `--letter-spacing` | Non-color values |
+
+---
+
+## HBS Bridge Variables (theme-switched legacy)
+
+### Why bridge instead of full migration
+
+Home page components have **70+ references** to HBS color variables. Migrating every reference to semantic tokens is a large refactor. Instead:
+
+1. **HBS color vars moved into `[data-theme]` blocks** — instant light theme support
+2. **Shared components** (SectionDivider, AnnouncementBar) migrated to semantic tokens directly
+3. **Future components** use semantic tokens; existing components migrate per-file over time
+
+### Two categories of HBS vars
+
+| Category | Location | Switches? | Examples |
+|----------|----------|-----------|---------|
+| **Font / layout** | `:root` (global) | NO | `--identity-font`, `--font-weight3`-`9`, `--font-size-*`, `--letter-spacing` |
+| **Color** | `[data-theme]` blocks | YES | `--section-dark-background-color`, `--white-color-1`, `--grey-color-*`, `--success-color` |
+
+### Color bridge vars (18 vars, 4 themes)
+
+| Variable | Gaming | Default | Workstation | Review |
+|----------|--------|---------|-------------|--------|
+| `--section-darkestdarker-background-color` | `#080808` | `#ffffff` | `#fafafa` | `#fffef7` |
+| `--section-darkestdark-background-color` | `#121212` | `#f8f9fa` | `#f4f4f5` | `#faf9f0` |
+| `--section-darkest-background-color` | `#161718` | `#f4f5f7` | `#ececed` | `#f7f6ec` |
+| `--section-dark-background-color` | `#1d2021` | `#f0f2f5`* | `#e4e4e7`* | `#f5f4e8`* |
+| `--section-dark-bg-on-white` | `#1d2021` | `#f0f2f5` | `#e4e4e7` | `#f5f4e8` |
+| `--section-dusk-background-color` | `#25292a` | `#e8eaed` | `#dcdce0` | `#edece0` |
+| `--section-medium-background-color` | `#3A3F41` | `#e2e8f0` | `#d4d4d8` | `#e7e5e4` |
+| `--section-light-background-color` | `#4d5557` | `#c8cdd3` | `#b4b4b8` | `#c8c4be` |
+| `--white-color-1` | `#ffffff` | `var(--color-text-primary)` | `var(--color-text-primary)` | `var(--color-text-primary)` |
+| `--white-color-2` | `#dddad5` | `var(--color-text-secondary)` | `var(--color-text-secondary)` | `var(--color-text-secondary)` |
+| `--white-black-color-1` | `#ffffff` | `var(--color-text-primary)` | `var(--color-text-primary)` | `var(--color-text-primary)` |
+| `--white-black-color-2` | `#dddad5` | `#6b7280` | `#71717a` | `#78716c` |
+| `--grey-color-1` | `#cccccc` | `#374151` | `#3f3f46` | `#44403c` |
+| `--grey-color-2` | `#bbbbbb` | `#6b7280` | `#71717a` | `#78716c` |
+| `--grey-color-3` | `#b0b0b0` | `#718096` | `#a1a1aa` | `#a8a29e` |
+| `--grey-color-4` | `#909090` | `#9ca3af` | `#a1a1aa` | `#a8a29e` |
+| `--accent-color-3` | `#e65443` | `#e65443` | `#e65443` | `#e65443` |
+| `--success-color` | `#00d26a` | `#16a34a` | `#16a34a` | `#16a34a` |
+
+*`--section-dark-background-color` is context-scoped in light themes. Theme-block value shown; body override changes it to `#ffffff`. See "Context-Based Card Elevation" section.
+
+### `--color-text-on-accent` token
+
+`--white-color-1` has a dual-use problem:
+- **Text on page backgrounds** (18 uses) — must flip to dark in light themes
+- **Text on gradient/colored backgrounds** (5 uses) — must stay white always
+
+**Solution:** `--color-text-on-accent: #ffffff` in all themes. All always-white usages:
+- `AnnouncementBar.astro` (2 uses — text on gradient bar)
+- `SettingsPanel.tsx` (1 use — "Sign up" button on gradient)
+- `ToggleSwitch.tsx` (1 use — dot on gradient track)
+- `RadioGroup.tsx` (1 use — dot on gradient radio)
+- `DashboardLargeTile.astro` (3 uses — container, content panel, title text on dark `rgba()` overlay; desktop only, mobile reverts to bridge vars)
+- `FeaturedScroller.astro` (3 uses — large tile container, content panel, title text on dark `rgba()` overlay; desktop only, mobile ≤825px reverts to bridge vars)
+
+### Text color decision tree
+
+When choosing a text color for a new element, follow this:
+
+```
+Q: What is the BACKGROUND behind this text?
+│
+├─ A theme-switched variable (bridge var or --color-bg-*)
+│  └─ Use matching bridge var or semantic token
+│     Examples: --white-color-1, --white-black-color-1, --color-text-primary
+│     WHY: text flips with background — dark text on light bg, white text on dark bg
+│
+├─ A FIXED dark background (rgba overlay, gradient, --cat-* accent)
+│  └─ Use --color-text-on-accent (#ffffff in ALL themes)
+│     WHY: background doesn't change, so text must stay white always
+│
+├─ Inside an --auth-* dialog
+│  └─ Use --auth-* text tokens (--auth-dialog-text, --auth-heading-text, etc.)
+│     WHY: dialog has its own background system separate from page
+│
+└─ Inside the navbar
+   └─ Use --nav-text or --nav-text-muted
+      WHY: nav has its own per-theme token set
+```
+
+### Bridge var hierarchy (naming inversion)
+
+The `--section-*` naming comes from HBS dark theme where "darkest" = most dark. In light themes the values are **inverted** — "darkestdarker" is the LIGHTEST (whitest) value:
+
+```
+Light themes (default):                    Dark theme (gaming):
+darkestdarker  #ffffff   (whitest)         darkestdarker  #080808  (darkest)
+darkestdark    #f8f9fa   (body canvas)     darkestdark    #121212  (body)
+darkest        #f4f5f7   (article bg)      darkest        #161718  (article bg)
+dark           #f0f2f5   (cards/panels)    dark           #1d2021  (cards/panels)
+dusk           #e8eaed                     dusk           #25292a
+medium         #e2e8f0   (borders)         medium         #3A3F41  (borders)
+light          #c8cdd3   (dividers)        light          #4d5557  (dividers)
+```
+
+Both modes follow **lighter = more elevated**. The names are confusing but consistent across themes — `--section-dark` is always the "card surface" regardless of actual lightness.
 
 ---
 
@@ -243,12 +538,14 @@ When the theme gate rule fires, test these scenarios:
 1. **Set `data-theme="default"`** — verify light backgrounds, dark text, correct brand colors
 2. **Set `data-theme="gaming"`** — verify dark backgrounds, light text (current behavior)
 3. **Toggle via Settings** — verify smooth transition, no flash
-4. **Open auth dialog in both themes** — verify dialog adapts (white bg in light, dark bg in dark)
-5. **Check category accents** — `--cat-*` colors should be visible on both light and dark backgrounds
-6. **Check scrollbars** — should match theme (light track on light, dark track on dark)
-7. **Check focus rings** — `--color-brand` should be visible on both backgrounds
-8. **Check shadows** — `--shadow-sm/md/lg` use `rgb(0 0 0 / ...)` — should be subtle on light, visible on dark
-9. **Check border colors** — `--color-border` should provide sufficient contrast on both themes
+4. **Check card elevation** — cards on grey body canvas should be WHITE; elements in white hero sections should be GREY
+5. **Check card shadows** — `--card-shadow` visible in light themes, absent in gaming
+6. **Open auth dialog in both themes** — dialog adapts (white bg in light, dark bg in dark)
+7. **Check category accents** — `--cat-*` colors visible on both backgrounds
+8. **Check scrollbars** — match theme
+9. **Check focus rings** — `--color-brand` visible on both backgrounds
+10. **Check borders** — `--color-border` / `--section-medium-background-color` sufficient contrast
+11. **Check overlay text** — text on dark overlays (cinematic tiles, image captions) must be white in ALL themes. If text is dark on a dark overlay, the component is using bridge vars instead of `--color-text-on-accent`.
 
 ### Browser DevTools shortcut
 
@@ -274,48 +571,75 @@ These components have NOT been built yet. When they are, their light theme statu
 
 | Phase | Component | Risk Level | Notes |
 |-------|-----------|-----------|-------|
-| 4.4 | GlobalFooter | LOW | Will use HBS dark vars (always dark, like navbar) |
+| 4.4 | GlobalFooter | LOW | Uses `--eg-footer-background` — auto-switches per theme |
 | 4.6 | Adbar | MEDIUM | Text banner — must use theme tokens for background/text |
-| 4.7 | Hero section | HIGH | H1/H2 text, stats — must contrast on both light and dark |
-| 4.8 | SlideShow | HIGH | Product cards, rating bar — category accents on themed background |
-| 4.9 | Tools section | MEDIUM | Links/icons on themed background |
-| 4.10 | Dashboard grid | HIGH | News cards, sidebar — heavy content, must theme correctly |
-| 4.11 | Game Gear Picks | MEDIUM | Card scroller — cards may need both dark and themed variants |
-| 4.12 | Featured Reviews | HIGH | Category tabs + cards — accent colors on themed surface |
-| 4.13 | Highlighted Guides | MEDIUM | Card scroller |
-| 4.14 | Latest News 4x4 | MEDIUM | Card grid |
-| 5.x | Snapshot Page | HIGH | Product detail — specs, metrics, images on themed background |
-| 6.x | Hub Page | HIGH | Filter panels, product grid — heavy use of theme tokens |
-| 7.x | Content Pages | MEDIUM | MDX rendered content — text on themed background |
+| 4.11 | Game Gear Picks | MEDIUM | Card scroller — uses bridge vars, context-based elevation applies |
+| ~~4.12~~ | ~~Featured Reviews~~ | DONE | See Phase 4.4 audit above |
+| ~~4.13~~ | ~~Highlighted Guides~~ | DONE | Same FeaturedScroller component, see Phase 4.4 audit |
+| ~~4.14~~ | ~~Latest News 4x4~~ | DONE | See Phase 4.5 audit below |
+| 5.x | Snapshot Page | HIGH | Mixed bg sections — will need `.-on-white-bg` class on white sections |
+| 6.x | Hub Page | HIGH | Filter panels, product grid — heavy use of bridge vars |
+| 7.x | Content Pages | MEDIUM | MDX rendered content on themed background |
 
 ---
 
 ## Rules for Future Development
 
-1. **Page content** MUST use theme tokens (`--color-bg-*`, `--color-text-*`, `--color-brand-*`) via Tailwind utilities (`bg-bg-base`, `text-text-primary`, etc.)
-2. **Navbar and footer** stay dark — use HBS variables (`--nav-*`, `--section-dark-*`)
-3. **Category accents** (`--cat-*`, `--card-*`) are global and work on any background — no changes needed per theme
-4. **Never hardcode** hex color literals in page content or dialog components — always use theme tokens or `--auth-*` tokens
-5. **Dialog components** use `--auth-*` tokens (not page-level `--color-*` tokens, because the dialog has its own background)
-6. **Shadows** defined in the theme switchboard (`--shadow-sm/md/lg`) — use these, not raw `box-shadow`
+1. **Page content** MUST use theme tokens (`--color-bg-*`, `--color-text-*`, `--color-brand-*`) via Tailwind utilities OR HBS bridge vars (both theme-switch)
+2. **Navbar** uses per-theme `--nav-*` tokens — light surfaces in light themes, dark in gaming
+3. **Category accents** (`--cat-*`) are global and work on any background — no changes needed
+4. **Never hardcode** hex color literals in page content — always use theme tokens or bridge vars
+5. **Dialog components** use `--auth-*` tokens (not page-level tokens)
+6. **Card shadows** defined per theme (`--card-shadow` / `--card-shadow-hover`) — use these for card elevation
 7. **Test light theme** after every component milestone (AGENTS.md theme gate rule)
-8. **Toggle/radio dots** use `--white-color-1` intentionally — white on gradient is correct in both themes
+8. **Toggle/radio dots** use `--color-text-on-accent` — always white on gradient surfaces
+9. **Context-based card elevation** — `--section-dark-background-color` is `#ffffff` on body in light themes. If your section has a white/bright bg and contains elements using `--section-dark`, add `.-on-white-bg` class to the section wrapper to revert cards to grey for contrast. Both halves of every page must follow this rule.
+10. **Per-page body backgrounds** use `body:has()` selectors — see `global.css` body rules. Do not set body bg directly on components.
+11. **Footer backgrounds** use `--eg-footer-background` with `body:has()` overrides — do not hardcode footer bg
+12. **New white-bg sections** must add `.-on-white-bg` if they contain `--section-dark` elements — see "Context-Based Card Elevation" section
+13. **Dark overlays on images** — if a component overlays content on a fixed dark bg (`rgba()`, gradient, or hex that does NOT change with theme), text must use `--color-text-on-accent` (always white). Bridge vars (`--white-color-1`) flip to dark in light themes = unreadable on dark overlay. If the component has a responsive breakpoint where the overlay becomes a themed card (like `DashboardLargeTile.astro` at ≤1150px), add bridge var overrides in the mobile media query so text adapts to the themed card bg. See the "Text color decision tree" section.
 
 ---
 
-## Files Changed (2026-03-04 audit)
+## Files Changed
+
+### Auth audit (2026-03-04)
 
 | File | Changes |
 |------|---------|
-| `src/styles/global.css` | Added 24 `--auth-*` tokens to default + gaming theme blocks; removed old auth tokens from `:root`; removed `color-scheme: dark` from `html`; fixed `body` background to `var(--color-bg-base)`; added `--scrollbar-thumb` to workstation + review |
-| `src/features/auth/components/AuthDialog.tsx` | Replaced `#1d2021`, `#e5e7eb`, `#6b7280`, `#d1d5db` with `var(--auth-*)` |
-| `src/features/auth/components/LoginView.tsx` | Replaced `#e5e7eb`, `#9ba2ab`, `#101214` with `var(--auth-*)` |
-| `src/features/auth/components/SignupView.tsx` | Replaced `#e5e7eb`, `#9ba2ab`, `#101214` with `var(--auth-*)` |
-| `src/features/auth/components/ConfirmSignupView.tsx` | Replaced `#e5e7eb`, `#9ba2ab` with `var(--auth-*)` |
-| `src/features/auth/components/ForgotPasswordView.tsx` | Replaced `#e5e7eb`, `#9ba2ab` with `var(--auth-*)` |
-| `src/features/settings/components/SettingsDialog.tsx` | Replaced `#1d2021`, `#e5e7eb` with `var(--auth-*)` |
-| `src/features/settings/components/SettingsPanel.tsx` | Replaced `--white-color-2`, `--grey-color-2`, `--grey-color-3`, `rgba(...)` with `var(--auth-*)` |
-| `src/features/settings/components/RadioGroup.tsx` | Replaced `--white-color-2`, `--grey-color-3` with `var(--auth-*)` |
+| `src/styles/global.css` | Added 24 `--auth-*` tokens to default + gaming; removed `color-scheme: dark` from `html` |
+| `src/features/auth/components/AuthDialog.tsx` | De-hardcoded to `--auth-*` tokens |
+| `src/features/auth/components/LoginView.tsx` | De-hardcoded to `--auth-*` tokens |
+| `src/features/auth/components/SignupView.tsx` | De-hardcoded to `--auth-*` tokens |
+| `src/features/auth/components/ConfirmSignupView.tsx` | De-hardcoded to `--auth-*` tokens |
+| `src/features/auth/components/ForgotPasswordView.tsx` | De-hardcoded to `--auth-*` tokens |
+| `src/features/settings/components/SettingsDialog.tsx` | De-hardcoded to `--auth-*` tokens |
+| `src/features/settings/components/SettingsPanel.tsx` | De-hardcoded to `--auth-*` tokens |
+| `src/features/settings/components/RadioGroup.tsx` | De-hardcoded to `--auth-*` tokens |
+
+### HBS bridge migration (2026-03-04)
+
+| File | Changes |
+|------|---------|
+| `src/styles/global.css` | Moved 17 HBS color vars from `:root` to 4 `[data-theme]` blocks; added `--color-text-on-accent`; fixed gaming scrollbar refs |
+| `src/shared/ui/AnnouncementBar.astro` | `--white-color-1` to `--color-text-on-accent` (2 uses) |
+| `src/features/settings/components/SettingsPanel.tsx` | `--white-color-1` to `--color-text-on-accent` |
+| `src/features/settings/components/ToggleSwitch.tsx` | `--white-color-1` to `--color-text-on-accent` |
+| `src/features/settings/components/RadioGroup.tsx` | `--white-color-1` to `--color-text-on-accent` |
+
+### Light-mode card elevation (2026-03-05)
+
+| File | Changes |
+|------|---------|
+| `src/styles/global.css` | Context-based `--section-dark` scoping: body override to `#ffffff` (3 light themes) + `.home-top-wrapper` / `.-on-white-bg` revert via `--section-dark-bg-on-white`; added `--section-dark-bg-on-white` helper to all 4 themes; added `--card-shadow` / `--card-shadow-hover` / `--card-container-bg` to all themes + `@theme`; body bg via `--section-darkestdark` with `body:has()` per-page overrides; `--eg-footer-background` per-page footer system; added `--section-light-background-color` bridge var |
+| `src/features/home/components/DashboardLargeTile.astro` | Desktop overlay text: `--white-color-1` to `--color-text-on-accent` (container, content, title, hover underline). Mobile ≤1150px: added bridge var overrides (`--white-color-1`, `--white-black-color-1`) when layout becomes themed card. |
+
+### FeaturedScroller light theme (2026-03-05)
+
+| File | Changes |
+|------|---------|
+| `src/features/home/components/FeaturedScroller.astro` | Desktop overlay text: `--white-color-1` to `--color-text-on-accent` (container, content, title). Added `box-shadow: var(--card-shadow)` to large tile + scroller cards. Mobile ≤825px: added bridge var overrides (`--white-color-1`, `--white-black-color-1`, `box-shadow: none`) when layout becomes themed card. |
+| `src/shared/ui/SectionDivider.astro` | Changed `<style>` to `<style is:global>`; added `[data-product-color="true"]` hover/active CSS rules for category filter tabs. |
 
 ---
 
@@ -323,13 +647,16 @@ These components have NOT been built yet. When they are, their light theme statu
 
 | File | Role in theme system |
 |------|---------------------|
-| `src/styles/global.css` (theme switchboard) | 4 theme definitions with page tokens + auth tokens |
-| `src/styles/global.css` (`@theme` block) | Registers page tokens as Tailwind utilities |
-| `src/styles/global.css` (`:root`) | HBS variables — always-dark global tokens |
-| `src/shared/layouts/MainLayout.astro` | Color derivation engine + theme flash prevention + `data-theme` attribute |
+| `src/styles/global.css` (theme switchboard) | 4 theme definitions with page + auth + nav + bridge + card tokens |
+| `src/styles/global.css` (`@theme` block) | Registers tokens as Tailwind utilities |
+| `src/styles/global.css` (`:root`) | HBS font/layout vars (non-color, theme-independent) |
+| `src/styles/global.css` (body rules) | Per-page backgrounds via `body:has()` + context-based card elevation |
+| `src/styles/nav-mobile.css` | Mobile nav drawer, hamburger, shade overlay, auth footer (extracted from global.css) |
+| `src/styles/dialogs.css` | Auth + settings dialog animations, keyframes, backdrop (extracted from global.css) |
+| `src/shared/layouts/MainLayout.astro` | `data-theme` attribute + theme flash prevention |
 | `src/features/settings/store.ts` | `$theme` atom, `setTheme()`, `loadTheme()` |
 | `src/features/settings/types.ts` | `ThemeMode = 'light' \| 'dark'` type |
-| `config/categories.json` | SSOT for site colors + category colors (theme-independent) |
+| `config/data/categories.json` | SSOT for site colors + category colors |
 | `docs/CSS-CONVENTIONS.md` | Full CSS system reference |
 | `docs/CATEGORY-COLORS.md` | Category color derivation reference |
 | `docs/Z-INDEX-MAP.md` | Layer stack reference |

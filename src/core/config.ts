@@ -2,7 +2,9 @@
 // No magic numbers in components. All behavioral constants live here.
 // Update here to change behavior site-wide.
 
-import categoriesData from '../../config/categories.json';
+import categoriesData from '../../config/data/categories.json';
+import imageDefaultsData from '../../config/data/image-defaults.json';
+import { resolveImageDefaults, resolveViewObjectFit } from './image-defaults-resolver.mjs';
 
 // ─── Category SSOT ──────────────────────────────────────────────────────────
 // WHY: categories.json is the single source of truth for all category lists.
@@ -39,6 +41,11 @@ const pluralMap: Record<string, string> = Object.fromEntries(
   allCategoryDefs.map(c => [c.id, c.plural])
 );
 
+// Singular label lookup (canonical — replaces titleCase hacks for acronyms like GPU, AI)
+const labelMap: Record<string, string> = Object.fromEntries(
+  allCategoryDefs.map(c => [c.id, c.label])
+);
+
 // Color lookup
 const colorMap: Record<string, string> = Object.fromEntries(
   allCategoryDefs.map(c => [c.id, c.color])
@@ -46,6 +53,23 @@ const colorMap: Record<string, string> = Object.fromEntries(
 
 // Site gradient colors (primary/secondary) — SSOT for seasonal themes
 export const siteColors = categoriesData.siteColors;
+
+/** Returns true if the category's product sub-section is active in the current environment. */
+export function isProductActive(cat: string): boolean {
+  const def = allCategoryDefs.find(c => c.id === cat);
+  return def ? isActive(def.product) : false;
+}
+
+/** Returns true if the category's content sub-section is active in the current environment. */
+export function isContentActive(cat: string): boolean {
+  const def = allCategoryDefs.find(c => c.id === cat);
+  return def ? isActive(def.content) : false;
+}
+
+/** Canonical singular label — use instead of titleCase for category display names. */
+export function label(cat: string): string {
+  return labelMap[cat] ?? (cat.charAt(0).toUpperCase() + cat.slice(1));
+}
 
 /** Canonical plural function — use this everywhere instead of local copies. */
 export function plural(cat: string): string {
@@ -55,6 +79,39 @@ export function plural(cat: string): string {
 /** Returns the hex color for a category ID, or a fallback grey. */
 export function categoryColor(cat: string): string {
   return colorMap[cat] ?? '#6c7086';
+}
+
+// ─── Image Defaults ─────────────────────────────────────────────────────────
+// WHY: Per-category image config replaces hardcoded view names in components.
+// JSON is SSOT; resolver merges category overrides with global defaults.
+
+interface ViewMeta {
+  objectFit: 'contain' | 'cover';
+  label: string;
+  labelShort: string;
+}
+
+export interface ImageDefaults {
+  defaultImageView: string[];
+  listThumbKeyBase: string[];
+  coverImageView: string[];
+  headerGame: string[];
+  viewPriority: string[];
+  imageDisplayOptions: Array<{ view: string; labelFull: string; labelShort: string }>;
+  viewMeta: Record<string, ViewMeta>;
+}
+
+const _imgDefaults = imageDefaultsData.defaults;
+const _imgCategories = imageDefaultsData.categories;
+
+/** Resolved image defaults for a category (merges overrides with global defaults). */
+export function imageDefaults(category: string): ImageDefaults {
+  return resolveImageDefaults(_imgDefaults, _imgCategories, category) as ImageDefaults;
+}
+
+/** Get the objectFit for a specific view in a category. Falls back to 'contain'. */
+export function viewObjectFit(category: string, view: string): 'contain' | 'cover' {
+  return resolveViewObjectFit(_imgDefaults, _imgCategories, category, view) as 'contain' | 'cover';
 }
 
 export const CONFIG = {

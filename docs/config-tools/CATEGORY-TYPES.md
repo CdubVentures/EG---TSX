@@ -2,7 +2,7 @@
 
 ## The Problem
 
-Categories in `config/categories.json` can represent two different things:
+Categories in `config/data/categories.json` can represent two different things:
 
 1. **Product categories** — have a hub page (`/hubs/mouse`), product database,
    comparison tools, shapes viewer, radar charts, etc.

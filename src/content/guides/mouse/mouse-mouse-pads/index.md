@@ -1,4 +1,4 @@
----
+﻿---
 category: mouse
 navbar:
   - educational guides
@@ -10,8 +10,8 @@ description: >-
   materials, thicknesses, and textures, plus best practices for maintenance and
   cleaning.
 tags: []
-heroImg: title
-fullArticle: true
+hero: title
+publish: true
 toc: false
 draft: false
 ---

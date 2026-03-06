@@ -1,4 +1,4 @@
----
+﻿---
 brand: Asus
 displayName: Asus
 title: 'Asus (ROG): High-Performance Hardware for Enthusiasts'
@@ -19,6 +19,7 @@ navbar:
   - monitor
   - mouse
 toc: false
-fullArticle: true
+publish: true
+hero: brand-logo-horizontal-index
 ---
 

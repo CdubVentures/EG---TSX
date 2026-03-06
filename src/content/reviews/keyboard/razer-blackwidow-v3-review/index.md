@@ -1,9 +1,9 @@
----
+﻿---
 category: keyboard
 brand: Razer
 model: BlackWidow V3
 author: EG Team
-fullArticle: true
+publish: true
 draft: false
 title: 'Razer BlackWidow V3 Review: Timeless Mechanical Precision'
 subtitle: 'Enjoy Green Clicky Switches, Chroma RGB, and Full-Size Glory'
@@ -13,7 +13,7 @@ description: >-
   choice for FPS, MMO, and RTS gamers in 2025.
 tags:
   - Classic Keyboard
-heroImg: feature-image
+hero: feature-image
 productId: razer-blackwidow-v3
 toc: false
 ---

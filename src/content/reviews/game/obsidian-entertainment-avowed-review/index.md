@@ -1,9 +1,9 @@
----
+﻿---
 category: game
 brand: Obsidian Entertainment
 model: Avowed
 author: EG Team
-fullArticle: false
+publish: false
 draft: false
 title: 'Avowed: Quest Through the Living Lands'
 subtitle: 'Explore Rich Lore, Tactical Combat, and Magical Depths'
@@ -14,7 +14,7 @@ description: >-
   vibrant 2025 adventure.
 tags:
   - Epic Fantasy RPG
-heroImg: feature-image
+hero: feature-image
 toc: false
 ---
 

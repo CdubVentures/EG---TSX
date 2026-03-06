@@ -1,4 +1,4 @@
----
+﻿---
 brand: EVGA
 displayName: EVGA
 title: 'EVGA: Redefining PC Gaming Power'
@@ -27,6 +27,7 @@ navbar:
   - monitor
   - mouse
 toc: false
-fullArticle: true
+publish: true
+hero: brand-logo-horizontal-index
 ---
 

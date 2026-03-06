@@ -1,4 +1,4 @@
----
+﻿---
 brand: HyperX
 displayName: HyperX
 title: 'HyperX: Reliable Comfort for Marathon Sessions'
@@ -18,6 +18,7 @@ navbar:
   - keyboard
   - mouse
 toc: false
-fullArticle: true
+publish: true
+hero: brand-logo-horizontal-index
 ---
 

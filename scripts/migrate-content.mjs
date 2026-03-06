@@ -1,11 +1,11 @@
-#!/usr/bin/env node
+﻿#!/usr/bin/env node
 /**
- * Migration Script: EG-HBS → EG-TSX
+ * Migration Script: EG-HBS â†’ EG-TSX
  *
  * Reads source markdown files and product JSONs from EG-HBS,
  * generates CUID2 IDs, and writes validated content files to EG-TSX.
  *
- * Idempotent via crosswalk file — re-running preserves existing IDs.
+ * Idempotent via crosswalk file â€” re-running preserves existing IDs.
  *
  * Run:  node scripts/migrate-content.mjs
  */
@@ -16,7 +16,7 @@ import { fileURLToPath } from 'node:url';
 import { createId } from '@paralleldrive/cuid2';
 import matter from 'gray-matter';
 
-// ─── Paths ───────────────────────────────────────────────────────────────────
+// â”€â”€â”€ Paths â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const TSX_ROOT = path.resolve(__dirname, '..');
 const HBS_ROOT = path.resolve(TSX_ROOT, '..', 'EG - HBS');
@@ -25,7 +25,7 @@ const CROSSWALK_PATH = path.join(__dirname, '.id-crosswalk.json');
 const SRC = (...parts) => path.join(HBS_ROOT, ...parts);
 const OUT = (...parts) => path.join(TSX_ROOT, ...parts);
 
-// ─── Stats ───────────────────────────────────────────────────────────────────
+// â”€â”€â”€ Stats â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 const stats = {
   products: { total: 0, byCategory: {} },
   brands: { total: 0 },
@@ -38,10 +38,10 @@ const stats = {
   errors: [],
 };
 
-function warn(msg) { stats.warnings.push(msg); console.warn(`  ⚠ ${msg}`); }
-function error(msg) { stats.errors.push(msg); console.error(`  ✗ ${msg}`); }
+function warn(msg) { stats.warnings.push(msg); console.warn(`  âš  ${msg}`); }
+function error(msg) { stats.errors.push(msg); console.error(`  âœ— ${msg}`); }
 
-// ─── Crosswalk (idempotency) ─────────────────────────────────────────────────
+// â”€â”€â”€ Crosswalk (idempotency) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 function loadCrosswalk() {
   if (fs.existsSync(CROSSWALK_PATH)) {
@@ -61,7 +61,7 @@ function getOrCreateId(cw, namespace, key) {
   return cw[fullKey];
 }
 
-// ─── Slug helpers ────────────────────────────────────────────────────────────
+// â”€â”€â”€ Slug helpers â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 function toSlug(input) {
   return input
@@ -70,19 +70,19 @@ function toSlug(input) {
     .replace(/^-+|-+$/g, '');
 }
 
-/** Extract [id = N] from review filename → integer or null */
+/** Extract [id = N] from review filename â†’ integer or null */
 function extractReviewLegacyId(filename) {
   const m = filename.match(/\[id\s*=\s*(\d+)\]/);
   return m ? parseInt(m[1], 10) : null;
 }
 
-/** Extract (N) from game filename → integer or null */
+/** Extract (N) from game filename â†’ integer or null */
 function extractGameLegacyId(filename) {
   const m = filename.match(/\((\d+)\)/);
   return m ? parseInt(m[1], 10) : null;
 }
 
-// ─── Helpers ─────────────────────────────────────────────────────────────────
+// â”€â”€â”€ Helpers â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 function ensureDir(p) { fs.mkdirSync(p, { recursive: true }); }
 
@@ -141,16 +141,16 @@ function ensureDescription(desc, fallback) {
   return d;
 }
 
-// ═══════════════════════════════════════════════════════════════════════════════
-// 1. PRODUCT MIGRATION (JSON → JSON with CUID2)
-// ═══════════════════════════════════════════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// 1. PRODUCT MIGRATION (JSON â†’ JSON with CUID2)
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
 function migrateProducts(cw) {
-  console.log('\n── Products ──────────────────────────────────────────');
+  console.log('\nâ”€â”€ Products â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€');
 
-  /** brand slug (lowercase) → CUID2 */
+  /** brand slug (lowercase) â†’ CUID2 */
   const brandMap = {};
-  /** "mouse:1" → CUID2 */
+  /** "mouse:1" â†’ CUID2 */
   const productMap = {};
 
   const CATEGORIES = ['mouse', 'keyboard', 'monitor'];
@@ -170,13 +170,13 @@ function migrateProducts(cw) {
       const id = getOrCreateId(cw, `product-${cat}`, String(legacyId));
       const slug = toSlug(`${product.brand}-${product.model}`);
 
-      // Build brand map (brand slug → CUID2)
+      // Build brand map (brand slug â†’ CUID2)
       const brandKey = toSlug(product.brand);
       if (!brandMap[brandKey]) {
         brandMap[brandKey] = getOrCreateId(cw, 'brand', brandKey);
       }
 
-      // Build product map (category:legacyId → CUID2)
+      // Build product map (category:legacyId â†’ CUID2)
       productMap[`${cat}:${legacyId}`] = id;
 
       // Preserve all fields; add id, legacyId, slug, brandId at top
@@ -201,18 +201,18 @@ function migrateProducts(cw) {
     const outPath = OUT('src', 'data', 'products', `${cat}.json`);
     ensureDir(path.dirname(outPath));
     fs.writeFileSync(outPath, JSON.stringify(output, null, 2), 'utf-8');
-    console.log(`  ${cat}: ${output.length} products → ${path.relative(TSX_ROOT, outPath)}`);
+    console.log(`  ${cat}: ${output.length} products â†’ ${path.relative(TSX_ROOT, outPath)}`);
   }
 
   return { brandMap, productMap };
 }
 
-// ═══════════════════════════════════════════════════════════════════════════════
-// 2. BRAND MIGRATION (MD → MD)
-// ═══════════════════════════════════════════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// 2. BRAND MIGRATION (MD â†’ MD)
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
 function migrateBrands(cw, brandMap) {
-  console.log('\n── Brands ────────────────────────────────────────────');
+  console.log('\nâ”€â”€ Brands â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€');
 
   const srcDir = SRC('.markdowns', 'brands');
   const files = findFiles(srcDir);
@@ -241,7 +241,7 @@ function migrateBrands(cw, brandMap) {
       datePublished: parseDate(data.datePublished),
       dateUpdated: parseDate(data.dateUpdated),
       overall: typeof data.overall === 'number' ? data.overall : undefined,
-      heroImg: clean(data.heroImg),
+      hero: clean(data.heroImg),
       heroCredit: clean(data.heroCredit),
       brand_website: clean(data.brand_website) || '',
       brand_facebook: clean(data.brand_facebook) || '',
@@ -259,7 +259,7 @@ function migrateBrands(cw, brandMap) {
       product_5: clean(data.product_5),
       product_6: clean(data.product_6),
       toc: data.toc === true,
-      fullArticle: data.fullArticle !== false,
+      publish: data.publish !== false,
     };
 
     // Remove undefined values so YAML stays clean
@@ -273,12 +273,12 @@ function migrateBrands(cw, brandMap) {
   console.log(`  ${stats.brands.total} brands migrated`);
 }
 
-// ═══════════════════════════════════════════════════════════════════════════════
-// 3. GAME MIGRATION (MD → MD)
-// ═══════════════════════════════════════════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// 3. GAME MIGRATION (MD â†’ MD)
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
 function migrateGames(cw) {
-  console.log('\n── Games ─────────────────────────────────────────────');
+  console.log('\nâ”€â”€ Games â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€');
 
   const srcDir = SRC('.markdowns', 'games');
   const files = findFiles(srcDir);
@@ -298,7 +298,7 @@ function migrateGames(cw) {
       guide: clean(data.guide),
       title: data.title || gameName,
       subtitle: clean(data.subtitle),
-      description: ensureDescription(data.description, `${gameName} — gaming guide and recommended gear`),
+      description: ensureDescription(data.description, `${gameName} â€” gaming guide and recommended gear`),
       profile: clean(data.profile),
       tags: cleanTags(data.tags),
       genre: clean(data.genre),
@@ -306,8 +306,8 @@ function migrateGames(cw) {
       lastPatchDate: clean(data.lastPatchDate),
       patchTitle: clean(data.patchTitle),
       overall: typeof data.overall === 'number' ? data.overall : undefined,
-      heroImg: clean(data.heroImg),
-      heroAltImg: clean(data.heroAltImg),
+      hero: clean(data.heroImg),
+      heroAlt: clean(data.heroAltImg),
       heroCredit: clean(data.heroCredit),
       boxCoverArt: clean(data.boxCoverArt),
       game_website: clean(data.game_website) || '',
@@ -317,7 +317,7 @@ function migrateGames(cw) {
       game_youtube: clean(data.game_youtube) || '',
       iDashboard: clean(data.iDashboard),
       author: clean(data.author),
-      fullArticle: data.fullArticle !== false,
+      publish: data.publish !== false,
       toc: data.toc === true,
     };
 
@@ -331,12 +331,12 @@ function migrateGames(cw) {
   console.log(`  ${stats.games.total} games migrated`);
 }
 
-// ═══════════════════════════════════════════════════════════════════════════════
-// 4. REVIEW MIGRATION (MD → MD with product/brand linking)
-// ═══════════════════════════════════════════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// 4. REVIEW MIGRATION (MD â†’ MD with product/brand linking)
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
 function migrateReviews(cw, brandMap, productMap) {
-  console.log('\n── Reviews ───────────────────────────────────────────');
+  console.log('\nâ”€â”€ Reviews â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€');
 
   const srcDir = SRC('.markdowns', 'reviews');
   const files = findFiles(srcDir);
@@ -358,7 +358,7 @@ function migrateReviews(cw, brandMap, productMap) {
     const category = data.category || subDir;
     const legacyId = extractReviewLegacyId(filename);
 
-    // Derive slug — deduplicate if needed
+    // Derive slug â€” deduplicate if needed
     let slug;
     if (data.brand && data.model) {
       slug = toSlug(`${data.brand}-${data.model}-review`);
@@ -397,7 +397,7 @@ function migrateReviews(cw, brandMap, productMap) {
       brand: clean(data.brand),
       model: clean(data.model),
       author: data.author || 'EG Team',
-      fullArticle: data.fullArticle !== false,
+      publish: data.publish !== false,
       draft: data.draft === true,
       title: data.title || `${data.brand || ''} ${data.model || ''} Review`.trim(),
       subtitle: clean(data.subtitle),
@@ -408,7 +408,7 @@ function migrateReviews(cw, brandMap, productMap) {
       tags: cleanTags(data.tags),
       datePublished: parseDate(data.datePublished),
       dateUpdated: parseDate(data.dateUpdated),
-      heroImg: clean(data.heroImg),
+      hero: clean(data.heroImg),
       heroAspect: clean(data.heroAspect),
       heroCredit: clean(data.heroCredit),
       productId,
@@ -431,12 +431,12 @@ function migrateReviews(cw, brandMap, productMap) {
   }
 }
 
-// ═══════════════════════════════════════════════════════════════════════════════
-// 5. GUIDE MIGRATION (MD → MD)
-// ═══════════════════════════════════════════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// 5. GUIDE MIGRATION (MD â†’ MD)
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
 function migrateGuides(cw) {
-  console.log('\n── Guides ────────────────────────────────────────────');
+  console.log('\nâ”€â”€ Guides â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€');
 
   const srcDir = SRC('.markdowns', 'guides');
   const files = findFiles(srcDir);
@@ -465,10 +465,10 @@ function migrateGuides(cw) {
       tags: cleanTags(data.tags),
       datePublished: parseDate(data.datePublished),
       dateUpdated: parseDate(data.dateUpdated),
-      heroImg: clean(data.heroImg),
+      hero: clean(data.heroImg),
       heroCredit: clean(data.heroCredit),
       author: clean(data.author),
-      fullArticle: data.fullArticle !== false,
+      publish: data.publish !== false,
       toc: data.toc === true,
       draft: data.draft === true,
     };
@@ -483,12 +483,12 @@ function migrateGuides(cw) {
   console.log(`  ${stats.guides.total} guides migrated`);
 }
 
-// ═══════════════════════════════════════════════════════════════════════════════
-// 6. NEWS MIGRATION (MD → MD)
-// ═══════════════════════════════════════════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// 6. NEWS MIGRATION (MD â†’ MD)
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
 function migrateNews(cw) {
-  console.log('\n── News ──────────────────────────────────────────────');
+  console.log('\nâ”€â”€ News â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€');
 
   const srcDir = SRC('.markdowns', 'news');
   const files = findFiles(srcDir);
@@ -500,7 +500,7 @@ function migrateNews(cw) {
     const slug = toSlug(filename);
     const id = getOrCreateId(cw, 'news', slug);
 
-    // datePublished is required — fall back to file mtime
+    // datePublished is required â€” fall back to file mtime
     let datePublished = parseDate(data.datePublished);
     if (!datePublished) {
       const mtime = fs.statSync(file).mtime;
@@ -517,11 +517,11 @@ function migrateNews(cw) {
       datePublished,
       dateUpdated: parseDate(data.dateUpdated),
       author: data.author || 'EG Team',
-      heroImg: clean(data.heroImg),
+      hero: clean(data.heroImg),
       heroCredit: clean(data.heroCredit),
       category: clean(data.category),
       draft: data.draft === true,
-      fullArticle: data.fullArticle !== false,
+      publish: data.publish !== false,
     };
 
     Object.keys(fm).forEach(k => fm[k] === undefined && delete fm[k]);
@@ -539,12 +539,12 @@ function migrateNews(cw) {
   console.log(`  ${stats.news.total} news articles migrated`);
 }
 
-// ═══════════════════════════════════════════════════════════════════════════════
-// 7. PAGE MIGRATION (MD → MD)
-// ═══════════════════════════════════════════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// 7. PAGE MIGRATION (MD â†’ MD)
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
 function migratePages(cw) {
-  console.log('\n── Pages ─────────────────────────────────────────────');
+  console.log('\nâ”€â”€ Pages â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€');
 
   const srcDir = SRC('.markdowns', 'pages');
   const files = findFiles(srcDir);
@@ -575,20 +575,20 @@ function migratePages(cw) {
   console.log(`  ${stats.pages.total} pages migrated`);
 }
 
-// ═══════════════════════════════════════════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 // MAIN
-// ═══════════════════════════════════════════════════════════════════════════════
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
 function main() {
-  console.log('╔══════════════════════════════════════════════════════╗');
-  console.log('║        EG-HBS → EG-TSX Content Migration           ║');
-  console.log('╚══════════════════════════════════════════════════════╝');
+  console.log('â•”â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•—');
+  console.log('â•‘        EG-HBS â†’ EG-TSX Content Migration           â•‘');
+  console.log('â•šâ•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•');
   console.log(`\nSource: ${HBS_ROOT}`);
   console.log(`Target: ${TSX_ROOT}`);
 
   // Verify source exists
   if (!fs.existsSync(HBS_ROOT)) {
-    console.error(`\n✗ Source directory not found: ${HBS_ROOT}`);
+    console.error(`\nâœ— Source directory not found: ${HBS_ROOT}`);
     process.exit(1);
   }
 
@@ -611,10 +611,10 @@ function main() {
   saveCrosswalk(cw);
   const newIds = Object.keys(cw).length - existingIds;
 
-  // ─── Report ──────────────────────────────────────────────────────────────
-  console.log('\n══════════════════════════════════════════════════════');
+  // â”€â”€â”€ Report â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  console.log('\nâ•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•');
   console.log('MIGRATION REPORT');
-  console.log('══════════════════════════════════════════════════════');
+  console.log('â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•');
   console.log(`Products: ${stats.products.total}`);
   for (const [cat, count] of Object.entries(stats.products.byCategory)) {
     console.log(`  ${cat}: ${count}`);
@@ -631,10 +631,10 @@ function main() {
   console.log(`\nCrosswalk: ${newIds} new IDs generated, ${Object.keys(cw).length} total`);
 
   if (stats.warnings.length) {
-    console.log(`\n⚠ ${stats.warnings.length} warnings (see above)`);
+    console.log(`\nâš  ${stats.warnings.length} warnings (see above)`);
   }
   if (stats.errors.length) {
-    console.log(`\n✗ ${stats.errors.length} errors:`);
+    console.log(`\nâœ— ${stats.errors.length} errors:`);
     stats.errors.forEach(e => console.log(`  ${e}`));
   }
 

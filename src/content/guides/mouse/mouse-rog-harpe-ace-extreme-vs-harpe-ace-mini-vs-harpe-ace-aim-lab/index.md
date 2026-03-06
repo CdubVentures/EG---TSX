@@ -1,4 +1,4 @@
----
+﻿---
 category: mouse
 navbar: []
 guide: ROG Harpe Ace Extreme vs Harpe Ace Mini vs Harpe Ace Aim Lab
@@ -33,10 +33,9 @@ tags:
   - optical switches
   - versus
 datePublished: '2025-12-16'
-heroImg: >-
-  /images/guides/mouse/rog-harpe-ace-extreme-vs-harpe-ace-mini-vs-harpe-ace-aim-lab/hero-img
+hero: carbon-fiber-hero
 author: Gear Guides Team
-fullArticle: true
+publish: true
 toc: false
 draft: false
 ---

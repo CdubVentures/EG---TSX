@@ -5,7 +5,7 @@
 
 import { CONFIG } from './config';
 
-export type ImageSize = 'blur' | 't' | 'xs' | 's' | 'm' | 'l' | 'xl' | 'xxl' | 'zoom';
+export type ImageSize = 'blur' | 't_blur' | 't' | 'xxs' | 'xs' | 's' | 'm' | 'l' | 'xl' | 'xxl' | 'zoom';
 
 // ─── Universal Resolver ─────────────────────────────────────────────────────
 // ONE function for ALL image types. Takes a base path, stem, size, and

@@ -23,6 +23,8 @@
  ─── dropdown group ────────────────────────────────────────────
  Mega menus (desktop)   94000     absolute    mainNav
  Vault menu (mobile)    94000     fixed       Viewport (moved to <body>)
+ ─── page-level ────────────────────────────────────────────────
+ Sticky ad stack        1000      sticky      home-rail / sidebar zone
  ─── local contexts ────────────────────────────────────────────
  Auth close button      10        absolute    <dialog> top layer
  Side auth footer       2         relative    Side menu drawer
@@ -52,7 +54,7 @@
 
 | Element | Selector | File | Line |
 |---------|----------|------|------|
-| Side menu drawer | `.side-menu` | `src/styles/global.css` | 857 |
+| Side menu drawer | `.side-menu` | `src/styles/nav-mobile.css` | 64 |
 
 - **Position:** `absolute` (relative to `mainNav`)
 - **Trigger:** Hamburger icon click (≤1150px)
@@ -62,7 +64,7 @@
 
 | Element | Selector | File | Line |
 |---------|----------|------|------|
-| Shade overlay | `.shade-overlay` | `src/styles/global.css` | 993 |
+| Shade overlay | `.shade-overlay` | `src/styles/nav-mobile.css` | 268 |
 
 - **Position:** `fixed` — covers viewport
 - **Trigger:** Side menu open (≤1150px)
@@ -92,6 +94,16 @@
 - **Position (mobile vault):** `fixed` — moved to `<body>` via JS to escape navbar stacking context
 - **WHY 94000:** Below navbar (95000) so the navbar covers the top edge of menus. On desktop this is invisible (menus drop below the bar). On mobile, the vault slides down from behind the navbar.
 
+### 1000 — Sticky Ad Stack
+
+| Element | Selector | File | Line |
+|---------|----------|------|------|
+| Sticky ad stack | `.sticky-stack[data-sticky="true"]` | `src/pages/index.astro` | 132 |
+
+- **Position:** `sticky` — sticks to viewport while scrolling within its parent zone
+- **Context:** Inside `.home-rail.-right` (home page) or `.sidebar-zone` (article pages, Phase 5+)
+- **WHY 1000:** Must be above page content but well below navbar (95000). Falls in the "Page-level" band. Article sidebar zones (Phase 5) will use the same value.
+
 ### 10 — Auth Dialog Close Button
 
 | Element | Selector | File | Line |
@@ -106,7 +118,7 @@
 
 | Element | Selector | File | Line |
 |---------|----------|------|------|
-| Auth footer | `.side-auth-footer` | `src/styles/global.css` | 1012 |
+| Auth footer | `.side-auth-footer` | `src/styles/nav-mobile.css` | 289 |
 
 - **Position:** Default (`relative` via flex)
 - **Context:** Inside `.side-menu` — local to the drawer

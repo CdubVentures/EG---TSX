@@ -1,8 +1,8 @@
----
+﻿---
 /**
- * GlobalNav.astro — Top-bar orchestrator.
+ * GlobalNav.astro â€” Top-bar orchestrator.
  *
- * Phase 4.2–4.5: Fixed header with logo, desktop nav links, icons, mobile drawer,
+ * Phase 4.2â€“4.5: Fixed header with logo, desktop nav links, icons, mobile drawer,
  * and mega menu dropdowns (Games, Guides, Brands, Hubs).
  * Matches HBS `<nav class="mainNav">` wrapping `<header class="top-bar">`.
  *
@@ -12,32 +12,36 @@
  */
 
 import { getCollection } from 'astro:content';
-import { CONFIG } from '@core/config';
+import { CONFIG, isContentActive } from '@core/config';
+import { contentImage, collectionImagePath } from '@core/images';
+import sectionOrder from '../../../config/data/navbar-guide-sections.json';
 import NavLogo from './NavLogo.astro';
 import NavLinks from './NavLinks.astro';
 import NavIcons from './NavIcons.astro';
 import NavMobile from './NavMobile.tsx';
-/* ─── Build-time data ─── */
+/* â”€â”€â”€ Build-time data â”€â”€â”€ */
 const allGames = await getCollection('games');
 const allGuides = await getCollection('guides');
 const allBrands = await getCollection('brands');
 
-// WHY CONFIG.categories: filtered by environment (production + vite flags)
-const hubsData = CONFIG.categories.map((c) => ({ category: c }));
+// WHY categories (not allCategories): disabled categories should not appear in the hubs menu at all
+const hubsData = CONFIG.categories.map((c) => ({
+  category: c,
+}));
 
-/* ─── Mobile nav data (simple shapes) ─── */
+/* â”€â”€â”€ Mobile nav data (simple shapes) â”€â”€â”€ */
 
 /* WHY navbar filter: only games with navbar:true appear in the games menu */
 const gamesData = allGames
-  .filter((g) => g.data.navbar && g.data.fullArticle !== false)
+  .filter((g) => g.data.navbar && g.data.publish !== false)
   .sort((a, b) => a.data.title.localeCompare(b.data.title))
   .map((g) => ({ title: g.data.title, url: `/games/${g.id}` }));
 
 const guidesMap = new Map<string, Array<{ title: string; url: string }>>();
 for (const g of allGuides) {
   const cat = g.data.category;
-  if (!cat || g.data.fullArticle === false) continue;
-  // WHY navbar check: match desktop mega menu — only guides with a navbar assignment appear
+  if (!cat || g.data.publish === false) continue;
+  // WHY navbar check: match desktop mega menu â€” only guides with a navbar assignment appear
   const navbar = g.data.navbar ?? [];
   if (navbar.length === 0) continue;
   if (!guidesMap.has(cat)) guidesMap.set(cat, []);
@@ -46,16 +50,18 @@ for (const g of allGuides) {
 }
 const guidesData = Array.from(guidesMap.entries()).map(([category, items]) => ({
   category,
+  disabled: !isContentActive(category),
   items: items.sort((a, b) => a.title.localeCompare(b.title)),
 }));
 
-const brandsMap = new Map<string, Array<{ brand: string; slug: string; url: string }>>();
+const brandsMap = new Map<string, Array<{ brand: string; slug: string; url: string; logoUrl: string }>>();
 for (const b of allBrands) {
-  if (b.data.fullArticle === false) continue;
+  if (b.data.publish === false) continue;
   const cats = b.data.navbar ?? [];
+  const logoUrl = contentImage(collectionImagePath('brands', b.id), 'brand-logo-horizontal-mono-black', 'xs', 'png');
   for (const cat of cats) {
     if (!brandsMap.has(cat)) brandsMap.set(cat, []);
-    brandsMap.get(cat)!.push({ brand: b.data.brand, slug: b.id, url: `/brands/${b.id}` });
+    brandsMap.get(cat)!.push({ brand: b.data.displayName ?? b.data.brand, slug: b.id, url: `/brands/${b.id}`, logoUrl });
   }
 }
 const brandsData = Array.from(brandsMap.entries()).map(([category, items]) => ({
@@ -63,11 +69,11 @@ const brandsData = Array.from(brandsMap.entries()).map(([category, items]) => ({
   items: items.sort((a, b) => a.brand.localeCompare(b.brand)),
 }));
 
-/* ─── Mega menu data (richer shapes for desktop dropdowns) ─── */
+/* â”€â”€â”€ Mega menu data (richer shapes for desktop dropdowns) â”€â”€â”€ */
 
 /* Games: need slug for image paths. Only navbar:true games appear. */
 const gamesMega = allGames
-  .filter((g) => g.data.navbar && g.data.fullArticle !== false)
+  .filter((g) => g.data.navbar && g.data.publish !== false)
   .sort((a, b) => a.data.title.localeCompare(b.data.title))
   .map((g) => ({
     title: g.data.title,
@@ -77,15 +83,15 @@ const gamesMega = allGames
 
 /* Guides: grouped by category, then by section name (from navbar field).
    WHY sections: HBS renders guides as titled columns ("Best In Classes",
-   "Educational Guides", etc.) — not balanced anonymous columns. */
+   "Educational Guides", etc.) â€” not balanced anonymous columns. */
 type GuideItem = { guide: string; url: string };
 type GuideSection = { title: string; items: GuideItem[] };
-type GuideCategoryMega = { category: string; sections: GuideSection[] };
+type GuideCategoryMega = { category: string; disabled: boolean; sections: GuideSection[] };
 
 const guidesByCatSection = new Map<string, Map<string, GuideItem[]>>();
 for (const g of allGuides) {
   const cat = g.data.category;
-  if (!cat || g.data.fullArticle === false) continue;
+  if (!cat || g.data.publish === false) continue;
   const navbar = g.data.navbar ?? [];
   /* WHY: only guides with a non-empty navbar field appear in the mega menu.
      Guides with navbar:[] are "unassigned" and don't show up. */
@@ -99,25 +105,21 @@ for (const g of allGuides) {
     url: `/guides/${g.id}`,
   });
 }
-/* WHY explicit ordering: controls column order in the guides mega menu. */
-const sectionOrder: Record<string, string[]> = {
-  mouse: ['best in classes', 'educational guides', 'top 10 speciality picks', 'top 10 genere picks'],
-  keyboard: ['best in classes'],
-  monitor: ['best in classes'],
-};
+/* WHY: section order comes from config/data/navbar-guide-sections.json (managed by navbar-manager.pyw).
+   Controls column order in the guides mega menu. */
 
 const guidesMega: GuideCategoryMega[] = Array.from(guidesByCatSection.entries())
   .sort(([a], [b]) => a.localeCompare(b))
   .map(([category, sectionMap]) => {
     const order = sectionOrder[category] ?? [];
     const allSections = Array.from(sectionMap.keys());
-    // Ordered sections first, then any not in the order file
     const sorted = [
       ...order.filter((s) => allSections.includes(s)),
       ...allSections.filter((s) => !order.includes(s)),
     ];
     return {
       category,
+      disabled: !isContentActive(category),
       sections: sorted.map((title) => ({
         title,
         items: (sectionMap.get(title) ?? []).sort((a, b) => a.guide.localeCompare(b.guide)),
@@ -128,12 +130,12 @@ const guidesMega: GuideCategoryMega[] = Array.from(guidesByCatSection.entries())
 /* Brands: grouped by category, split into 4 balanced columns (HBS style) */
 const brandsMegaMap = new Map<string, Array<{ brand: string; slug: string; url: string }>>();
 for (const b of allBrands) {
-  if (b.data.fullArticle === false) continue;
+  if (b.data.publish === false) continue;
   const cats = b.data.navbar ?? [];
   for (const cat of cats) {
     if (!brandsMegaMap.has(cat)) brandsMegaMap.set(cat, []);
     brandsMegaMap.get(cat)!.push({
-      brand: b.data.brand,
+      brand: b.data.displayName ?? b.data.brand,
       slug: b.id,
       url: `/brands/${b.id}`,
     });
@@ -191,6 +193,7 @@ const brandsMega = Array.from(brandsMegaMap.entries())
     padding: 0;
     box-sizing: border-box;
     margin: 0;
+    box-shadow: var(--nav-shadow);
   }
 
   .top-bar {
@@ -207,7 +210,7 @@ const brandsMega = Array.from(brandsMegaMap.entries())
     background: var(--nav-bg);
   }
 
-  /* WHY: navbar-specific sizing for logo — NavLogo itself is context-agnostic
+  /* WHY: navbar-specific sizing for logo â€” NavLogo itself is context-agnostic
      (inherits font-size from parent). Auth dialog uses a different font-size. */
   .nav-logo-wrapper {
     font-size: var(--font-size-28px);

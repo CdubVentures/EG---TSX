@@ -4,7 +4,7 @@
 navbar-manager.py -- Professional GUI for managing navbar content fields.
 
 Reads/writes YAML frontmatter in .md files under src/content/.
-Writes navbar-hubs.json and navbar-guide-sections.json.
+Writes config/data/navbar-guide-sections.json.
 """
 
 import ctypes
@@ -26,11 +26,10 @@ if sys.platform == "win32":
 # -- Paths -------------------------------------------------------------------
 ROOT = Path(__file__).resolve().parent.parent
 CONTENT = ROOT / "src" / "content"
-HUBS_JSON = ROOT / "src" / "data" / "navbar-hubs.json"
-SECTIONS_JSON = ROOT / "src" / "data" / "navbar-guide-sections.json"
-CATEGORIES_JSON = ROOT / "config" / "categories.json"
+SECTIONS_JSON = ROOT / "config" / "data" / "navbar-guide-sections.json"
+CATEGORIES_JSON = ROOT / "config" / "data" / "categories.json"
 
-# SSOT: read category IDs from config/categories.json
+# SSOT: read category IDs from config/data/categories.json
 def _load_all_categories() -> list[str]:
     if CATEGORIES_JSON.is_file():
         data = json.loads(CATEGORIES_JSON.read_text(encoding="utf-8"))
@@ -38,7 +37,15 @@ def _load_all_categories() -> list[str]:
     return ["mouse", "keyboard", "monitor", "headset", "mousepad", "controller",
             "hardware", "game", "gpu", "ai"]
 
+def _load_category_defs() -> list[dict]:
+    """Load full category definitions for display-only Hubs tab."""
+    if CATEGORIES_JSON.is_file():
+        data = json.loads(CATEGORIES_JSON.read_text(encoding="utf-8"))
+        return data.get("categories", [])
+    return []
+
 ALL_CATEGORIES = _load_all_categories()
+ALL_CATEGORY_DEFS = _load_category_defs()
 
 # -- Design System -----------------------------------------------------------
 class C:
@@ -65,7 +72,7 @@ class C:
     DROP = "#2a2b3d"
     CARD_BORDER = "#252538"
 
-# SSOT: read category colors from config/categories.json
+# SSOT: read category colors from config/data/categories.json
 def _load_cat_colors():
     if CATEGORIES_JSON.is_file():
         data = json.loads(CATEGORIES_JSON.read_text(encoding="utf-8"))
@@ -76,7 +83,7 @@ def _load_cat_colors():
 
 CAT_COLORS = _load_cat_colors()
 
-# SSOT: read site accent colors from config/categories.json
+# SSOT: read site accent colors from config/data/categories.json
 def _load_site_accent():
     if CATEGORIES_JSON.is_file():
         data = json.loads(CATEGORIES_JSON.read_text(encoding="utf-8"))
@@ -185,6 +192,40 @@ def write_navbar_field(filepath: Path, value):
     filepath.write_text(f"{parts[0]}---{chr(10).join(new_lines)}---{parts[2]}", encoding="utf-8")
 
 
+def write_field(filepath: Path, key: str, value: str):
+    """Targeted write: update a single scalar YAML field in frontmatter."""
+    text = filepath.read_text(encoding="utf-8")
+    parts = text.split("---", 2)
+    if len(parts) < 3:
+        return
+    lines = parts[1].split("\n")
+    needs_quote = any(c in value for c in ':{}[]&*?|>!%@#`') or value != value.strip()
+    if needs_quote:
+        escaped = value.replace('\\', '\\\\').replace('"', '\\"')
+        quoted = f'"{escaped}"'
+    else:
+        quoted = value
+    found = False
+    for i, line in enumerate(lines):
+        if re.match(rf"^{re.escape(key)}:", line):
+            lines[i] = f"{key}: {quoted}"
+            found = True
+            break
+    if not found:
+        idx = len(lines)
+        for i, line in enumerate(lines):
+            if re.match(r"^(title|brand|game|guide|displayName):", line):
+                idx = i + 1
+                break
+        if idx == len(lines):
+            for i, line in enumerate(lines):
+                if line.strip() and not line.strip().startswith("#"):
+                    idx = i + 1
+                    break
+        lines.insert(idx, f"{key}: {quoted}")
+    filepath.write_text(f"{parts[0]}---{chr(10).join(lines)}---{parts[2]}", encoding="utf-8")
+
+
 # -- Data Loading ------------------------------------------------------------
 def load_guides():
     guides = []
@@ -214,6 +255,7 @@ def load_brands():
         brands.append({
             "path": f, "filename": slug,
             "brand": fm.get("brand", slug),
+            "displayName": fm.get("displayName", fm.get("brand", slug)),
             "navbar": fm.get("navbar", []),
         })
     return brands
@@ -233,11 +275,6 @@ def load_games():
             "navbar": fm.get("navbar", False),
         })
     return games
-
-def load_hubs():
-    if HUBS_JSON.is_file():
-        return json.loads(HUBS_JSON.read_text(encoding="utf-8"))
-    return ["mouse", "keyboard", "monitor", "headset"]
 
 def load_section_order():
     if SECTIONS_JSON.is_file():
@@ -410,12 +447,12 @@ class NavbarManager(tk.Tk):
         self.guides_data = load_guides()
         self.brands_data = load_brands()
         self.games_data = load_games()
-        self.hubs_data = load_hubs()
         self.section_order_data = load_section_order()
         self.guide_categories = sorted(set(
             g["category"] for g in self.guides_data if g["category"]
         ))
         self.pending_changes: dict[str, dict] = {}
+        self.pending_field_changes: dict[str, dict[str, str]] = {}
 
         # Drag state
         self._drag_src: tk.Listbox | None = None
@@ -497,7 +534,7 @@ class NavbarManager(tk.Tk):
                  bg=C.CRUST, fg=C.SURFACE2, font=F.TINY, padx=20).pack(side="right", fill="y")
 
     def _update_badge(self):
-        n = len(self.pending_changes)
+        n = len(self.pending_changes) + len(self.pending_field_changes)
         if n > 0:
             self.changes_lbl.configure(
                 text=f"{n} unsaved change{'s' if n != 1 else ''}", fg=C.PEACH)
@@ -519,10 +556,7 @@ class NavbarManager(tk.Tk):
             pass
 
     def _on_close(self):
-        has_changes = bool(self.pending_changes)
-        if not has_changes:
-            new_hubs = [c for c in ALL_CATEGORIES if self.hub_toggles[c].get()]
-            has_changes = new_hubs != self.hubs_data
+        has_changes = bool(self.pending_changes) or bool(self.pending_field_changes)
         if not has_changes:
             has_changes = self.section_order_data != load_section_order()
         if has_changes:
@@ -539,10 +573,10 @@ class NavbarManager(tk.Tk):
         except Exception:
             return
         hints = [
-            "Drag between columns to reassign  ·  < > reorder sections  ·  Del key unassigns",
-            "Drag from pool to add  ·  Drag to pool or Del key to remove",
-            "Toggle games on/off  ·  Toggle All for bulk changes",
-            "Enable categories to show in navbar dropdown",
+            "Drag between columns to reassign  ·  < > reorder sections  ·  Del key unassigns  ·  Double-click to rename",
+            "Drag from pool to add  ·  Drag to pool or Del key to remove  ·  Double-click to rename",
+            "Toggle games on/off  ·  Toggle All for bulk changes  ·  Double-click to rename",
+            "Display only  ·  Use Category Manager to change activation flags",
         ]
         if 0 <= tab < len(hints):
             self.status_var.set(f"  {hints[tab]}  ·  Ctrl+S to save")
@@ -562,28 +596,32 @@ class NavbarManager(tk.Tk):
         idx = lb.nearest(event.y)
         if idx < 0 or idx >= lb.size() or lb.bbox(idx) is None:
             return
-        HoverListbox._global_drag = True
         lb.selection_clear(0, "end")
         lb.selection_set(idx)
         self._drag_src = lb
         self._drag_idx = idx
         self._drag_item = lb._items[idx]
         self._drag_tab = tab
-        name = self._drag_item.get("guide",
-               self._drag_item.get("brand",
-               self._drag_item.get("title", "")))
-        g = tk.Toplevel(self)
-        g.overrideredirect(True)
-        g.attributes("-alpha", 0.9)
-        g.configure(bg=ACCENT)
-        tk.Label(g, text=f"  {name}  ", bg=ACCENT, fg=C.CRUST,
-                 font=F.BODY_BOLD, padx=8, pady=4).pack()
-        g.geometry(f"+{event.x_root + 14}+{event.y_root - 10}")
-        self._drag_ghost = g
+        # WHY: ghost is NOT created here — deferred to _drag_motion so that
+        # double-click (no motion) never spawns a toplevel or triggers refresh.
 
     def _drag_motion(self, event):
-        if not self._drag_ghost or not self._drag_item:
+        if not self._drag_item:
             return
+        # Create ghost on first motion (deferred from _drag_start)
+        if not self._drag_ghost:
+            HoverListbox._global_drag = True
+            name = self._drag_item.get("guide",
+                   self._drag_item.get("displayName",
+                   self._drag_item.get("brand",
+                   self._drag_item.get("title", ""))))
+            g = tk.Toplevel(self)
+            g.overrideredirect(True)
+            g.attributes("-alpha", 0.9)
+            g.configure(bg=ACCENT)
+            tk.Label(g, text=f"  {name}  ", bg=ACCENT, fg=C.CRUST,
+                     font=F.BODY_BOLD, padx=8, pady=4).pack()
+            self._drag_ghost = g
         self._drag_ghost.geometry(f"+{event.x_root + 14}+{event.y_root - 10}")
         tgt = self._lb_at(event.x_root, event.y_root)
         for lb in self._active_lbs():
@@ -800,12 +838,14 @@ class NavbarManager(tk.Tk):
         lb.bind("<ButtonPress-1>", lambda e: self._drag_start(e, "guides"))
         lb.bind("<B1-Motion>", self._drag_motion)
         lb.bind("<ButtonRelease-1>", self._on_guide_drop)
+        lb.bind("<Double-Button-1>", lambda e, l=lb: self._on_guide_dblclick(e, l))
         self._guide_lbs.append(lb)
 
     def _on_guide_drop(self, event):
         if not self._drag_item or not self._drag_src or self._drag_tab != "guides":
             self._drag_cleanup()
             return
+        dropped = False
         tgt = self._lb_at(event.x_root, event.y_root)
         if tgt and tgt != self._drag_src:
             g = self._drag_item
@@ -819,8 +859,10 @@ class NavbarManager(tk.Tk):
                 g["navbar"] = [] if target == "Unassigned" else [target]
                 self.pending_changes[str(g["path"])] = {"navbar": g["navbar"], "type": "list"}
                 self._update_badge()
+                dropped = True
         self._drag_cleanup()
-        self._refresh_guides()
+        if dropped:
+            self._refresh_guides()
 
     def _move_sec(self, ci, direction):
         cat = self.guide_cat_var.get()
@@ -1063,13 +1105,14 @@ class NavbarManager(tk.Tk):
                           hover_bg=C.SURFACE1, item_bg=C.SURFACE0)
         lb.pack(fill="both", expand=True, padx=12, pady=(4, 12))
         for b in items:
-            lb.insert("end", b["brand"])
+            lb.insert("end", b["displayName"])
         lb._col_name = col_name
         lb._items = items
         lb._is_unassigned = is_ua
         lb.bind("<ButtonPress-1>", lambda e: self._drag_start(e, "brands"))
         lb.bind("<B1-Motion>", self._drag_motion)
         lb.bind("<ButtonRelease-1>", self._on_brand_drop)
+        lb.bind("<Double-Button-1>", lambda e, l=lb: self._on_brand_dblclick(e, l))
         if not is_ua:
             lb.bind("<Delete>", self._on_brand_del)
             lb.bind("<BackSpace>", self._on_brand_del)
@@ -1079,6 +1122,7 @@ class NavbarManager(tk.Tk):
         if not self._drag_item or not self._drag_src or self._drag_tab != "brands":
             self._drag_cleanup()
             return
+        dropped = False
         tgt = self._lb_at(event.x_root, event.y_root)
         if tgt and tgt != self._drag_src:
             brand = self._drag_item
@@ -1092,17 +1136,20 @@ class NavbarManager(tk.Tk):
                     brand["navbar"] = nb
                     self.pending_changes[str(brand["path"])] = {"navbar": nb, "type": "list"}
                     self._update_badge()
+                    dropped = True
             elif tc in nb:
                 # Already in this category — notify user
                 self.toast.show(
-                    f"{brand['brand']} is already in {tc.title()}", C.OVERLAY0, 2000)
+                    f"{brand['displayName']} is already in {tc.title()}", C.OVERLAY0, 2000)
             else:
                 nb.append(tc)
                 brand["navbar"] = nb
                 self.pending_changes[str(brand["path"])] = {"navbar": nb, "type": "list"}
                 self._update_badge()
+                dropped = True
         self._drag_cleanup()
-        self._refresh_brands()
+        if dropped:
+            self._refresh_brands()
 
     def _on_brand_del(self, event):
         lb = event.widget
@@ -1139,6 +1186,7 @@ class NavbarManager(tk.Tk):
         grid = tk.Frame(frame, bg=C.MANTLE)
         grid.pack(fill="both", expand=True, padx=24, pady=(0, 20))
         self.game_toggles: list[Toggle] = []
+        self.game_labels: list[tk.Label] = []
 
         cols = 3
         for i, g in enumerate(self.games_data):
@@ -1151,19 +1199,24 @@ class NavbarManager(tk.Tk):
             tk.Frame(card, bg=ACCENT, width=3).pack(side="left", fill="y")
             inner = tk.Frame(card, bg=C.SURFACE0)
             inner.pack(side="left", fill="both", expand=True, padx=16, pady=14)
-            tk.Label(inner, text=g["game"], bg=C.SURFACE0, fg=C.TEXT,
-                     font=F.BODY_BOLD, anchor="w").pack(side="left", fill="x", expand=True)
+            lbl = tk.Label(inner, text=g["game"], bg=C.SURFACE0, fg=C.TEXT,
+                           font=F.BODY_BOLD, anchor="w", cursor="hand2")
+            lbl.pack(side="left", fill="x", expand=True)
+            lbl.bind("<Double-Button-1>", lambda e, idx=i: self._rename_game(idx))
+            self.game_labels.append(lbl)
             t = Toggle(inner, initial=bool(g["navbar"]),
                        on_toggle=lambda v, idx=i: self._on_game_toggle(idx, v),
                        bg=C.SURFACE0)
             t.pack(side="right")
             self.game_toggles.append(t)
             # Card hover
-            for w in (card, inner):
-                w.bind("<Enter>", lambda e, cd=card, inn=inner: (
-                    cd.configure(bg=C.SURFACE1), inn.configure(bg=C.SURFACE1)))
-                w.bind("<Leave>", lambda e, cd=card, inn=inner: (
-                    cd.configure(bg=C.SURFACE0), inn.configure(bg=C.SURFACE0)))
+            for w in (card, inner, lbl):
+                w.bind("<Enter>", lambda e, cd=card, inn=inner, lb=lbl: (
+                    cd.configure(bg=C.SURFACE1), inn.configure(bg=C.SURFACE1),
+                    lb.configure(bg=C.SURFACE1)))
+                w.bind("<Leave>", lambda e, cd=card, inn=inner, lb=lbl: (
+                    cd.configure(bg=C.SURFACE0), inn.configure(bg=C.SURFACE0),
+                    lb.configure(bg=C.SURFACE0)))
 
     def _on_game_toggle(self, idx, val):
         g = self.games_data[idx]
@@ -1178,7 +1231,7 @@ class NavbarManager(tk.Tk):
             self._on_game_toggle(i, any_off)
 
     # ========================================================================
-    # HUBS TAB
+    # HUBS TAB (display-only — reflects categories.json activation flags)
     # ========================================================================
     def _build_hubs_tab(self):
         frame = ttk.Frame(self.notebook)
@@ -1191,39 +1244,154 @@ class NavbarManager(tk.Tk):
         tk.Label(top, text=str(len(ALL_CATEGORIES)), bg=ACCENT, fg=C.CRUST,
                  font=F.TINY, padx=6, pady=2).pack(side="left", padx=(10, 0))
 
+        # WHY display-only: hubs in the navbar are driven by categories.json
+        # product flags via config.ts → GlobalNav.astro. There is no separate
+        # hubs toggle — use Category Manager to change activation flags.
+        note = tk.Frame(top, bg=C.MANTLE)
+        note.pack(side="right")
+        tk.Label(note, text="Read-only  ·  Use Category Manager to edit flags",
+                 bg=C.MANTLE, fg=C.OVERLAY0, font=F.SMALL).pack(side="left")
+
         container = tk.Frame(frame, bg=C.MANTLE)
         container.pack(fill="both", expand=True, padx=24, pady=(0, 20))
-        self.hub_toggles: dict[str, Toggle] = {}
 
-        for cat in ALL_CATEGORIES:
+        for cat_def in ALL_CATEGORY_DEFS:
+            cat = cat_def["id"]
             color = CAT_COLORS.get(cat, ACCENT)
+            prod = cat_def.get("product", {})
+            prod_on = prod.get("production", False)
+            prod_vite = prod.get("vite", False)
+
             card = tk.Frame(container, bg=C.SURFACE0,
                             highlightthickness=1, highlightbackground=C.CARD_BORDER)
             card.pack(fill="x", pady=5)
             tk.Frame(card, bg=color, width=3).pack(side="left", fill="y")
             inner = tk.Frame(card, bg=C.SURFACE0)
             inner.pack(side="left", fill="both", expand=True, padx=16, pady=12)
+
+            # Category dot + name
             dot = tk.Canvas(inner, width=12, height=12, highlightthickness=0, bg=C.SURFACE0)
             dot.pack(side="left", padx=(0, 10))
             dot.create_oval(1, 1, 11, 11, fill=color, outline="")
-            tk.Label(inner, text=cat.title(), bg=C.SURFACE0, fg=C.TEXT,
-                     font=F.BODY, anchor="w").pack(side="left", fill="x", expand=True)
-            t = Toggle(inner, initial=(cat in self.hubs_data), bg=C.SURFACE0)
-            t.pack(side="right")
-            self.hub_toggles[cat] = t
+            tk.Label(inner, text=cat_def.get("label", cat.title()), bg=C.SURFACE0,
+                     fg=C.TEXT, font=F.BODY_BOLD, anchor="w").pack(side="left")
+
+            # Status badges (right side)
+            badges = tk.Frame(inner, bg=C.SURFACE0)
+            badges.pack(side="right")
+
+            def _badge(parent, text, active, bg_on, bg_off=C.SURFACE2):
+                bg = bg_on if active else bg_off
+                fg = C.CRUST if active else C.OVERLAY0
+                tk.Label(parent, text=text, bg=bg, fg=fg,
+                         font=F.TINY, padx=6, pady=2).pack(side="left", padx=2)
+
+            _badge(badges, "Product", prod_on, C.GREEN)
+            _badge(badges, "Vite", prod_vite, C.BLUE)
+
             # Card hover
-            for w in (card, inner):
-                w.bind("<Enter>", lambda e, cd=card, inn=inner: (
-                    cd.configure(bg=C.SURFACE1), inn.configure(bg=C.SURFACE1)))
-                w.bind("<Leave>", lambda e, cd=card, inn=inner: (
-                    cd.configure(bg=C.SURFACE0), inn.configure(bg=C.SURFACE0)))
+            all_widgets = [card, inner, dot, badges]
+            for w in all_widgets:
+                w.bind("<Enter>", lambda e, cd=card, inn=inner, d=dot, b=badges: (
+                    cd.configure(bg=C.SURFACE1), inn.configure(bg=C.SURFACE1),
+                    d.configure(bg=C.SURFACE1), b.configure(bg=C.SURFACE1)))
+                w.bind("<Leave>", lambda e, cd=card, inn=inner, d=dot, b=badges: (
+                    cd.configure(bg=C.SURFACE0), inn.configure(bg=C.SURFACE0),
+                    d.configure(bg=C.SURFACE0), b.configure(bg=C.SURFACE0)))
+
+    # ========================================================================
+    # RENAME (double-click)
+    # ========================================================================
+    def _rename_item_dialog(self, title, current, callback):
+        dlg = self._dialog(title, 380, 160)
+        body = tk.Frame(dlg, bg=C.SURFACE0)
+        body.pack(fill="both", expand=True, padx=20, pady=16)
+        tk.Label(body, text="New name", bg=C.SURFACE0, fg=C.SUBTEXT0,
+                 font=F.SMALL).pack(anchor="w", pady=(0, 4))
+        entry = self._styled_entry(body)
+        entry.pack(fill="x", ipady=4)
+        entry.insert(0, current)
+        entry.select_range(0, "end")
+        entry.focus_set()
+
+        def do():
+            new_name = entry.get().strip()
+            if not new_name or new_name == current:
+                dlg.destroy()
+                return
+            callback(new_name)
+            dlg.destroy()
+
+        entry.bind("<Return>", lambda e: do())
+        btn_row = tk.Frame(body, bg=C.SURFACE0)
+        btn_row.pack(fill="x", pady=(16, 0))
+        FlatBtn(btn_row, text="Cancel", command=dlg.destroy,
+                bg=C.SURFACE1, hover_bg=C.SURFACE2).pack(side="right", padx=(8, 0))
+        FlatBtn(btn_row, text="  Rename  ", command=do,
+                bg=ACCENT, fg=C.CRUST, hover_bg=ACCENT_HOVER).pack(side="right")
+
+    def _rename_game(self, idx):
+        g = self.games_data[idx]
+        current = g["title"]
+
+        def on_rename(new_name):
+            old_game = g["game"]
+            g["title"] = new_name
+            if old_game == current:
+                g["game"] = new_name
+            self.game_labels[idx].configure(text=g["game"])
+            pkey = str(g["path"])
+            self.pending_field_changes.setdefault(pkey, {})["title"] = new_name
+            if old_game == current:
+                self.pending_field_changes[pkey]["game"] = new_name
+            self._update_badge()
+
+        self._rename_item_dialog("Rename Game", current, on_rename)
+
+    def _on_guide_dblclick(self, event, lb):
+        self._drag_cleanup()
+        idx = lb.nearest(event.y)
+        if idx < 0 or idx >= lb.size() or lb.bbox(idx) is None:
+            return
+        self._rename_guide(lb, idx)
+
+    def _rename_guide(self, lb, idx):
+        item = lb._items[idx]
+        current = item.get("guide", item.get("title", ""))
+
+        def on_rename(new_name):
+            item["guide"] = new_name
+            pkey = str(item["path"])
+            self.pending_field_changes.setdefault(pkey, {})["guide"] = new_name
+            self._update_badge()
+            self._refresh_guides()
+
+        self._rename_item_dialog("Rename Guide", current, on_rename)
+
+    def _on_brand_dblclick(self, event, lb):
+        self._drag_cleanup()
+        idx = lb.nearest(event.y)
+        if idx < 0 or idx >= lb.size() or lb.bbox(idx) is None:
+            return
+        self._rename_brand(lb, idx)
+
+    def _rename_brand(self, lb, idx):
+        item = lb._items[idx]
+        current = item.get("displayName", item.get("brand", ""))
+
+        def on_rename(new_name):
+            item["displayName"] = new_name
+            pkey = str(item["path"])
+            self.pending_field_changes.setdefault(pkey, {})["displayName"] = new_name
+            self._update_badge()
+            self._refresh_brands()
+
+        self._rename_item_dialog("Rename Brand", current, on_rename)
 
     # ========================================================================
     # SAVE
     # ========================================================================
     def _save_all(self):
-        new_hubs = [c for c in ALL_CATEGORIES if self.hub_toggles[c].get()]
-        hubs_changed = new_hubs != self.hubs_data
         section_changed = self.section_order_data != load_section_order()
 
         counts = {"guides": 0, "brands": 0, "games": 0}
@@ -1233,7 +1401,8 @@ class NavbarManager(tk.Tk):
             if col in counts:
                 counts[col] += 1
 
-        total = sum(counts.values()) + (1 if hubs_changed else 0) + (1 if section_changed else 0)
+        field_count = len(self.pending_field_changes)
+        total = sum(counts.values()) + field_count + (1 if section_changed else 0)
         if total == 0:
             self.toast.show("No changes to save", C.OVERLAY0)
             return
@@ -1245,12 +1414,12 @@ class NavbarManager(tk.Tk):
             except Exception as e:
                 errors.append(f"{Path(p).name}: {e}")
 
-        if hubs_changed:
+        for p, fields in self.pending_field_changes.items():
             try:
-                HUBS_JSON.write_text(json.dumps(new_hubs, indent=2) + "\n", encoding="utf-8")
-                self.hubs_data = new_hubs
+                for key, value in fields.items():
+                    write_field(Path(p), key, value)
             except Exception as e:
-                errors.append(f"hubs: {e}")
+                errors.append(f"{Path(p).name}: {e}")
 
         if section_changed:
             try:
@@ -1259,6 +1428,7 @@ class NavbarManager(tk.Tk):
                 errors.append(f"sections: {e}")
 
         self.pending_changes.clear()
+        self.pending_field_changes.clear()
         self._update_badge()
 
         if errors:
@@ -1271,8 +1441,8 @@ class NavbarManager(tk.Tk):
                 parts.append(f"{counts['brands']} brands")
             if counts["games"]:
                 parts.append(f"{counts['games']} games")
-            if hubs_changed:
-                parts.append("hub config")
+            if field_count:
+                parts.append(f"{field_count} renamed")
             if section_changed:
                 parts.append("section order")
             now = datetime.now().strftime("%H:%M:%S")

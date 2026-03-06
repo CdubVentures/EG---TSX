@@ -39,7 +39,7 @@ export default function ToggleSwitch({ id, checked, onChange, disabled }: Toggle
             : 'bg-[var(--grey-color-4)]',
           // Dot
           "before:content-[''] before:absolute before:left-[2px] before:bottom-[3px]",
-          'before:w-[16px] before:h-[16px] before:bg-[var(--white-color-1)] before:rounded-full',
+          'before:w-[16px] before:h-[16px] before:bg-[var(--color-text-on-accent)] before:rounded-full',
           'before:transition-transform before:duration-[400ms]',
           checked && 'before:translate-x-[18px]'
         )}

@@ -1,4 +1,4 @@
----
+﻿---
 title: >-
   Esports Events 2025: Data Breakdown – What Mice Did the Pros Use, and What’s
   Next for 2026?
@@ -17,9 +17,10 @@ tags:
   - gaming
 datePublished: '2025-12-19'
 author: Newsroom
+hero: hero-img
 category: mouse
 draft: false
-fullArticle: true
+publish: true
 ---
 The biggest esports champions of **2025—Team Vitality, NRG, and T1—lifted their trophies using mice under 60g with blazing-fast 8K polling rates.** The message is clear: **lightweight wireless** remains the competitive meta.
 

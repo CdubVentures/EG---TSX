@@ -1,4 +1,4 @@
----
+﻿---
 category: mouse
 navbar:
   - educational guides
@@ -9,8 +9,8 @@ description: >-
   Learn how to maintain, upgrade, and replace your mouse skates to achieve
   smoother movements, improved accuracy, and extend the lifespan of your mouse.
 tags: []
-heroImg: title
-fullArticle: true
+hero: title
+publish: true
 toc: false
 draft: false
 ---

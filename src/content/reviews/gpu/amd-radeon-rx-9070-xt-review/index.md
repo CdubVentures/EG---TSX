@@ -1,9 +1,9 @@
----
+﻿---
 category: gpu
 brand: AMD
 model: Radeon RX 9070 XT
 author: EG Team
-fullArticle: false
+publish: false
 draft: false
 title: 'AMD Radeon RX 9070 XT: Mid-Range King of 2025'
 subtitle: Experience 1440p Dominance with 16GB VRAM and FSR 4
@@ -13,7 +13,7 @@ description: >-
   powerhouse for FPS, MOBA, and RTS gaming in 2025.
 tags:
   - Best Value GPU
-heroImg: feature-image
+hero: feature-image
 toc: false
 ---
 

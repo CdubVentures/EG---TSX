@@ -1,0 +1,102 @@
+---
+/**
+ * FeaturedPanel.astro — Single panel (large tile + scroller cards) for FeaturedScroller.
+ * Extracted to deduplicate the "All" and per-category panel markup.
+ * Dark theme values are LOCKED — match HBS exactly.
+ */
+import EditorsBadge from '@shared/ui/EditorsBadge.astro';
+import { catVar } from '@core/categories';
+import type { FeaturedItem } from '../featured-scroller-utils';
+
+interface Props {
+  panelId: string;
+  prefix: string;
+  items: FeaturedItem[];
+  visible: boolean;
+}
+
+const { panelId, prefix, items, visible } = Astro.props;
+
+if (items.length === 0) return;
+
+// WHY !: length check above guarantees items[0] exists
+const tile = items[0]!;
+const cards = items.slice(1, 10);
+---
+
+<div id={panelId} class={`${prefix}-section`} style={visible ? 'display: block;' : 'display: none;'}>
+  <a href={tile.url} class="feature-board-large-tile">
+    {tile.egbadge && (
+      <div class="feature-board-badge-wrap">
+        <EditorsBadge badgeText={tile.egbadge} category={tile.category} />
+      </div>
+    )}
+    <img
+      loading="lazy"
+      src={`${tile.heroPath}_xl.webp`}
+      srcset={tile.srcset}
+      sizes="(min-width: 1000px) 1000px, 100vw"
+      alt={tile.title}
+      class="feature-board-large-tile-image lazy-no-blur"
+    />
+    <div class="feature-board-large-tile-content">
+      <div class="feature-board-content-top">
+        <span class="feature-board-large-item-type item-tag"
+              style={`color: ${catVar(tile.category)}`}>
+          {tile.categoryLabel}
+        </span>
+        <h3 class="feature-board-large-tile-title">{tile.title}</h3>
+        <p class="feature-board-large-tile-description">{tile.description}</p>
+      </div>
+      <p class="feature-board-large-tile-date item-date">{tile.dateFormatted}</p>
+    </div>
+  </a>
+
+  {cards.length > 0 && (
+    <section class="feature-board-scroller-container">
+      <div class="feature-board-scroller">
+        <div class="feature-board-left-arrow feature-board-arrow scroller-arrow">
+          <svg aria-hidden="true" class="svg-base" focusable="false" height="16"
+            viewBox="0 0 16 16" width="16" xmlns="http://www.w3.org/2000/svg">
+            <path fill="currentColor" d="M2.38 7.784 8.796 1.37l1.414 1.414-5 5 5 5-1.414 1.414z"></path>
+          </svg>
+        </div>
+        <div class="feature-board-slider">
+          {cards.map(item => (
+            <a href={item.url} class="feature-board-item feature-board-row1-item">
+              {item.egbadge && (
+                <div class="feature-board-badge-wrap">
+                  <EditorsBadge badgeText={item.egbadge} category={item.category} />
+                </div>
+              )}
+              <img
+                loading="lazy"
+                src={`${item.heroPath}_s.webp`}
+                srcset={item.srcset}
+                sizes="(min-width: 1150px) 275px, (min-width: 825px) calc(200px + ((100vw - 825px) * 75 / 325)), 200px"
+                alt={item.title}
+                class="feature-board-grid-image feature-board-row1-image lazy-no-blur"
+              />
+              <div class="feature-board-item-content feature-board-row1-content">
+                <div class="feature-board-content-top">
+                  <span class="feature-board-item-type item-tag"
+                        style={`color: ${catVar(item.category)}`}>
+                    {item.categoryLabel}
+                  </span>
+                  <h3 class="feature-board-row1-title">{item.title}</h3>
+                </div>
+                <p class="feature-board-row1-date item-date">{item.dateFormatted}</p>
+              </div>
+            </a>
+          ))}
+        </div>
+        <div class="feature-board-right-arrow feature-board-arrow scroller-arrow">
+          <svg aria-hidden="true" class="svg-base" focusable="false" height="16"
+            viewBox="0 0 16 16" width="16" xmlns="http://www.w3.org/2000/svg">
+            <path fill="currentColor" d="m13.21 7.784-6.415 6.414-1.414-1.414 5-5-5-5L6.795 1.37z"></path>
+          </svg>
+        </div>
+      </div>
+    </section>
+  )}
+</div>

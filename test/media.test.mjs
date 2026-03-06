@@ -61,6 +61,22 @@ function noColorMedia() {
   };
 }
 
+/** Product where ALL images have explicit color tags (no colorless fallback) */
+function allTaggedMedia() {
+  return {
+    defaultColor: 'black',
+    colors: ['black', 'white'],
+    editions: [],
+    images: [
+      { stem: 'top---black', view: 'top', color: 'black' },
+      { stem: 'top---white', view: 'top', color: 'white' },
+      { stem: 'left---black', view: 'left', color: 'black' },
+      { stem: 'left---white', view: 'left', color: 'white' },
+      { stem: 'side', view: 'side' },
+    ],
+  };
+}
+
 /** Product with editions (like M75 Wireless Cyberpunk edition) */
 function editionMedia() {
   return {
@@ -193,6 +209,13 @@ describe('getImage', () => {
   it('returns null for empty media', () => {
     const result = getImage(emptyMedia(), 'top');
     assert.equal(result, null);
+  });
+
+  it('returns default-color image when all images are color-tagged', () => {
+    const result = getImage(allTaggedMedia(), 'top');
+    assert.ok(result, 'should find top view');
+    assert.equal(result.color, 'black', 'should return defaultColor image');
+    assert.equal(result.stem, 'top---black');
   });
 
   it('returns first match for view with multiple sequences', () => {

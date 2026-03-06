@@ -1,7 +1,8 @@
----
+﻿---
 category: hardware
-navbar: []
-guide: highlighted products
+navbar:
+  - HIghlighted
+guide: Highlighted Products
 title: 'Highlighted Products of 2025: Noteworthy Monitors, Mice, and Keyboards'
 subtitle: 'Featured picks to enhance everyday computing, work tasks, and entertainment'
 summary: >-
@@ -36,7 +37,8 @@ datePublished: '2025-10-10'
 dateUpdated: '2025-10-16'
 heroCredit: 'Photo: EG Gamer'
 author: Gear Guides Team
-fullArticle: true
+hero: hero-img
+publish: true
 toc: false
 draft: false
 ---

@@ -1,0 +1,340 @@
+---
+/**
+ * Dashboard.astro — Orchestrator: receives items (15) + newsItems (3).
+ * Renders the full dashboard grid: hero + news sidebar, 3-col row, sub-divider,
+ * cinematic tile, 3+3+4 rows. Faithful port of HBS index.handlebars lines 397–735.
+ *
+ * Layout:
+ * ┌───────────────────────────────────┬─────────────────┐
+ * │  DashboardHeroCard [0]            │  NewsFeed [3]   │  Row 1 (57.5% / 42.5%)
+ * ├───────────────────────────────────┴─────────────────┤
+ * │  DashboardCard×3 [1-3]                              │  Row 2 (3-col)
+ * ├─────────────────────────────────────────────────────┤
+ * │  SubSectionDivider "Latest Updates"                 │
+ * ├─────────────────────────────────────────────────────┤
+ * │  DashboardLargeTile [4]                             │  Cinematic
+ * ├─────────────────────────────────────────────────────┤
+ * │  DashboardCard×3 [5-7]                              │  Row 3 (3-col)
+ * ├─────────────────────────────────────────────────────┤
+ * │  DashboardCard×3 [8-10]                             │  Row 4 (3-col)
+ * ├─────────────────────────────────────────────────────┤
+ * │  DashboardCard×4 [11-14]                            │  Row 5 (4-col)
+ * └─────────────────────────────────────────────────────┘
+ */
+import SectionDivider from '@shared/ui/SectionDivider.astro';
+import SubSectionDivider from '@shared/ui/SubSectionDivider.astro';
+import DashboardHeroCard from './DashboardHeroCard.astro';
+import DashboardCard from './DashboardCard.astro';
+import DashboardLargeTile from './DashboardLargeTile.astro';
+import NewsFeed from './NewsFeed.astro';
+import type { DashboardEntry } from '@core/article-helpers';
+import type { EnrichedDashboardEntry } from '@core/dashboard';
+
+interface Props {
+  items: EnrichedDashboardEntry[];
+  newsItems: DashboardEntry[];
+}
+
+const { items, newsItems } = Astro.props;
+
+// Slice enriched items into their row assignments (matches HBS slice indices)
+const heroItem = items[0];
+const row2Items = items.slice(1, 4);
+const largeTileItem = items[4];
+const row3Items = items.slice(5, 8);
+const row4Items = items.slice(8, 11);
+const row5Items = items.slice(11, 15);
+---
+
+{items.length > 0 && (
+  <div class="home-page-body home-page-body--first">
+    <SectionDivider
+      title="What's New"
+      subtitle="Stay up to date with our team's latest insights"
+    />
+
+    <section class="dashboard-menu-tile-board-section">
+      <div class="dashboard-top-menu-content">
+        {/* ── Row 1: Hero + NewsFeed sidebar ── */}
+        <div class="dashboard-grid-row1-wrapper">
+          <div class="dashboard-grid-row dashboard-row1">
+            {heroItem && <DashboardHeroCard item={heroItem.entry} meta={heroItem.meta} />}
+          </div>
+          <NewsFeed items={newsItems} />
+        </div>
+
+        {/* ── Row 2: 3-col grid ── */}
+        <div class="dashboard-row2-wrapper">
+          <div class="dashboard-grid-row dashboard-row2">
+            {row2Items.map(({ entry, meta }) => (
+              <DashboardCard item={entry} variant="row2" meta={meta} />
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <SubSectionDivider text="Latest Updates" />
+
+    <section class="dashboard-menu-tile-board-section">
+      <div class="dashboard-menu-content">
+        <div class="dashboard-grid-container">
+          {/* ── Large cinematic tile ── */}
+          {largeTileItem && (
+            <div class="dashboard-grid-row dashboard-grid-large-tile-row">
+              <DashboardLargeTile item={largeTileItem.entry} meta={largeTileItem.meta} />
+            </div>
+          )}
+
+          {/* ── Row 3: 3-col grid ── */}
+          <div class="dashboard-grid-row dashboard-row3">
+            {row3Items.map(({ entry, meta }) => (
+              <DashboardCard item={entry} variant="row3" meta={meta} />
+            ))}
+          </div>
+
+          {/* ── Row 4: 3-col grid ── */}
+          <div class="dashboard-grid-row dashboard-row4">
+            {row4Items.map(({ entry, meta }) => (
+              <DashboardCard item={entry} variant="row4" meta={meta} />
+            ))}
+          </div>
+
+          {/* ── Row 5: 4-col grid ── */}
+          <div class="dashboard-grid-row dashboard-row5">
+            {row5Items.map(({ entry, meta }) => (
+              <DashboardCard item={entry} variant="row5" meta={meta} />
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+)}
+
+<style>
+  /* WHY: .home-page-body rules live in index.astro <style is:global> —
+     shared layout class used by Dashboard, Games, and future sections. */
+
+  /* ── Base section styles ── */
+  .dashboard-menu-tile-board-section {
+    margin-top: 0;
+    position: relative;
+    box-sizing: border-box;
+  }
+
+  .dashboard-top-menu-content {
+    margin-top: 0;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    row-gap: clamp(23px, 20.8667px + 0.5333vw, 27px);
+    margin-bottom: 32px;
+  }
+
+  .dashboard-menu-content {
+    margin-top: 0;
+    display: flex;
+    flex-direction: row;
+    gap: 2rem;
+  }
+
+  /* ── Grid container ── */
+  .dashboard-grid-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1.75rem;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+
+  .dashboard-grid-row {
+    display: grid;
+    box-sizing: border-box;
+  }
+
+  /* ── Row 1 wrapper (hero + newsfeed side-by-side) ── */
+  .dashboard-grid-row1-wrapper {
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+    width: 100%;
+    column-gap: clamp(20px, 17.8667px + 0.5333vw, 24px);
+  }
+
+  .dashboard-row1 {
+    width: calc(57.5% - 1rem);
+  }
+
+  /* ── Row 2 wrapper ── */
+  .dashboard-row2-wrapper {
+    grid-column: 1 / -1;
+  }
+
+  /* ── Grid template columns (desktop) ── */
+  .dashboard-row2 {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.25rem;
+  }
+
+  .dashboard-row3 {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.25rem;
+  }
+
+  .dashboard-row4 {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.25rem;
+  }
+
+  .dashboard-row5 {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.1rem;
+  }
+
+  /* ── ≤1150px: rows 3-5 become single column ── */
+  @media (max-width: 1150px) {
+    .dashboard-grid-container {
+      gap: var(--ft-16-12);
+    }
+
+    .dashboard-row3,
+    .dashboard-row4,
+    .dashboard-row5 {
+      grid-template-columns: 1fr;
+      grid-auto-rows: 1fr;
+      gap: var(--ft-16-12);
+    }
+  }
+
+  /* ── ≤825px: row 1 stacks, row 2 scrolls ── */
+  @media (max-width: 825px) {
+    .dashboard-top-menu-content {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .dashboard-grid-row1-wrapper {
+      flex-direction: column;
+      width: 100%;
+    }
+
+    .dashboard-row1 {
+      width: 100%;
+      order: 1;
+    }
+
+    .dashboard-menu-content {
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .dashboard-row2-wrapper {
+      order: 2;
+      width: 100%;
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      overflow-x: auto;
+      padding-bottom: 1rem;
+      margin-bottom: -1rem;
+    }
+
+    .dashboard-row2 {
+      display: flex;
+      flex-direction: row;
+      width: clamp(650px, 485.2941px + 41.1765vw, 825px);
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    .dashboard-row2 > :global(*) {
+      flex: none;
+      width: calc(clamp(650px, 485.2941px + 41.1765vw, 825px) / 3);
+    }
+  }
+
+  /* ══════════════════════════════════════════════════════════════════════════
+     Editor's Choice Badge Positioning
+     Port of scroller_dashboard.css lines 563–642
+     ══════════════════════════════════════════════════════════════════════════ */
+
+  /* Row-specific font sizes */
+  .dashboard-row1 :global(.editors-choice-badge) {
+    font-size: var(--font-size-20px);
+  }
+
+  .dashboard-grid-large-tile-row :global(.editors-choice-badge) {
+    font-size: var(--font-size-22px);
+  }
+
+  .dashboard-row2 :global(.editors-choice-badge),
+  .dashboard-row3 :global(.editors-choice-badge),
+  .dashboard-row4 :global(.editors-choice-badge) {
+    font-size: var(--font-size-15px);
+  }
+
+  .dashboard-row5 :global(.editors-choice-badge) {
+    font-size: var(--font-size-14px);
+  }
+
+  /* Badge positioning for all rows/tiles */
+  .dashboard-row1 :global(.editors-choice-badge),
+  .dashboard-row2 :global(.editors-choice-badge),
+  .dashboard-row3 :global(.editors-choice-badge),
+  .dashboard-row4 :global(.editors-choice-badge),
+  .dashboard-row5 :global(.editors-choice-badge),
+  .dashboard-grid-large-tile-row :global(.editors-choice-badge) {
+    position: absolute;
+    top: 0.75rem;
+    right: 0.75rem;
+    z-index: 10;
+  }
+
+  @media (max-width: 1150px) {
+    .dashboard-row2 :global(.editors-choice-badge) {
+      font-size: var(--font-size-15px);
+    }
+
+    .dashboard-row3 :global(.editors-choice-badge),
+    .dashboard-row4 :global(.editors-choice-badge),
+    .dashboard-row5 :global(.editors-choice-badge),
+    .dashboard-grid-large-tile-row :global(.editors-choice-badge) {
+      font-size: var(--ft-17-14);
+    }
+
+    .dashboard-row3 :global(.editors-choice-badge),
+    .dashboard-row4 :global(.editors-choice-badge),
+    .dashboard-row5 :global(.editors-choice-badge),
+    .dashboard-grid-large-tile-row :global(.editors-choice-badge) {
+      display: flex;
+      position: absolute;
+      right: calc(60% + 0.75rem);
+      z-index: 10;
+    }
+  }
+
+  @media (max-width: 825px) {
+    .dashboard-row1 :global(.editors-choice-badge) {
+      font-size: var(--ftm-21-18);
+    }
+  }
+
+  @media (max-width: 600px) {
+    .dashboard-row1 :global(.editors-choice-badge) {
+      font-size: var(--fm-18-16);
+    }
+
+    .dashboard-row2 :global(.editors-choice-badge) {
+      font-size: var(--fm-15-14);
+    }
+
+    .dashboard-row3 :global(.editors-choice-badge),
+    .dashboard-row4 :global(.editors-choice-badge),
+    .dashboard-row5 :global(.editors-choice-badge),
+    .dashboard-grid-large-tile-row :global(.editors-choice-badge) {
+      font-size: var(--fm-14-11);
+    }
+  }
+</style>

@@ -7,33 +7,24 @@
  * for drag, autoplay, arrows, pause/play, category filtering, lazy loading.
  */
 import { getProducts } from '@core/products';
-import { getCarouselImages } from '@core/media';
-import { categoryColor } from '@core/config';
+import { getImageWithFallback } from '@core/media';
+import { categoryColor, imageDefaults } from '@core/config';
+import { contentImage, collectionImagePath } from '@core/images';
 import type { ProductMedia } from '@core/media';
 import DexaBadge from '@shared/ui/DexaBadge.astro';
 
 // ─── Resolve hero image for a product ────────────────────────────────────────
 // WHY: HBS uses hubCards.getImagesArrayXXL + sortImagesForCarousel to pick the
 // best hero shot. We replicate this with the structured media object: pick the
-// first carousel image by view priority.
-const VIEW_PRIORITY = ['feature-image', 'top', 'left', 'right', 'sangle', 'angle', 'front', 'rear', 'bot', 'img'];
+// first carousel image by view priority from config.
 
-function pickHero(media: ProductMedia): { stem: string; objectFit: string } | null {
-  const carousel = getCarouselImages(media);
-  if (carousel.length === 0) return null;
-
-  // Sort by view priority
-  const sorted = [...carousel].sort((a, b) => {
-    const ai = VIEW_PRIORITY.indexOf(a.view);
-    const bi = VIEW_PRIORITY.indexOf(b.view);
-    return (ai === -1 ? 999 : ai) - (bi === -1 ? 999 : bi);
-  });
-
-  const hero = sorted[0];
+function pickHero(media: ProductMedia, category: string): { stem: string; objectFit: string } | null {
+  const coverChain = imageDefaults(category).coverImageView;
+  const hero = getImageWithFallback(media, coverChain);
   if (!hero) return null;
-  // feature-image and top views use 'cover'; contain only for cutout-style images
-  const objectFit = hero.view === 'top' ? 'contain' : 'cover';
-  return { stem: hero.stem, objectFit };
+  // WHY: coverImageView targets views best suited for cover display (feature-image, sangle, etc.)
+  // viewMeta objectFit is informational — slideshow CSS forces object-fit: cover on .slide-image
+  return { stem: hero.stem, objectFit: 'cover' };
 }
 
 // ─── Rating bar width calculation (port of HBS calcRatingWidth) ──────────────
@@ -64,63 +55,114 @@ interface SlideData {
   overall: number;
   snapSubtitle: string;
   brandSlug: string;
+  thumbnailStem: string;
 }
 
+// WHY: Zod schema uses .passthrough() so TS doesn't know about overall/snap_subtitle.
+// Narrow once here instead of scattering `as any` everywhere.
+interface SlideshowProduct {
+  slug: string;
+  brand: string;
+  model: string;
+  category: string;
+  imagePath: string;
+  media: ProductMedia;
+  overall?: number | string;
+  snap_subtitle?: string;
+}
+
+// ─── Load slideshow config ────────────────────────────────────────────────────
+// WHY: config/data/slideshow.json is the SSOT for slide order when populated.
+// If config is empty or missing, fall back to algorithmic selection (original).
+import slideshowConfig from '../../../../config/data/slideshow.json';
+
 const allProducts = await getProducts();
+// WHY: filterByActiveCategories (.mjs) strips Astro's CollectionEntry type.
+// Cast through unknown to restore .id access for the lookup map.
+const productMap = new Map(
+  (allProducts as unknown as Array<{ id: string; data: Record<string, unknown> }>)
+    .map(p => [p.id, p])
+);
 
-// Pick test products: top-scored products with media images, across categories
-const candidates = allProducts
-  .filter(p => {
-    const d = p.data as any;
-    return d.overall && d.overall !== '' && d.media?.images?.length > 0;
-  })
-  .map(p => {
-    const d = p.data as any;
-    return { entry: p, overall: parseFloat(String(d.overall)) };
-  })
-  .filter(c => !isNaN(c.overall))
-  .sort((a, b) => b.overall - a.overall);
-
-// Take top 10 with good category spread
-const slides: SlideData[] = [];
-const catCounts: Record<string, number> = {};
-const MAX_PER_CAT = 5;
-const MAX_SLIDES = 10;
-
-for (const c of candidates) {
-  if (slides.length >= MAX_SLIDES) break;
-  const d = c.entry.data as any;
-  const cat = d.category;
-  if ((catCounts[cat] || 0) >= MAX_PER_CAT) continue;
-
-  const hero = pickHero(d.media);
-  if (!hero) continue;
-
-  // Derive brand slug from imagePath: /images/{cat}/{brandSlug}/{productSlug}
+// ─── Helper: resolve a product entry → SlideData ─────────────────────────────
+function toSlide(p: { id: string; data: Record<string, unknown> }): SlideData | null {
+  const d = p.data as unknown as SlideshowProduct;
+  if (!d.media?.images?.length) return null;
+  const hero = pickHero(d.media, d.category);
+  if (!hero) return null;
   const pathParts = d.imagePath.split('/');
-  const brandSlug = pathParts[3] || '';
+  // Resolve thumbnail via data-level fallback chain (Photoshop script guarantees all sizes)
+  const viewChain = imageDefaults(d.category).defaultImageView;
+  const thumb = getImageWithFallback(d.media, viewChain);
+  if (!thumb) return null;
 
-  slides.push({
+  return {
     slug: d.slug,
     brand: d.brand,
     model: d.model,
-    category: cat,
+    category: d.category,
     imagePath: d.imagePath,
     heroStem: hero.stem,
     heroObjectFit: hero.objectFit,
-    overall: c.overall,
+    overall: parseFloat(String(d.overall || 0)),
     snapSubtitle: d.snap_subtitle || '',
-    brandSlug,
-  });
-
-  catCounts[cat] = (catCounts[cat] || 0) + 1;
+    brandSlug: pathParts[3] || '',
+    thumbnailStem: thumb.stem,
+  };
 }
 
+// ─── Config-driven selection ─────────────────────────────────────────────────
+const configuredSlides: SlideData[] = [];
+const configMax = slideshowConfig.maxSlides ?? 10;
+
+for (const entryId of slideshowConfig.slides ?? []) {
+  if (configuredSlides.length >= configMax) break;
+  const p = productMap.get(entryId);
+  if (!p) continue;
+  const slide = toSlide(p);
+  if (slide) configuredSlides.push(slide);
+}
+
+// ─── Algorithmic fallback (original logic) ───────────────────────────────────
+function algorithmicSlides(): SlideData[] {
+  const typed = allProducts as unknown as Array<{ id: string; data: Record<string, unknown> }>;
+  const candidates = typed
+    .filter(p => {
+      const d = p.data as unknown as SlideshowProduct;
+      return d.overall && d.overall !== '' && d.media?.images?.length > 0;
+    })
+    .map(p => {
+      const d = p.data as unknown as SlideshowProduct;
+      return { entry: p, overall: parseFloat(String(d.overall)) };
+    })
+    .filter(c => !isNaN(c.overall))
+    .sort((a, b) => b.overall - a.overall);
+
+  const result: SlideData[] = [];
+  const catCounts: Record<string, number> = {};
+  const MAX_PER_CAT = 5;
+  const MAX = 10;
+
+  for (const c of candidates) {
+    if (result.length >= MAX) break;
+    const d = c.entry.data as unknown as SlideshowProduct;
+    const cat = d.category;
+    if ((catCounts[cat] || 0) >= MAX_PER_CAT) continue;
+    const slide = toSlide(c.entry);
+    if (!slide) continue;
+    result.push(slide);
+    catCounts[cat] = (catCounts[cat] || 0) + 1;
+  }
+  return result;
+}
+
+// WHY: use config slides when available, fall back to algorithmic when empty
+const slides = configuredSlides.length > 0 ? configuredSlides : algorithmicSlides();
 const slideCount = slides.length;
 
-// Build srcset helper — all sizes for a product image stem
+// Build srcset helper — all sizes for a product image stem, routed through CDN
 function srcSet(imagePath: string, stem: string): string {
-  const sizes = [
+  const sizes: Array<{ suffix: 'xxs' | 'xs' | 's' | 'm' | 'l' | 'xl' | 'xxl'; w: number }> = [
     { suffix: 'xxs', w: 100 },
     { suffix: 'xs', w: 200 },
     { suffix: 's', w: 400 },
@@ -129,7 +171,7 @@ function srcSet(imagePath: string, stem: string): string {
     { suffix: 'xl', w: 1000 },
     { suffix: 'xxl', w: 2000 },
   ];
-  return sizes.map(s => `${imagePath}/${stem}_${s.suffix}.webp ${s.w}w`).join(', ');
+  return sizes.map(s => `${contentImage(imagePath, stem, s.suffix)} ${s.w}w`).join(', ');
 }
 ---
 
@@ -143,8 +185,9 @@ function srcSet(imagePath: string, stem: string): string {
       const catDark = darkenHex(catHex, 0.15);
       const ratingWidth = calcRatingWidth(slide.overall);
       const isFirst = idx === 0;
-      const heroSrc = `${slide.imagePath}/${slide.heroStem}`;
-      const brandLogoPath = `/images/brands/${slide.brandSlug}/brand-logo-horizontal-mono-black_xs.png`;
+      const heroSrc = contentImage(slide.imagePath, slide.heroStem, 'l');
+      const heroSrcSet = srcSet(slide.imagePath, slide.heroStem);
+      const brandLogoPath = contentImage(collectionImagePath('brands', slide.brandSlug), 'brand-logo-horizontal-mono-black', 'xs', 'png');
 
       return (
         <a
@@ -166,25 +209,45 @@ function srcSet(imagePath: string, stem: string): string {
                 ) : null}
               </div>
 
-              {/* Compare toggle (top-right) */}
+              {/* Compare toggle (top-right) — hydrated by initCarousel via hydrateVaultToggles.
+                   WHY no client:load: Embla cloneNode(true) destroys Astro hydration targets.
+                   Static HTML here is the initial paint; React mounts on the clones. */}
               <div
-                class={`compare-toggle ${slide.category}-color`}
-                data-id={slide.slug}
-                data-category={slide.category}
+                class="vault-toggle-slot"
+                data-vault-product={JSON.stringify({
+                  id: slide.slug,
+                  slug: slide.slug,
+                  brand: slide.brand,
+                  model: slide.model,
+                  category: slide.category,
+                  imagePath: slide.imagePath,
+                  thumbnailStem: slide.thumbnailStem,
+                })}
               >
-                <input
-                  type="checkbox"
-                  class="compare-checkbox"
-                  id={`compare-${slide.category}-${slide.slug}`}
-                  aria-label="Add to Vault"
-                />
-                <label for={`compare-${slide.category}-${slide.slug}`} class="compare-label">
-                  <span class="compare-text">COMPARE</span>
-                  <span class="compare-symbol">
-                    <span class="plus">+</span>
-                    <span class="minus">-</span>
-                  </span>
-                </label>
+                <div
+                  class={`compare-toggle ${slide.category}-color`}
+                  data-id={slide.slug}
+                  data-category={slide.category}
+                  data-vault-mount
+                >
+                  <input
+                    type="checkbox"
+                    class="compare-checkbox"
+                    id={`compare-${slide.category}-${slide.slug}`}
+                    aria-label={`Add ${slide.model} to vault`}
+                  />
+                  <label for={`compare-${slide.category}-${slide.slug}`} class="compare-label">
+                    <span class="compare-text">COMPARE</span>
+                    <span class="compare-symbol">
+                      <span class="compare-sym-slot">
+                        <svg class="compare-icon compare-icon-plus" viewBox="0 0 16 16" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true">
+                          <line x1="8" y1="4.5" x2="8" y2="11.5" />
+                          <line x1="4.5" y1="8" x2="11.5" y2="8" />
+                        </svg>
+                      </span>
+                    </span>
+                  </label>
+                </div>
               </div>
             </div>
 
@@ -193,8 +256,8 @@ function srcSet(imagePath: string, stem: string): string {
               <img
                 fetchpriority="high"
                 loading="eager"
-                src={`${heroSrc}_l.webp`}
-                srcset={srcSet(slide.imagePath, slide.heroStem)}
+                src={heroSrc}
+                srcset={heroSrcSet}
                 sizes="(min-width: 825px) 625px, 100vw"
                 alt={`${slide.brand} ${slide.model} Hero Shot`}
                 class="slide-image"
@@ -203,8 +266,8 @@ function srcSet(imagePath: string, stem: string): string {
               />
             ) : (
               <img
-                data-src={`${heroSrc}_l.webp`}
-                data-srcset={srcSet(slide.imagePath, slide.heroStem)}
+                data-src={heroSrc}
+                data-srcset={heroSrcSet}
                 data-sizes="(min-width: 825px) 625px, 100vw"
                 alt={`${slide.brand} ${slide.model} Hero Shot`}
                 class="slide-image"
@@ -241,12 +304,14 @@ function srcSet(imagePath: string, stem: string): string {
                       src={brandLogoPath}
                       alt={`${slide.brand} Logo`}
                       class="slideShow-brand-logo"
+                      onerror="this.style.display='none'"
                     />
                   ) : (
                     <img
                       data-src={brandLogoPath}
                       alt={`${slide.brand} Logo`}
                       class="slideShow-brand-logo"
+                      onerror="this.style.display='none'"
                     />
                   )}
                 </div>
@@ -303,7 +368,7 @@ function srcSet(imagePath: string, stem: string): string {
 
         {/* Slide counter + pause button */}
         <div class="slide-info-overlay">
-          <div class="slide-count-container">
+          <div class="slide-count-container" aria-live="polite">
             <span class="current-slide-number">1</span>
             <span class="count-separator">of</span>
             <span class="total-slides">{slideCount}</span>
@@ -352,324 +417,12 @@ function srcSet(imagePath: string, stem: string): string {
 </section>
 
 <script>
-  import EmblaCarousel from 'embla-carousel';
-
-  // ─── Constants ──────────────────────────────────────────────────────────────
-  const AUTO_INTERVAL = 5000;
-  const RESET_AFTER_INTERACTION = 5000;
-
-  // ─── State ──────────────────────────────────────────────────────────────────
-  let embla: ReturnType<typeof EmblaCarousel> | null = null;
-  let autoID: ReturnType<typeof setInterval> | null = null;
-  let isPaused = false;
-  let isTabPaused = false;
-  const lastSelectedPerCategory: Record<string, string> = {};
-
-  // ─── Lazy-load helpers ──────────────────────────────────────────────────────
-  function loadImgIfNeeded(img: HTMLImageElement | null) {
-    if (!img) return;
-    if (img.dataset.src) { img.src = img.dataset.src; delete img.dataset.src; }
-    if (img.dataset.srcset) { img.srcset = img.dataset.srcset; delete img.dataset.srcset; }
-    if (img.dataset.sizes) { img.sizes = img.dataset.sizes; delete img.dataset.sizes; }
-  }
-
-  function loadAllImgs(el: Element) {
-    el.querySelectorAll<HTMLImageElement>('img[data-src], img[data-srcset]').forEach(loadImgIfNeeded);
-  }
-
-  // ─── Autoplay controls ─────────────────────────────────────────────────────
-  function clearAutoplay() { if (autoID) { clearInterval(autoID); autoID = null; } }
-
-  function startAuto() {
-    clearAutoplay();
-    if (!isPaused && !isTabPaused && embla) {
-      autoID = setInterval(() => embla?.scrollNext(), AUTO_INTERVAL);
-    }
-  }
-
-  function pauseAuto(ms: number) {
-    clearAutoplay();
-    if (!isPaused && !isTabPaused && embla) {
-      setTimeout(() => startAuto(), ms);
-    }
-  }
-
-  function fullPause() { clearAutoplay(); }
-  function fullResume() { if (!isPaused && !isTabPaused && embla) startAuto(); }
-
-  // ─── Press effect on arrows ─────────────────────────────────────────────────
-  function pressFX(el: Element | null) {
-    if (!el) return;
-    const add = () => el.classList.add('active');
-    const rem = () => el.classList.remove('active');
-    ['mousedown', 'touchstart', 'pointerdown'].forEach(ev => el.addEventListener(ev, add));
-    ['mouseup', 'touchend', 'pointerup', 'mouseleave', 'touchcancel', 'pointercancel']
-      .forEach(ev => el.addEventListener(ev, rem));
-  }
-
-  // ─── Overlay counter + pause icon ──────────────────────────────────────────
-  function getOverlayEls() {
-    const overlay = document.querySelector('.slide-info-overlay');
-    return {
-      curEl: overlay?.querySelector<HTMLElement>('.current-slide-number'),
-      totalEl: overlay?.querySelector<HTMLElement>('.total-slides'),
-      pauseBtn: overlay?.querySelector<HTMLElement>('.pause-button'),
-      barsEl: overlay?.querySelector<HTMLElement>('.bars'),
-      playEl: overlay?.querySelector<HTMLElement>('.arrow'),
-    };
-  }
-
-  function updatePauseIcon(barsEl: HTMLElement | null | undefined, playEl: HTMLElement | null | undefined) {
-    if (!barsEl || !playEl) return;
-    barsEl.style.display = isPaused ? 'none' : 'flex';
-    playEl.style.display = isPaused ? 'flex' : 'none';
-  }
-
-  // ─── Category color propagation ────────────────────────────────────────────
-  function updateColor(slideEl: Element | null) {
-    const cat = slideEl?.querySelector<HTMLElement>('.compare-toggle')?.dataset.category;
-    if (!cat) return;
-    document.querySelectorAll(
-      '.slide-card-carousel-circle-left, .slide-card-carousel-circle-right, .pause-button'
-    ).forEach(el => {
-      el.classList.forEach(c => c.endsWith('-color') && el.classList.remove(c));
-      el.classList.add(`${cat}-color`);
-    });
-  }
-
-  // ─── Prefetch adjacent slide images ────────────────────────────────────────
-  function prefetch(idx: number, slides: Element[]) {
-    if (!slides.length) return;
-    const n = (idx + 1) % slides.length;
-    const p = (idx - 1 + slides.length) % slides.length;
-    [n, p].forEach(i => { const s = slides[i]; if (s) loadAllImgs(s); });
-  }
-
-  // ─── Pristine clone storage for category filtering ─────────────────────────
-  let cleanClones: HTMLElement[] = [];
-
-  // ─── Get current category from dropdown ────────────────────────────────────
-  function getCategory(): string {
-    return document.querySelector<HTMLElement>('.custom-dropdown-button')?.dataset.category || 'all';
-  }
-
-  // ─── Init / rebuild carousel ───────────────────────────────────────────────
-  function initCarousel(category: string, isFirstRun = false) {
-    const root = document.querySelector<HTMLElement>('[data-slideshow]');
-    if (!root) return;
-    const track = root.querySelector<HTMLElement>('.slideshow-track');
-    if (!track) return;
-
-    // Store pristine clones on first run
-    if (cleanClones.length === 0) {
-      cleanClones = Array.from(track.querySelectorAll<HTMLElement>('.slide-anchor')).map(
-        n => n.cloneNode(true) as HTMLElement
-      );
-    }
-
-    // Destroy existing instance
-    if (embla) {
-      embla.destroy();
-      embla = null;
-    }
-
-    // Remove old slides from track
-    track.querySelectorAll('.slide-anchor').forEach(el => el.remove());
-
-    if (isFirstRun) root.style.opacity = '0';
-
-    // Filter clones by category
-    const source = category === 'all'
-      ? cleanClones
-      : cleanClones.filter(c => c.dataset.category === category);
-
-    // Insert fresh clones into track (Embla container)
-    source.forEach(c => track.appendChild(c.cloneNode(true)));
-
-    // Force reflow before Embla init
-    void root.offsetHeight;
-
-    // Init Embla
-    embla = EmblaCarousel(root, {
-      loop: true,
-      dragFree: false,
-      containScroll: false,
-      align: 'start',
-      skipSnaps: false,
-      dragThreshold: 10,
-    });
-
-    const leftArrow = root.querySelector<HTMLElement>('.left-arrow');
-    const rightArrow = root.querySelector<HTMLElement>('.right-arrow');
-    const { curEl, totalEl, pauseBtn, barsEl, playEl } = getOverlayEls();
-
-    // Reset pause state
-    isPaused = false;
-    updatePauseIcon(barsEl, playEl);
-    startAuto();
-
-    // Drag pauses autoplay
-    embla.on('pointerDown', () => pauseAuto(RESET_AFTER_INTERACTION));
-
-    // Pause button
-    if (pauseBtn) {
-      pauseBtn.onclick = () => {
-        isPaused = !isPaused;
-        updatePauseIcon(barsEl, playEl);
-        isPaused ? fullPause() : fullResume();
-      };
-    }
-
-    // Arrow buttons
-    pressFX(leftArrow);
-    pressFX(rightArrow);
-
-    if (leftArrow) {
-      leftArrow.onclick = (e) => {
-        e.preventDefault();
-        embla?.scrollPrev();
-        pauseAuto(AUTO_INTERVAL);
-      };
-    }
-    if (rightArrow) {
-      rightArrow.onclick = (e) => {
-        e.preventDefault();
-        embla?.scrollNext();
-        pauseAuto(AUTO_INTERVAL);
-      };
-    }
-
-    // Compare toggle pauses
-    root.onclick = (e) => {
-      if ((e.target as Element)?.closest('.compare-label, .compare-toggle')) {
-        pauseAuto(RESET_AFTER_INTERACTION);
-      }
-    };
-
-    // Update overlay counter
-    function updateOverlayCounter() {
-      if (!embla) return;
-      const total = embla.slideNodes().length;
-      const idx = embla.selectedScrollSnap();
-      if (curEl) curEl.textContent = String(total ? idx + 1 : 0);
-      if (totalEl) totalEl.textContent = String(total);
-    }
-
-    // On slide change
-    embla.on('select', () => {
-      const slides = Array.from(root.querySelectorAll('.slide-anchor'));
-      const idx = embla!.selectedScrollSnap();
-      updateOverlayCounter();
-
-      // Lazy-load current slide
-      const current = slides[idx];
-      if (current) {
-        loadAllImgs(current);
-        updateColor(current);
-      }
-
-      // Prefetch adjacent
-      prefetch(idx, slides);
-    });
-
-    // First-run fade-in
-    if (isFirstRun) {
-      embla.on('settle', () => {
-        root.style.opacity = '';
-        updateOverlayCounter();
-      });
-    }
-
-    updateOverlayCounter();
-
-    // Load first slide images immediately
-    const firstSlide = root.querySelector('.slide-anchor');
-    if (firstSlide) {
-      loadAllImgs(firstSlide);
-      updateColor(firstSlide);
-    }
-
-    // Restore remembered position
-    const remembered = lastSelectedPerCategory[category];
-    if (remembered) {
-      const slides = Array.from(root.querySelectorAll<HTMLElement>('.slide-anchor'));
-      const idx = slides.findIndex(a => a.dataset.id === remembered);
-      if (idx !== -1) {
-        embla.scrollTo(idx, true);
-        updateOverlayCounter();
-      }
-    }
-
-    // Hover on current slide pauses briefly
-    root.querySelectorAll<HTMLElement>('.slide-anchor').forEach((a, i) => {
-      a.onmouseenter = () => {
-        if (embla && i === embla.selectedScrollSnap()) pauseAuto(AUTO_INTERVAL);
-      };
-    });
-
-    // Drag suppression — prevent link activation during drag
-    let pointerStartX = 0;
-    let wasDragged = false;
-
-    root.addEventListener('pointerdown', (e) => {
-      pointerStartX = e.clientX;
-      wasDragged = false;
-    }, { passive: true });
-
-    root.addEventListener('pointermove', (e) => {
-      if (Math.abs(e.clientX - pointerStartX) > 3) wasDragged = true;
-    }, { passive: true });
-
-    root.addEventListener('click', (e) => {
-      const anchor = (e.target as Element)?.closest('.slide-anchor');
-      if (anchor && wasDragged) {
-        e.preventDefault();
-        e.stopPropagation();
-      }
-    }, true);
-  }
-
-  // ─── Public refresh (called by dropdown) ───────────────────────────────────
-  (window as any).refreshSlider = function () {
-    if (embla) {
-      const slides = document.querySelectorAll<HTMLElement>('[data-slideshow] .slide-anchor');
-      const idx = embla.selectedScrollSnap();
-      const curAnchor = slides[idx];
-      if (curAnchor?.dataset.id && curAnchor.dataset.category) {
-        lastSelectedPerCategory[curAnchor.dataset.category] = curAnchor.dataset.id;
-      }
-    }
-    initCarousel(getCategory());
-  };
-
-  // ─── Tab visibility pause/resume ───────────────────────────────────────────
-  document.addEventListener('visibilitychange', () => {
-    if (!embla) return;
-    if (document.hidden) {
-      isTabPaused = true;
-      fullPause();
-    } else {
-      isTabPaused = false;
-      fullResume();
-    }
-  });
-
-  // ─── Init on DOM ready ─────────────────────────────────────────────────────
-  function boot() {
-    initCarousel('all', true);
-
-    // Load all images after page load (background prefetch)
-    window.addEventListener('load', () => {
-      document.querySelectorAll<HTMLElement>('[data-slideshow] .slide-anchor').forEach(a => {
-        loadAllImgs(a);
-      });
-    });
-  }
+  import { initSlideshow } from '../slideshow-carousel';
 
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', boot);
+    document.addEventListener('DOMContentLoaded', () => initSlideshow());
   } else {
-    boot();
+    initSlideshow();
   }
 </script>
 
@@ -710,7 +463,8 @@ function srcSet(imagePath: string, stem: string): string {
     min-width: 0;
     width: 100%;
     height: 100%;
-    background-color: var(--section-dark-background-color);
+    margin-right: clamp(8px, 3.7333px + 1.0667vw, 16px);
+    background-color: #1d2021 /* always-dark: slideshow overlays photos */;
     cursor: pointer;
     user-select: none;
     -webkit-user-drag: none;
@@ -808,7 +562,7 @@ function srcSet(imagePath: string, stem: string): string {
     font-weight: var(--font-weight7);
     letter-spacing: -.5px !important;
     font-family: var(--identity-font);
-    color: var(--white-color-1);
+    color: var(--color-text-on-accent);
     line-height: 1.4;
     display: inline-block;
     max-width: 100%;
@@ -826,7 +580,7 @@ function srcSet(imagePath: string, stem: string): string {
     font-weight: var(--font-weight4);
     letter-spacing: -.5px !important;
     font-family: var(--identity-font);
-    color: var(--white-color-1);
+    color: var(--color-text-on-accent);
     line-height: 1.3;
     white-space: nowrap;
     overflow: hidden;
@@ -843,7 +597,7 @@ function srcSet(imagePath: string, stem: string): string {
     margin-right: .5rem;
     padding: 0;
     font-size: clamp(var(--font-size-17px), 1.117rem + 0.571vw, var(--font-size-18px));
-    color: var(--white-color-1);
+    color: var(--color-text-on-accent);
     text-decoration: none;
     text-align: left;
     font-weight: 400;
@@ -856,7 +610,7 @@ function srcSet(imagePath: string, stem: string): string {
     position: relative;
     font-family: var(--identity-font);
     font-weight: 400;
-    color: var(--white-color-1);
+    color: var(--color-text-on-accent);
     margin-left: .5rem;
     line-height: .9;
     font-size: clamp(var(--font-size-17px), 1.117rem + 0.571vw, var(--font-size-18px));
@@ -868,7 +622,7 @@ function srcSet(imagePath: string, stem: string): string {
   .slide-anchor:hover .detail-container .learn-more-link {
     text-decoration-line: underline;
     text-decoration-thickness: 1.25px;
-    text-decoration-color: var(--white-color-1);
+    text-decoration-color: var(--color-text-on-accent);
     text-underline-offset: 2px;
   }
 
@@ -959,7 +713,7 @@ function srcSet(imagePath: string, stem: string): string {
     z-index: 1000;
     -webkit-tap-highlight-color: transparent;
     pointer-events: auto;
-    overflow: hidden;
+    overflow: visible;
   }
 
   .slide-anchor .compare-checkbox { display: none; }
@@ -970,12 +724,11 @@ function srcSet(imagePath: string, stem: string): string {
     justify-content: center;
     width: max-content;
     height: max-content;
-    aspect-ratio: 1;
     padding: .25rem .25rem;
     min-width: clamp(var(--font-size-26px), 22.8px + 0.8vw, var(--font-size-32px));
     min-height: clamp(var(--font-size-26px), 22.8px + 0.8vw, var(--font-size-32px));
     background-color: var(--card-color);
-    color: var(--white-color-1);
+    color: var(--color-text-on-accent);
     font-family: var(--identity-font);
     font-size: var(--font-size-16px);
     font-weight: 600;
@@ -986,9 +739,10 @@ function srcSet(imagePath: string, stem: string): string {
     box-sizing: border-box;
     overflow: hidden;
     position: relative;
-    transition: background-color 0.3s;
+    transition: background-color 0.3s ease;
   }
 
+  /* ── Symbol container ── */
   .slide-anchor .compare-symbol {
     position: relative;
     display: inline-flex;
@@ -1002,26 +756,75 @@ function srcSet(imagePath: string, stem: string): string {
     box-sizing: content-box;
   }
 
-  .slide-anchor .compare-symbol .minus {
-    display: none;
-    justify-content: center;
-    margin-bottom: .2rem;
-    width: 1.15em;
-  }
-
-  .slide-anchor .compare-symbol .plus {
+  /* ── SVG icon slot: scale-pop on state change ── */
+  .slide-anchor .compare-sym-slot {
     display: flex;
+    align-items: center;
     justify-content: center;
-    width: 1.15em;
+    width: 100%;
+    height: 100%;
+    animation: symbolPop 200ms cubic-bezier(0.16, 1, 0.3, 1) both;
   }
 
+  .slide-anchor .compare-icon {
+    display: block;
+    width: 1em;
+    height: 1em;
+  }
+
+  @keyframes symbolPop {
+    0%   { transform: scale(0); opacity: 0; }
+    60%  { transform: scale(1.2); opacity: 1; }
+    100% { transform: scale(1); opacity: 1; }
+  }
+
+  /* ── Glow pulse on vault toggle (single flash, category-colored) ── */
+  .slide-anchor .compare-toggle.vault-pulse {
+    animation: vaultGlow 350ms ease-out;
+  }
+
+  @keyframes vaultGlow {
+    0%   { box-shadow: 0 0 0 0 var(--card-color); }
+    40%  { box-shadow: 0 0 10px 3px var(--card-color); }
+    100% { box-shadow: 0 0 0 0 transparent; }
+  }
+
+  /* ── "COMPARE" text: smooth expand/collapse via max-width + opacity ── */
   .slide-anchor .compare-text {
     display: flex;
+    align-items: center;
     max-width: 0;
+    opacity: 0;
+    margin-right: 0;
     white-space: nowrap;
     overflow: hidden;
+    transition:
+      max-width 180ms ease,
+      opacity 140ms ease,
+      margin-right 180ms ease;
   }
 
+  /* ── Toggle spinner (kept for future server-sync loading states) ── */
+  .slide-anchor .toggle-spinner {
+    font-size: 1.15rem;
+    width: 1em;
+    height: 1em;
+    border: 0.11rem solid var(--color-text-on-accent);
+    border-top-color: transparent;
+    border-radius: 50%;
+    animation: spin 0.75s linear infinite;
+  }
+
+  @keyframes spin {
+    to { transform: rotate(360deg); }
+  }
+
+  /* vault-toggle-slot: transparent wrapper for re-hydration data */
+  .vault-toggle-slot {
+    display: contents;
+  }
+
+  /* ── Desktop hover: expand label to pill ── */
   @media (hover: hover) and (pointer: fine) {
     .slide-anchor .compare-label:hover,
     .slide-anchor .compare-label:active,
@@ -1032,15 +835,16 @@ function srcSet(imagePath: string, stem: string): string {
       justify-content: space-between;
     }
 
-    .slide-anchor .compare-label:hover .compare-text {
-      display: flex;
-      align-items: flex-start;
-      max-width: fit-content;
-      min-height: fit-content;
+    .slide-anchor .compare-label:hover .compare-text,
+    .slide-anchor .compare-label:active .compare-text,
+    .slide-anchor .compare-checkbox:focus + .compare-label .compare-text {
+      max-width: 7.5rem;
+      opacity: 1;
       margin-right: 1.25rem;
     }
   }
 
+  /* ── Touch: expand on first tap ── */
   @media (hover: none) and (pointer: coarse) {
     .slide-anchor .compare-label.touch-open {
       width: fit-content;
@@ -1050,10 +854,28 @@ function srcSet(imagePath: string, stem: string): string {
     }
 
     .slide-anchor .compare-label.touch-open .compare-text {
-      display: inline-block;
-      max-width: fit-content;
+      max-width: 7.5rem;
       opacity: 1;
       margin-right: 1rem;
+    }
+  }
+
+  /* ── Reduced motion: disable animations, keep instant state changes ── */
+  @media (prefers-reduced-motion: reduce) {
+    .slide-anchor .compare-sym-slot {
+      animation: none;
+    }
+
+    .slide-anchor .compare-toggle.vault-pulse {
+      animation: none;
+    }
+
+    .slide-anchor .compare-text {
+      transition: none;
+    }
+
+    .slide-anchor .toggle-spinner {
+      animation-duration: 1.5s;
     }
   }
 
@@ -1104,13 +926,15 @@ function srcSet(imagePath: string, stem: string): string {
     -webkit-tap-highlight-color: transparent;
   }
 
+  /* Desktop: 35–44px circles (44px at 1150px viewport)
+     WHY font-size + 1em: em-based square scales with the responsive variable */
   .slide-card-carousel-circle-left,
   .slide-card-carousel-circle-right {
-    font-size: var(--ft-44-35, 2.5rem);
+    font-size: var(--ft-44-35, 4rem);
     width: 1em;
     height: 1em;
     border-radius: 50%;
-    background-color: var(--section-darkest-background-color);
+    background-color: #161718 /* always-dark: slideshow overlays photos */;
     opacity: .6;
     display: flex;
     align-items: center;
@@ -1129,7 +953,7 @@ function srcSet(imagePath: string, stem: string): string {
     background-size: 100%;
     height: 100%;
     width: 100%;
-    color: var(--white-color-1);
+    color: var(--color-text-on-accent);
     background-color: transparent;
   }
 
@@ -1149,7 +973,7 @@ function srcSet(imagePath: string, stem: string): string {
   @media (hover: hover) and (pointer: fine) {
     .slide-card-carousel-arrow-container.active .slide-card-carousel-circle-right,
     .slide-card-carousel-arrow-container.active .slide-card-carousel-circle-left {
-      background-color: var(--section-darkest-background-color);
+      background-color: #161718 /* always-dark: slideshow overlays photos */;
     }
 
     .slide-card-carousel-arrow-container.right-arrow:hover .slide-card-carousel-circle-right,
@@ -1160,13 +984,13 @@ function srcSet(imagePath: string, stem: string): string {
 
     .slide-card-carousel-arrow-container.active:hover .slide-card-carousel-circle-right,
     .slide-card-carousel-arrow-container.active:hover .slide-card-carousel-circle-left {
-      background-color: var(--section-darkest-background-color);
+      background-color: #161718 /* always-dark: slideshow overlays photos */;
     }
   }
 
   /* ── Slide info overlay (counter + pause) ── */
   .slide-info-overlay {
-    color: var(--white-color-1);
+    color: var(--color-text-on-accent);
     font-family: var(--identity-font);
     padding: 0.3rem 0.4rem .3rem .6rem;
     border-radius: 1rem;
@@ -1177,28 +1001,30 @@ function srcSet(imagePath: string, stem: string): string {
     pointer-events: auto;
   }
 
+  /* Desktop counter: 13–14px font, 24–26px pill height */
   .slide-info-overlay .slide-count-container {
     padding: 0 1rem;
     border-radius: 80px;
     font-weight: 600;
-    background-color: var(--section-darkest-background-color);
+    background-color: #161718 /* always-dark: slideshow overlays photos */;
     display: flex;
     opacity: .6;
     align-items: center;
     gap: 0.25rem;
-    font-size: var(--ft-14-13, 0.82rem);
-    min-height: var(--ft-26-24, 1.5rem);
+    font-size: var(--ft-14-13, 1.273rem);
+    min-height: var(--ft-26-24, 2.364rem);
   }
 
   .slide-count-container .current-slide-number { font-weight: 700; }
   .slide-count-container .count-separator,
   .slide-count-container .total-slides { font-weight: 400; }
 
+  /* Desktop pause: 24–26px circle */
   .slide-info-overlay .pause-button {
-    font-size: var(--ft-26-24, 1.5rem);
+    font-size: var(--ft-26-24, 2.364rem);
     width: 1em;
     height: 1em;
-    background-color: var(--section-darkest-background-color);
+    background-color: #161718 /* always-dark: slideshow overlays photos */;
     border-radius: 50%;
     opacity: .6;
     display: flex;
@@ -1247,7 +1073,7 @@ function srcSet(imagePath: string, stem: string): string {
     margin: auto;
   }
 
-  .pause-button svg { color: var(--white-color-1); }
+  .pause-button svg { color: var(--color-text-on-accent); }
 
   /* ── Deal CTA ── */
   .wrapper-cta-details {
@@ -1264,19 +1090,20 @@ function srcSet(imagePath: string, stem: string): string {
     pointer-events: none;
     transform: translateY(5rem);
     transition: opacity 0.18s ease-out, visibility 0.18s ease-out, transform 0.18s ease-out;
-    height: calc(var(--ft-44-35, 2.5rem) + 4px);
+    height: calc(var(--ft-44-35, 4rem) + 4px);
   }
 
+  /* Desktop deal CTA: 18px font, pill button */
   .slide-deal-cta {
     border: 0;
     margin: 0;
     padding: 0.45rem 1.15rem;
     border-radius: 999px;
-    background-color: var(--section-darkest-background-color);
-    color: var(--white-color-1);
+    background-color: #161718 /* always-dark: slideshow overlays photos */;
+    color: var(--color-text-on-accent);
     font-family: var(--identity-font);
     font-weight: 600;
-    font-size: var(--font-size-18px);
+    font-size: var(--font-size-18px, 1.636rem);
     line-height: 1;
     opacity: .9;
     text-decoration: none;
@@ -1363,18 +1190,19 @@ function srcSet(imagePath: string, stem: string): string {
       --slideShow-card-score-fs: var(--ft-44-30, 2rem);
     }
 
+    /* ≤900px: controls scale UP for touch — 39–58px arrows, 24–40px pause */
     .slide-card-carousel-circle-left,
     .slide-card-carousel-circle-right {
-      font-size: var(--ft-58-39, 3rem);
+      font-size: var(--ft-58-39, 5.273rem);
     }
 
     .slide-info-overlay .slide-count-container {
-      min-height: var(--ft-40-24, 2rem);
-      font-size: var(--ft-21-14, 1rem);
+      min-height: var(--ft-40-24, 3.636rem);
+      font-size: var(--ft-21-14, 1.909rem);
     }
 
     .slide-info-overlay .pause-button {
-      font-size: var(--ft-40-24, 2rem);
+      font-size: var(--ft-40-24, 3.636rem);
       width: 1em;
       height: 1em;
     }
@@ -1388,13 +1216,17 @@ function srcSet(imagePath: string, stem: string): string {
       font-size: var(--ft-21-18, 1.2rem);
     }
 
+    .slide-anchor .toggle-spinner {
+      font-size: var(--ft-16-14, 0.9rem);
+    }
+
     .slide-deal-cta {
-      font-size: var(--ft-23-15, 1.2rem);
-      min-height: var(--ft-40-24, 2rem);
+      font-size: var(--ft-23-15, 2.091rem);
+      min-height: var(--ft-40-24, 3.636rem);
     }
 
     .wrapper-cta-details {
-      height: calc(var(--ft-58-39, 3rem) + 4px);
+      height: calc(var(--ft-58-39, 5.273rem) + 4px);
     }
   }
 
@@ -1423,18 +1255,19 @@ function srcSet(imagePath: string, stem: string): string {
       font-size: var(--fm-15-14, 0.9rem);
     }
 
+    /* ≤600px: scaled for small touch screens (base drops to 10px) */
     .slide-card-carousel-circle-left,
     .slide-card-carousel-circle-right {
-      font-size: var(--fm-39-32, 2rem);
+      font-size: var(--fm-39-32, 3.545rem);
     }
 
     .slide-info-overlay .slide-count-container {
-      min-height: var(--fm-24-21, 1.3rem);
-      font-size: var(--fm-14-13, 0.8rem);
+      min-height: var(--fm-24-21, 2.182rem);
+      font-size: var(--fm-14-13, 1.273rem);
     }
 
     .slide-info-overlay .pause-button {
-      font-size: var(--fm-24-21, 1.3rem);
+      font-size: var(--fm-24-21, 2.182rem);
       width: 1em;
       height: 1em;
     }
@@ -1448,13 +1281,17 @@ function srcSet(imagePath: string, stem: string): string {
       font-size: var(--fm-18-17, 1rem);
     }
 
+    .slide-anchor .toggle-spinner {
+      font-size: var(--fm-14-13, 0.8rem);
+    }
+
     .slide-deal-cta {
-      font-size: var(--fm-15-13, 0.85rem);
-      min-height: var(--fm-24-21, 1.3rem);
+      font-size: var(--fm-15-13, 1.364rem);
+      min-height: var(--fm-24-21, 2.182rem);
     }
 
     .wrapper-cta-details {
-      height: calc(var(--fm-39-32, 2rem) + 2px);
+      height: calc(var(--fm-39-32, 3.545rem) + 2px);
     }
   }
 </style>

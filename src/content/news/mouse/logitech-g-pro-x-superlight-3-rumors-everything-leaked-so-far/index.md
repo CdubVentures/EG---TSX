@@ -1,4 +1,4 @@
----
+﻿---
 title: 'Logitech G Pro X Superlight 3 Rumors: Everything Leaked So Far'
 description: >-
   Confused by "GPW3" leaks? We break down the Logitech roadmap, the new haptic
@@ -26,9 +26,10 @@ tags:
   - release-window
 datePublished: '2025-12-20'
 author: Newsroom
+hero: hero-img
 category: mouse
 draft: false
-fullArticle: true
+publish: true
 ---
 The hunt for the **Logitech G Pro X Superlight 3** has become one of the most talked-about sagas in recent gaming mouse history. If you frequent enthusiast forums or browse marketplaces like Taobao, you’ve probably stumbled across “GPW3” listings more than once.
 

@@ -1,4 +1,4 @@
----
+﻿---
 category: monitor
 navbar:
   - best in classes
@@ -11,8 +11,8 @@ description: >-
   exceptional value without compromise.
 tags:
   - Budget Monitors
-heroImg: title
-fullArticle: true
+hero: title
+publish: true
 toc: false
 draft: false
 ---

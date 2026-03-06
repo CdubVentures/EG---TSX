@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="300" height="450" viewBox="0 0 300 450">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0.2" y2="1">
+      <stop offset="0%" stop-color="#111827"/>
+      <stop offset="100%" stop-color="#0d1117"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#8b5cf6"/>
+      <stop offset="100%" stop-color="#6d28d9"/>
+    </linearGradient>
+    <linearGradient id="glow" x1="0.5" y1="0" x2="0.5" y2="1">
+      <stop offset="0%" stop-color="#8b5cf6" stop-opacity="0.12"/>
+      <stop offset="100%" stop-color="#8b5cf6" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="300" height="450" fill="url(#bg)"/>
+  <rect width="300" height="3" fill="url(#accent)"/>
+
+  <!-- Geometric decorations -->
+  <polygon points="300,0 300,180 180,0" fill="#161d2a" opacity="0.5"/>
+  <polygon points="300,0 300,100 230,0" fill="#1a2235" opacity="0.3"/>
+  <circle cx="150" cy="200" r="80" fill="url(#glow)"/>
+
+  <!-- Brand -->
+  <rect x="20" y="22" width="8" height="8" rx="4" fill="#8b5cf6"/>
+  <text x="36" y="31" font-family="system-ui, sans-serif" font-size="11" font-weight="700" fill="#8b949e" letter-spacing="2">SAMPLE BRAND</text>
+
+  <!-- Headline -->
+  <text x="20" y="76" font-family="system-ui, -apple-system, sans-serif" font-size="32" font-weight="900" fill="#ffffff" letter-spacing="1">NEXT-GEN</text>
+  <text x="20" y="112" font-family="system-ui, -apple-system, sans-serif" font-size="32" font-weight="900" fill="#8b5cf6" letter-spacing="1">SENSOR</text>
+
+  <!-- Feature circle -->
+  <circle cx="150" cy="195" r="52" fill="none" stroke="#8b5cf6" stroke-width="2" opacity="0.3"/>
+  <circle cx="150" cy="195" r="42" fill="#161d2a"/>
+  <text x="150" y="188" font-family="system-ui, sans-serif" font-size="22" font-weight="900" fill="#8b5cf6" text-anchor="middle">26K</text>
+  <text x="150" y="210" font-family="system-ui, sans-serif" font-size="13" font-weight="600" fill="#8b949e" text-anchor="middle">DPI</text>
+
+  <!-- Description -->
+  <text x="20" y="278" font-family="system-ui, sans-serif" font-size="13" font-weight="400" fill="#8b949e">Zero-compromise tracking with</text>
+  <text x="20" y="298" font-family="system-ui, sans-serif" font-size="13" font-weight="400" fill="#8b949e">industry-leading precision.</text>
+
+  <!-- Spec pills -->
+  <rect x="20" y="320" width="82" height="26" rx="13" fill="#1e2530"/>
+  <text x="61" y="338" font-family="system-ui, sans-serif" font-size="11" font-weight="700" fill="#8b5cf6" text-anchor="middle">0.1mm</text>
+
+  <rect x="110" y="320" width="82" height="26" rx="13" fill="#1e2530"/>
+  <text x="151" y="338" font-family="system-ui, sans-serif" font-size="11" font-weight="700" fill="#8b5cf6" text-anchor="middle">750 IPS</text>
+
+  <rect x="200" y="320" width="80" height="26" rx="13" fill="#1e2530"/>
+  <text x="240" y="338" font-family="system-ui, sans-serif" font-size="11" font-weight="700" fill="#8b5cf6" text-anchor="middle">50G</text>
+
+  <!-- Price + CTA -->
+  <text x="20" y="390" font-family="system-ui, sans-serif" font-size="28" font-weight="900" fill="#ffffff">$129</text>
+  <rect x="170" y="368" width="110" height="38" rx="19" fill="#8b5cf6"/>
+  <text x="225" y="393" font-family="system-ui, sans-serif" font-size="13" font-weight="800" fill="#ffffff" text-anchor="middle" letter-spacing="1">SHOP NOW</text>
+
+  <!-- Sponsored -->
+  <text x="280" y="442" font-family="system-ui, sans-serif" font-size="9" font-weight="500" fill="#4a5568" text-anchor="end">Sponsored</text>
+
+  <!-- Bottom accent -->
+  <rect y="447" width="300" height="3" fill="url(#accent)"/>
+</svg>

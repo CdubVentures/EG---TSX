@@ -1,4 +1,4 @@
----
+﻿---
 category: mouse
 navbar: []
 guide: Corsair Scimitar Elite Wireless SE vs Elite Wireless
@@ -32,10 +32,9 @@ tags:
   - versus
 datePublished: '2025-07-11'
 dateUpdated: '2025-12-12'
-heroImg: >-
-  /images/guides/mouse/corsair-scimitar-elite-wireless-se-vs-elite-wireless/hero-img
+hero: hero-img
 author: Gear Guides Team
-fullArticle: true
+publish: true
 toc: false
 draft: false
 ---

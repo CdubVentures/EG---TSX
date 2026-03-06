@@ -1,9 +1,9 @@
----
+﻿---
 category: monitor
 brand: Dell
 model: UltraSharp U3425WE
 author: EG Team
-fullArticle: true
+publish: true
 draft: false
 title: 'Dell UltraSharp U3425WE: Gaming and Work Harmony'
 subtitle: 'Enjoy Ultrawide 3440x1440, 120Hz Refresh Rate, and IPS Versatility'
@@ -13,7 +13,7 @@ description: >-
   seamlessly in 2025.
 tags:
   - Versatile Monitor
-heroImg: feature-image
+hero: feature-image
 productId: dell-ultrasharp-u3425we
 toc: false
 ---

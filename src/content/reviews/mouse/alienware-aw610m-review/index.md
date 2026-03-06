@@ -1,9 +1,9 @@
----
+﻿---
 category: mouse
 brand: Alienware
 model: AW610M
 author: Maze
-fullArticle: true
+publish: true
 draft: false
 title: 'Alienware AW610M Review: Elevate Your Wired/Wireless Gaming Performance'
 subtitle: >-
@@ -17,6 +17,7 @@ tags:
   - Heavyweight Mouse
 heroAspect: 16/9
 heroCredit: "Photo:\_Jane\_Smith\_/\_TechGear"
+hero: feature-image
 productId: alienware-aw610m
 toc: true
 ---

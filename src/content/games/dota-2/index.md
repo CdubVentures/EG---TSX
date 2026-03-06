@@ -1,4 +1,4 @@
----
+﻿---
 game: Dota 2
 navbar: true
 guide: Dota 2
@@ -25,7 +25,8 @@ game_facebook: 'https://www.facebook.com/Dota2'
 game_x: 'https://x.com/DOTA2'
 game_instagram: 'https://www.instagram.com/dota2/'
 game_youtube: 'https://www.youtube.com/@dota2'
-fullArticle: true
+publish: true
 toc: false
+hero: box-art-cover
 ---
 

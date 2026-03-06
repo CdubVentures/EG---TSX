@@ -1,4 +1,4 @@
----
+﻿---
 category: mouse
 navbar:
   - best in classes
@@ -9,7 +9,7 @@ description: >-
   Learn how to evaluate specs, grip styles, and build quality to pick a gaming
   mouse that aligns seamlessly with your preferences and budget.
 tags: []
-fullArticle: true
+publish: true
 toc: false
 draft: false
 ---

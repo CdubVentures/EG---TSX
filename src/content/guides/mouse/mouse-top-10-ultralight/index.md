@@ -1,4 +1,4 @@
----
+﻿---
 category: mouse
 navbar:
   - top 10 speciality picks
@@ -10,8 +10,8 @@ description: >-
   helping you achieve lightning-fast flick shots and seamless tracking.
 tags:
   - Ultralight Mice
-heroImg: title
-fullArticle: true
+hero: title
+publish: true
 toc: false
 draft: false
 ---

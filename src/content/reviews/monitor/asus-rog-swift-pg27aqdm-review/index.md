@@ -1,9 +1,9 @@
----
+﻿---
 category: monitor
 brand: ASUS
 model: ROG Swift PG27AQDM
 author: EG Team
-fullArticle: true
+publish: true
 draft: false
 title: 'ASUS ROG Swift PG27AQDM: Speed Meets Clarity'
 subtitle: 'Experience 360Hz Refresh Rate, 1080p Precision, and IPS Performance'
@@ -13,7 +13,7 @@ description: >-
   needing ultra-smooth motion.
 tags:
   - High-Refresh Monitor
-heroImg: feature-image
+hero: feature-image
 productId: asus-rog-swift-pg27aqdm
 toc: false
 ---

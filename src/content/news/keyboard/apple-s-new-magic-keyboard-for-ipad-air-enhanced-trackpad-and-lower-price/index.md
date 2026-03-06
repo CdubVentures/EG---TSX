@@ -1,4 +1,4 @@
----
+﻿---
 title: 'Apple’s New Magic Keyboard for iPad Air: Enhanced Trackpad and Lower Price'
 description: >-
   Apple unveiled a redesigned Magic Keyboard for the M3 iPad Air on March 3,
@@ -10,9 +10,9 @@ tags:
   - Productivity Keyboard Update
 datePublished: '2025-12-09'
 author: EG Team
-heroImg: feature-image
+hero: feature-image
 category: keyboard
 draft: false
-fullArticle: true
+publish: true
 ---
 

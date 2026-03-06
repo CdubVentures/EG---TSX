@@ -1,4 +1,4 @@
----
+﻿---
 category: monitor
 navbar:
   - best in classes
@@ -9,8 +9,8 @@ description: >-
   and robust performance—designed to excel in gaming, professional work, and
   everyday use.
 tags: []
-heroImg: title
-fullArticle: true
+hero: title
+publish: true
 toc: false
 draft: false
 ---

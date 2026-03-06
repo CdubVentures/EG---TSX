@@ -25,7 +25,7 @@ import VaultCount from '@features/vault/components/VaultCount';
         <path d="M8.088 12.098l3.185-1.81a.178.178 0 01.176 0l2.843 1.615a.172.172 0 010 .3l-6.204 3.524a.178.178 0 01-.176 0L1.088 11.85A.173.173 0 011 11.7V3.947c0-.061.033-.118.088-.15L7.292.274a.176.176 0 01.264.15v3.23a.172.172 0 01-.088.15l-3.186 1.81a.173.173 0 00-.088.149v4.124c0 .062.034.119.088.15l3.63 2.062c.054.03.122.03.176 0z" />
         <path d="M8.532 3.803l3.186 1.81a.173.173 0 01.088.149v3.62c0 .06.033.118.088.149l2.842 1.615a.176.176 0 00.264-.15V3.947a.173.173 0 00-.088-.15L8.708.274a.176.176 0 00-.264.15v3.23c0 .062.034.119.088.150z" />
         <path d="M4 2h8a2 2 0 012 2v8a2 2 0 01-2 2H4a2 2 0 01-2-2V4a2 2 0 012-2z" fill="#000000" opacity="0.1" />
-        <path d="M5.9 6.2l2.1 4.2h0l2.1-4.2H8l-2.1 0z" fill="#FFFFFF" />
+        <path d="M5.9 6.2l2.1 4.2h0l2.1-4.2H8l-2.1 0z" style="fill: var(--nav-text);" />
       </g>
     </svg>
     <div class="nav-vault-item-count-wrapper mobile-vault-badge">
@@ -90,7 +90,7 @@ import VaultCount from '@features/vault/components/VaultCount';
 
   {/* Settings */}
   <div class="nav-icon settings-nav-icon">
-    <svg fill="#ffffff" xmlns="http://www.w3.org/2000/svg" class="nav-svg" viewBox="32.02 26 447.96 460">
+    <svg fill="currentColor" xmlns="http://www.w3.org/2000/svg" class="nav-svg" viewBox="32.02 26 447.96 460">
       <defs>
         <linearGradient id="navbarThemeGradient4" x1="0%" y1="0%" x2="100%" y2="0%">
           <stop offset="0%" style="stop-color: var(--site-gradient-start);" />
@@ -138,7 +138,7 @@ import VaultCount from '@features/vault/components/VaultCount';
     display: flex;
     justify-content: center;
     align-items: center;
-    color: var(--white-color-1);
+    color: var(--nav-text);
     font-size: 1rem;
     font-family: var(--identity-font);
     font-weight: var(--font-weight5);
@@ -148,7 +148,7 @@ import VaultCount from '@features/vault/components/VaultCount';
   /* WHY font-size: HBS sets font-size on .nav-icon svg so height:1em = 22px */
   .nav-svg {
     font-size: var(--font-size-22px);
-    fill: #ffffff;
+    fill: currentColor;
     width: auto;
     height: 1em;
   }
@@ -178,7 +178,7 @@ import VaultCount from '@features/vault/components/VaultCount';
     font-size: var(--font-size-14px);
     font-family: var(--identity-font);
     font-weight: var(--font-weight5);
-    color: var(--white-color-1);
+    color: var(--nav-text);
     white-space: nowrap;
     height: 100%;
     display: flex;
@@ -193,7 +193,7 @@ import VaultCount from '@features/vault/components/VaultCount';
     font-size: var(--font-size-14px);
     font-family: var(--identity-font);
     font-weight: var(--font-weight5);
-    color: var(--white-color-1);
+    color: var(--nav-text);
     cursor: pointer;
     white-space: nowrap;
     height: 100%;
@@ -288,7 +288,7 @@ import VaultCount from '@features/vault/components/VaultCount';
     font-size: var(--font-size-14px);
     font-family: var(--identity-font);
     font-weight: var(--font-weight4);
-    color: var(--white-color-1);
+    color: var(--nav-text);
     text-decoration: none;
     white-space: nowrap;
   }
@@ -315,7 +315,7 @@ import VaultCount from '@features/vault/components/VaultCount';
   @media (hover: hover) and (pointer: fine) {
     .account-dd-link:hover,
     .account-dd-link:focus {
-      background-color: #2e343b;
+      background-color: var(--nav-surface-medium);
     }
   }
 
