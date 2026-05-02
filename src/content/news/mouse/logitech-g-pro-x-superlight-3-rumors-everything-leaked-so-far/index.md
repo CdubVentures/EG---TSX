@@ -182,7 +182,7 @@ To stay ahead of future updates, visit our **[Mouse Hub](/hubs/mouse)** for comp
 
 ::: full
 {{> ads/inline-manual
-  campaign="inline-ad"
+  position="in_content"
   desktop=true
   mobile=true
 }}

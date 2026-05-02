@@ -1,31 +1,57 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="300" height="300" viewBox="0 0 300 300">
-  <defs>
-    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="#0f172a"/>
-      <stop offset="100%" stop-color="#1e293b"/>
-    </linearGradient>
-    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0%" stop-color="#06b6d4"/>
-      <stop offset="100%" stop-color="#0891b2"/>
-    </linearGradient>
-  </defs>
-  <rect width="300" height="300" fill="url(#bg)"/>
-  <rect width="300" height="3" fill="url(#accent)"/>
-  <circle cx="150" cy="140" r="55" fill="#06b6d4" opacity="0.04"/>
-  <text x="20" y="42" font-family="system-ui, sans-serif" font-size="11" font-weight="700" fill="#06b6d4" letter-spacing="2">DEAL OF THE DAY</text>
-  <text x="20" y="82" font-family="system-ui, sans-serif" font-size="32" font-weight="900" fill="#ffffff">USB-C</text>
-  <text x="20" y="116" font-family="system-ui, sans-serif" font-size="32" font-weight="900" fill="#06b6d4">HUB PRO</text>
-  <text x="20" y="145" font-family="system-ui, sans-serif" font-size="13" font-weight="400" fill="#94a3b8">10-in-1 · Dual HDMI · 100W PD</text>
-  <g transform="translate(40, 160)" opacity="0.05">
-    <rect x="0" y="0" width="220" height="40" rx="8" fill="#06b6d4"/>
-    <circle cx="30" cy="20" r="8" fill="#06b6d4"/><circle cx="60" cy="20" r="8" fill="#06b6d4"/>
-    <rect x="100" y="12" width="30" height="16" rx="3" fill="#06b6d4"/>
-    <rect x="140" y="12" width="30" height="16" rx="3" fill="#06b6d4"/>
+  <!-- FreshBrew — Coffee Subscription Ad (300x300) -->
+  <rect width="300" height="300" fill="#f5f0eb" rx="2" stroke="#e5e7eb" stroke-width="1"/>
+
+  <!-- Coffee cup silhouette -->
+  <g transform="translate(150, 68)" fill="#92400e" opacity="0.15">
+    <path d="M-25,0 L-20,-35 L20,-35 L25,0 Q25,12 0,12 Q-25,12 -25,0 Z"/>
+    <path d="M25,-20 Q42,-18 40,-5 Q38,8 25,5" fill="none" stroke="#92400e" stroke-width="2.5" opacity="0.3"/>
+    <rect x="-18" y="12" width="36" height="4" rx="2"/>
   </g>
-  <text x="20" y="230" font-family="system-ui, sans-serif" font-size="15" font-weight="500" fill="#64748b" text-decoration="line-through">$89</text>
-  <text x="70" y="230" font-family="system-ui, sans-serif" font-size="28" font-weight="900" fill="#ffffff">$49</text>
-  <rect x="20" y="248" width="260" height="38" rx="19" fill="#06b6d4"/>
-  <text x="150" y="273" font-family="system-ui, sans-serif" font-size="14" font-weight="800" fill="#0f172a" text-anchor="middle" letter-spacing="1">GRAB THE DEAL</text>
-  <text x="280" y="296" font-family="system-ui, sans-serif" font-size="9" font-weight="500" fill="#4a5568" text-anchor="end">Sponsored</text>
-  <rect y="297" width="300" height="3" fill="url(#accent)"/>
+
+  <!-- Steam wisps -->
+  <g fill="none" stroke="#92400e" stroke-width="1.2" opacity="0.2">
+    <path d="M140,18 Q137,10 140,2 Q143,-6 140,-14"/>
+    <path d="M150,20 Q147,10 150,0 Q153,-10 150,-18"/>
+    <path d="M160,18 Q157,10 160,2 Q163,-6 160,-14"/>
+  </g>
+
+  <!-- Bean icons scattered -->
+  <g fill="#92400e" opacity="0.12">
+    <ellipse cx="45" cy="130" rx="6" ry="9" transform="rotate(-30 45 130)"/>
+    <line x1="42" y1="123" x2="48" y2="137" stroke="#f5f0eb" stroke-width="1.5"/>
+
+    <ellipse cx="255" cy="145" rx="5" ry="8" transform="rotate(20 255 145)"/>
+    <line x1="252" y1="139" x2="258" y2="151" stroke="#f5f0eb" stroke-width="1.5"/>
+
+    <ellipse cx="62" cy="220" rx="5" ry="7" transform="rotate(45 62 220)"/>
+    <line x1="59" y1="215" x2="65" y2="225" stroke="#f5f0eb" stroke-width="1.5"/>
+
+    <ellipse cx="240" cy="235" rx="5" ry="8" transform="rotate(-15 240 235)"/>
+    <line x1="237" y1="229" x2="243" y2="241" stroke="#f5f0eb" stroke-width="1.5"/>
+  </g>
+
+  <!-- Ad label -->
+  <text x="282" y="14" font-family="Arial, Helvetica, sans-serif" font-size="9" fill="#9ca3af" text-anchor="end">Ad</text>
+
+  <!-- Brand -->
+  <text x="150" y="110" font-family="Georgia, Times New Roman, serif" font-size="13" fill="#92400e" text-anchor="middle" font-weight="700" letter-spacing="3">FRESHBREW</text>
+
+  <!-- Divider -->
+  <line x1="115" y1="118" x2="185" y2="118" stroke="#92400e" stroke-width="1" opacity="0.25"/>
+
+  <!-- Headline -->
+  <text x="150" y="145" font-family="Georgia, Times New Roman, serif" font-size="19" fill="#451a03" text-anchor="middle" font-weight="700">Artisan Coffee</text>
+  <text x="150" y="168" font-family="Arial, Helvetica, sans-serif" font-size="14" fill="#78350f" text-anchor="middle">Delivered Fresh Weekly</text>
+
+  <!-- Price -->
+  <text x="150" y="200" font-family="Georgia, Times New Roman, serif" font-size="26" fill="#92400e" text-anchor="middle" font-weight="700">$9.99<tspan font-size="13" font-weight="400">/mo</tspan></text>
+
+  <!-- Body -->
+  <text x="150" y="224" font-family="Arial, Helvetica, sans-serif" font-size="11" fill="#78716c" text-anchor="middle">Single-origin beans from 12 countries</text>
+  <text x="150" y="239" font-family="Arial, Helvetica, sans-serif" font-size="11" fill="#78716c" text-anchor="middle">Roasted within 24 hours of shipping</text>
+
+  <!-- CTA Button -->
+  <rect x="80" y="252" width="140" height="36" rx="6" fill="#92400e"/>
+  <text x="150" y="275" font-family="Arial, Helvetica, sans-serif" font-size="14" fill="#ffffff" text-anchor="middle" font-weight="600">Subscribe</text>
 </svg>

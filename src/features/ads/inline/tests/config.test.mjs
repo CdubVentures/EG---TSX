@@ -6,7 +6,7 @@ describe('inlineCadenceSchema', () => {
   it('parses valid full config', async () => {
     const { inlineAdsConfigSchema } = await import('../config.ts');
     const valid = {
-      defaults: { campaign: 'inline-ad', desktop: true, mobile: true },
+      defaults: { position: 'in_content', desktop: true, mobile: true },
       collections: {
         reviews: {
           enabled: true,
@@ -29,7 +29,7 @@ describe('inlineCadenceSchema', () => {
   it('rejects missing firstAfter field on enabled collection', async () => {
     const { inlineAdsConfigSchema } = await import('../config.ts');
     const bad = {
-      defaults: { campaign: 'inline-ad', desktop: true, mobile: true },
+      defaults: { position: 'in_content', desktop: true, mobile: true },
       collections: {
         reviews: {
           enabled: true,
@@ -50,7 +50,7 @@ describe('inlineCadenceSchema', () => {
   it('rejects negative every value', async () => {
     const { inlineAdsConfigSchema } = await import('../config.ts');
     const bad = {
-      defaults: { campaign: 'inline-ad', desktop: true, mobile: true },
+      defaults: { position: 'in_content', desktop: true, mobile: true },
       collections: {
         reviews: {
           enabled: true,
@@ -71,7 +71,7 @@ describe('inlineCadenceSchema', () => {
   it('rejects max of 0 when enabled', async () => {
     const { inlineAdsConfigSchema } = await import('../config.ts');
     const bad = {
-      defaults: { campaign: 'inline-ad', desktop: true, mobile: true },
+      defaults: { position: 'in_content', desktop: true, mobile: true },
       collections: {
         reviews: {
           enabled: true,
@@ -92,7 +92,7 @@ describe('inlineCadenceSchema', () => {
   it('allows disabled collection with no cadence fields', async () => {
     const { inlineAdsConfigSchema } = await import('../config.ts');
     const valid = {
-      defaults: { campaign: 'inline-ad', desktop: true, mobile: true },
+      defaults: { position: 'in_content', desktop: true, mobile: true },
       collections: {
         games: { enabled: false },
       },
@@ -104,7 +104,7 @@ describe('inlineCadenceSchema', () => {
   it('allows multiple collections mixed enabled/disabled', async () => {
     const { inlineAdsConfigSchema } = await import('../config.ts');
     const valid = {
-      defaults: { campaign: 'inline-ad', desktop: true, mobile: true },
+      defaults: { position: 'in_content', desktop: true, mobile: true },
       collections: {
         reviews: {
           enabled: true,
@@ -134,7 +134,7 @@ describe('INLINE_ADS_CONFIG', () => {
     assert.ok(INLINE_ADS_CONFIG);
     assert.ok(INLINE_ADS_CONFIG.defaults);
     assert.ok(INLINE_ADS_CONFIG.collections);
-    assert.equal(INLINE_ADS_CONFIG.defaults.campaign, 'inline-ad');
+    assert.equal(INLINE_ADS_CONFIG.defaults.position, 'in_content');
   });
 
   it('reviews collection is enabled with cadence fields', async () => {

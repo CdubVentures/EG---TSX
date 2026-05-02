@@ -1,17 +1,10 @@
-// ─── Vault Store ────────────────────────────────────────────────────────────
-// Nano Store atom for Comparison Vault. Persona-scoped localStorage persistence.
-// Sync engine (sync.ts) orchestrates auth transitions — this module stays pure.
-
 import { atom } from 'nanostores';
 import type { VaultProduct, VaultEntry, VaultState, VaultStorageScope, AddResult } from './types.ts';
 import { VAULT_MAX_PER_CATEGORY, VAULT_LEGACY_KEY, vaultStorageKey } from './types.ts';
-
-// ─── Current persona scope ─────────────────────────────────────────────────
+import { emitVaultAction } from './vault-action.ts';
+import { normalizeContentImagePath } from '@core/image-path';
 
 let _currentScope: VaultStorageScope = 'guest';
-
-// ─── One-time legacy migration ─────────────────────────────────────────────
-// WHY: migrates flat 'eg-vault' key → 'eg-vault:guest' on first load
 
 function migrateLegacyKey(): void {
   if (typeof globalThis.localStorage === 'undefined') return;
@@ -19,17 +12,106 @@ function migrateLegacyKey(): void {
   if (!legacy) return;
 
   const scopedKey = vaultStorageKey('guest');
-  // Only migrate if scoped key doesn't already exist
   if (!globalThis.localStorage.getItem(scopedKey)) {
     globalThis.localStorage.setItem(scopedKey, legacy);
   }
   globalThis.localStorage.removeItem(VAULT_LEGACY_KEY);
 }
 
-// Run migration once at module load
 migrateLegacyKey();
 
-// ─── Restore from localStorage ──────────────────────────────────────────────
+function isNonEmptyString(value: unknown): value is string {
+  return typeof value === 'string' && value.trim().length > 0;
+}
+
+function normalizeThumbnailStem(value: unknown): string {
+  if (!isNonEmptyString(value)) return 'top';
+  const stem = value.trim();
+  const normalized = stem.toLowerCase();
+  if (normalized === 'undefined' || normalized === 'null' || normalized === 'nan') return 'top';
+  return stem;
+}
+
+function normalizeImagePath(value: unknown): string | null {
+  if (!isNonEmptyString(value)) return null;
+  const normalized = normalizeContentImagePath(value);
+  return normalized || null;
+}
+
+function normalizeProduct(product: VaultProduct): VaultProduct {
+  return {
+    ...product,
+    imagePath: normalizeContentImagePath(product.imagePath),
+    thumbnailStem: normalizeThumbnailStem(product.thumbnailStem),
+  };
+}
+
+function normalizeEntry(raw: unknown): VaultEntry | null {
+  if (!raw || typeof raw !== 'object') return null;
+  const candidate = raw as Record<string, unknown>;
+
+  if (!candidate.product || typeof candidate.product !== 'object') return null;
+  const rawProduct = candidate.product as Record<string, unknown>;
+
+  const productId =
+    (isNonEmptyString(candidate.productId) ? candidate.productId : null)
+    ?? (isNonEmptyString(rawProduct.id) ? rawProduct.id : null);
+  const category =
+    (isNonEmptyString(candidate.category) ? candidate.category : null)
+    ?? (isNonEmptyString(rawProduct.category) ? rawProduct.category : null);
+  const slug = isNonEmptyString(rawProduct.slug) ? rawProduct.slug : null;
+  const brand = isNonEmptyString(rawProduct.brand) ? rawProduct.brand : null;
+  const model = isNonEmptyString(rawProduct.model) ? rawProduct.model : null;
+  const imagePath = normalizeImagePath(rawProduct.imagePath);
+  if (!productId || !category || !slug || !brand || !model || !imagePath) return null;
+
+  const addedAtRaw = candidate.addedAt;
+  const addedAt = (
+    typeof addedAtRaw === 'number'
+    && Number.isInteger(addedAtRaw)
+    && addedAtRaw >= 0
+  )
+    ? addedAtRaw
+    : Date.now();
+
+  const product: VaultProduct = {
+    id: productId,
+    slug,
+    brand,
+    model,
+    category: category as VaultProduct['category'],
+    imagePath,
+    thumbnailStem: normalizeThumbnailStem(rawProduct.thumbnailStem),
+  };
+
+  return {
+    productId,
+    category: category as VaultProduct['category'],
+    product,
+    addedAt,
+  };
+}
+
+function normalizeEntries(entries: unknown[]): VaultEntry[] {
+  const normalized: VaultEntry[] = [];
+  const seen = new Set<string>();
+  const categoryCounts: Record<string, number> = {};
+
+  for (const rawEntry of entries) {
+    const entry = normalizeEntry(rawEntry);
+    if (!entry) continue;
+    if (seen.has(entry.productId)) continue;
+
+    const categoryCount = categoryCounts[entry.category] ?? 0;
+    if (categoryCount >= VAULT_MAX_PER_CATEGORY) continue;
+
+    seen.add(entry.productId);
+    categoryCounts[entry.category] = categoryCount + 1;
+    normalized.push(entry);
+  }
+
+  return normalized;
+}
 
 function loadFromStorage(scope?: VaultStorageScope): VaultState {
   if (typeof globalThis.localStorage === 'undefined') return { entries: [] };
@@ -39,25 +121,19 @@ function loadFromStorage(scope?: VaultStorageScope): VaultState {
     if (!raw) return { entries: [] };
     const parsed = JSON.parse(raw);
     if (!parsed || !Array.isArray(parsed.entries)) return { entries: [] };
-    return { entries: parsed.entries };
+    return { entries: normalizeEntries(parsed.entries) };
   } catch {
     return { entries: [] };
   }
 }
 
-// ─── Atom ───────────────────────────────────────────────────────────────────
-
 export const $vault = atom<VaultState>(loadFromStorage());
 
-// ─── Persist to localStorage ────────────────────────────────────────────────
-
-/** Synchronously flush current state to localStorage (exposed for tests) */
 export function _flushToStorage(): void {
   if (typeof globalThis.localStorage === 'undefined') return;
   globalThis.localStorage.setItem(vaultStorageKey(_currentScope), JSON.stringify($vault.get()));
 }
 
-// Subscribe to changes — debounced write in browser, sync flush via _flushToStorage for tests
 let debounceTimer: ReturnType<typeof setTimeout> | undefined;
 
 $vault.subscribe(() => {
@@ -66,43 +142,56 @@ $vault.subscribe(() => {
   debounceTimer = setTimeout(_flushToStorage, 100);
 });
 
-// ─── Actions ────────────────────────────────────────────────────────────────
-
 export function addToVault(product: VaultProduct): AddResult {
+  const normalizedProduct = normalizeProduct(product);
   const state = $vault.get();
 
-  // No duplicates
-  if (state.entries.some(e => e.product.id === product.id)) return 'duplicate';
+  if (state.entries.some(e => e.productId === normalizedProduct.id)) {
+    emitVaultAction({ type: 'duplicate', product: normalizedProduct });
+    return 'duplicate';
+  }
 
-  // Enforce max per category
-  const categoryCount = state.entries.filter(e => e.product.category === product.category).length;
-  if (categoryCount >= VAULT_MAX_PER_CATEGORY) return 'category-full';
+  const categoryCount = state.entries.filter(e => e.category === normalizedProduct.category).length;
+  if (categoryCount >= VAULT_MAX_PER_CATEGORY) {
+    emitVaultAction({ type: 'category-full', product: normalizedProduct });
+    return 'category-full';
+  }
 
-  const entry: VaultEntry = { product, addedAt: Date.now() };
+  const entry: VaultEntry = {
+    productId: normalizedProduct.id,
+    category: normalizedProduct.category,
+    product: normalizedProduct,
+    addedAt: Date.now(),
+  };
   $vault.set({ entries: [...state.entries, entry] });
+  emitVaultAction({ type: 'added', product: normalizedProduct });
   return 'added';
 }
 
 export function removeFromVault(id: string): void {
   const state = $vault.get();
-  const filtered = state.entries.filter(e => e.product.id !== id);
-  if (filtered.length !== state.entries.length) {
-    $vault.set({ entries: filtered });
-  }
+  const entry = state.entries.find(e => e.productId === id);
+  if (!entry) return;
+  $vault.set({ entries: state.entries.filter(e => e.productId !== id) });
+  emitVaultAction({ type: 'removed', product: entry.product });
 }
 
 export function clearCategory(category: string): void {
   const state = $vault.get();
-  $vault.set({ entries: state.entries.filter(e => e.product.category !== category) });
+  const count = state.entries.filter(e => e.category === category).length;
+  $vault.set({ entries: state.entries.filter(e => e.category !== category) });
+  emitVaultAction({ type: 'cleared-category', category, count });
 }
 
 export function clearAll(): void {
+  const count = $vault.get().entries.length;
   $vault.set({ entries: [] });
+  emitVaultAction({ type: 'cleared-all', count });
 }
 
 export function moveItem(id: string, newIndex: number): void {
   const state = $vault.get();
-  const currentIndex = state.entries.findIndex(e => e.product.id === id);
+  const currentIndex = state.entries.findIndex(e => e.productId === id);
   if (currentIndex === -1) return;
 
   const entries = [...state.entries];
@@ -112,34 +201,22 @@ export function moveItem(id: string, newIndex: number): void {
   $vault.set({ entries });
 }
 
-// ─── Persona switching (called by sync engine) ─────────────────────────────
-
-/** Switch to a different persona scope. Saves current, loads new. */
 export function switchPersona(scope: VaultStorageScope): void {
-  // Flush current state before switching
   _flushToStorage();
   _currentScope = scope;
   $vault.set(loadFromStorage(scope));
 }
 
-/** Replace atom state directly — used by sync engine to inject server data. */
 export function setVaultState(state: VaultState): void {
-  $vault.set(state);
+  $vault.set({ entries: normalizeEntries(state.entries as unknown[]) });
 }
 
-/** Get current scope — used by sync engine for inspection. */
 export function getCurrentScope(): VaultStorageScope {
   return _currentScope;
 }
 
-// ─── Derived Readers ────────────────────────────────────────────────────────
-// WHY plain functions instead of computed atoms: the test harness uses dynamic
-// imports with cache-busting to get fresh stores. Computed atoms (which capture
-// the atom reference at module eval time) work fine, but plain functions are
-// simpler to test and have zero overhead for these synchronous reads.
-
 export function isInVault(id: string): boolean {
-  return $vault.get().entries.some(e => e.product.id === id);
+  return $vault.get().entries.some(e => e.productId === id);
 }
 
 export function vaultCount(): number {
@@ -149,19 +226,16 @@ export function vaultCount(): number {
 export function vaultCountByCategory(): Record<string, number> {
   const counts: Record<string, number> = {};
   for (const entry of $vault.get().entries) {
-    const cat = entry.product.category;
+    const cat = entry.category;
     counts[cat] = (counts[cat] ?? 0) + 1;
   }
   return counts;
 }
 
 export function vaultItemsByCategory(category: string): VaultEntry[] {
-  return $vault.get().entries.filter(e => e.product.category === category);
+  return $vault.get().entries.filter(e => e.category === category);
 }
 
-// ─── Test-only helpers ─────────────────────────────────────────────────────
-
-/** Re-read localStorage and replace atom state. Used by tests to simulate fresh page load. */
 export function _resetFromStorage(): void {
   $vault.set(loadFromStorage());
 }

@@ -1,0 +1,30 @@
+{
+  "creatives": {
+    "sidebar": [
+      {
+        "label": "Razer Spring Campaign",
+        "img": "/images/ads/razer-spring-300x400.webp",
+        "href": "https://razer.com/gaming-mice",
+        "width": 300,
+        "height": 400,
+        "weight": 50,
+        "startDate": "2026-01-01",
+        "endDate": "2026-06-30",
+        "rel": "nofollow sponsored noopener",
+        "alt": "Razer gaming peripherals"
+      },
+      {
+        "label": "SteelSeries Promo",
+        "img": "/images/ads/steelseries-promo-300x400.webp",
+        "href": "https://steelseries.com",
+        "width": 300,
+        "height": 400,
+        "weight": 50,
+        "startDate": "2026-03-01",
+        "endDate": "2026-09-30",
+        "rel": "nofollow sponsored noopener",
+        "alt": "SteelSeries gaming gear"
+      }
+    ]
+  }
+}

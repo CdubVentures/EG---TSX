@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 250" width="300" height="250">
+  <rect width="300" height="250" fill="#f9fbff" stroke="#dbe2ef"/>
+  <text x="284" y="16" font-family="Inter, Arial, Helvetica, sans-serif" font-size="9" fill="#94a3b8" text-anchor="end">Ad</text>
+
+  <text x="150" y="36" font-family="Inter, Arial, Helvetica, sans-serif" font-size="26" font-weight="800" fill="#1d4ed8" text-anchor="middle">Maple Tools</text>
+  <text x="150" y="58" font-family="Inter, Arial, Helvetica, sans-serif" font-size="14" fill="#334155" text-anchor="middle">Creator essentials for desks that convert</text>
+
+  <rect x="26" y="70" width="248" height="120" rx="6" fill="#1e3a8a" opacity="0.08"/>
+  <rect x="48" y="90" width="204" height="12" fill="#2563eb" opacity="0.85"/>
+  <rect x="48" y="112" width="160" height="10" fill="#1d4ed8" opacity="0.45"/>
+  <rect x="48" y="132" width="182" height="10" fill="#1d4ed8" opacity="0.35"/>
+  <rect x="48" y="152" width="96" height="10" fill="#1d4ed8" opacity="0.35"/>
+
+  <rect x="90" y="182" width="120" height="36" rx="8" fill="#1d4ed8"/>
+  <text x="150" y="205" font-family="Inter, Arial, Helvetica, sans-serif" font-size="13" fill="#fff" text-anchor="middle" font-weight="700">Build setup</text>
+
+  <text x="150" y="236" font-family="Inter, Arial, Helvetica, sans-serif" font-size="9" fill="#64748b" text-anchor="middle">New customer discount is capped per account.</text>
+</svg>

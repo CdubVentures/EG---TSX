@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 336 280" width="336" height="280">
+  <rect width="336" height="280" fill="#f8fbff" stroke="#dbe2ef"/>
+  <text x="320" y="18" font-family="Inter, Arial, Helvetica, sans-serif" font-size="9" fill="#64748b" text-anchor="end">Ad</text>
+
+  <text x="20" y="42" font-family="Inter, Arial, Helvetica, sans-serif" font-size="22" fill="#0f172a" font-weight="800">Spotify</text>
+  <text x="20" y="64" font-family="Inter, Arial, Helvetica, sans-serif" font-size="12" fill="#334155">The music you want, without ads interruption.</text>
+
+  <rect x="20" y="78" width="296" height="1" fill="#cbd5f5"/>
+
+  <g transform="translate(20,90)">
+    <rect x="0" y="0" width="120" height="100" rx="8" fill="#0a0f1a" opacity="0.08"/>
+    <rect x="12" y="18" width="96" height="14" fill="#2563eb" opacity="0.24"/>
+    <rect x="12" y="40" width="76" height="12" fill="#2563eb" opacity="0.2"/>
+  </g>
+
+  <g transform="translate(162,90)">
+    <rect x="0" y="0" width="154" height="100" rx="8" fill="#1d4ed8" opacity="0.06"/>
+    <text x="77" y="32" font-family="Inter, Arial, Helvetica, sans-serif" font-size="28" fill="#1d4ed8" font-weight="800" text-anchor="middle">$0</text>
+    <text x="77" y="52" font-family="Inter, Arial, Helvetica, sans-serif" font-size="11" fill="#475569" text-anchor="middle">Trial intro</text>
+    <rect x="0" y="64" width="154" height="28" rx="6" fill="#1d4ed8"/>
+    <text x="77" y="82" font-family="Inter, Arial, Helvetica, sans-serif" font-size="11" fill="#fff" text-anchor="middle" font-weight="700">Play now</text>
+  </g>
+
+  <text x="20" y="210" font-family="Inter, Arial, Helvetica, sans-serif" font-size="11" fill="#334155">No credit card required for first month preview.</text>
+  <text x="20" y="228" font-family="Inter, Arial, Helvetica, sans-serif" font-size="9" fill="#64748b">Auto-renewal after trial period.</text>
+</svg>

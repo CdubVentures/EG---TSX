@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 400" width="300" height="400">
+  <!-- Video Ad Simulation — compact autoplay sidebar video (Ezoic style) -->
+
+  <defs>
+    <linearGradient id="vidBg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0c0c1d"/>
+      <stop offset="100%" stop-color="#1a1a3e"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Player background -->
+  <rect width="300" height="400" fill="#000000"/>
+
+  <!-- Video thumbnail area (top 200px) — car commercial style -->
+  <rect y="0" width="300" height="200" fill="url(#vidBg)"/>
+
+  <!-- Fake video: car silhouette on road -->
+  <g opacity="0.2">
+    <!-- Road -->
+    <rect x="0" y="145" width="300" height="55" fill="#374151"/>
+    <line x1="0" y1="170" x2="300" y2="170" stroke="#fbbf24" stroke-width="2" stroke-dasharray="20,15"/>
+    <!-- Car body -->
+    <rect x="85" y="110" width="130" height="50" rx="8" fill="#60a5fa"/>
+    <rect x="100" y="90" width="95" height="30" rx="6" fill="#93c5fd"/>
+    <!-- Wheels -->
+    <circle cx="115" cy="160" r="14" fill="#1f2937"/>
+    <circle cx="115" cy="160" r="8" fill="#4b5563"/>
+    <circle cx="190" cy="160" r="14" fill="#1f2937"/>
+    <circle cx="190" cy="160" r="8" fill="#4b5563"/>
+  </g>
+
+  <!-- Play button -->
+  <circle cx="150" cy="100" r="24" fill="#000000" opacity="0.55"/>
+  <circle cx="150" cy="100" r="22" fill="none" stroke="#ffffff" stroke-width="2" opacity="0.8"/>
+  <polygon points="143,88 143,112 163,100" fill="#ffffff"/>
+
+  <!-- AD badge -->
+  <rect x="8" y="8" width="28" height="16" rx="3" fill="#000000" opacity="0.7"/>
+  <text x="22" y="19" font-family="Arial, Helvetica, sans-serif" font-size="9" font-weight="600" fill="#fbbf24" text-anchor="middle">AD</text>
+
+  <!-- Duration -->
+  <rect x="254" y="8" width="38" height="16" rx="3" fill="#000000" opacity="0.7"/>
+  <text x="273" y="19" font-family="Arial, Helvetica, sans-serif" font-size="8" font-weight="600" fill="#ffffff" text-anchor="middle">0:15</text>
+
+  <!-- Progress bar -->
+  <rect x="0" y="196" width="300" height="3" fill="#374151"/>
+  <rect x="0" y="196" width="180" height="3" fill="#ef4444"/>
+  <circle cx="180" cy="197.5" r="4" fill="#ef4444"/>
+
+  <!-- Below video: white content card -->
+  <rect x="0" y="199" width="300" height="201" fill="#ffffff"/>
+
+  <!-- Brand logo area -->
+  <rect x="16" y="212" width="36" height="36" rx="6" fill="#1e40af"/>
+  <text x="34" y="226" font-family="Arial, Helvetica, sans-serif" font-size="8" font-weight="800" fill="#ffffff" text-anchor="middle">AUTO</text>
+  <text x="34" y="237" font-family="Arial, Helvetica, sans-serif" font-size="7" font-weight="600" fill="#93c5fd" text-anchor="middle">MAX</text>
+
+  <text x="62" y="225" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="700" fill="#111827">AutoMax Motors</text>
+  <text x="62" y="240" font-family="Arial, Helvetica, sans-serif" font-size="9" fill="#6b7280">Sponsored · automax.com</text>
+
+  <!-- Headline -->
+  <text x="16" y="272" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="700" fill="#111827">New 2026 Models</text>
+  <text x="16" y="292" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="700" fill="#111827">Starting at $299/mo</text>
+
+  <text x="16" y="314" font-family="Arial, Helvetica, sans-serif" font-size="10" fill="#6b7280">0% APR for 72 months. Tax credit eligible.</text>
+
+  <!-- CTA -->
+  <rect x="16" y="332" width="268" height="36" rx="6" fill="#1e40af"/>
+  <text x="150" y="355" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="700" fill="#ffffff" text-anchor="middle">View Inventory →</text>
+
+  <!-- Fine print -->
+  <text x="150" y="386" font-family="Arial, Helvetica, sans-serif" font-size="7" fill="#9ca3af" text-anchor="middle">Ad served by Ezoic · Terms apply</text>
+</svg>

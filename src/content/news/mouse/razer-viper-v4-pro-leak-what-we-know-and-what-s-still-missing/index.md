@@ -22,6 +22,7 @@ author: Newsroom
 heroCredit: IEM / ESL broadcast
 hero: hero-img
 category: mouse
+pinned: true
 draft: false
 publish: true
 ---

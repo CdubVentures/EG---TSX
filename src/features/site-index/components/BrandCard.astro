@@ -1,0 +1,175 @@
+---
+/**
+ * BrandCard.astro — Individual brand tile card for the A-Z body grid.
+ * Port of HBS site-brands-grid.handlebars brand-card structure
+ * + site_index.css lines 979-1066 (.brand-card, .brand-card__logoWrap, .brand-card__name).
+ *
+ * Dark-theme CSS values: FROZEN (exact HBS match).
+ * Light-theme: card shadow checklist + dual logo swap applied per MEMORY.md.
+ */
+import { brandLogoSrcSet } from '../brand-helpers';
+import type { BrandTileItem } from '../brand-types';
+
+interface Props {
+  item: BrandTileItem;
+  loading?: 'lazy' | 'eager';
+}
+
+const { item, loading = 'lazy' } = Astro.props;
+const srcsetDark = brandLogoSrcSet(item.logoBase);
+const srcsetLight = brandLogoSrcSet(item.logoBaseLight);
+
+/** HBS-exact sizes attribute for body brand cards (4→3→2 col grid) */
+const BRAND_CARD_SIZES = [
+  '(min-width: 1401px) calc((924px - 42px) / 4)',
+  '(min-width: 1151px) calc((100vw - 48px - 300px - 30px - 28px)/3)',
+  '(min-width: 901px)  calc((100vw - 48px - 28px) / 3)',
+  '(min-width: 561px)  calc((100vw - 48px - 14px) / 2)',
+  'calc(100vw - 48px)',
+].join(', ');
+---
+
+<a href={item.url} class="brand-card" aria-label={item.name}>
+  <div class="brand-card__logoWrap">
+    <img
+      loading={loading}
+      decoding="async"
+      src={`${item.logoBase}_s.png`}
+      srcset={srcsetDark}
+      sizes={BRAND_CARD_SIZES}
+      alt={`${item.name} logo`}
+      class="brand-card__logo brand-card__logo--dark"
+      style={item.logoStyle ? `object-fit: ${item.logoStyle}` : undefined}
+    />
+    <img
+      loading={loading}
+      decoding="async"
+      src={`${item.logoBaseLight}_s.png`}
+      srcset={srcsetLight}
+      sizes={BRAND_CARD_SIZES}
+      alt={`${item.name} logo`}
+      class="brand-card__logo brand-card__logo--light"
+      style={item.logoStyle ? `object-fit: ${item.logoStyle}` : undefined}
+    />
+  </div>
+  <span class="brand-card__name">{item.name}</span>
+</a>
+
+<style>
+  /* ─── BRAND CARD — port of HBS site_index.css lines 979-1066 ───
+     Dark-theme values: FROZEN (exact HBS match) */
+
+  .brand-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    border-radius: 7px;
+    background-color: var(--section-dark-background-color);
+    text-decoration: none;
+    padding: 16px 12px;
+    transition: transform .12s ease, box-shadow .18s ease, border-color .18s ease, background-color .18s ease;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  /* HBS exact hover values */
+  .brand-card:hover {
+    transform: translateY(-2px);
+    background: var(--section-medium-background-color);
+    box-shadow: 0 10px 22px rgba(0, 0, 0, .22);
+  }
+
+  /* Light-theme card shadow checklist (MANDATORY per MEMORY.md) */
+  :global([data-theme="default"]) .brand-card,
+  :global([data-theme="workstation"]) .brand-card,
+  :global([data-theme="review"]) .brand-card {
+    box-shadow: var(--card-shadow);
+    transition: box-shadow 0.2s ease, transform .12s ease, background-color .18s ease;
+  }
+
+  :global([data-theme="default"]) .brand-card:hover,
+  :global([data-theme="workstation"]) .brand-card:hover,
+  :global([data-theme="review"]) .brand-card:hover {
+    box-shadow: var(--card-shadow-hover), 0 10px 22px rgba(0, 0, 0, .22);
+  }
+
+  /* HBS exact: .brand-card__logoWrap */
+  .brand-card__logoWrap {
+    width: 90%;
+    aspect-ratio: 1 / 1;
+    display: grid;
+    place-items: center;
+    border-radius: 999px;
+    overflow: hidden;
+  }
+
+  /* HBS exact: .brand-card__logo */
+  .brand-card__logo {
+    max-width: 74%;
+    max-height: 74%;
+    width: auto;
+    height: auto;
+    display: block;
+    object-fit: contain;
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: optimizeQuality;
+  }
+
+  /* Dark/light logo swap — same pattern as BrandDashboard.astro */
+  .brand-card__logo--light {
+    display: none;
+  }
+
+  :global([data-theme="default"]) .brand-card__logo--dark,
+  :global([data-theme="workstation"]) .brand-card__logo--dark,
+  :global([data-theme="review"]) .brand-card__logo--dark {
+    display: none;
+  }
+
+  :global([data-theme="default"]) .brand-card__logo--light,
+  :global([data-theme="workstation"]) .brand-card__logo--light,
+  :global([data-theme="review"]) .brand-card__logo--light {
+    display: block;
+  }
+
+  /* HBS exact: .brand-card__name — lines 1023-1052 */
+  .brand-card__name {
+    font-family: var(--identity-font, inherit);
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: var(--font-size-22px);
+    color: var(--white-color-1, #fff);
+    text-align: center;
+    white-space: normal;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+    hyphens: auto;
+    text-wrap: balance;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    line-height: 1.15;
+    max-width: 100%;
+  }
+
+  /* Focus ring — consistent with Pagination.astro */
+  .brand-card:focus-visible {
+    outline: 2px solid var(--site-start-color, #5a6ef8);
+    outline-offset: 2px;
+  }
+
+  /* HBS exact: responsive name sizing — lines 1055-1066 */
+  @media (max-width: 900px) {
+    .brand-card__name {
+      font-size: var(--ft-22-18);
+    }
+  }
+
+  @media (max-width: 600px) {
+    .brand-card__name {
+      font-size: var(--fm-18-16);
+    }
+  }
+</style>

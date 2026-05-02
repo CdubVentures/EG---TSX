@@ -1,0 +1,241 @@
+---
+/**
+ * CategorySidebar.astro — Dual-mode category filter.
+ * Port of HBS site-categories-filter.handlebars.
+ *
+ * Renders BOTH variants; CSS swaps between them:
+ *   >1400px:  vertical list sidebar
+ *   ≤1400px:  horizontal chip grid (above feed)
+ *   ≤825px:   entire sidebar hidden (mobile filter dropdown in FeedHeader)
+ */
+import type { FilterCategory } from '@features/site-index/build-pagination';
+
+interface Props {
+  categories: FilterCategory[];
+  activeCategory?: string;
+  type: string;
+  allCount: number;
+  categoryClass?: string;
+}
+
+const { categories, activeCategory, type, allCount, categoryClass } = Astro.props;
+---
+
+<div class:list={['site-cat-filter-wrap', categoryClass]}>
+  {/* Desktop >1400px: vertical list */}
+  <aside class="site-cat-filter site-cat-filter--list" aria-label="Categories">
+    <h4 class="site-cat-filter__title">Categories</h4>
+
+    <ul class="site-cat-filter__list">
+      <li class:list={['site-cat-filter__item', { 'is-active': !activeCategory }]}>
+        <a class="site-cat-filter__link" href={`/${type}/`}>All</a>
+        <span class="site-cat-filter__count">{allCount}</span>
+      </li>
+
+      {categories.map(cat => (
+        <li class:list={['site-cat-filter__item', `${cat.key}-color`, { 'is-active': cat.active }]}>
+          <a class="site-cat-filter__link" href={cat.url}>{cat.label}</a>
+          <span class="site-cat-filter__count">{cat.count}</span>
+        </li>
+      ))}
+    </ul>
+  </aside>
+
+  {/* Tablet ≤1400px: chip grid */}
+  <nav class="site-cat-filter site-cat-filter--grid -grid" aria-label="Categories">
+    <h4 class="site-cat-filter__title">Categories</h4>
+
+    <div class="site-cat-filter__grid" role="list">
+      <a
+        role="listitem"
+        class:list={['site-cat-chip', { 'is-active': !activeCategory }]}
+        href={`/${type}/`}
+        aria-current={!activeCategory ? 'page' : undefined}
+      >
+        <span class="site-cat-chip__label">All</span>
+      </a>
+
+      {categories.map(cat => (
+        <a
+          role="listitem"
+          class:list={['site-cat-chip', `${cat.key}-color`, { 'is-active': cat.active }]}
+          href={cat.url}
+          aria-current={cat.active ? 'page' : undefined}
+        >
+          <span class="site-cat-chip__label">{cat.label}</span>
+        </a>
+      ))}
+    </div>
+  </nav>
+</div>
+
+<style>
+  /* Port of site_index.css — category filter heading */
+  .site-cat-filter__title {
+    font-family: var(--identity-font, inherit);
+    font-weight: 600;
+    letter-spacing: .02em;
+    text-transform: uppercase;
+    font-size: var(--ft-18-16);
+    line-height: 2;
+    color: var(--white-color-1);
+    padding: 0 14px 8px;
+    margin: 0 0 32px;
+    border-bottom: 1px solid var(--section-medium-background-color);
+  }
+
+  /* ── Variant toggles ── */
+  .site-cat-filter--grid {
+    display: none;
+  }
+
+  .site-cat-filter--list {
+    display: block;
+  }
+
+  @media (max-width: 1400px) {
+    .site-cat-filter--list {
+      display: none;
+    }
+
+    .site-cat-filter--grid {
+      display: block;
+    }
+  }
+
+  /* ── DESKTOP LIST (>1400px) ── */
+  .site-cat-filter__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .site-cat-filter__item {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 14px;
+    border-left: 3px solid transparent;
+  }
+
+  .site-cat-filter__item.is-active {
+    background: rgba(255, 255, 255, .035);
+    border-left-color: var(--card-color, var(--site-start-color));
+  }
+
+  .site-cat-filter__link {
+    font-family: var(--identity-font, inherit);
+    font-size: var(--ft-16-15);
+    color: var(--white-color-1);
+    text-transform: capitalize;
+    text-decoration: none;
+  }
+
+  .site-cat-filter__link:hover {
+    text-decoration: underline;
+  }
+
+  .site-cat-filter__link:focus-visible {
+    outline: 2px solid var(--site-start-color, #5a6ef8);
+    outline-offset: 2px;
+  }
+
+  .site-cat-filter__count {
+    font-size: var(--ft-15-14);
+    color: var(--grey-color-1);
+    background: rgba(255, 255, 255, .06);
+    border-radius: 999px;
+    padding: 2px 8px;
+    display: none;
+  }
+
+  /* ── CHIP GRID (≤1400px) ── */
+  @media (max-width: 1400px) {
+    .site-cat-filter__grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(160px, 1fr));
+      gap: 10px 12px;
+      margin-bottom: 24px;
+    }
+
+    @media (max-width: 1200px) {
+      .site-cat-filter__grid {
+        grid-template-columns: repeat(3, minmax(160px, 1fr));
+      }
+    }
+
+    @media (max-width: 900px) {
+      .site-cat-filter__grid {
+        grid-template-columns: repeat(2, minmax(160px, 1fr));
+      }
+    }
+
+    @media (max-width: 400px) {
+      .site-cat-filter__grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .site-cat-chip {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 42px;
+      border-radius: 10px;
+      border: 1px solid rgba(255, 255, 255, .12);
+      background: rgba(255, 255, 255, .03);
+      color: var(--white-color-1);
+      font-family: var(--identity-font, inherit);
+      font-weight: 500;
+      font-size: var(--ft-16-14);
+      text-decoration: none;
+      letter-spacing: .02em;
+      text-transform: capitalize;
+      transition: background-color .18s ease, border-color .18s ease, transform .12s ease;
+      will-change: background-color, transform;
+    }
+
+    .site-cat-chip:hover {
+      background: rgba(255, 255, 255, .06);
+      border-color: rgba(255, 255, 255, .18);
+      transform: translateY(-1px);
+    }
+
+    .site-cat-chip:focus-visible {
+      outline: 2px solid var(--site-start-color, #5a6ef8);
+      outline-offset: 2px;
+    }
+
+    .site-cat-chip.is-active,
+    .site-cat-chip[aria-current="page"] {
+      background: var(--card-color, var(--site-start-color));
+      border-color: transparent;
+      color: #fff;
+    }
+  }
+
+  /* ── Light theme overrides — dark mode untouched ── */
+
+  :global([data-theme="default"]) .site-cat-filter__item.is-active,
+  :global([data-theme="workstation"]) .site-cat-filter__item.is-active,
+  :global([data-theme="review"]) .site-cat-filter__item.is-active {
+    background: rgba(0, 0, 0, .04);
+  }
+
+  /* Chip grid: white chips on grey body */
+  @media (max-width: 1400px) {
+    :global([data-theme="default"]) .site-cat-chip,
+    :global([data-theme="workstation"]) .site-cat-chip,
+    :global([data-theme="review"]) .site-cat-chip {
+      background: var(--section-dark-background-color);
+      border-color: var(--section-medium-background-color);
+    }
+
+    :global([data-theme="default"]) .site-cat-chip:hover,
+    :global([data-theme="workstation"]) .site-cat-chip:hover,
+    :global([data-theme="review"]) .site-cat-chip:hover {
+      background: var(--section-dusk-background-color);
+      border-color: var(--section-light-background-color);
+    }
+  }</style>

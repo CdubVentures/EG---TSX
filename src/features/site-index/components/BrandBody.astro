@@ -1,0 +1,206 @@
+---
+/**
+ * BrandBody.astro — Body section orchestrator for /brands/ index pages.
+ * Port of HBS site_brands.handlebars lines 46-74.
+ *
+ * Structure: CategorySidebar + BrandCard grid + ad rail.
+ * Grid layout reuses IndexBody.astro's .site-index__grid pattern.
+ * Brand grid CSS from HBS site_index.css lines 947-976 (FROZEN dark values).
+ */
+import type { BrandTileItem } from '../brand-types';
+import type { PaginationData, FilterCategory } from '../build-pagination';
+import CategorySidebar from './CategorySidebar.astro';
+import FeedHeader from './FeedHeader.astro';
+import BrandCard from './BrandCard.astro';
+import Pagination from '@shared/ui/Pagination.astro';
+import AdSlot from '@features/ads/components/AdSlot.astro';
+
+interface Props {
+  heading: string;
+  pageItems: BrandTileItem[];
+  allCount: number;
+  pagination: PaginationData;
+  filterCategories: FilterCategory[];
+  activeCategory?: string;
+  categoryClass?: string;
+}
+
+const {
+  heading,
+  pageItems,
+  allCount,
+  pagination,
+  filterCategories,
+  activeCategory,
+  categoryClass,
+} = Astro.props;
+---
+
+<div class:list={['site-index', 'site-index--brands']}>
+  <section class="site-index__grid">
+    <aside class="site-index__cats">
+      <CategorySidebar
+        categories={filterCategories}
+        activeCategory={activeCategory}
+        type="brands"
+        allCount={allCount}
+        categoryClass={categoryClass}
+      />
+    </aside>
+
+    <div class="site-index__main">
+      <FeedHeader
+        heading={heading}
+        prevUrl={pagination.prevUrl || undefined}
+        nextUrl={pagination.nextUrl || undefined}
+        filterCategories={filterCategories}
+        activeCategory={activeCategory}
+        type="brands"
+        allCount={allCount}
+        categoryClass={categoryClass}
+      />
+
+      <div class="brand-grid">
+        {pageItems.map(item => (
+          <BrandCard item={item} />
+        ))}
+      </div>
+
+      {pagination.total > 1 && (
+        <Pagination pagination={pagination} categoryClass={categoryClass} />
+      )}
+    </div>
+
+    <aside class:list={['site-index__rail', 'first-type-rail', categoryClass]} aria-label="Advertisement">
+      <div class="sticky-stack" data-sticky="true">
+        <AdSlot position="sidebar_sticky" />
+      </div>
+    </aside>
+  </section>
+</div>
+
+<style>
+  /* ─── Grid layout — reused from IndexBody.astro (port of HBS site_index.css body grid) ─── */
+  .site-index {
+    --si-max: 1500px;
+    --si-gap: 22px;
+    --si-gap-lg: 30px;
+    --si-col-cats: 200px;
+    --si-col-rail: 300px;
+    box-sizing: content-box; /* WHY: HBS uses content-box — padding-left is OUTSIDE max-width */
+    margin: 0 auto;
+    max-width: calc(var(--si-max) + 32px);
+    padding-left: clamp(0px, -1650px + 103.125vw, 330px);
+  }
+
+  .site-index__grid {
+    display: grid;
+    grid-template-columns: var(--si-col-cats) minmax(0, 1fr) var(--si-col-rail);
+    grid-template-areas: "cats main rail";
+    gap: var(--si-gap-lg);
+    align-items: start;
+    padding: 24px 24px 0px;
+    margin-bottom: 24px;
+  }
+
+  .site-index__cats {
+    grid-area: cats;
+    min-width: 0;
+  }
+
+  .site-index__main {
+    grid-area: main;
+    min-width: 0;
+  }
+
+  .site-index__rail {
+    grid-area: rail;
+    min-width: 0;
+    height: 100%;
+  }
+
+  .sticky-stack[data-sticky="true"] {
+    position: sticky;
+    top: var(--rail-sticky-top, calc(var(--top-bar-H, 64px) + 32px));
+    will-change: top;
+    isolation: isolate;
+    z-index: 1000;
+    min-height: 600px;
+  }
+
+  .site-index__rail :global(.ad-slot) {
+    width: var(--si-col-rail);
+    max-width: 100%;
+  }
+
+  /* ≤1400px: categories above feed, rail spans both rows */
+  @media (max-width: 1400px) {
+    .site-index__grid {
+      grid-template-columns: minmax(0, 1fr) var(--si-col-rail);
+      grid-template-areas:
+        "cats  rail"
+        "main  rail";
+      gap: var(--si-gap-lg);
+    }
+
+    .site-index__rail {
+      align-self: stretch;
+    }
+  }
+
+  /* ≤1150px: single column, rail hidden */
+  @media (max-width: 1150px) {
+    .site-index__grid {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 0;
+      grid-template-areas:
+        "cats"
+        "main";
+    }
+
+    .site-index__rail,
+    .site-index__grid .site-index__rail {
+      display: none !important;
+    }
+  }
+
+  /* ≤825px: category sidebar hidden (mobile filter in header) */
+  @media (max-width: 825px) {
+    .site-index--brands .site-index__cats {
+      display: none !important;
+    }
+  }
+
+  /* ─── Brand grid — port of HBS site_index.css lines 947-976 (FROZEN dark values) ─── */
+  .brand-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 14px;
+    margin-bottom: 24px;
+  }
+
+  @media (max-width: 1250px) {
+    .brand-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+
+  /* WHY: at ≤1150px the rail is hidden → more space → back to 4 cols */
+  @media (max-width: 1150px) {
+    .brand-grid {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+  }
+
+  @media (max-width: 900px) {
+    .brand-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+
+  @media (max-width: 400px) {
+    .brand-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+</style>

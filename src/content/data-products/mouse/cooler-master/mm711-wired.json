@@ -1,9 +1,9 @@
 {
   "slug": "cooler-master-mm711-wired",
   "brand": "Cooler Master",
-  "model": "MM711 Wired",
+  "model": "MM711",
   "baseModel": "MM711",
-  "variant": "Wired",
+  "variant": "",
   "category": "mouse",
   "imagePath": "/images/mouse/cooler-master/mm711-wired",
   "cardTags": "false",

@@ -5,7 +5,7 @@
 
 export const NUM_SLOTS = 15;
 
-/** Composite key: "{_collection}:{id}" — matches dashboard.json format. */
+/** Composite key: "{_collection}:{id}" — matches content.json format. */
 export function entryKey(entry) {
   return `${entry._collection}:${entry.id}`;
 }
@@ -32,9 +32,26 @@ export function splitBadge(text, delimiter = ' ') {
 }
 
 /**
+ * Sort entries: pinned first (newest within pinned), then unpinned newest-first.
+ * Port of HBS sortByPinnedThenDate().
+ * @param {Array} entries
+ * @param {Set} [pinnedSet] - set of entry keys that are pinned (optional, reads from entries otherwise)
+ * @returns {Array}
+ */
+export function sortByPinnedThenDate(entries, pinnedSet) {
+  return [...entries].sort((a, b) => {
+    const aPinned = pinnedSet ? pinnedSet.has(entryKey(a)) : Boolean(a.data?.pinned);
+    const bPinned = pinnedSet ? pinnedSet.has(entryKey(b)) : Boolean(b.data?.pinned);
+    if (aPinned !== bPinned) return aPinned ? -1 : 1;
+    return newestDate(b) - newestDate(a);
+  });
+}
+
+/**
  * Build the 15-slot dashboard from all article entries + editorial config.
  *
- * Algorithm (port of simulate_dashboard() from dashboard-manager.pyw):
+ * Algorithm (port of the dashboard simulation used by the Content panel in
+ * config/eg-config.pyw):
  * 1. Build key map: {collection}:{entryId} → entry
  * 2. Filter eligible: has hero, not in excluded
  * 3. Place manual overrides from config.slots into their 1-indexed positions

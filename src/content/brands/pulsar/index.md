@@ -18,10 +18,14 @@ brand_x: ''
 brand_instagram: ''
 brand_youtube: ''
 brand_tiktok: ''
+categories:
+  - mouse
 navbar:
   - mouse
 toc: false
 publish: true
 hero: brand-logo-horizontal-index
+datePublished: '2025-09-11'
+dateUpdated: '2025-11-25'
 ---
 

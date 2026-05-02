@@ -1,5 +1,6 @@
 /** Shared login redirect builder — DRYs the 3 login endpoints. */
 
+import { withNoIndexHeaders } from '@core/seo/indexation-policy';
 import { getCognitoConfig } from './cognito-config';
 import { generateOidcState, generatePkceChallenge } from './oidc';
 import { buildPkceCookie } from './cookies';
@@ -37,7 +38,7 @@ export function buildLoginRedirect({ provider, isProd, extraParams }: LoginRedir
   let nonceCookie = `eg_nonce=${encodeURIComponent(state)}; Path=/; SameSite=Lax; Max-Age=300; HttpOnly`;
   if (isProd) nonceCookie += '; Secure';
 
-  const headers = new Headers({ Location: authorizeUrl });
+  const headers = withNoIndexHeaders({ Location: authorizeUrl });
   headers.append('Set-Cookie', nonceCookie);
   headers.append('Set-Cookie', buildPkceCookie(pkce.verifier, isProd));
 

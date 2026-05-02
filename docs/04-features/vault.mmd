@@ -1,0 +1,80 @@
+%%{init: {'theme': 'base', 'themeVariables': { 'fontSize': '20px', 'actorWidth': 250, 'actorMargin': 200, 'boxMargin': 20 }}}%%
+sequenceDiagram
+  autonumber
+  actor U as User
+  box Client
+    participant CARD as VaultToggleButton
+    participant STORE as vault/store.ts
+    participant ACTION as vault-action.ts
+    participant TOAST as vault-bridge + ToastContainer
+    participant LS as localStorage
+    participant SYNC as vault/sync.ts
+    participant BUS as BroadcastChannel or storage event
+  end
+  box Server
+    participant PUT as /api/user/vault
+    participant THUMBS as /api/vault/thumbs
+    participant JWT as verifyIdToken()
+    participant DDB as DynamoDB vault table
+  end
+
+  U->>CARD: Click COMPARE
+  CARD->>STORE: addToVault(product) or removeFromVault(productId)
+
+  alt Duplicate product
+    STORE->>ACTION: emit duplicate action
+    ACTION->>TOAST: notify already-in-vault
+  else Category limit reached
+    STORE->>ACTION: emit category-full action
+    ACTION->>TOAST: notify category-full
+  else Entry accepted or removed
+    STORE->>STORE: mutate entries and queue debounced storage flush
+    STORE->>ACTION: emit added or removed action
+    ACTION->>TOAST: notify vault toast
+    STORE->>LS: write scoped snapshot after debounce
+    STORE->>SYNC: vault listener fires
+    SYNC->>BUS: broadcast updated entries to same-scope tabs
+    BUS-->>SYNC: sibling tabs apply setVaultState(entries)
+  end
+
+  alt Guest persona
+    SYNC->>SYNC: keep changes local only
+  else Authenticated persona
+    SYNC->>PUT: PUT compare entries
+    PUT->>JWT: verify session cookie
+    JWT-->>PUT: uid
+    PUT->>DDB: read existing row and rev
+    DDB-->>PUT: current compare and builds
+    PUT->>DDB: write updated compare and increment rev
+    DDB-->>PUT: new rev
+    PUT-->>SYNC: ok and rev
+    SYNC->>LS: update stored rev
+
+    opt First authenticated session after guest usage
+      SYNC->>PUT: GET current server vault
+      PUT->>DDB: read compare payload
+      DDB-->>PUT: current server compare
+      PUT-->>SYNC: compare payload
+      SYNC->>SYNC: mergeVaults(guest, server)
+      SYNC->>PUT: push merged compare back to server
+    end
+
+    opt Thumbnail repair window opens
+      SYNC->>THUMBS: POST requestId and category pairs
+      THUMBS-->>SYNC: resolved imagePath and thumbnailStem data
+      SYNC->>STORE: patch entries with repaired thumbnail metadata
+      STORE->>LS: flush repaired snapshot
+    end
+
+    opt Visibility regain or auth hydration
+      SYNC->>PUT: GET with current rev
+      alt Rev unchanged
+        PUT-->>SYNC: 304 not modified
+      else Rev changed
+        PUT->>DDB: read latest compare and builds
+        DDB-->>PUT: latest payload
+        PUT-->>SYNC: updated payload
+        SYNC->>STORE: replace local state from server
+      end
+    end
+  end

@@ -1,45 +1,80 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="300" height="600" viewBox="0 0 300 600">
+  <!-- Video Ad Simulation — TechGear Pro (300x600) -->
+  <rect width="300" height="600" fill="#0a0a0a"/>
+
+  <!-- Top bar: brand + skip timer -->
+  <rect x="0" y="0" width="300" height="28" fill="#111111"/>
+  <text x="12" y="18" font-family="Arial, Helvetica, sans-serif" font-size="9" fill="#888">Ad</text>
+  <text x="28" y="18" font-family="Arial, Helvetica, sans-serif" font-size="9" fill="#666">&#183; 0:15</text>
+  <rect x="220" y="6" width="70" height="18" rx="3" fill="#333"/>
+  <text x="255" y="19" font-family="Arial, Helvetica, sans-serif" font-size="9" font-weight="600" fill="#ccc" text-anchor="middle">Skip Ad</text>
+
+  <!-- Video thumbnail area -->
   <defs>
-    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="#111827"/>
-      <stop offset="50%" stop-color="#0d1117"/>
-      <stop offset="100%" stop-color="#111827"/>
+    <linearGradient id="vidThumb" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#1a2a3a"/>
+      <stop offset="35%" stop-color="#162030"/>
+      <stop offset="65%" stop-color="#1e1428"/>
+      <stop offset="100%" stop-color="#221830"/>
     </linearGradient>
-    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0%" stop-color="#3b82f6"/>
-      <stop offset="100%" stop-color="#2563eb"/>
+    <linearGradient id="vidOverlay" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#000" stop-opacity="0.1"/>
+      <stop offset="80%" stop-color="#000" stop-opacity="0"/>
+      <stop offset="100%" stop-color="#000" stop-opacity="0.6"/>
     </linearGradient>
   </defs>
-  <rect width="300" height="600" fill="url(#bg)"/>
-  <rect width="300" height="3" fill="url(#accent)"/>
-  <line x1="0" y1="150" x2="300" y2="170" stroke="#1e2d4a" stroke-width="1" opacity="0.4"/>
-  <line x1="0" y1="350" x2="300" y2="330" stroke="#1e2d4a" stroke-width="1" opacity="0.3"/>
-  <rect x="20" y="22" width="8" height="8" rx="4" fill="#3b82f6"/>
-  <text x="36" y="31" font-family="system-ui, sans-serif" font-size="11" font-weight="700" fill="#8b949e" letter-spacing="2">CLOUD GAMING</text>
-  <text x="20" y="82" font-family="system-ui, sans-serif" font-size="36" font-weight="900" fill="#ffffff">PLAY</text>
-  <text x="20" y="120" font-family="system-ui, sans-serif" font-size="36" font-weight="900" fill="#3b82f6">ANYWHERE</text>
-  <text x="20" y="150" font-family="system-ui, sans-serif" font-size="14" font-weight="400" fill="#94a3b8">Stream AAA games on any device</text>
-  <g transform="translate(50, 175)" opacity="0.05">
-    <rect x="0" y="0" width="200" height="120" rx="12" fill="#3b82f6"/>
-    <polygon points="80,30 80,90 130,60" fill="#3b82f6"/>
-  </g>
-  <rect x="20" y="320" width="260" height="1" fill="#1e2d4a"/>
-  <text x="20" y="350" font-family="system-ui, sans-serif" font-size="11" font-weight="700" fill="#64748b" letter-spacing="2">WHY SWITCH</text>
-  <g font-family="system-ui, sans-serif">
-    <text x="20" y="380" font-size="22" font-weight="900" fill="#3b82f6">4K</text>
-    <text x="60" y="380" font-size="13" font-weight="500" fill="#94a3b8">HDR Streaming</text>
-    <rect x="20" y="395" width="260" height="1" fill="#1a2540" opacity="0.5"/>
-    <text x="20" y="420" font-size="22" font-weight="900" fill="#3b82f6">0</text>
-    <text x="35" y="420" font-size="13" font-weight="500" fill="#94a3b8">Downloads required</text>
-    <rect x="20" y="435" width="260" height="1" fill="#1a2540" opacity="0.5"/>
-    <text x="20" y="460" font-size="22" font-weight="900" fill="#3b82f6">500+</text>
-    <text x="82" y="460" font-size="13" font-weight="500" fill="#94a3b8">Games available</text>
-    <rect x="20" y="475" width="260" height="1" fill="#1a2540" opacity="0.5"/>
-    <text x="20" y="500" font-size="22" font-weight="900" fill="#3b82f6">$9</text>
-    <text x="50" y="500" font-size="13" font-weight="500" fill="#94a3b8">/month · Cancel anytime</text>
-  </g>
-  <rect x="20" y="530" width="260" height="44" rx="22" fill="#3b82f6"/>
-  <text x="150" y="558" font-family="system-ui, sans-serif" font-size="15" font-weight="800" fill="#ffffff" text-anchor="middle" letter-spacing="1">START FREE TRIAL</text>
-  <text x="280" y="594" font-family="system-ui, sans-serif" font-size="9" font-weight="500" fill="#4a5568" text-anchor="end">Sponsored</text>
-  <rect y="597" width="300" height="3" fill="url(#accent)"/>
+  <rect x="0" y="28" width="300" height="440" fill="url(#vidThumb)"/>
+  <rect x="0" y="28" width="300" height="440" fill="url(#vidOverlay)"/>
+
+  <!-- Fake video scene elements -->
+  <rect x="40" y="140" width="220" height="130" rx="4" fill="#111820" opacity="0.5"/>
+  <rect x="60" y="155" width="80" height="8" rx="2" fill="#334155" opacity="0.4"/>
+  <rect x="60" y="170" width="120" height="6" rx="2" fill="#293548" opacity="0.3"/>
+  <rect x="60" y="200" width="100" height="50" rx="4" fill="#1e293b" opacity="0.4"/>
+
+  <!-- Play button (white circle with triangle) -->
+  <circle cx="150" cy="240" r="36" fill="rgba(0,0,0,0.55)" stroke="#ffffff" stroke-width="2.5"/>
+  <polygon points="140,220 140,260 172,240" fill="#ffffff"/>
+
+  <!-- Duration badge -->
+  <rect x="245" y="440" width="42" height="20" rx="3" fill="rgba(0,0,0,0.75)"/>
+  <text x="266" y="454" font-family="Arial, Helvetica, sans-serif" font-size="10" font-weight="600" fill="#ffffff" text-anchor="middle">0:30</text>
+
+  <!-- Video controls bar -->
+  <rect x="0" y="468" width="300" height="36" fill="#111111"/>
+  <!-- Progress bar background -->
+  <rect x="12" y="480" width="276" height="3" rx="1.5" fill="#333"/>
+  <!-- Progress bar filled (about 50%) -->
+  <rect x="12" y="480" width="138" height="3" rx="1.5" fill="#e11d48"/>
+  <!-- Progress dot -->
+  <circle cx="150" cy="481.5" r="5" fill="#e11d48"/>
+  <!-- Playback icons -->
+  <polygon points="18,493 18,501 24,497" fill="#999"/>
+  <rect x="260" y="493" width="6" height="8" rx="1" fill="none" stroke="#999" stroke-width="1.2"/>
+  <rect x="270" y="493" width="6" height="8" rx="1" fill="none" stroke="#999" stroke-width="1.2"/>
+  <!-- Volume icon -->
+  <rect x="34" y="494" width="3" height="6" fill="#999"/>
+  <polygon points="37,492 44,488 44,502 37,498" fill="none" stroke="#999" stroke-width="1"/>
+
+  <!-- Brand info section below player -->
+  <rect x="0" y="504" width="300" height="96" fill="#141414"/>
+  <rect x="0" y="504" width="300" height="1" fill="#222"/>
+
+  <!-- Brand logo area -->
+  <rect x="16" y="516" width="32" height="32" rx="6" fill="#1e293b"/>
+  <text x="32" y="537" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="800" fill="#3b82f6" text-anchor="middle">TG</text>
+
+  <!-- Brand name + description -->
+  <text x="58" y="530" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="700" fill="#ffffff">TechGear Pro</text>
+  <text x="58" y="545" font-family="Arial, Helvetica, sans-serif" font-size="10" fill="#888">Premium tech accessories for creators</text>
+
+  <!-- CTA -->
+  <rect x="16" y="560" width="130" height="30" rx="4" fill="#2563eb"/>
+  <text x="81" y="580" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="600" fill="#ffffff" text-anchor="middle">Learn More</text>
+
+  <!-- Visit site link -->
+  <text x="170" y="580" font-family="Arial, Helvetica, sans-serif" font-size="11" fill="#2563eb">techgearpro.com</text>
+
+  <!-- Sponsored label -->
+  <text x="280" y="598" font-family="Arial, Helvetica, sans-serif" font-size="8" fill="#555" text-anchor="end">Sponsored</text>
 </svg>

@@ -1,29 +1,100 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="970" height="250" viewBox="0 0 970 250">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 970 250" width="970" height="250">
   <defs>
-    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+    <clipPath id="ad2-clip"><rect width="970" height="250" rx="4"/></clipPath>
+    <linearGradient id="ad2-bg" x1="0" y1="0" x2="1" y2="1">
       <stop offset="0%" stop-color="#0f172a"/>
       <stop offset="100%" stop-color="#1e293b"/>
     </linearGradient>
-    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0%" stop-color="#10b981"/>
+    <linearGradient id="ad2-shield" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0ea5e9"/>
+      <stop offset="100%" stop-color="#0284c7"/>
+    </linearGradient>
+    <linearGradient id="ad2-btn" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#0ea5e9"/>
       <stop offset="100%" stop-color="#06b6d4"/>
     </linearGradient>
   </defs>
-  <rect width="970" height="250" fill="url(#bg)"/>
-  <rect width="970" height="3" fill="url(#accent)"/>
-  <line x1="0" y1="125" x2="970" y2="110" stroke="#1e3a5f" stroke-width="1" opacity="0.4"/>
-  <line x1="0" y1="180" x2="970" y2="195" stroke="#1e3a5f" stroke-width="1" opacity="0.3"/>
-  <circle cx="850" cy="125" r="80" fill="#10b981" opacity="0.04"/>
-  <circle cx="850" cy="125" r="55" fill="#10b981" opacity="0.06"/>
-  <text x="50" y="65" font-family="system-ui, sans-serif" font-size="12" font-weight="700" fill="#10b981" letter-spacing="3">TOURNAMENT SERIES 2025</text>
-  <text x="50" y="115" font-family="system-ui, sans-serif" font-size="44" font-weight="900" fill="#ffffff" letter-spacing="1">COMPETE</text>
-  <text x="310" y="115" font-family="system-ui, sans-serif" font-size="44" font-weight="900" fill="#10b981" letter-spacing="1">GLOBALLY</text>
-  <text x="50" y="150" font-family="system-ui, sans-serif" font-size="16" font-weight="400" fill="#94a3b8">$50,000 prize pool · Open registration · All skill levels</text>
-  <rect x="50" y="175" width="140" height="42" rx="21" fill="#10b981"/>
-  <text x="120" y="202" font-family="system-ui, sans-serif" font-size="14" font-weight="800" fill="#0f172a" text-anchor="middle" letter-spacing="1">REGISTER</text>
-  <rect x="210" y="175" width="140" height="42" rx="21" fill="none" stroke="#10b981" stroke-width="2"/>
-  <text x="280" y="202" font-family="system-ui, sans-serif" font-size="14" font-weight="700" fill="#10b981" text-anchor="middle" letter-spacing="1">LEARN MORE</text>
-  <text x="800" y="105" font-family="system-ui, sans-serif" font-size="60" font-weight="900" fill="#ffffff" text-anchor="middle" opacity="0.06">ESL</text>
-  <text x="940" y="18" font-family="system-ui, sans-serif" font-size="9" font-weight="500" fill="#4a5568" text-anchor="end">Sponsored</text>
-  <rect y="247" width="970" height="3" fill="url(#accent)"/>
+  <g clip-path="url(#ad2-clip)">
+    <!-- Background: dark navy gradient -->
+    <rect width="970" height="250" fill="url(#ad2-bg)"/>
+
+    <!-- Subtle grid pattern -->
+    <g stroke="#1e3a5f" stroke-width="0.5" opacity="0.15">
+      <line x1="0" y1="50" x2="970" y2="50"/>
+      <line x1="0" y1="100" x2="970" y2="100"/>
+      <line x1="0" y1="150" x2="970" y2="150"/>
+      <line x1="0" y1="200" x2="970" y2="200"/>
+      <line x1="194" y1="0" x2="194" y2="250"/>
+      <line x1="388" y1="0" x2="388" y2="250"/>
+      <line x1="582" y1="0" x2="582" y2="250"/>
+      <line x1="776" y1="0" x2="776" y2="250"/>
+    </g>
+
+    <!-- "Ad" badge top-right -->
+    <rect x="920" y="8" width="36" height="18" rx="3" fill="rgba(255,255,255,0.08)"/>
+    <text x="938" y="20" font-family="Arial, Helvetica, sans-serif" font-size="10" fill="#64748b" text-anchor="middle" font-weight="600">Ad</text>
+
+    <!-- Shield + lock icon -->
+    <g transform="translate(65, 35)">
+      <!-- Large shield -->
+      <path d="M0 20 L50 0 L100 20 L100 75 Q100 120 50 145 Q0 120 0 75 Z" fill="url(#ad2-shield)" opacity="0.15"/>
+      <path d="M0 20 L50 0 L100 20 L100 75 Q100 120 50 145 Q0 120 0 75 Z" fill="none" stroke="#0ea5e9" stroke-width="2" opacity="0.5"/>
+      <!-- Lock body -->
+      <rect x="30" y="60" width="40" height="35" rx="5" fill="#0ea5e9"/>
+      <!-- Lock shackle -->
+      <path d="M38 60 L38 45 Q38 30 50 30 Q62 30 62 45 L62 60" fill="none" stroke="#0ea5e9" stroke-width="5" stroke-linecap="round"/>
+      <!-- Keyhole -->
+      <circle cx="50" cy="75" r="6" fill="#0f172a"/>
+      <rect x="47" y="78" width="6" height="10" rx="2" fill="#0f172a"/>
+    </g>
+
+    <!-- Brand logo -->
+    <g transform="translate(210, 30)">
+      <text x="0" y="24" font-family="Arial, Helvetica, sans-serif" font-size="26" fill="#0ea5e9" font-weight="800" letter-spacing="-0.5">ShieldVPN</text>
+      <text x="0" y="42" font-family="Arial, Helvetica, sans-serif" font-size="11" fill="#64748b" font-weight="400" letter-spacing="3">CYBERSECURITY</text>
+    </g>
+
+    <!-- Headline -->
+    <text x="210" y="105" font-family="Arial, Helvetica, sans-serif" font-size="36" fill="#f1f5f9" font-weight="700">Browse Securely</text>
+
+    <!-- Discount badge inline -->
+    <g transform="translate(210, 118)">
+      <rect width="120" height="32" rx="4" fill="#0ea5e9" opacity="0.15"/>
+      <rect width="120" height="32" rx="4" fill="none" stroke="#0ea5e9" stroke-width="1" opacity="0.4"/>
+      <text x="60" y="22" font-family="Arial, Helvetica, sans-serif" font-size="18" fill="#0ea5e9" text-anchor="middle" font-weight="800">70% OFF</text>
+    </g>
+    <text x="345" y="142" font-family="Arial, Helvetica, sans-serif" font-size="18" fill="#94a3b8" font-weight="400">Annual Plan</text>
+
+    <!-- Subtext -->
+    <text x="210" y="175" font-family="Arial, Helvetica, sans-serif" font-size="13" fill="#64748b">Military-grade encryption. 5,500+ servers in 60 countries. No logs, ever.</text>
+
+    <!-- CTA Button -->
+    <rect x="210" y="195" width="200" height="44" rx="6" fill="url(#ad2-btn)"/>
+    <text x="310" y="222" font-family="Arial, Helvetica, sans-serif" font-size="15" fill="#0f172a" text-anchor="middle" font-weight="700">Start Free Trial</text>
+
+    <!-- Trial note -->
+    <text x="425" y="222" font-family="Arial, Helvetica, sans-serif" font-size="11" fill="#475569">30-day money-back guarantee</text>
+
+    <!-- Decorative: connection nodes far right -->
+    <g opacity="0.2">
+      <circle cx="780" cy="60" r="4" fill="#0ea5e9"/>
+      <circle cx="840" cy="40" r="3" fill="#0ea5e9"/>
+      <circle cx="880" cy="80" r="3" fill="#0ea5e9"/>
+      <circle cx="820" cy="100" r="4" fill="#0ea5e9"/>
+      <circle cx="870" cy="140" r="3" fill="#0ea5e9"/>
+      <circle cx="790" cy="150" r="3" fill="#0ea5e9"/>
+      <circle cx="850" cy="190" r="4" fill="#0ea5e9"/>
+      <line x1="780" y1="60" x2="840" y2="40" stroke="#0ea5e9" stroke-width="1"/>
+      <line x1="840" y1="40" x2="880" y2="80" stroke="#0ea5e9" stroke-width="1"/>
+      <line x1="880" y1="80" x2="820" y2="100" stroke="#0ea5e9" stroke-width="1"/>
+      <line x1="820" y1="100" x2="870" y2="140" stroke="#0ea5e9" stroke-width="1"/>
+      <line x1="870" y1="140" x2="850" y2="190" stroke="#0ea5e9" stroke-width="1"/>
+      <line x1="790" y1="150" x2="850" y2="190" stroke="#0ea5e9" stroke-width="1"/>
+      <line x1="780" y1="60" x2="820" y2="100" stroke="#0ea5e9" stroke-width="0.5"/>
+      <line x1="790" y1="150" x2="870" y2="140" stroke="#0ea5e9" stroke-width="0.5"/>
+    </g>
+
+    <!-- Border -->
+    <rect width="970" height="250" rx="4" fill="none" stroke="#1e293b" stroke-width="1"/>
+  </g>
 </svg>

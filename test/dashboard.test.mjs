@@ -4,6 +4,7 @@ import {
   buildDashboard,
   entryKey,
   splitBadge,
+  sortByPinnedThenDate,
 } from '../src/core/dashboard-filter.mjs';
 
 // ─── Test helpers ───────────────────────────────────────────────────────────
@@ -514,8 +515,8 @@ describe('buildDashboard — manual slot placement across all rows', () => {
   });
 });
 
-describe('buildDashboard — production dashboard.json shape', () => {
-  // Simulate the exact shape of our real dashboard.json to ensure it parses
+describe('buildDashboard — production content.json shape', () => {
+  // Simulate the exact shape of our real content.json to ensure it parses
   const entries = [
     makeEntry('news', 'monitor/msi-unveils-mag', { datePublished: new Date('2025-06-01') }),
     makeEntry('reviews', 'keyboard/asus-rog-strix', { datePublished: new Date('2025-05-01') }),
@@ -608,6 +609,100 @@ describe('splitBadge', () => {
 
   it('truncates to 2 words max', () => {
     assert.deepEqual(splitBadge('Best Of Year'), ['Best', 'Of']);
+  });
+});
+
+// ─── sortByPinnedThenDate ───────────────────────────────────────────────────
+
+describe('sortByPinnedThenDate', () => {
+  it('pinned entries come before unpinned', () => {
+    const entries = [
+      makeEntry('reviews', 'unpinned', { datePublished: new Date('2025-03-01') }),
+      makeEntry('reviews', 'pinned', { datePublished: new Date('2025-01-05') }),
+    ];
+    const pinnedSet = new Set(['reviews:pinned']);
+    const result = sortByPinnedThenDate(entries, pinnedSet);
+    assert.equal(result[0].id, 'pinned');
+    assert.equal(result[1].id, 'unpinned');
+  });
+
+  it('within pinned group, newest date first', () => {
+    const entries = [
+      makeEntry('reviews', 'pin-old', { datePublished: new Date('2025-01-05') }),
+      makeEntry('reviews', 'pin-new', { datePublished: new Date('2025-02-10') }),
+    ];
+    const pinnedSet = new Set(['reviews:pin-old', 'reviews:pin-new']);
+    const result = sortByPinnedThenDate(entries, pinnedSet);
+    assert.equal(result[0].id, 'pin-new');
+    assert.equal(result[1].id, 'pin-old');
+  });
+
+  it('within unpinned group, newest date first', () => {
+    const entries = [
+      makeEntry('reviews', 'old', { datePublished: new Date('2025-01-01') }),
+      makeEntry('reviews', 'new', { datePublished: new Date('2025-03-03') }),
+    ];
+    const result = sortByPinnedThenDate(entries, new Set());
+    assert.equal(result[0].id, 'new');
+    assert.equal(result[1].id, 'old');
+  });
+
+  it('full example: 4 articles with mixed pin/date', () => {
+    // Same example from the analysis
+    const entries = [
+      makeEntry('reviews', 'A', { datePublished: new Date('2025-03-01') }),
+      makeEntry('reviews', 'B', { datePublished: new Date('2025-01-05'), pinned: true }),
+      makeEntry('reviews', 'C', { datePublished: new Date('2025-03-03') }),
+      makeEntry('reviews', 'D', { datePublished: new Date('2025-02-10'), pinned: true }),
+    ];
+    const pinnedSet = new Set(['reviews:B', 'reviews:D']);
+    const result = sortByPinnedThenDate(entries, pinnedSet);
+    assert.equal(result[0].id, 'D');  // pinned, newer
+    assert.equal(result[1].id, 'B');  // pinned, older
+    assert.equal(result[2].id, 'C');  // unpinned, newer
+    assert.equal(result[3].id, 'A');  // unpinned, older
+  });
+
+  it('does not mutate the original array', () => {
+    const entries = [
+      makeEntry('reviews', 'b', { datePublished: new Date('2025-01-01') }),
+      makeEntry('reviews', 'a', { datePublished: new Date('2025-06-01') }),
+    ];
+    const original = [...entries];
+    sortByPinnedThenDate(entries, new Set());
+    assert.equal(entries[0].id, original[0].id);
+    assert.equal(entries[1].id, original[1].id);
+  });
+
+  it('works without pinnedSet (falls back to data.pinned boolean)', () => {
+    const entries = [
+      makeEntry('reviews', 'not-pinned', { datePublished: new Date('2025-06-01') }),
+      makeEntry('reviews', 'is-pinned', { datePublished: new Date('2025-01-01'), pinned: true }),
+    ];
+    const result = sortByPinnedThenDate(entries);
+    assert.equal(result[0].id, 'is-pinned');
+    assert.equal(result[1].id, 'not-pinned');
+  });
+
+  it('returns empty array for empty input', () => {
+    const result = sortByPinnedThenDate([], new Set());
+    assert.deepEqual(result, []);
+  });
+
+  it('uses dateUpdated when newer than datePublished', () => {
+    const entries = [
+      makeEntry('reviews', 'old-pub-new-upd', {
+        datePublished: new Date('2024-01-01'),
+        dateUpdated: new Date('2025-12-01'),
+      }),
+      makeEntry('reviews', 'new-pub', {
+        datePublished: new Date('2025-06-01'),
+        dateUpdated: null,
+      }),
+    ];
+    const result = sortByPinnedThenDate(entries, new Set());
+    assert.equal(result[0].id, 'old-pub-new-upd');
+    assert.equal(result[1].id, 'new-pub');
   });
 });
 

@@ -1,0 +1,65 @@
+---
+/**
+ * GameBadge.astro — Frosted glass badge for game poster cards.
+ *
+ * Unlike EditorsBadge (2-part grid with EG GEAR logo), this is a single-line
+ * frosted pill designed for the narrow 7:10 poster format in GamesScroller.
+ *
+ * Layout: backdrop-blur frosted glass, gradient border accent, white uppercase text.
+ * Positioned absolute bottom-right inside the game-image-container.
+ */
+interface Props {
+  text: string;
+}
+
+const { text } = Astro.props;
+---
+
+<span class="game-badge-pill" aria-label={text}>
+  {text}
+</span>
+
+<style>
+  .game-badge-pill {
+    position: absolute;
+    bottom: 0.5rem;
+    right: 0.5rem;
+    z-index: 10;
+
+    /* Frosted glass + gradient border via padding-box / border-box technique.
+       WHY: border-image doesn't work with border-radius, so we layer two
+       background gradients — dark glass clips to padding-box, site gradient
+       clips to border-box. The 1px transparent border reveals the gradient. */
+    background:
+      linear-gradient(rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.55)) padding-box,
+      linear-gradient(135deg, var(--site-start-color), var(--site-end-color)) border-box;
+    border: 1px solid transparent;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+
+    /* Text */
+    color: #ffffff;
+    font-family: var(--identity-font);
+    font-weight: var(--font-weight7);
+    font-size: var(--ft-11-10);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    white-space: nowrap;
+
+    /* Shape */
+    padding: 0.3em 0.65em;
+    border-radius: 100px;
+    line-height: 1.2;
+
+    /* WHY: subtle shadow adds depth and keeps the pill readable over light box art */
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.35);
+
+    pointer-events: none;
+  }
+
+  @media (max-width: 600px) {
+    .game-badge-pill {
+      font-size: var(--fm-9-8);
+    }
+  }
+</style>

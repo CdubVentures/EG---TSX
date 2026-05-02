@@ -55,4 +55,10 @@ const { categoryColor } = Astro.props;
     vertical-align: middle;
     filter: invert(100%);
   }
+
+  @media (max-width: 600px) {
+    .pinned-tag {
+      font-size: var(--fm-13-12);
+    }
+  }
 </style>

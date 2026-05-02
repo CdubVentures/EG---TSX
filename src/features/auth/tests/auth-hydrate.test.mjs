@@ -92,6 +92,40 @@ describe('hydrateAuth()', () => {
     assert.equal(mod.$auth.get().status, 'guest');
   });
 
+  it('skips the startup fetch when the auth hint cookie is missing', async () => {
+    let fetchCount = 0;
+    globalThis.fetch = async () => {
+      fetchCount++;
+      throw new Error('fetch should not run without the auth hint cookie');
+    };
+
+    await mod.hydrateAuthFromCookieHint('theme=gaming');
+
+    assert.equal(fetchCount, 0);
+    assert.equal(mod.$auth.get().status, 'guest');
+  });
+
+  it('hydrates when the auth hint cookie is present', async () => {
+    let fetchCount = 0;
+    globalThis.fetch = async () => {
+      fetchCount++;
+      return new Response(
+        JSON.stringify({
+          status: 'authenticated',
+          uid: 'u-123',
+          email: 'a@b.com',
+          username: 'alice',
+        }),
+        { status: 200, headers: { 'Content-Type': 'application/json' } }
+      );
+    };
+
+    await mod.hydrateAuthFromCookieHint('foo=bar; eg_hint=1; theme=gaming');
+
+    assert.equal(fetchCount, 1);
+    assert.equal(mod.$auth.get().status, 'authenticated');
+  });
+
   it('deduplicates concurrent calls (fetch called once)', async () => {
     let fetchCount = 0;
     globalThis.fetch = async () => {

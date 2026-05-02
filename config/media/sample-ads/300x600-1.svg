@@ -1,48 +1,60 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="300" height="600" viewBox="0 0 300 600">
-  <defs>
-    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="#0f172a"/>
-      <stop offset="100%" stop-color="#1e293b"/>
-    </linearGradient>
-    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0%" stop-color="#f43f5e"/>
-      <stop offset="100%" stop-color="#e11d48"/>
-    </linearGradient>
-  </defs>
-  <rect width="300" height="600" fill="url(#bg)"/>
-  <rect width="300" height="3" fill="url(#accent)"/>
-  <polygon points="0,0 120,0 0,200" fill="#1a2744" opacity="0.5"/>
-  <circle cx="150" cy="250" r="100" fill="#f43f5e" opacity="0.03"/>
-  <circle cx="150" cy="250" r="70" fill="#f43f5e" opacity="0.04"/>
-  <rect x="20" y="22" width="8" height="8" rx="4" fill="#f43f5e"/>
-  <text x="36" y="31" font-family="system-ui, sans-serif" font-size="11" font-weight="700" fill="#8b949e" letter-spacing="2">STREAMING PRO</text>
-  <text x="20" y="80" font-family="system-ui, sans-serif" font-size="34" font-weight="900" fill="#ffffff">BROADCAST</text>
-  <text x="20" y="118" font-family="system-ui, sans-serif" font-size="34" font-weight="900" fill="#f43f5e">STUDIO</text>
-  <text x="20" y="148" font-family="system-ui, sans-serif" font-size="14" font-weight="400" fill="#94a3b8">Professional Streaming Bundle</text>
-  <g transform="translate(40, 175)" opacity="0.06">
-    <rect x="0" y="0" width="180" height="120" rx="8" fill="#f43f5e"/>
-    <circle cx="90" cy="60" r="25" fill="#f43f5e"/>
+  <!-- CloudDesk — SaaS/Productivity Ad (300x600) -->
+  <rect width="300" height="600" fill="#ffffff" stroke="#e5e7eb" stroke-width="1"/>
+
+  <!-- Ad label -->
+  <text x="280" y="16" font-family="Arial, Helvetica, sans-serif" font-size="9" fill="#9ca3af" text-anchor="end">Sponsored</text>
+
+  <!-- Brand -->
+  <circle cx="32" cy="40" r="12" fill="#7c3aed"/>
+  <text x="32" y="44" font-family="Arial, Helvetica, sans-serif" font-size="10" font-weight="700" fill="#ffffff" text-anchor="middle">C</text>
+  <text x="52" y="45" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="700" fill="#1f2937">CloudDesk</text>
+
+  <!-- Laptop silhouette placeholder -->
+  <rect x="30" y="75" width="240" height="195" rx="4" fill="#f5f3ff"/>
+  <!-- Screen -->
+  <rect x="55" y="90" width="190" height="120" rx="6" fill="#ede9fe"/>
+  <!-- Screen content lines -->
+  <rect x="70" y="108" width="80" height="6" rx="3" fill="#c4b5fd"/>
+  <rect x="70" y="122" width="60" height="6" rx="3" fill="#ddd6fe"/>
+  <rect x="70" y="136" width="100" height="6" rx="3" fill="#ddd6fe"/>
+  <rect x="70" y="156" width="50" height="22" rx="4" fill="#7c3aed"/>
+  <text x="95" y="171" font-family="Arial, Helvetica, sans-serif" font-size="9" font-weight="600" fill="#ffffff" text-anchor="middle">Save</text>
+  <!-- Chart bars -->
+  <rect x="170" y="155" width="10" height="40" rx="2" fill="#c4b5fd"/>
+  <rect x="185" y="140" width="10" height="55" rx="2" fill="#a78bfa"/>
+  <rect x="200" y="125" width="10" height="70" rx="2" fill="#7c3aed"/>
+  <!-- Keyboard base -->
+  <rect x="40" y="215" width="220" height="10" rx="3" fill="#e5e7eb"/>
+  <rect x="90" y="225" width="120" height="5" rx="2" fill="#d1d5db"/>
+
+  <!-- Headline -->
+  <text x="150" y="310" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="700" fill="#111827" text-anchor="middle">Work Smarter,</text>
+  <text x="150" y="336" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="700" fill="#7c3aed" text-anchor="middle">Not Harder</text>
+
+  <!-- Subtext -->
+  <text x="150" y="362" font-family="Arial, Helvetica, sans-serif" font-size="12" fill="#6b7280" text-anchor="middle">The all-in-one workspace for teams</text>
+
+  <!-- Feature checkmarks -->
+  <rect x="30" y="385" width="240" height="110" rx="8" fill="#f9fafb"/>
+  <g font-family="Arial, Helvetica, sans-serif">
+    <text x="50" y="413" font-size="16" fill="#7c3aed">&#10003;</text>
+    <text x="72" y="414" font-size="14" font-weight="500" fill="#374151">Real-time Sync</text>
+
+    <text x="50" y="443" font-size="16" fill="#7c3aed">&#10003;</text>
+    <text x="72" y="444" font-size="14" font-weight="500" fill="#374151">1-Click Share</text>
+
+    <text x="50" y="473" font-size="16" fill="#7c3aed">&#10003;</text>
+    <text x="72" y="474" font-size="14" font-weight="500" fill="#374151">Team Collaboration</text>
   </g>
-  <rect x="20" y="310" width="260" height="1" fill="#2a3652"/>
-  <text x="20" y="340" font-family="system-ui, sans-serif" font-size="11" font-weight="700" fill="#64748b" letter-spacing="2">INCLUDES</text>
-  <g font-family="system-ui, sans-serif">
-    <circle cx="28" cy="366" r="4" fill="#f43f5e"/>
-    <text x="42" y="370" font-size="13" font-weight="500" fill="#94a3b8">USB-C Condenser Microphone</text>
-    <circle cx="28" cy="396" r="4" fill="#f43f5e"/>
-    <text x="42" y="400" font-size="13" font-weight="500" fill="#94a3b8">1080p60 Capture Card</text>
-    <circle cx="28" cy="426" r="4" fill="#f43f5e"/>
-    <text x="42" y="430" font-size="13" font-weight="500" fill="#94a3b8">Ring Light with Diffuser</text>
-    <circle cx="28" cy="456" r="4" fill="#f43f5e"/>
-    <text x="42" y="460" font-size="13" font-weight="500" fill="#94a3b8">Green Screen Backdrop</text>
-    <circle cx="28" cy="486" r="4" fill="#f43f5e"/>
-    <text x="42" y="490" font-size="13" font-weight="500" fill="#94a3b8">Stream Deck Mini</text>
-  </g>
-  <rect x="20" y="510" width="260" height="1" fill="#2a3652"/>
-  <text x="20" y="545" font-family="system-ui, sans-serif" font-size="14" font-weight="500" fill="#64748b">Bundle Price</text>
-  <text x="280" y="545" font-family="system-ui, sans-serif" font-size="14" font-weight="500" fill="#64748b" text-anchor="end" text-decoration="line-through">$599</text>
-  <text x="20" y="575" font-family="system-ui, sans-serif" font-size="30" font-weight="900" fill="#ffffff">$399</text>
-  <rect x="170" y="552" width="110" height="38" rx="19" fill="#f43f5e"/>
-  <text x="225" y="577" font-family="system-ui, sans-serif" font-size="13" font-weight="800" fill="#ffffff" text-anchor="middle" letter-spacing="1">GET BUNDLE</text>
-  <text x="280" y="594" font-family="system-ui, sans-serif" font-size="9" font-weight="500" fill="#4a5568" text-anchor="end">Sponsored</text>
-  <rect y="597" width="300" height="3" fill="url(#accent)"/>
+
+  <!-- Trust badge -->
+  <text x="150" y="520" font-family="Arial, Helvetica, sans-serif" font-size="11" fill="#9ca3af" text-anchor="middle">Trusted by 50,000+ teams worldwide</text>
+
+  <!-- CTA button -->
+  <rect x="55" y="538" width="190" height="44" rx="22" fill="#7c3aed"/>
+  <text x="150" y="565" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="700" fill="#ffffff" text-anchor="middle">Try Free</text>
+
+  <!-- Footer -->
+  <text x="150" y="596" font-family="Arial, Helvetica, sans-serif" font-size="9" fill="#9ca3af" text-anchor="middle">No credit card required</text>
 </svg>

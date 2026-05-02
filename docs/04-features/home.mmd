@@ -1,0 +1,56 @@
+%%{init: {'theme': 'base', 'themeVariables': { 'fontSize': '20px', 'actorWidth': 250, 'actorMargin': 200, 'boxMargin': 20 }}}%%
+sequenceDiagram
+  autonumber
+  actor B as Build pipeline
+  actor U as User
+  box Static Build
+    participant PAGE as src/pages/index.astro
+    participant PROD as getProducts()
+    participant CONT as getReviews(), getGuides(), getNews(), getGames()
+    participant DASH as buildDashboard() and home helpers
+    participant OUT as prerendered index.html
+  end
+  box Delivery
+    participant CDN as CloudFront
+    participant S3 as Static site bucket
+  end
+  box Client
+    participant SHELL as MainLayout boot scripts
+    participant HOME as HomeHero, TopProducts, Dashboard, scrollers
+    participant CAR as slideshow-carousel.ts
+    participant DROP as CategoryDropdown.tsx
+    participant VAULT as VaultToggleButton
+  end
+
+  B->>PAGE: astro build prerenders `/`
+  PAGE->>PROD: load products
+  PROD-->>PAGE: product collection
+  PAGE->>CONT: load reviews, guides, news, and games
+  CONT-->>PAGE: tagged article and game entries
+  PAGE->>DASH: build dashboard, pinned ordering, featured item groups
+  DASH-->>PAGE: home section datasets
+  PAGE->>OUT: render static home HTML with component tree
+  OUT-->>S3: publish index.html and assets
+
+  U->>CDN: GET /
+  CDN->>S3: fetch prerendered home document
+  S3-->>CDN: index.html
+  CDN-->>U: static HTML, CSS, and client bundles
+
+  U->>SHELL: load page
+  SHELL->>HOME: hydrate shared auth, settings, vault, notifications, and ads boot paths
+  HOME->>CAR: initialize Embla slideshow and pause or autoplay controls
+  CAR->>CAR: mount compare buttons onto cloned slide DOM
+
+  opt Category filter changed
+    U->>DROP: choose category
+    DROP->>CAR: dispatch slideshow refresh
+    CAR->>CAR: rebuild slide set for selected category
+  end
+
+  opt Compare clicked from slideshow
+    U->>VAULT: click compare
+    VAULT->>VAULT: delegate to vault store flow
+  end
+
+  Note over PAGE,S3: Home composition is static in this snapshot. The only live runtime edges reached from the page are shared client features such as auth hydration, ads, and vault sync after delivery.

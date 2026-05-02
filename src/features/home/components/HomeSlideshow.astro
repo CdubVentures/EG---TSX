@@ -10,7 +10,9 @@ import { getProducts } from '@core/products';
 import { getImageWithFallback } from '@core/media';
 import { categoryColor, imageDefaults } from '@core/config';
 import { contentImage, collectionImagePath } from '@core/images';
+import { productUrl } from '@core/product-helpers';
 import type { ProductMedia } from '@core/media';
+import { resolveSlideshowDeal } from '../slideshow-deal';
 import DexaBadge from '@shared/ui/DexaBadge.astro';
 
 // ─── Resolve hero image for a product ────────────────────────────────────────
@@ -56,6 +58,13 @@ interface SlideData {
   snapSubtitle: string;
   brandSlug: string;
   thumbnailStem: string;
+  deal: {
+    href: string;
+    label: 'View Deal' | 'Search Amazon';
+    retailer: string;
+    slug: string;
+    variant?: string;
+  } | null;
 }
 
 // WHY: Zod schema uses .passthrough() so TS doesn't know about overall/snap_subtitle.
@@ -67,6 +76,13 @@ interface SlideshowProduct {
   category: string;
   imagePath: string;
   media: ProductMedia;
+  affiliateLinks?: Array<{
+    url?: string;
+    retailer?: string;
+    slug?: string;
+    variant?: string;
+    isPrimary?: boolean;
+  }>;
   overall?: number | string;
   snap_subtitle?: string;
 }
@@ -108,6 +124,7 @@ function toSlide(p: { id: string; data: Record<string, unknown> }): SlideData | 
     snapSubtitle: d.snap_subtitle || '',
     brandSlug: pathParts[3] || '',
     thumbnailStem: thumb.stem,
+    deal: resolveSlideshowDeal(d),
   };
 }
 
@@ -189,13 +206,17 @@ function srcSet(imagePath: string, stem: string): string {
       const heroSrcSet = srcSet(slide.imagePath, slide.heroStem);
       const brandLogoPath = contentImage(collectionImagePath('brands', slide.brandSlug), 'brand-logo-horizontal-mono-black', 'xs', 'png');
 
+      const productHref = productUrl(slide);
+      const dealAriaLabel = slide.deal?.label === 'Search Amazon'
+        ? `Search Amazon for ${slide.brand} ${slide.model}`
+        : `View deal on ${slide.deal?.retailer ?? 'retailer'}${slide.deal?.variant ? ` (${slide.deal.variant})` : ''}`;
+
       return (
-        <a
+        <div
           class={`slide-anchor ${slide.category}-color ${isFirst ? 'is-active' : ''}`}
           data-category={slide.category}
           data-slide-index={idx}
           data-id={slide.slug}
-          href={`/hubs/${slide.category}/${slide.brandSlug}/${slide.slug.replace(`${slide.brandSlug}-`, '').replace(`${slide.brand.toLowerCase().replace(/\s+/g, '-')}-`, '')}`}
           draggable="false"
         >
           {/* Main image area */}
@@ -252,45 +273,54 @@ function srcSet(imagePath: string, stem: string): string {
             </div>
 
             {/* Hero image — first slide eager, rest lazy via data-src */}
-            {isFirst ? (
-              <img
-                fetchpriority="high"
-                loading="eager"
-                src={heroSrc}
-                srcset={heroSrcSet}
-                sizes="(min-width: 825px) 625px, 100vw"
-                alt={`${slide.brand} ${slide.model} Hero Shot`}
-                class="slide-image"
-                style={`object-fit: ${slide.heroObjectFit};`}
-                draggable="false"
-              />
-            ) : (
-              <img
-                data-src={heroSrc}
-                data-srcset={heroSrcSet}
-                data-sizes="(min-width: 825px) 625px, 100vw"
-                alt={`${slide.brand} ${slide.model} Hero Shot`}
-                class="slide-image"
-                style={`object-fit: ${slide.heroObjectFit};`}
-                draggable="false"
-              />
-            )}
+            <a
+              class="slide-image-link"
+              href={productHref}
+              aria-label={`Learn more about ${slide.brand} ${slide.model}`}
+            >
+              {isFirst ? (
+                <img
+                  fetchpriority="high"
+                  loading="eager"
+                  src={heroSrc}
+                  srcset={heroSrcSet}
+                  sizes="(min-width: 825px) 625px, 100vw"
+                  alt={`${slide.brand} ${slide.model} Hero Shot`}
+                  class="slide-image"
+                  style={`object-fit: ${slide.heroObjectFit};`}
+                  draggable="false"
+                />
+              ) : (
+                <img
+                  data-src={heroSrc}
+                  data-srcset={heroSrcSet}
+                  data-sizes="(min-width: 825px) 625px, 100vw"
+                  alt={`${slide.brand} ${slide.model} Hero Shot`}
+                  class="slide-image"
+                  style={`object-fit: ${slide.heroObjectFit};`}
+                  draggable="false"
+                />
+              )}
+            </a>
 
             {/* Deal CTA (overlaid bottom of image) */}
-            <div class={`wrapper-cta-details ${slide.category}-color`}>
-              <button
-                class="slide-deal-cta"
-                type="button"
-                aria-label={`View deal for ${slide.brand} ${slide.model}`}
-                title={`View deal for ${slide.brand} ${slide.model}`}
-              >
-                <span class="slide-deal-label">View Deal</span>
-              </button>
-            </div>
+            {slide.deal ? (
+              <div class={`wrapper-cta-details ${slide.category}-color`}>
+                <button
+                  class="slide-deal-cta"
+                  type="button"
+                  data-deal-href={slide.deal.href}
+                  aria-label={dealAriaLabel}
+                  title={dealAriaLabel}
+                >
+                  <span class="slide-deal-label">{slide.deal.label}</span>
+                </button>
+              </div>
+            ) : null}
           </div>
 
           {/* Slide details bar */}
-          <div class="wrapper-details">
+          <a class="wrapper-details" href={productHref}>
             <div
               class="detail-container"
               style={`background: ${catHex};`}
@@ -334,8 +364,8 @@ function srcSet(imagePath: string, stem: string): string {
                 </div>
               </div>
             </div>
-          </div>
-        </a>
+          </a>
+        </div>
       );
     })}
     </div>{/* close .slideshow-track */}
@@ -345,7 +375,7 @@ function srcSet(imagePath: string, stem: string): string {
       <div class="overlay-wrapper-btns">
         <div class="slide-arrow-container-wrapper">
           {/* Left arrow */}
-          <div class="slide-card-carousel-arrow-container left-arrow" aria-label="Previous slide" role="button" tabindex="0">
+          <button type="button" class="slide-card-carousel-arrow-container left-arrow" aria-label="Previous slide">
             <div class="slide-card-carousel-circle-left">
               <div class="slide-card-carousel-arrow">
                 <svg aria-hidden="true" focusable="false" height="16" class="svg-base" viewBox="0 0 16 16" width="16" xmlns="http://www.w3.org/2000/svg">
@@ -353,9 +383,9 @@ function srcSet(imagePath: string, stem: string): string {
                 </svg>
               </div>
             </div>
-          </div>
+          </button>
           {/* Right arrow */}
-          <div class="slide-card-carousel-arrow-container right-arrow" aria-label="Next slide" role="button" tabindex="0">
+          <button type="button" class="slide-card-carousel-arrow-container right-arrow" aria-label="Next slide">
             <div class="slide-card-carousel-circle-right">
               <div class="slide-card-carousel-arrow">
                 <svg aria-hidden="true" focusable="false" height="16" class="svg-base" viewBox="0 0 16 16" width="16" xmlns="http://www.w3.org/2000/svg">
@@ -363,7 +393,7 @@ function srcSet(imagePath: string, stem: string): string {
                 </svg>
               </div>
             </div>
-          </div>
+          </button>
         </div>
 
         {/* Slide counter + pause button */}
@@ -373,7 +403,7 @@ function srcSet(imagePath: string, stem: string): string {
             <span class="count-separator">of</span>
             <span class="total-slides">{slideCount}</span>
           </div>
-          <div class="pause-button" aria-label="Pause Slideshow" role="button" tabindex="0">
+          <button type="button" class="pause-button" aria-label="Pause slideshow">
             <span class="pause-icon">
               <span class="bars">
                 <svg viewBox="-45 0 327 327" xmlns="http://www.w3.org/2000/svg" fill="white" width="100%" height="100%" class="svg-base">
@@ -387,7 +417,7 @@ function srcSet(imagePath: string, stem: string): string {
                 </svg>
               </span>
             </span>
-          </div>
+          </button>
         </div>
       </div>
 
@@ -473,9 +503,7 @@ function srcSet(imagePath: string, stem: string): string {
 
   .slide-anchor.dragging { transition: none; }
 
-  .image-stretch-container,
-  .blurred-image,
-  .wrapper-details {
+  .blurred-image {
     pointer-events: none;
   }
 
@@ -494,6 +522,13 @@ function srcSet(imagePath: string, stem: string): string {
     box-sizing: border-box;
   }
 
+  .slide-image-link {
+    position: absolute;
+    inset: 0;
+    display: block;
+    text-decoration: none;
+  }
+
   /* ── Slide image ── */
   .home-top-slides .slide-image {
     position: absolute;
@@ -509,6 +544,8 @@ function srcSet(imagePath: string, stem: string): string {
     height: auto;
     overflow: hidden;
     z-index: 1000;
+    text-decoration: none;
+    color: inherit;
   }
 
   .detail-container {
@@ -917,12 +954,15 @@ function srcSet(imagePath: string, stem: string): string {
   }
 
   .slide-card-carousel-arrow-container {
+    appearance: none;
     width: auto;
     height: auto;
     display: grid;
     z-index: 200;
     cursor: pointer;
     background-color: transparent;
+    border: 0;
+    padding: 0;
     -webkit-tap-highlight-color: transparent;
   }
 
@@ -1021,16 +1061,19 @@ function srcSet(imagePath: string, stem: string): string {
 
   /* Desktop pause: 24–26px circle */
   .slide-info-overlay .pause-button {
+    appearance: none;
     font-size: var(--ft-26-24, 2.364rem);
     width: 1em;
     height: 1em;
     background-color: #161718 /* always-dark: slideshow overlays photos */;
     border-radius: 50%;
+    border: 0;
     opacity: .6;
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
+    padding: 0;
     user-select: none;
     transition: background-color 0.2s ease;
   }
@@ -1080,6 +1123,7 @@ function srcSet(imagePath: string, stem: string): string {
     position: absolute;
     width: 100%;
     bottom: 0;
+    z-index: 1000;
     padding: 1rem;
     display: flex;
     align-items: center;

@@ -15,6 +15,7 @@ import {
 import type { VaultEntry } from '../types';
 import { CONFIG, plural } from '@core/config';
 import { catVar } from '@core/categories';
+import { tryImageFallback } from '@core/images';
 
 /** Comparison buttons config — matches HBS getComparisonButtonsForCategory */
 function getComparisonButtons(category: string) {
@@ -49,11 +50,11 @@ export default function VaultDropdown() {
   // Per-category counts
   const counts: Record<string, number> = {};
   for (const entry of entries) {
-    const cat = entry.product.category;
+    const cat = entry.category;
     counts[cat] = (counts[cat] ?? 0) + 1;
   }
 
-  const categoryItems = entries.filter(e => e.product.category === activeCategory);
+  const categoryItems = entries.filter(e => e.category === activeCategory);
   const catCount = counts[activeCategory] ?? 0;
 
   // Set --navbar-vault-color on the mega-menu parent
@@ -175,7 +176,7 @@ export default function VaultDropdown() {
               <div className="vault-set-inner">
                 {categoryItems.map(entry => (
                   <VaultItemCard
-                    key={entry.product.id}
+                    key={entry.productId}
                     entry={entry}
                   />
                 ))}
@@ -202,22 +203,39 @@ interface VaultItemCardProps {
   entry: VaultEntry;
 }
 
+function normalizeThumbnailStem(value: unknown): string {
+  if (typeof value !== 'string') return 'top';
+  const stem = value.trim();
+  if (!stem) return 'top';
+  const normalized = stem.toLowerCase();
+  if (normalized === 'undefined' || normalized === 'null' || normalized === 'nan') return 'top';
+  return stem;
+}
+
 function VaultItemCard({ entry }: VaultItemCardProps) {
   const { product } = entry;
+  const category = entry.category;
+  const productId = entry.productId;
 
-  // WHY _t suffix: HBS uses NavbarVaultThumbSuffix = '_t' for vault thumbnails
-  // thumbnailStem resolved via getImageWithFallback(defaultImageView chain) at add-time
-  const imgSrc = `${product.imagePath}/${product.thumbnailStem}_t.webp`;
-  const snapshotUrl = `/hubs/${product.category}/${product.slug}`;
+  const stem = normalizeThumbnailStem(product.thumbnailStem);
+  const imgSrc = `${product.imagePath}/${stem}_t.webp`;
+  const snapshotUrl = `/hubs/${category}/${product.slug}`;
 
   return (
     <div
       className="navbar-vault-item"
-      data-itemid={product.id}
-      data-category={product.category}
+      data-itemid={productId}
+      data-category={category}
     >
       <div className="navbar-vault-img">
-        <img src={imgSrc} alt={`${product.brand} ${product.model}`} loading="lazy" />
+        <img
+          src={imgSrc}
+          alt={`${product.brand} ${product.model}`}
+          loading="lazy"
+          onError={(event) => {
+            tryImageFallback(event.currentTarget, product.imagePath, category, '_t', stem);
+          }}
+        />
       </div>
       <div className="navbar-vault-info">
         <a href={snapshotUrl}>
@@ -227,10 +245,10 @@ function VaultItemCard({ entry }: VaultItemCardProps) {
       </div>
       <div
         className="navbar-vault-remove"
-        data-removeid={product.id}
-        data-category={product.category}
+        data-removeid={productId}
+        data-category={category}
         title="Remove this item"
-        onClick={() => removeFromVault(product.id)}
+        onClick={() => removeFromVault(productId)}
       >
         <RemoveIcon />
       </div>

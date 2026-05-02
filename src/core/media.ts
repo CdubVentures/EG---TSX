@@ -14,6 +14,7 @@ export interface ProductImage {
 
 export interface ProductMedia {
   defaultColor: string | null;
+  defaultEdition?: string | null;
   colors: string[];
   editions: string[];
   images: ProductImage[];
@@ -31,6 +32,64 @@ function isPhotoView(img: ProductImage): boolean {
   // AND stem exactly equals view (no separators).
   if (!SHAPE_VIEWS.has(img.view)) return true;
   return img.color !== undefined || img.edition !== undefined || img.seq !== undefined || img.stem !== img.view;
+}
+
+type ImageScore = [number, number, number, string, string];
+
+function normalizeToken(value: string | null | undefined): string | null {
+  if (typeof value !== 'string') return null;
+  const trimmed = value.trim();
+  return trimmed.length > 0 ? trimmed : null;
+}
+
+function resolveTargetColor(media: ProductMedia, color?: string): string | null {
+  return normalizeToken(color) ?? normalizeToken(media.defaultColor);
+}
+
+function resolveTargetEdition(media: ProductMedia, edition?: string): string | null {
+  return normalizeToken(edition) ?? normalizeToken(media.defaultEdition);
+}
+
+function colorRank(imageColor: string | undefined, targetColor: string | null): number {
+  const normalized = normalizeToken(imageColor);
+  if (targetColor) {
+    if (normalized === targetColor) return 0;
+    if (!normalized) return 1;
+    return 2;
+  }
+  return normalized ? 1 : 0;
+}
+
+function editionRank(imageEdition: string | undefined, targetEdition: string | null): number {
+  const normalized = normalizeToken(imageEdition);
+  if (targetEdition) {
+    if (normalized === targetEdition) return 0;
+    if (!normalized) return 1;
+    return 2;
+  }
+  return normalized ? 1 : 0;
+}
+
+function scoreImage(image: ProductImage, targetColor: string | null, targetEdition: string | null): ImageScore {
+  return [
+    colorRank(image.color, targetColor),
+    editionRank(image.edition, targetEdition),
+    image.seq ?? 0,
+    normalizeToken(image.edition) ?? '',
+    image.stem,
+  ];
+}
+
+function compareScore(a: ImageScore, b: ImageScore): number {
+  const [aColor, aEdition, aSeq, aEditionLabel, aStem] = a;
+  const [bColor, bEdition, bSeq, bEditionLabel, bStem] = b;
+
+  if (aColor !== bColor) return aColor - bColor;
+  if (aEdition !== bEdition) return aEdition - bEdition;
+  if (aSeq !== bSeq) return aSeq - bSeq;
+  if (aEditionLabel !== bEditionLabel) return aEditionLabel < bEditionLabel ? -1 : 1;
+  if (aStem !== bStem) return aStem < bStem ? -1 : 1;
+  return 0;
 }
 
 // ─── Public API ─────────────────────────────────────────────────────────────
@@ -61,36 +120,46 @@ export function getCarouselImages(media: ProductMedia, color?: string): ProductI
 
 /**
  * Get the best single image for a view, optionally for a specific color.
- * Falls back to default (colorless) image if the requested color isn't available.
+ * Falls back to default (colorless/editionless) image when needed.
  */
-export function getImage(media: ProductMedia, view: string, color?: string): ProductImage | null {
+export function getImage(media: ProductMedia, view: string, color?: string, edition?: string): ProductImage | null {
   if (media.images.length === 0) return null;
 
   const viewImages = media.images.filter(img => img.view === view);
   if (viewImages.length === 0) return null;
 
-  const targetColor = color ?? media.defaultColor;
+  const targetColor = resolveTargetColor(media, color);
+  const targetEdition = resolveTargetEdition(media, edition);
 
-  if (targetColor) {
-    const colorMatch = viewImages.find(img => img.color === targetColor);
-    if (colorMatch) return colorMatch;
+  const [firstImage, ...remainingImages] = viewImages;
+  if (!firstImage) return null;
+
+  let best = firstImage;
+  let bestScore = scoreImage(best, targetColor, targetEdition);
+
+  for (const candidate of remainingImages) {
+    const candidateScore = scoreImage(candidate, targetColor, targetEdition);
+    if (compareScore(candidateScore, bestScore) < 0) {
+      best = candidate;
+      bestScore = candidateScore;
+    }
   }
 
-  // Fall back to colorless image
-  const defaultMatch = viewImages.find(img => !img.color);
-  if (defaultMatch) return defaultMatch;
-
-  // Last resort: first image for that view
-  return viewImages[0];
+  return best;
 }
 
 /**
  * Try views in order, return the first match or null.
  * WHY: defaultImageView and listThumbKeyBase are now fallback chains (arrays).
  */
-export function getImageWithFallback(media: ProductMedia, views: string[], color?: string): ProductImage | null {
+export function getImageWithFallback(
+  media: ProductMedia,
+  views: string[],
+  color?: string,
+  edition?: string,
+): ProductImage | null {
   for (const view of views) {
-    const img = getImage(media, view, color);
+    const img = getImage(media, view, color, edition);
     if (img) return img;
   }
   return null;
@@ -112,9 +181,10 @@ export function resolveImage(
   views: string[],
   stemExists: (stem: string) => boolean,
   color?: string,
+  edition?: string,
 ): ProductImage | null {
   for (const view of views) {
-    const img = getImage(media, view, color);
+    const img = getImage(media, view, color, edition);
     if (!img) continue;
     if (!stemExists(img.stem)) continue;
     return img;
@@ -125,8 +195,13 @@ export function resolveImage(
 /**
  * Get an image for a specific color + view, with fallback to default color.
  */
-export function getImageForColor(media: ProductMedia, color: string, view: string): ProductImage | null {
-  return getImage(media, view, color);
+export function getImageForColor(
+  media: ProductMedia,
+  color: string,
+  view: string,
+  edition?: string,
+): ProductImage | null {
+  return getImage(media, view, color, edition);
 }
 
 /**

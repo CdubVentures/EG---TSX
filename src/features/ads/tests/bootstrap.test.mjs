@@ -1,56 +1,18 @@
 import { describe, it } from 'node:test';
 import { strict as assert } from 'node:assert';
 
-// ─── parseSizesForGPT ───────────────────────────────────────────────────
-describe('parseSizesForGPT()', () => {
-  it('converts comma-separated sizes to GPT format', async () => {
-    const { parseSizesForGPT } = await import('../bootstrap.ts');
-    const result = parseSizesForGPT('300x250,336x280');
-    assert.deepStrictEqual(result, [[300, 250], [336, 280]]);
-  });
-
-  it('handles single size', async () => {
-    const { parseSizesForGPT } = await import('../bootstrap.ts');
-    assert.deepStrictEqual(parseSizesForGPT('970x250'), [[970, 250]]);
-  });
-
-  it('returns empty array for empty string', async () => {
-    const { parseSizesForGPT } = await import('../bootstrap.ts');
-    assert.deepStrictEqual(parseSizesForGPT(''), []);
-  });
-
-  it('skips invalid entries', async () => {
-    const { parseSizesForGPT } = await import('../bootstrap.ts');
-    const result = parseSizesForGPT('invalid,300x250');
-    assert.deepStrictEqual(result, [[300, 250]]);
-  });
-
-  it('handles inline-ad sizes (6 entries)', async () => {
-    const { parseSizesForGPT } = await import('../bootstrap.ts');
-    const result = parseSizesForGPT('970x250,728x90,336x280,300x250,320x100,320x50');
-    assert.equal(result.length, 6);
-    assert.deepStrictEqual(result[0], [970, 250]);
-    assert.deepStrictEqual(result[5], [320, 50]);
-  });
-});
-
 // ─── checkStickyPolicy ──────────────────────────────────────────────────
 describe('checkStickyPolicy()', () => {
   it('returns warning for adsense + sticky', async () => {
     const { checkStickyPolicy } = await import('../bootstrap.ts');
-    const result = checkStickyPolicy('adsense', true, 'sidebar-right-top');
+    const result = checkStickyPolicy('adsense', true, 'sidebar_sticky');
     assert.equal(typeof result, 'string');
     assert.ok(result.length > 0);
   });
 
   it('returns null for adsense + non-sticky', async () => {
     const { checkStickyPolicy } = await import('../bootstrap.ts');
-    assert.equal(checkStickyPolicy('adsense', false, 'sidebar-right-top'), null);
-  });
-
-  it('returns null for gpt + sticky', async () => {
-    const { checkStickyPolicy } = await import('../bootstrap.ts');
-    assert.equal(checkStickyPolicy('gpt', true, 'inline-gpt'), null);
+    assert.equal(checkStickyPolicy('adsense', false, 'sidebar'), null);
   });
 
   it('returns null for direct + sticky', async () => {
@@ -66,25 +28,17 @@ describe('resolveProviderRoute()', () => {
     assert.equal(resolveProviderRoute('adsense'), 'adsense');
   });
 
-  it('returns "gpt" for gpt provider', async () => {
-    const { resolveProviderRoute } = await import('../bootstrap.ts');
-    assert.equal(resolveProviderRoute('gpt'), 'gpt');
-  });
-
   it('returns "direct" for direct provider', async () => {
     const { resolveProviderRoute } = await import('../bootstrap.ts');
     assert.equal(resolveProviderRoute('direct'), 'direct');
-  });
-
-  it('returns "native" for native provider', async () => {
-    const { resolveProviderRoute } = await import('../bootstrap.ts');
-    assert.equal(resolveProviderRoute('native'), 'native');
   });
 
   it('returns null for unknown provider', async () => {
     const { resolveProviderRoute } = await import('../bootstrap.ts');
     assert.equal(resolveProviderRoute('unknown'), null);
     assert.equal(resolveProviderRoute(''), null);
+    assert.equal(resolveProviderRoute('gpt'), null);
+    assert.equal(resolveProviderRoute('native'), null);
   });
 });
 
@@ -124,7 +78,6 @@ describe('bootstrap module exports', () => {
 
   it('exports pure utility functions', async () => {
     const mod = await import('../bootstrap.ts');
-    assert.equal(typeof mod.parseSizesForGPT, 'function');
     assert.equal(typeof mod.checkStickyPolicy, 'function');
     assert.equal(typeof mod.resolveProviderRoute, 'function');
   });
@@ -132,5 +85,25 @@ describe('bootstrap module exports', () => {
   it('exports isSlotHidden function', async () => {
     const mod = await import('../bootstrap.ts');
     assert.equal(typeof mod.isSlotHidden, 'function');
+  });
+});
+
+describe('mountAll()', () => {
+  it('queries only live slots and excludes placeholders and sample slots', async () => {
+    const { mountAll } = await import('../bootstrap.ts');
+    let selector = '';
+    const root = {
+      querySelectorAll(nextSelector) {
+        selector = nextSelector;
+        return [];
+      },
+    };
+
+    mountAll(root);
+
+    assert.equal(
+      selector,
+      '.ad-slot:not([data-placeholder="true"]):not(.ad-slot--sample)',
+    );
   });
 });

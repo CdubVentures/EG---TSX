@@ -1,0 +1,119 @@
+sequenceDiagram
+  autonumber
+  actor U as User
+  participant NAV as NavIcons or NavMobile
+  participant DSTORE as auth dialog store
+  participant DIALOG as AuthDialog island
+  participant FORM as auth form views
+  participant POPUP as openOAuthPopup()
+  participant LOGIN as /login/google or /login/discord
+  participant SIGNUP as /api/auth/sign-up
+  participant CONFIRM as /api/auth/confirm-sign-up
+  participant RESEND as /api/auth/resend-code
+  participant SIGNIN as /api/auth/sign-in
+  participant FORGOT as /api/auth/forgot-password
+  participant RESET as /api/auth/confirm-forgot-password
+  participant CALLBACK as /auth/callback
+  participant ME as /api/auth/me
+  participant LOGOUT as /logout
+  participant COG as Cognito Hosted UI or User Pool
+  participant JWT as verifyIdToken()
+  participant DDB as DynamoDB eg_profiles
+  participant ASTATE as auth store
+  participant VSYNC as vault sync
+
+  U->>NAV: Click Log in or Sign Up
+  NAV->>DSTORE: openLogin() or openSignup()
+  DSTORE->>DIALOG: open dialog and choose initial view
+  DIALOG-->>U: showModal() and render form
+
+  alt Email sign-up path
+    U->>FORM: Submit email and password
+    FORM->>SIGNUP: POST /api/auth/sign-up
+    SIGNUP->>COG: cognitoSignUp(email, password)
+    COG-->>SIGNUP: confirm required
+    SIGNUP-->>FORM: confirm-required JSON
+    FORM->>DSTORE: set email and switch to confirm-signup
+    DSTORE->>DIALOG: render ConfirmSignupView
+    opt User requests another code
+      U->>FORM: Click Resend code
+      FORM->>RESEND: POST /api/auth/resend-code
+      RESEND->>COG: cognitoResendCode(email)
+      COG-->>RESEND: code sent
+      RESEND-->>FORM: code-sent JSON
+    end
+    U->>FORM: Submit verification code
+    FORM->>CONFIRM: POST /api/auth/confirm-sign-up
+    CONFIRM->>COG: cognitoConfirmSignUp(email, code)
+    COG-->>CONFIRM: confirmed
+    CONFIRM-->>FORM: confirmed JSON
+    FORM->>DSTORE: switch to login
+  else Email sign-in path
+    U->>FORM: Submit email and password
+    FORM->>SIGNIN: POST /api/auth/sign-in
+    SIGNIN->>COG: cognitoSignIn(email, password)
+    COG-->>SIGNIN: id token and refresh token
+    SIGNIN->>JWT: verifyIdToken(id token)
+    JWT-->>SIGNIN: uid and profile claims
+    SIGNIN->>DDB: readVaultRev(uid)
+    DDB-->>SIGNIN: current rev or 0
+    SIGNIN-->>FORM: authenticated JSON plus auth cookies
+    FORM->>ASTATE: setAuthenticated(uid, email, username)
+    ASTATE->>DIALOG: authenticated listener closes dialog
+    ASTATE->>VSYNC: auth state changed to authenticated
+  else Forgot password path
+    U->>FORM: Click Forgot password
+    FORM->>DSTORE: switch to forgot-password
+    DSTORE->>DIALOG: render ForgotPasswordView
+    U->>FORM: Submit email for reset
+    FORM->>FORGOT: POST /api/auth/forgot-password
+    FORGOT->>COG: cognitoForgotPassword(email)
+    COG-->>FORGOT: reset code sent
+    FORGOT-->>FORM: code-sent JSON
+    U->>FORM: Submit code and new password
+    FORM->>RESET: POST /api/auth/confirm-forgot-password
+    RESET->>COG: cognitoConfirmForgotPassword(email, code, newPassword)
+    COG-->>RESET: password reset complete
+    RESET-->>FORM: password-reset JSON
+    FORM->>DSTORE: switch to login
+  else Hosted UI OAuth path
+    U->>FORM: Click Continue with Google or Discord
+    FORM->>POPUP: openOAuthPopup(provider path)
+    alt Desktop popup
+      POPUP->>LOGIN: window.open(provider path)
+    else Mobile redirect
+      POPUP->>POPUP: write eg_return cookie
+      POPUP->>LOGIN: window.location = provider path
+    end
+    LOGIN->>COG: buildLoginRedirect() with state and PKCE cookies
+    COG-->>CALLBACK: Redirect to /auth/callback with code and state
+    CALLBACK->>CALLBACK: validate nonce and PKCE cookies
+    CALLBACK->>COG: exchangeCodeForTokens(code, verifier)
+    COG-->>CALLBACK: id token and refresh token
+    CALLBACK->>JWT: verifyIdToken(id token)
+    JWT-->>CALLBACK: uid and profile claims
+    CALLBACK->>DDB: readVaultRev(uid)
+    DDB-->>CALLBACK: current rev or 0
+    alt Mobile return cookie exists
+      CALLBACK-->>U: 302 back to validated return URL plus auth cookies
+      U->>ME: next page bootstrap calls /api/auth/me
+    else Desktop popup callback
+      CALLBACK-->>POPUP: HTML postMessage plus auth cookies
+      POPUP->>ME: hydrateAuth()
+    end
+    ME->>JWT: verifyIdToken(session cookie)
+    JWT-->>ME: authenticated claims
+    ME-->>ASTATE: authenticated session payload
+    ASTATE->>DIALOG: close dialog
+    ASTATE->>VSYNC: auth state changed to authenticated
+  end
+
+  opt Logout path
+    U->>NAV: Click Sign out
+    NAV->>LOGOUT: navigate to /logout
+    LOGOUT-->>U: clear cookies and redirect to hosted logout
+    U->>ME: next bootstrap calls /api/auth/me
+    ME-->>ASTATE: guest session payload
+  end
+
+  Note over DDB,VSYNC: DynamoDB participation inside auth is limited to rev lookup for first-login detection. Full vault persistence is documented in vault.mmd and vault.md.

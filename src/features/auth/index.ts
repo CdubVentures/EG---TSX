@@ -14,6 +14,7 @@ export {
   setLoading,
   setGuest,
   hydrateAuth,
+  hydrateAuthFromCookieHint,
   logout,
   $authDialog,
   openLogin,

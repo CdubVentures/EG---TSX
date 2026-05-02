@@ -1,30 +1,74 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="970" height="250" viewBox="0 0 970 250">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 970 250" width="970" height="250">
   <defs>
-    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="0.5">
-      <stop offset="0%" stop-color="#1a0a2e"/>
-      <stop offset="100%" stop-color="#16213e"/>
-    </linearGradient>
-    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0%" stop-color="#f97316"/>
-      <stop offset="100%" stop-color="#ef4444"/>
-    </linearGradient>
+    <clipPath id="ad1-clip"><rect width="970" height="250" rx="4"/></clipPath>
   </defs>
-  <rect width="970" height="250" fill="url(#bg)"/>
-  <rect width="970" height="3" fill="url(#accent)"/>
-  <polygon points="650,0 970,0 970,250 750,250" fill="#1e0f3d" opacity="0.6"/>
-  <polygon points="720,0 970,0 970,250 820,250" fill="#220f45" opacity="0.4"/>
-  <text x="50" y="70" font-family="system-ui, sans-serif" font-size="14" font-weight="700" fill="#f97316" letter-spacing="3">LIMITED TIME OFFER</text>
-  <text x="50" y="120" font-family="system-ui, sans-serif" font-size="48" font-weight="900" fill="#ffffff" letter-spacing="1">BLACK FRIDAY</text>
-  <text x="50" y="165" font-family="system-ui, sans-serif" font-size="20" font-weight="500" fill="#c4b5fd">Up to 40% off gaming peripherals</text>
-  <rect x="50" y="185" width="160" height="44" rx="22" fill="#f97316"/>
-  <text x="130" y="213" font-family="system-ui, sans-serif" font-size="15" font-weight="800" fill="#ffffff" text-anchor="middle" letter-spacing="1">SHOP DEALS</text>
-  <text x="700" y="100" font-family="system-ui, sans-serif" font-size="72" font-weight="900" fill="#ffffff" text-anchor="middle" opacity="0.15">40%</text>
-  <text x="700" y="145" font-family="system-ui, sans-serif" font-size="28" font-weight="700" fill="#ffffff" text-anchor="middle" opacity="0.15">OFF</text>
-  <g fill="#f97316" opacity="0.2">
-    <circle cx="860" cy="50" r="3"/><circle cx="880" cy="50" r="3"/><circle cx="900" cy="50" r="3"/><circle cx="920" cy="50" r="3"/>
-    <circle cx="860" cy="70" r="3"/><circle cx="880" cy="70" r="3"/><circle cx="900" cy="70" r="3"/><circle cx="920" cy="70" r="3"/>
-    <circle cx="860" cy="90" r="3"/><circle cx="880" cy="90" r="3"/><circle cx="900" cy="90" r="3"/><circle cx="920" cy="90" r="3"/>
+  <g clip-path="url(#ad1-clip)">
+    <!-- Background: warm cream -->
+    <rect width="970" height="250" fill="#fff8f0"/>
+
+    <!-- Sponsored label top-right -->
+    <rect x="891" y="8" width="66" height="18" rx="3" fill="rgba(0,0,0,0.06)"/>
+    <text x="924" y="20" font-family="Arial, Helvetica, sans-serif" font-size="10" fill="#9a8478" text-anchor="middle" font-weight="500">Sponsored</text>
+
+    <!-- Food shape placeholder (bowl/plate) -->
+    <g transform="translate(580, 30)">
+      <!-- Plate -->
+      <ellipse cx="110" cy="140" rx="120" ry="25" fill="#fde5c8" opacity="0.6"/>
+      <!-- Bowl -->
+      <ellipse cx="110" cy="100" rx="90" ry="70" fill="#fed7aa"/>
+      <ellipse cx="110" cy="70" rx="90" ry="40" fill="#fdba74"/>
+      <!-- Food items in bowl -->
+      <circle cx="80" cy="65" r="14" fill="#ef4444" opacity="0.8"/>
+      <circle cx="115" cy="55" r="12" fill="#22c55e" opacity="0.7"/>
+      <circle cx="140" cy="65" r="13" fill="#f59e0b" opacity="0.8"/>
+      <circle cx="95" cy="50" r="10" fill="#a855f7" opacity="0.5"/>
+      <circle cx="130" cy="50" r="9" fill="#ef4444" opacity="0.6"/>
+      <!-- Steam wisps -->
+      <path d="M80 20 Q75 10 80 0" stroke="#d4c5b5" stroke-width="2" fill="none" opacity="0.4"/>
+      <path d="M110 15 Q105 5 110 -5" stroke="#d4c5b5" stroke-width="2" fill="none" opacity="0.4"/>
+      <path d="M140 20 Q135 10 140 0" stroke="#d4c5b5" stroke-width="2" fill="none" opacity="0.4"/>
+    </g>
+
+    <!-- Brand logo -->
+    <g transform="translate(55, 28)">
+      <!-- Fork/spoon icon -->
+      <rect x="0" y="0" width="6" height="28" rx="3" fill="#e8590c"/>
+      <rect x="12" y="0" width="6" height="28" rx="3" fill="#e8590c"/>
+      <ellipse cx="26" cy="10" rx="8" ry="10" fill="none" stroke="#e8590c" stroke-width="2.5"/>
+      <rect x="23" y="14" width="6" height="16" rx="3" fill="#e8590c"/>
+      <!-- Brand name -->
+      <text x="44" y="16" font-family="Georgia, 'Times New Roman', serif" font-size="24" fill="#c2410c" font-weight="700">QuickBite</text>
+      <text x="44" y="32" font-family="Arial, Helvetica, sans-serif" font-size="11" fill="#9a7b6a" letter-spacing="2">FOOD DELIVERY</text>
+    </g>
+
+    <!-- Promo badge -->
+    <g transform="translate(55, 75)">
+      <rect width="130" height="50" rx="8" fill="#e8590c"/>
+      <text x="65" y="22" font-family="Arial, Helvetica, sans-serif" font-size="11" fill="#ffffff" text-anchor="middle" font-weight="600" letter-spacing="1">USE CODE</text>
+      <text x="65" y="42" font-family="Arial, Helvetica, sans-serif" font-size="18" fill="#ffffff" text-anchor="middle" font-weight="800">BITE10</text>
+    </g>
+
+    <!-- Headline -->
+    <text x="205" y="100" font-family="Georgia, 'Times New Roman', serif" font-size="34" fill="#1c1917" font-weight="700">$10 OFF</text>
+    <text x="205" y="135" font-family="Arial, Helvetica, sans-serif" font-size="22" fill="#44403c" font-weight="400">Your First Order</text>
+
+    <!-- Subtext -->
+    <text x="55" y="175" font-family="Arial, Helvetica, sans-serif" font-size="14" fill="#78716c">Fresh meals delivered in 30 min or less. 2,000+ restaurants near you.</text>
+
+    <!-- CTA Button -->
+    <rect x="55" y="195" width="170" height="44" rx="22" fill="#e8590c"/>
+    <text x="140" y="222" font-family="Arial, Helvetica, sans-serif" font-size="16" fill="#ffffff" text-anchor="middle" font-weight="700">Order Now</text>
+
+    <!-- Minimum order note -->
+    <text x="240" y="222" font-family="Arial, Helvetica, sans-serif" font-size="11" fill="#a8a29e">Min. $25 order. New users only.</text>
+
+    <!-- Decorative scattered dots -->
+    <circle cx="480" cy="40" r="4" fill="#fdba74" opacity="0.3"/>
+    <circle cx="510" cy="70" r="3" fill="#fdba74" opacity="0.25"/>
+    <circle cx="465" cy="180" r="5" fill="#fdba74" opacity="0.2"/>
+    <circle cx="530" cy="200" r="3" fill="#fdba74" opacity="0.3"/>
+
+    <!-- Border -->
+    <rect width="970" height="250" rx="4" fill="none" stroke="#f5e6d3" stroke-width="1"/>
   </g>
-  <text x="940" y="18" font-family="system-ui, sans-serif" font-size="9" font-weight="500" fill="#4a5568" text-anchor="end">Sponsored</text>
-  <rect y="247" width="970" height="3" fill="url(#accent)"/>
 </svg>

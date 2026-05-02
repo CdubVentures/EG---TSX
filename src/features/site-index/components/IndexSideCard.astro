@@ -1,0 +1,182 @@
+---
+/**
+ * IndexSideCard — smaller stacked card for the site-index 3-slot dashboard right column.
+ * Port of HBS .moreof-hf__sideCard.eg-hf__card from site-top-dashboard.handlebars + feed_moreof.css.
+ */
+import type { FeaturedItem } from '@features/home/featured-scroller-utils';
+import DexaBadge from '@shared/ui/DexaBadge.astro';
+
+interface Props {
+  item: FeaturedItem;
+}
+
+const { item } = Astro.props;
+---
+
+<a href={item.url} class:list={['eg-hf__card moreof-hf__sideCard', item.category ? `${item.category}-color` : '']}>
+  {item.overall != null && (
+    <div class="moreof-hero-item-score">
+      <DexaBadge score={item.overall} />
+    </div>
+  )}
+
+  {item.srcset && (
+    <img
+      loading="lazy"
+      decoding="async"
+      src={`${item.heroPath}_s.webp`}
+      srcset={item.srcset}
+      sizes="(min-width: 1150px) 350px, (min-width: 600px) 33vw, 100vw"
+      alt={item.title}
+      class="eg-hf__img"
+    />
+  )}
+
+  <div class="eg-hf__content">
+    <div class="eg-hf__top">
+      <span class="eg-hf__tag item-tag">
+        {item.categoryLabel}
+      </span>
+      <h3 class="eg-hf__title moreof-hf__sideTitle">{item.title}</h3>
+    </div>
+    {/* WHY no date: HBS feed_moreof.css .eg-hf__date { display: none } on dashboard cards */}
+  </div>
+</a>
+
+<style>
+  /* Port of feed_moreof.css — side card styling (right column) */
+  .eg-hf__card.moreof-hf__sideCard {
+    position: relative;
+    display: grid !important;
+    grid-template-rows: 1fr;
+    border-radius: 6px;
+    overflow: hidden;
+    background: var(--section-darkest-background-color);
+    box-shadow: var(--card-shadow);
+    text-decoration: none;
+    color: var(--color-text-on-accent); /* WHY: text sits on dark gradient overlay — must stay white in all themes */
+    transition: box-shadow 0.2s ease;
+  }
+
+  .eg-hf__card.moreof-hf__sideCard:hover {
+    box-shadow: var(--card-shadow-hover);
+  }
+
+  /* Score badge positioning (container-query sized) */
+  .eg-hf__card.moreof-hf__sideCard {
+    container-type: size;
+  }
+
+  .moreof-hero-item-score {
+    position: absolute;
+    top: 12px;
+    left: 10px;
+    right: auto;
+    bottom: auto;
+    --dexa-size: clamp(16px, 9.9cqh, 29px); /* WHY: DexaBadge reads --dexa-size; HBS dexa inherits font-size from parent */
+    font-size: clamp(16px, 9.9cqh, 29px);
+    z-index: 3;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+  }
+
+  /* WHY position:absolute — HBS uses .eg-hf__img_rc (not grid placement).
+     Image fills the card via absolute positioning, matching HBS exactly. */
+  .eg-hf__img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+  }
+
+  /* Gradient overlay via ::after */
+  .eg-hf__card.moreof-hf__sideCard::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg,
+      rgba(0, 0, 0, 0) 10%,
+      rgba(0, 0, 0, .375) 55%,
+      rgba(0, 0, 0, .85) 85%,
+      rgba(0, 0, 0, .92) 100%);
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .eg-hf__content {
+    grid-row: 1;
+    grid-column: 1;
+    align-self: end;
+    position: relative;
+    z-index: 2;
+    padding: 1rem 1rem 1.1rem 1rem;
+    margin: 0 !important;
+    background: none;
+  }
+
+  .eg-hf__tag {
+    color: var(--card-color, inherit);
+    font-weight: var(--font-weight7);
+    font-size: var(--ft-12-11);
+    text-transform: uppercase;
+  }
+
+  .moreof-hf__sideTitle {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin: 0;
+    font-family: var(--identity-font);
+    font-weight: var(--font-weight8);
+    letter-spacing: -0.5px;
+    line-height: 1.15;
+    font-size: var(--ft-20-17);
+    color: var(--color-text-on-accent); /* WHY: on dark gradient overlay */
+  }
+
+  /* Hover underline on side card title */
+  .eg-hf__card.moreof-hf__sideCard:hover .moreof-hf__sideTitle,
+  .eg-hf__card.moreof-hf__sideCard:focus .moreof-hf__sideTitle,
+  .eg-hf__card.moreof-hf__sideCard:focus-visible .moreof-hf__sideTitle {
+    text-decoration: underline;
+    text-underline-offset: 2px;
+    text-decoration-thickness: from-font;
+    text-decoration-skip-ink: auto;
+  }
+
+  /* ── Responsive: phone stack ≤700px ── */
+  @media (max-width: 700px) {
+    .eg-hf__card.moreof-hf__sideCard {
+      aspect-ratio: 5 / 3;
+    }
+
+    .eg-hf__content {
+      padding: 1.25rem 1.5rem 1.5rem 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      width: unset;
+    }
+
+    .eg-hf__tag {
+      font-size: var(--fm-12-11);
+    }
+
+    .moreof-hf__sideTitle {
+      margin-top: 3px;
+      font-size: var(--fm-24-18);
+    }
+
+    .moreof-hero-item-score {
+      --dexa-size: clamp(19px, 5.6667px + 3.3333vw, 29px);
+      font-size: clamp(19px, 5.6667px + 3.3333vw, 29px);
+    }
+  }
+</style>

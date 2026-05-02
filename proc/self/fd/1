@@ -1,0 +1,862 @@
+"use strict";
+import { Fragment, jsx, jsxs } from "react/jsx-runtime";
+import { useState, useEffect, useRef, useCallback } from "react";
+const T = {
+  bg: "#070d0f",
+  panel: "#0b1518",
+  border: "rgba(20,200,160,0.14)",
+  borderB: "rgba(255,255,255,0.07)",
+  cyan: "#0ff5c8",
+  blue: "#22d3ee",
+  purple: "#818cf8",
+  orange: "#fb923c",
+  red: "#f87171",
+  yellow: "#fbbf24",
+  green: "#34d399",
+  dim: "rgba(255,255,255,0.22)",
+  dimmer: "rgba(255,255,255,0.1)"
+};
+const API_BASE = "http://localhost:8420";
+const STAGES = [
+  { key: "watcher", label: "File Watch", sub: "MDX/JSON \xB7 7 changes", icon: "\u{1F441}", col: T.cyan },
+  { key: "recommender", label: "Recommender", sub: "Python \xB7 embeddings", icon: "\u{1F9E0}", col: T.yellow },
+  { key: "building", label: "Astro Build", sub: "npm run build \xB7 SSG", icon: "\u26A1", col: T.blue },
+  { key: "syncing", label: "S3 Sync", sub: "aws s3 sync --delete", icon: "\u2601", col: T.purple },
+  { key: "cdn", label: "CDN Invalidate", sub: "CloudFront \xB7 /dist/*", icon: "\u{1F310}", col: T.green },
+  { key: "lambda", label: "Lambda Deploy", sub: "search-api-auth \xB7 zip", icon: "\u03BB", col: T.orange },
+  { key: "done", label: "Live", sub: "All systems green", icon: "\u2714", col: T.cyan }
+];
+const STAGE_ORDER = STAGES.map((s) => s.key);
+const MATRIX_PAGES = [
+  { id: 1, path: "/monitors/lg-ultragear-27gp950/index.html", cat: "monitors", status: "success", pct: 100, elapsed: "0m 18s", changed: true },
+  { id: 2, path: "/monitors/dell-alienware-aw3423dw/index.html", cat: "monitors", status: "success", pct: 100, elapsed: "0m 19s", changed: false },
+  { id: 3, path: "/monitors/samsung-odyssey-g9/index.html", cat: "monitors", status: "building", pct: 65, elapsed: "0m 14s", changed: false },
+  { id: 4, path: "/monitors/asus-rog-swift-pg42uq/index.html", cat: "monitors", status: "building", pct: 42, elapsed: "0m 14s", changed: false },
+  { id: 5, path: "/keyboards/logitech-g915-tkl/index.html", cat: "keyboards", status: "queued", pct: 0, elapsed: "0m 00s", changed: true },
+  { id: 6, path: "/keyboards/keychron-q1-pro/index.html", cat: "keyboards", status: "queued", pct: 0, elapsed: "0m 00s", changed: true },
+  { id: 7, path: "/keyboards/ducky-one-3/index.html", cat: "keyboards", status: "queued", pct: 0, elapsed: "0m 00s", changed: false },
+  { id: 8, path: "/mice/logitech-g-pro-x-superlight/index.html", cat: "mice", status: "success", pct: 100, elapsed: "0m 21s", changed: false },
+  { id: 9, path: "/mice/razer-deathadder-v3/index.html", cat: "mice", status: "success", pct: 100, elapsed: "0m 16s", changed: true },
+  { id: 10, path: "/headsets/steelseries-arctis-nova-pro/index.html", cat: "headsets", status: "queued", pct: 0, elapsed: "0m 00s", changed: false },
+  { id: 11, path: "/news/best-monitors-2025/index.html", cat: "news", status: "success", pct: 100, elapsed: "0m 08s", changed: true },
+  { id: 12, path: "/news/mechanical-keyboards-guide/index.html", cat: "news", status: "failed", pct: 27, elapsed: "1m 23s", changed: false },
+  { id: 13, path: "/client/central_degls.27nffulfft.txt", cat: "assets", status: "success", pct: 100, elapsed: "0m 14s", changed: false },
+  { id: 14, path: "/client/central_degls/f5.3fnfulfft.ixt", cat: "assets", status: "building", pct: 36, elapsed: "0m 14s", changed: false },
+  { id: 15, path: "/client/central_degl/span.cats_testfreac.txt", cat: "assets", status: "failed", pct: 38, elapsed: "1m 23s", changed: false }
+];
+const LAMBDAS = [
+  { name: "search-api-auth", runtime: "Node 20.x", mem: "512MB", timeout: "15s", status: "watching", arn: "arn:aws:lambda:us-east-1:123456789:function:search-api-auth", changed: true },
+  { name: "product-indexer", runtime: "Python 3.11", mem: "1024MB", timeout: "60s", status: "idle", arn: "arn:aws:lambda:us-east-1:123456789:function:product-indexer", changed: false },
+  { name: "cdn-cache-warmer", runtime: "Node 20.x", mem: "256MB", timeout: "30s", status: "idle", arn: "arn:aws:lambda:us-east-1:123456789:function:cdn-cache-warmer", changed: false }
+];
+function classifyLineKind(line) {
+  if (line.startsWith("upload:")) return "upload";
+  if (line.startsWith("delete:")) return "delete";
+  if (line.includes("error") || line.includes("FAILED")) return "delete";
+  if (line.includes("complete") || line.includes("Complete") || line.includes("Done")) return "done";
+  if (line.includes("/index.html") || line.includes(".html")) return "built";
+  if (line.startsWith("[") || line.startsWith(">") || line.startsWith("Starting:")) return "info";
+  return "ok";
+}
+function timeAgo(iso) {
+  const diff = Date.now() - new Date(iso).getTime();
+  const mins = Math.floor(diff / 6e4);
+  if (mins < 1) return "just now";
+  if (mins < 60) return `${mins}m ago`;
+  const hrs = Math.floor(mins / 60);
+  if (hrs < 24) return `${hrs}h ago`;
+  return `${Math.floor(hrs / 24)}d ago`;
+}
+const CATS = [
+  { path: "/monitors", color: T.blue, target: 142, icon: "\u{1F5A5}", current: 0 },
+  { path: "/keyboards", color: T.purple, target: 89, icon: "\u2328", current: 0 },
+  { path: "/mice", color: T.green, target: 67, icon: "\u{1F5B1}", current: 0 },
+  { path: "/headsets", color: T.orange, target: 53, icon: "\u{1F3A7}", current: 0 },
+  { path: "/news", color: "#f472b6", target: 15, icon: "\u{1F4F0}", current: 0 }
+];
+const HISTORY = [
+  { id: "d4f2a", time: "2h 14m ago", dur: "22.1s", pages: 366, ok: true, type: "Quick" },
+  { id: "b8e91", time: "Yesterday", dur: "51.3s", pages: 364, ok: true, type: "Full" },
+  { id: "c3a07", time: "2d ago", dur: "19.8s", pages: 362, ok: true, type: "Quick" },
+  { id: "f1d55", time: "3d ago", dur: "23.4s", pages: 362, ok: false, type: "Quick" }
+];
+function Ring({ value, max, color, size = 44, stroke = 4 }) {
+  const r = (size - stroke) / 2, circ = 2 * Math.PI * r, pct = max > 0 ? Math.min(value / max, 1) : 0;
+  return /* @__PURE__ */ jsxs("svg", { width: size, height: size, style: { transform: "rotate(-90deg)", flexShrink: 0 }, children: [
+    /* @__PURE__ */ jsx("circle", { cx: size / 2, cy: size / 2, r, fill: "none", stroke: "rgba(255,255,255,0.06)", strokeWidth: stroke }),
+    /* @__PURE__ */ jsx(
+      "circle",
+      {
+        cx: size / 2,
+        cy: size / 2,
+        r,
+        fill: "none",
+        stroke: color,
+        strokeWidth: stroke,
+        strokeDasharray: circ,
+        strokeDashoffset: circ * (1 - pct),
+        strokeLinecap: "round",
+        style: { transition: "stroke-dashoffset 0.25s ease", filter: `drop-shadow(0 0 4px ${color})` }
+      }
+    )
+  ] });
+}
+function ProgressBar({ pct, color, h = 3 }) {
+  return /* @__PURE__ */ jsx("div", { style: { height: h, background: "rgba(255,255,255,0.06)", borderRadius: h, overflow: "hidden", width: "100%" }, children: /* @__PURE__ */ jsx("div", { style: { height: "100%", background: color, borderRadius: h, width: `${pct}%`, transition: "width 0.4s ease", boxShadow: `0 0 5px ${color}88` } }) });
+}
+const STATUS_CFG = {
+  success: { color: "#34d399", bg: "rgba(52,211,153,0.12)", label: "SUCCESS" },
+  building: { color: "#22d3ee", bg: "rgba(34,211,238,0.12)", label: "BUILDING" },
+  queued: { color: "#fbbf24", bg: "rgba(251,191,36,0.12)", label: "QUEUED" },
+  failed: { color: "#f87171", bg: "rgba(248,113,113,0.12)", label: "FAILED" },
+  idle: { color: "rgba(255,255,255,0.25)", bg: "rgba(255,255,255,0.05)", label: "IDLE" },
+  watching: { color: "#0ff5c8", bg: "rgba(15,245,200,0.1)", label: "WATCHING" },
+  deploying: { color: "#fb923c", bg: "rgba(251,146,60,0.12)", label: "DEPLOYING" }
+};
+function StatusBadge({ status, small }) {
+  const cfg = STATUS_CFG[status] || STATUS_CFG.idle;
+  return /* @__PURE__ */ jsxs("span", { style: {
+    display: "inline-flex",
+    alignItems: "center",
+    gap: 4,
+    background: cfg.bg,
+    color: cfg.color,
+    border: `1px solid ${cfg.color}44`,
+    borderRadius: 4,
+    padding: small ? "1px 6px" : "3px 8px",
+    fontFamily: "monospace",
+    fontSize: small ? 7 : 9,
+    fontWeight: 700,
+    letterSpacing: 0.8,
+    whiteSpace: "nowrap"
+  }, children: [
+    status === "building" && /* @__PURE__ */ jsx("span", { style: { width: 5, height: 5, borderRadius: "50%", border: `1.5px solid ${cfg.color}`, borderTopColor: "transparent", animation: "spin 0.7s linear infinite", display: "inline-block" } }),
+    status === "watching" && /* @__PURE__ */ jsx("span", { style: { width: 5, height: 5, borderRadius: "50%", background: cfg.color, boxShadow: `0 0 5px ${cfg.color}`, display: "inline-block", animation: "pulse 1.5s ease-in-out infinite" } }),
+    cfg.label
+  ] });
+}
+function TermLine({ text, kind }) {
+  const c = { ok: T.green, built: T.blue, done: T.cyan, info: T.yellow, upload: T.purple, delete: T.red }[kind] || "rgba(255,255,255,0.4)";
+  return /* @__PURE__ */ jsx("div", { style: {
+    fontFamily: "monospace",
+    fontSize: 10,
+    lineHeight: 1.7,
+    color: c,
+    animation: "slideUp 0.12s ease forwards",
+    opacity: 0,
+    whiteSpace: "nowrap",
+    overflow: "hidden",
+    textOverflow: "ellipsis",
+    textShadow: ["ok", "upload", "done", "built"].includes(kind) ? `0 0 8px ${c}44` : "none"
+  }, children: text });
+}
+function Panel({ title, icon, children, accent, style: sx }) {
+  return /* @__PURE__ */ jsxs("div", { style: { background: T.panel, border: `1px solid ${accent || T.border}`, borderRadius: 12, overflow: "hidden", ...sx }, children: [
+    /* @__PURE__ */ jsxs("div", { style: { padding: "9px 14px", borderBottom: `1px solid ${accent || T.border}`, display: "flex", alignItems: "center", gap: 7, background: "rgba(0,0,0,0.2)" }, children: [
+      icon && /* @__PURE__ */ jsx("span", { style: { fontSize: 13 }, children: icon }),
+      /* @__PURE__ */ jsx("span", { style: { fontFamily: "monospace", fontSize: 9, fontWeight: 700, color: accent || T.cyan, letterSpacing: 2, textTransform: "uppercase" }, children: title })
+    ] }),
+    /* @__PURE__ */ jsx("div", { style: { padding: "12px 14px" }, children })
+  ] });
+}
+function MatrixRow({ row, isRunning }) {
+  const live = isRunning && row.status === "building";
+  const [animPct, setAnimPct] = useState(row.pct);
+  useEffect(() => {
+    if (live) {
+      const id = setInterval(() => setAnimPct((p) => Math.min(p + 1, 99)), 350);
+      return () => clearInterval(id);
+    } else setAnimPct(row.pct);
+  }, [live, row.pct]);
+  const catColor = { monitors: T.blue, keyboards: T.purple, mice: T.green, headsets: T.orange, news: "#f472b6", assets: "rgba(255,255,255,0.3)" }[row.cat] || T.dim;
+  const pctColor = row.status === "success" ? T.green : row.status === "building" ? T.blue : row.status === "failed" ? T.red : T.yellow;
+  return /* @__PURE__ */ jsxs("div", { style: {
+    display: "grid",
+    gridTemplateColumns: "90px 1fr 160px 80px 64px 90px",
+    alignItems: "center",
+    gap: 10,
+    padding: "6px 14px",
+    borderBottom: `1px solid rgba(255,255,255,0.04)`,
+    background: row.changed ? "rgba(15,245,200,0.025)" : "transparent",
+    transition: "background 0.2s"
+  }, children: [
+    /* @__PURE__ */ jsx(StatusBadge, { status: live ? "building" : row.status }),
+    /* @__PURE__ */ jsxs("div", { style: { display: "flex", alignItems: "center", gap: 6, minWidth: 0 }, children: [
+      /* @__PURE__ */ jsx("span", { style: { width: 3, height: 3, borderRadius: "50%", background: catColor, flexShrink: 0, boxShadow: `0 0 4px ${catColor}` } }),
+      /* @__PURE__ */ jsx("span", { style: { fontFamily: "monospace", fontSize: 9.5, color: "rgba(255,255,255,0.6)", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }, children: row.path }),
+      row.changed && /* @__PURE__ */ jsx("span", { style: { fontFamily: "monospace", fontSize: 7, color: T.cyan, background: "rgba(15,245,200,0.12)", padding: "0 4px", borderRadius: 2, flexShrink: 0 }, children: "CHANGED" })
+    ] }),
+    /* @__PURE__ */ jsxs("div", { style: { display: "flex", alignItems: "center", gap: 6 }, children: [
+      /* @__PURE__ */ jsx(ProgressBar, { pct: live ? animPct : row.pct, color: pctColor, h: 4 }),
+      /* @__PURE__ */ jsxs("span", { style: { fontFamily: "monospace", fontSize: 9, color: pctColor, width: 28, textAlign: "right", flexShrink: 0 }, children: [
+        live ? animPct : row.pct,
+        "%"
+      ] })
+    ] }),
+    /* @__PURE__ */ jsx("span", { style: { fontFamily: "monospace", fontSize: 9, color: "rgba(255,255,255,0.35)", textAlign: "center" }, children: row.elapsed }),
+    /* @__PURE__ */ jsxs("div", { style: { display: "flex", gap: 4, justifyContent: "center" }, children: [
+      /* @__PURE__ */ jsx("button", { style: { background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.1)", borderRadius: 3, padding: "2px 5px", cursor: "pointer", color: "rgba(255,255,255,0.3)", fontFamily: "monospace", fontSize: 8 }, children: "\u{1F4CB}" }),
+      /* @__PURE__ */ jsx("button", { style: { background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.1)", borderRadius: 3, padding: "2px 5px", cursor: "pointer", color: "rgba(248,113,113,0.6)", fontFamily: "monospace", fontSize: 8 }, children: "\u2715" })
+    ] }),
+    /* @__PURE__ */ jsx("button", { style: {
+      background: row.status === "failed" ? "rgba(248,113,113,0.1)" : "rgba(255,255,255,0.04)",
+      border: `1px solid ${row.status === "failed" ? "rgba(248,113,113,0.3)" : "rgba(255,255,255,0.09)"}`,
+      borderRadius: 4,
+      padding: "2px 8px",
+      cursor: "pointer",
+      color: row.status === "failed" ? T.red : "rgba(255,255,255,0.28)",
+      fontFamily: "monospace",
+      fontSize: 8,
+      letterSpacing: 0.5
+    }, children: row.status === "failed" ? "Retry Build" : "Cancel Build" })
+  ] });
+}
+function LambdaCard({ fn, isDeploying }) {
+  const s = isDeploying && fn.changed ? "deploying" : fn.status;
+  return /* @__PURE__ */ jsxs("div", { style: {
+    background: s === "watching" ? "rgba(15,245,200,0.04)" : s === "deploying" ? "rgba(251,146,60,0.05)" : "rgba(255,255,255,0.02)",
+    border: `1px solid ${s === "watching" ? T.cyan + "33" : s === "deploying" ? T.orange + "33" : T.borderB}`,
+    borderRadius: 9,
+    padding: "11px 13px"
+  }, children: [
+    /* @__PURE__ */ jsxs("div", { style: { display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 8 }, children: [
+      /* @__PURE__ */ jsxs("div", { style: { display: "flex", alignItems: "center", gap: 7 }, children: [
+        /* @__PURE__ */ jsx("span", { style: { fontFamily: "monospace", fontSize: 12, color: T.orange }, children: "\u03BB" }),
+        /* @__PURE__ */ jsx("span", { style: { fontFamily: "monospace", fontSize: 11, fontWeight: 700, color: "rgba(255,255,255,0.8)" }, children: fn.name }),
+        fn.changed && /* @__PURE__ */ jsx("span", { style: { fontSize: 7, fontFamily: "monospace", color: T.cyan, background: "rgba(15,245,200,0.12)", padding: "1px 5px", borderRadius: 2 }, children: "CHANGED" })
+      ] }),
+      /* @__PURE__ */ jsx(StatusBadge, { status: s, small: true })
+    ] }),
+    /* @__PURE__ */ jsx("div", { style: { display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 6, marginBottom: 8 }, children: [[fn.runtime, "runtime"], [fn.mem, "memory"], [fn.timeout, "timeout"]].map(([v, l]) => /* @__PURE__ */ jsxs("div", { style: { background: "rgba(0,0,0,0.2)", borderRadius: 5, padding: "5px 7px", textAlign: "center" }, children: [
+      /* @__PURE__ */ jsx("div", { style: { fontSize: 10, fontFamily: "monospace", color: "rgba(255,255,255,0.6)", fontWeight: 700 }, children: v }),
+      /* @__PURE__ */ jsx("div", { style: { fontSize: 7, fontFamily: "monospace", color: "rgba(255,255,255,0.25)", marginTop: 1 }, children: l })
+    ] }, l)) }),
+    /* @__PURE__ */ jsx("div", { style: { fontFamily: "monospace", fontSize: 7.5, color: "rgba(255,255,255,0.2)", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }, children: fn.arn }),
+    s === "deploying" && /* @__PURE__ */ jsxs("div", { style: { marginTop: 8 }, children: [
+      /* @__PURE__ */ jsx(ProgressBar, { pct: 75, color: T.orange, h: 3 }),
+      /* @__PURE__ */ jsx("div", { style: { fontFamily: "monospace", fontSize: 8, color: T.orange, marginTop: 4 }, children: "Packaging & uploading\u2026" })
+    ] })
+  ] });
+}
+export default function App() {
+  const [phase, setPhase] = useState("idle");
+  const [termLines, setTerm] = useState([]);
+  const [cats, setCats] = useState(CATS.map((c) => ({ ...c })));
+  const [elapsed, setElapsed] = useState(0);
+  const [uploaded, setUploaded] = useState(0);
+  const [deleted, setDeleted] = useState(0);
+  const [bytesMB, setBytes] = useState(0);
+  const [cdnCleared, setCdn] = useState(0);
+  const [lambdaVer, setLambdaVer] = useState(46);
+  const [matrixRows, setMatrix] = useState(MATRIX_PAGES);
+  const [activeTab, setActiveTab] = useState("terminal");
+  const [pendingCount, setPendingCount] = useState(0);
+  const [pendingFiles, setPendingFiles] = useState([]);
+  const termRef = useRef(null);
+  const iRef = useRef(null);
+  const abortRef = useRef(null);
+  const kill = () => {
+    clearInterval(iRef.current);
+    if (abortRef.current) {
+      abortRef.current.abort();
+      abortRef.current = null;
+    }
+  };
+  const reset = () => {
+    kill();
+    setPhase("idle");
+    setTerm([]);
+    setElapsed(0);
+    setCats(CATS.map((c) => ({ ...c, current: 0 })));
+    setUploaded(0);
+    setDeleted(0);
+    setBytes(0);
+    setCdn(0);
+    setLambdaVer(46);
+    setMatrix(MATRIX_PAGES);
+  };
+  const handleSSELine = useCallback(({ stage, source, line }) => {
+    const kind = classifyLineKind(line);
+    setTerm((prev) => [...prev, { text: line, kind, id: Math.random() }]);
+    if (stage === "build") setPhase("building");
+    if (stage === "sync") setPhase("syncing");
+    if (stage === "done") {
+      setPhase("done");
+      clearInterval(iRef.current);
+    }
+    if (stage === "sync") {
+      if (line.startsWith("upload:")) {
+        setUploaded((p) => p + 1);
+        setBytes((p) => +(p + 0.057).toFixed(2));
+      }
+      if (line.startsWith("delete:")) setDeleted((p) => p + 1);
+    }
+    if (stage === "build" && line.includes("/index.html")) {
+      setCats((prev) => {
+        for (const cat of prev) {
+          if (line.includes(cat.path)) {
+            return prev.map((c) => c.path === cat.path ? { ...c, current: Math.min(c.current + 1, c.target) } : c);
+          }
+        }
+        return prev;
+      });
+    }
+  }, []);
+  const startLiveBuild = useCallback((mode) => {
+    reset();
+    setPhase("building");
+    let tick = 0;
+    iRef.current = setInterval(() => {
+      tick = +(tick + 0.1).toFixed(1);
+      setElapsed(tick);
+    }, 100);
+    const controller = new AbortController();
+    abortRef.current = controller;
+    fetch(`${API_BASE}/api/build/${mode}`, { method: "POST", signal: controller.signal }).then((response) => {
+      const reader = response.body.getReader();
+      const decoder = new TextDecoder();
+      let buffer = "";
+      function read() {
+        reader.read().then(({ done, value }) => {
+          if (done) {
+            setPhase((prev) => prev === "done" ? prev : "idle");
+            clearInterval(iRef.current);
+            abortRef.current = null;
+            return;
+          }
+          buffer += decoder.decode(value, { stream: true });
+          const chunks = buffer.split("\n\n");
+          buffer = chunks.pop();
+          for (const chunk of chunks) {
+            if (!chunk.startsWith("data: ")) continue;
+            try {
+              handleSSELine(JSON.parse(chunk.slice(6)));
+            } catch (_) {
+            }
+          }
+          read();
+        }).catch(() => {
+          setPhase("idle");
+          clearInterval(iRef.current);
+          abortRef.current = null;
+        });
+      }
+      read();
+    }).catch((err) => {
+      if (err.name !== "AbortError") {
+        setTerm((prev) => [...prev, { text: `Connection error: ${err.message}`, kind: "delete", id: Math.random() }]);
+      }
+      setPhase("idle");
+      clearInterval(iRef.current);
+      abortRef.current = null;
+    });
+  }, [handleSSELine]);
+  useEffect(() => {
+    const poll = () => {
+      fetch(`${API_BASE}/api/status`).then((r) => r.json()).then((data) => {
+        setPendingCount(data.count);
+        setPendingFiles(data.files || []);
+      }).catch(() => {
+      });
+    };
+    poll();
+    const interval = setInterval(poll, 1e4);
+    return () => clearInterval(interval);
+  }, []);
+  useEffect(() => {
+    if (termRef.current) termRef.current.scrollTop = termRef.current.scrollHeight;
+  }, [termLines]);
+  useEffect(() => () => kill(), []);
+  const isRunning = ["recommender", "building", "syncing", "cdn", "lambda"].includes(phase);
+  const totalPages = cats.reduce((a, c) => a + c.current, 0);
+  const stageState = (key) => {
+    if (phase === "idle") return "idle";
+    const pi = STAGE_ORDER.indexOf(phase), ki = STAGE_ORDER.indexOf(key);
+    if (key === "watcher") return "done";
+    if (ki < pi) return "done";
+    if (ki === pi) return "active";
+    return "idle";
+  };
+  const pCol = { idle: "rgba(255,255,255,0.2)", recommender: T.yellow, building: T.blue, syncing: T.purple, cdn: T.green, lambda: T.orange, done: T.cyan }[phase];
+  const pLabel = { idle: "STANDBY", recommender: "RECOMMENDER", building: "ASTRO BUILD", syncing: "S3 SYNC", cdn: "CDN INVALIDATE", lambda: "LAMBDA DEPLOY", done: "\u2714 COMPLETE" }[phase];
+  const pPct = { idle: "0%", recommender: "15%", building: "40%", syncing: "65%", cdn: "82%", lambda: "94%", done: "100%" }[phase];
+  return /* @__PURE__ */ jsxs(Fragment, { children: [
+    /* @__PURE__ */ jsx("style", { children: `
+        @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Exo+2:wght@600;700;800;900&display=swap');
+        *{box-sizing:border-box;margin:0;padding:0}
+        body{background:${T.bg}}
+        ::-webkit-scrollbar{width:3px;height:3px}
+        ::-webkit-scrollbar-track{background:transparent}
+        ::-webkit-scrollbar-thumb{background:rgba(15,245,200,0.15);border-radius:2px}
+        @keyframes slideUp{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:translateY(0)}}
+        @keyframes sweep{0%{transform:translateX(-100%)}100%{transform:translateX(350%)}}
+        @keyframes pulse{0%,100%{opacity:.5;transform:scale(1)}50%{opacity:1;transform:scale(1.08)}}
+        @keyframes spin{to{transform:rotate(360deg)}}
+        @keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
+        @keyframes rise{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+        @keyframes scanPulse{0%,100%{box-shadow:0 0 0 rgba(15,245,200,0)}50%{box-shadow:0 0 20px rgba(15,245,200,0.15)}}
+        button:hover:not(:disabled){filter:brightness(1.15);transform:translateY(-1px)}
+        button:active:not(:disabled){transform:translateY(0)}
+        button{transition:all 0.15s ease;cursor:pointer}
+        .tab{background:transparent;border:none;padding:7px 14px;font-family:monospace;font-size:9px;letter-spacing:1.5px;text-transform:uppercase;cursor:pointer;transition:all 0.15s ease}
+        .tab.active{color:${T.cyan};border-bottom:2px solid ${T.cyan}}
+        .tab:not(.active){color:rgba(255,255,255,0.28);border-bottom:2px solid transparent}
+        .tab:hover:not(.active){color:rgba(255,255,255,0.5)}
+      ` }),
+    /* @__PURE__ */ jsxs("div", { style: {
+      minHeight: "100vh",
+      background: T.bg,
+      color: "#fff",
+      fontFamily: "'Exo 2',sans-serif",
+      backgroundImage: `radial-gradient(ellipse 60% 30% at 50% 0%, rgba(15,245,200,0.045) 0%, transparent 70%)`
+    }, children: [
+      /* @__PURE__ */ jsxs("div", { style: {
+        padding: "0 20px",
+        height: 50,
+        borderBottom: `1px solid ${T.border}`,
+        display: "flex",
+        alignItems: "center",
+        gap: 12,
+        background: "rgba(7,13,15,0.97)",
+        position: "sticky",
+        top: 0,
+        zIndex: 200
+      }, children: [
+        /* @__PURE__ */ jsx("div", { style: {
+          fontFamily: "'Share Tech Mono',monospace",
+          fontSize: 17,
+          letterSpacing: 4,
+          background: `linear-gradient(135deg,${T.cyan},${T.blue})`,
+          WebkitBackgroundClip: "text",
+          WebkitTextFillColor: "transparent"
+        }, children: "DEPLOYCTL" }),
+        /* @__PURE__ */ jsx("div", { style: { width: 1, height: 16, background: T.border } }),
+        /* @__PURE__ */ jsx("div", { style: { fontSize: 9, fontFamily: "monospace", color: "rgba(255,255,255,0.28)", letterSpacing: 1 }, children: "techreviews-prod \xB7 us-east-1 \xB7 Astro 4.8.3 \xB7 Node 20.x" }),
+        pendingCount > 0 && /* @__PURE__ */ jsxs("div", { style: {
+          display: "flex",
+          alignItems: "center",
+          gap: 5,
+          background: "rgba(251,191,36,0.1)",
+          border: "1px solid rgba(251,191,36,0.3)",
+          borderRadius: 20,
+          padding: "3px 10px",
+          animation: "pulse 2.5s ease-in-out infinite"
+        }, children: [
+          /* @__PURE__ */ jsx("div", { style: { width: 5, height: 5, borderRadius: "50%", background: T.yellow, boxShadow: `0 0 7px ${T.yellow}` } }),
+          /* @__PURE__ */ jsxs("span", { style: { fontSize: 10, fontWeight: 700, color: T.yellow, fontFamily: "monospace" }, children: [
+            pendingCount,
+            " Pending File",
+            pendingCount !== 1 ? "s" : ""
+          ] })
+        ] }),
+        /* @__PURE__ */ jsx("div", { style: { flex: 1 } }),
+        (isRunning || phase === "done") && /* @__PURE__ */ jsxs("div", { style: { fontFamily: "monospace", fontSize: 11, color: pCol, padding: "3px 8px", background: pCol + "18", borderRadius: 4, border: `1px solid ${pCol}33` }, children: [
+          elapsed.toFixed(1),
+          "s"
+        ] }),
+        /* @__PURE__ */ jsxs("div", { style: {
+          fontFamily: "monospace",
+          fontSize: 8,
+          letterSpacing: 2,
+          textTransform: "uppercase",
+          color: pCol,
+          border: `1px solid ${pCol}44`,
+          background: pCol + "11",
+          padding: "4px 10px",
+          borderRadius: 4,
+          display: "flex",
+          alignItems: "center",
+          gap: 5
+        }, children: [
+          isRunning && /* @__PURE__ */ jsx("div", { style: { width: 7, height: 7, borderRadius: "50%", border: `2px solid ${pCol}`, borderTopColor: "transparent", animation: "spin 0.7s linear infinite" } }),
+          pLabel
+        ] }),
+        phase !== "idle" && /* @__PURE__ */ jsx("button", { onClick: reset, style: { fontSize: 8, fontFamily: "monospace", color: "rgba(255,255,255,0.3)", background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.09)", borderRadius: 4, padding: "4px 9px" }, children: "RESET" })
+      ] }),
+      /* @__PURE__ */ jsxs("div", { style: { padding: "14px 20px 24px", display: "flex", flexDirection: "column", gap: 12 }, children: [
+        /* @__PURE__ */ jsxs("div", { style: { display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 12 }, children: [
+          /* @__PURE__ */ jsxs(Panel, { title: "Deployment Vitals", icon: "\u{1F4CA}", accent: T.cyan + "44", children: [
+            /* @__PURE__ */ jsxs("div", { style: { display: "flex", alignItems: "center", gap: 12, marginBottom: 12 }, children: [
+              /* @__PURE__ */ jsxs("div", { style: { background: "rgba(15,245,200,0.08)", border: `1px solid ${T.cyan}33`, borderRadius: 10, padding: "10px 14px", textAlign: "center", flex: 1 }, children: [
+                /* @__PURE__ */ jsx("div", { style: { fontSize: 8, fontFamily: "monospace", color: T.dim, letterSpacing: 1, marginBottom: 4 }, children: "BUILD TIME" }),
+                /* @__PURE__ */ jsx("div", { style: { fontFamily: "'Share Tech Mono',monospace", fontSize: 26, color: T.cyan, textShadow: `0 0 20px ${T.cyan}`, lineHeight: 1 }, children: isRunning ? `${Math.floor(elapsed / 60)}m ${(elapsed % 60).toFixed(0).padStart(2, "0")}s` : phase === "done" ? `${Math.floor(elapsed / 60)}m ${(elapsed % 60).toFixed(0).padStart(2, "0")}s` : "--:--" })
+              ] }),
+              /* @__PURE__ */ jsxs("div", { style: { background: "rgba(248,113,113,0.06)", border: "1px solid rgba(248,113,113,0.2)", borderRadius: 10, padding: "10px 14px", textAlign: "center", flex: 1 }, children: [
+                /* @__PURE__ */ jsx("div", { style: { fontSize: 8, fontFamily: "monospace", color: T.dim, letterSpacing: 1, marginBottom: 4 }, children: "ERROR RATE" }),
+                /* @__PURE__ */ jsx("div", { style: { fontFamily: "'Share Tech Mono',monospace", fontSize: 26, color: T.red, textShadow: `0 0 20px ${T.red}`, lineHeight: 1 }, children: "0%" })
+              ] })
+            ] }),
+            [
+              { l: "Build ID", v: "12234-354379", c: T.dimmer },
+              { l: "Pending Files", v: "6,672 files", c: T.yellow },
+              { l: "Site Status", v: "s3://techreviews", c: T.green },
+              { l: "Images Built", v: "847 compressed", c: T.blue },
+              { l: "CDN Paths", v: `${cdnCleared} cleared`, c: T.green }
+            ].map((r) => /* @__PURE__ */ jsxs("div", { style: { display: "flex", justifyContent: "space-between", padding: "4px 0", borderBottom: `1px solid rgba(255,255,255,0.04)` }, children: [
+              /* @__PURE__ */ jsx("span", { style: { fontFamily: "monospace", fontSize: 9, color: "rgba(255,255,255,0.28)" }, children: r.l }),
+              /* @__PURE__ */ jsx("span", { style: { fontFamily: "monospace", fontSize: 9, color: r.c }, children: r.v })
+            ] }, r.l))
+          ] }),
+          /* @__PURE__ */ jsxs(Panel, { title: "S3 State & Sync", icon: "\u2601", accent: T.purple + "44", children: [
+            /* @__PURE__ */ jsx("div", { style: { display: "grid", gridTemplateColumns: "1fr 1fr", gap: 8, marginBottom: 10 }, children: [
+              { l: "Pending", v: 7, sub: "Step Changes", c: T.yellow },
+              { l: "Models Status", v: "Lambda", sub: "RDS", c: T.blue },
+              { l: "QuickCDN Mem", v: "Idle", sub: "", c: T.green },
+              { l: "CDN Invalidation", v: "Not\nNeeded", sub: "", c: "rgba(255,255,255,0.3)" }
+            ].map((m) => /* @__PURE__ */ jsxs("div", { style: { background: "rgba(255,255,255,0.02)", border: T.borderB, borderRadius: 7, padding: "8px", textAlign: "center" }, children: [
+              /* @__PURE__ */ jsx("div", { style: { fontSize: 8, fontFamily: "monospace", color: "rgba(255,255,255,0.25)", marginBottom: 3 }, children: m.l }),
+              /* @__PURE__ */ jsx("div", { style: { fontFamily: "'Share Tech Mono',monospace", fontSize: 18, color: m.c, lineHeight: 1.1, whiteSpace: "pre" }, children: m.v }),
+              m.sub && /* @__PURE__ */ jsxs("div", { style: { fontSize: 7, fontFamily: "monospace", color: T.cyan, marginTop: 2 }, children: [
+                "\xA9 ",
+                m.sub
+              ] })
+            ] }, m.l)) }),
+            /* @__PURE__ */ jsxs("div", { style: { background: "rgba(255,255,255,0.02)", border: `1px solid ${T.border}`, borderRadius: 7, padding: "8px 10px", marginBottom: 8 }, children: [
+              /* @__PURE__ */ jsx("div", { style: { fontSize: 8, fontFamily: "monospace", color: T.dim, letterSpacing: 1, marginBottom: 6 }, children: "MANAGED RESOURCES" }),
+              [
+                { l: "eggeer-tac", status: "deployed", col: T.green },
+                { l: "eg-tac-prod-operations", status: "running", col: T.blue }
+              ].map((r) => /* @__PURE__ */ jsxs("div", { style: { display: "flex", alignItems: "center", justifyContent: "space-between", padding: "3px 0", borderBottom: `1px solid rgba(255,255,255,0.04)` }, children: [
+                /* @__PURE__ */ jsx("span", { style: { fontFamily: "monospace", fontSize: 9, color: "rgba(255,255,255,0.5)" }, children: r.l }),
+                /* @__PURE__ */ jsx("span", { style: { fontSize: 7, fontFamily: "monospace", color: r.col, background: r.col + "18", padding: "1px 6px", borderRadius: 3 }, children: r.status })
+              ] }, r.l))
+            ] }),
+            /* @__PURE__ */ jsxs("div", { style: { display: "flex", gap: 8 }, children: [
+              /* @__PURE__ */ jsxs("div", { style: { flex: 1, background: "rgba(255,255,255,0.02)", borderRadius: 6, padding: "6px 8px" }, children: [
+                /* @__PURE__ */ jsx("div", { style: { fontSize: 7, fontFamily: "monospace", color: T.dim, marginBottom: 3 }, children: "UPLOADED" }),
+                /* @__PURE__ */ jsx("div", { style: { fontFamily: "'Share Tech Mono',monospace", fontSize: 20, color: T.purple, textShadow: `0 0 12px ${T.purple}` }, children: uploaded })
+              ] }),
+              /* @__PURE__ */ jsxs("div", { style: { flex: 1, background: "rgba(255,255,255,0.02)", borderRadius: 6, padding: "6px 8px" }, children: [
+                /* @__PURE__ */ jsx("div", { style: { fontSize: 7, fontFamily: "monospace", color: T.dim, marginBottom: 3 }, children: "DATA MB" }),
+                /* @__PURE__ */ jsx("div", { style: { fontFamily: "'Share Tech Mono',monospace", fontSize: 20, color: T.green, textShadow: `0 0 12px ${T.green}` }, children: bytesMB.toFixed(1) })
+              ] }),
+              /* @__PURE__ */ jsxs("div", { style: { flex: 1, background: "rgba(255,255,255,0.02)", borderRadius: 6, padding: "6px 8px" }, children: [
+                /* @__PURE__ */ jsx("div", { style: { fontSize: 7, fontFamily: "monospace", color: T.dim, marginBottom: 3 }, children: "DELETED" }),
+                /* @__PURE__ */ jsx("div", { style: { fontFamily: "'Share Tech Mono',monospace", fontSize: 20, color: T.red, textShadow: `0 0 12px ${T.red}` }, children: deleted })
+              ] })
+            ] })
+          ] }),
+          /* @__PURE__ */ jsxs(Panel, { title: "Lambda Command Center", icon: "\u03BB", accent: T.orange + "44", children: [
+            /* @__PURE__ */ jsx("div", { style: { fontSize: 8, fontFamily: "monospace", color: T.dim, marginBottom: 8 }, children: "Watches designated Lambda functions serving the search, auth, and user APIs" }),
+            /* @__PURE__ */ jsx("div", { style: { display: "flex", gap: 6, marginBottom: 10, flexWrap: "wrap" }, children: ["FUNCTION DEPLOY", "TRIGGER LOG", "RUNTIME CONFIG"].map((b) => /* @__PURE__ */ jsx("button", { style: { fontSize: 7, fontFamily: "monospace", color: T.orange, background: "rgba(251,146,60,0.08)", border: `1px solid ${T.orange}33`, borderRadius: 3, padding: "3px 8px", letterSpacing: 0.5 }, children: b }, b)) }),
+            /* @__PURE__ */ jsx("div", { style: { display: "flex", flexDirection: "column", gap: 7 }, children: LAMBDAS.map((fn) => /* @__PURE__ */ jsx(LambdaCard, { fn, isDeploying: phase === "lambda" }, fn.name)) }),
+            phase === "done" && /* @__PURE__ */ jsx("div", { style: { marginTop: 8, background: "rgba(52,211,153,0.07)", border: `1px solid ${T.green}33`, borderRadius: 6, padding: "7px 10px" }, children: /* @__PURE__ */ jsxs("div", { style: { fontSize: 8, fontFamily: "monospace", color: T.green }, children: [
+              "\u2714 search-api-auth \u2192 v",
+              lambdaVer,
+              " deployed \xB7 2.1s"
+            ] }) })
+          ] })
+        ] }),
+        /* @__PURE__ */ jsxs("div", { style: { display: "grid", gridTemplateColumns: "1fr 1fr auto auto auto", gap: 10, alignItems: "stretch" }, children: [
+          /* @__PURE__ */ jsxs("button", { onClick: () => !isRunning && startLiveBuild("quick"), disabled: isRunning, style: {
+            padding: "12px 18px",
+            borderRadius: 9,
+            border: "none",
+            background: isRunning ? "rgba(34,211,238,0.1)" : "linear-gradient(135deg,#0284c7,#22d3ee)",
+            color: "#fff",
+            fontFamily: "'Exo 2',sans-serif",
+            fontWeight: 800,
+            fontSize: 15,
+            letterSpacing: 1,
+            boxShadow: isRunning ? "none" : "0 0 28px rgba(34,211,238,0.35),0 4px 14px rgba(0,0,0,0.4)",
+            opacity: isRunning ? 0.45 : 1,
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between"
+          }, children: [
+            /* @__PURE__ */ jsx("span", { children: "\u26A1 Publish Updates" }),
+            /* @__PURE__ */ jsx("span", { style: { fontSize: 7, fontFamily: "monospace", opacity: 0.7, letterSpacing: 1 }, children: "INCREMENTAL" })
+          ] }),
+          /* @__PURE__ */ jsxs("button", { onClick: () => !isRunning && startLiveBuild("full"), disabled: isRunning, style: {
+            padding: "12px 18px",
+            borderRadius: 9,
+            border: `1.5px solid ${T.orange}55`,
+            background: isRunning ? "rgba(251,146,60,0.03)" : "rgba(251,146,60,0.08)",
+            color: T.orange,
+            fontFamily: "'Exo 2',sans-serif",
+            fontWeight: 800,
+            fontSize: 15,
+            letterSpacing: 1,
+            boxShadow: isRunning ? "none" : "0 0 18px rgba(251,146,60,0.18)",
+            opacity: isRunning ? 0.3 : 1,
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between"
+          }, children: [
+            /* @__PURE__ */ jsx("span", { children: "\u{1F525} Force Full Rebuild" }),
+            /* @__PURE__ */ jsx("span", { style: { fontSize: 7, fontFamily: "monospace", opacity: 0.6, letterSpacing: 1 }, children: "CLEAN & SYNC" })
+          ] }),
+          /* @__PURE__ */ jsx("button", { disabled: isRunning, style: {
+            padding: "12px 14px",
+            borderRadius: 9,
+            border: `1px solid rgba(15,245,200,0.2)`,
+            background: "rgba(15,245,200,0.04)",
+            color: T.cyan,
+            fontFamily: "monospace",
+            fontSize: 10,
+            opacity: isRunning ? 0.25 : 1,
+            letterSpacing: 0.5
+          }, children: "\u{1F310} Invalidate CDN" }),
+          /* @__PURE__ */ jsx("button", { disabled: isRunning, style: {
+            padding: "12px 14px",
+            borderRadius: 9,
+            border: `1px solid ${T.orange}33`,
+            background: "rgba(251,146,60,0.04)",
+            color: T.orange,
+            fontFamily: "monospace",
+            fontSize: 10,
+            opacity: isRunning ? 0.25 : 1,
+            letterSpacing: 0.5
+          }, children: "\u03BB Deploy Lambda" }),
+          /* @__PURE__ */ jsx("button", { onClick: () => {
+            if (isRunning) return;
+            fetch(`${API_BASE}/api/cache/purge`, { method: "POST" }).then((r) => r.json()).then((data) => {
+              setTerm((prev) => [...prev, {
+                text: `Cache purged: ${data.cleared.join(", ") || "already clean"}`,
+                kind: "ok",
+                id: Math.random()
+              }]);
+            }).catch((err) => {
+              setTerm((prev) => [...prev, {
+                text: `Cache purge failed: ${err.message}`,
+                kind: "delete",
+                id: Math.random()
+              }]);
+            });
+          }, disabled: isRunning, style: {
+            padding: "12px 14px",
+            borderRadius: 9,
+            border: "1px solid rgba(255,255,255,0.09)",
+            background: "transparent",
+            color: "rgba(255,255,255,0.25)",
+            fontFamily: "monospace",
+            fontSize: 10,
+            opacity: isRunning ? 0.2 : 1
+          }, children: "\u2298 Purge Cache" })
+        ] }),
+        /* @__PURE__ */ jsxs("div", { style: { background: T.panel, border: `1px solid ${T.border}`, borderRadius: 12, padding: "12px 16px" }, children: [
+          /* @__PURE__ */ jsxs("div", { style: { display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 10 }, children: [
+            /* @__PURE__ */ jsxs("div", { children: [
+              /* @__PURE__ */ jsx("div", { style: { fontFamily: "monospace", fontSize: 9, fontWeight: 700, color: T.cyan, letterSpacing: 2, textTransform: "uppercase" }, children: "\u25C8 Operation Storyboard" }),
+              /* @__PURE__ */ jsx("div", { style: { fontFamily: "monospace", fontSize: 8, color: T.dim, marginTop: 2 }, children: "Timeline to the next deployment phases" })
+            ] }),
+            phase === "done" && /* @__PURE__ */ jsxs("span", { style: { fontFamily: "monospace", fontSize: 9, color: T.green, background: "rgba(52,211,153,0.1)", border: `1px solid ${T.green}33`, padding: "3px 10px", borderRadius: 4 }, children: [
+              "\u2714 All stages complete \xB7 ",
+              elapsed.toFixed(1),
+              "s"
+            ] })
+          ] }),
+          /* @__PURE__ */ jsx("div", { style: { display: "flex", alignItems: "flex-start", gap: 0, marginBottom: 10 }, children: STAGES.map((s, i) => {
+            const st = stageState(s.key);
+            const bc = st === "done" ? T.green : st === "active" ? s.col : "rgba(255,255,255,0.08)";
+            const tc = st === "done" ? T.green : st === "active" ? s.col : "rgba(255,255,255,0.25)";
+            return /* @__PURE__ */ jsxs("div", { style: { display: "flex", alignItems: "center", flex: 1 }, children: [
+              /* @__PURE__ */ jsxs("div", { style: {
+                flex: 1,
+                background: st === "done" ? "rgba(52,211,153,0.07)" : st === "active" ? s.col + "12" : "rgba(255,255,255,0.02)",
+                border: `1.5px solid ${bc}`,
+                borderRadius: 9,
+                padding: "9px 11px",
+                boxShadow: st === "active" ? `0 0 18px ${s.col}22` : "none",
+                transition: "all 0.4s ease",
+                position: "relative",
+                overflow: "hidden"
+              }, children: [
+                st === "active" && /* @__PURE__ */ jsx("div", { style: { position: "absolute", inset: 0, background: `linear-gradient(90deg,transparent,${s.col}08,transparent)`, animation: "sweep 1.8s ease-in-out infinite" } }),
+                /* @__PURE__ */ jsxs("div", { style: { display: "flex", alignItems: "center", gap: 6, marginBottom: 4 }, children: [
+                  /* @__PURE__ */ jsx("span", { style: { fontSize: 16 }, children: s.icon }),
+                  /* @__PURE__ */ jsx("div", { style: { width: 6, height: 6, borderRadius: "50%", background: bc, boxShadow: st !== "idle" ? `0 0 7px ${bc}` : "none", transition: "all 0.3s" } })
+                ] }),
+                /* @__PURE__ */ jsx("div", { style: { fontFamily: "monospace", fontSize: 9, fontWeight: 700, color: tc, letterSpacing: 0.3 }, children: s.label }),
+                /* @__PURE__ */ jsx("div", { style: { fontFamily: "monospace", fontSize: 7.5, color: "rgba(255,255,255,0.2)", marginTop: 2 }, children: s.sub }),
+                st === "done" && /* @__PURE__ */ jsx("div", { style: { fontSize: 8, color: T.green, marginTop: 4, fontFamily: "monospace" }, children: "\u25CF Done" }),
+                st === "active" && /* @__PURE__ */ jsxs("div", { style: { fontSize: 8, color: s.col, marginTop: 4, fontFamily: "monospace", display: "flex", alignItems: "center", gap: 3 }, children: [
+                  /* @__PURE__ */ jsx("div", { style: { width: 5, height: 5, borderRadius: "50%", border: `1.5px solid ${s.col}`, borderTopColor: "transparent", animation: "spin 0.7s linear infinite" } }),
+                  "Running"
+                ] })
+              ] }),
+              i < STAGES.length - 1 && /* @__PURE__ */ jsx("div", { style: { padding: "0 3px", display: "flex", gap: 2, alignItems: "center", flexShrink: 0 }, children: [0, 1, 2].map((j) => /* @__PURE__ */ jsx("div", { style: { width: 3, height: 3, borderRadius: "50%", background: st === "done" ? T.green : "rgba(255,255,255,0.1)", transition: "background 0.3s ease", transitionDelay: `${j * 0.08}s` } }, j)) })
+            ] }, s.key);
+          }) }),
+          /* @__PURE__ */ jsx("div", { style: { height: 3, background: "rgba(255,255,255,0.05)", borderRadius: 2, overflow: "hidden" }, children: /* @__PURE__ */ jsx("div", { style: {
+            height: "100%",
+            background: `linear-gradient(90deg,${T.cyan},${T.blue},${T.purple},${T.green},${T.orange})`,
+            width: pPct,
+            transition: "width 1s ease",
+            boxShadow: `0 0 8px ${pCol}`
+          } }) })
+        ] }),
+        /* @__PURE__ */ jsxs("div", { style: { display: "grid", gridTemplateColumns: "1fr 300px", gap: 12 }, children: [
+          /* @__PURE__ */ jsxs("div", { style: { display: "flex", flexDirection: "column", gap: 12 }, children: [
+            /* @__PURE__ */ jsxs("div", { style: { background: T.panel, border: `1px solid ${T.border}`, borderRadius: 12, overflow: "hidden" }, children: [
+              /* @__PURE__ */ jsxs("div", { style: { display: "flex", alignItems: "center", borderBottom: `1px solid ${T.border}`, padding: "0 14px", background: "rgba(0,0,0,0.2)" }, children: [
+                [["terminal", "\u2B1B Terminal Log"], ["matrix", "\u229E Page Build Matrix"], ["categories", "\u25CE Category Rings"]].map(([k, l]) => /* @__PURE__ */ jsx("button", { className: `tab${activeTab === k ? " active" : ""}`, onClick: () => setActiveTab(k), children: l }, k)),
+                /* @__PURE__ */ jsx("div", { style: { flex: 1 } }),
+                /* @__PURE__ */ jsxs("span", { style: { fontFamily: "monospace", fontSize: 8, color: "rgba(255,255,255,0.15)", paddingRight: 8 }, children: [
+                  termLines.length,
+                  " log lines"
+                ] })
+              ] }),
+              activeTab === "terminal" && /* @__PURE__ */ jsxs("div", { children: [
+                /* @__PURE__ */ jsxs("div", { style: { display: "flex", alignItems: "center", gap: 6, padding: "6px 12px", background: "rgba(255,255,255,0.02)", borderBottom: `1px solid ${T.borderB}` }, children: [
+                  ["#f87171", "#fbbf24", "#34d399"].map((c, i) => /* @__PURE__ */ jsx("div", { style: { width: 8, height: 8, borderRadius: "50%", background: c, opacity: 0.7 } }, i)),
+                  /* @__PURE__ */ jsx("span", { style: { fontFamily: "monospace", fontSize: 9, color: "rgba(255,255,255,0.18)", marginLeft: 4 }, children: phase === "idle" ? "~ awaiting command" : phase === "recommender" ? "~ python recommender.py" : phase === "building" ? "~ npm run build" : phase === "syncing" ? "~ aws s3 sync" : phase === "cdn" ? "~ aws cloudfront create-invalidation" : phase === "lambda" ? "~ aws lambda update-function-code" : "~ deployment complete" })
+                ] }),
+                /* @__PURE__ */ jsxs("div", { ref: termRef, style: { maxHeight: 280, overflowY: "auto", padding: "10px 14px", display: "flex", flexDirection: "column", position: "relative", minHeight: 150 }, children: [
+                  phase === "idle" && !termLines.length && /* @__PURE__ */ jsx("div", { style: { position: "absolute", inset: 0, display: "flex", alignItems: "center", justifyContent: "center", flexDirection: "column", gap: 8 }, children: /* @__PURE__ */ jsxs("div", { style: { fontFamily: "monospace", fontSize: 11, color: "rgba(255,255,255,0.1)", letterSpacing: 3 }, children: [
+                    "AWAITING COMMAND",
+                    /* @__PURE__ */ jsx("span", { style: { animation: "blink 1s step-end infinite" }, children: "\u258A" })
+                  ] }) }),
+                  termLines.map((l) => /* @__PURE__ */ jsx(TermLine, { text: l.text, kind: l.kind }, l.id)),
+                  isRunning && /* @__PURE__ */ jsx("div", { style: { fontFamily: "monospace", fontSize: 10, color: pCol, animation: "blink 0.8s step-end infinite" }, children: "\u258A" })
+                ] }),
+                /* @__PURE__ */ jsx("div", { style: { height: 3, background: "rgba(255,255,255,0.04)" }, children: /* @__PURE__ */ jsx("div", { style: { height: "100%", background: `linear-gradient(90deg,${pCol},${pCol}88)`, width: pPct, transition: "width 1s ease", boxShadow: `0 0 6px ${pCol}` } }) })
+              ] }),
+              activeTab === "matrix" && /* @__PURE__ */ jsxs("div", { children: [
+                /* @__PURE__ */ jsx("div", { style: {
+                  display: "grid",
+                  gridTemplateColumns: "90px 1fr 160px 80px 64px 90px",
+                  gap: 10,
+                  padding: "6px 14px",
+                  borderBottom: `1px solid rgba(255,255,255,0.06)`,
+                  background: "rgba(0,0,0,0.15)"
+                }, children: ["STATUS", "PATH / FILE", "PROGRESS", "ELAPSED", "ACTIONS", ""].map((h, i) => /* @__PURE__ */ jsx("div", { style: { fontFamily: "monospace", fontSize: 8, color: "rgba(255,255,255,0.25)", letterSpacing: 1, textTransform: "uppercase" }, children: h }, i)) }),
+                /* @__PURE__ */ jsx("div", { style: { maxHeight: 320, overflowY: "auto" }, children: matrixRows.map((r) => /* @__PURE__ */ jsx(MatrixRow, { row: r, isRunning }, r.id)) }),
+                /* @__PURE__ */ jsx("div", { style: { padding: "6px 14px", borderTop: `1px solid rgba(255,255,255,0.05)`, display: "flex", gap: 12 }, children: [
+                  { l: "Success", c: T.green, n: matrixRows.filter((r) => r.status === "success").length },
+                  { l: "Building", c: T.blue, n: matrixRows.filter((r) => r.status === "building").length },
+                  { l: "Queued", c: T.yellow, n: matrixRows.filter((r) => r.status === "queued").length },
+                  { l: "Failed", c: T.red, n: matrixRows.filter((r) => r.status === "failed").length }
+                ].map((s) => /* @__PURE__ */ jsxs("div", { style: { display: "flex", alignItems: "center", gap: 4 }, children: [
+                  /* @__PURE__ */ jsx("div", { style: { width: 5, height: 5, borderRadius: "50%", background: s.c, boxShadow: `0 0 4px ${s.c}` } }),
+                  /* @__PURE__ */ jsxs("span", { style: { fontFamily: "monospace", fontSize: 8, color: "rgba(255,255,255,0.3)" }, children: [
+                    s.l,
+                    ": ",
+                    /* @__PURE__ */ jsx("strong", { style: { color: s.c }, children: s.n })
+                  ] })
+                ] }, s.l)) })
+              ] }),
+              activeTab === "categories" && /* @__PURE__ */ jsx("div", { style: { padding: "14px" }, children: isRunning || phase === "done" ? /* @__PURE__ */ jsx("div", { style: { display: "grid", gridTemplateColumns: "repeat(5,1fr)", gap: 10 }, children: cats.map((c) => /* @__PURE__ */ jsxs("div", { style: { background: "rgba(255,255,255,0.025)", border: "1px solid rgba(255,255,255,0.07)", borderRadius: 10, padding: "12px", display: "flex", flexDirection: "column", gap: 7, position: "relative", overflow: "hidden" }, children: [
+                /* @__PURE__ */ jsx("div", { style: { position: "absolute", bottom: 0, left: 0, right: 0, height: 2 }, children: /* @__PURE__ */ jsx("div", { style: { height: "100%", background: c.color, width: `${c.target > 0 ? Math.round(c.current / c.target * 100) : 0}%`, transition: "width 0.3s ease", boxShadow: `0 0 5px ${c.color}` } }) }),
+                /* @__PURE__ */ jsxs("div", { style: { display: "flex", alignItems: "center", justifyContent: "space-between" }, children: [
+                  /* @__PURE__ */ jsxs("div", { style: { display: "flex", alignItems: "center", gap: 5 }, children: [
+                    /* @__PURE__ */ jsx("span", { style: { fontSize: 13 }, children: c.icon }),
+                    /* @__PURE__ */ jsx("span", { style: { fontFamily: "monospace", fontSize: 8, color: "rgba(255,255,255,0.35)" }, children: c.path })
+                  ] }),
+                  /* @__PURE__ */ jsxs("span", { style: { fontFamily: "monospace", fontSize: 7, color: c.color, background: c.color + "20", padding: "1px 4px", borderRadius: 2 }, children: [
+                    c.target > 0 ? Math.round(c.current / c.target * 100) : 0,
+                    "%"
+                  ] })
+                ] }),
+                /* @__PURE__ */ jsxs("div", { style: { display: "flex", alignItems: "flex-end", justifyContent: "space-between", gap: 4 }, children: [
+                  /* @__PURE__ */ jsxs("div", { children: [
+                    /* @__PURE__ */ jsxs("div", { style: { fontSize: 24, fontWeight: 900, fontFamily: "monospace", color: c.color, textShadow: `0 0 12px ${c.color}`, lineHeight: 1 }, children: [
+                      c.current,
+                      /* @__PURE__ */ jsxs("span", { style: { fontSize: 10, color: "rgba(255,255,255,0.2)", fontWeight: 400 }, children: [
+                        "/",
+                        c.target
+                      ] })
+                    ] }),
+                    /* @__PURE__ */ jsx("div", { style: { fontFamily: "monospace", fontSize: 7, color: "rgba(255,255,255,0.25)", marginTop: 2 }, children: "pages built" })
+                  ] }),
+                  /* @__PURE__ */ jsx(Ring, { value: c.current, max: c.target, color: c.color, size: 40, stroke: 4 })
+                ] })
+              ] }, c.path)) }) : /* @__PURE__ */ jsx("div", { style: { textAlign: "center", padding: "40px 0", fontFamily: "monospace", fontSize: 10, color: "rgba(255,255,255,0.15)", letterSpacing: 2 }, children: "START A BUILD TO SEE CATEGORY PROGRESS" }) })
+            ] }),
+            phase === "done" && /* @__PURE__ */ jsxs("div", { style: {
+              background: "linear-gradient(135deg,rgba(15,245,200,0.06),rgba(34,211,238,0.04))",
+              border: `1px solid ${T.cyan}33`,
+              borderRadius: 12,
+              padding: "14px 18px",
+              animation: "rise 0.5s ease"
+            }, children: [
+              /* @__PURE__ */ jsxs("div", { style: { fontSize: 9, fontFamily: "monospace", color: T.cyan, letterSpacing: 2, marginBottom: 12, textTransform: "uppercase" }, children: [
+                "\u2714 Full Deployment Complete \xB7 ",
+                elapsed.toFixed(1),
+                "s total"
+              ] }),
+              /* @__PURE__ */ jsx("div", { style: { display: "grid", gridTemplateColumns: "repeat(6,1fr)", gap: 10 }, children: [
+                { l: "Pages Built", v: totalPages, c: T.blue },
+                { l: "S3 Uploaded", v: uploaded, c: T.purple },
+                { l: "S3 Deleted", v: deleted, c: T.red },
+                { l: "Data Sent", v: `${bytesMB.toFixed(1)}MB`, c: T.green },
+                { l: "CDN Paths", v: cdnCleared, c: T.cyan },
+                { l: "Lambda Ver", v: `v${lambdaVer}`, c: T.orange }
+              ].map((m) => /* @__PURE__ */ jsxs("div", { style: { textAlign: "center", background: "rgba(255,255,255,0.03)", borderRadius: 8, padding: "10px 6px" }, children: [
+                /* @__PURE__ */ jsx("div", { style: { fontSize: 7, fontFamily: "monospace", color: "rgba(255,255,255,0.28)", letterSpacing: 1, textTransform: "uppercase", marginBottom: 4 }, children: m.l }),
+                /* @__PURE__ */ jsx("div", { style: { fontSize: 22, fontWeight: 900, fontFamily: "monospace", color: m.c, textShadow: `0 0 14px ${m.c}`, lineHeight: 1 }, children: m.v })
+              ] }, m.l)) })
+            ] })
+          ] }),
+          /* @__PURE__ */ jsxs("div", { style: { display: "flex", flexDirection: "column", gap: 11 }, children: [
+            /* @__PURE__ */ jsx(Panel, { title: `Changed Files (${pendingCount})`, icon: "\u{1F4DD}", accent: T.yellow + "33", children: /* @__PURE__ */ jsx("div", { style: { display: "flex", flexDirection: "column", gap: 4 }, children: pendingFiles.length === 0 ? /* @__PURE__ */ jsx("div", { style: { fontFamily: "monospace", fontSize: 9, color: "rgba(255,255,255,0.2)", textAlign: "center", padding: "12px 0" }, children: "No pending changes" }) : pendingFiles.map((f, i) => /* @__PURE__ */ jsxs("div", { style: {
+              display: "flex",
+              alignItems: "center",
+              gap: 6,
+              padding: "5px 6px",
+              background: "rgba(255,255,255,0.02)",
+              borderRadius: 5
+            }, children: [
+              /* @__PURE__ */ jsx("div", { style: { width: 4, height: 4, borderRadius: "50%", background: T.yellow, boxShadow: `0 0 4px ${T.yellow}`, flexShrink: 0 } }),
+              /* @__PURE__ */ jsxs("div", { style: { flex: 1, minWidth: 0 }, children: [
+                /* @__PURE__ */ jsx("div", { style: { fontFamily: "monospace", fontSize: 9, color: "rgba(255,255,255,0.6)", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }, children: f.rel_path.split("/").pop() }),
+                /* @__PURE__ */ jsxs("div", { style: { fontFamily: "monospace", fontSize: 7, color: "rgba(255,255,255,0.22)", marginTop: 1 }, children: [
+                  f.category,
+                  " \xB7 ",
+                  timeAgo(f.mtime_iso)
+                ] })
+              ] }),
+              /* @__PURE__ */ jsx("span", { style: { fontSize: 7, fontFamily: "monospace", color: T.yellow, background: T.yellow + "18", padding: "1px 4px", borderRadius: 2, flexShrink: 0 }, children: "MODIFIED" })
+            ] }, i)) }) }),
+            /* @__PURE__ */ jsxs(Panel, { title: "Database Connectors", icon: "\u{1F5C4}", accent: T.green + "33", children: [
+              /* @__PURE__ */ jsx("div", { style: { display: "flex", gap: 5, marginBottom: 8, flexWrap: "wrap" }, children: ["aggrer", "suite", "dlaN"].map((t) => /* @__PURE__ */ jsx("span", { style: { fontFamily: "monospace", fontSize: 8, color: T.dim, background: "rgba(255,255,255,0.05)", padding: "2px 8px", borderRadius: 3 }, children: t }, t)) }),
+              /* @__PURE__ */ jsx("div", { style: { fontSize: 7.5, fontFamily: "monospace", color: "rgba(255,255,255,0.22)", marginBottom: 6 }, children: "MATCHED LAMBDA FOLDERS" }),
+              [["eggeer-tzs-cr", "eggeer-tae-sor"], ["eg-tac-prod-operations", "eg-tac-prod-2"]].map((row, i) => /* @__PURE__ */ jsx("div", { style: { display: "flex", gap: 5, marginBottom: 4 }, children: row.map((n) => /* @__PURE__ */ jsx("div", { style: { flex: 1, background: "rgba(255,255,255,0.03)", borderRadius: 5, padding: "4px 6px", fontFamily: "monospace", fontSize: 8, color: "rgba(255,255,255,0.45)", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }, children: n }, n)) }, i)),
+              /* @__PURE__ */ jsx("div", { style: { marginTop: 8, fontSize: 7.5, fontFamily: "monospace", color: "rgba(255,255,255,0.22)", marginBottom: 6 }, children: "HEALTH PING (PROD)" }),
+              /* @__PURE__ */ jsx("div", { style: { display: "grid", gridTemplateColumns: "repeat(5,1fr)", gap: 3 }, children: Array(10).fill(0).map((_, i) => /* @__PURE__ */ jsxs("div", { style: { display: "flex", alignItems: "center", gap: 2 }, children: [
+                /* @__PURE__ */ jsx("div", { style: { width: 5, height: 5, borderRadius: "50%", background: i < 8 ? T.green : T.red, boxShadow: `0 0 3px ${i < 8 ? T.green : T.red}` } }),
+                /* @__PURE__ */ jsxs("span", { style: { fontFamily: "monospace", fontSize: 7, color: "rgba(255,255,255,0.25)" }, children: [
+                  "P",
+                  i
+                ] })
+              ] }, i)) })
+            ] }),
+            /* @__PURE__ */ jsx(Panel, { title: "Deploy History", icon: "\u{1F4DC}", accent: T.borderB, children: HISTORY.map((h, i) => /* @__PURE__ */ jsxs("div", { style: { display: "flex", alignItems: "center", gap: 6, padding: "5px 0", borderBottom: `1px solid rgba(255,255,255,0.04)` }, children: [
+              /* @__PURE__ */ jsx("div", { style: { width: 5, height: 5, borderRadius: "50%", background: h.ok ? T.green : T.red, boxShadow: `0 0 4px ${h.ok ? T.green : T.red}` } }),
+              /* @__PURE__ */ jsxs("span", { style: { fontFamily: "monospace", fontSize: 7.5, color: "rgba(255,255,255,0.22)", width: 40 }, children: [
+                "#",
+                h.id
+              ] }),
+              /* @__PURE__ */ jsx("span", { style: { fontFamily: "monospace", fontSize: 9, color: "rgba(255,255,255,0.5)", flex: 1 }, children: h.time }),
+              /* @__PURE__ */ jsxs("span", { style: { fontFamily: "monospace", fontSize: 8, color: "rgba(255,255,255,0.28)" }, children: [
+                h.pages,
+                "p"
+              ] }),
+              /* @__PURE__ */ jsx("span", { style: { fontFamily: "monospace", fontSize: 8, color: "rgba(255,255,255,0.28)" }, children: h.dur }),
+              /* @__PURE__ */ jsx("span", { style: { fontSize: 7, fontFamily: "monospace", color: h.type === "Full" ? T.orange : T.blue, background: h.type === "Full" ? "rgba(251,146,60,0.12)" : "rgba(34,211,238,0.1)", padding: "1px 5px", borderRadius: 3 }, children: h.type })
+            ] }, h.id)) }),
+            /* @__PURE__ */ jsx(Panel, { title: "Server Health", icon: "\u{1F4BB}", accent: T.borderB, children: [
+              { l: "CPU", v: isRunning ? 72 : 18, max: 100, c: T.cyan, u: "%" },
+              { l: "Memory", v: isRunning ? 3.8 : 1.2, max: 16, c: T.purple, u: "GB" },
+              { l: "Build Cache", v: 847, max: 2048, c: T.green, u: "MB" },
+              { l: "Disk Free", v: 124, max: 256, c: T.yellow, u: "GB" }
+            ].map((s) => /* @__PURE__ */ jsxs("div", { style: { marginBottom: 7 }, children: [
+              /* @__PURE__ */ jsxs("div", { style: { display: "flex", justifyContent: "space-between", marginBottom: 3 }, children: [
+                /* @__PURE__ */ jsx("span", { style: { fontFamily: "monospace", fontSize: 9, color: "rgba(255,255,255,0.3)" }, children: s.l }),
+                /* @__PURE__ */ jsxs("span", { style: { fontFamily: "monospace", fontSize: 9, color: s.c }, children: [
+                  s.v,
+                  s.u
+                ] })
+              ] }),
+              /* @__PURE__ */ jsx(ProgressBar, { pct: s.v / s.max * 100, color: s.c, h: 3 })
+            ] }, s.l)) })
+          ] })
+        ] })
+      ] }),
+      /* @__PURE__ */ jsxs("div", { style: { padding: "8px 20px", borderTop: `1px solid ${T.border}`, display: "flex", justifyContent: "space-between" }, children: [
+        /* @__PURE__ */ jsx("div", { style: { fontFamily: "monospace", fontSize: 7.5, color: "rgba(255,255,255,0.12)", letterSpacing: 1 }, children: "Node 20.11 \xB7 Astro 4.8.3 \xB7 Tailwind 3.4 \xB7 AWS CLI 2.15 \xB7 CloudFront 2024" }),
+        /* @__PURE__ */ jsx("div", { style: { fontFamily: "monospace", fontSize: 7.5, color: "rgba(255,255,255,0.12)", letterSpacing: 1 }, children: "DEPLOYCTL v3.0.0 \xB7 Office Server \xB7 us-east-1" })
+      ] })
+    ] })
+  ] });
+}

@@ -9,13 +9,13 @@
 import AdSlot from './AdSlot.astro';
 
 interface Props {
-  campaign?: string;
+  position?: string;
   desktop?: boolean;
   mobile?: boolean;
 }
 
 const {
-  campaign = 'inline-ad',
+  position = 'in_content',
   desktop = true,
   mobile = true,
 } = Astro.props;
@@ -26,7 +26,7 @@ const {
   data-desktop={String(desktop)}
   data-mobile={String(mobile)}
 >
-  <AdSlot campaign={campaign} />
+  <AdSlot position={position} />
 </div>
 
 <style>

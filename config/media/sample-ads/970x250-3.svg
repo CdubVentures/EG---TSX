@@ -1,0 +1,88 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 970 250" width="970" height="250">
+  <!-- Video Ad Simulation — horizontal pre-roll style leaderboard (AdSense video) -->
+
+  <!-- Background -->
+  <rect width="970" height="250" fill="#000000"/>
+
+  <defs>
+    <linearGradient id="vidScene" x1="0" y1="0" x2="1" y2="0.5">
+      <stop offset="0%" stop-color="#1e1b4b"/>
+      <stop offset="50%" stop-color="#312e81"/>
+      <stop offset="100%" stop-color="#1e1b4b"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Video area left (640px) -->
+  <rect x="0" y="0" width="640" height="250" fill="url(#vidScene)"/>
+
+  <!-- Fake video content: gaming headset product shot -->
+  <g transform="translate(200, 30)" opacity="0.2">
+    <!-- Headband -->
+    <path d="M20,90 Q20,10 120,10 Q220,10 220,90" fill="none" stroke="#a78bfa" stroke-width="8" stroke-linecap="round"/>
+    <!-- Left ear cup -->
+    <ellipse cx="30" cy="110" rx="28" ry="38" fill="#7c3aed" stroke="#a78bfa" stroke-width="2"/>
+    <ellipse cx="30" cy="110" rx="16" ry="22" fill="#6d28d9"/>
+    <!-- Right ear cup -->
+    <ellipse cx="210" cy="110" rx="28" ry="38" fill="#7c3aed" stroke="#a78bfa" stroke-width="2"/>
+    <ellipse cx="210" cy="110" rx="16" ry="22" fill="#6d28d9"/>
+    <!-- Mic boom -->
+    <path d="M50,130 Q40,165 60,180" fill="none" stroke="#a78bfa" stroke-width="3" stroke-linecap="round"/>
+    <circle cx="62" cy="182" r="5" fill="#a78bfa"/>
+  </g>
+
+  <!-- Play button center of video -->
+  <circle cx="320" cy="125" r="30" fill="#000000" opacity="0.5"/>
+  <circle cx="320" cy="125" r="28" fill="none" stroke="#ffffff" stroke-width="2" opacity="0.8"/>
+  <polygon points="312,110 312,140 338,125" fill="#ffffff"/>
+
+  <!-- AD badge -->
+  <rect x="8" y="8" width="28" height="18" rx="3" fill="#000000" opacity="0.7"/>
+  <text x="22" y="20" font-family="Arial, Helvetica, sans-serif" font-size="10" font-weight="600" fill="#fbbf24" text-anchor="middle">AD</text>
+
+  <!-- Duration -->
+  <rect x="588" y="8" width="42" height="18" rx="3" fill="#000000" opacity="0.7"/>
+  <text x="609" y="20" font-family="Arial, Helvetica, sans-serif" font-size="9" font-weight="600" fill="#ffffff" text-anchor="middle">0:30</text>
+
+  <!-- Video progress bar -->
+  <rect x="0" y="240" width="640" height="4" fill="#374151"/>
+  <rect x="0" y="240" width="224" height="4" fill="#ef4444"/>
+  <circle cx="224" cy="242" r="5" fill="#ef4444"/>
+
+  <!-- Skip button -->
+  <rect x="530" y="206" width="98" height="26" rx="4" fill="#000000" opacity="0.7"/>
+  <text x="579" y="222" font-family="Arial, Helvetica, sans-serif" font-size="10" font-weight="600" fill="#ffffff" text-anchor="middle">Skip Ad ▸</text>
+
+  <!-- Video controls -->
+  <rect x="0" y="244" width="640" height="6" fill="#111111"/>
+
+  <!-- Right panel: companion card (330px) -->
+  <rect x="640" y="0" width="330" height="250" fill="#ffffff"/>
+
+  <!-- Brand -->
+  <rect x="658" y="16" width="32" height="32" rx="6" fill="#7c3aed"/>
+  <text x="674" y="30" font-family="Arial, Helvetica, sans-serif" font-size="9" font-weight="800" fill="#ffffff" text-anchor="middle">AP</text>
+  <text x="674" y="40" font-family="Arial, Helvetica, sans-serif" font-size="6" font-weight="600" fill="#c4b5fd" text-anchor="middle">PRO</text>
+
+  <text x="698" y="28" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="700" fill="#111827">AudioPeak Pro</text>
+  <text x="698" y="42" font-family="Arial, Helvetica, sans-serif" font-size="9" fill="#6b7280">Sponsored</text>
+
+  <!-- Headline -->
+  <text x="658" y="78" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="700" fill="#111827">Studio-Grade</text>
+  <text x="658" y="100" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="700" fill="#7c3aed">Wireless Audio</text>
+
+  <!-- Features -->
+  <g font-family="Arial, Helvetica, sans-serif" font-size="10" fill="#6b7280">
+    <text x="670" y="126">✓ 50mm Planar Drivers</text>
+    <text x="670" y="142">✓ Active Noise Cancellation</text>
+    <text x="670" y="158">✓ 80hr Battery Life</text>
+    <text x="670" y="174">✓ Bluetooth 5.4 + 2.4GHz</text>
+  </g>
+
+  <!-- Price -->
+  <text x="658" y="200" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="800" fill="#111827">$249</text>
+  <text x="720" y="200" font-family="Arial, Helvetica, sans-serif" font-size="13" fill="#9ca3af" text-decoration="line-through">$349</text>
+
+  <!-- CTA -->
+  <rect x="658" y="212" width="294" height="30" rx="6" fill="#7c3aed"/>
+  <text x="805" y="231" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="700" fill="#ffffff" text-anchor="middle">Shop Now →</text>
+</svg>

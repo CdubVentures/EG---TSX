@@ -1,0 +1,561 @@
+---
+import MainLayout from '@shared/layouts/MainLayout.astro';
+---
+
+<MainLayout
+  title="Error 404 — EG Gear"
+  description="Page not found"
+  noIndex={true}
+>
+  <main class="eg404-shell">
+    <div class="eg404-main">
+
+      <!-- Hero: oversized 404 with gradient + glitch -->
+      <div class="eg404-hero" aria-hidden="true">
+        <span class="eg404-code">404</span>
+      </div>
+
+      <header class="eg404-header">
+        <div class="eg404-header-top">
+          <span class="eg404-logo">
+            <span class="eg404-logo-e">EG</span><span class="eg404-logo-g">GEAR</span>
+          </span>
+          <span class="eg404-dot">&middot;</span>
+          <span class="eg404-status">Error 404</span>
+        </div>
+
+        <h1 class="eg404-title">Page not found</h1>
+        <p class="eg404-subtitle">
+          The page you're looking for doesn't exist or may have been moved.
+          Check the URL for typos, or try one of the links below.
+        </p>
+      </header>
+
+      <section class="eg404-panel" aria-label="Next steps">
+        <div class="eg404-actions">
+          <a class="eg404-btn eg404-btn-primary" href="/">Back to home</a>
+          <button class="eg404-btn" type="button" data-eg404="back">Go back</button>
+          <button class="eg404-btn" type="button" data-eg404="reload">Reload page</button>
+        </div>
+
+        <div class="eg404-divider" aria-hidden="true">
+          <span class="eg404-divider-line"></span>
+          <span class="eg404-divider-text">or explore</span>
+          <span class="eg404-divider-line"></span>
+        </div>
+
+        <nav class="eg404-grid" aria-label="Browse sections">
+          <a class="eg404-card" href="/mice/">
+            <svg class="eg404-card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M12 2C8.13 2 5 5.13 5 9v6c0 3.87 3.13 7 7 7s7-3.13 7-7V9c0-3.87-3.13-7-7-7z"/>
+              <line x1="12" y1="6" x2="12" y2="10"/>
+            </svg>
+            <span class="eg404-card-label">Mice</span>
+            <svg class="eg404-card-arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <line x1="3" y1="8" x2="13" y2="8"/><polyline points="9 4 13 8 9 12"/>
+            </svg>
+          </a>
+
+          <a class="eg404-card" href="/keyboards/">
+            <svg class="eg404-card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <rect x="2" y="4" width="20" height="16" rx="2"/>
+              <path d="M6 8h2m3 0h2m3 0h2M6 12h2m3 0h2m3 0h2M8 16h8"/>
+            </svg>
+            <span class="eg404-card-label">Keyboards</span>
+            <svg class="eg404-card-arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <line x1="3" y1="8" x2="13" y2="8"/><polyline points="9 4 13 8 9 12"/>
+            </svg>
+          </a>
+
+          <a class="eg404-card" href="/monitors/">
+            <svg class="eg404-card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <rect x="2" y="3" width="20" height="14" rx="2"/>
+              <line x1="8" y1="21" x2="16" y2="21"/>
+              <line x1="12" y1="17" x2="12" y2="21"/>
+            </svg>
+            <span class="eg404-card-label">Monitors</span>
+            <svg class="eg404-card-arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <line x1="3" y1="8" x2="13" y2="8"/><polyline points="9 4 13 8 9 12"/>
+            </svg>
+          </a>
+
+          <a class="eg404-card" href="/reviews/">
+            <svg class="eg404-card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+            </svg>
+            <span class="eg404-card-label">Reviews</span>
+            <svg class="eg404-card-arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <line x1="3" y1="8" x2="13" y2="8"/><polyline points="9 4 13 8 9 12"/>
+            </svg>
+          </a>
+
+          <a class="eg404-card" href="/news/">
+            <svg class="eg404-card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M4 22h16a2 2 0 002-2V4a2 2 0 00-2-2H8a2 2 0 00-2 2v16a2 2 0 01-2 2zm0 0a2 2 0 01-2-2v-9c0-1.1.9-2 2-2h2"/>
+              <line x1="10" y1="6" x2="18" y2="6"/>
+              <line x1="10" y1="10" x2="18" y2="10"/>
+              <line x1="10" y1="14" x2="14" y2="14"/>
+            </svg>
+            <span class="eg404-card-label">News</span>
+            <svg class="eg404-card-arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <line x1="3" y1="8" x2="13" y2="8"/><polyline points="9 4 13 8 9 12"/>
+            </svg>
+          </a>
+
+          <a class="eg404-card" href="/guides/">
+            <svg class="eg404-card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/>
+              <path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/>
+            </svg>
+            <span class="eg404-card-label">Guides</span>
+            <svg class="eg404-card-arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <line x1="3" y1="8" x2="13" y2="8"/><polyline points="9 4 13 8 9 12"/>
+            </svg>
+          </a>
+        </nav>
+      </section>
+    </div>
+  </main>
+
+  <script is:inline>
+    (function () {
+      function ready(fn) {
+        if (document.readyState === 'loading') {
+          document.addEventListener('DOMContentLoaded', fn);
+        } else {
+          fn();
+        }
+      }
+      ready(function () {
+        var back = document.querySelector('[data-eg404="back"]');
+        if (back) {
+          back.addEventListener('click', function (e) {
+            e.preventDefault();
+            if (history.length > 1) history.back();
+            else window.location.href = '/';
+          });
+        }
+        var reload = document.querySelector('[data-eg404="reload"]');
+        if (reload) {
+          reload.addEventListener('click', function (e) {
+            e.preventDefault();
+            window.location.reload();
+          });
+        }
+      });
+    })();
+  </script>
+</MainLayout>
+
+<style>
+  /* WHY: 404 page uses scoped Astro styles.
+     Centered layout with oversized 404 hero, glitch animation, and section card grid.
+     Uses HBS bridge variables for gaming theme parity. */
+
+  .eg404-shell {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding: clamp(1.5rem, 4vw, 2.5rem) 1.5rem clamp(3.5rem, 6vw, 4rem);
+    box-sizing: border-box;
+  }
+
+  .eg404-main {
+    width: 100%;
+    max-width: 900px;
+    text-align: center;
+  }
+
+  /* ── Hero: oversized 404 ─────────────────────────────── */
+
+  .eg404-hero {
+    position: relative;
+    margin-bottom: 0.25rem;
+    line-height: 1;
+    user-select: none;
+    overflow: hidden;
+  }
+
+  /* WHY: radial glow adds depth behind the 404 number */
+  .eg404-hero::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 70%;
+    height: 200%;
+    background: radial-gradient(
+      ellipse,
+      var(--site-start-color) 0%,
+      transparent 70%
+    );
+    opacity: 0.06;
+    pointer-events: none;
+  }
+
+  .eg404-code {
+    position: relative;
+    display: inline-block;
+    font-family: var(--identity-font);
+    font-weight: var(--font-weight9);
+    font-size: clamp(7rem, 22vw, 13rem);
+    letter-spacing: -0.03em;
+    line-height: 1;
+    background: linear-gradient(
+      135deg,
+      var(--site-start-color),
+      var(--site-end-color),
+      var(--site-start-color)
+    );
+    background-size: 200% 200%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: eg404-gradient 8s ease infinite;
+  }
+
+  /* WHY: glitch layers use clip-path + transform on pseudo-elements
+     so they don't interfere with the gradient animation on the main element */
+  .eg404-code::before,
+  .eg404-code::after {
+    content: '404';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      135deg,
+      var(--site-start-color),
+      var(--site-end-color),
+      var(--site-start-color)
+    );
+    background-size: 200% 200%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .eg404-code::before {
+    clip-path: polygon(0 0, 100% 0, 100% 40%, 0 40%);
+    animation: eg404-gradient 8s ease infinite, eg404-glitch-top 6s linear infinite;
+  }
+
+  .eg404-code::after {
+    clip-path: polygon(0 60%, 100% 60%, 100% 100%, 0 100%);
+    animation: eg404-gradient 8s ease infinite, eg404-glitch-bot 6s linear infinite;
+  }
+
+  @keyframes eg404-gradient {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+
+  @keyframes eg404-glitch-top {
+    0%, 93%, 95%, 97%, 100% { transform: translateX(0); }
+    93.5% { transform: translateX(6px); }
+    94% { transform: translateX(-4px); }
+    96% { transform: translateX(3px); }
+  }
+
+  @keyframes eg404-glitch-bot {
+    0%, 91%, 94%, 96%, 100% { transform: translateX(0); }
+    92% { transform: translateX(-5px); }
+    93% { transform: translateX(4px); }
+    95% { transform: translateX(-2px); }
+  }
+
+  /* ── Header ──────────────────────────────────────────── */
+
+  .eg404-header {
+    margin-bottom: 1.75rem;
+  }
+
+  .eg404-header-top {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    margin-bottom: 0.85rem;
+  }
+
+  .eg404-logo {
+    font-family: var(--identity-font);
+    font-weight: var(--font-weight8);
+    font-size: var(--font-size-18px);
+    letter-spacing: var(--letter-spacing-tight);
+    line-height: 1;
+  }
+
+  .eg404-logo-e {
+    color: var(--white-black-color-1);
+  }
+
+  .eg404-logo-g {
+    background: var(--site-background-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .eg404-dot {
+    color: var(--grey-color-2);
+    font-size: var(--font-size-18px);
+    line-height: 1;
+  }
+
+  .eg404-status {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.25rem 0.75rem;
+    border-radius: 999px;
+    border: 1px solid var(--section-light-background-color);
+    font-family: var(--identity-font);
+    font-weight: var(--font-weight6);
+    font-size: var(--font-size-13px);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--grey-color-1);
+  }
+
+  .eg404-title {
+    font-family: var(--identity-font);
+    font-weight: var(--font-weight8);
+    letter-spacing: var(--letter-spacing-tight);
+    font-size: var(--ft-32-25);
+    line-height: 1.2;
+    color: var(--white-black-color-1);
+    margin: 0 0 0.5rem 0;
+  }
+
+  .eg404-subtitle {
+    margin: 0 auto;
+    max-width: 520px;
+    font-family: var(--identity-font);
+    font-weight: var(--font-weight4);
+    font-size: var(--ft-18-16);
+    line-height: 1.6;
+    color: var(--grey-color-1);
+  }
+
+  /* ── Panel ───────────────────────────────────────────── */
+
+  .eg404-panel {
+    border-radius: 10px;
+    border: 1px solid var(--section-medium-background-color);
+    background-color: var(--section-dark-background-color);
+    padding: 1.75rem;
+    box-shadow: var(--card-shadow);
+    text-align: center;
+  }
+
+  /* ── Buttons ─────────────────────────────────────────── */
+
+  .eg404-actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.75rem;
+  }
+
+  .eg404-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.75rem 1.4rem;
+    border-radius: 0.6rem;
+    border: 1px solid var(--section-light-background-color);
+    background: transparent;
+    font-family: var(--identity-font);
+    font-weight: var(--font-weight6);
+    font-size: var(--ft-16-14);
+    letter-spacing: var(--letter-spacing-regular);
+    color: var(--white-black-color-1);
+    cursor: pointer;
+    text-decoration: none;
+    transition:
+      background-color var(--duration-fast) ease,
+      border-color var(--duration-fast) ease,
+      color var(--duration-fast) ease,
+      transform var(--duration-fast) ease;
+  }
+
+  .eg404-btn-primary {
+    background: var(--site-background-gradient);
+    border-color: var(--site-start-color);
+    color: #fff;
+  }
+
+  .eg404-btn:hover {
+    background-color: rgba(255, 255, 255, 0.04);
+    transform: translateY(-1px);
+  }
+
+  .eg404-btn-primary:hover {
+    background: var(--site-background-gradient);
+    border-color: var(--site-end-color);
+    transform: translateY(-1px);
+  }
+
+  .eg404-btn:active,
+  .eg404-btn-primary:active {
+    transform: translateY(0);
+  }
+
+  .eg404-btn:focus-visible {
+    outline: 2px solid var(--site-color);
+    outline-offset: 2px;
+  }
+
+  /* ── Divider ─────────────────────────────────────────── */
+
+  .eg404-divider {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin: 1.5rem 0;
+  }
+
+  .eg404-divider-line {
+    flex: 1;
+    height: 1px;
+    background-color: var(--section-medium-background-color);
+  }
+
+  .eg404-divider-text {
+    font-family: var(--identity-font);
+    font-weight: var(--font-weight5);
+    font-size: var(--font-size-13px);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--grey-color-2);
+    white-space: nowrap;
+  }
+
+  /* ── Section cards grid ──────────────────────────────── */
+
+  .eg404-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.6rem;
+  }
+
+  .eg404-card {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.7rem 0.9rem;
+    border-radius: 0.5rem;
+    border: 1px solid var(--section-medium-background-color);
+    background: transparent;
+    text-decoration: none;
+    color: var(--white-black-color-1);
+    transition:
+      background-color var(--duration-fast) ease,
+      border-color var(--duration-fast) ease,
+      transform var(--duration-fast) ease;
+  }
+
+  .eg404-card:hover {
+    background-color: rgba(255, 255, 255, 0.04);
+    border-color: var(--section-light-background-color);
+    transform: translateY(-1px);
+  }
+
+  .eg404-card:focus-visible {
+    outline: 2px solid var(--site-color);
+    outline-offset: 2px;
+  }
+
+  .eg404-card-icon {
+    width: 1.15em;
+    height: 1.15em;
+    flex-shrink: 0;
+    color: var(--grey-color-1);
+    transition: color var(--duration-fast) ease;
+  }
+
+  .eg404-card:hover .eg404-card-icon {
+    color: var(--site-start-color);
+  }
+
+  .eg404-card-label {
+    flex: 1;
+    text-align: left;
+    font-family: var(--identity-font);
+    font-weight: var(--font-weight6);
+    font-size: var(--font-size-14px);
+    letter-spacing: var(--letter-spacing-regular);
+  }
+
+  .eg404-card-arrow {
+    width: 0.85em;
+    height: 0.85em;
+    flex-shrink: 0;
+    color: var(--grey-color-2);
+    transition:
+      transform var(--duration-fast) ease,
+      color var(--duration-fast) ease;
+  }
+
+  .eg404-card:hover .eg404-card-arrow {
+    transform: translateX(3px);
+    color: var(--site-start-color);
+  }
+
+  /* ── Reduced motion ──────────────────────────────────── */
+
+  @media (prefers-reduced-motion: reduce) {
+    .eg404-code {
+      animation: none;
+    }
+    .eg404-code::before,
+    .eg404-code::after {
+      animation: none;
+    }
+    .eg404-card:hover .eg404-card-arrow {
+      transform: none;
+    }
+    .eg404-btn:hover,
+    .eg404-btn-primary:hover,
+    .eg404-card:hover {
+      transform: none;
+    }
+  }
+
+  /* ── Mobile ──────────────────────────────────────────── */
+
+  @media (max-width: 700px) {
+    .eg404-shell {
+      padding-inline: 1.25rem;
+    }
+
+    .eg404-panel {
+      padding: 1.25rem;
+    }
+
+    .eg404-title {
+      font-size: var(--ft-28-21);
+    }
+
+    .eg404-actions {
+      flex-direction: column;
+      align-items: stretch;
+    }
+
+    .eg404-btn,
+    .eg404-btn-primary {
+      width: 100%;
+      justify-content: center;
+    }
+
+    .eg404-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 400px) {
+    .eg404-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

@@ -1,0 +1,71 @@
+{
+  "slots": {
+    "1": {
+      "collection": "news",
+      "id": "monitor/msi-unveils-mag-255xf-entry-level-300hz-gaming-monitor-for-budget-gamers"
+    },
+    "2": {
+      "collection": "reviews",
+      "id": "keyboard/asus-rog-strix-scope-ii-96-wireless-review"
+    },
+    "5": {
+      "collection": "guides",
+      "id": "mouse/mouse-best-overall"
+    },
+    "8": {
+      "collection": "news",
+      "id": "ai/common-sense-machines-unveils-ai-platform-for-real-time-level-generation-in-games"
+    },
+    "9": {
+      "collection": "reviews",
+      "id": "mouse/razer-deathadder-v3-pro-review"
+    },
+    "12": {
+      "collection": "reviews",
+      "id": "mouse/razer-viper-v3-pro-review"
+    }
+  },
+  "pinned": [
+    "news:monitor/msi-unveils-mag-255xf-entry-level-300hz-gaming-monitor-for-budget-gamers",
+    "reviews:keyboard/asus-rog-strix-scope-ii-96-wireless-review",
+    "guides:mouse/mouse-best-overall",
+    "reviews:mouse/razer-viper-v3-pro-review",
+    "news:ai/common-sense-machines-unveils-ai-platform-for-real-time-level-generation-in-games",
+    "reviews:mouse/razer-deathadder-v3-pro-review",
+    "games:valorant",
+    "reviews:mouse/glorious-model-o-2-wireless-review",
+    "guides:mouse/mouse-best-budget",
+    "news:hardware/nvidia-n1x-cpu-what-we-actually-know-so-far",
+    "news:ai/nvidia-ace-autonomous-characters-debut-in-major-titles-redefining-npc-interaction",
+    "reviews:mouse/logitech-g-pro-x-superlight-2-review",
+    "reviews:mouse/corsair-darkstar-wireless-rgb-review",
+    "guides:mouse/mouse-best-high-end",
+    "news:mouse/razer-deathadder-v4-pro-lighter-faster-and-already-winning-tournaments",
+    "news:mouse/the-rise-of-lightweight-gaming-mice"
+  ],
+  "badges": {
+    "news:monitor/msi-unveils-mag-255xf-entry-level-300hz-gaming-monitor-for-budget-gamers": "Top Pick",
+    "reviews:keyboard/asus-rog-strix-scope-ii-96-wireless-review": "Editors Choice",
+    "guides:mouse/mouse-best-overall": "Best Overall",
+    "news:ai/common-sense-machines-unveils-ai-platform-for-real-time-level-generation-in-games": "Hot Take",
+    "reviews:mouse/razer-deathadder-v3-pro-review": "Staff Pick",
+    "reviews:mouse/razer-viper-v3-pro-review": "Award Winner",
+    "games:valorant": "Top Competitive",
+    "reviews:mouse/glorious-model-o-2-wireless-review": "Best Value",
+    "guides:mouse/mouse-best-budget": "Budget Guide",
+    "news:hardware/nvidia-n1x-cpu-what-we-actually-know-so-far": "Breaking",
+    "news:ai/nvidia-ace-autonomous-characters-debut-in-major-titles-redefining-npc-interaction": "Trending",
+    "reviews:mouse/logitech-g-pro-x-superlight-2-review": "Top Rated",
+    "reviews:mouse/corsair-darkstar-wireless-rgb-review": "Hot Pick",
+    "guides:mouse/mouse-best-high-end": "Must Read",
+    "news:mouse/razer-deathadder-v4-pro-lighter-faster-and-already-winning-tournaments": "Hot News",
+    "news:mouse/the-rise-of-lightweight-gaming-mice": "Deep Dive"
+  },
+  "excluded": [],
+  "indexHeroes": {
+    "reviews": {},
+    "news": {},
+    "guides": {},
+    "brands": {}
+  }
+}

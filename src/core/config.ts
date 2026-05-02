@@ -2,83 +2,46 @@
 // No magic numbers in components. All behavioral constants live here.
 // Update here to change behavior site-wide.
 
-import categoriesData from '../../config/data/categories.json';
-import imageDefaultsData from '../../config/data/image-defaults.json';
+import imageDefaultsData from '../../config/data/image-defaults.json' with { type: 'json' };
+import {
+  activeContentCategoryIds,
+  activeProductCategoryIds,
+  allCategoryIds,
+  categoryColor,
+  isContentActive,
+  isProductActive,
+  label,
+  plural,
+  siteColors,
+} from './category-contract.ts';
+// Logical dependency retained for config-contract audits: from './category-contract'
 import { resolveImageDefaults, resolveViewObjectFit } from './image-defaults-resolver.mjs';
 
-// ─── Category SSOT ──────────────────────────────────────────────────────────
-// WHY: categories.json is the single source of truth for all category lists.
-// Each category has independent product + content sub-sections.
-// Active = production:true OR (dev-only && vite:true), applied per sub-section.
+type RuntimeEnvValue = string | boolean | undefined;
+type RuntimeEnv = Record<string, RuntimeEnvValue>;
 
-interface SubSection {
-  production: boolean;
-  vite: boolean;
+const ASTRO_ENV = ((import.meta as ImportMeta & { env?: RuntimeEnv }).env ?? {}) as RuntimeEnv;
+
+function readEnvValue(name: string): string | undefined {
+  const astroValue = ASTRO_ENV[name];
+  if (typeof astroValue === 'string') return astroValue;
+  if (typeof astroValue === 'boolean') return astroValue ? 'true' : 'false';
+  if (typeof process !== 'undefined') return process.env[name];
+  return undefined;
 }
 
-interface CategoryDef {
-  id: string;
-  label: string;
-  plural: string;
-  color: string;
-  product: SubSection;
-  content: SubSection;
+function isProdRuntime(): boolean {
+  const astroProd = ASTRO_ENV.PROD;
+  if (typeof astroProd === 'boolean') return astroProd;
+  if (typeof astroProd === 'string') return astroProd === 'true';
+  return typeof process !== 'undefined' && process.env.NODE_ENV === 'production';
 }
 
-const allCategoryDefs: CategoryDef[] = categoriesData.categories as CategoryDef[];
-const isDev = import.meta.env.DEV;
-
-function isActive(sub: SubSection): boolean {
-  return sub.production || (isDev && sub.vite);
-}
-
-const productActiveIds = allCategoryDefs.filter(c => isActive(c.product)).map(c => c.id);
-const contentActiveIds = allCategoryDefs.filter(c => isActive(c.content)).map(c => c.id);
-const allIds = allCategoryDefs.map(c => c.id);
-
-// Plural lookup (canonical — replaces 4 duplicate functions)
-const pluralMap: Record<string, string> = Object.fromEntries(
-  allCategoryDefs.map(c => [c.id, c.plural])
-);
-
-// Singular label lookup (canonical — replaces titleCase hacks for acronyms like GPU, AI)
-const labelMap: Record<string, string> = Object.fromEntries(
-  allCategoryDefs.map(c => [c.id, c.label])
-);
-
-// Color lookup
-const colorMap: Record<string, string> = Object.fromEntries(
-  allCategoryDefs.map(c => [c.id, c.color])
-);
-
-// Site gradient colors (primary/secondary) — SSOT for seasonal themes
-export const siteColors = categoriesData.siteColors;
-
-/** Returns true if the category's product sub-section is active in the current environment. */
-export function isProductActive(cat: string): boolean {
-  const def = allCategoryDefs.find(c => c.id === cat);
-  return def ? isActive(def.product) : false;
-}
-
-/** Returns true if the category's content sub-section is active in the current environment. */
-export function isContentActive(cat: string): boolean {
-  const def = allCategoryDefs.find(c => c.id === cat);
-  return def ? isActive(def.content) : false;
-}
-
-/** Canonical singular label — use instead of titleCase for category display names. */
-export function label(cat: string): string {
-  return labelMap[cat] ?? (cat.charAt(0).toUpperCase() + cat.slice(1));
-}
-
-/** Canonical plural function — use this everywhere instead of local copies. */
-export function plural(cat: string): string {
-  return pluralMap[cat] ?? (cat.charAt(0).toUpperCase() + cat.slice(1) + 's');
-}
-
-/** Returns the hex color for a category ID, or a fallback grey. */
-export function categoryColor(cat: string): string {
-  return colorMap[cat] ?? '#6c7086';
+function isDevRuntime(): boolean {
+  const astroDev = ASTRO_ENV.DEV;
+  if (typeof astroDev === 'boolean') return astroDev;
+  if (typeof astroDev === 'string') return astroDev === 'true';
+  return typeof process !== 'undefined' && process.env.NODE_ENV === 'development';
 }
 
 // ─── Image Defaults ─────────────────────────────────────────────────────────
@@ -116,13 +79,14 @@ export function viewObjectFit(category: string, view: string): 'contain' | 'cove
 
 export const CONFIG = {
   site: {
-    name: 'Expert Gaming',
-    url: import.meta.env.PUBLIC_SITE_URL ?? 'https://expertgaming.gg',
-    defaultDescription: 'Hardware reviews, PC builder, and gaming guides.',
+    name: 'EG Gear',
+    url: readEnvValue('PUBLIC_SITE_URL') ?? 'https://eggear.com',
+    defaultDescription: 'Deep specs, expert reviews, practical guides, and better builds for gaming mice, keyboards, and monitors.',
   },
 
   pagination: {
     articlesPerPage: 12,
+    indexPerPage: 20,
     hubCardsPerRow: 4,
     commentsPerLoad: 20,
     brandsPerPage: 24,
@@ -143,19 +107,21 @@ export const CONFIG = {
   },
 
   cdn: {
-    baseUrl: import.meta.env.CDN_BASE_URL ?? '',
+    // WHY: local dev should always serve from public/ so missing CDN uploads
+    // never hide images during Vite/Astro development.
+    baseUrl: isDevRuntime() ? '' : (readEnvValue('CDN_BASE_URL') ?? ''),
   },
 
   // Product categories — filtered by environment (product sub-section flags)
   // WHY: replaces hardcoded arrays in GlobalNav, vault, NavMobile, etc.
-  categories: productActiveIds as string[],
+  categories: activeProductCategoryIds,
 
   // Content categories — filtered by environment (content sub-section flags)
   // WHY: reviews, guides, news filtering use content flags independently of product flags.
-  contentCategories: contentActiveIds as string[],
+  contentCategories: activeContentCategoryIds,
 
   // All category IDs regardless of flags — for schema validation / data loading
-  allCategories: allIds as string[],
+  allCategories: allCategoryIds,
 
   // Game genres
   genres: [
@@ -165,12 +131,20 @@ export const CONFIG = {
 } as const;
 
 // WHY: empty CDN_BASE_URL in production means all image URLs resolve as relative paths
-if (import.meta.env.PROD && !CONFIG.cdn.baseUrl) {
+if (isProdRuntime() && !CONFIG.cdn.baseUrl) {
   console.warn('[EG] CDN_BASE_URL is not set — images will use relative paths');
 }
 
 // WHY allCategories: Zod schemas and data files need to validate ALL category IDs,
 // not just the currently active ones. A mousepad product JSON must validate even
 // when mousepad is production:false.
-export type Category = (typeof categoriesData.categories)[number]['id'];
+export type { Category } from './category-contract.ts';
 export type Genre = typeof CONFIG.genres[number];
+export {
+  categoryColor,
+  isContentActive,
+  isProductActive,
+  label,
+  plural,
+  siteColors,
+};

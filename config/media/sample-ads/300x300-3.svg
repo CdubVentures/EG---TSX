@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300" width="300" height="300">
+  <!-- Native Content / Taboola-style "Recommended" widget -->
+
+  <rect width="300" height="300" fill="#ffffff" stroke="#e5e7eb" stroke-width="1"/>
+
+  <!-- "Recommended" header -->
+  <text x="14" y="20" font-family="Arial, Helvetica, sans-serif" font-size="9" font-weight="600" fill="#9ca3af" letter-spacing="0.5">RECOMMENDED FOR YOU</text>
+  <line x1="14" y1="28" x2="286" y2="28" stroke="#f3f4f6" stroke-width="1"/>
+
+  <!-- Article 1: thumbnail + title -->
+  <rect x="14" y="38" width="90" height="60" rx="4" fill="#dbeafe"/>
+  <g transform="translate(36, 50)" opacity="0.3">
+    <rect width="46" height="36" rx="2" fill="#3b82f6"/>
+    <polygon points="14,10 14,26 28,18" fill="#ffffff"/>
+  </g>
+  <text x="114" y="54" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="600" fill="#111827">Doctors Stunned: This</text>
+  <text x="114" y="70" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="600" fill="#111827">Simple Trick Cuts Bills</text>
+  <text x="114" y="86" font-family="Arial, Helvetica, sans-serif" font-size="9" fill="#9ca3af">HealthDaily | Sponsored</text>
+
+  <!-- Divider -->
+  <line x1="14" y1="108" x2="286" y2="108" stroke="#f3f4f6" stroke-width="1"/>
+
+  <!-- Article 2 -->
+  <rect x="14" y="118" width="90" height="60" rx="4" fill="#fef3c7"/>
+  <g transform="translate(34, 130)" opacity="0.25">
+    <circle cx="25" cy="18" r="16" fill="#f59e0b"/>
+    <rect x="10" y="8" width="30" height="20" rx="3" fill="#d97706"/>
+  </g>
+  <text x="114" y="134" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="600" fill="#111827">Seniors: Claim Your</text>
+  <text x="114" y="150" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="600" fill="#111827">Free $500 Grocery Card</text>
+  <text x="114" y="166" font-family="Arial, Helvetica, sans-serif" font-size="9" fill="#9ca3af">BenefitsHub | Sponsored</text>
+
+  <!-- Divider -->
+  <line x1="14" y1="188" x2="286" y2="188" stroke="#f3f4f6" stroke-width="1"/>
+
+  <!-- Article 3 -->
+  <rect x="14" y="198" width="90" height="60" rx="4" fill="#fce7f3"/>
+  <g transform="translate(34, 210)" opacity="0.2">
+    <rect x="5" y="0" width="40" height="36" rx="4" fill="#ec4899"/>
+    <rect x="12" y="6" width="26" height="16" rx="2" fill="#f9a8d4"/>
+  </g>
+  <text x="114" y="214" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="600" fill="#111827">New Mattress Tech Is</text>
+  <text x="114" y="230" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="600" fill="#111827">Changing Sleep Forever</text>
+  <text x="114" y="246" font-family="Arial, Helvetica, sans-serif" font-size="9" fill="#9ca3af">SleepReview | Sponsored</text>
+
+  <!-- Footer -->
+  <line x1="14" y1="268" x2="286" y2="268" stroke="#f3f4f6" stroke-width="1"/>
+  <text x="150" y="284" font-family="Arial, Helvetica, sans-serif" font-size="8" fill="#d1d5db" text-anchor="middle">Powered by Taboola</text>
+  <text x="150" y="296" font-family="Arial, Helvetica, sans-serif" font-size="7" fill="#d1d5db" text-anchor="middle">Sponsored Content</text>
+</svg>

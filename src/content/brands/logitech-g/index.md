@@ -13,6 +13,10 @@ brand_x: ''
 brand_instagram: ''
 brand_youtube: ''
 brand_tiktok: ''
+categories:
+  - keyboard
+  - monitor
+  - mouse
 navbar:
   - keyboard
   - monitor
@@ -20,5 +24,7 @@ navbar:
 toc: false
 publish: true
 hero: brand-logo-horizontal-index
+datePublished: '2025-04-29'
+dateUpdated: '2025-05-10'
 ---
 

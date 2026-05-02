@@ -1,0 +1,107 @@
+---
+/**
+ * IndexHeroAds — structured ad section for page 2+ of site-index pages.
+ * Mirrors IndexDashboard's grid structure (content area + 300px rail)
+ * so page 2+ has the same visual rhythm as page 1.
+ *
+ * Layout by breakpoint:
+ *   Desktop (>1150px): leaderboard (970x250) + companion rail (300x250)
+ *   Tablet (825–1150px): leaderboard only, centered, rail hidden
+ *   Mobile (<825px): leaderboard scales via aspect-ratio
+ *
+ * WHY fixed-height containers: CLS prevention — real ad networks load after
+ * SSG page paint. Without reserved heights, ads push content down on load.
+ */
+import AdSlot from '@features/ads/components/AdSlot.astro';
+---
+
+<section class="hero-ads" data-feed-kind="hero-ad-strip">
+  <div class="hero-ads__grid">
+    <div class="hero-ads__main">
+      <AdSlot position="hero_leaderboard" />
+    </div>
+
+    <aside class="hero-ads__rail" aria-label="Advertisement">
+      <AdSlot position="hero_companion" />
+    </aside>
+  </div>
+</section>
+
+<style>
+  /* ── Base container ── */
+  .hero-ads {
+    margin-bottom: 0;
+  }
+
+  /* ── Grid: matches IndexDashboard's moreof-hf__grid (1fr + 300px rail) ── */
+  .hero-ads__grid {
+    display: grid;
+    grid-template-columns: 1fr 300px;
+    gap: 30px; /* HBS: [data-ad-rail="right"] gap is 30px */
+    align-items: start;
+  }
+
+  /* ── Main: leaderboard container ──
+     WHY fixed height: CLS reservation for 970x250. Ad loads async after page paint.
+     Without this, the ad insert pushes the feed down causing visible jank. */
+  .hero-ads__main {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 250px;
+    border-top: 1px solid var(--section-medium-background-color);
+    border-bottom: 1px solid var(--section-medium-background-color);
+  }
+
+  /* ── Rail: companion ad (matches dashboard's moreof-rail-ad) ──
+     WHY fixed dimensions: prevents CLS and matches sidebar ad pattern. */
+  .hero-ads__rail {
+    width: 300px;
+    max-width: 300px;
+    min-width: 0;
+    min-height: 250px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* ── Responsive: hide rail ≤1150px (matches IndexDashboard) ── */
+  @media (max-width: 1150px) {
+    .hero-ads__grid {
+      grid-template-columns: 1fr;
+    }
+
+    .hero-ads__rail {
+      display: none;
+    }
+
+    /* WHY aspect-ratio: Below 970px the leaderboard can't render at full width.
+       Let it scale proportionally from 970x250 down to ~82px at 320px viewport.
+       min-height ensures it never collapses to nothing. */
+    .hero-ads__main {
+      min-height: 90px;
+      aspect-ratio: 970 / 250;
+      max-height: 250px;
+    }
+  }
+
+  /* ── Responsive: mobile ≤700px ── */
+  @media (max-width: 700px) {
+    .hero-ads__main {
+      min-height: 50px;
+      border-top: none;
+      border-bottom: none;
+    }
+  }
+
+  /* ── Ensure inline ads fill the main container properly ── */
+  .hero-ads__main :global(.ad-slot) {
+    width: 100%;
+    max-width: 970px;
+  }
+
+  .hero-ads__rail :global(.ad-slot) {
+    width: 300px;
+    max-width: 100%;
+  }
+</style>

@@ -1,0 +1,32 @@
+---
+/**
+ * /guides/ index page — full page (top half + bottom half).
+ * Handles: /guides/, /guides/page/2/, /guides/mice/, /guides/mice/page/2/
+ */
+import MainLayout from '@shared/layouts/MainLayout.astro';
+import SiteIndexPage from '@features/site-index/components/SiteIndexPage.astro';
+import {
+  buildSiteIndexVm,
+  getSiteIndexStaticPaths,
+  guidesIndexDefinition,
+} from '@features/site-index/definitions';
+import type { SiteIndexStaticPathProps } from '@features/site-index/page-builder';
+
+export async function getStaticPaths() {
+  return getSiteIndexStaticPaths(guidesIndexDefinition);
+}
+
+const vm = await buildSiteIndexVm(
+  guidesIndexDefinition,
+  Astro.props as SiteIndexStaticPathProps,
+);
+---
+
+<MainLayout
+  title={vm.seo.title}
+  description={vm.seo.description}
+  canonicalUrl={vm.seo.canonicalUrl}
+  structuredData={vm.seo.structuredData}
+>
+  <SiteIndexPage vm={vm} />
+</MainLayout>

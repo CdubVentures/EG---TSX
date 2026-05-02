@@ -1,0 +1,236 @@
+---
+/**
+ * IndexBody.astro — Bottom-half orchestrator for site-index pages.
+ * Port of HBS <div class="site-index site-index--{type}"> from site_reviews/news/guides.handlebars.
+ *
+ * Structure:
+ *   Grid A: category sidebar + feed (first half) + sticky ad rail
+ *   Grid B (≥10 items): empty spacer + feed (second half) + second sticky ad rail
+ *
+ * CSS grid layout from site_index.css body grid section.
+ */
+import type { FeaturedItem } from '@features/home/featured-scroller-utils';
+import type { PaginationData, FilterCategory } from '@features/site-index/build-pagination';
+import CategorySidebar from './CategorySidebar.astro';
+import FeedVertical from './FeedVertical.astro';
+import IndexEmptyFeed from './IndexEmptyFeed.astro';
+import AdSlot from '@features/ads/components/AdSlot.astro';
+
+interface Props {
+  type: 'reviews' | 'news' | 'guides';
+  typeLabel?: string;
+  pageItems: FeaturedItem[];
+  heading: string;
+  pagination: PaginationData;
+  filterCategories: FilterCategory[];
+  activeCategory?: string;
+  categoryClass?: string;
+  allCount: number;
+  dashboardCount?: number;
+}
+
+const {
+  type,
+  typeLabel,
+  pageItems,
+  heading,
+  pagination,
+  filterCategories,
+  activeCategory,
+  categoryClass,
+  allCount,
+  dashboardCount = 0,
+} = Astro.props;
+
+// WHY: HBS splits the feed into two grids when ≥10 items — each grid gets its own ad rail
+const feedCount = pageItems.length;
+const showMidInline = feedCount >= 10;
+const splitIndex = showMidInline ? Math.ceil(feedCount / 2) : feedCount;
+
+const firstHalf = pageItems.slice(0, splitIndex);
+const secondHalf = showMidInline ? pageItems.slice(splitIndex) : [];
+
+// WHY: inline ad injected at end of first feed when ≥2 items
+const showBottomInline = feedCount >= 2;
+
+// WHY showScore: only reviews show the DexaBadge score overlay
+const showScore = type === 'reviews';
+---
+
+<div class:list={['site-index', `site-index--${type}`]}>
+  {/* ── Grid A: cats | main | rail ── */}
+  <section class="site-index__grid">
+    <aside class="site-index__cats">
+      <CategorySidebar
+        categories={filterCategories}
+        activeCategory={activeCategory}
+        type={type}
+        allCount={allCount}
+        categoryClass={categoryClass}
+      />
+    </aside>
+
+    <div class="site-index__main">
+      {feedCount > 0 ? (
+        <FeedVertical
+          items={firstHalf}
+          heading={heading}
+          pagination={pagination}
+          showPagination={!showMidInline}
+          showHeader={true}
+          showInlineAd={showBottomInline}
+          showScore={showScore}
+          filterCategories={filterCategories}
+          activeCategory={activeCategory}
+          type={type}
+          allCount={allCount}
+          categoryClass={categoryClass}
+        />
+      ) : (
+        <IndexEmptyFeed
+          typeLabel={typeLabel || type}
+          dashboardCount={dashboardCount}
+        />
+      )}
+    </div>
+
+    <aside class="site-index__rail first-type-rail" aria-label="Advertisement">
+      <div class="sticky-stack" data-sticky="true">
+        <AdSlot position="sidebar_sticky" />
+      </div>
+    </aside>
+  </section>
+
+  {/* ── Grid B: spacer | main | rail (only when ≥10 items) ── */}
+  {showMidInline && (
+    <section class="site-index__grid -nocats">
+      <aside class="site-index__cats" aria-hidden="true"></aside>
+
+      <div class="site-index__main">
+        <FeedVertical
+          items={secondHalf}
+          showPagination={true}
+          showHeader={false}
+          showInlineAd={false}
+          showScore={showScore}
+          pagination={pagination}
+          type={type}
+          categoryClass={categoryClass}
+        />
+      </div>
+
+      <aside class="site-index__rail second-type-rail" aria-label="Advertisement">
+        <div class="sticky-stack" data-sticky="true">
+          <AdSlot position="sidebar_sticky" />
+        </div>
+      </aside>
+    </section>
+  )}
+</div>
+
+<style>
+  /* Port of site_index.css — body grid (cats | main | rail) */
+  .site-index {
+    --si-max: 1500px;
+    --si-gap: 22px;
+    --si-gap-lg: 30px;
+    --si-col-cats: 200px;
+    --si-col-rail: 300px;
+    box-sizing: content-box; /* WHY: HBS uses content-box — padding-left is OUTSIDE max-width, not inside */
+    margin: 0 auto;
+    max-width: calc(var(--si-max) + 32px);
+    padding-left: clamp(0px, -1650px + 103.125vw, 330px);
+  }
+
+  .site-index__grid {
+    display: grid;
+    grid-template-columns: var(--si-col-cats) minmax(0, 1fr) var(--si-col-rail);
+    grid-template-areas: "cats main rail";
+    gap: var(--si-gap-lg);
+    align-items: start;
+    padding: 24px 24px 0px;
+    margin-bottom: 24px;
+  }
+
+  .site-index__grid.-nocats {
+    margin-bottom: 40px;
+  }
+
+  .site-index__cats {
+    grid-area: cats;
+    min-width: 0;
+  }
+
+  .site-index__main {
+    grid-area: main;
+    min-width: 0;
+  }
+
+  .site-index__rail {
+    grid-area: rail;
+    min-width: 0;
+    height: 100%;
+  }
+
+  /* First rail compensates for dashboard height above */
+  .site-index__rail.first-type-rail {
+    height: calc(100% - 250px - 50px);
+  }
+
+  /* Sticky ad wrapper
+     WHY min-height: CLS reservation — prevents layout shift when ad loads async.
+     300x600 is the largest sidebar_sticky size. */
+  .sticky-stack[data-sticky="true"] {
+    position: sticky;
+    top: var(--rail-sticky-top, calc(var(--top-bar-H, 64px) + 32px));
+    will-change: top;
+    isolation: isolate;
+    z-index: 1000;
+    min-height: 600px;
+  }
+
+  .site-index__rail :global(.ad-slot) {
+    width: var(--si-col-rail);
+    max-width: 100%;
+  }
+
+  /* ≤1400px: categories above feed, rail spans both rows */
+  @media (max-width: 1400px) {
+    .site-index__grid {
+      grid-template-columns: minmax(0, 1fr) var(--si-col-rail);
+      grid-template-areas:
+        "cats  rail"
+        "main  rail";
+      gap: var(--si-gap-lg);
+    }
+
+    .site-index__rail {
+      align-self: stretch;
+    }
+  }
+
+  /* ≤1150px: single column, rail hidden */
+  @media (max-width: 1150px) {
+    .site-index__grid {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 0;
+      grid-template-areas:
+        "cats"
+        "main";
+    }
+
+    .site-index__rail,
+    .site-index__grid .site-index__rail {
+      display: none !important;
+    }
+  }
+
+  /* ≤825px: category sidebar hidden (mobile filter in header) */
+  @media (max-width: 825px) {
+    .site-index--reviews .site-index__cats,
+    .site-index--news .site-index__cats,
+    .site-index--guides .site-index__cats {
+      display: none !important;
+    }
+  }
+</style>

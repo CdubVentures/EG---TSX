@@ -1,35 +1,50 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="300" height="400" viewBox="0 0 300 400">
-  <defs>
-    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="#1a0a2e"/>
-      <stop offset="100%" stop-color="#0d0519"/>
-    </linearGradient>
-    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0%" stop-color="#a855f7"/>
-      <stop offset="100%" stop-color="#ec4899"/>
-    </linearGradient>
-  </defs>
-  <rect width="300" height="400" fill="url(#bg)"/>
-  <rect width="300" height="3" fill="url(#accent)"/>
-  <polygon points="300,0 300,200 150,0" fill="#2d1050" opacity="0.4"/>
-  <circle cx="150" cy="180" r="60" fill="#a855f7" opacity="0.05"/>
-  <rect x="20" y="22" width="8" height="8" rx="4" fill="#a855f7"/>
-  <text x="36" y="31" font-family="system-ui, sans-serif" font-size="11" font-weight="700" fill="#8b949e" letter-spacing="2">SAMPLE BRAND</text>
-  <text x="20" y="78" font-family="system-ui, sans-serif" font-size="28" font-weight="900" fill="#ffffff">PRO GAMING</text>
-  <text x="20" y="110" font-family="system-ui, sans-serif" font-size="28" font-weight="900" fill="#a855f7">HEADSET</text>
-  <text x="20" y="140" font-family="system-ui, sans-serif" font-size="13" font-weight="400" fill="#8b949e">7.1 Surround · 50mm Drivers</text>
-  <g transform="translate(60, 160)" opacity="0.08">
-    <circle cx="90" cy="50" r="45" fill="#a855f7"/>
-    <rect x="45" y="0" width="90" height="20" rx="10" fill="#a855f7"/>
-  </g>
-  <rect x="20" y="260" width="260" height="1" fill="#2d1050"/>
-  <text x="20" y="290" font-family="system-ui, sans-serif" font-size="13" font-weight="500" fill="#8b949e">Noise Cancellation</text>
-  <text x="280" y="290" font-family="system-ui, sans-serif" font-size="13" font-weight="700" fill="#a855f7" text-anchor="end">Active</text>
-  <text x="20" y="318" font-family="system-ui, sans-serif" font-size="13" font-weight="500" fill="#8b949e">Battery</text>
-  <text x="280" y="318" font-family="system-ui, sans-serif" font-size="13" font-weight="700" fill="#a855f7" text-anchor="end">60 Hours</text>
-  <text x="20" y="360" font-family="system-ui, sans-serif" font-size="24" font-weight="900" fill="#ffffff">$249</text>
-  <rect x="170" y="340" width="110" height="38" rx="19" fill="#a855f7"/>
-  <text x="225" y="365" font-family="system-ui, sans-serif" font-size="13" font-weight="800" fill="#ffffff" text-anchor="middle" letter-spacing="1">SHOP NOW</text>
-  <text x="280" y="394" font-family="system-ui, sans-serif" font-size="9" font-weight="500" fill="#4a5568" text-anchor="end">Sponsored</text>
-  <rect y="397" width="300" height="3" fill="url(#accent)"/>
+  <!-- FitTrack — Fitness App Ad (300x400) -->
+  <rect width="300" height="400" fill="#f0fdf4" stroke="#e5e7eb" stroke-width="1"/>
+
+  <!-- Ad label -->
+  <text x="280" y="16" font-family="Arial, Helvetica, sans-serif" font-size="9" fill="#9ca3af" text-anchor="end">Sponsored</text>
+
+  <!-- Brand -->
+  <circle cx="30" cy="34" r="10" fill="#059669"/>
+  <text x="30" y="38" font-family="Arial, Helvetica, sans-serif" font-size="9" font-weight="700" fill="#ffffff" text-anchor="middle">F</text>
+  <text x="48" y="39" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="700" fill="#065f46">FitTrack</text>
+
+  <!-- Phone shape placeholder -->
+  <rect x="95" y="60" width="110" height="180" rx="14" fill="#d1fae5" stroke="#a7f3d0" stroke-width="1.5"/>
+  <!-- Screen -->
+  <rect x="103" y="75" width="94" height="150" rx="4" fill="#ecfdf5"/>
+  <!-- Screen content -->
+  <!-- Heart rate -->
+  <text x="150" y="98" font-family="Arial, Helvetica, sans-serif" font-size="9" fill="#6b7280" text-anchor="middle">Heart Rate</text>
+  <text x="150" y="120" font-family="Arial, Helvetica, sans-serif" font-size="26" font-weight="700" fill="#059669" text-anchor="middle">128</text>
+  <text x="174" y="120" font-family="Arial, Helvetica, sans-serif" font-size="9" fill="#059669">bpm</text>
+  <!-- Mini chart -->
+  <polyline points="112,140 122,135 132,145 142,130 152,138 162,128 172,135 182,125 188,132" fill="none" stroke="#34d399" stroke-width="2" stroke-linecap="round"/>
+  <!-- Stats row -->
+  <rect x="110" y="155" width="35" height="30" rx="4" fill="#d1fae5"/>
+  <text x="127" y="170" font-family="Arial, Helvetica, sans-serif" font-size="10" font-weight="700" fill="#059669" text-anchor="middle">5.2k</text>
+  <text x="127" y="180" font-family="Arial, Helvetica, sans-serif" font-size="7" fill="#6b7280" text-anchor="middle">steps</text>
+  <rect x="150" y="155" width="35" height="30" rx="4" fill="#d1fae5"/>
+  <text x="167" y="170" font-family="Arial, Helvetica, sans-serif" font-size="10" font-weight="700" fill="#059669" text-anchor="middle">342</text>
+  <text x="167" y="180" font-family="Arial, Helvetica, sans-serif" font-size="7" fill="#6b7280" text-anchor="middle">cal</text>
+  <!-- Progress ring -->
+  <circle cx="150" cy="208" r="10" fill="none" stroke="#d1fae5" stroke-width="3"/>
+  <circle cx="150" cy="208" r="10" fill="none" stroke="#059669" stroke-width="3" stroke-dasharray="47 63" stroke-linecap="round" transform="rotate(-90 150 208)"/>
+  <!-- Camera notch -->
+  <rect x="140" y="63" width="20" height="5" rx="2.5" fill="#a7f3d0"/>
+
+  <!-- Headline -->
+  <text x="150" y="272" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="700" fill="#111827" text-anchor="middle">Your Personal</text>
+  <text x="150" y="296" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="700" fill="#059669" text-anchor="middle">Trainer</text>
+
+  <!-- Subtext -->
+  <text x="150" y="320" font-family="Arial, Helvetica, sans-serif" font-size="12" fill="#6b7280" text-anchor="middle">AI-powered workouts + nutrition plans</text>
+
+  <!-- CTA button -->
+  <rect x="65" y="340" width="170" height="40" rx="20" fill="#059669"/>
+  <text x="150" y="365" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="700" fill="#ffffff" text-anchor="middle">Get the App</text>
+
+  <!-- Download badge -->
+  <text x="150" y="393" font-family="Arial, Helvetica, sans-serif" font-size="9" fill="#9ca3af" text-anchor="middle">Free Download | iOS &amp; Android</text>
 </svg>

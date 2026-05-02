@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 728 90" width="728" height="90">
+  <!-- Background with light border -->
+  <rect x="0.5" y="0.5" width="727" height="89" rx="4" fill="#ffffff" stroke="#e5e7eb" stroke-width="1"/>
+
+  <!-- Brand area left: shield icon + brand name -->
+  <rect x="14" y="14" width="62" height="62" rx="10" fill="#1a56db"/>
+  <path d="M45 22 L58 28 L58 42 Q58 52 45 58 Q32 52 32 42 L32 28 Z" fill="none" stroke="#ffffff" stroke-width="1.8"/>
+  <path d="M40 40 L44 44 L52 35" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="45" y="68" font-family="Arial, Helvetica, sans-serif" font-size="6.5" font-weight="600" fill="#ffffff" text-anchor="middle" dominant-baseline="central" letter-spacing="0.8">SAFEGUARD</text>
+
+  <!-- Divider line -->
+  <line x1="90" y1="18" x2="90" y2="72" stroke="#e5e7eb" stroke-width="1"/>
+
+  <!-- Headline center -->
+  <text x="330" y="32" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="700" fill="#1a56db" text-anchor="middle" dominant-baseline="central">Save 30% on Auto Insurance</text>
+  <text x="330" y="56" font-family="Arial, Helvetica, sans-serif" font-size="12" fill="#6b7280" text-anchor="middle" dominant-baseline="central">Compare top-rated providers. Free quotes in 2 minutes.</text>
+
+  <!-- CTA button right -->
+  <rect x="575" y="23" width="124" height="44" rx="6" fill="#1a56db"/>
+  <text x="637" y="46" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="700" fill="#ffffff" text-anchor="middle" dominant-baseline="central">Get Quote</text>
+
+  <!-- Ad label top-right -->
+  <rect x="693" y="4" width="28" height="16" rx="3" fill="none" stroke="#d1d5db" stroke-width="1"/>
+  <text x="707" y="13" font-family="Arial, Helvetica, sans-serif" font-size="9" fill="#9ca3af" text-anchor="middle" dominant-baseline="central">Ad</text>
+</svg>

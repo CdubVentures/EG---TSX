@@ -1,9 +1,9 @@
-import { AD_REGISTRY, ADSENSE_CLIENT } from './config';
+import { AD_POSITIONS, ADSENSE_CLIENT } from './config';
 import type { AdSlotConfig, ParsedSize } from './config';
 
-/** Look up an ad slot by campaign name. Returns undefined if not found. */
-export function resolveAd(campaign: string): AdSlotConfig | undefined {
-  return AD_REGISTRY[campaign];
+/** Look up an ad slot by position name. Returns undefined if not found. */
+export function resolveAd(position: string): AdSlotConfig | undefined {
+  return AD_POSITIONS[position];
 }
 
 /** Returns the global AdSense publisher client ID. */

@@ -1,0 +1,139 @@
+---
+/**
+ * IndexBleed — top-half orchestrator for site-index pages (reviews, news, guides, brands).
+ * Port of HBS .site-index-bleed section from site_reviews.handlebars + site_index.css.
+ *
+ * Renders: breadcrumbs, h1 title, dek description, and either
+ * IndexDashboard/BrandDashboard (page 1) or an ad placeholder (page 2+).
+ */
+import type { FeaturedItem } from '@features/home/featured-scroller-utils';
+import type { BrandTileItem } from '../brand-types';
+import type { SiteIndexType } from '../page-builder';
+import Breadcrumbs from '@shared/ui/Breadcrumbs.astro';
+import IndexDashboard from './IndexDashboard.astro';
+import BrandDashboard from './BrandDashboard.astro';
+import IndexHeroAds from './IndexHeroAds.astro';
+
+interface BreadcrumbItem {
+  label: string;
+  href?: string;
+}
+
+interface Props {
+  type: SiteIndexType;
+  typeLabel: string;
+  category?: string;
+  categoryLabel?: string;
+  categoryClass?: string;
+  page: number;
+  headerDek: string;
+  dashboardItems?: FeaturedItem[];
+  brandDashboardItems?: BrandTileItem[];
+  heading: string;
+  breadcrumbs: BreadcrumbItem[];
+}
+
+const {
+  type,
+  typeLabel,
+  category,
+  categoryLabel,
+  categoryClass,
+  page,
+  headerDek,
+  dashboardItems = [],
+  brandDashboardItems,
+  heading,
+  breadcrumbs,
+} = Astro.props;
+
+const isBrands = type === 'brands';
+---
+
+<div class:list={['site-index-bleed', isBrands && 'site-index-brands']}>
+  <div class:list={['site-index-wrapper', `site-index--${type}`]}>
+    <div class="site-index__header">
+      <Breadcrumbs
+        items={breadcrumbs}
+        categoryClass={categoryClass}
+      />
+
+      <h1 class="site-index__title">{heading}</h1>
+      {headerDek && <p class="site-index__dek">{headerDek}</p>}
+    </div>
+
+    <section class="site-index__feature">
+      {page === 1 ? (
+        isBrands && brandDashboardItems ? (
+          <BrandDashboard items={brandDashboardItems} categoryClass={categoryClass} />
+        ) : (
+          <IndexDashboard items={dashboardItems} type={type as 'reviews' | 'news' | 'guides'} />
+        )
+      ) : (
+        <IndexHeroAds />
+      )}
+    </section>
+  </div>
+</div>
+
+<style>
+  /* Port of site_index.css — bleed + wrapper + header + title + dek */
+
+  .site-index-bleed {
+    width: 100%;
+    background-color: var(--section-dark-background-color);
+  }
+
+  /* HBS site_index.css: .site-index-brands overrides bleed bg to darker shade */
+  .site-index-brands {
+    background-color: var(--section-darkestdarker-background-color);
+  }
+
+  .site-index-wrapper {
+    --si-max: 1500px;
+    --si-gap: 22px;
+    box-sizing: content-box; /* WHY: HBS uses content-box — padding-left is OUTSIDE max-width, not inside */
+    margin: 0 auto;
+    max-width: calc(var(--si-max) + 32px);
+    padding-left: clamp(0px, -1650px + 103.125vw, 330px);
+    padding-bottom: 28px;
+  }
+
+  .site-index__header {
+    padding: 24px 24px;
+  }
+
+  .site-index__feature {
+    padding: 0px 24px;
+  }
+
+  .site-index__title {
+    margin: 12px 0 12px;
+    font-family: var(--identity-font, inherit);
+    font-weight: 900;
+    letter-spacing: 0px;
+    font-size: var(--ft-40-31);
+    line-height: 1.1;
+    color: var(--white-color-1);
+  }
+
+  .site-index__dek {
+    margin: 0px 0 3px;
+    font-family: var(--identity-font, inherit);
+    font-weight: 400;
+    font-size: var(--ft-18-15);
+    line-height: 1.2;
+    color: var(--grey-color-1);
+    max-width: 90ch;
+    opacity: 0.95;
+  }
+
+  /* ── Responsive: ≤900px single column ── */
+  @media (max-width: 900px) {
+    .site-index__header,
+    .site-index__feature {
+      padding-left: 16px;
+      padding-right: 16px;
+    }
+  }
+</style>

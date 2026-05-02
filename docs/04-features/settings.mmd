@@ -1,0 +1,56 @@
+%%{init: {'theme': 'base', 'themeVariables': { 'fontSize': '20px', 'actorWidth': 250, 'actorMargin': 200, 'boxMargin': 20 }}}%%
+sequenceDiagram
+  autonumber
+  actor U as User
+  box Interface Layer
+    participant NAV as settings-nav-icon
+    participant DSTORE as $settingsDialog
+    participant DIALOG as SettingsDialog
+    participant PANEL as SettingsPanel
+  end
+  box State Layer
+    participant PREFS as $userPrefs
+    participant THEME as $theme
+    participant AUTH as $auth
+    participant LS as localStorage
+  end
+  box Browser
+    participant DOM as documentElement and theme-color meta
+    participant FAV as __egUpdateFavicon()
+    participant EVT as hubSettingsChanged event
+  end
+
+  U->>NAV: Click settings icon
+  NAV->>DSTORE: openSettings()
+  DSTORE->>DIALOG: open state becomes true
+  DIALOG->>LS: loadPrefs()
+  DIALOG->>DIALOG: dialog.showModal()
+  DIALOG-->>U: render SettingsPanel
+
+  alt Theme changed
+    U->>PANEL: Select Light or Dark
+    PANEL->>THEME: setTheme(mode)
+    THEME->>LS: write eg-theme
+    THEME->>DOM: set html data-theme and theme-color meta
+    THEME->>FAV: requestAnimationFrame then rebuild themed favicon
+  else Authenticated hub preference changed
+    PANEL->>AUTH: read authenticated uid
+    PANEL->>PREFS: setPref(key, value)
+    PREFS->>LS: write {uid}|preference key
+    PREFS->>PREFS: update atom
+    PREFS->>EVT: dispatch hubSettingsChanged
+  else Guest opens Hub Settings
+    PANEL->>AUTH: read guest status
+    PANEL-->>U: render disabled controls and guest CTA
+    opt User chooses Sign up or Log in
+      PANEL->>DIALOG: animate close
+      DIALOG->>DSTORE: closeSettings()
+      PANEL->>AUTH: openSignup() or openLogin()
+    end
+  end
+
+  opt Dialog dismissed
+    U->>DIALOG: Escape, backdrop click, or close button
+    DIALOG->>DIALOG: closing animation
+    DIALOG->>DSTORE: closeSettings()
+  end

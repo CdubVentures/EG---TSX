@@ -29,7 +29,7 @@ import VaultCount from '@features/vault/components/VaultCount';
       </g>
     </svg>
     <div class="nav-vault-item-count-wrapper mobile-vault-badge">
-      <VaultCount client:idle />
+      <VaultCount client:only="react" />
     </div>
   </div>
 
@@ -335,9 +335,9 @@ import VaultCount from '@features/vault/components/VaultCount';
 
   .mobile-vault-badge {
     position: absolute;
-    top: -0.35em;
-    right: -0.35em;
-    transform: none;
+    top: 0;
+    right: 0;
+    transform: translate(50%, -50%);
     width: 1.35em;
     font-size: var(--font-size-11px);
   }
@@ -393,6 +393,18 @@ import VaultCount from '@features/vault/components/VaultCount';
   import { openLogin, openSignup } from '@features/auth';
   document.querySelector('.login-nav-icon')?.addEventListener('click', () => openLogin());
   document.querySelector('.signup-nav-icon')?.addEventListener('click', () => openSignup());
+</script>
+
+{/* Search icon trigger + Ctrl+K global shortcut */}
+<script>
+  import { openSearch } from '@features/search';
+  document.querySelector('.search-nav-icon')?.addEventListener('click', () => openSearch());
+  document.addEventListener('keydown', (e) => {
+    if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+      e.preventDefault();
+      openSearch();
+    }
+  });
 </script>
 
 {/* Settings icon trigger — opens SettingsDialog via shared atom */}

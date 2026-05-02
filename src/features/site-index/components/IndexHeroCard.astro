@@ -1,0 +1,205 @@
+---
+/**
+ * IndexHeroCard — large featured hero card for the site-index 3-slot dashboard.
+ * Port of HBS .moreof-hero__card from site-top-dashboard.handlebars + feed_moreof.css.
+ */
+import type { FeaturedItem } from '@features/home/featured-scroller-utils';
+import DexaBadge from '@shared/ui/DexaBadge.astro';
+
+interface Props {
+  item: FeaturedItem;
+}
+
+const { item } = Astro.props;
+---
+
+<div class="moreof-hero__wrap">
+  <a href={item.url} class:list={['moreof-hero__card', item.category ? `${item.category}-color` : '']}>
+    {item.overall != null && (
+      <div class="moreof-hero-item-score">
+        <DexaBadge score={item.overall} />
+      </div>
+    )}
+
+    {item.srcset && (
+      <img
+        loading="eager"
+        fetchpriority="high"
+        decoding="async"
+        src={`${item.heroPath}_xl.webp`}
+        srcset={item.srcset}
+        sizes="(min-width: 1150px) 60vw, 100vw"
+        alt={item.title}
+        class="moreof-hero__image"
+      />
+    )}
+
+    <span class="moreof-hero__overlay" aria-hidden="true"></span>
+
+    <div class="moreof-hero__content">
+      <div class="moreof-hero__top">
+        <span class="item-tag moreof-hero__tag">
+          {item.categoryLabel}
+        </span>
+        <h2 class="moreof-hero__title">{item.title}</h2>
+      </div>
+      {/* WHY no date: HBS feed_moreof.css .moreof-hero__date { display: none } */}
+    </div>
+  </a>
+</div>
+
+<style>
+  /* Port of feed_moreof.css — hero card styling */
+  .moreof-hero__wrap {
+    flex: 0 1 65%;
+    min-width: 0;
+    display: flex;
+  }
+
+  .moreof-hero__card {
+    position: relative;
+    display: block;
+    flex: 1 1 auto;
+    min-width: 0;
+    border-radius: 6px;
+    overflow: hidden;
+    background: var(--section-darkest-background-color);
+    box-shadow: var(--card-shadow);
+    text-decoration: none;
+    color: var(--color-text-on-accent); /* WHY: text sits on dark gradient overlay — must stay white in all themes */
+    transition: box-shadow 0.2s ease;
+  }
+
+  .moreof-hero__card:hover {
+    box-shadow: var(--card-shadow-hover);
+  }
+
+  .moreof-hero__image {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+  }
+
+  /* Port of site_index.css — score badge positioning (container-query sized) */
+  .moreof-hero__card {
+    container-type: size;
+  }
+
+  .moreof-hero-item-score {
+    position: absolute;
+    top: 12px;
+    left: 10px;
+    right: auto;
+    bottom: auto;
+    --dexa-size: clamp(16px, 9.9cqh, 29px); /* WHY: DexaBadge reads --dexa-size; HBS dexa inherits font-size from parent */
+    font-size: clamp(16px, 9.9cqh, 29px);
+    z-index: 3;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+  }
+
+  .moreof-hero__overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg,
+      rgba(0, 0, 0, 0) 10%,
+      rgba(0, 0, 0, .375) 55%,
+      rgba(0, 0, 0, .85) 85%,
+      rgba(0, 0, 0, .92) 100%);
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .moreof-hero__content {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding: 1.25rem 1.5rem 1.5rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    width: min(85%, 980px);
+    z-index: 2;
+  }
+
+  .moreof-hero__tag {
+    color: var(--card-color, inherit);
+    font-weight: var(--font-weight7);
+    font-size: var(--ft-14-12);
+    text-transform: uppercase;
+  }
+
+  .moreof-hero__title {
+    margin: 0;
+    font-family: var(--identity-font);
+    font-weight: var(--font-weight8);
+    letter-spacing: -0.5px;
+    line-height: 1.15;
+    font-size: var(--ft-28-21);
+    color: var(--color-text-on-accent); /* WHY: on dark gradient overlay */
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .moreof-hero__card:hover .moreof-hero__title,
+  .moreof-hero__card:focus .moreof-hero__title,
+  .moreof-hero__card:focus-visible .moreof-hero__title {
+    text-decoration: underline;
+    text-underline-offset: 2px;
+    text-decoration-thickness: from-font;
+    text-decoration-skip-ink: auto;
+  }
+
+  /* ── Responsive: phone stack ≤700px ── */
+  @media (max-width: 700px) {
+    .moreof-hero__wrap {
+      flex: 1 1 auto;
+      min-width: 0;
+    }
+
+    .moreof-hero__card {
+      width: 100%;
+      aspect-ratio: 5 / 3;
+      min-height: 0;
+    }
+
+    .moreof-hero__image {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .moreof-hero__content {
+      padding: 1.25rem 1.5rem 1.5rem 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      width: unset;
+    }
+
+    .moreof-hero__tag {
+      font-size: var(--fm-12-11);
+    }
+
+    .moreof-hero__title {
+      margin-top: 3px;
+      font-size: var(--fm-24-18);
+    }
+
+    .moreof-hero-item-score {
+      --dexa-size: clamp(19px, 5.6667px + 3.3333vw, 29px);
+      font-size: clamp(19px, 5.6667px + 3.3333vw, 29px);
+    }
+  }
+</style>

@@ -122,6 +122,13 @@ export function setTheme(mode: ThemeMode): void {
     document.documentElement.setAttribute('data-theme', THEME_TO_DATA[mode]);
     const meta = document.querySelector('meta[name="theme-color"]');
     if (meta) meta.setAttribute('content', THEME_COLORS[mode]);
+
+    /* WHY requestAnimationFrame: CSS vars update after data-theme attribute
+       change is applied. The favicon builder reads computed CSS vars, so we
+       wait one frame for the new theme's variables to resolve. */
+    requestAnimationFrame(() => {
+      (window as unknown as Record<string, unknown>).__egUpdateFavicon?.();
+    });
   }
 }
 

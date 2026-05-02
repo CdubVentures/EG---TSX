@@ -1,0 +1,268 @@
+---
+/**
+ * FilterDropdown.astro - Mobile category filter (visible <=825px only).
+ * Port of HBS site-index__filterBar from site-latest-vertical.handlebars
+ * + JS toggle from site_index_scripts.handlebars.
+ */
+import type { FilterCategory } from '@features/site-index/build-pagination';
+
+interface Props {
+  categories: FilterCategory[];
+  activeCategory?: string;
+  type: string;
+  allCount: number;
+}
+
+const { categories, activeCategory, type, allCount } = Astro.props;
+const menuId = `site-index-filter-menu-${type}-${activeCategory ?? 'all'}`;
+---
+
+<div class="site-index__filterBar" data-site-index-filter>
+  <button
+    type="button"
+    class="site-index__filterButton"
+    aria-label={`Filter ${type}`}
+    aria-haspopup="true"
+    aria-expanded="false"
+    aria-controls={menuId}
+    data-site-index-filter-toggle
+  >
+    <span class="site-index__filterButton-icon">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="5 8 53.99 51" aria-hidden="true" focusable="false">
+        <path
+          d="M53.39 8H10.61a5.61 5.61 0 0 0-4.15 9.38L25 37.77V57a2 2 0 0 0 1.13 1.8 1.94 1.94 0 0 0 .87.2 2 2 0 0 0 1.25-.44l3.75-3 6.25-5A2 2 0 0 0 39 49V37.77l18.54-20.39A5.61 5.61 0 0 0 53.39 8z"
+          fill="currentColor"
+        />
+      </svg>
+    </span>
+    <span class="site-index__filterButton-label">Filter</span>
+  </button>
+
+  <nav
+    id={menuId}
+    class="site-index__filterMenu"
+    aria-label={`Filter ${type}`}
+    hidden
+    data-site-index-filter-menu
+  >
+    <ul class="site-index__filterList">
+      <li>
+        <a
+          href={`/${type}/`}
+          class:list={['site-index__filterOption', { 'is-active': !activeCategory }]}
+          aria-current={!activeCategory ? 'page' : undefined}
+        >
+          <span class="site-index__filterOption-label">All</span>
+          <span class="site-index__filterOption-count">{allCount}</span>
+        </a>
+      </li>
+
+      {categories.map(cat => (
+        <li>
+          <a
+            href={cat.url}
+            class:list={['site-index__filterOption', { 'is-active': cat.active }]}
+            aria-current={cat.active ? 'page' : undefined}
+          >
+            <span class="site-index__filterOption-label">{cat.label}</span>
+            <span class="site-index__filterOption-count">{cat.count}</span>
+          </a>
+        </li>
+      ))}
+    </ul>
+  </nav>
+</div>
+
+{/* WHY is:inline - small toggle script, no bundling needed.
+    Port of site_index_scripts.handlebars filter dropdown toggle. */}
+<script is:inline>
+(function () {
+  function initSiteIndexFilters() {
+    var bars = document.querySelectorAll('[data-site-index-filter]');
+    if (!bars.length) return;
+
+    bars.forEach(function (bar) {
+      var btn = bar.querySelector('[data-site-index-filter-toggle]');
+      var menu = bar.querySelector('[data-site-index-filter-menu]');
+      if (!btn || !menu) return;
+
+      btn.addEventListener('click', function (e) {
+        e.stopPropagation();
+        var isOpen = !menu.hidden;
+        closeAll();
+        if (!isOpen) {
+          menu.hidden = false;
+          menu.classList.add('is-open');
+          btn.setAttribute('aria-expanded', 'true');
+        }
+      });
+    });
+
+    function closeAll() {
+      bars.forEach(function (bar) {
+        var btn = bar.querySelector('[data-site-index-filter-toggle]');
+        var menu = bar.querySelector('[data-site-index-filter-menu]');
+        if (!btn || !menu) return;
+        menu.hidden = true;
+        menu.classList.remove('is-open');
+        btn.setAttribute('aria-expanded', 'false');
+      });
+    }
+
+    document.addEventListener('click', closeAll);
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') closeAll();
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initSiteIndexFilters);
+  } else {
+    initSiteIndexFilters();
+  }
+})();
+</script>
+
+<style>
+  /* Port of site_index.css - filter dropdown */
+  .site-index__filterBar {
+    position: relative;
+    display: none;
+    align-items: stretch;
+    height: var(--si-header-ctrl-h, 3rem);
+    box-sizing: border-box;
+  }
+
+  @media (max-width: 825px) {
+    .site-index__filterBar {
+      display: inline-flex;
+    }
+  }
+
+  .site-index__filterButton {
+    appearance: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0 1rem;
+    height: 100%;
+    border-radius: 2px;
+    border: 1px solid var(--section-medium-background-color);
+    background: var(--section-dusk-background-color);
+    color: var(--white-color-2);
+    font-family: var(--identity-font);
+    font-size: var(--font-size-14px);
+    font-weight: 700;
+    text-transform: capitalize;
+    letter-spacing: 0.06em;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: background-color 0.15s ease;
+  }
+
+  .site-index__filterButton:hover {
+    background: var(--section-medium-background-color);
+  }
+
+  .site-index__filterButton:focus-visible {
+    outline: 2px solid var(--site-start-color, #5a6ef8);
+    outline-offset: 2px;
+  }
+
+  .site-index__filterButton-icon {
+    display: inline-flex;
+    width: 1.25rem;
+    height: 1.25rem;
+  }
+
+  .site-index__filterButton-icon svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+
+  .site-index__filterButton-label {
+    line-height: 1;
+  }
+
+  @media (max-width: 600px) {
+    .site-index__filterButton-label {
+      display: none;
+    }
+  }
+
+  .site-index__filterMenu {
+    position: absolute;
+    top: calc(100% + 1rem);
+    right: -1rem;
+    min-width: 190px;
+    padding: 16px 10px;
+    border-radius: 6px;
+    border: 1px solid var(--section-medium-background-color);
+    background: var(--section-dark-background-color);
+    box-shadow: 0 12px 26px rgba(0, 0, 0, 0.55);
+    z-index: 40;
+  }
+
+  .site-index__filterMenu[hidden] {
+    display: none;
+  }
+
+  .site-index__filterMenu.is-open {
+    display: block;
+  }
+
+  .site-index__filterList {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .site-index__filterOption {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 6px 10px;
+    border-radius: 2px;
+    text-decoration: none;
+    font-family: var(--identity-font);
+    font-size: var(--font-size-14px);
+    color: var(--white-color-2);
+  }
+
+  .site-index__filterList li + li {
+    margin-top: 4px;
+  }
+
+  .site-index__filterOption:hover {
+    background: var(--section-dusk-background-color);
+  }
+
+  .site-index__filterOption:focus-visible {
+    outline: 2px solid var(--site-start-color, #5a6ef8);
+    outline-offset: 2px;
+  }
+
+  .site-index__filterOption.is-active {
+    background: var(--card-color, var(--site-start-color));
+    color: #fff;
+  }
+
+  .site-index__filterOption-label {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding-right: 10px;
+  }
+
+  .site-index__filterOption-count {
+    font-size: var(--font-size-13px);
+    color: var(--grey-color-1);
+    padding: 2px 10px;
+  }
+
+  @media (max-width: 600px) {
+    .site-index__filterMenu {
+      width: min(240px, 100vw - 32px);
+    }
+  }
+</style>

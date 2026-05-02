@@ -298,7 +298,7 @@ One power-user tip from the community: if you dislike heavyweight “suite” so
 
 ::: full
 {{> ads/inline-manual
-  campaign="inline-ad"
+  position="in_content"
   desktop=true
   mobile=true
 }}
@@ -312,7 +312,7 @@ One power-user tip from the community: if you dislike heavyweight “suite” so
 
 ::: full
 {{> ads/inline-manual
-  campaign="inline-ad"
+  position="in_content"
   desktop=true
   mobile=true
 }}
@@ -325,7 +325,7 @@ One power-user tip from the community: if you dislike heavyweight “suite” so
 
 ::: full
 {{> ads/inline-manual
-  campaign="inline-ad"
+  position="in_content"
   desktop=true
   mobile=true
 }}
@@ -432,7 +432,7 @@ Bottom line: pick by shape first, then decide how far you want to chase polling 
 
 ::: full
 {{> ads/inline-manual
-  campaign="inline-ad"
+  position="in_content"
   desktop=true
   mobile=true
 }}

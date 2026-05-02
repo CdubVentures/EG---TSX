@@ -1,9 +1,9 @@
 {
   "slug": "pwnage-stormbreaker-8k",
   "brand": "Pwnage",
-  "model": "StormBreaker 8k",
+  "model": "StormBreaker",
   "baseModel": "StormBreaker",
-  "variant": "8k",
+  "variant": "",
   "category": "mouse",
   "imagePath": "/images/mouse/pwnage/stormbreaker-8k",
   "cardTags": "false",

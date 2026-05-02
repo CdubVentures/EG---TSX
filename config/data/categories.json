@@ -8,7 +8,7 @@
       "id": "mouse",
       "label": "Mouse",
       "plural": "Mice",
-      "color": "#00aeff",
+      "color": "#feca57",
       "product": {
         "production": true,
         "vite": true
@@ -16,6 +16,12 @@
       "content": {
         "production": true,
         "vite": true
+      },
+      "collections": {
+        "dataProducts": true,
+        "reviews": true,
+        "guides": true,
+        "news": true
       }
     },
     {
@@ -30,6 +36,12 @@
       "content": {
         "production": true,
         "vite": true
+      },
+      "collections": {
+        "dataProducts": true,
+        "reviews": true,
+        "guides": true,
+        "news": true
       }
     },
     {
@@ -44,6 +56,12 @@
       "content": {
         "production": true,
         "vite": true
+      },
+      "collections": {
+        "dataProducts": true,
+        "reviews": true,
+        "guides": true,
+        "news": true
       }
     },
     {
@@ -58,6 +76,12 @@
       "content": {
         "production": false,
         "vite": false
+      },
+      "collections": {
+        "dataProducts": true,
+        "reviews": true,
+        "guides": false,
+        "news": true
       }
     },
     {
@@ -72,6 +96,12 @@
       "content": {
         "production": false,
         "vite": false
+      },
+      "collections": {
+        "dataProducts": true,
+        "reviews": true,
+        "guides": false,
+        "news": true
       }
     },
     {
@@ -86,6 +116,12 @@
       "content": {
         "production": false,
         "vite": false
+      },
+      "collections": {
+        "dataProducts": true,
+        "reviews": true,
+        "guides": false,
+        "news": true
       }
     },
     {
@@ -100,6 +136,12 @@
       "content": {
         "production": true,
         "vite": true
+      },
+      "collections": {
+        "dataProducts": false,
+        "reviews": false,
+        "guides": true,
+        "news": true
       }
     },
     {
@@ -114,6 +156,12 @@
       "content": {
         "production": false,
         "vite": true
+      },
+      "collections": {
+        "dataProducts": false,
+        "reviews": true,
+        "guides": false,
+        "news": true
       }
     },
     {
@@ -128,6 +176,12 @@
       "content": {
         "production": true,
         "vite": true
+      },
+      "collections": {
+        "dataProducts": false,
+        "reviews": true,
+        "guides": false,
+        "news": true
       }
     },
     {
@@ -142,6 +196,12 @@
       "content": {
         "production": true,
         "vite": true
+      },
+      "collections": {
+        "dataProducts": false,
+        "reviews": false,
+        "guides": false,
+        "news": true
       }
     }
   ]

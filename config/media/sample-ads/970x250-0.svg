@@ -1,74 +1,67 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="970" height="250" viewBox="0 0 970 250">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 970 250" width="970" height="250">
   <defs>
-    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%" stop-color="#0d1117"/>
-      <stop offset="100%" stop-color="#161b22"/>
-    </linearGradient>
-    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0%" stop-color="#00d4ff"/>
-      <stop offset="100%" stop-color="#7c3aed"/>
-    </linearGradient>
-    <linearGradient id="cta-bg" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0%" stop-color="#00d4ff"/>
-      <stop offset="100%" stop-color="#0099cc"/>
-    </linearGradient>
+    <clipPath id="ad0-clip"><rect width="970" height="250" rx="4"/></clipPath>
   </defs>
+  <g clip-path="url(#ad0-clip)">
+    <!-- Background: clean white/light gray -->
+    <rect width="970" height="250" fill="#f7f8fa"/>
+    <!-- Subtle left accent stripe -->
+    <rect x="0" y="0" width="5" height="250" fill="#1a56db"/>
 
-  <!-- Background -->
-  <rect width="970" height="250" fill="url(#bg)"/>
+    <!-- "Ad" badge top-right -->
+    <rect x="920" y="8" width="36" height="18" rx="3" fill="#e5e7eb"/>
+    <text x="938" y="20" font-family="Arial, Helvetica, sans-serif" font-size="10" fill="#6b7280" text-anchor="middle" font-weight="600">Ad</text>
 
-  <!-- Top accent bar -->
-  <rect width="970" height="3" fill="url(#accent)"/>
+    <!-- Car silhouette placeholder -->
+    <g transform="translate(60, 55)">
+      <!-- Car body -->
+      <rect x="0" y="60" width="160" height="50" rx="10" fill="#dbeafe"/>
+      <rect x="20" y="35" width="110" height="40" rx="8" fill="#dbeafe"/>
+      <!-- Windows -->
+      <rect x="30" y="40" width="35" height="25" rx="4" fill="#93bbfd"/>
+      <rect x="75" y="40" width="45" height="25" rx="4" fill="#93bbfd"/>
+      <!-- Wheels -->
+      <circle cx="40" cy="112" r="16" fill="#4b5563"/>
+      <circle cx="40" cy="112" r="8" fill="#9ca3af"/>
+      <circle cx="130" cy="112" r="16" fill="#4b5563"/>
+      <circle cx="130" cy="112" r="8" fill="#9ca3af"/>
+      <!-- Headlight -->
+      <rect x="148" y="68" width="12" height="8" rx="2" fill="#fbbf24"/>
+    </g>
 
-  <!-- Geometric decoration — diagonal lines -->
-  <line x1="620" y1="0" x2="720" y2="250" stroke="#1e2530" stroke-width="40"/>
-  <line x1="680" y1="0" x2="780" y2="250" stroke="#1a2029" stroke-width="25"/>
-  <line x1="730" y1="0" x2="830" y2="250" stroke="#161d25" stroke-width="15"/>
+    <!-- Brand logo area -->
+    <g transform="translate(290, 30)">
+      <!-- Shield icon -->
+      <path d="M0 8 L16 0 L32 8 L32 22 Q32 34 16 40 Q0 34 0 22 Z" fill="#1a56db"/>
+      <path d="M10 18 L15 24 L24 12" stroke="#ffffff" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+      <!-- Brand name -->
+      <text x="42" y="16" font-family="Arial, Helvetica, sans-serif" font-size="22" fill="#1a56db" font-weight="700">SafeGuard</text>
+      <text x="42" y="34" font-family="Arial, Helvetica, sans-serif" font-size="13" fill="#6b7280" font-weight="400">Insurance</text>
+    </g>
 
-  <!-- Dot grid pattern (right side) -->
-  <g fill="#2a3040" opacity="0.5">
-    <circle cx="800" cy="60" r="2"/><circle cx="820" cy="60" r="2"/><circle cx="840" cy="60" r="2"/><circle cx="860" cy="60" r="2"/>
-    <circle cx="800" cy="80" r="2"/><circle cx="820" cy="80" r="2"/><circle cx="840" cy="80" r="2"/><circle cx="860" cy="80" r="2"/>
-    <circle cx="800" cy="100" r="2"/><circle cx="820" cy="100" r="2"/><circle cx="840" cy="100" r="2"/><circle cx="860" cy="100" r="2"/>
-    <circle cx="800" cy="120" r="2"/><circle cx="820" cy="120" r="2"/><circle cx="840" cy="120" r="2"/><circle cx="860" cy="120" r="2"/>
+    <!-- Headline -->
+    <text x="290" y="105" font-family="Arial, Helvetica, sans-serif" font-size="32" fill="#111827" font-weight="700">Save up to 30%</text>
+    <text x="290" y="142" font-family="Arial, Helvetica, sans-serif" font-size="28" fill="#374151" font-weight="400">on Auto Insurance</text>
+
+    <!-- Subtext -->
+    <text x="290" y="175" font-family="Arial, Helvetica, sans-serif" font-size="14" fill="#6b7280">Compare rates from top providers in minutes. No commitment required.</text>
+
+    <!-- CTA Button -->
+    <rect x="290" y="195" width="180" height="44" rx="6" fill="#1a56db"/>
+    <text x="380" y="222" font-family="Arial, Helvetica, sans-serif" font-size="16" fill="#ffffff" text-anchor="middle" font-weight="700">Get a Quote</text>
+
+    <!-- Fine print -->
+    <text x="485" y="222" font-family="Arial, Helvetica, sans-serif" font-size="11" fill="#9ca3af">Free. No obligation.</text>
+
+    <!-- Decorative dots pattern far right -->
+    <g fill="#e5e7eb" opacity="0.6">
+      <circle cx="850" cy="60" r="3"/><circle cx="870" cy="60" r="3"/><circle cx="890" cy="60" r="3"/>
+      <circle cx="850" cy="80" r="3"/><circle cx="870" cy="80" r="3"/><circle cx="890" cy="80" r="3"/>
+      <circle cx="850" cy="100" r="3"/><circle cx="870" cy="100" r="3"/><circle cx="890" cy="100" r="3"/>
+      <circle cx="850" cy="120" r="3"/><circle cx="870" cy="120" r="3"/><circle cx="890" cy="120" r="3"/>
+    </g>
+
+    <!-- Border -->
+    <rect width="970" height="250" rx="4" fill="none" stroke="#e5e7eb" stroke-width="1"/>
   </g>
-
-  <!-- Left content -->
-  <text x="45" y="75" font-family="system-ui, -apple-system, sans-serif" font-size="42" font-weight="900" fill="#ffffff" letter-spacing="2">PRECISION</text>
-  <text x="45" y="120" font-family="system-ui, -apple-system, sans-serif" font-size="42" font-weight="900" fill="#00d4ff" letter-spacing="2">REDEFINED</text>
-  <text x="45" y="155" font-family="system-ui, -apple-system, sans-serif" font-size="16" font-weight="400" fill="#8b949e" letter-spacing="1">Ultra-Light Wireless Gaming Mouse</text>
-
-  <!-- Spec pills -->
-  <rect x="45" y="175" width="72" height="28" rx="14" fill="#1e2530"/>
-  <text x="81" y="194" font-family="system-ui, sans-serif" font-size="12" font-weight="700" fill="#00d4ff" text-anchor="middle">49g</text>
-
-  <rect x="127" y="175" width="90" height="28" rx="14" fill="#1e2530"/>
-  <text x="172" y="194" font-family="system-ui, sans-serif" font-size="12" font-weight="700" fill="#00d4ff" text-anchor="middle">8000Hz</text>
-
-  <rect x="227" y="175" width="100" height="28" rx="14" fill="#1e2530"/>
-  <text x="277" y="194" font-family="system-ui, sans-serif" font-size="12" font-weight="700" fill="#00d4ff" text-anchor="middle">30K DPI</text>
-
-  <!-- Center — mouse silhouette area -->
-  <g transform="translate(480, 45)" opacity="0.12">
-    <ellipse cx="60" cy="80" rx="50" ry="75" fill="#00d4ff"/>
-    <rect x="20" y="10" width="80" height="50" rx="20" fill="#00d4ff"/>
-  </g>
-
-  <!-- Price badge -->
-  <text x="780" y="85" font-family="system-ui, sans-serif" font-size="14" font-weight="600" fill="#8b949e" text-anchor="middle">Starting at</text>
-  <text x="780" y="125" font-family="system-ui, sans-serif" font-size="38" font-weight="900" fill="#ffffff" text-anchor="middle">$149</text>
-
-  <!-- CTA Button -->
-  <rect x="718" y="155" width="130" height="44" rx="22" fill="url(#cta-bg)"/>
-  <text x="783" y="183" font-family="system-ui, sans-serif" font-size="15" font-weight="800" fill="#0d1117" text-anchor="middle" letter-spacing="1">SHOP NOW</text>
-
-  <!-- Brand area -->
-  <rect x="890" y="210" width="55" height="20" rx="3" fill="none" stroke="#2a3040" stroke-width="1"/>
-  <text x="917" y="224" font-family="system-ui, sans-serif" font-size="9" font-weight="600" fill="#4a5568" text-anchor="middle">BRAND</text>
-
-  <!-- Bottom accent bar -->
-  <rect y="247" width="970" height="3" fill="url(#accent)"/>
-
-  <!-- Sponsored label -->
-  <text x="940" y="18" font-family="system-ui, sans-serif" font-size="9" font-weight="500" fill="#4a5568" text-anchor="end">Sponsored</text>
 </svg>

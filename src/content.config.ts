@@ -2,6 +2,7 @@
 // https://docs.astro.build/en/guides/content-collections/
 import { defineCollection, z } from 'astro:content';
 import { glob } from 'astro/loaders';
+import { collectionEnumValues } from './core/category-contract';
 
 // ─── Slug-folder loader ───────────────────────────────────────────────────
 // Article content uses slug-folder layout: {slug}/index.{md,mdx}
@@ -15,48 +16,12 @@ function articleLoader(base: string) {
 }
 
 // ─── Shared validators ─────────────────────────────────────────────────────
-
-// ─── Category enums ─────────────────────────────────────────────────────────
-// SSOT: config/data/categories.json is the single source of truth for category IDs,
-// labels, colors, and product/content flags.
-// Zod requires static string literals — these enums CANNOT be derived at runtime.
-// When adding/removing a category in categories.json, update these enums to match.
-//
-//   categories       → product data, hubs, vault, brand pages
-//   reviewCategories → reviews (product cats + editorial types like game, gpu)
-//   newsCategories   → news (all content verticals including hardware, ai)
-
-// Product categories — used for product data, hubs, brand pages
-const categories = z.enum([
-  'mouse', 'keyboard', 'monitor', 'headset', 'mousepad', 'controller',
-]);
-
-// Review categories — product categories + editorial review types
-const reviewCategories = z.enum([
-  'mouse', 'keyboard', 'monitor', 'headset', 'mousepad', 'controller',
-  'game', 'gpu',
-]);
-
-// News categories — any content vertical
-const newsCategories = z.enum([
-  'mouse', 'keyboard', 'monitor', 'headset', 'mousepad', 'controller',
-  'game', 'gpu', 'ai', 'hardware',
-]);
-
-// ─── SSOT drift check (build-time) ─────────────────────────────────────────
-// WHY: If someone edits categories.json but forgets to update the enums above,
-// Astro build will fail here with a clear message instead of silently dropping
-// content or producing validation errors deep in the pipeline.
-import categoriesJson from '../config/data/categories.json';
-const jsonIds = new Set(categoriesJson.categories.map((c: { id: string }) => c.id));
-const newsEnumIds = new Set(newsCategories.options);
-const missing = [...jsonIds].filter(id => !newsEnumIds.has(id));
-if (missing.length > 0) {
-  throw new Error(
-    `[SSOT DRIFT] categories.json has IDs not in newsCategories enum: ${missing.join(', ')}. ` +
-    `Update the Zod enums in src/content.config.ts to match.`
-  );
-}
+// WHY: category-contract.ts is the single reader for categories.json. Content
+// collections derive their allowed category IDs from that shared contract.
+const categories = z.enum(collectionEnumValues.dataProducts);
+const reviewCategories = z.enum(collectionEnumValues.reviews);
+const guideCategories = z.enum(collectionEnumValues.guides);
+const newsCategories = z.enum(collectionEnumValues.news);
 
 // ─── Reviews (product review articles) ────────────────────────────────────
 // Source: EG-HBS/.markdowns/reviews/**/*.md
@@ -92,8 +57,9 @@ const reviews = defineCollection({
     // Links to product data (slug from products registry)
     productId:   z.string().optional(),
 
-    // Badges
+    // Editorial
     egbadge:     z.string().optional(),
+    pinned:      z.boolean().default(false),
 
     // Layout
     toc:         z.boolean().default(false),
@@ -136,6 +102,7 @@ const brands = defineCollection({
     brand_tiktok:    z.string().url().optional().or(z.literal('')),
 
     // Hub config
+    categories:       z.array(z.coerce.string()).default([]),
     navbar:           z.array(z.coerce.string()).default([]),
     iDashboard:       z.string().optional(),
     iFilteredDashboard: z.string().optional(),
@@ -205,7 +172,7 @@ const games = defineCollection({
 const guides = defineCollection({
   loader: articleLoader('./src/content/guides'),
   schema: z.object({
-    category:    z.string().optional(), // 'hardware', 'keyboard', 'mouse', 'monitor'
+    category:    guideCategories.optional(),
     guide:       z.string().optional(),
     navbar:      z.array(z.coerce.string()).default([]),
 
@@ -224,8 +191,9 @@ const guides = defineCollection({
     hero:        z.string().optional(),
     heroCredit:  z.string().optional(),
 
-    // Badges
+    // Editorial
     egbadge:     z.string().optional(),
+    pinned:      z.boolean().default(false),
 
     author:      z.string().optional(),
     publish: z.boolean().default(true),
@@ -250,6 +218,11 @@ const news = defineCollection({
     heroCredit:  z.string().optional(),
 
     category:    newsCategories.optional(),
+
+    // Editorial
+    egbadge:     z.string().optional(),
+    pinned:      z.boolean().default(false),
+
     draft:       z.boolean().default(false),
     publish: z.boolean().default(true),
   }),
@@ -269,6 +242,7 @@ const productImage = z.object({
 
 const productMedia = z.object({
   defaultColor: z.string().nullable(),  // product.colors[0] or null if no colors
+  defaultEdition: z.string().nullable().optional(), // explicit default edition when available
   colors:       z.array(z.string()),    // all colors (default first), deduped
   editions:     z.array(z.string()),    // all editions, deduped
   images:       z.array(productImage),  // ordered by view priority

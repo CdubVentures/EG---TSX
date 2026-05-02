@@ -1,6 +1,8 @@
 /** POST /api/auth/sign-in — Email/password sign-in via Cognito User Pool API. */
 
 import type { APIRoute } from 'astro';
+import { withCachePolicyHeaders } from '@core/cache-cdn-contract';
+import { jsonNoIndex, withNoIndexHeaders } from '@core/seo/indexation-policy';
 import { cognitoSignIn } from '@features/auth/server/cognito-api';
 import { verifyIdToken } from '@features/auth/server/jwt';
 import { buildAuthCookieHeaders } from '@features/auth/server/cookies';
@@ -8,22 +10,24 @@ import { readVaultRev } from '@features/vault/server/db';
 
 export const prerender = false;
 
+const NO_CACHE_HEADERS = withCachePolicyHeaders('dynamicApis');
+
 export const POST: APIRoute = async ({ request }) => {
   let body: { email?: string; password?: string };
   try {
     body = await request.json();
   } catch {
-    return Response.json(
+    return jsonNoIndex(
       { error: { code: 'InvalidRequest', message: 'Invalid JSON body' } },
-      { status: 400 },
+      { status: 400, headers: NO_CACHE_HEADERS },
     );
   }
 
   const { email, password } = body;
   if (!email || !password) {
-    return Response.json(
+    return jsonNoIndex(
       { error: { code: 'InvalidRequest', message: 'Email and password are required' } },
-      { status: 400 },
+      { status: 400, headers: NO_CACHE_HEADERS },
     );
   }
 
@@ -31,15 +35,15 @@ export const POST: APIRoute = async ({ request }) => {
   const result = await signIn(email, password);
 
   if (!result.ok) {
-    return Response.json({ error: result.error }, { status: 400 });
+    return jsonNoIndex({ error: result.error }, { status: 400, headers: NO_CACHE_HEADERS });
   }
 
   const verify = globalThis.__mockVerifyIdToken ?? verifyIdToken;
   const claims = await verify(result.data.idToken);
   if (!claims) {
-    return Response.json(
+    return jsonNoIndex(
       { error: { code: 'TokenError', message: 'Token verification failed' } },
-      { status: 400 },
+      { status: 400, headers: NO_CACHE_HEADERS },
     );
   }
 
@@ -59,7 +63,9 @@ export const POST: APIRoute = async ({ request }) => {
     isFirstSignup,
   });
 
-  const headers = new Headers({ 'Content-Type': 'application/json' });
+  const headers = withNoIndexHeaders(
+    withCachePolicyHeaders('dynamicApis', { 'Content-Type': 'application/json' }),
+  );
   for (const cookie of cookieHeaders) {
     headers.append('Set-Cookie', cookie);
   }

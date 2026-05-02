@@ -23,26 +23,32 @@ function makeProduct(overrides = {}) {
 }
 
 function makeMouseEntry(n) {
+  const product = makeProduct({
+    id: `mouse/brand/mouse-${n}`,
+    slug: `mouse-${n}`,
+    model: `Mouse ${n}`,
+  });
   return {
-    product: makeProduct({
-      id: `mouse/brand/mouse-${n}`,
-      slug: `mouse-${n}`,
-      model: `Mouse ${n}`,
-    }),
+    productId: product.id,
+    category: product.category,
+    product,
     addedAt: 1700000000000 + n,
   };
 }
 
 function makeKeyboardEntry(n) {
+  const product = makeProduct({
+    id: `keyboard/corsair/kb-${n}`,
+    slug: `kb-${n}`,
+    brand: 'Corsair',
+    model: `Keyboard ${n}`,
+    category: 'keyboard',
+    imagePath: `/images/data-products/keyboard/corsair/kb-${n}`,
+  });
   return {
-    product: makeProduct({
-      id: `keyboard/corsair/kb-${n}`,
-      slug: `kb-${n}`,
-      brand: 'Corsair',
-      model: `Keyboard ${n}`,
-      category: 'keyboard',
-      imagePath: `/images/data-products/keyboard/corsair/kb-${n}`,
-    }),
+    productId: product.id,
+    category: product.category,
+    product,
     addedAt: 1700000000000 + n,
   };
 }
@@ -89,7 +95,7 @@ describe('mergeVaults', () => {
     const server = Array.from({ length: 10 }, (_, i) => makeMouseEntry(i + 11));
 
     const result = mergeVaults(guest, server);
-    const mouseCount = result.filter(e => e.product.category === 'mouse').length;
+    const mouseCount = result.filter(e => e.category === 'mouse').length;
     assert.equal(mouseCount, 16);
   });
 
@@ -125,8 +131,8 @@ describe('mergeVaults', () => {
     ];
 
     const result = mergeVaults(guest, server);
-    const mouseCount = result.filter(e => e.product.category === 'mouse').length;
-    const kbCount = result.filter(e => e.product.category === 'keyboard').length;
+    const mouseCount = result.filter(e => e.category === 'mouse').length;
+    const kbCount = result.filter(e => e.category === 'keyboard').length;
     assert.equal(mouseCount, 16);
     assert.equal(kbCount, 2);
   });
@@ -136,17 +142,21 @@ describe('mergeVaults', () => {
     const guest = [makeMouseEntry(1)];
     const server = [makeKeyboardEntry(1)];
     const result = mergeVaults(guest, server);
-    assert.equal(result[0].product.category, 'mouse');
-    assert.equal(result[1].product.category, 'keyboard');
+    assert.equal(result[0].category, 'mouse');
+    assert.equal(result[1].category, 'keyboard');
   });
 
   it('guest entry with same product ID always takes priority', async () => {
     const { mergeVaults } = await freshMerge();
     const guestEntry = {
+      productId: 'shared/product/1',
+      category: 'mouse',
       product: makeProduct({ id: 'shared/product/1' }),
       addedAt: 5000,
     };
     const serverEntry = {
+      productId: 'shared/product/1',
+      category: 'mouse',
       product: makeProduct({ id: 'shared/product/1', brand: 'ServerBrand' }),
       addedAt: 3000,
     };
@@ -162,8 +172,8 @@ describe('mergeVaults', () => {
     const server = [makeKeyboardEntry(1), makeMouseEntry(3), makeKeyboardEntry(2)];
     const result = mergeVaults(guest, server);
     assert.equal(result.length, 5);
-    assert.equal(result.filter(e => e.product.category === 'mouse').length, 3);
-    assert.equal(result.filter(e => e.product.category === 'keyboard').length, 2);
+    assert.equal(result.filter(e => e.category === 'mouse').length, 3);
+    assert.equal(result.filter(e => e.category === 'keyboard').length, 2);
   });
 
   it('stops adding to a category once limit is reached', async () => {
@@ -171,7 +181,7 @@ describe('mergeVaults', () => {
     const guest = Array.from({ length: 16 }, (_, i) => makeMouseEntry(i + 1));
     const server = [makeMouseEntry(20), makeMouseEntry(21)];
     const result = mergeVaults(guest, server);
-    const mouseIds = result.filter(e => e.product.category === 'mouse').map(e => e.product.id);
+    const mouseIds = result.filter(e => e.category === 'mouse').map(e => e.productId);
     assert.equal(mouseIds.length, 16);
     // Server mice 20 and 21 should NOT be included
     assert.ok(!mouseIds.includes('mouse/brand/mouse-20'));
@@ -181,6 +191,8 @@ describe('mergeVaults', () => {
   it('handles large merge without error', async () => {
     const { mergeVaults } = await freshMerge();
     const guest = Array.from({ length: 80 }, (_, i) => ({
+      productId: `cat${i % 10}/brand/p-${i}`,
+      category: `cat${i % 10}`,
       product: makeProduct({
         id: `cat${i % 10}/brand/p-${i}`,
         category: `cat${i % 10}`,
@@ -188,6 +200,8 @@ describe('mergeVaults', () => {
       addedAt: 1700000000000 + i,
     }));
     const server = Array.from({ length: 80 }, (_, i) => ({
+      productId: `cat${i % 10}/brand/s-${i}`,
+      category: `cat${i % 10}`,
       product: makeProduct({
         id: `cat${i % 10}/brand/s-${i}`,
         category: `cat${i % 10}`,

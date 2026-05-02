@@ -9,7 +9,7 @@
  * Requires: Both dev servers running (HBS on :3000, TSX on :4321)
  */
 
-import { describe, it, before } from 'node:test';
+import { describe, it } from 'node:test';
 import assert from 'node:assert/strict';
 import http from 'node:http';
 
@@ -61,20 +61,21 @@ function getInlineStyle(html, className) {
 
 /* ─── Tests ─── */
 
-describe('Navbar characterization: HBS vs TSX structural parity', () => {
-  let hbs = '';
-  let tsx = '';
+const [hbs, tsx] = await Promise.all([
+  fetchPage('http://localhost:3000/').catch(() => ''),
+  fetchPage('http://localhost:4321/').catch(() => ''),
+]);
 
-  before(async () => {
-    const [hbsHtml, tsxHtml] = await Promise.all([
-      fetchPage('http://localhost:3000/').catch(() => ''),
-      fetchPage('http://localhost:4321/').catch(() => ''),
-    ]);
-    hbs = hbsHtml;
-    tsx = tsxHtml;
-    assert.ok(hbs.length > 0, 'HBS server must be running on localhost:3000');
-    assert.ok(tsx.length > 0, 'TSX server must be running on localhost:4321');
+if (hbs.length === 0 || tsx.length === 0) {
+  describe('Navbar characterization: HBS vs TSX structural parity', () => {
+    it(
+      'skipped: start HBS on localhost:3000 and TSX on localhost:4321',
+      { skip: true },
+      () => {}
+    );
   });
+} else {
+describe('Navbar characterization: HBS vs TSX structural parity', () => {
 
   describe('Top-level structure', () => {
     it('both have nav.mainNav', () => {
@@ -355,3 +356,4 @@ describe('Navbar characterization: HBS vs TSX structural parity', () => {
     });
   });
 });
+}

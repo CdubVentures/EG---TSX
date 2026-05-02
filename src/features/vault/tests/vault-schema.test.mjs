@@ -29,7 +29,21 @@ function validProduct() {
 }
 
 function validEntry() {
-  return { product: validProduct(), addedAt: 1700000000000 };
+  return {
+    productId: 'mouse/razer/viper-v3-pro',
+    category: 'mouse',
+    product: validProduct(),
+    addedAt: 1700000000000,
+  };
+}
+
+function legacyEntry() {
+  const product = validProduct();
+  delete product.thumbnailStem;
+  return {
+    product,
+    addedAt: 1700000000000,
+  };
 }
 
 // ─── VaultProductSchema ────────────────────────────────────────────────────
@@ -57,10 +71,23 @@ describe('VaultProductSchema', () => {
 // ─── VaultEntrySchema ──────────────────────────────────────────────────────
 
 describe('VaultEntrySchema', () => {
-  it('accepts a valid entry', async () => {
+  it('accepts a valid canonical entry', async () => {
     const { VaultEntrySchema } = await freshSchemas();
     const result = VaultEntrySchema.safeParse(validEntry());
     assert.equal(result.success, true);
+    assert.equal(result.data.productId, 'mouse/razer/viper-v3-pro');
+    assert.equal(result.data.category, 'mouse');
+  });
+
+  it('accepts legacy entry and normalizes canonical fields', async () => {
+    const { VaultEntrySchema } = await freshSchemas();
+    const result = VaultEntrySchema.safeParse(legacyEntry());
+    assert.equal(result.success, true);
+    assert.equal(result.data.productId, 'mouse/razer/viper-v3-pro');
+    assert.equal(result.data.category, 'mouse');
+    assert.equal(result.data.product.id, 'mouse/razer/viper-v3-pro');
+    assert.equal(result.data.product.category, 'mouse');
+    assert.equal(result.data.product.thumbnailStem, 'top');
   });
 
   it('rejects entry with negative timestamp', async () => {
@@ -176,6 +203,64 @@ describe('VaultPutResponseSchema', () => {
   it('rejects response with ok: false', async () => {
     const { VaultPutResponseSchema } = await freshSchemas();
     const result = VaultPutResponseSchema.safeParse({ ok: false, rev: 3 });
+    assert.equal(result.success, false);
+  });
+});
+
+describe('VaultThumbResolveRequestSchema', () => {
+  it('accepts valid thumb resolve request', async () => {
+    const { VaultThumbResolveRequestSchema } = await freshSchemas();
+    const result = VaultThumbResolveRequestSchema.safeParse({
+      items: [
+        { requestId: 'mouse/alienware/aw610m', category: 'mouse' },
+        { requestId: 'alienware-aw610m', category: 'mouse' },
+      ],
+    });
+    assert.equal(result.success, true);
+  });
+
+  it('rejects request with too many items', async () => {
+    const { VaultThumbResolveRequestSchema } = await freshSchemas();
+    const items = Array.from({ length: 161 }, (_, i) => ({
+      requestId: `id-${i}`,
+      category: 'mouse',
+    }));
+    const result = VaultThumbResolveRequestSchema.safeParse({ items });
+    assert.equal(result.success, false);
+  });
+});
+
+describe('VaultThumbResolveResponseSchema', () => {
+  it('accepts valid thumb resolve response', async () => {
+    const { VaultThumbResolveResponseSchema } = await freshSchemas();
+    const result = VaultThumbResolveResponseSchema.safeParse({
+      items: [{
+        requestId: 'mouse/alienware/aw610m',
+        productId: 'alienware-aw610m',
+        category: 'mouse',
+        slug: 'aw610m',
+        brand: 'Alienware',
+        model: 'AW610M',
+        imagePath: '/images/mouse/alienware/aw610m',
+        thumbnailStem: 'top---white+black',
+      }],
+    });
+    assert.equal(result.success, true);
+  });
+
+  it('rejects invalid response item shape', async () => {
+    const { VaultThumbResolveResponseSchema } = await freshSchemas();
+    const result = VaultThumbResolveResponseSchema.safeParse({
+      items: [{
+        requestId: '',
+        productId: 'alienware-aw610m',
+        category: 'mouse',
+        slug: 'aw610m',
+        brand: 'Alienware',
+        model: 'AW610M',
+        imagePath: '/images/mouse/alienware/aw610m',
+      }],
+    });
     assert.equal(result.success, false);
   });
 });

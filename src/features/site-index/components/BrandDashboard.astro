@@ -1,0 +1,237 @@
+---
+/**
+ * BrandDashboard — 3×2 brand logo tile grid for /brands/ index hero.
+ * Port of HBS site-grid-top-dashboard.handlebars (brands-only path)
+ * + site_index.css .brands-dash__stageGrid + .grid-dash__tile
+ *
+ * Dark-theme CSS values: FROZEN (exact HBS match).
+ * Light-theme: card shadow checklist applied per MEMORY.md.
+ */
+import { brandLogoSrcSet } from '../brand-helpers';
+import AdSlot from '@features/ads/components/AdSlot.astro';
+import type { BrandTileItem } from '../brand-types';
+
+interface Props {
+  items: BrandTileItem[];
+  categoryClass?: string;
+}
+
+const { items, categoryClass } = Astro.props;
+const catClass = categoryClass ?? '';
+const rowsClass = items.length > 3 ? ' u-gridRowsEven' : '';
+
+/** HBS-matching sizes attribute for brand logo tiles */
+const BRAND_SIZES = [
+  '(min-width: 1401px) calc((924px - 32px) / 3)',
+  '(min-width: 1151px) calc((100vw - 48px - 300px - 30px - 32px)/3)',
+  '(min-width: 901px) calc((100vw - 48px - 200px - 32px)/3)',
+  '(min-width: 561px) calc((100vw - 48px - 16px) / 2)',
+  'calc(100vw - 48px)',
+].join(', ');
+---
+
+{items.length > 0 && (
+  <section
+    class:list={['moreof-hf', catClass]}
+    data-feed-kind="type-dashboard"
+    data-layout="horizontal"
+  >
+    <div class="moreof-hf__grid" data-ad-rail="right">
+      <div class:list={['brands-dash__stageGrid', rowsClass, 'u-show3At1Col']}>
+        {items.slice(0, 6).map(item => {
+          const srcsetDark = brandLogoSrcSet(item.logoBase);
+          const srcsetLight = brandLogoSrcSet(item.logoBaseLight);
+          return (
+            <a
+              href={item.url}
+              class:list={['grid-dash__tile', catClass, 'u-minSizeZero']}
+              aria-label={item.name}
+            >
+              <img
+                loading="eager"
+                fetchpriority="high"
+                decoding="async"
+                src={`${item.logoBase}_s.png`}
+                srcset={srcsetDark}
+                sizes={BRAND_SIZES}
+                alt={`${item.name} logo`}
+                class="brands-dash__logo brands-dash__logo--dark"
+                style={item.logoStyle ? `object-fit: ${item.logoStyle}` : undefined}
+              />
+              <img
+                loading="eager"
+                fetchpriority="high"
+                decoding="async"
+                src={`${item.logoBaseLight}_s.png`}
+                srcset={srcsetLight}
+                sizes={BRAND_SIZES}
+                alt={`${item.name} logo`}
+                class="brands-dash__logo brands-dash__logo--light"
+                style={item.logoStyle ? `object-fit: ${item.logoStyle}` : undefined}
+              />
+            </a>
+          );
+        })}
+      </div>
+
+      <aside class="moreof-rail-ad" aria-label="Advertisement">
+        <AdSlot position="sidebar" />
+      </aside>
+    </div>
+  </section>
+)}
+
+<style>
+  /* ───────── BRANDS Top Dashboard: 3×2 grid ─────────
+     Port of HBS site_index.css .brands-dash__stageGrid + .grid-dash__tile
+     Dark-theme values: FROZEN (exact HBS match) */
+
+  .brands-dash__stageGrid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-rows: 2fr;
+    gap: 12px;
+    align-items: stretch;
+  }
+
+  /* HBS site_index.css line 1094 + line 1413 override (padding: 0) */
+  .grid-dash__tile {
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    padding: 0; /* HBS override: line 1413 sets padding: 0 */
+    height: 100%;
+    border-radius: 4px;
+    text-decoration: none;
+    background-color: var(--section-dark-background-color);
+    position: relative;
+    /* HBS exact: 0 0 0 1px rgba(255,255,255,0.03) inset — always applied */
+    box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.03) inset;
+    transition: transform .12s ease, box-shadow .18s ease, background .18s ease, border-color .18s ease;
+    -webkit-tap-highlight-color: transparent;
+    aspect-ratio: 1;
+  }
+
+  /* HBS exact hover values */
+  .grid-dash__tile:hover {
+    transform: translateY(-2px);
+    background: var(--section-medium-background-color);
+    box-shadow: 0 10px 22px rgba(0, 0, 0, .22);
+  }
+
+  /* Light-theme card shadow overlay (gaming = none, so no effect) */
+  @supports (box-shadow: var(--card-shadow)) {
+    :global([data-theme="default"]) .grid-dash__tile,
+    :global([data-theme="workstation"]) .grid-dash__tile,
+    :global([data-theme="review"]) .grid-dash__tile {
+      box-shadow: var(--card-shadow), 0 0 0 1px rgba(255, 255, 255, 0.03) inset;
+    }
+
+    :global([data-theme="default"]) .grid-dash__tile:hover,
+    :global([data-theme="workstation"]) .grid-dash__tile:hover,
+    :global([data-theme="review"]) .grid-dash__tile:hover {
+      box-shadow: var(--card-shadow-hover), 0 10px 22px rgba(0, 0, 0, .22);
+    }
+  }
+
+  /* Focus ring — consistent with Pagination.astro */
+  .grid-dash__tile:focus-visible {
+    outline: 2px solid var(--site-start-color, #5a6ef8);
+    outline-offset: 2px;
+  }
+
+  .grid-dash__tile img {
+    max-width: 65%;
+    max-height: 65%;
+    width: auto;
+    height: auto;
+    display: block;
+    image-rendering: -webkit-optimize-contrast;
+  }
+
+  .brands-dash__logo {
+    object-fit: contain;
+  }
+
+  /* Dark/light logo swap: index (white/colored) for gaming, primary (colored/black) for light */
+  .grid-dash__tile .brands-dash__logo--light {
+    display: none;
+  }
+
+  :global([data-theme="default"]) .grid-dash__tile .brands-dash__logo--dark,
+  :global([data-theme="workstation"]) .grid-dash__tile .brands-dash__logo--dark,
+  :global([data-theme="review"]) .grid-dash__tile .brands-dash__logo--dark {
+    display: none;
+  }
+
+  :global([data-theme="default"]) .grid-dash__tile .brands-dash__logo--light,
+  :global([data-theme="workstation"]) .grid-dash__tile .brands-dash__logo--light,
+  :global([data-theme="review"]) .grid-dash__tile .brands-dash__logo--light {
+    display: block;
+  }
+
+  /* Utility: even rows for 4+ tiles */
+  .u-gridRowsEven {
+    grid-template-rows: repeat(2, minmax(0, 1fr));
+    grid-auto-rows: minmax(0, 1fr);
+    align-content: stretch;
+  }
+
+  .u-minSizeZero {
+    min-width: 0;
+    min-height: 0;
+    overflow: hidden;
+  }
+
+  /* ── Grid + rail layout — HBS feed_moreof_side.css [data-ad-rail="right"] ── */
+  .moreof-hf {
+    margin-bottom: 32px; /* HBS feed_moreof.css exact */
+  }
+
+  .moreof-hf__grid {
+    display: grid;
+    grid-template-columns: 1fr 300px;
+    gap: 30px;
+    align-items: start;
+  }
+
+  .moreof-rail-ad {
+    width: 300px;
+    max-width: 300px;
+    min-width: 0;
+    min-height: 250px;
+    overflow: clip;
+  }
+
+  /* ── Responsive: 2-col ≤900px ── */
+  @media (max-width: 900px) {
+    .brands-dash__stageGrid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  /* ── Responsive: 1-col ≤400px (show only first 3 tiles) ── */
+  @media (max-width: 400px) {
+    .brands-dash__stageGrid {
+      grid-template-columns: 1fr;
+    }
+
+    .u-show3At1Col > :global(*:nth-child(n+4)) {
+      display: none;
+    }
+  }
+
+  /* ── Responsive: hide rail ≤1150px — HBS feed_moreof_side.css exact ── */
+  @media (max-width: 1150px) {
+    .moreof-hf__grid {
+      grid-template-columns: 1fr;
+    }
+
+    .moreof-rail-ad {
+      display: none !important; /* HBS exact: !important to mirror left-rail hide */
+    }
+  }
+</style>

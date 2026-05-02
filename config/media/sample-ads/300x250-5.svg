@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 250" width="300" height="250">
+  <rect width="300" height="250" fill="#f9fbff" stroke="#dbe2ef"/>
+  <text x="284" y="16" font-family="Inter, Arial, Helvetica, sans-serif" font-size="9" fill="#64748b" text-anchor="end">Ad</text>
+
+  <text x="150" y="36" font-family="Inter, Arial, Helvetica, sans-serif" font-size="23" fill="#1d4ed8" text-anchor="middle" font-weight="800">Squarespace</text>
+  <text x="150" y="56" font-family="Inter, Arial, Helvetica, sans-serif" font-size="12" fill="#334155" text-anchor="middle">Build a publication page in minutes.</text>
+
+  <rect x="30" y="74" width="240" height="1" fill="#dbe2ef"/>
+
+  <rect x="30" y="86" width="240" height="108" rx="6" fill="#eff6ff"/>
+  <rect x="48" y="102" width="204" height="14" fill="#2563eb" opacity="0.22"/>
+  <rect x="48" y="124" width="160" height="12" fill="#2563eb" opacity="0.16"/>
+  <rect x="48" y="146" width="184" height="12" fill="#2563eb" opacity="0.14"/>
+  <rect x="88" y="176" width="124" height="34" rx="8" fill="#1d4ed8"/>
+  <text x="150" y="198" font-family="Inter, Arial, Helvetica, sans-serif" font-size="12" fill="#fff" text-anchor="middle" font-weight="700">Create now</text>
+
+  <text x="150" y="236" font-family="Inter, Arial, Helvetica, sans-serif" font-size="9" fill="#64748b" text-anchor="middle">Standard template access included.</text>
+</svg>

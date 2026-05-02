@@ -15,10 +15,15 @@ brand_x: ''
 brand_instagram: ''
 brand_youtube: ''
 brand_tiktok: ''
+categories:
+  - monitor
+  - mouse
 navbar:
   - monitor
   - mouse
 toc: false
 publish: true
+datePublished: '2025-07-22'
+dateUpdated: '2025-12-15'
 ---
 

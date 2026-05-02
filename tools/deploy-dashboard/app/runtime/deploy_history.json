@@ -1,0 +1,16 @@
+[
+  {
+    "id": "35a8bd",
+    "kind": "site",
+    "label": "Full",
+    "status": "success",
+    "started_at": "2026-03-08T00:00:00+00:00",
+    "completed_at": "2026-03-08T00:00:51+00:00",
+    "duration_seconds": 51.3,
+    "pages_built": 364,
+    "uploaded": 71,
+    "deleted": 8,
+    "cdn_paths": 12,
+    "lambda_version": null
+  }
+]

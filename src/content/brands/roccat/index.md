@@ -1,5 +1,13 @@
 ﻿---
 brand: Roccat
+navbar:
+  - monitor
+  - mouse
+  - keyboard
+categories:
+  - keyboard
+  - monitor
+  - mouse
 displayName: Roccat
 title: 'Roccat: German Engineering, Esports Precision'
 subtitle: 'Speed, Accuracy, and Innovation'
@@ -17,12 +25,10 @@ brand_x: ''
 brand_instagram: ''
 brand_youtube: ''
 brand_tiktok: ''
-navbar:
-  - keyboard
-  - monitor
-  - mouse
 toc: false
 publish: true
 hero: brand-logo-horizontal-index
+datePublished: '2025-02-19'
+dateUpdated: '2025-05-31'
 ---
 

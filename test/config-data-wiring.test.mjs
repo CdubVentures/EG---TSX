@@ -30,9 +30,10 @@ function readFile(relPath) {
 describe('config/data/ — file existence', () => {
   const expected = [
     'categories.json',
+    'cache-cdn.json',
     'hub-tools.json',
     'slideshow.json',
-    'dashboard.json',
+    'content.json',
     'navbar-guide-sections.json',
     'image-defaults.json',
   ];
@@ -85,6 +86,7 @@ describe('categories.json — structure', () => {
       assert.match(cat.color, /^#[0-9a-fA-F]{6}$/, `category ${cat.id} color not hex`);
       assert.ok(cat.product, `category ${cat.id} missing product`);
       assert.ok(cat.content, `category ${cat.id} missing content`);
+      assert.ok(cat.collections, `category ${cat.id} missing collections`);
     }
   });
 
@@ -95,6 +97,18 @@ describe('categories.json — structure', () => {
           `${cat.id}.${sub}.production must be boolean`);
         assert.equal(typeof cat[sub].vite, 'boolean',
           `${cat.id}.${sub}.vite must be boolean`);
+      }
+    }
+  });
+
+  it('collections sub-section has boolean flags', () => {
+    for (const cat of data.categories) {
+      for (const key of ['dataProducts', 'reviews', 'guides', 'news']) {
+        assert.equal(
+          typeof cat.collections[key],
+          'boolean',
+          `${cat.id}.collections.${key} must be boolean`
+        );
       }
     }
   });
@@ -222,10 +236,10 @@ describe('slideshow.json — structure', () => {
   });
 });
 
-// ─── 5. dashboard.json — structure ──────────────────────────────────────────
+// ─── 5. content.json — structure ──────────────────────────────────────────
 
-describe('dashboard.json — structure', () => {
-  const data = readJson('dashboard.json');
+describe('content.json — structure', () => {
+  const data = readJson('content.json');
 
   it('has slots object', () => {
     assert.equal(typeof data.slots, 'object', 'slots must be an object');
@@ -343,24 +357,24 @@ describe('image-defaults.json — structure', () => {
 
 // ─── 7. Wiring — TS/Astro imports reference config/data/ ────────────────────
 
-describe('TS/Astro imports — wired to config/data/', () => {
-  it('src/core/config.ts imports config/data/categories.json', () => {
+describe('TS/Astro imports — wired to shared config contracts', () => {
+  it('src/core/config.ts imports src/core/category-contract.ts', () => {
     const content = readFile('src/core/config.ts');
     assert.ok(
-      content.includes("config/data/categories.json"),
-      'config.ts must import from config/data/categories.json'
+      content.includes("from './category-contract'"),
+      'config.ts must import from src/core/category-contract.ts'
     );
     assert.ok(
-      !content.includes("'../../config/categories.json'"),
-      'config.ts still has old import path'
+      !content.includes('config/data/categories.json'),
+      'config.ts must not read categories.json directly'
     );
   });
 
-  it('src/content.config.ts imports config/data/categories.json', () => {
+  it('src/content.config.ts imports src/core/category-contract.ts', () => {
     const content = readFile('src/content.config.ts');
     assert.ok(
-      content.includes("config/data/categories.json"),
-      'content.config.ts must import from config/data/categories.json'
+      content.includes("from './core/category-contract'"),
+      'content.config.ts must import from src/core/category-contract.ts'
     );
   });
 
@@ -405,98 +419,95 @@ describe('TS/Astro imports — wired to config/data/', () => {
   });
 });
 
-// ─── 8. Wiring — .pyw managers reference config/data/ ───────────────────────
+// ─── 8. Wiring — unified config app references config/data/ ─────────────────
 
-describe('.pyw managers — wired to config/data/', () => {
-  const managers = [
-    'category-manager.pyw',
-    'navbar-manager.pyw',
-    'hub-tools-manager.pyw',
-    'slideshow-manager.pyw',
-    'dashboard-manager.pyw',
-    'image-manager.pyw',
-  ];
+describe('eg-config mega-app — wired to config/data/', () => {
+  it('config/eg-config.pyw exists', () => {
+    assert.ok(existsSync(join(ROOT, 'config', 'eg-config.pyw')), 'Missing: config/eg-config.pyw');
+  });
 
-  for (const mgr of managers) {
-    it(`${mgr} exists`, () => {
-      assert.ok(existsSync(join(ROOT, 'config', mgr)), `Missing: config/${mgr}`);
-    });
-  }
-
-  it('category-manager.pyw points to config/data/categories.json', () => {
-    const content = readFile('config/category-manager.pyw');
+  it('config/lib/config_store.py exists', () => {
     assert.ok(
-      content.includes('"config" / "data" / "categories.json"'),
-      'category-manager.pyw must reference config/data/categories.json'
-    );
-    assert.ok(
-      !content.includes('"config" / "categories.json"'),
-      'category-manager.pyw still has old path'
+      existsSync(join(ROOT, 'config', 'lib', 'config_store.py')),
+      'Missing: config/lib/config_store.py'
     );
   });
 
-  it('navbar-manager.pyw points to config/data/ for both JSONs', () => {
-    const content = readFile('config/navbar-manager.pyw');
-    assert.ok(
-      content.includes('"config" / "data" / "categories.json"'),
-      'navbar-manager.pyw must reference config/data/categories.json'
+  it('eg-config.pyw bootstraps the shared store and panel registry', () => {
+    const content = readFile('config/eg-config.pyw');
+
+    assert.match(
+      content,
+      /from lib\.config_store import ConfigStore/,
+      'eg-config.pyw must bootstrap the shared ConfigStore'
     );
-    assert.ok(
-      content.includes('"config" / "data" / "navbar-guide-sections.json"'),
-      'navbar-manager.pyw must reference config/data/navbar-guide-sections.json'
+
+    assert.match(
+      content,
+      /from lib\.config_watcher import ConfigWatcher/,
+      'eg-config.pyw must bootstrap the shared ConfigWatcher'
     );
-    assert.ok(
-      !content.includes('"src" / "data" / "navbar-guide-sections.json"'),
-      'navbar-manager.pyw still has old src/data/ path'
-    );
+
+    for (const panel of [
+      'Categories',
+      'Content',
+      'Index Heroes',
+      'Hub Tools',
+      'Navbar',
+      'Slideshow',
+      'Image Defaults',
+      'Ads',
+      'Cache / CDN',
+    ]) {
+      assert.match(
+        content,
+        new RegExp(`"${panel}"`),
+        `eg-config.pyw must register the ${panel} panel`
+      );
+    }
   });
 
-  it('hub-tools-manager.pyw points to config/data/ for both JSONs', () => {
-    const content = readFile('config/hub-tools-manager.pyw');
-    assert.ok(
-      content.includes('"config" / "data" / "categories.json"'),
-      'hub-tools-manager.pyw must reference config/data/categories.json'
-    );
-    assert.ok(
-      content.includes('"config" / "data" / "hub-tools.json"'),
-      'hub-tools-manager.pyw must reference config/data/hub-tools.json'
-    );
+  it('ConfigStore maps all config keys to config/data/', () => {
+    const content = readFile('config/lib/config_store.py');
+
+    for (const filename of [
+      'categories.json',
+      'content.json',
+      'slideshow.json',
+      'hub-tools.json',
+      'navbar-guide-sections.json',
+      'image-defaults.json',
+      'ads-registry.json',
+      'inline-ads-config.json',
+      'direct-sponsors.json',
+      'cache-cdn.json',
+    ]) {
+      assert.ok(
+        content.includes(`d / "${filename}"`),
+        `config_store.py must map ${filename} under config/data/`
+      );
+    }
   });
 
-  it('slideshow-manager.pyw points to config/data/ for both JSONs', () => {
-    const content = readFile('config/slideshow-manager.pyw');
-    assert.ok(
-      content.includes('"config" / "data" / "categories.json"'),
-      'slideshow-manager.pyw must reference config/data/categories.json'
-    );
-    assert.ok(
-      content.includes('"config" / "data" / "slideshow.json"'),
-      'slideshow-manager.pyw must reference config/data/slideshow.json'
-    );
-  });
+  it('panel modules own the config contracts previously split across managers', () => {
+    const panelContracts = [
+      ['config/panels/categories.py', 'ConfigStore.CATEGORIES'],
+      ['config/panels/content.py', 'ConfigStore.CONTENT'],
+      ['config/panels/hub_tools.py', 'ConfigStore.HUB_TOOLS'],
+      ['config/panels/navbar.py', 'ConfigStore.NAV_SECTIONS'],
+      ['config/panels/slideshow.py', 'ConfigStore.SLIDESHOW'],
+      ['config/panels/image_defaults.py', 'ConfigStore.IMAGE_DEFAULTS'],
+      ['config/panels/ads.py', 'ConfigStore.ADS_REGISTRY'],
+      ['config/panels/cache_cdn.py', 'ConfigStore.CACHE_CDN'],
+    ];
 
-  it('dashboard-manager.pyw points to config/data/ for both JSONs', () => {
-    const content = readFile('config/dashboard-manager.pyw');
-    assert.ok(
-      content.includes('"config" / "data" / "categories.json"'),
-      'dashboard-manager.pyw must reference config/data/categories.json'
-    );
-    assert.ok(
-      content.includes('"config" / "data" / "dashboard.json"'),
-      'dashboard-manager.pyw must reference config/data/dashboard.json'
-    );
-  });
-
-  it('image-manager.pyw points to config/data/ for both JSONs', () => {
-    const content = readFile('config/image-manager.pyw');
-    assert.ok(
-      content.includes('"config" / "data" / "categories.json"'),
-      'image-manager.pyw must reference config/data/categories.json'
-    );
-    assert.ok(
-      content.includes('"config" / "data" / "image-defaults.json"'),
-      'image-manager.pyw must reference config/data/image-defaults.json'
-    );
+    for (const [file, storeKey] of panelContracts) {
+      assert.ok(existsSync(join(ROOT, file)), `Missing: ${file}`);
+      assert.ok(
+        readFile(file).includes(storeKey),
+        `${file} must use ${storeKey} via the shared config store`
+      );
+    }
   });
 });
 
@@ -509,8 +520,8 @@ describe('no stale path references', () => {
     'src/core/hub-tools.ts',
     'src/features/home/components/HomeSlideshow.astro',
     'src/shared/layouts/GlobalNav.astro',
-    'src/core/DOMAIN.md',
-    'src/features/home/DOMAIN.md',
+    'src/core/README.md',
+    'src/features/home/README.md',
     'src/features/vault/types.ts',
   ];
 
@@ -577,7 +588,7 @@ describe('cross-file consistency', () => {
   });
 
   it('dashboard slot collections are valid content types', () => {
-    const data = readJson('dashboard.json');
+    const data = readJson('content.json');
     const validCollections = new Set(['reviews', 'guides', 'news', 'brands', 'games']);
     for (const [key, val] of Object.entries(data.slots)) {
       assert.ok(validCollections.has(val.collection),

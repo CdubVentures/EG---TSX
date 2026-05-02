@@ -36,7 +36,7 @@ const collectionConfigSchema = z.discriminatedUnion('enabled', [
 
 // ─── Top-level config ────────────────────────────────────────────────────
 const defaultsSchema = z.object({
-  campaign: z.string(),
+  position: z.string(),
   desktop: z.boolean(),
   mobile: z.boolean(),
 });

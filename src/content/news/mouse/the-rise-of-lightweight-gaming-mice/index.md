@@ -9,6 +9,8 @@ datePublished: '2025-12-09'
 author: EG Team
 hero: feature-image
 category: mouse
+pinned: true
+egbadge: "Trending Now"
 draft: false
 publish: true
 ---

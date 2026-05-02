@@ -175,7 +175,7 @@ If you’ve used Naga-style MMO mice before, both Scimitars will feel immediatel
 
 ::: full
 {{> ads/inline-manual
-  campaign="inline-ad"
+  position="in_content"
   desktop=true
   mobile=true
 }}
@@ -189,7 +189,7 @@ If you’ve used Naga-style MMO mice before, both Scimitars will feel immediatel
 
 ::: full
 {{> ads/inline-manual
-  campaign="inline-ad"
+  position="in_content"
   desktop=true
   mobile=true
 }}
@@ -335,7 +335,7 @@ The **Scimitar Elite Wireless (original)** still makes sense as the value Scimit
 If pricing is close, pick the **Scimitar Elite Wireless SE**. Then use our stats, radar, and shapes tools plus the tagged MMO alternatives above to sanity-check hand fit, deals, and ecosystem—because the best MMO mouse is the one you can use for hours without thinking about it.
 
 {{> ads/inline-manual
-  campaign="inline-ad"
+  position="in_content"
   desktop=true
   mobile=true
 }}

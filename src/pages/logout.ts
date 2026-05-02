@@ -1,6 +1,7 @@
 /** GET /logout — Clears auth cookies and redirects to Cognito logout. */
 
 import type { APIRoute } from 'astro';
+import { withNoIndexHeaders } from '@core/seo/indexation-policy';
 import { buildClearCookieHeaders } from '@features/auth/server/cookies';
 import { getCognitoConfig } from '@features/auth/server/cognito-config';
 
@@ -15,7 +16,7 @@ export const GET: APIRoute = () => {
 
   const logoutUrl = `https://${config.domain}/logout?${params.toString()}`;
 
-  const headers = new Headers({ Location: logoutUrl });
+  const headers = withNoIndexHeaders({ Location: logoutUrl });
   for (const cookie of buildClearCookieHeaders()) {
     headers.append('Set-Cookie', cookie);
   }

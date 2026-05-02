@@ -1,0 +1,407 @@
+{
+  "generatedAt": "2026-03-07T11:02:00.968Z",
+  "rows": [
+    {
+      "path": "client/_astro/_slug_.CLSBEc7k.css",
+      "status": "new",
+      "localEtag": "2553ff95266fccc47eb0dec1940d7341",
+      "remoteEtag": ""
+    },
+    {
+      "path": "client/_astro/_slug_.Dvjqsi7E.css",
+      "status": "deleted",
+      "localEtag": "",
+      "remoteEtag": "8c12348aa32dd69eeac3cf7ff6247680"
+    },
+    {
+      "path": "client/guides/hardware/index.html",
+      "status": "modified",
+      "localEtag": "5ac1e6025d2a4b532c1222134e66fcf5",
+      "remoteEtag": "9129c562bd2811756005e2025a46f32c"
+    },
+    {
+      "path": "client/guides/index.html",
+      "status": "modified",
+      "localEtag": "3ae43bf6e3439c2749d49326d649d51c",
+      "remoteEtag": "48f26e2522c4877d8444f9a3ae45d813"
+    },
+    {
+      "path": "client/guides/keyboard/index.html",
+      "status": "modified",
+      "localEtag": "94c6c417a9354a3b28c67aea735f849f",
+      "remoteEtag": "d9f219edcdfa894083ea96b4522f1456"
+    },
+    {
+      "path": "client/guides/monitor/index.html",
+      "status": "modified",
+      "localEtag": "63eb8588400425a0a2dfb637adb0341c",
+      "remoteEtag": "1cf6f29afc9c8e1cac92dc8051bb32e2"
+    },
+    {
+      "path": "client/guides/mouse/index.html",
+      "status": "modified",
+      "localEtag": "337ee1f98107060a95e1a4c332458ac1",
+      "remoteEtag": "0fc0797ce4b1350ae0efc92df81b8057"
+    },
+    {
+      "path": "client/guides/mouse/page/2/index.html",
+      "status": "modified",
+      "localEtag": "156f308b78818208741aebb2f28a218e",
+      "remoteEtag": "a67461255ba7dd35131ffe63d68b4431"
+    },
+    {
+      "path": "client/guides/page/2/index.html",
+      "status": "modified",
+      "localEtag": "c818f42c434a3865ef747719b91dc4fa",
+      "remoteEtag": "04694d3edcdf7b10f15fad1c178637c3"
+    },
+    {
+      "path": "client/index.html",
+      "status": "modified",
+      "localEtag": "f51d8f253ebb5f08588233772dfbb360",
+      "remoteEtag": "5f8fe31f92abf25e4fd7d3feaf26698b"
+    },
+    {
+      "path": "client/news/ai/index.html",
+      "status": "modified",
+      "localEtag": "7b92d862a928ee9b8a1a5726c84880cf",
+      "remoteEtag": "6e7cf381b7e0cc5eaa97dc4bb7ac7009"
+    },
+    {
+      "path": "client/news/hardware/index.html",
+      "status": "modified",
+      "localEtag": "40db0dae1047cff115aa5194f995525c",
+      "remoteEtag": "cfa6595683f9553bb05d7911d5377023"
+    },
+    {
+      "path": "client/news/index.html",
+      "status": "modified",
+      "localEtag": "f29c16b34ec786a7341ec0d5cfdbcc81",
+      "remoteEtag": "3bb0b985a8a434a6f8dd8b7614e2ebdf"
+    },
+    {
+      "path": "client/news/keyboard/index.html",
+      "status": "modified",
+      "localEtag": "7918a1c74f51dbdb9abadd7437040324",
+      "remoteEtag": "7f83687e221f5b978a1bad57768c8cc7"
+    },
+    {
+      "path": "client/news/monitor/index.html",
+      "status": "modified",
+      "localEtag": "bb26494ce7c17896339d6388a6b171b1",
+      "remoteEtag": "500b9c3c630d23e283fe59ed7b11fc46"
+    },
+    {
+      "path": "client/news/mouse/index.html",
+      "status": "modified",
+      "localEtag": "becd6cc684e1e3b3db3569a4f3b49885",
+      "remoteEtag": "d770c72cddb6866212518fdb1b4717a8"
+    },
+    {
+      "path": "client/news/page/2/index.html",
+      "status": "modified",
+      "localEtag": "d066afbf5900729c7eb22d8475f7357c",
+      "remoteEtag": "338e57cc903cc895315a8484df4ec8d1"
+    },
+    {
+      "path": "client/reviews/index.html",
+      "status": "modified",
+      "localEtag": "fa153fe780913cd1facf9396546df96a",
+      "remoteEtag": "c3e9aef801ea92b2a2cf1b9e9cb7d793"
+    },
+    {
+      "path": "client/reviews/keyboard/index.html",
+      "status": "modified",
+      "localEtag": "2b42ddc978b556be3e13b66e416d63cd",
+      "remoteEtag": "67689418f51111ee6c6bf6b275a529e4"
+    },
+    {
+      "path": "client/reviews/monitor/index.html",
+      "status": "modified",
+      "localEtag": "14963685efeabb366a70ec9a0a6ad2a2",
+      "remoteEtag": "cd71a4f505b4cb2e5f0b0d7e161054e8"
+    },
+    {
+      "path": "client/reviews/mouse/index.html",
+      "status": "modified",
+      "localEtag": "90053e9ac79a0d6bccf4e91e65f988a0",
+      "remoteEtag": "f58658005e0a68f5b0843cb85f1a9cfb"
+    },
+    {
+      "path": "client/reviews/page/2/index.html",
+      "status": "modified",
+      "localEtag": "b7555dbe12a6ae3b0ef050d625f13416",
+      "remoteEtag": "1ca2cb3814ef09ab599c6eb8502a4276"
+    },
+    {
+      "path": "server/_@astrojs-ssr-adapter.mjs",
+      "status": "modified",
+      "localEtag": "b2d2be0e9ba071d1d5da13d88b2e7323",
+      "remoteEtag": "421c9905aa7eaaec7147f6a7c9c6a0bf"
+    },
+    {
+      "path": "server/_astro-internal_middleware.mjs",
+      "status": "modified",
+      "localEtag": "ebe1fe8bca503f8f0b076adc6314d1c1",
+      "remoteEtag": "e809e6a6007b2086e0514f51ea4fad35"
+    },
+    {
+      "path": "server/chunks/_@astrojs-ssr-adapter_BTppQd9U.mjs",
+      "status": "new",
+      "localEtag": "2d72a61786214877ff1de0c244648272",
+      "remoteEtag": ""
+    },
+    {
+      "path": "server/chunks/_@astrojs-ssr-adapter_CV_Ql0PC.mjs",
+      "status": "deleted",
+      "localEtag": "",
+      "remoteEtag": "063b5f25274625d43e21879769c43fe8"
+    },
+    {
+      "path": "server/chunks/_astro_content_ButeimNV.mjs",
+      "status": "deleted",
+      "localEtag": "",
+      "remoteEtag": "d18d49e3597e5c1d16d730987f35e44a"
+    },
+    {
+      "path": "server/chunks/_astro_content_C0lMxd2p.mjs",
+      "status": "new",
+      "localEtag": "a430409c02e1ab89c09c56baa17210bb",
+      "remoteEtag": ""
+    },
+    {
+      "path": "server/chunks/article-helpers_CSBpMgEv.mjs",
+      "status": "new",
+      "localEtag": "60d8b7c7be6da1384e62aead422b88b5",
+      "remoteEtag": ""
+    },
+    {
+      "path": "server/chunks/article-helpers_DJaRuePi.mjs",
+      "status": "deleted",
+      "localEtag": "",
+      "remoteEtag": "08e7a7b807eb4df4de246d265775495e"
+    },
+    {
+      "path": "server/chunks/astro-designed-error-pages_B0GEpKyE.mjs",
+      "status": "deleted",
+      "localEtag": "",
+      "remoteEtag": "db172d33b868859440eea4250e892b1d"
+    },
+    {
+      "path": "server/chunks/astro-designed-error-pages_BsFMlncy.mjs",
+      "status": "new",
+      "localEtag": "141e196d12875cafc9de67a25f74f6f5",
+      "remoteEtag": ""
+    },
+    {
+      "path": "server/chunks/cognito-api_C8tl91NS.mjs",
+      "status": "deleted",
+      "localEtag": "",
+      "remoteEtag": "c14007462796e56234c7f3168d7ce22f"
+    },
+    {
+      "path": "server/chunks/cognito-api_Dv1irbtG.mjs",
+      "status": "new",
+      "localEtag": "41a770f4592dde069a8e4229f5d76a7d",
+      "remoteEtag": ""
+    },
+    {
+      "path": "server/chunks/cognito-config_B5Rp7vQm.mjs",
+      "status": "new",
+      "localEtag": "47a4d56532121dc1e2746fe32d1af2c7",
+      "remoteEtag": ""
+    },
+    {
+      "path": "server/chunks/cognito-config_B6yGq3Cw.mjs",
+      "status": "deleted",
+      "localEtag": "",
+      "remoteEtag": "add7ac2654fc15bd3f2578d418d88e97"
+    },
+    {
+      "path": "server/chunks/config_BwCNQewJ.mjs",
+      "status": "deleted",
+      "localEtag": "",
+      "remoteEtag": "0c1730e84b14c83870dcd9267fc7fd7f"
+    },
+    {
+      "path": "server/chunks/config_DmebMkWn.mjs",
+      "status": "new",
+      "localEtag": "74f46e78fa20705a529f73a99e4d83bf",
+      "remoteEtag": ""
+    },
+    {
+      "path": "server/chunks/cookies_DLhtkj13.mjs",
+      "status": "deleted",
+      "localEtag": "",
+      "remoteEtag": "2008fdf62b6b7aea3f645880083f292e"
+    },
+    {
+      "path": "server/chunks/cookies_DmCOsNNc.mjs",
+      "status": "new",
+      "localEtag": "3bba53befad0c5095491fa3d3a1d55ab",
+      "remoteEtag": ""
+    },
+    {
+      "path": "server/chunks/index_BR3a15lX.mjs",
+      "status": "new",
+      "localEtag": "0665f7c2c196ca3a435e1305502fca3b",
+      "remoteEtag": ""
+    },
+    {
+      "path": "server/chunks/index_CNWSYsrW.mjs",
+      "status": "deleted",
+      "localEtag": "",
+      "remoteEtag": "36f08657bee48a10e48d784e848bde86"
+    },
+    {
+      "path": "server/chunks/jwt_CHiQwfl5.mjs",
+      "status": "new",
+      "localEtag": "2117407913b5397e841f580bc442a79b",
+      "remoteEtag": ""
+    },
+    {
+      "path": "server/chunks/jwt_CiDAAFN4.mjs",
+      "status": "deleted",
+      "localEtag": "",
+      "remoteEtag": "261bbb9616d614b94ac39ee17f9e0650"
+    },
+    {
+      "path": "server/chunks/login-redirect_CVrgiVyE.mjs",
+      "status": "deleted",
+      "localEtag": "",
+      "remoteEtag": "c25153d313ef1ba9fa14c2b647272da1"
+    },
+    {
+      "path": "server/chunks/login-redirect_DHGdFpsJ.mjs",
+      "status": "new",
+      "localEtag": "3b90e8c5472c8ad0270ad39a5f3f7d46",
+      "remoteEtag": ""
+    },
+    {
+      "path": "server/chunks/oidc_D3EvAvp8.mjs",
+      "status": "new",
+      "localEtag": "20ac1176cc5b40cd92ca1678fbd37fdc",
+      "remoteEtag": ""
+    },
+    {
+      "path": "server/chunks/oidc_gNDzNp4A.mjs",
+      "status": "deleted",
+      "localEtag": "",
+      "remoteEtag": "825ade71b51750800d6720228258ee75"
+    },
+    {
+      "path": "server/chunks/products_CGYRDKKt.mjs",
+      "status": "deleted",
+      "localEtag": "",
+      "remoteEtag": "0297f5a7af529c66e36f75958895f8b4"
+    },
+    {
+      "path": "server/chunks/products_CoqqDP6y.mjs",
+      "status": "new",
+      "localEtag": "5766152f97b85fd3b8cd3adf899c929c",
+      "remoteEtag": ""
+    },
+    {
+      "path": "server/entry.mjs",
+      "status": "modified",
+      "localEtag": "d2bef67e026300ca81ada504e5e1d016",
+      "remoteEtag": "4fe0b81053c0ce437f0e73d6d6857e22"
+    },
+    {
+      "path": "server/manifest_BQNU1ZVV.mjs",
+      "status": "new",
+      "localEtag": "81573bd194d029465ea25cf66513fb4e",
+      "remoteEtag": ""
+    },
+    {
+      "path": "server/manifest_DFSYptO8.mjs",
+      "status": "deleted",
+      "localEtag": "",
+      "remoteEtag": "c4bdcac50b9c1ecae52f8184cf15b616"
+    },
+    {
+      "path": "server/pages/api/auth/confirm-forgot-password.astro.mjs",
+      "status": "modified",
+      "localEtag": "31c4b7ba8b3d1833f6ad1a2da5028907",
+      "remoteEtag": "849088519b0fcac753dc92e55d912155"
+    },
+    {
+      "path": "server/pages/api/auth/confirm-sign-up.astro.mjs",
+      "status": "modified",
+      "localEtag": "93ca85fe572beb449a019064ca4bc797",
+      "remoteEtag": "a790c728e229448525e637ab20a0802c"
+    },
+    {
+      "path": "server/pages/api/auth/forgot-password.astro.mjs",
+      "status": "modified",
+      "localEtag": "202288ab71258801d7e7d56a8c935f28",
+      "remoteEtag": "b951787809bd00d9de2ded94ec739444"
+    },
+    {
+      "path": "server/pages/api/auth/me.astro.mjs",
+      "status": "modified",
+      "localEtag": "92b49136fed13cadb72f2986800500cb",
+      "remoteEtag": "5db695673c4b61041c0866d57159a0eb"
+    },
+    {
+      "path": "server/pages/api/auth/resend-code.astro.mjs",
+      "status": "modified",
+      "localEtag": "e308af6dc217d228761998154b24855f",
+      "remoteEtag": "7bacb26a0bd5194b904fa9b3bbf7bc05"
+    },
+    {
+      "path": "server/pages/api/auth/sign-in.astro.mjs",
+      "status": "modified",
+      "localEtag": "16a48daf490c617373595f8d5f35d3b1",
+      "remoteEtag": "754a168ab61704ffadf3da44d7e91dc5"
+    },
+    {
+      "path": "server/pages/api/auth/sign-up.astro.mjs",
+      "status": "modified",
+      "localEtag": "c2ca02baf78cf1afd33ced748971f854",
+      "remoteEtag": "81b534c957f976f8072a1ed19db8e133"
+    },
+    {
+      "path": "server/pages/api/search.astro.mjs",
+      "status": "modified",
+      "localEtag": "7ad06e7ac5c5108cc3a7a5ad720c366a",
+      "remoteEtag": "6926efc2175102289bb1312352f55e79"
+    },
+    {
+      "path": "server/pages/api/user/vault.astro.mjs",
+      "status": "modified",
+      "localEtag": "6e2e81384398a7541d3d47ade1832fc1",
+      "remoteEtag": "207a6e9a2d54956e9e15f22dad6dcd08"
+    },
+    {
+      "path": "server/pages/api/vault/thumbs.astro.mjs",
+      "status": "modified",
+      "localEtag": "3c4f1943d64f90cf987c60b7dc0f74af",
+      "remoteEtag": "0ed2880e9b764fb94cabf1bba6603710"
+    },
+    {
+      "path": "server/pages/auth/callback.astro.mjs",
+      "status": "modified",
+      "localEtag": "5276bb40203e6deb00b504f2bc988a62",
+      "remoteEtag": "ae7130060453a61ac9e9da9dc29ca2ef"
+    },
+    {
+      "path": "server/pages/login/discord.astro.mjs",
+      "status": "modified",
+      "localEtag": "e5e923c0884b6fc3e5688ca21690cf6a",
+      "remoteEtag": "11b4ccfb7ad79b947747d19b0346986f"
+    },
+    {
+      "path": "server/pages/login/google.astro.mjs",
+      "status": "modified",
+      "localEtag": "4f630a186b3eb0cca00589ba48490bc5",
+      "remoteEtag": "5a04f048c0b080530cec9b40b334f34d"
+    },
+    {
+      "path": "server/pages/logout.astro.mjs",
+      "status": "modified",
+      "localEtag": "57e40462cae1a93850f31d123e8a926f",
+      "remoteEtag": "d401a94aaf2eff82f18452a1b39bcb04"
+    }
+  ]
+}

@@ -1,0 +1,320 @@
+---
+/**
+ * FeedItem.astro — Reusable horizontal article card.
+ * Port of HBS <a class="feed-item"> from feed_scroller.css + site_index.css overrides.
+ *
+ * Layout: image (40%) + content (60%), flex row.
+ * Responsive: image height scales down at smaller viewports.
+ *
+ * Variants:
+ *   "base"  — home page style (feed_scroller.css: 6px radius, solid bg)
+ *   "index" — site-index style (site_index.css: 10px radius, border, transparent bg)
+ */
+import type { FeaturedItem } from '@features/home/featured-scroller-utils';
+import { categoryColor } from '@core/config';
+import PinTag from '@shared/ui/PinTag.astro';
+import EditorsBadge from '@shared/ui/EditorsBadge.astro';
+import DexaBadge from '@shared/ui/DexaBadge.astro';
+
+interface Props {
+  item: FeaturedItem;
+  showScore?: boolean;
+  variant?: 'base' | 'index';
+}
+
+const { item, showScore = false, variant = 'base' } = Astro.props;
+const catColor = item.category ? categoryColor(item.category) : undefined;
+const objectFit = item.heroStyle || 'cover';
+const isIndex = variant === 'index';
+const hasHero = Boolean(item.heroPath);
+---
+
+<a href={item.url} class:list={['feed-item', { 'feed-item--index': isIndex, 'feed-item--no-image': !hasHero }]}>
+  {item.isPinned && <PinTag categoryColor={catColor} />}
+  {item.egbadge && <EditorsBadge badgeText={item.egbadge} category={item.category} />}
+
+  {hasHero && (
+    <img
+      loading="lazy"
+      src={`${item.heroPath}_s.webp`}
+      srcset={item.srcset}
+      sizes="(min-width: 1000px) 400px, 40vw"
+      alt={item.title}
+      class="feed-item-image"
+      style={`object-fit: ${objectFit};`}
+    />
+  )}
+
+  {/* Score overlay — reviews only */}
+  {showScore && item.overall && (
+    <div class="feed-item-score">
+      <DexaBadge score={item.overall} />
+    </div>
+  )}
+
+  <div class="feed-item-content">
+    <div class="feed-content-top">
+      {item.category && (
+        <span
+          class="feed-item-category item-tag"
+          style={catColor ? `color: ${catColor}` : undefined}
+        >
+          {item.categoryLabel || item.category}
+        </span>
+      )}
+      <h3 class="feed-item-title">{item.title}</h3>
+      <p class="feed-item-description">{item.description}</p>
+    </div>
+    <p class="feed-item-date item-date">{item.dateFormatted}</p>
+  </div>
+</a>
+
+<style>
+  /* ══════════════════════════════════════════════════════════════════════════
+     BASE — Port of feed_scroller.css (home page bottom feed)
+     Dark theme values are LOCKED — they match HBS exactly.
+     ══════════════════════════════════════════════════════════════════════════ */
+  .feed-item {
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+    background: var(--section-dark-background-color);
+    overflow: hidden;
+    position: relative;
+    border-radius: 6px;
+    text-decoration: none;
+    color: var(--white-color-1);
+    box-shadow: var(--card-shadow);
+    transition: box-shadow 0.2s ease;
+  }
+
+  .feed-item:hover {
+    box-shadow: var(--card-shadow-hover);
+  }
+
+  /* ── INDEX variant — HBS site_index.css overrides ── */
+  .feed-item--index {
+    background: rgba(255, 255, 255, .02);
+    border: 1px solid rgba(255, 255, 255, .06);
+    border-radius: 10px;
+  }
+
+  .feed-item-image {
+    width: 40%;
+    height: var(--font-size-250px);
+    object-fit: cover;
+    order: 1;
+    display: block;
+  }
+
+  .feed-item-content {
+    order: 2;
+    width: 60%;
+    height: auto;
+    padding: 20px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 0.75rem;
+  }
+
+  .feed-item--no-image .feed-item-content {
+    width: 100%;
+  }
+
+  .feed-content-top {
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* WHY: .item-tag is scoped to index.astro (home page) — replicate here for all contexts */
+  .feed-item-category {
+    font-family: var(--identity-font);
+    font-weight: var(--font-weight7);
+    font-size: var(--ft-14-12);
+    text-transform: uppercase;
+    display: inline-block;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .feed-item-title {
+    font-size: var(--font-size-21px);
+    font-weight: var(--font-weight7);
+    letter-spacing: -.5px;
+    margin: 1rem 0 1.15rem 0;
+    line-height: 1.5;
+    color: var(--white-color-1);
+    font-family: var(--identity-font);
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .feed-item-description {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin: 0;
+    line-height: 1.4;
+    font-size: var(--font-size-16px);
+    color: var(--grey-color-4);
+    font-family: var(--identity-font);
+    font-weight: var(--font-weight4);
+  }
+
+  /* WHY: .item-date is scoped to index.astro (home page) — replicate here for all contexts */
+  .feed-item-date {
+    margin: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: var(--grey-color-3);
+    line-height: 1.5;
+    font-size: var(--ft-12-11);
+    font-family: var(--identity-font);
+    font-weight: var(--font-weight6);
+  }
+
+  /* Hover */
+  .feed-item:hover .feed-item-title {
+    text-decoration: underline;
+    text-decoration-color: var(--white-color-1);
+    text-decoration-thickness: 1.25px;
+    text-underline-offset: 1.25px;
+  }
+
+  /* Score overlay */
+  .feed-item-score {
+    position: absolute;
+    left: 8px;
+    bottom: 10px;
+    --dexa-size: var(--ft-20-17);
+    z-index: 3;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+  }
+
+  /* Editor's choice badge positioning */
+  .feed-item :global(.editors-choice-badge) {
+    display: flex;
+    position: absolute;
+    top: 0.75rem;
+    right: calc(60% + 0.75rem);
+    font-size: var(--ft-17-14);
+    z-index: 10;
+  }
+
+  .feed-item--no-image :global(.editors-choice-badge) {
+    right: 0.75rem;
+  }
+
+  /* ══════════════════════════════════════════════════════════════════════════
+     RESPONSIVE — Port of feed_scroller.css breakpoints
+     ══════════════════════════════════════════════════════════════════════════ */
+  @media (max-width: 1150px) {
+    /* WHY: base variant drops to 5px (HBS feed_scroller.css) */
+    .feed-item:not(.feed-item--index) {
+      border-radius: 5px;
+    }
+
+    .feed-item-title {
+      font-size: var(--ft-21-16);
+      line-height: 1.4;
+    }
+
+    .feed-item-description {
+      font-size: var(--font-size-15px);
+    }
+
+    .feed-item-image {
+      height: var(--font-size-215px);
+    }
+  }
+
+  @media (max-width: 825px) {
+    .feed-item-image {
+      height: var(--font-size-175px);
+    }
+
+    .feed-item-title {
+      margin: .45rem 0 .7rem 0;
+    }
+
+    .feed-item-content {
+      padding: clamp(12px, 9.1765px + 0.7059vw, 15px) 15px;
+    }
+
+    .feed-item-description {
+      -webkit-line-clamp: 1;
+      margin-bottom: .25rem;
+    }
+
+  }
+
+  @media (max-width: 600px) {
+    .feed-item-image {
+      height: clamp(var(--font-size-125px), 75px + 12.5vw, var(--font-size-150px));
+    }
+
+    .feed-item-title {
+      font-size: var(--fm-16-14);
+      margin: .45rem 0 0rem 0;
+    }
+
+    .feed-item-description {
+      display: none;
+    }
+
+    .feed-item-date {
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 1;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    /* HBS site_shared.css .item-tag responsive */
+    .feed-item-category {
+      font-size: var(--fm-12-11);
+    }
+
+    .feed-item-score {
+      --dexa-size: var(--fm-16-14);
+      left: 6px;
+      bottom: 8px;
+    }
+
+    .feed-item :global(.editors-choice-badge) {
+      font-size: var(--fm-14-11);
+    }
+  }
+
+  @media (max-width: 380px) {
+    .feed-item-image {
+      height: var(--font-size-120px);
+    }
+  }
+
+  /* ── Light theme overrides — dark mode untouched ── */
+  :global([data-theme="default"]) .feed-item,
+  :global([data-theme="workstation"]) .feed-item,
+  :global([data-theme="review"]) .feed-item {
+    border-color: var(--section-medium-background-color);
+  }
+
+  :global([data-theme="default"]) .feed-item--index,
+  :global([data-theme="workstation"]) .feed-item--index,
+  :global([data-theme="review"]) .feed-item--index {
+    background: var(--section-dark-background-color);
+  }
+</style>

@@ -5,11 +5,8 @@
 // and drafts/stubs are excluded consistently.
 //
 // Disable a content category in category-manager.py â†’ articles vanish site-wide.
-//
-// Exception: GlobalNav may use raw getCollection() for navbar-specific filtering
-// (navbar field assignment), since that is a separate concern from content visibility.
 
-import { getCollection } from 'astro:content';
+import { getCollection, type CollectionEntry } from 'astro:content';
 import { CONFIG } from '@core/config';
 import { filterArticles } from './content-filter.mjs';
 
@@ -19,9 +16,9 @@ type ArticleCollection = 'reviews' | 'guides' | 'news' | 'brands' | 'games';
  * Returns filtered, sorted entries for any article collection.
  * Applies: publish, draft, content category flags, datePublished sort.
  */
-export async function getArticles(collection: ArticleCollection) {
+export async function getArticles<T extends ArticleCollection>(collection: T): Promise<CollectionEntry<T>[]> {
   const entries = await getCollection(collection);
-  return filterArticles(entries, CONFIG.contentCategories);
+  return filterArticles(entries, CONFIG.contentCategories) as CollectionEntry<T>[];
 }
 
 /** Typed convenience â€” reviews only. */

@@ -6,7 +6,7 @@
 import { articleUrl, resolveHero, articleSrcSet, formatArticleDate } from '@core/article-helpers';
 import type { DashboardEntry } from '@core/article-helpers';
 import type { DashboardMeta } from '@core/dashboard';
-import { categoryColor } from '@core/config';
+import { catVar } from '@core/categories';
 import PinTag from '@shared/ui/PinTag.astro';
 import EditorsBadge from '@shared/ui/EditorsBadge.astro';
 
@@ -20,7 +20,7 @@ const url = articleUrl(item._collection, item.id);
 const heroPath = item.data.hero
   ? resolveHero(item._collection, item.id, item.data.hero)
   : null;
-const catColor = item.data.category ? categoryColor(item.data.category) : undefined;
+const catColor = item.data.category ? catVar(item.data.category) : undefined;
 ---
 
 <a href={url} class="dashboard-grid-item dashboard-row1-item">
@@ -29,6 +29,8 @@ const catColor = item.data.category ? categoryColor(item.data.category) : undefi
   {heroPath && (
     <img
       loading="eager"
+      fetchpriority="high"
+      decoding="async"
       src={`${heroPath}_l.webp`}
       srcset={articleSrcSet(heroPath)}
       sizes="(min-width: 825px) 575px, 100vw"

@@ -28,6 +28,7 @@ interface Props {
 const { badgeText, category } = Astro.props;
 
 const [line1, line2] = splitBadge(badgeText);
+const isSingleWord = !line2;
 
 // WHY: HBS uses var(--global-{category}-color) which maps to our --cat-{category}.
 // Category gradient for the right side background.
@@ -42,15 +43,17 @@ const logoColor = category
 ---
 
 <div class="editors-choice-badge" aria-label="Editor's Choice Badge" itemprop="award">
-  <div class="editors-badge-left" style={`background-color: #f0f0f0;`}>
+  <div class:list={['editors-badge-left', { 'editors-badge-left--single': isSingleWord }]}
+       style={`background-color: #f0f0f0;`}>
     <span class="editors-badge-logo-text1" style={`color: ${logoColor};`}>EG</span>
     <span class="editors-badge-logo-text2" style={`color: ${logoColor};`}>
       <span>G</span><span>E</span><span>A</span><span>R</span>
     </span>
   </div>
-  <div class="editors-badge-right" style={`background: ${rightBg}; color: #ffffff;`}>
+  <div class:list={['editors-badge-right', { 'editors-badge-right--single': isSingleWord }]}
+       style={`background: ${rightBg}; color: #ffffff;`}>
     <span class="editors-badge-line1" style="color: #ffffff;">{line1}</span>
-    <span class="editors-badge-line2" style="color: #ffffff;">{line2}</span>
+    {!isSingleWord && <span class="editors-badge-line2" style="color: #ffffff;">{line2}</span>}
   </div>
 </div>
 
@@ -129,4 +132,15 @@ const logoColor = category
     text-box-trim: trim-both;
     text-box-edge: cap alphabetic;
   }
+
+  /* WHY: Single-word badges (e.g. "Breaking", "Trending") have no line2.
+     Center both sides vertically instead of space-between against nothing. */
+  .editors-badge-left--single {
+    justify-content: center;
+  }
+
+  .editors-badge-right--single {
+    justify-content: center;
+  }
+
 </style>

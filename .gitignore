@@ -22,3 +22,14 @@ pnpm-debug.log*
 
 # jetbrains setting folder
 .idea/
+
+# local/generated media lives in S3, keep only tiny site assets in git
+public/images/*
+!public/images/favicons/
+!public/images/favicons/**
+!public/images/navbar/
+!public/images/navbar/**
+debug/
+.pytest_cache/
+.server-state/
+infrastructure/

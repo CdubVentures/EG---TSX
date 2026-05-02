@@ -14,6 +14,9 @@ brand_x: ''
 brand_instagram: ''
 brand_youtube: ''
 brand_tiktok: ''
+categories:
+  - keyboard
+  - mouse
 navbar:
   - keyboard
   - mouse
@@ -21,5 +24,7 @@ iDashboard: all_1
 toc: false
 publish: true
 hero: brand-logo-horizontal-index
+datePublished: '2025-01-01'
+dateUpdated: '2025-03-06'
 ---
 

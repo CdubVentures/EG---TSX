@@ -3,9 +3,47 @@
 // WHY: Centralizes URL construction, hero image resolution, srcset generation,
 // and date formatting so every consumer stays consistent.
 
+import { existsSync, readdirSync } from 'node:fs';
+import path from 'node:path';
 import { collectionImagePath } from './images';
 
 export type ArticleCollection = 'reviews' | 'guides' | 'news' | 'brands' | 'games' | 'pages';
+
+const PUBLIC_ROOT = path.resolve(process.cwd(), 'public');
+const HERO_VARIANT_SUFFIX = '_s.webp';
+const heroStemCache = new Map<string, string>();
+
+function toPublicDerivativePath(heroPath: string): string {
+  return path.join(PUBLIC_ROOT, `${heroPath.replace(/^\//, '')}${HERO_VARIANT_SUFFIX}`);
+}
+
+function resolveHeroStem(collection: string, entryId: string, heroStem: string): string {
+  const cacheKey = `${collection}:${entryId}:${heroStem}`;
+  const cachedStem = heroStemCache.get(cacheKey);
+  if (cachedStem) return cachedStem;
+
+  const imageBasePath = collectionImagePath(collection, entryId);
+  const directHeroPath = `${imageBasePath}/${heroStem}`;
+  if (existsSync(toPublicDerivativePath(directHeroPath))) {
+    heroStemCache.set(cacheKey, heroStem);
+    return heroStem;
+  }
+
+  const imageDir = path.join(PUBLIC_ROOT, imageBasePath.replace(/^\//, ''));
+  if (!existsSync(imageDir)) {
+    heroStemCache.set(cacheKey, heroStem);
+    return heroStem;
+  }
+
+  const variantStem = readdirSync(imageDir)
+    .filter((name) => name.startsWith(`${heroStem}---`) && name.endsWith(HERO_VARIANT_SUFFIX))
+    .sort()[0]
+    ?.slice(0, -HERO_VARIANT_SUFFIX.length);
+
+  const resolvedStem = variantStem ?? heroStem;
+  heroStemCache.set(cacheKey, resolvedStem);
+  return resolvedStem;
+}
 
 /** Shared shape for tagged article entries used by Dashboard components. */
 export interface DashboardEntry {
@@ -33,7 +71,8 @@ export function articleUrl(collection: ArticleCollection, entryId: string): stri
  * Returns the full path WITHOUT size suffix or extension.
  */
 export function resolveHero(collection: string, entryId: string, heroStem: string): string {
-  return `${collectionImagePath(collection, entryId)}/${heroStem}`;
+  const resolvedStem = resolveHeroStem(collection, entryId, heroStem);
+  return `${collectionImagePath(collection, entryId)}/${resolvedStem}`;
 }
 
 /**

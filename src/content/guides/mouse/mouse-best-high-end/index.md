@@ -11,6 +11,8 @@ description: >-
 tags: []
 hero: title
 publish: true
+pinned: true
+egbadge: "Must Read"
 toc: false
 draft: false
 ---

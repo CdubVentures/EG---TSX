@@ -5,6 +5,8 @@
  * Dark theme values are LOCKED — match HBS exactly.
  */
 import { resolveHero, articleUrl, articleSrcSet } from '@core/article-helpers';
+import PinTag from '@shared/ui/PinTag.astro';
+import GameBadge from '@shared/ui/GameBadge.astro';
 
 interface GameEntry {
   id: string;
@@ -17,9 +19,11 @@ interface GameEntry {
 
 interface Props {
   games: GameEntry[];
+  pinnedSet?: Set<string>;
+  badgesMap?: Record<string, string>;
 }
 
-const { games } = Astro.props;
+const { games, pinnedSet, badgesMap } = Astro.props;
 
 // WHY: If no games, render nothing (invariant from contract)
 if (games.length === 0) return;
@@ -27,12 +31,12 @@ if (games.length === 0) return;
 
 <section class="games-scroller-container">
   <div class="games-scroller">
-    <div class="game-left-arrow game-arrow scroller-arrow">
+    <button type="button" class="game-left-arrow game-arrow scroller-arrow" aria-label="Scroll games left">
       <svg aria-hidden="true" class="svg-base" focusable="false" height="16"
         viewBox="0 0 16 16" width="16" xmlns="http://www.w3.org/2000/svg">
         <path fill="currentColor" d="M2.38 7.784 8.796 1.37l1.414 1.414-5 5 5 5-1.414 1.414z"></path>
       </svg>
-    </div>
+    </button>
 
     <div class="game-slider">
       {games.map(game => {
@@ -40,10 +44,15 @@ if (games.length === 0) return;
         const heroPath = resolveHero('games', game.id, heroStem);
         const srcset = articleSrcSet(heroPath);
         const url = articleUrl('games', game.id);
+        const gameKey = `games:${game.id}`;
+        const isPinned = pinnedSet?.has(gameKey) ?? false;
+        const badgeText = badgesMap?.[gameKey];
 
         return (
           <a class="game-slider-item" href={url}>
             <div class="game-image-container">
+              {isPinned && <PinTag />}
+              {badgeText && <GameBadge text={badgeText} />}
               <img
                 loading="lazy"
                 src={`${heroPath}_s.webp`}
@@ -60,12 +69,12 @@ if (games.length === 0) return;
       })}
     </div>
 
-    <div class="game-right-arrow game-arrow scroller-arrow">
+    <button type="button" class="game-right-arrow game-arrow scroller-arrow" aria-label="Scroll games right">
       <svg aria-hidden="true" class="svg-base" focusable="false" height="16"
         viewBox="0 0 16 16" width="16" xmlns="http://www.w3.org/2000/svg">
         <path fill="currentColor" d="m13.21 7.784-6.415 6.414-1.414-1.414 5-5-5-5L6.795 1.37z"></path>
       </svg>
-    </div>
+    </button>
   </div>
 </section>
 
@@ -207,6 +216,17 @@ if (games.length === 0) return;
     height: 100%;
     object-fit: cover;
     transition: transform 0.3s ease;
+  }
+
+  /* ── Pin override: top-LEFT for poster cards + site gradient ── */
+  /* WHY 0.5rem: HBS scroller_games.css used 0.5rem offset for the narrower
+     7:10 poster format (vs 0.75rem for standard article cards).
+     WHY left: badge moved to bottom-right, pin balances on top-left. */
+  .game-image-container :global(.pinned-tag) {
+    top: 0.5rem;
+    left: 0.5rem;
+    right: auto;
+    background: linear-gradient(135deg, var(--site-start-color), var(--site-end-color));
   }
 
   /* ── Title ── */

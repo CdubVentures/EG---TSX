@@ -319,7 +319,7 @@ function isActive(href: string): boolean {
             </svg>
           </span>
           <div class="nav-vault-item-count-wrapper">
-            <VaultCount client:idle />
+            <VaultCount client:only="react" />
           </div>
           Comparison Vault
         </a>
@@ -899,10 +899,6 @@ function isActive(href: string): boolean {
   }
   .nav-links > li.sub-menu.locked > a {
     color: var(--nav-text);
-  }
-
-  .nav-link[aria-current="page"]::after {
-    width: 80%;
   }
 
   .icon-inline {
@@ -1943,6 +1939,10 @@ function isActive(href: string): boolean {
   .mega-menu-vault .mega-menu-left-column .mega-menu-left-nav .empty-cat.active .category-icon {
     background-color: var(--overall-zero-score, #555) !important;
   }
+  .vault-left-nav li a:not(.active):hover::after,
+  .vault-left-nav li a:not(.active):hover .vault-link-count {
+    color: var(--card-color, var(--site-gradient-end));
+  }
   .mega-menu-vault .mega-menu-left-column .mega-menu-left-nav .empty-cat:not(.active):hover .vault-link-count {
     color: var(--card-color);
   }
@@ -2327,6 +2327,7 @@ function isActive(href: string): boolean {
   @media (max-width: 600px) {
     .mega-menu-vault-inner {
       flex-direction: column;
+      overflow-y: auto;
     }
 
     .vault-left-nav {
@@ -2343,11 +2344,21 @@ function isActive(href: string): boolean {
       flex-basis: 100%;
     }
 
+    /* HBS: category buttons get bordered card appearance at mobile */
+    .mega-menu-vault .mega-menu-left-nav li a {
+      border: 1px solid var(--section-medium-background-color);
+      border-radius: 4px;
+      padding: 1rem 1.75rem;
+    }
+
+    .mega-menu-vault .mega-menu-left-nav li {
+      margin: 0;
+    }
+
     .vault-clear-section {
       border-top: none;
       margin: 0;
-      padding: 0;
-      display: none;
+      padding: 0.5rem 0 0;
     }
 
     .mega-menu-vault .mega-menu-left-column .mega-menu-left-nav li a.active {
@@ -2361,12 +2372,12 @@ function isActive(href: string): boolean {
 
     .vault-left-column {
       padding-right: 0;
-      min-width: 22em;
+      min-width: unset;
     }
 
     .vault-right-content {
       padding-left: 0;
-      min-width: 22em;
+      min-width: unset;
     }
 
     .mega-menu-vault {

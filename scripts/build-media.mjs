@@ -221,9 +221,9 @@ function scanImageFolder(folderPath) {
 // ─── Image ordering ─────────────────────────────────────────────────────────
 
 /**
- * Sort images by view priority, then seq, then color (default first).
+ * Sort images by view priority, then seq, then color and edition defaults.
  */
-function sortImages(images, defaultColor) {
+function sortImages(images, defaultColor, defaultEdition = null) {
   return [...images].sort((a, b) => {
     // 1. View priority
     const vp = viewPriority(a.view) - viewPriority(b.view);
@@ -237,7 +237,18 @@ function sortImages(images, defaultColor) {
     // 3. Default color first (no color = default, then defaultColor, then others)
     const ca = colorRank(a.color, defaultColor);
     const cb = colorRank(b.color, defaultColor);
-    return ca - cb;
+    if (ca !== cb) return ca - cb;
+
+    // 4. Default edition first (editionless first when no default edition is set)
+    const ea = editionRank(a.edition, defaultEdition);
+    const eb = editionRank(b.edition, defaultEdition);
+    if (ea !== eb) return ea - eb;
+
+    // 5. Stable deterministic ordering for ties
+    const edA = a.edition ?? '';
+    const edB = b.edition ?? '';
+    if (edA !== edB) return edA.localeCompare(edB);
+    return a.stem.localeCompare(b.stem);
   });
 }
 
@@ -245,6 +256,47 @@ function colorRank(color, defaultColor) {
   if (color === undefined) return 0;          // no color = default image
   if (color === defaultColor) return 1;       // explicit default color
   return 2;                                   // other colors
+}
+
+function editionRank(edition, defaultEdition) {
+  if (defaultEdition) {
+    if (edition === defaultEdition) return 0;
+    if (edition === undefined) return 1;
+    return 2;
+  }
+  return edition === undefined ? 0 : 1;
+}
+
+function normalizeToken(value) {
+  if (typeof value !== 'string') return null;
+  const trimmed = value.trim();
+  return trimmed.length > 0 ? trimmed : null;
+}
+
+function deriveDefaultEdition(images, defaultColor, editions) {
+  if (editions.length === 0) return null;
+
+  const hasEditionlessDefault = images.some((img) => {
+    if (img.edition !== undefined) return false;
+    if (defaultColor === null) return true;
+    return img.color === undefined || img.color === defaultColor;
+  });
+
+  if (hasEditionlessDefault) return null;
+  return editions[0] ?? null;
+}
+
+function resolveDefaultEdition(product, editions, inferredDefaultEdition) {
+  const mediaDefaultEdition = normalizeToken(product?.media?.defaultEdition);
+  if (mediaDefaultEdition && editions.includes(mediaDefaultEdition)) return mediaDefaultEdition;
+
+  const explicitDefaultEdition = normalizeToken(product?.defaultEdition);
+  if (explicitDefaultEdition && editions.includes(explicitDefaultEdition)) return explicitDefaultEdition;
+
+  const variantDefaultEdition = normalizeToken(product?.variant);
+  if (variantDefaultEdition && editions.includes(variantDefaultEdition)) return variantDefaultEdition;
+
+  return inferredDefaultEdition;
 }
 
 // ─── Build media object ─────────────────────────────────────────────────────
@@ -273,13 +325,18 @@ function buildMedia(product, folderPath) {
   const colors = [...colorsSet];
 
   // Collect unique editions from images
-  const editions = [...new Set(images.filter(i => i.edition).map(i => i.edition))];
+  const editions = [...new Set(images.filter(i => i.edition).map(i => i.edition))]
+    .sort((a, b) => String(a).localeCompare(String(b)));
+
+  const inferredDefaultEdition = deriveDefaultEdition(images, defaultColor, editions);
+  const defaultEdition = resolveDefaultEdition(product, editions, inferredDefaultEdition);
 
   // Sort images
-  const sortedImages = sortImages(images, defaultColor);
+  const sortedImages = sortImages(images, defaultColor, defaultEdition);
 
   return {
     defaultColor,
+    defaultEdition,
     colors,
     editions,
     images: sortedImages,
@@ -316,6 +373,7 @@ function processProduct(filePath) {
     // Only update media.images, keep everything else
     product.media = product.media || {};
     product.media.defaultColor = media.defaultColor;
+    product.media.defaultEdition = media.defaultEdition;
     product.media.colors = media.colors;
     product.media.editions = media.editions;
     product.media.images = media.images;

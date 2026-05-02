@@ -5,22 +5,30 @@
  * Replaces HBS ads_bootstrap.js + ads_inline_bootstrap.js.
  *
  * Simplifications vs HBS:
- * - No runtime config fetches (baked in at build time via AD_REGISTRY)
- * - No campaign alias resolution (campaigns are explicit in templates)
+ * - No runtime config fetches (baked in at build time via AD_POSITIONS)
+ * - No position alias resolution (positions are explicit in templates)
  * - placementType from registry replaces runtime DOM inference
  */
 
-import { AD_REGISTRY, ADSENSE_CLIENT } from './config';
-import type { AdSlotConfig } from './config';
+import { AD_POSITIONS, ADSENSE_CLIENT } from './config';
 
 // ─── Types ──────────────────────────────────────────────────────────────
 
-type ProviderRoute = 'adsense' | 'gpt' | 'direct' | 'native';
+type ProviderRoute = 'adsense' | 'direct';
 
 interface BootstrapState {
   mounted: Set<Element>;
   adsenseLoaded: boolean;
-  gptLoaded: boolean;
+}
+
+interface EgAdsBridge {
+  init: () => void;
+  mountAll: (root: Document | Element) => void;
+}
+
+interface EgAdsWindow extends Window {
+  adsbygoogle?: unknown[];
+  egAds?: EgAdsBridge;
 }
 
 // ─── Module state ───────────────────────────────────────────────────────
@@ -28,32 +36,20 @@ interface BootstrapState {
 const state: BootstrapState = {
   mounted: new Set(),
   adsenseLoaded: false,
-  gptLoaded: false,
 };
 
 // ═══════════════════════════════════════════════════════════════════════════
 // PURE FUNCTIONS — testable without DOM
 // ═══════════════════════════════════════════════════════════════════════════
 
-/** Convert "300x250,336x280" to [[300,250],[336,280]] for GPT defineSlot. */
-export function parseSizesForGPT(sizes: string): number[][] {
-  if (!sizes) return [];
-  return sizes.split(',')
-    .map(s => {
-      const parts = s.trim().split('x').map(Number);
-      return parts.length === 2 && !isNaN(parts[0]) && !isNaN(parts[1]) ? parts : null;
-    })
-    .filter((s): s is number[] => s !== null);
-}
-
 /** Returns a warning string if AdSense + sticky, null otherwise. */
 export function checkStickyPolicy(
   provider: string,
   sticky: boolean,
-  campaign: string,
+  position: string,
 ): string | null {
   if (provider === 'adsense' && sticky) {
-    return `[egAds] Sticky ad "${campaign}" uses AdSense — AdSense prohibits sticky positioning.`;
+    return `[egAds] Sticky ad "${position}" uses AdSense — AdSense prohibits sticky positioning.`;
   }
   return null;
 }
@@ -65,7 +61,7 @@ export function isSlotHidden(el: Pick<HTMLElement, 'offsetParent'>): boolean {
 
 /** Validate and return the provider route, or null if unknown. */
 export function resolveProviderRoute(provider: string): ProviderRoute | null {
-  const valid: ProviderRoute[] = ['adsense', 'gpt', 'direct', 'native'];
+  const valid: ProviderRoute[] = ['adsense', 'direct'];
   return valid.includes(provider as ProviderRoute) ? (provider as ProviderRoute) : null;
 }
 
@@ -91,7 +87,7 @@ export function init(): void {
 /** Find and mount all live ad slots within a root element. */
 export function mountAll(root: Document | Element): void {
   const slots = root.querySelectorAll<HTMLElement>(
-    '.ad-slot:not([data-placeholder="true"])'
+    '.ad-slot:not([data-placeholder="true"]):not(.ad-slot--sample)'
   );
   slots.forEach(slot => scheduleMount(slot));
 }
@@ -142,11 +138,11 @@ function mountSlot(el: HTMLElement): void {
   if (isSlotHidden(el)) return;
 
   const provider = el.dataset.provider ?? '';
-  const campaign = el.dataset.campaign ?? '';
+  const position = el.dataset.position ?? '';
   const sticky = el.dataset.sticky === 'true';
 
   // Sticky policy check
-  const warning = checkStickyPolicy(provider, sticky, campaign);
+  const warning = checkStickyPolicy(provider, sticky, position);
   if (warning) console.warn(warning);
 
   const route = resolveProviderRoute(provider);
@@ -154,17 +150,11 @@ function mountSlot(el: HTMLElement): void {
     case 'adsense':
       mountAdSense(el);
       break;
-    case 'gpt':
-      mountGPT(el, campaign);
-      break;
     case 'direct':
-      mountDirect(el, campaign);
-      break;
-    case 'native':
-      // WHY: native ads are handled by NativeCard component, not bootstrap
+      mountDirect(el, position);
       break;
     default:
-      console.warn(`[egAds] Unknown provider "${provider}" for campaign "${campaign}"`);
+      console.warn(`[egAds] Unknown provider "${provider}" for position "${position}"`);
   }
 }
 
@@ -187,9 +177,9 @@ function mountAdSense(el: HTMLElement): void {
 
   // Push to adsbygoogle queue — triggers ad request
   try {
-    const w = window as Record<string, unknown>;
-    w.adsbygoogle = (w.adsbygoogle as unknown[]) || [];
-    (w.adsbygoogle as unknown[]).push({});
+    const w = window as EgAdsWindow;
+    w.adsbygoogle ??= [];
+    w.adsbygoogle.push({});
   } catch (e) {
     console.error('[egAds] AdSense push failed:', e);
   }
@@ -221,53 +211,11 @@ function watchAutoSizing(ins: HTMLElement): void {
 }
 
 // ═══════════════════════════════════════════════════════════════════════════
-// GPT (Google Publisher Tags)
-// ═══════════════════════════════════════════════════════════════════════════
-
-function mountGPT(el: HTMLElement, campaign: string): void {
-  const config = AD_REGISTRY[campaign];
-  if (!config?.slot) return;
-
-  ensureGPT(() => {
-    const sizes = parseSizesForGPT(config.sizes);
-    const divId = `gpt-${campaign}-${Date.now()}`;
-
-    const container = document.createElement('div');
-    container.id = divId;
-    el.appendChild(container);
-
-    const gt = (window as Record<string, any>).googletag;
-    gt.defineSlot(config.slot, sizes, divId)
-      .addService(gt.pubads());
-    gt.pubads().enableSingleRequest();
-    gt.enableServices();
-    gt.display(divId);
-
-    el.dataset.fill = 'filled';
-  });
-}
-
-function ensureGPT(callback: () => void): void {
-  const w = window as Record<string, any>;
-  w.googletag = w.googletag || { cmd: [] };
-
-  if (!state.gptLoaded) {
-    state.gptLoaded = true;
-    const script = document.createElement('script');
-    script.async = true;
-    script.src = 'https://securepubads.g.doubleclick.net/tag/js/gpt.js';
-    document.head.appendChild(script);
-  }
-
-  w.googletag.cmd.push(callback);
-}
-
-// ═══════════════════════════════════════════════════════════════════════════
 // DIRECT (sponsor image links)
 // ═══════════════════════════════════════════════════════════════════════════
 
-function mountDirect(el: HTMLElement, campaign: string): void {
-  const config = AD_REGISTRY[campaign];
+function mountDirect(el: HTMLElement, position: string): void {
+  const config = AD_POSITIONS[position];
   if (!config?.img || !config?.href) return;
 
   const link = document.createElement('a');
@@ -326,5 +274,6 @@ function observeFill(el: HTMLElement, ins: HTMLElement): void {
 // ═══════════════════════════════════════════════════════════════════════════
 
 if (typeof window !== 'undefined') {
-  (window as Record<string, unknown>).egAds = { init, mountAll };
+  const w = window as EgAdsWindow;
+  w.egAds = { init, mountAll };
 }

@@ -1,0 +1,32 @@
+---
+/**
+ * /news/ index page — full page (top half + bottom half).
+ * Handles: /news/, /news/page/2/, /news/mice/, /news/mice/page/2/
+ */
+import MainLayout from '@shared/layouts/MainLayout.astro';
+import SiteIndexPage from '@features/site-index/components/SiteIndexPage.astro';
+import {
+  buildSiteIndexVm,
+  getSiteIndexStaticPaths,
+  newsIndexDefinition,
+} from '@features/site-index/definitions';
+import type { SiteIndexStaticPathProps } from '@features/site-index/page-builder';
+
+export async function getStaticPaths() {
+  return getSiteIndexStaticPaths(newsIndexDefinition);
+}
+
+const vm = await buildSiteIndexVm(
+  newsIndexDefinition,
+  Astro.props as SiteIndexStaticPathProps,
+);
+---
+
+<MainLayout
+  title={vm.seo.title}
+  description={vm.seo.description}
+  canonicalUrl={vm.seo.canonicalUrl}
+  structuredData={vm.seo.structuredData}
+>
+  <SiteIndexPage vm={vm} />
+</MainLayout>

@@ -1,9 +1,9 @@
 {
   "slug": "msi-clutch-gm41-lw-v2",
   "brand": "MSI",
-  "model": "Clutch GM41 LW V2",
-  "baseModel": "Clutch GM41",
-  "variant": "LW V2",
+  "model": "Clutch GM41 Lightweight V2",
+  "baseModel": "Clutch GM41 Lightweight",
+  "variant": "V2",
   "category": "mouse",
   "imagePath": "/images/mouse/msi/clutch-gm41-lw-v2",
   "cardTags": "false",

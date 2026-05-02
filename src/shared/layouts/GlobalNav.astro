@@ -13,16 +13,21 @@
 
 import { getCollection } from 'astro:content';
 import { CONFIG, isContentActive } from '@core/config';
+import { filterNavbarEntries } from '@core/content-filter.mjs';
 import { contentImage, collectionImagePath } from '@core/images';
 import sectionOrder from '../../../config/data/navbar-guide-sections.json';
 import NavLogo from './NavLogo.astro';
 import NavLinks from './NavLinks.astro';
 import NavIcons from './NavIcons.astro';
 import NavMobile from './NavMobile.tsx';
+import SearchDialog from '@features/search/components/SearchDialog';
 /* â”€â”€â”€ Build-time data â”€â”€â”€ */
 const allGames = await getCollection('games');
 const allGuides = await getCollection('guides');
 const allBrands = await getCollection('brands');
+const navbarGames = filterNavbarEntries(allGames, CONFIG.contentCategories);
+const navbarGuides = filterNavbarEntries(allGuides, CONFIG.contentCategories);
+const navbarBrands = filterNavbarEntries(allBrands, CONFIG.contentCategories);
 
 // WHY categories (not allCategories): disabled categories should not appear in the hubs menu at all
 const hubsData = CONFIG.categories.map((c) => ({
@@ -33,17 +38,16 @@ const hubsData = CONFIG.categories.map((c) => ({
 
 /* WHY navbar filter: only games with navbar:true appear in the games menu */
 const gamesData = allGames
-  .filter((g) => g.data.navbar && g.data.publish !== false)
+  .filter((g) => navbarGames.includes(g))
   .sort((a, b) => a.data.title.localeCompare(b.data.title))
   .map((g) => ({ title: g.data.title, url: `/games/${g.id}` }));
 
 const guidesMap = new Map<string, Array<{ title: string; url: string }>>();
-for (const g of allGuides) {
+for (const g of navbarGuides) {
   const cat = g.data.category;
-  if (!cat || g.data.publish === false) continue;
+  if (!cat) continue;
   // WHY navbar check: match desktop mega menu â€” only guides with a navbar assignment appear
   const navbar = g.data.navbar ?? [];
-  if (navbar.length === 0) continue;
   if (!guidesMap.has(cat)) guidesMap.set(cat, []);
   // WHY guide || title: use the short nav-friendly name, same as the desktop mega menu
   guidesMap.get(cat)!.push({ title: g.data.guide || g.data.title, url: `/guides/${g.id}` });
@@ -55,8 +59,7 @@ const guidesData = Array.from(guidesMap.entries()).map(([category, items]) => ({
 }));
 
 const brandsMap = new Map<string, Array<{ brand: string; slug: string; url: string; logoUrl: string }>>();
-for (const b of allBrands) {
-  if (b.data.publish === false) continue;
+for (const b of navbarBrands) {
   const cats = b.data.navbar ?? [];
   const logoUrl = contentImage(collectionImagePath('brands', b.id), 'brand-logo-horizontal-mono-black', 'xs', 'png');
   for (const cat of cats) {
@@ -73,7 +76,7 @@ const brandsData = Array.from(brandsMap.entries()).map(([category, items]) => ({
 
 /* Games: need slug for image paths. Only navbar:true games appear. */
 const gamesMega = allGames
-  .filter((g) => g.data.navbar && g.data.publish !== false)
+  .filter((g) => navbarGames.includes(g))
   .sort((a, b) => a.data.title.localeCompare(b.data.title))
   .map((g) => ({
     title: g.data.title,
@@ -89,13 +92,12 @@ type GuideSection = { title: string; items: GuideItem[] };
 type GuideCategoryMega = { category: string; disabled: boolean; sections: GuideSection[] };
 
 const guidesByCatSection = new Map<string, Map<string, GuideItem[]>>();
-for (const g of allGuides) {
+for (const g of navbarGuides) {
   const cat = g.data.category;
-  if (!cat || g.data.publish === false) continue;
+  if (!cat) continue;
   const navbar = g.data.navbar ?? [];
   /* WHY: only guides with a non-empty navbar field appear in the mega menu.
      Guides with navbar:[] are "unassigned" and don't show up. */
-  if (navbar.length === 0) continue;
   const section = String(navbar[0]);
   if (!guidesByCatSection.has(cat)) guidesByCatSection.set(cat, new Map());
   const catMap = guidesByCatSection.get(cat)!;
@@ -105,7 +107,7 @@ for (const g of allGuides) {
     url: `/guides/${g.id}`,
   });
 }
-/* WHY: section order comes from config/data/navbar-guide-sections.json (managed by navbar-manager.pyw).
+/* WHY: section order comes from config/data/navbar-guide-sections.json (managed by the Navbar panel in config/eg-config.pyw).
    Controls column order in the guides mega menu. */
 
 const guidesMega: GuideCategoryMega[] = Array.from(guidesByCatSection.entries())
@@ -129,8 +131,7 @@ const guidesMega: GuideCategoryMega[] = Array.from(guidesByCatSection.entries())
 
 /* Brands: grouped by category, split into 4 balanced columns (HBS style) */
 const brandsMegaMap = new Map<string, Array<{ brand: string; slug: string; url: string }>>();
-for (const b of allBrands) {
-  if (b.data.publish === false) continue;
+for (const b of navbarBrands) {
   const cats = b.data.navbar ?? [];
   for (const cat of cats) {
     if (!brandsMegaMap.has(cat)) brandsMegaMap.set(cat, []);
@@ -157,7 +158,7 @@ const brandsMega = Array.from(brandsMegaMap.entries())
   <header class="top-bar">
     {/* NavMobile renders: hamburger button + side menu + shade overlay */}
     <NavMobile
-      client:visible
+      client:only="react"
       games={gamesData}
       guides={guidesData}
       brands={brandsData}
@@ -180,6 +181,9 @@ const brandsMega = Array.from(brandsMegaMap.entries())
     </div>
   </header>
 </nav>
+
+{/* Search overlay — React island, always-dark, z-99600 */}
+<SearchDialog client:only="react" />
 
 <style>
   .mainNav {
@@ -261,6 +265,7 @@ const brandsMega = Array.from(brandsMegaMap.entries())
     }
 
     .nav-logo-wrapper {
+      order: 2;
       font-size: var(--font-size-24px);
     }
   }

@@ -673,6 +673,11 @@ describe('errorPage (callback.ts)', () => {
     const res = htmlMod.errorPage('err');
     assert.equal(res.headers.get('Content-Type'), 'text/html');
   });
+
+  it('errorPage sets X-Robots-Tag to noindex,nofollow', () => {
+    const res = htmlMod.errorPage('err');
+    assert.equal(res.headers.get('X-Robots-Tag'), 'noindex,nofollow');
+  });
 });
 
 // ─── buildLoginRedirect Tests ──────────────────────────────────────────────
@@ -742,5 +747,10 @@ describe('buildLoginRedirect', () => {
     });
     const location = res.headers.get('Location');
     assert.ok(location.includes('prompt=select_account'));
+  });
+
+  it('sets X-Robots-Tag to noindex,nofollow', () => {
+    const res = mod.buildLoginRedirect({ provider: 'Google', isProd: false });
+    assert.equal(res.headers.get('X-Robots-Tag'), 'noindex,nofollow');
   });
 });

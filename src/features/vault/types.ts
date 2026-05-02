@@ -12,6 +12,10 @@ export interface VaultProduct {
 }
 
 export interface VaultEntry {
+  // Canonical identity (SSOT for persistence + dedupe)
+  productId: string;
+  category: Category;
+  // Derived snapshot cache for immediate UI render; may be repaired during migration.
   product: VaultProduct;
   addedAt: number;   // Date.now() timestamp
 }
@@ -42,6 +46,11 @@ export function vaultStorageKey(scope: VaultStorageScope): string {
 /** Returns localStorage key for tracking server revision */
 export function vaultRevKey(uid: string): string {
   return `eg-vault-rev:${uid}`;
+}
+
+/** Returns localStorage key for tracking vault thumbnail refresh timestamp */
+export function vaultThumbRefreshKey(scope: VaultStorageScope): string {
+  return `eg-vault-thumbs-refresh:v2:${scope}`;
 }
 
 // ─── Sync state ────────────────────────────────────────────────────────────

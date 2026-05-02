@@ -29,6 +29,19 @@ export function hydrateAuth(): Promise<void> {
   return _hydratePromise;
 }
 
+function hasAuthHintCookie(cookieHeader: string): boolean {
+  return /(?:^|;\s*)eg_hint=1(?:;|$)/.test(cookieHeader);
+}
+
+/** Skip the startup auth fetch unless the client hint cookie says a user session exists. */
+export function hydrateAuthFromCookieHint(cookieHeader: string): Promise<void> {
+  if (!hasAuthHintCookie(cookieHeader)) {
+    setGuest();
+    return Promise.resolve();
+  }
+  return hydrateAuth();
+}
+
 async function _doHydrate(): Promise<void> {
   setLoading();
   try {

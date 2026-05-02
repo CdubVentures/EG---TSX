@@ -1,0 +1,165 @@
+---
+/**
+ * FeedHeader.astro — Feed heading row with prev/next arrows and mobile filter.
+ * Port of HBS .article-latest__header + .feed-divider-text from site-latest-vertical.handlebars.
+ * CSS from site_index.css heading/control sections.
+ */
+import type { FilterCategory } from '@features/site-index/build-pagination';
+import FilterDropdown from './FilterDropdown.astro';
+
+interface Props {
+  heading: string;
+  prevUrl?: string;
+  nextUrl?: string;
+  filterCategories?: FilterCategory[];
+  activeCategory?: string;
+  type: string;
+  allCount?: number;
+  categoryClass?: string;
+}
+
+const { heading, prevUrl, nextUrl, filterCategories, activeCategory, type, allCount, categoryClass } = Astro.props;
+const hasPagination = prevUrl !== undefined || nextUrl !== undefined;
+---
+
+<div class="article-latest__header">
+  <div class:list={['feed-divider-text', categoryClass]}>
+    <span class="feed-divider-text__label">{heading}</span>
+
+    <div class="site-index__headerControls">
+      {/* Header pagination arrows */}
+      {hasPagination && (
+        <div class="site-index__headerPager">
+          {prevUrl ? (
+            <a class="site-index__headerArrow -prev" href={prevUrl} aria-label="Previous page">
+              <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
+                <path fill="currentColor" d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z" />
+              </svg>
+            </a>
+          ) : (
+            <span class="site-index__headerArrow -prev is-disabled" aria-disabled="true">
+              <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
+                <path fill="currentColor" d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z" />
+              </svg>
+            </span>
+          )}
+
+          {nextUrl ? (
+            <a class="site-index__headerArrow -next" href={nextUrl} aria-label="Next page">
+              <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
+                <path fill="currentColor" d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z" />
+              </svg>
+            </a>
+          ) : (
+            <span class="site-index__headerArrow -next is-disabled" aria-disabled="true">
+              <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
+                <path fill="currentColor" d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z" />
+              </svg>
+            </span>
+          )}
+        </div>
+      )}
+
+      {/* Mobile filter dropdown (≤825px) */}
+      {filterCategories && filterCategories.length > 0 && (
+        <FilterDropdown
+          categories={filterCategories}
+          activeCategory={activeCategory}
+          type={type}
+          allCount={allCount ?? 0}
+        />
+      )}
+    </div>
+  </div>
+</div>
+
+<style>
+  /* Port of site_index.css — heading row + controls */
+  .article-latest__header {
+    margin-bottom: 32px;
+  }
+
+  .feed-divider-text {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    font-family: var(--identity-font, inherit);
+    font-weight: 600;
+    letter-spacing: .02em;
+    text-transform: uppercase;
+    font-size: var(--ft-18-16);
+    line-height: 2;
+    color: var(--white-color-1);
+    padding: 0 14px 8px;
+    margin: 0 0 0px;
+    border-bottom: 1px solid var(--section-medium-background-color);
+    --si-header-ctrl-h: 3rem;
+  }
+
+  .site-index__headerControls {
+    display: inline-flex;
+    align-items: stretch;
+    gap: 0.5rem;
+    height: var(--si-header-ctrl-h);
+  }
+
+  /* Header pagination arrows */
+  .site-index__headerPager {
+    display: inline-flex;
+    align-items: stretch;
+    gap: 0.35rem;
+    height: 100%;
+    box-sizing: border-box;
+  }
+
+  .site-index__headerArrow {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: var(--si-header-ctrl-h);
+    height: 100%;
+    border-radius: 2px;
+    border: 1px solid var(--section-medium-background-color);
+    background: var(--section-dusk-background-color);
+    color: var(--white-color-2);
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color 0.15s ease;
+  }
+
+  .site-index__headerArrow svg {
+    width: 50%;
+    height: 50%;
+  }
+
+  .site-index__headerArrow:hover {
+    background: var(--section-medium-background-color);
+  }
+
+  .site-index__headerArrow:focus-visible {
+    outline: 2px solid var(--site-start-color, #5a6ef8);
+    outline-offset: 2px;
+  }
+
+  .site-index__headerArrow.is-disabled {
+    opacity: 0.45;
+    cursor: default;
+    pointer-events: none;
+  }
+
+  @media (max-width: 825px) {
+    .feed-divider-text {
+      border: none;
+      padding: .5rem 1rem;
+      border-radius: 6px;
+      font-weight: 700;
+      line-height: 1;
+      align-items: center;
+      background: var(--section-dark-background-color);
+    }
+
+    .article-latest__header {
+      margin-bottom: 16px;
+    }
+  }
+</style>

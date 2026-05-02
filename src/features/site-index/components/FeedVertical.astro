@@ -1,0 +1,102 @@
+---
+/**
+ * FeedVertical.astro — Feed section wrapper.
+ * Port of HBS site-latest-vertical.handlebars <section class="article-latest -vertical">.
+ *
+ * Orchestrates: FeedHeader + FeedItem list + optional inline ad + optional Pagination.
+ */
+import type { FeaturedItem } from '@features/home/featured-scroller-utils';
+import type { PaginationData, FilterCategory } from '@features/site-index/build-pagination';
+import FeedHeader from './FeedHeader.astro';
+import FeedItem from './FeedItem.astro';
+import Pagination from '@shared/ui/Pagination.astro';
+import AdSlot from '@features/ads/components/AdSlot.astro';
+
+interface Props {
+  items: FeaturedItem[];
+  heading?: string;
+  pagination?: PaginationData;
+  showPagination?: boolean;
+  showHeader?: boolean;
+  showInlineAd?: boolean;
+  showScore?: boolean;
+  filterCategories?: FilterCategory[];
+  activeCategory?: string;
+  type: string;
+  allCount?: number;
+  categoryClass?: string;
+}
+
+const {
+  items,
+  heading,
+  pagination,
+  showPagination = true,
+  showHeader = true,
+  showInlineAd = false,
+  showScore = false,
+  filterCategories,
+  activeCategory,
+  type,
+  allCount,
+  categoryClass,
+} = Astro.props;
+---
+
+{items.length > 0 && (
+  <section class:list={['article-latest', '-vertical', categoryClass]} data-feed-kind="site-latest">
+
+    {showHeader && heading && (
+      <FeedHeader
+        heading={heading}
+        prevUrl={pagination?.prevUrl}
+        nextUrl={pagination?.nextUrl}
+        filterCategories={filterCategories}
+        activeCategory={activeCategory}
+        type={type}
+        allCount={allCount}
+        categoryClass={categoryClass}
+      />
+    )}
+
+    <div class="feed-vertical" aria-live="polite">
+      {items.map(item => (
+        <FeedItem item={item} showScore={showScore} variant="index" />
+      ))}
+
+      {showInlineAd && (
+        <div class="article-inline-ad -anywhere">
+          <AdSlot position="in_content" />
+        </div>
+      )}
+    </div>
+
+    {showPagination && pagination && pagination.total > 1 && (
+      <Pagination pagination={pagination} categoryClass={categoryClass} />
+    )}
+  </section>
+)}
+
+<style>
+  /* Port of site_index.css — vertical feed container
+     WHY 14px: HBS uses .feed-item+.feed-item { margin-top: 14px }, not grid gap.
+     Using grid gap: 14px produces the same visual result. */
+  .feed-vertical {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-auto-rows: auto;
+    gap: 14px;
+  }
+
+  /* Inline ad within feed — site_index.css overrides */
+  .article-inline-ad.-anywhere {
+    margin: 34px 0 10px 0;
+    width: 100%;
+    max-width: none;
+  }
+
+  .article-inline-ad.-anywhere :global(.ad-slot) {
+    width: 100%;
+    max-width: none;
+  }
+</style>

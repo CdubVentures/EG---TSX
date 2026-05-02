@@ -49,6 +49,9 @@ brand_x: 'https://twitter.com/Alienware'
 brand_instagram: 'https://www.instagram.com/alienware/'
 brand_youtube: 'https://www.youtube.com/AlienwareChannel'
 brand_tiktok: ''
+categories:
+  - monitor
+  - mouse
 navbar:
   - monitor
   - mouse
@@ -97,7 +100,7 @@ Alienware’s ecosystem shines through Alienware Command Center (AWCC), a hub fo
 {{{xxl_tagged aw_mb=0 title=false bg=false class="brand-tagged" grid=true col=3 filter="latest" brand="alienware" display_start=4 display_end=6 max=6}}}
 
 {{> ads/inline-manual
-  campaign="inline-ad"
+  position="in_content"
   desktop=true
   mobile=true
 }}

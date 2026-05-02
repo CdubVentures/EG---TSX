@@ -1,6 +1,6 @@
 {
   "defaults": {
-    "campaign": "inline-ad",
+    "position": "in_content",
     "desktop": true,
     "mobile": true
   },

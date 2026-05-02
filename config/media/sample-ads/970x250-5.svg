@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 970 250" width="970" height="250">
+  <rect width="970" height="250" fill="#f5f8ff" stroke="#c7d2fe" stroke-width="1"/>
+  <text x="950" y="18" font-family="Inter, Arial, Helvetica, sans-serif" font-size="9" fill="#64748b" text-anchor="end">Ad</text>
+
+  <rect x="16" y="16" width="130" height="38" rx="9" fill="#ecfeff"/>
+  <text x="81" y="39" font-family="Inter, Arial, Helvetica, sans-serif" font-size="18" fill="#0f172a" text-anchor="middle" font-weight="700">Northline Studio</text>
+
+  <text x="176" y="36" font-family="Inter, Arial, Helvetica, sans-serif" font-size="22" fill="#0f172a" font-weight="800">Build better home offices in hours</text>
+  <text x="176" y="62" font-family="Inter, Arial, Helvetica, sans-serif" font-size="13" fill="#334155">Desk bundles, chairs, and focus lighting</text>
+
+  <rect x="176" y="78" width="560" height="1" fill="#cbd5f5"/>
+
+  <rect x="176" y="92" width="186" height="34" rx="8" fill="#2563eb"/>
+  <text x="269" y="114" font-family="Inter, Arial, Helvetica, sans-serif" font-size="13" fill="#fff" text-anchor="middle" font-weight="700">Shop the kit</text>
+
+  <g transform="translate(620,50)">
+    <rect x="0" y="0" width="320" height="160" rx="8" fill="#020617" opacity="0.12"/>
+    <rect x="24" y="18" width="272" height="20" fill="#1d4ed8" opacity="0.12"/>
+    <rect x="24" y="50" width="272" height="14" fill="#2563eb" opacity="0.16"/>
+    <rect x="24" y="72" width="220" height="14" fill="#1d4ed8" opacity="0.12"/>
+    <rect x="24" y="102" width="272" height="14" fill="#1d4ed8" opacity="0.16"/>
+    <rect x="24" y="124" width="172" height="14" fill="#2563eb" opacity="0.15"/>
+  </g>
+
+  <text x="176" y="204" font-family="Inter, Arial, Helvetica, sans-serif" font-size="12" fill="#475569">Starter package ships in 24h · New customers save 15%</text>
+  <text x="176" y="224" font-family="Inter, Arial, Helvetica, sans-serif" font-size="10" fill="#64748b">Terms and regional availability apply.</text>
+</svg>

@@ -7,12 +7,15 @@
  *   SectionDivider → Top Grid (2×2) → SubSectionDivider → Bottom Feed (up to 16)
  *   Inline ad after 8th bottom feed item.
  *
+ * Bottom feed uses the shared FeedItem component (base variant).
  * All dark theme CSS values are LOCKED to HBS parity.
  */
 import SectionDivider from '@shared/ui/SectionDivider.astro';
 import SubSectionDivider from '@shared/ui/SubSectionDivider.astro';
 import AdSlot from '@features/ads/components/AdSlot.astro';
+import PinTag from '@shared/ui/PinTag.astro';
 import EditorsBadge from '@shared/ui/EditorsBadge.astro';
+import FeedItem from '@features/site-index/components/FeedItem.astro';
 import { catVar } from '@core/categories';
 import { newsTopGridItems, newsBottomFeedItems, newsAdInsertIndex } from '../latest-news-utils';
 import type { FeaturedItem } from '../featured-scroller-utils';
@@ -51,6 +54,7 @@ const row2 = topItems.slice(2, 4);
           <div class="news-grid-row news-row1">
             {row1.map(item => (
               <a href={item.url} class="news-grid-item news-row1-item">
+                {item.isPinned && <PinTag categoryColor={catVar(item.category)} />}
                 {item.egbadge && (
                   <EditorsBadge badgeText={item.egbadge} category={item.category} />
                 )}
@@ -81,6 +85,7 @@ const row2 = topItems.slice(2, 4);
             <div class="news-grid-row news-row2">
               {row2.map(item => (
                 <a href={item.url} class="news-grid-item news-row2-item">
+                  {item.isPinned && <PinTag categoryColor={catVar(item.category)} />}
                   {item.egbadge && (
                     <EditorsBadge badgeText={item.egbadge} category={item.category} />
                   )}
@@ -121,35 +126,12 @@ const row2 = topItems.slice(2, 4);
     <div class="news-row">
       {feedItems.map((item, i) => (
         <>
-          <a href={item.url} class="news-item">
-            {item.egbadge && (
-              <EditorsBadge badgeText={item.egbadge} category={item.category} />
-            )}
-            <img
-              loading="lazy"
-              src={`${item.heroPath}_s.webp`}
-              srcset={item.srcset}
-              sizes="(min-width: 1000px) 400px, 40vw"
-              alt={item.title}
-              class="news-item-image"
-            />
-            <div class="news-item-content">
-              <div class="news-content-top">
-                <span
-                  class="news-item-type item-tag"
-                  style={`color: ${catVar(item.category)}`}
-                >{item.categoryLabel}</span>
-                <h3 class="news-item-title">{item.title}</h3>
-                <p class="news-item-description">{item.description}</p>
-              </div>
-              <p class="news-item-date item-date">{item.dateFormatted}</p>
-            </div>
-          </a>
+          <FeedItem item={item} />
 
           {/* Inline ad after 8th feed item */}
           {i === adIndex && (
             <div class="news-inline-ad" aria-label="Advertisement">
-              <AdSlot campaign="inline-ad" />
+              <AdSlot position="in_content" />
             </div>
           )}
         </>
@@ -162,6 +144,7 @@ const row2 = topItems.slice(2, 4);
   /* ══════════════════════════════════════════════════════════════════════════
      LATEST NEWS — Port of scroller_4x4.css (EG-HBS)
      Dark theme values are LOCKED — they match HBS exactly.
+     Bottom feed horizontal cards use shared FeedItem component.
      ══════════════════════════════════════════════════════════════════════════ */
 
   /* ── Top Grid (First Partial) ── */
@@ -283,106 +266,12 @@ const row2 = topItems.slice(2, 4);
     text-underline-offset: 1.25px;
   }
 
-  /* ── Bottom Feed (News Cont.) ── */
+  /* ── Bottom Feed container (News Cont.) ── */
   .news-row {
     display: grid;
     grid-template-columns: 1fr;
     gap: var(--ft-16-12);
     box-sizing: border-box;
-  }
-
-  .news-item {
-    display: flex;
-    flex-direction: row;
-    align-items: stretch;
-    background: var(--section-dark-background-color);
-    overflow: hidden;
-    position: relative;
-    border-radius: 6px;
-    text-decoration: none;
-    color: var(--white-color-1);
-    box-shadow: var(--card-shadow);
-    transition: box-shadow 0.2s ease;
-  }
-
-  .news-item:hover {
-    box-shadow: var(--card-shadow-hover);
-  }
-
-  .news-item-image {
-    width: 40%;
-    height: var(--font-size-250px);
-    object-fit: cover;
-    order: 1;
-  }
-
-  .news-content-top {
-    display: flex;
-    flex-direction: column;
-  }
-
-  .news-item-content {
-    order: 2;
-    width: 60%;
-    height: auto;
-    padding: 20px;
-    box-sizing: border-box;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    gap: 0.75rem;
-  }
-
-  .news-item-title {
-    font-size: var(--font-size-21px);
-    font-weight: var(--font-weight7);
-    letter-spacing: -0.5px;
-    margin: 1rem 0 1.15rem 0;
-    line-height: 1.5;
-    color: var(--white-color-1);
-    font-family: var(--identity-font);
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 3;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-
-  .news-item-description {
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 2;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    margin: 0;
-    line-height: 1.4;
-    font-size: var(--font-size-16px);
-    color: var(--grey-color-4);
-    font-family: var(--identity-font);
-    font-weight: var(--font-weight4);
-  }
-
-  .news-item-date {
-    margin: 0;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    color: var(--grey-color-3);
-  }
-
-  .news-row .item-tag {
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 1;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-
-  /* Hover effect for bottom feed titles */
-  .news-item:hover .news-item-title {
-    text-decoration: underline;
-    text-decoration-color: var(--white-color-1);
-    text-decoration-thickness: 1.25px;
-    text-underline-offset: 1.25px;
   }
 
   /* ── Inline ad in bottom feed ── */
@@ -403,144 +292,34 @@ const row2 = topItems.slice(2, 4);
     z-index: 10;
   }
 
-  /* ── EditorsBadge positioning — bottom feed ── */
-  .news-row .editors-choice-badge {
-    font-size: var(--ft-17-14);
-    display: flex;
-    position: absolute;
-    top: 0.75rem;
-    right: calc(60% + 0.75rem);
-    z-index: 10;
-  }
-
   /* ══════════════════════════════════════════════════════════════════════════
      RESPONSIVE — Port of scroller_4x4.css breakpoints
+     Bottom feed responsive handled by FeedItem component.
      ══════════════════════════════════════════════════════════════════════════ */
 
   @media (max-width: 1150px) {
-    .news-item {
-      border-radius: 5px;
-    }
-
-    .news-item-title {
-      font-size: var(--ft-21-16);
-      line-height: 1.4;
-      display: -webkit-box;
-      -webkit-box-orient: vertical;
-      -webkit-line-clamp: 3;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-
-    .news-item-description {
-      font-size: var(--font-size-15px);
-      display: -webkit-box;
-      -webkit-box-orient: vertical;
-      -webkit-line-clamp: 2;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-
     .news-row {
       grid-template-columns: 1fr;
-    }
-
-    .news-item-image {
-      width: 40%;
-      height: var(--font-size-215px);
-      object-fit: cover;
-      order: 1;
-    }
-
-    .news-item-content {
-      order: 2;
-      width: 60%;
-      height: 100%;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-    }
-
-    .news-item-date {
-      display: block;
     }
   }
 
   @media (max-width: 825px) {
-    .news-item-image {
-      height: var(--font-size-175px);
-    }
-
-    .news-item-title {
-      margin: 0.45rem 0 0.7rem 0;
-    }
-
-    .news-item-content {
-      padding: clamp(12px, 9.1765px + 0.7059vw, 15px) 15px;
-    }
-
     .news-row1-title,
     .news-row2-title {
       line-height: 1.3;
     }
-
-    .news-item-description {
-      display: -webkit-box;
-      -webkit-box-orient: vertical;
-      -webkit-line-clamp: 1;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      margin-bottom: 0.25rem;
-    }
   }
 
   @media (max-width: 600px) {
-    .news-item-image {
-      height: clamp(var(--font-size-125px), 75px + 12.5vw, var(--font-size-150px));
-    }
-
     .news-row1-title,
     .news-row2-title {
       font-size: var(--fm-17-15);
-    }
-
-    .news-item-title {
-      font-size: var(--fm-16-14);
-      margin: 0.45rem 0 0 0;
-      display: -webkit-box;
-      -webkit-box-orient: vertical;
-      -webkit-line-clamp: 3;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-
-    .news-item-description {
-      display: none;
-    }
-
-    .news-item-date {
-      display: -webkit-box;
-      -webkit-box-orient: vertical;
-      -webkit-line-clamp: 1;
-      overflow: hidden;
-      text-overflow: ellipsis;
     }
 
     /* EditorsBadge responsive — top grid */
     .news-row1 .editors-choice-badge,
     .news-row2 .editors-choice-badge {
       font-size: var(--fm-15-12);
-    }
-
-    /* EditorsBadge responsive — bottom feed */
-    .news-row .editors-choice-badge {
-      font-size: var(--fm-14-11);
-    }
-  }
-
-  @media (max-width: 380px) {
-    .news-item-image {
-      height: var(--font-size-120px);
     }
   }
 </style>

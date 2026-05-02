@@ -1,9 +1,9 @@
 {
   "slug": "razer-viper-v3-hyperspeed",
   "brand": "Razer",
-  "model": "Viper V3 Hyperspeed",
-  "baseModel": "Viper",
-  "variant": "V3 Hyperspeed",
+  "model": "Viper V3 HyperSpeed",
+  "baseModel": "Viper V3",
+  "variant": "HyperSpeed",
   "category": "mouse",
   "imagePath": "/images/mouse/razer/viper-v3-hyperspeed",
   "cardTags": "false",

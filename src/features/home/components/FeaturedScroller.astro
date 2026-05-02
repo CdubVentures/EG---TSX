@@ -39,23 +39,28 @@ if (allItems.length === 0) return;
       <h2 class="section-divider-title">{sectionTitle}</h2>
       <span class="section-divider-subtitle">{sectionSubtitle}</span>
     </div>
-    <div class="section-divider-actions">
-      <a href="#" class="section-divider-link active"
+    <div class="section-divider-actions" aria-label={sectionTitle}>
+      <button type="button" class="section-divider-link active"
+         id={`${prefix}-tab-all`}
+         aria-pressed="true" aria-controls={`${prefix}-all`}
          data-filter="all" data-category="all">
         All
-      </a>
+      </button>
       {activeCategories.map(cat => {
         const colors = getCategoryColors(cat);
         return (
-          <a href="#" class="section-divider-link"
+          <button type="button" class="section-divider-link"
+             id={`${prefix}-tab-${cat}`}
+             aria-pressed="false" aria-controls={`${prefix}-${cat}`}
              data-filter={cat} data-category={cat}
              data-product-color="true"
              style={`--card-color: ${colors.base}; --card-hover: ${colors.hover};`}>
             {itemsByCategory[cat]?.[0]?.categoryLabel ?? cat}
-          </a>
+          </button>
         );
       })}
       <a href={seeMoreHref} class="section-divider-link"
+         aria-label={`See more ${sectionTitle}`}
          data-filter="see-more" data-category="see-more">
         See More
       </a>
@@ -109,18 +114,24 @@ if (allItems.length === 0) return;
 
       // ── Tab switching ──────────────────────────────────────────────────────
       const filterButtons = container.querySelectorAll(
-        '.section-divider-actions .section-divider-link[href="#"]:not([data-filter="see-more"])'
-      ) as NodeListOf<HTMLAnchorElement>;
+        '.section-divider-actions .section-divider-link[data-filter]:not([data-filter="see-more"])'
+      ) as NodeListOf<HTMLButtonElement>;
 
       filterButtons.forEach(btn => {
         btn.addEventListener('click', (e) => {
-          e.preventDefault();
           e.stopPropagation();
 
-          filterButtons.forEach(b => b.classList.remove('active'));
+          filterButtons.forEach(b => {
+            b.classList.remove('active');
+            b.setAttribute('aria-pressed', 'false');
+          });
           btn.classList.add('active');
+          btn.setAttribute('aria-pressed', 'true');
 
-          const sections = container.querySelectorAll(`[id^="${prefix}-"]`) as NodeListOf<HTMLElement>;
+          // WHY .${prefix}-section: [id^="${prefix}-"] also matches tab buttons
+          // (e.g. reviews-tab-all) which hides the buttons themselves — HBS tabs
+          // have no IDs so this collision didn't exist there.
+          const sections = container.querySelectorAll(`.${prefix}-section`) as NodeListOf<HTMLElement>;
           sections.forEach(section => section.style.display = 'none');
 
           const filter = btn.getAttribute('data-filter');
@@ -137,7 +148,7 @@ if (allItems.length === 0) return;
       });
 
       // ── Initialize sliders for visible sections ────────────────────────────
-      const sections = container.querySelectorAll(`[id^="${prefix}-"]`) as NodeListOf<HTMLElement>;
+      const sections = container.querySelectorAll(`.${prefix}-section`) as NodeListOf<HTMLElement>;
       sections.forEach(section => {
         if (getComputedStyle(section).display !== 'none') {
           section.querySelectorAll('.feature-board-scroller').forEach(scroller => {
@@ -441,6 +452,36 @@ if (allItems.length === 0) return;
     top: 0.75rem;
     right: 0.75rem;
     z-index: 10;
-    font-size: var(--ft-14-12);
+  }
+
+  /* WHY: HBS scroller_featured.css sized large tile and scroller cards differently.
+     Large tile is a full-width cinematic image → badge needs to be larger.
+     Scroller cards are narrow thumbnails → badge needs to be smaller. */
+  .feature-board-large-tile .feature-board-badge-wrap {
+    font-size: var(--font-size-22px);
+  }
+
+  .feature-board-item .feature-board-badge-wrap {
+    font-size: var(--font-size-15px);
+  }
+
+  @media (max-width: 1150px) {
+    .feature-board-large-tile .feature-board-badge-wrap {
+      font-size: var(--ft-21-18);
+    }
+
+    .feature-board-item .feature-board-badge-wrap {
+      font-size: var(--ft-15-14);
+    }
+  }
+
+  @media (max-width: 600px) {
+    .feature-board-large-tile .feature-board-badge-wrap {
+      font-size: var(--fm-18-16);
+    }
+
+    .feature-board-item .feature-board-badge-wrap {
+      font-size: var(--fm-14-12);
+    }
   }
 </style>

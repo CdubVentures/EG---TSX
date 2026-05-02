@@ -1,9 +1,9 @@
 {
   "slug": "corsair-m55-wired",
   "brand": "Corsair",
-  "model": "M55 Wired",
+  "model": "M55",
   "baseModel": "M55",
-  "variant": "Wired",
+  "variant": "",
   "category": "mouse",
   "imagePath": "/images/mouse/corsair/m55-wired",
   "cardTags": "false",

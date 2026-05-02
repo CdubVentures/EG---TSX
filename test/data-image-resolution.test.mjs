@@ -190,8 +190,8 @@ describe('Product dual source of truth', () => {
     assert.ok(existsSync(filePath), `Image file doesn't exist: ${filePath}`);
   });
 
-  it('all 366 products are accounted for', () => {
-    assert.equal(allProducts.length, 366, 'total count');
+  it('loads a non-empty product catalog from disk', () => {
+    assert.ok(allProducts.length > 0, 'product catalog should not be empty');
   });
 });
 

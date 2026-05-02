@@ -79,9 +79,12 @@ describe('Vault Store', () => {
 
     const state = $vault.get();
     assert.equal(state.entries.length, 1);
+    assert.equal(state.entries[0].productId, product.id);
+    assert.equal(state.entries[0].category, product.category);
     assert.equal(state.entries[0].product.id, product.id);
     assert.equal(state.entries[0].product.brand, 'Razer');
     assert.equal(state.entries[0].product.model, 'Viper V3 Pro');
+    assert.equal(state.entries[0].product.imagePath, '/images/mouse/razer/viper-v3-pro');
     assert.equal(typeof state.entries[0].addedAt, 'number');
   });
 
@@ -230,16 +233,20 @@ describe('Vault Store', () => {
     assert.ok(raw !== null);
     const parsed = JSON.parse(raw);
     assert.equal(parsed.entries.length, 1);
+    assert.equal(parsed.entries[0].productId, 'mouse/razer/viper-v3-pro');
+    assert.equal(parsed.entries[0].category, 'mouse');
     assert.equal(parsed.entries[0].product.id, 'mouse/razer/viper-v3-pro');
   });
 
-  it('restores from localStorage with scoped key', async () => {
+  it('restores and normalizes legacy localStorage entries', async () => {
     const { $vault, clearAll, _resetFromStorage } = await freshStore();
     clearAll();
 
+    const legacyProduct = makeProduct();
+    delete legacyProduct.thumbnailStem;
     const seeded = {
       entries: [{
-        product: makeProduct(),
+        product: legacyProduct,
         addedAt: 1700000000000,
       }],
     };
@@ -248,7 +255,11 @@ describe('Vault Store', () => {
 
     const state = $vault.get();
     assert.equal(state.entries.length, 1);
+    assert.equal(state.entries[0].productId, 'mouse/razer/viper-v3-pro');
+    assert.equal(state.entries[0].category, 'mouse');
     assert.equal(state.entries[0].product.id, 'mouse/razer/viper-v3-pro');
+    assert.equal(state.entries[0].product.imagePath, '/images/mouse/razer/viper-v3-pro');
+    assert.equal(state.entries[0].product.thumbnailStem, 'top');
     assert.equal(state.entries[0].addedAt, 1700000000000);
   });
 
@@ -307,7 +318,8 @@ describe('Persona switching', () => {
   });
 
   it('switchPersona saves current and loads new scope', async () => {
-    const { $vault, addToVault, switchPersona, _flushToStorage } = await freshStore();
+    const { $vault, addToVault, clearAll, switchPersona, _flushToStorage } = await freshStore();
+    clearAll();
 
     // Add to guest
     addToVault(makeMouseProduct(1));
@@ -332,9 +344,14 @@ describe('Persona switching', () => {
 
   it('setVaultState replaces atom state directly', async () => {
     const { $vault, setVaultState } = await freshStore();
-    const entries = [{ product: makeProduct(), addedAt: 1700000000000 }];
+    const legacyProduct = makeProduct();
+    legacyProduct.thumbnailStem = '';
+    const entries = [{ product: legacyProduct, addedAt: 1700000000000 }];
     setVaultState({ entries });
     assert.equal($vault.get().entries.length, 1);
+    assert.equal($vault.get().entries[0].productId, 'mouse/razer/viper-v3-pro');
+    assert.equal($vault.get().entries[0].category, 'mouse');
+    assert.equal($vault.get().entries[0].product.thumbnailStem, 'top');
     assert.equal($vault.get().entries[0].addedAt, 1700000000000);
   });
 
@@ -388,10 +405,20 @@ describe('Legacy migration', () => {
 
   it('does not overwrite existing scoped key during migration', async () => {
     const legacy = {
-      entries: [{ product: makeProduct({ id: 'legacy' }), addedAt: 1 }],
+      entries: [{
+        productId: 'legacy',
+        category: 'mouse',
+        product: makeProduct({ id: 'legacy' }),
+        addedAt: 1,
+      }],
     };
     const existing = {
-      entries: [{ product: makeProduct({ id: 'existing' }), addedAt: 2 }],
+      entries: [{
+        productId: 'existing',
+        category: 'mouse',
+        product: makeProduct({ id: 'existing' }),
+        addedAt: 2,
+      }],
     };
     globalThis.localStorage.setItem('eg-vault', JSON.stringify(legacy));
     globalThis.localStorage.setItem('eg-vault:guest', JSON.stringify(existing));

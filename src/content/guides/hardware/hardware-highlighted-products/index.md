@@ -86,7 +86,7 @@ We're committed to providing reliable insights based on a thorough, unbiased pro
 Our recommendations are independent and based solely on merit and value. We also keep this guide up to date as new products emerge or prices shift (last updated: October 16, 2025).
 
 {{> ads/inline-manual
-campaign="inline-ad"
+position="in_content"
 desktop=true
 mobile=true }}
 
@@ -128,6 +128,6 @@ Yes. We verify all specs and features against the manufacturer's official inform
 That wraps up our highlighted picks for 2025. Ready to elevate your setup? Pick a favorite and let us know how it goes—we'd love to hear how your new gear works out for you. Enjoy your tech journey!
 
 {{> ads/inline-manual
-campaign="inline-ad"
+position="in_content"
 desktop=true
 mobile=true }}

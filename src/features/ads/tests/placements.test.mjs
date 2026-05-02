@@ -3,16 +3,16 @@ import { strict as assert } from 'node:assert';
 
 // ─── Schema validation ──────────────────────────────────────────────────────
 describe('ads config — schema validation', () => {
-  it('AD_REGISTRY is a non-empty object', async () => {
-    const { AD_REGISTRY } = await import('../config.ts');
-    assert.equal(typeof AD_REGISTRY, 'object');
-    assert.ok(Object.keys(AD_REGISTRY).length > 0, 'Must have at least one placement');
+  it('AD_POSITIONS is a non-empty object', async () => {
+    const { AD_POSITIONS } = await import('../config.ts');
+    assert.equal(typeof AD_POSITIONS, 'object');
+    assert.ok(Object.keys(AD_POSITIONS).length > 0, 'Must have at least one position');
   });
 
   it('validates all entries against Zod schema', async () => {
     const { adSlotConfigSchema } = await import('../config.ts');
-    const { AD_REGISTRY } = await import('../config.ts');
-    for (const [name, entry] of Object.entries(AD_REGISTRY)) {
+    const { AD_POSITIONS } = await import('../config.ts');
+    for (const [name, entry] of Object.entries(AD_POSITIONS)) {
       const result = adSlotConfigSchema.safeParse(entry);
       assert.equal(result.success, true, `"${name}" failed: ${JSON.stringify(result.error?.issues)}`);
     }
@@ -25,25 +25,30 @@ describe('ads config — schema validation', () => {
     assert.ok(ADSENSE_CLIENT.length > 10, 'Client ID too short');
   });
 
-  it('has all 22 HBS registry placements', async () => {
-    const { AD_REGISTRY } = await import('../config.ts');
-    const keys = Object.keys(AD_REGISTRY);
-    assert.ok(keys.length >= 22, `Expected ≥22 placements, got ${keys.length}`);
+  it('has exactly 5 positions including hero units', async () => {
+    const { AD_POSITIONS } = await import('../config.ts');
+    const keys = Object.keys(AD_POSITIONS);
+    assert.equal(keys.length, 5, `Expected 5 positions, got ${keys.length}`);
+    assert.ok(keys.includes('sidebar'));
+    assert.ok(keys.includes('sidebar_sticky'));
+    assert.ok(keys.includes('in_content'));
+    assert.ok(keys.includes('hero_leaderboard'));
+    assert.ok(keys.includes('hero_companion'));
   });
 });
 
 // ─── Size format validation ─────────────────────────────────────────────────
 describe('ads config — size format', () => {
-  it('all placements have sizes matching WxH pattern', async () => {
-    const { AD_REGISTRY } = await import('../config.ts');
+  it('all positions have sizes matching WxH pattern', async () => {
+    const { AD_POSITIONS } = await import('../config.ts');
     const sizePattern = /^\d+x\d+$/;
-    for (const [name, placement] of Object.entries(AD_REGISTRY)) {
-      const sizes = placement.sizes.split(',');
+    for (const [name, position] of Object.entries(AD_POSITIONS)) {
+      const sizes = position.sizes.split(',');
       for (const size of sizes) {
         assert.match(
           size.trim(),
           sizePattern,
-          `Placement "${name}" has invalid size "${size}" — expected WxH format`
+          `Position "${name}" has invalid size "${size}" — expected WxH format`
         );
       }
     }
@@ -52,10 +57,10 @@ describe('ads config — size format', () => {
 
 // ─── resolveAd ──────────────────────────────────────────────────────────────
 describe('resolveAd()', () => {
-  it('returns correct shape for home-rail-top', async () => {
+  it('returns correct shape for sidebar', async () => {
     const { resolveAd } = await import('../resolve.ts');
-    const p = resolveAd('home-rail-top');
-    assert.ok(p !== undefined, 'home-rail-top must exist');
+    const p = resolveAd('sidebar');
+    assert.ok(p !== undefined, 'sidebar must exist');
     assert.equal(p.provider, 'adsense');
     assert.equal(typeof p.adSlot, 'string');
     assert.ok(p.adSlot.length > 0);
@@ -63,15 +68,23 @@ describe('resolveAd()', () => {
     assert.equal(typeof p.display, 'boolean');
   });
 
-  it('returns correct shape for home-rail-body-1', async () => {
+  it('returns correct shape for sidebar_sticky', async () => {
     const { resolveAd } = await import('../resolve.ts');
-    const p = resolveAd('home-rail-body-1');
-    assert.ok(p !== undefined, 'home-rail-body-1 must exist');
+    const p = resolveAd('sidebar_sticky');
+    assert.ok(p !== undefined, 'sidebar_sticky must exist');
     assert.equal(p.provider, 'adsense');
     assert.equal(p.display, true);
   });
 
-  it('returns undefined for nonexistent campaign', async () => {
+  it('returns correct shape for in_content', async () => {
+    const { resolveAd } = await import('../resolve.ts');
+    const p = resolveAd('in_content');
+    assert.ok(p !== undefined, 'in_content must exist');
+    assert.equal(p.provider, 'adsense');
+    assert.equal(p.placementType, 'inline');
+  });
+
+  it('returns undefined for nonexistent position', async () => {
     const { resolveAd } = await import('../resolve.ts');
     const p = resolveAd('does-not-exist-xyz');
     assert.equal(p, undefined);
@@ -147,30 +160,42 @@ describe('parseFirstSize()', () => {
   });
 });
 
-// ─── Home-page contract ─────────────────────────────────────────────────────
-describe('home page placements contract', () => {
-  it('home-rail-top uses adSlot 6560707323', async () => {
+// ─── Position slot contract ─────────────────────────────────────────────────
+describe('position slot contract', () => {
+  it('sidebar uses adSlot 6560707323', async () => {
     const { resolveAd } = await import('../resolve.ts');
-    const p = resolveAd('home-rail-top');
+    const p = resolveAd('sidebar');
     assert.equal(p?.adSlot, '6560707323');
   });
 
-  it('home-rail-top sizes match HBS registry', async () => {
+  it('sidebar sizes match registry', async () => {
     const { resolveAd } = await import('../resolve.ts');
-    const p = resolveAd('home-rail-top');
+    const p = resolveAd('sidebar');
     assert.equal(p?.sizes, '300x400,300x250,300x300');
   });
 
-  it('home-rail-body-1 uses adSlot 6560707323', async () => {
+  it('sidebar_sticky uses adSlot 3735233435', async () => {
     const { resolveAd } = await import('../resolve.ts');
-    const p = resolveAd('home-rail-body-1');
-    assert.equal(p?.adSlot, '6560707323');
+    const p = resolveAd('sidebar_sticky');
+    assert.equal(p?.adSlot, '3735233435');
   });
 
-  it('home-rail-body-1 sizes match HBS registry', async () => {
+  it('sidebar_sticky sizes match registry', async () => {
     const { resolveAd } = await import('../resolve.ts');
-    const p = resolveAd('home-rail-body-1');
-    assert.equal(p?.sizes, '300x400,300x250,300x300');
+    const p = resolveAd('sidebar_sticky');
+    assert.equal(p?.sizes, '300x600,300x250');
+  });
+
+  it('in_content uses adSlot 1051669276', async () => {
+    const { resolveAd } = await import('../resolve.ts');
+    const p = resolveAd('in_content');
+    assert.equal(p?.adSlot, '1051669276');
+  });
+
+  it('in_content sizes match registry', async () => {
+    const { resolveAd } = await import('../resolve.ts');
+    const p = resolveAd('in_content');
+    assert.equal(p?.sizes, '970x250,728x90,336x280,300x250,320x100,320x50');
   });
 });
 
@@ -261,49 +286,21 @@ describe('parseSmallestSize()', () => {
   });
 });
 
-// ─── Full HBS registry parity ───────────────────────────────────────────────
-describe('HBS registry parity', () => {
-  it('all 22 HBS registry placements are present', async () => {
-    const { AD_REGISTRY } = await import('../config.ts');
-    const expected = [
-      'inline-ad', 'hero-right', 'hero-left',
-      'home-rail-top', 'home-rail-body-1', 'home-rail-body-2', 'home-rail-body-3',
-      'sidebar-right-top', 'sidebar-right-mid', 'sidebar-right-index2',
-      'sidebar-right-index3', 'sidebar-right-index4',
-      'footer-right', 'footer-left',
-      'site-index-rail', 'type-dashboard-rail', 'type-dashboard-rail-1row',
-      'moreof-rail', 'snap-rail-one', 'snap-rail-two',
-      'inline-gpt', 'gpt-sidebar-right-top',
-    ];
-    for (const key of expected) {
-      assert.ok(AD_REGISTRY[key] !== undefined, `Missing HBS placement: "${key}"`);
-    }
-  });
-
-  it('GPT placements are disabled by default', async () => {
-    const { AD_REGISTRY } = await import('../config.ts');
-    assert.equal(AD_REGISTRY['inline-gpt'].display, false);
-    assert.equal(AD_REGISTRY['gpt-sidebar-right-top'].display, false);
-  });
-});
-
 // ─── placementType contract ─────────────────────────────────────────────
 describe('placementType', () => {
-  it('inline-ad has placementType "inline"', async () => {
-    const { AD_REGISTRY } = await import('../config.ts');
-    assert.equal(AD_REGISTRY['inline-ad'].placementType, 'inline');
+  it('in_content has placementType "inline"', async () => {
+    const { AD_POSITIONS } = await import('../config.ts');
+    assert.equal(AD_POSITIONS['in_content'].placementType, 'inline');
   });
 
-  it('inline-gpt has placementType "inline"', async () => {
-    const { AD_REGISTRY } = await import('../config.ts');
-    assert.equal(AD_REGISTRY['inline-gpt'].placementType, 'inline');
+  it('sidebar defaults to placementType "rail"', async () => {
+    const { AD_POSITIONS } = await import('../config.ts');
+    assert.equal(AD_POSITIONS['sidebar'].placementType, 'rail');
   });
 
-  it('rail placements default to "rail"', async () => {
-    const { AD_REGISTRY } = await import('../config.ts');
-    assert.equal(AD_REGISTRY['home-rail-top'].placementType, 'rail');
-    assert.equal(AD_REGISTRY['sidebar-right-top'].placementType, 'rail');
-    assert.equal(AD_REGISTRY['footer-right'].placementType, 'rail');
+  it('sidebar_sticky defaults to placementType "rail"', async () => {
+    const { AD_POSITIONS } = await import('../config.ts');
+    assert.equal(AD_POSITIONS['sidebar_sticky'].placementType, 'rail');
   });
 });
 
@@ -328,5 +325,49 @@ describe('LOAD_SAMPLE_ADS', () => {
   it('exports a boolean', async () => {
     const { LOAD_SAMPLE_ADS } = await import('../config.ts');
     assert.equal(typeof LOAD_SAMPLE_ADS, 'boolean');
+  });
+});
+
+async function importAdsConfigForNodeEnv(nodeEnv) {
+  const previousNodeEnv = process.env.NODE_ENV;
+  process.env.NODE_ENV = nodeEnv;
+
+  try {
+    return await import(`../config.ts?node-env=${nodeEnv}-${Date.now()}`);
+  } finally {
+    if (previousNodeEnv === undefined) {
+      delete process.env.NODE_ENV;
+    } else {
+      process.env.NODE_ENV = previousNodeEnv;
+    }
+  }
+}
+
+describe('sample ad runtime gating', () => {
+  it('disables sample ads in production mode even when the registry enables them', async () => {
+    const { LOAD_SAMPLE_ADS } = await importAdsConfigForNodeEnv('production');
+    assert.equal(LOAD_SAMPLE_ADS, false);
+  });
+
+  it('keeps sample ads available in development mode for layout verification', async () => {
+    const { LOAD_SAMPLE_ADS } = await importAdsConfigForNodeEnv('development');
+    assert.equal(LOAD_SAMPLE_ADS, true);
+  });
+
+  it('preserves production placeholder behavior independently from sample-ad gating', async () => {
+    const { SHOW_PRODUCTION_PLACEHOLDERS } = await importAdsConfigForNodeEnv('production');
+    assert.equal(SHOW_PRODUCTION_PLACEHOLDERS, true);
+  });
+});
+
+describe('sample ad runtime knobs', () => {
+  it('exports a SAMPLE_AD_MODE value accepted by the schema', async () => {
+    const { SAMPLE_AD_MODE, sampleAdModeSchema } = await import('../config.ts');
+    assert.equal(sampleAdModeSchema.safeParse(SAMPLE_AD_MODE).success, true);
+  });
+
+  it('exports a SAMPLE_AD_NETWORK value accepted by the schema', async () => {
+    const { SAMPLE_AD_NETWORK, sampleAdNetworkSchema } = await import('../config.ts');
+    assert.equal(sampleAdNetworkSchema.safeParse(SAMPLE_AD_NETWORK).success, true);
   });
 });

@@ -21,7 +21,7 @@ function getClient(): DynamoDBDocumentClient {
 }
 
 function tableName(): string {
-  return import.meta.env.DYNAMODB_TABLE_NAME ?? 'eg_profiles';
+  return import.meta.env.DYNAMO_PROFILES_TABLE ?? 'eg_profiles';
 }
 
 // ─── Read vault ────────────────────────────────────────────────────────────

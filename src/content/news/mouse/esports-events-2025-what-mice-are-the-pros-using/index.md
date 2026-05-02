@@ -149,7 +149,7 @@ Razer has already teased a **Boomslang revival** for early 2026, while Logitech 
 
 ::: full
 {{> ads/inline-manual
-  campaign="inline-ad"
+  position="in_content"
   desktop=true
   mobile=true
 }}

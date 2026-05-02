@@ -1,5 +1,11 @@
 ﻿---
 brand: SteelSeries
+navbar:
+  - mouse
+  - keyboard
+categories:
+  - keyboard
+  - mouse
 displayName: SteelSeries
 title: 'SteelSeries: Premium Quality and Low-Latency Tech'
 description: >-
@@ -14,11 +20,10 @@ brand_x: ''
 brand_instagram: ''
 brand_youtube: ''
 brand_tiktok: ''
-navbar:
-  - keyboard
-  - mouse
 toc: false
 publish: true
 hero: brand-logo-horizontal-index
+datePublished: '2025-04-02'
+dateUpdated: '2025-06-16'
 ---
 

@@ -1,9 +1,9 @@
 {
   "slug": "cougar-airblader-tournamanet",
   "brand": "Cougar",
-  "model": "Airblader Tournamanet",
+  "model": "Airblader Tournament",
   "baseModel": "Airblader",
-  "variant": "Tournamanet",
+  "variant": "Tournament",
   "category": "mouse",
   "imagePath": "/images/mouse/cougar/airblader-tournamanet",
   "cardTags": "false",

@@ -1,32 +1,55 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="336" height="280" viewBox="0 0 336 280">
-  <defs>
-    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="#0f172a"/>
-      <stop offset="100%" stop-color="#1e293b"/>
-    </linearGradient>
-    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0%" stop-color="#10b981"/>
-      <stop offset="100%" stop-color="#059669"/>
-    </linearGradient>
-  </defs>
-  <rect width="336" height="280" fill="url(#bg)"/>
-  <rect width="336" height="2" fill="url(#accent)"/>
-  <circle cx="280" cy="60" r="60" fill="#10b981" opacity="0.04"/>
-  <text x="24" y="42" font-family="system-ui, sans-serif" font-size="12" font-weight="700" fill="#10b981" letter-spacing="2">FREE SHIPPING</text>
-  <text x="24" y="80" font-family="system-ui, sans-serif" font-size="28" font-weight="900" fill="#ffffff">GAMING</text>
-  <text x="24" y="112" font-family="system-ui, sans-serif" font-size="28" font-weight="900" fill="#10b981">ESSENTIALS</text>
-  <text x="24" y="140" font-family="system-ui, sans-serif" font-size="13" font-weight="400" fill="#94a3b8">Mice · Keyboards · Mousepads</text>
-  <g transform="translate(40, 155)" opacity="0.05">
-    <ellipse cx="130" cy="30" rx="110" ry="35" fill="#10b981"/>
+  <!-- GameVault — Digital Games Sale Ad (336x280) -->
+  <rect width="336" height="280" fill="#1a1a2e" rx="2"/>
+
+  <!-- Neon glow background accent -->
+  <ellipse cx="168" cy="140" rx="160" ry="100" fill="#a855f7" opacity="0.06"/>
+
+  <!-- Controller silhouette -->
+  <g transform="translate(168, 72)" fill="none" stroke="#a855f7" stroke-width="1.5" opacity="0.4">
+    <ellipse cx="0" cy="0" rx="50" ry="28"/>
+    <circle cx="-22" cy="-4" r="8"/>
+    <circle cx="22" cy="-4" r="8"/>
+    <rect x="-26" y="-8" width="8" height="1.5" rx="0.5"/>
+    <rect x="-23" y="-11" width="1.5" height="8" rx="0.5"/>
+    <circle cx="19" cy="-7" r="1.5"/>
+    <circle cx="22" cy="-1" r="1.5"/>
+    <circle cx="25" cy="-7" r="1.5"/>
+    <circle cx="22" cy="-10" r="1.5" fill="#a855f7"/>
+    <line x1="-12" y1="22" x2="-18" y2="34"/>
+    <line x1="12" y1="22" x2="18" y2="34"/>
   </g>
-  <rect x="24" y="200" width="72" height="24" rx="12" fill="#1e3a38"/>
-  <text x="60" y="216" font-family="system-ui, sans-serif" font-size="11" font-weight="700" fill="#10b981" text-anchor="middle">Mice</text>
-  <rect x="104" y="200" width="90" height="24" rx="12" fill="#1e3a38"/>
-  <text x="149" y="216" font-family="system-ui, sans-serif" font-size="11" font-weight="700" fill="#10b981" text-anchor="middle">Keyboards</text>
-  <rect x="202" y="200" width="90" height="24" rx="12" fill="#1e3a38"/>
-  <text x="247" y="216" font-family="system-ui, sans-serif" font-size="11" font-weight="700" fill="#10b981" text-anchor="middle">Pads</text>
-  <rect x="24" y="236" width="288" height="36" rx="18" fill="#10b981"/>
-  <text x="168" y="260" font-family="system-ui, sans-serif" font-size="14" font-weight="800" fill="#0f172a" text-anchor="middle" letter-spacing="1">BROWSE COLLECTION</text>
-  <text x="312" y="16" font-family="system-ui, sans-serif" font-size="9" font-weight="500" fill="#4a5568" text-anchor="end">Sponsored</text>
-  <rect y="278" width="336" height="2" fill="url(#accent)"/>
+
+  <!-- Sponsored label -->
+  <text x="318" y="16" font-family="Arial, Helvetica, sans-serif" font-size="9" fill="#6b7280" text-anchor="end">Sponsored</text>
+
+  <!-- Brand -->
+  <text x="168" y="120" font-family="Arial, Helvetica, sans-serif" font-size="12" fill="#a855f7" text-anchor="middle" font-weight="700" letter-spacing="3">GAMEVAULT</text>
+
+  <!-- Headline -->
+  <text x="168" y="150" font-family="Arial, Helvetica, sans-serif" font-size="22" fill="#ffffff" text-anchor="middle" font-weight="800">SUMMER SALE</text>
+  <text x="168" y="174" font-family="Arial, Helvetica, sans-serif" font-size="16" fill="#c4b5fd" text-anchor="middle" font-weight="600">Up to 80% Off</text>
+
+  <!-- Countdown -->
+  <g transform="translate(93, 190)">
+    <rect x="0" y="0" width="44" height="30" rx="4" fill="#2d2b55"/>
+    <text x="22" y="16" font-family="monospace" font-size="14" fill="#ffffff" text-anchor="middle" font-weight="700">3d</text>
+    <text x="22" y="26" font-family="Arial, Helvetica, sans-serif" font-size="7" fill="#a78bfa" text-anchor="middle">DAYS</text>
+
+    <text x="52" y="16" font-family="monospace" font-size="14" fill="#a855f7" text-anchor="middle" font-weight="700">:</text>
+
+    <rect x="56" y="0" width="44" height="30" rx="4" fill="#2d2b55"/>
+    <text x="78" y="16" font-family="monospace" font-size="14" fill="#ffffff" text-anchor="middle" font-weight="700">12h</text>
+    <text x="78" y="26" font-family="Arial, Helvetica, sans-serif" font-size="7" fill="#a78bfa" text-anchor="middle">HOURS</text>
+
+    <text x="108" y="16" font-family="monospace" font-size="14" fill="#a855f7" text-anchor="middle" font-weight="700">:</text>
+
+    <rect x="112" y="0" width="44" height="30" rx="4" fill="#2d2b55"/>
+    <text x="134" y="16" font-family="monospace" font-size="14" fill="#ffffff" text-anchor="middle" font-weight="700">47m</text>
+    <text x="134" y="26" font-family="Arial, Helvetica, sans-serif" font-size="7" fill="#a78bfa" text-anchor="middle">MINS</text>
+  </g>
+
+  <!-- CTA Button -->
+  <rect x="88" y="232" width="160" height="36" rx="18" fill="#a855f7"/>
+  <text x="168" y="255" font-family="Arial, Helvetica, sans-serif" font-size="14" fill="#ffffff" text-anchor="middle" font-weight="700">Browse Deals</text>
 </svg>

@@ -1,0 +1,788 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Product Catalog Report</title>
+  <style>
+    :root {
+      --bg: #0d1117;
+      --surface: #161b22;
+      --surface2: #1c2333;
+      --border: #30363d;
+      --text: #e6edf3;
+      --text-muted: #8b949e;
+      --accent: #58a6ff;
+      --accent2: #3fb950;
+      --mouse: #da6b2b;
+      --monitor: #8957e5;
+      --keyboard: #d2a8ff;
+      --cat-bg: #21262d;
+      --brand-bg: #161b22;
+      --hover: #1f2a3a;
+      --radius: 8px;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.5;
+    }
+
+    .layout {
+      display: grid;
+      grid-template-columns: 220px 1fr;
+      min-height: 100vh;
+    }
+
+    /* Sidebar */
+    .sidebar {
+      background: var(--surface);
+      border-right: 1px solid var(--border);
+      padding: 20px 16px;
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      overflow-y: auto;
+    }
+    .sidebar h2 {
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--text-muted);
+      margin-bottom: 12px;
+    }
+    .sidebar-cat {
+      font-weight: 600;
+      font-size: 13px;
+      color: var(--accent);
+      margin-top: 14px;
+      margin-bottom: 4px;
+    }
+    .sidebar-brand {
+      font-size: 12px;
+      color: var(--text-muted);
+      padding: 2px 0 2px 16px;
+    }
+
+    /* Main */
+    .main {
+      padding: 24px 32px;
+      overflow-x: auto;
+    }
+
+    /* Header */
+    .header {
+      margin-bottom: 24px;
+    }
+    .header h1 {
+      font-size: 24px;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+    .header .meta {
+      color: var(--text-muted);
+      font-size: 13px;
+      margin-bottom: 16px;
+    }
+    .stats-bar {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    .stat-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 14px;
+      border-radius: 20px;
+      font-size: 13px;
+      font-weight: 600;
+      border: 1px solid var(--border);
+    }
+    .stat-chip.mouse { color: var(--mouse); border-color: var(--mouse); }
+    .stat-chip.monitor { color: var(--monitor); border-color: var(--monitor); }
+    .stat-chip.keyboard { color: var(--keyboard); border-color: var(--keyboard); }
+    .stat-total {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--accent2);
+    }
+
+    /* Search */
+    .search-bar {
+      margin-bottom: 16px;
+    }
+    .search-bar input {
+      width: 100%;
+      max-width: 400px;
+      padding: 8px 14px;
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      background: var(--surface);
+      color: var(--text);
+      font-size: 14px;
+      outline: none;
+    }
+    .search-bar input:focus {
+      border-color: var(--accent);
+    }
+    .search-bar input::placeholder {
+      color: var(--text-muted);
+    }
+
+    /* Table */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+    }
+    thead {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+    thead th {
+      background: var(--surface2);
+      color: var(--text-muted);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      font-size: 11px;
+      padding: 10px 12px;
+      text-align: left;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .cat-header td {
+      background: var(--cat-bg);
+      font-weight: 700;
+      font-size: 15px;
+      padding: 14px 12px 10px;
+      border-bottom: 2px solid var(--border);
+      color: var(--accent);
+    }
+    .cat-icon {
+      font-size: 18px;
+      vertical-align: middle;
+    }
+    .cat-meta {
+      font-size: 12px;
+      font-weight: 400;
+      color: var(--text-muted);
+      margin-left: 8px;
+    }
+
+    .brand-header td {
+      background: var(--brand-bg);
+      font-weight: 600;
+      font-size: 13px;
+      padding: 8px 12px 6px 20px;
+      border-bottom: 1px solid var(--border);
+      color: var(--text);
+    }
+    .brand-count {
+      color: var(--text-muted);
+      font-weight: 400;
+      font-size: 12px;
+    }
+
+    .product-row td {
+      padding: 6px 12px;
+      border-bottom: 1px solid #1c2128;
+      vertical-align: middle;
+    }
+    .product-row:hover td {
+      background: var(--hover);
+    }
+
+    .row-num {
+      color: var(--text-muted);
+      font-size: 11px;
+      width: 36px;
+      text-align: right;
+      padding-right: 14px !important;
+    }
+
+    .col-model {
+      font-weight: 600;
+      color: var(--text);
+      white-space: nowrap;
+    }
+    .col-base {
+      color: var(--accent);
+      white-space: nowrap;
+    }
+    .col-variant {
+      color: var(--accent2);
+      white-space: nowrap;
+    }
+    .col-slug {
+      color: var(--text-muted);
+      font-size: 11px;
+      font-family: 'SF Mono', Consolas, monospace;
+    }
+    .col-file {
+      color: var(--text-muted);
+      font-size: 11px;
+      font-family: 'SF Mono', Consolas, monospace;
+    }
+
+    .empty-variant {
+      color: #484f58;
+    }
+
+    /* Hidden rows from search */
+    .hidden { display: none; }
+  </style>
+</head>
+<body>
+  <div class="layout">
+    <aside class="sidebar">
+      <h2>Brands</h2>
+      <div class="sidebar-cat">&#x1F5B1; Mouse</div>
+          <div class="sidebar-brand">Acer <span class="brand-count">(4)</span></div>
+          <div class="sidebar-brand">Alienware <span class="brand-count">(5)</span></div>
+          <div class="sidebar-brand">Aorus <span class="brand-count">(5)</span></div>
+          <div class="sidebar-brand">Asus <span class="brand-count">(20)</span></div>
+          <div class="sidebar-brand">Cooler Master <span class="brand-count">(8)</span></div>
+          <div class="sidebar-brand">Corsair <span class="brand-count">(32)</span></div>
+          <div class="sidebar-brand">Cougar <span class="brand-count">(11)</span></div>
+          <div class="sidebar-brand">Endgame Gear <span class="brand-count">(10)</span></div>
+          <div class="sidebar-brand">EVGA <span class="brand-count">(4)</span></div>
+          <div class="sidebar-brand">Finalmouse <span class="brand-count">(4)</span></div>
+          <div class="sidebar-brand">Fnatic <span class="brand-count">(4)</span></div>
+          <div class="sidebar-brand">G-Wolves <span class="brand-count">(24)</span></div>
+          <div class="sidebar-brand">Glorious <span class="brand-count">(16)</span></div>
+          <div class="sidebar-brand">HyperX <span class="brand-count">(9)</span></div>
+          <div class="sidebar-brand">Lamzu <span class="brand-count">(13)</span></div>
+          <div class="sidebar-brand">Lenovo Legion <span class="brand-count">(5)</span></div>
+          <div class="sidebar-brand">Logitech G <span class="brand-count">(19)</span></div>
+          <div class="sidebar-brand">Mad Catz <span class="brand-count">(14)</span></div>
+          <div class="sidebar-brand">MSI <span class="brand-count">(17)</span></div>
+          <div class="sidebar-brand">NZXT <span class="brand-count">(3)</span></div>
+          <div class="sidebar-brand">Pulsar <span class="brand-count">(43)</span></div>
+          <div class="sidebar-brand">Pwnage <span class="brand-count">(12)</span></div>
+          <div class="sidebar-brand">Razer <span class="brand-count">(18)</span></div>
+          <div class="sidebar-brand">Redragon <span class="brand-count">(36)</span></div>
+          <div class="sidebar-brand">Turtle Beach <span class="brand-count">(6)</span></div>
+          <div class="sidebar-cat">&#x1F5A5; Monitor</div>
+          <div class="sidebar-brand">Acer <span class="brand-count">(1)</span></div>
+          <div class="sidebar-brand">Alienware <span class="brand-count">(2)</span></div>
+          <div class="sidebar-brand">Asus <span class="brand-count">(1)</span></div>
+          <div class="sidebar-brand">Dell <span class="brand-count">(1)</span></div>
+          <div class="sidebar-brand">Gigabyte <span class="brand-count">(1)</span></div>
+          <div class="sidebar-brand">HP <span class="brand-count">(1)</span></div>
+          <div class="sidebar-brand">LG <span class="brand-count">(1)</span></div>
+          <div class="sidebar-brand">MSI <span class="brand-count">(2)</span></div>
+          <div class="sidebar-brand">Samsung <span class="brand-count">(1)</span></div>
+          <div class="sidebar-brand">ViewSonic <span class="brand-count">(1)</span></div>
+          <div class="sidebar-cat">&#x2328; Keyboard</div>
+          <div class="sidebar-brand">Asus <span class="brand-count">(1)</span></div>
+          <div class="sidebar-brand">Corsair <span class="brand-count">(1)</span></div>
+          <div class="sidebar-brand">HyperX <span class="brand-count">(1)</span></div>
+          <div class="sidebar-brand">Lemokey <span class="brand-count">(1)</span></div>
+          <div class="sidebar-brand">Logitech G <span class="brand-count">(1)</span></div>
+          <div class="sidebar-brand">Mountain <span class="brand-count">(1)</span></div>
+          <div class="sidebar-brand">NuPhy <span class="brand-count">(1)</span></div>
+          <div class="sidebar-brand">Razer <span class="brand-count">(2)</span></div>
+          <div class="sidebar-brand">SteelSeries <span class="brand-count">(2)</span></div>
+          <div class="sidebar-brand">Wooting <span class="brand-count">(1)</span></div>
+    </aside>
+    <main class="main">
+      <div class="header">
+        <h1>Product Catalog Report</h1>
+        <div class="meta">Generated: 2026-04-06 21:20:54</div>
+        <div class="stats-bar">
+          <span class="stat-total">366 Total</span>
+          <span class="stat-chip mouse">Mouse: 342</span>
+            <span class="stat-chip monitor">Monitor: 12</span>
+            <span class="stat-chip keyboard">Keyboard: 12</span>
+        </div>
+      </div>
+
+      <div class="search-bar">
+        <input type="text" id="search" placeholder="Filter by brand, model, base, variant..." autocomplete="off">
+      </div>
+
+      <table>
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Model</th>
+            <th>Base Model</th>
+            <th>Variant</th>
+            <th>Slug</th>
+            <th>File</th>
+          </tr>
+        </thead>
+        <tbody id="tbody">
+          <tr class="cat-header"><td colspan="6"><span class="cat-icon">&#x1F5B1;</span> Mouse <span class="cat-meta">342 products &middot; 25 brands</span></td></tr>
+          <tr class="brand-header"><td colspan="6">Acer <span class="brand-count">(4)</span></td></tr>
+          <tr class="product-row"><td class="row-num">1</td><td class="col-model">Cestus 310</td><td class="col-base">Cestus</td><td class="col-variant">310</td><td class="col-slug">acer-cestus-310</td><td class="col-file">mouse\acer\cestus-310.json</td></tr>
+          <tr class="product-row"><td class="row-num">2</td><td class="col-model">Cestus 330</td><td class="col-base">Cestus</td><td class="col-variant">330</td><td class="col-slug">acer-cestus-330</td><td class="col-file">mouse\acer\cestus-330.json</td></tr>
+          <tr class="product-row"><td class="row-num">3</td><td class="col-model">Cestus 335</td><td class="col-base">Cestus</td><td class="col-variant">335</td><td class="col-slug">acer-cestus-335</td><td class="col-file">mouse\acer\cestus-335.json</td></tr>
+          <tr class="product-row"><td class="row-num">4</td><td class="col-model">Cestus 350</td><td class="col-base">Cestus</td><td class="col-variant">350</td><td class="col-slug">acer-cestus-350</td><td class="col-file">mouse\acer\cestus-350.json</td></tr>
+          <tr class="brand-header"><td colspan="6">Alienware <span class="brand-count">(5)</span></td></tr>
+          <tr class="product-row"><td class="row-num">5</td><td class="col-model">Alienware Pro</td><td class="col-base">Alienware Pro</td><td class="col-variant"><span class=empty-variant>&mdash;</span></td><td class="col-slug">alienware-alienware-pro</td><td class="col-file">mouse\alienware\alienware-pro.json</td></tr>
+          <tr class="product-row"><td class="row-num">6</td><td class="col-model">AW320M</td><td class="col-base">AW320M</td><td class="col-variant"><span class=empty-variant>&mdash;</span></td><td class="col-slug">alienware-aw320m</td><td class="col-file">mouse\alienware\aw320m.json</td></tr>
+          <tr class="product-row"><td class="row-num">7</td><td class="col-model">AW610M</td><td class="col-base">AW610M</td><td class="col-variant"><span class=empty-variant>&mdash;</span></td><td class="col-slug">alienware-aw610m</td><td class="col-file">mouse\alienware\aw610m.json</td></tr>
+          <tr class="product-row"><td class="row-num">8</td><td class="col-model">AW620M</td><td class="col-base">AW620M</td><td class="col-variant"><span class=empty-variant>&mdash;</span></td><td class="col-slug">alienware-aw620m</td><td class="col-file">mouse\alienware\aw620m.json</td></tr>
+          <tr class="product-row"><td class="row-num">9</td><td class="col-model">AW720M</td><td class="col-base">AW720M</td><td class="col-variant"><span class=empty-variant>&mdash;</span></td><td class="col-slug">alienware-aw720m</td><td class="col-file">mouse\alienware\aw720m.json</td></tr>
+          <tr class="brand-header"><td colspan="6">Aorus <span class="brand-count">(5)</span></td></tr>
+          <tr class="product-row"><td class="row-num">10</td><td class="col-model">M2</td><td class="col-base">M2</td><td class="col-variant"><span class=empty-variant>&mdash;</span></td><td class="col-slug">aorus-m2</td><td class="col-file">mouse\aorus\m2.json</td></tr>
+          <tr class="product-row"><td class="row-num">11</td><td class="col-model">M3</td><td class="col-base">M3</td><td class="col-variant"><span class=empty-variant>&mdash;</span></td><td class="col-slug">aorus-m3</td><td class="col-file">mouse\aorus\m3.json</td></tr>
+          <tr class="product-row"><td class="row-num">12</td><td class="col-model">M4</td><td class="col-base">M4</td><td class="col-variant"><span class=empty-variant>&mdash;</span></td><td class="col-slug">aorus-m4</td><td class="col-file">mouse\aorus\m4.json</td></tr>
+          <tr class="product-row"><td class="row-num">13</td><td class="col-model">M5</td><td class="col-base">M5</td><td class="col-variant"><span class=empty-variant>&mdash;</span></td><td class="col-slug">aorus-m5</td><td class="col-file">mouse\aorus\m5.json</td></tr>
+          <tr class="product-row"><td class="row-num">14</td><td class="col-model">M6</td><td class="col-base">M6</td><td class="col-variant"><span class=empty-variant>&mdash;</span></td><td class="col-slug">aorus-m6</td><td class="col-file">mouse\aorus\m6.json</td></tr>
+          <tr class="brand-header"><td colspan="6">Asus <span class="brand-count">(20)</span></td></tr>
+          <tr class="product-row"><td class="row-num">15</td><td class="col-model">GX1000 Eagle Eye Mouse</td><td class="col-base">GX1000</td><td class="col-variant">Eagle Eye Mouse</td><td class="col-slug">asus-gx1000-eagle-eye-mouse</td><td class="col-file">mouse\asus\gx1000-eagle-eye-mouse.json</td></tr>
+          <tr class="product-row"><td class="row-num">16</td><td class="col-model">ROG Chakram</td><td class="col-base">ROG Chakram</td><td class="col-variant"><span class=empty-variant>&mdash;</span></td><td class="col-slug">asus-rog-chakram</td><td class="col-file">mouse\asus\rog-chakram.json</td></tr>
+          <tr class="product-row"><td class="row-num">17</td><td class="col-model">ROG Chakram Core</td><td class="col-base">ROG Chakram</td><td class="col-variant">Core</td><td class="col-slug">asus-rog-chakram-x-core</td><td class="col-file">mouse\asus\rog-chakram-x-core.json</td></tr>
+          <tr class="product-row"><td class="row-num">18</td><td class="col-model">ROG Chakram X Origin</td><td class="col-base">ROG Chakram</td><td class="col-variant">X Origin</td><td class="col-slug">asus-rog-chakram-x-origin</td><td class="col-file">mouse\asus\rog-chakram-x-origin.json</td></tr>
+          <tr class="product-row"><td class="row-num">19</td><td class="col-model">ROG Gladius III</td><td class="col-base">ROG Gladius III</td><td class="col-variant"><span class=empty-variant>&mdash;</span></td><td class="col-slug">asus-rog-gladius-iii</td><td class="col-file">mouse\asus\rog-gladius-iii.json</td></tr>
+          <tr class="product-row"><td class="row-num">20</td><td class="col-model">ROG Gladius III Core</td><td class="col-base">ROG Gladius III</td><td class="col-variant">Core</td><td class="col-slug">asus-rog-gladius-iii-core</td><td class="col-file">mouse\asus\rog-gladius-iii-core.json</td></tr>
+          <tr class="product-row"><td class="row-num">21</td><td class="col-model">ROG Gladius III Wireless</td><td class="col-base">ROG Gladius III</td><td class="col-variant">Wireless</td><td class="col-slug">asus-rog-gladius-iii-wireless</td><td class="col-file">mouse\asus\rog-gladius-iii-wireless.json</td></tr>
+          <tr class="product-row"><td class="row-num">22</td><td class="col-model">ROG Gladius III Wireless AimPoint</td><td class="col-base">ROG Gladius III</td><td class="col-variant">Wireless AimPoint</td><td class="col-slug">asus-rog-gladius-iii-wireless-aimpoint</td><td class="col-file">mouse\asus\rog-gladius-iii-wireless-aimpoint.json</td></tr>
+          <tr class="product-row"><td class="row-num">23</td><td class="col-model">ROG Gladius III Wireless AimPoint EVA-02</td><td class="col-base">ROG Gladius III</td><td class="col-variant">Wireless AimPoint EVA-02</td><td class="col-slug">asus-rog-gladius-iii-wireless-aimpoint-eva-02</td><td class="col-file">mouse\asus\rog-gladius-iii-wireless-aimpoint-eva-02.json</td></tr>
+          <tr class="product-row"><td class="row-num">24</td><td class="col-model">ROG Harpe Ace Aim Lab Edition</td><td class="col-base">ROG Harpe Ace</td><td class="col-variant">Aim Lab Edition</td><td class="col-slug">asus-rog-harpe-ace-aim-lab</td><td class="col-file">mouse\asus\rog-harpe-ace-aim-lab.json</td></tr>
+          <tr class="product-row"><td class="row-num">25</td><td class="col-model">ROG Harpe Ace Extreme</td><td class="col-base">ROG Harpe Ace</td><td class="col-variant">Extreme</td><td class="col-slug">asus-rog-harpe-ace-extreme</td><td class="col-file">mouse\asus\rog-harpe-ace-extreme.json</td></tr>
+          <tr class="product-row"><td class="row-num">26</td><td class="col-model">ROG Harpe Ace Mini</td><td class="col-base">ROG Harpe Ace</td><td class="col-variant">Mini</td><td class="col-slug">asus-rog-harpe-ace-mini</td><td class="col-file">mouse\asus\rog-harpe-ace-mini.json</td></tr>
+          <tr class="product-row"><td class="row-num">27</td><td class="col-model">ROG Harpe II Ace</td><td class="col-base">ROG Harpe II Ace</td><td class="col-variant"><span class=empty-variant>&mdash;</span></td><td class="col-slug">asus-rog-harpe-ii-ace</td><td class="col-file">mouse\asus\rog-harpe-ii-ace.json</td></tr>
+          <tr class="product-row"><td class="row-num">28</td><td class="col-model">ROG Keris</td><td class="col-base">ROG Keris</td><td class="col-variant"><span class=empty-variant>&mdash;</span></td><td class="col-slug">asus-rog-keris</td><td class="col-file">mouse\asus\rog-keris.json</td></tr>
+          <tr class="product-row"><td class="row-num">29</td><td class="col-model">ROG Keris II Ace</td><td class="col-base">ROG Keris II</td><td class="col-variant">Ace</td><td class="col-slug">asus-rog-keris-ii-ace</td><td class="col-file">mouse\asus\rog-keris-ii-ace.json</td></tr>
+          <tr class="product-row"><td class="row-num">30</td><td class="col-model">ROG Keris II Origin</td><td class="col-base">ROG Keris II</td><td class="col-variant">Origin</td><td class="col-slug">asus-rog-keris-ii-origin</td><td class="col-file">mouse\asus\rog-keris-ii-origin.json</td></tr>
+          <tr class="product-row"><td class="row-num">31</td><td class="col-model">ROG Keris Wireless AimPoint</td><td class="col-base">ROG Keris</td><td class="col-variant">Wireless AimPoint</td><td class="col-slug">asus-rog-keris-wireless-aimpoint</td><td class="col-file">mouse\asus\rog-keris-wireless-aimpoint.json</td></tr>
+          <tr class="product-row"><td class="row-num">32</td><td class="col-model">ROG Spatha X</td><td class="col-base">ROG Spatha X</td><td class="col-variant"><span class=empty-variant>&mdash;</span></td><td class="col-slug">asus-rog-spatha-x</td><td class="col-file">mouse\asus\rog-spatha-x.json</td></tr>
+          <tr class="product-row"><td class="row-num">33</td><td class="col-model">ROG Strix Impact III</td><td class="col-base">ROG Strix Impact III</td><td class="col-variant"><span class=empty-variant>&mdash;</span></td><td class="col-slug">asus-rog-strix-impact-iii</td><td class="col-file">mouse\asus\rog-strix-impact-iii.json</td></tr>
+          <tr class="product-row"><td class="row-num">34</td><td class="col-model">ROG Strix Impact III Wireless</td><td class="col-base">ROG Strix Impact III</td><td class="col-variant">Wireless</td><td class="col-slug">asus-rog-strix-impact-iii-wireless</td><td class="col-file">mouse\asus\rog-strix-impact-iii-wireless.json</td></tr>
+          <tr class="brand-header"><td colspan="6">Cooler Master <span class="brand-count">(8)</span></td></tr>
+          <tr class="product-row"><td class="row-num">35</td><td class="col-model">MM310</td><td class="col-base">MM310</td><td class="col-variant"><span class=empty-variant>&mdash;</span></td><td class="col-slug">cooler-master-mm310</td><td class="col-file">mouse\cooler-master\mm310.json</td></tr>
+          <tr class="product-row"><td class="row-num">36</td><td class="col-model">MM311</td><td class="col-base">MM311</td><td class="col-variant"><span class=empty-variant>&mdash;</span></td><td class="col-slug">cooler-master-mm311</td><td class="col-file">mouse\cooler-master\mm311.json</td></tr>
+          <tr class="product-row"><td class="row-num">37</td><td class="col-model">MM711</td><td class="col-base">MM711</td><td class="col-variant"><span class=empty-variant>&mdash;</span></td><td class="col-slug">cooler-master-mm711-wired</td><td class="col-file">mouse\cooler-master\mm711-wired.json</td></tr>
+          <tr class="product-row"><td class="row-num">38</td><td class="col-model">MM712</td><td class="col-base">MM712</td><td class="col-variant"><span class=empty-variant>&mdash;</span></td><td class="col-slug">cooler-master-mm712</td><td class="col-file">mouse\cooler-master\mm712.json</td></tr>
+          <tr class="product-row"><td class="row-num">39</td><td class="col-model">MM712 30th Anniversary Edition</td><td class="col-base">MM712</td><td class="col-variant">30th Anniversary Edition</td><td class="col-slug">cooler-master-mm712-30th-anniversary-edition</td><td class="col-file">mouse\cooler-master\mm712-30th-anniversary-edition.json</td></tr>
+          <tr class="product-row"><td class="row-num">40</td><td class="col-model">MM712 Wired</td><td class="col-base">MM712</td><td class="col-variant">Wired</td><td class="col-slug">cooler-master-mm712-wired</td><td class="col-file">mouse\cooler-master\mm712-wired.json</td></tr>
+          <tr class="product-row"><td class="row-num">41</td><td class="col-model">MM730</td><td class="col-base">MM730</td><td class="col-variant"><span class=empty-variant>&mdash;</span></td><td class="col-slug">cooler-master-mm730</td><td class="col-file">mouse\cooler-master\mm730.json</td></tr>
+          <tr class="product-row"><td class="row-num">42</td><td class="col-model">MM731</td><td class="col-base">MM731</td><td class="col-variant"><span class=empty-variant>&mdash;</span></td><td class="col-slug">cooler-master-mm731</td><td class="col-file">mouse\cooler-master\mm731.json</td></tr>
+          <tr class="brand-header"><td colspan="6">Corsair <span class="brand-count">(32)</span></td></tr>
+          <tr class="product-row"><td class="row-num">43</td><td class="col-model">Dark Core RGB Pro</td><td class="col-base">Dark Core</td><td class="col-variant">RGB Pro</td><td class="col-slug">corsair-dark-core-rgb-pro</td><td class="col-file">mouse\corsair\dark-core-rgb-pro.json</td></tr>
+          <tr class="product-row"><td class="row-num">44</td><td class="col-model">Dark Core RGB Pro SE</td><td class="col-base">Dark Core</td><td class="col-variant">RGB Pro SE</td><td class="col-slug">corsair-dark-core-rgb-pro-se</td><td class="col-file">mouse\corsair\dark-core-rgb-pro-se.json</td></tr>
+          <tr class="product-row"><td class="row-num">45</td><td class="col-model">Dark Core RGB SE</td><td class="col-base">Dark Core</td><td class="col-variant">RGB SE</td><td class="col-slug">corsair-dark-core-rgb-se</td><td class="col-file">mouse\corsair\dark-core-rgb-se.json</td></tr>
+          <tr class="product-row"><td class="row-num">46</td><td class="col-model">Darkstar Wireless RGB</td><td class="col-base">Darkstar</td><td class="col-variant">Wireless RGB</td><td class="col-slug">corsair-darkstar-wireless-rgb</td><td class="col-file">mouse\corsair\darkstar-wireless-rgb.json</td></tr>
+          <tr class="product-row"><td class="row-num">47</td><td class="col-model">Glaive RGB Pro</td><td class="col-base">Glaive</td><td class="col-variant">RGB Pro</td><td class="col-slug">corsair-glaive-rgb-pro</td><td class="col-file">mouse\corsair\glaive-rgb-pro.json</td></tr>
+          <tr class="product-row"><td class="row-num">48</td><td class="col-model">Harpoon RGB</td><td class="col-base">Harpoon</td><td class="col-variant">RGB</td><td class="col-slug">corsair-harpoon-rgb</td><td class="col-file">mouse\corsair\harpoon-rgb.json</td></tr>
+          <tr class="product-row"><td class="row-num">49</td><td class="col-model">Harpoon RGB Wireless</td><td class="col-base">Harpoon</td><td class="col-variant">RGB Wireless</td><td class="col-slug">corsair-harpoon-rgb-wireless</td><td class="col-file">mouse\corsair\harpoon-rgb-wireless.json</td></tr>
+          <tr class="product-row"><td class="row-num">50</td><td class="col-model">Ironclaw RGB</td><td class="col-base">Ironclaw</td><td class="col-variant">RGB</td><td class="col-slug">corsair-ironclaw-rgb</td><td class="col-file">mouse\corsair\ironclaw-rgb.json</td></tr>
+          <tr class="product-row"><td class="row-num">51</td><td class="col-model">Ironclaw RGB Wireless</td><td class="col-base">Ironclaw</td><td class="col-variant">RGB Wireless</td><td class="col-slug">corsair-ironclaw-rgb-wireless</td><td class="col-file">mouse\corsair\ironclaw-rgb-wireless.json</td></tr>
+          <tr class="product-row"><td class="row-num">52</td><td class="col-model">Katar Elite Wireless</td><td class="col-base">Katar</td><td class="col-variant">Elite Wireless</td><td class="col-slug">corsair-katar-elite-wireless</td><td class="col-file">mouse\corsair\katar-elite-wireless.json</td></tr>
+          <tr class="product-row"><td class="row-num">53</td><td class="col-model">Katar Pro Wireless</td><td class="col-base">Katar</td><td class="col-variant">Pro Wireless</td><td class="col-slug">corsair-katar-pro-wireless</td><td class="col-file">mouse\corsair\katar-pro-wireless.json</td></tr>
+          <tr class="product-row"><td class="row-num">54</td><td class="col-model">Katar Pro XT</td><td class="col-base">Katar</td><td class="col-variant">Pro XT</td><td class="col-slug">corsair-katar-pro-xt</td><td class="col-file">mouse\corsair\katar-pro-xt.json</td></tr>
+          <tr class="product-row"><td class="row-num">55</td><td class="col-model">M55</td><td class="col-base">M55</td><td class="col-variant"><span class=empty-variant>&mdash;</span></td><td class="col-slug">corsair-m55-wired</td><td class="col-file">mouse\corsair\m55-wired.json</td></tr>
+          <tr class="product-row"><td class="row-num">56</td><td class="col-model">M55 RGB Pro</td><td class="col-base">M55</td><td class="col-variant">RGB Pro</td><td class="col-slug">corsair-m55-rgb-pro</td><td class="col-file">mouse\corsair\m55-rgb-pro.json</td></tr>
+          <tr class="product-row"><td class="row-num">57</td><td class="col-model">M55 Wireless</td><td class="col-base">M55</td><td class="col-variant">Wireless</td><td class="col-slug">corsair-m55-wireless</td><td class="col-file">mouse\corsair\m55-wireless.json</td></tr>
+          <tr class="product-row"><td class="row-num">58</td><td class="col-model">M65 RGB Elite</td><td class="col-base">M65</td><td class="col-variant">RGB Elite</td><td class="col-slug">corsair-m65-rgb-elite</td><td class="col-file">mouse\corsair\m65-rgb-elite.json</td></tr>
+          <tr class="product-row"><td class="row-num">59</td><td class="col-model">M65 RGB Laser</td><td class="col-base">M65</td><td class="col-variant">RGB Laser</td><td class="col-slug">corsair-m65-rgb-laser</td><td class="col-file">mouse\corsair\m65-rgb-laser.json</td></tr>
+          <tr class="product-row"><td class="row-num">60</td><td class="col-model">M65 RGB Ultra</td><td class="col-base">M65</td><td class="col-variant">RGB Ultra</td><td class="col-slug">corsair-m65-rgb-ultra</td><td class="col-file">mouse\corsair\m65-rgb-ultra.json</td></tr>
+          <tr class="product-row"><td class="row-num">61</td><td class="col-model">M65 RGB Ultra Wireless</td><td class="col-base">M65</td><td class="col-variant">RGB Ultra Wireless</td><td class="col-slug">corsair-m65-rgb-ultra-wireless</td><td class="col-file">mouse\corsair\m65-rgb-ultra-wireless.json</td></tr>
+          <tr class="product-row"><td class="row-num">62</td><td class="col-model">M75</td><td class="col-base">M75</td><td class="col-variant"><span class=empty-variant>&mdash;</span></td><td class="col-slug">corsair-m75</td><td class="col-file">mouse\corsair\m75.json</td></tr>
+          <tr class="product-row"><td class="row-num">63</td><td class="col-model">M75 Air Wireless</td><td class="col-base">M75</td><td class="col-variant">Air Wireless</td><td class="col-slug">corsair-m75-air-wireless</td><td class="col-file">mouse\corsair\m75-air-wireless.json</td></tr>
+          <tr class="product-row"><td class="row-num">64</td><td class="col-model">M75 Wireless</td><td class="col-base">M75</td><td class="col-variant">Wireless</td><td class="col-slug">corsair-m75-wireless</td><td class="col-file">mouse\corsair\m75-wireless.json</td></tr>
+          <tr class="product-row"><td class="row-num">65</td><td class="col-model">Nightsabre Wireless RGB</td><td class="col-base">Nightsabre</td><td class="col-variant">Wireless RGB</td><td class="col-slug">corsair-nightsabre-wireless</td><td class="col-file">mouse\corsair\nightsabre-wireless.json</td></tr>
+          <tr class="product-row"><td class="row-num">66</td><td class="col-model">Nightsword RGB Tunable</td><td class="col-base">Nightsword</td><td class="col-variant">RGB Tunable</td><td class="col-slug">corsair-nightsword-rgb-tunable</td><td class="col-file">mouse\corsair\nightsword-rgb-tunable.json</td></tr>
+          <tr class="product-row"><td class="row-num">67</td><td class="col-model">Sabre Pro</td><td class="col-base">Sabre</td><td class="col-variant">Pro</td><td class="col-slug">corsair-sabre-pro-optical</td><td class="col-file">mouse\corsair\sabre-pro-optical.json</td></tr>
+          <tr class="product-row"><td class="row-num">68</td><td class="col-model">Sabre RGB Pro</td><td class="col-base">Sabre</td><td class="col-variant">RGB Pro</td><td class="col-slug">corsair-sabre-rgb-pro</td><td class="col-file">mouse\corsair\sabre-rgb-pro.json</td></tr>
+          <tr class="product-row"><td class="row-num">69</td><td class="col-model">Sabre RGB Pro Wireless</td><td class="col-base">Sabre</td><td class="col-variant">RGB Pro Wireless</td><td class="col-slug">corsair-sabre-rgb-pro-wireless</td><td class="col-file">mouse\corsair\sabre-rgb-pro-wireless.json</td></tr>
+          <tr class="product-row"><td class="row-num">70</td><td class="col-model">Sabre v2 Pro</td><td class="col-base">Sabre</td><td class="col-variant">v2 Pro</td><td class="col-slug">corsair-sabre-v2-pro</td><td class="col-file">mouse\corsair\sabre-v2-pro.json</td></tr>
+          <tr class="product-row"><td class="row-num">71</td><td class="col-model">Scimitar Elite Wireless</td><td class="col-base">Scimitar</td><td class="col-variant">Elite Wireless</td><td class="col-slug">corsair-scimitar-elite-wireless</td><td class="col-file">mouse\corsair\scimitar-elite-wireless.json</td></tr>
+          <tr class="product-row"><td class="row-num">72</td><td class="col-model">Scimitar Elite Wireless SE</td><td class="col-base">Scimitar</td><td class="col-variant">Elite Wireless SE</td><td class="col-slug">corsair-scimitar-elite-wireless-se</td><td class="col-file">mouse\corsair\scimitar-elite-wireless-se.json</td></tr>
+          <tr class="product-row"><td class="row-num">73</td><td class="col-model">Scimitar Pro RGB</td><td class="col-base">Scimitar</td><td class="col-variant">Pro RGB</td><td class="col-slug">corsair-scimitar-pro-rgb</td><td class="col-file">mouse\corsair\scimitar-pro-rgb.json</td></tr>
+          <tr class="product-row"><td class="row-num">74</td><td class="col-model">Scimitar RGB Elite</td><td class="col-base">Scimitar</td><td class="col-variant">RGB Elite</td><td class="col-slug">corsair-scimitar-rgb-elite</td><td class="col-file">mouse\corsair\scimitar-rgb-elite.json</td></tr>
+          <tr class="brand-header"><td colspan="6">Cougar <span class="brand-count">(11)</span></td></tr>
+          <tr class="product-row"><td class="row-num">75</td><td class="col-model">700M EVO eSPORTS</td><td class="col-base">700M EVO eSPORTS</td><td class="col-variant"><span class=empty-variant>&mdash;</span></td><td class="col-slug">cougar-700m-evo-esports</td><td class="col-file">mouse\cougar\700m-evo-esports.json</td></tr>
+          <tr class="product-row"><td class="row-num">76</td><td class="col-model">Airblader</td><td class="col-base">Airblader</td><td class="col-variant"><span class=empty-variant>&mdash;</span></td><td class="col-slug">cougar-airblader</td><td class="col-file">mouse\cougar\airblader.json</td></tr>
+          <tr class="product-row"><td class="row-num">77</td><td class="col-model">Airblader Tournament</td><td class="col-base">Airblader</td><td class="col-variant">Tournament</td><td class="col-slug">cougar-airblader-tournamanet</td><td class="col-file">mouse\cougar\airblader-tournamanet.json</td></tr>
+          <tr class="product-row"><td class="row-num">78</td><td class="col-model">Dualblader</td><td class="col-base">Dualblader</td><td class="col-variant"><span class=empty-variant>&mdash;</span></td><td class="col-slug">cougar-dualblader</td><td class="col-file">mouse\cougar\dualblader.json</td></tr>
+          <tr class="product-row"><td class="row-num">79</td><td class="col-model">Minos EX</td><td class="col-base">Minos EX</td><td class="col-variant"><span class=empty-variant>&mdash;</span></td><td class="col-slug">cougar-minos-ex</td><td class="col-file">mouse\cougar\minos-ex.json</td></tr>
+          <tr class="product-row"><td class="row-num">80</td><td class="col-model">Minos Neo</td><td class="col-base">Minos Neo</td><td class="col-variant"><span class=empty-variant>&mdash;</span></td><td class="col-slug">cougar-minos-neo</td><td class="col-file">mouse\cougar\minos-neo.json</td></tr>
+          <tr class="product-row"><td class="row-num">81</td><td class="col-model">Minos X2</td><td class="col-base">Minos X2</td><td class="col-variant"><span class=empty-variant>&mdash;</span></td><td class="col-slug">cougar-minos-x2</td><td class="col-file">mouse\cougar\minos-x2.json</td></tr>
+          <tr class="product-row"><td class="row-num">82</td><td class="col-model">Minos XT</td><td class="col-base">Minos XT</td><td class="col-variant"><span class=empty-variant>&mdash;</span></td><td class="col-slug">cougar-minox-xt</td><td class="col-file">mouse\cougar\minox-xt.json</td></tr>
+          <tr class="product-row"><td class="row-num">83</td><td class="col-model">Revenger Pro 4K</td><td class="col-base">Revenger Pro 4K</td><td class="col-variant"><span class=empty-variant>&mdash;</span></td><td class="col-slug">cougar-revenger-pro-4k</td><td class="col-file">mouse\cougar\revenger-pro-4k.json</td></tr>
+          <tr class="product-row"><td class="row-num">84</td><td class="col-model">Surpassion EX</td><td class="col-base">Surpassion</td><td class="col-variant">EX</td><td class="col-slug">cougar-surpassion-ex</td><td class="col-file">mouse\cougar\surpassion-ex.json</td></tr>
+          <tr class="product-row"><td class="row-num">85</td><td class="col-model">Surpassion RX</td><td class="col-base">Surpassion</td><td class="col-variant">RX</td><td class="col-slug">cougar-surpassion-rx</td><td class="col-file">mouse\cougar\surpassion-rx.json</td></tr>
+          <tr class="brand-header"><td colspan="6">Endgame Gear <span class="brand-count">(10)</span></td></tr>
+          <tr class="product-row"><td class="row-num">86</td><td class="col-model">OP1</td><td class="col-base">OP1</td><td class="col-variant"><span class=empty-variant>&mdash;</span></td><td class="col-slug">endgame-gear-op1</td><td class="col-file">mouse\endgame-gear\op1.json</td></tr>
+          <tr class="product-row"><td class="row-num">87</td><td class="col-model">OP1 8k</td><td class="col-base">OP1</td><td class="col-variant">8k</td><td class="col-slug">endgame-gear-op1-8k</td><td class="col-file">mouse\endgame-gear\op1-8k.json</td></tr>
+          <tr class="product-row"><td class="row-num">88</td><td class="col-model">OP1 RGB</td><td class="col-base">OP1</td><td class="col-variant">RGB</td><td class="col-slug">endgame-gear-op1-rgb</td><td class="col-file">mouse\endgame-gear\op1-rgb.json</td></tr>
+          <tr class="product-row"><td class="row-num">89</td><td class="col-model">OP1w 4k</td><td class="col-base">OP1w</td><td class="col-variant">4k</td><td class="col-slug">endgame-gear-op1w-4k-wireless</td><td class="col-file">mouse\endgame-gear\op1w-4k-wireless.json</td></tr>
+          <tr class="product-row"><td class="row-num">90</td><td class="col-model">OP1we</td><td class="col-base">OP1we</td><td class="col-variant"><span class=empty-variant>&mdash;</span></td><td class="col-slug">endgame-gear-op1we-wireless</td><td class="col-file">mouse\endgame-gear\op1we-wireless.json</td></tr>
+          <tr class="product-row"><td class="row-num">91</td><td class="col-model">XM1 RGB</td><td class="col-base">XM1</td><td class="col-variant">RGB</td><td class="col-slug">endgame-gear-xm1-rgb</td><td class="col-file">mouse\endgame-gear\xm1-rgb.json</td></tr>
+          <tr class="product-row"><td class="row-num">92</td><td class="col-model">XM1r</td><td class="col-base">XM1r</td><td class="col-variant"><span class=empty-variant>&mdash;</span></td><td class="col-slug">endgame-gear-xm1r</td><td class="col-file">mouse\endgame-gear\xm1r.json</td></tr>
+          <tr class="product-row"><td class="row-num">93</td><td class="col-model">XM2 8k</td><td class="col-base">XM2</td><td class="col-variant">8k</td><td class="col-slug">endgame-gear-xm2-8k</td><td class="col-file">mouse\endgame-gear\xm2-8k.json</td></tr>
+          <tr class="product-row"><td class="row-num">94</td><td class="col-model">XM2w 4k</td><td class="col-base">XM2w</td><td class="col-variant">4k</td><td class="col-slug">endgame-gear-xm2w-4k-wireless</td><td class="col-file">mouse\endgame-gear\xm2w-4k-wireless.json</td></tr>
+          <tr class="product-row"><td class="row-num">95</td><td class="col-model">XM2we</td><td class="col-base">XM2we</td><td class="col-variant"><span class=empty-variant>&mdash;</span></td><td class="col-slug">endgame-gear-xm2we-wireless</td><td class="col-file">mouse\endgame-gear\xm2we-wireless.json</td></tr>
+          <tr class="brand-header"><td colspan="6">EVGA <span class="brand-count">(4)</span></td></tr>
+          <tr class="product-row"><td class="row-num">96</td><td class="col-model">X12</td><td class="col-base">X12</td><td class="col-variant"><span class=empty-variant>&mdash;</span></td><td class="col-slug">evga-x12</td><td class="col-file">mouse\evga\x12.json</td></tr>
+          <tr class="product-row"><td class="row-num">97</td><td class="col-model">X15 MMO</td><td class="col-base">X15 MMO</td><td class="col-variant"><span class=empty-variant>&mdash;</span></td><td class="col-slug">evga-x15-mmo</td><td class="col-file">mouse\evga\x15-mmo.json</td></tr>
+          <tr class="product-row"><td class="row-num">98</td><td class="col-model">X17</td><td class="col-base">X17</td><td class="col-variant"><span class=empty-variant>&mdash;</span></td><td class="col-slug">evga-x17</td><td class="col-file">mouse\evga\x17.json</td></tr>
+          <tr class="product-row"><td class="row-num">99</td><td class="col-model">X20 Wireless</td><td class="col-base">X20</td><td class="col-variant">Wireless</td><td class="col-slug">evga-x20-wireless</td><td class="col-file">mouse\evga\x20-wireless.json</td></tr>
+          <tr class="brand-header"><td colspan="6">Finalmouse <span class="brand-count">(4)</span></td></tr>
+          <tr class="product-row"><td class="row-num">100</td><td class="col-model">ULX Prophecy - Clix</td><td class="col-base">ULX Prophecy</td><td class="col-variant">Clix</td><td class="col-slug">finalmouse-ulx-prophecy-clix</td><td class="col-file">mouse\finalmouse\ulx-prophecy-clix.json</td></tr>
+          <tr class="product-row"><td class="row-num">101</td><td class="col-model">ULX Prophecy - Scream</td><td class="col-base">ULX Prophecy</td><td class="col-variant">Scream</td><td class="col-slug">finalmouse-ulx-prophecy-scream</td><td class="col-file">mouse\finalmouse\ulx-prophecy-scream.json</td></tr>
+          <tr class="product-row"><td class="row-num">102</td><td class="col-model">ULX Prophecy - Tarik</td><td class="col-base">ULX Prophecy</td><td class="col-variant">Tarik</td><td class="col-slug">finalmouse-ulx-prophecy-tarik</td><td class="col-file">mouse\finalmouse\ulx-prophecy-tarik.json</td></tr>
+          <tr class="product-row"><td class="row-num">103</td><td class="col-model">ULX Prophecy - Tfue</td><td class="col-base">ULX Prophecy</td><td class="col-variant">Tfue</td><td class="col-slug">finalmouse-ulx-prophecy-tfue</td><td class="col-file">mouse\finalmouse\ulx-prophecy-tfue.json</td></tr>
+          <tr class="brand-header"><td colspan="6">Fnatic <span class="brand-count">(4)</span></td></tr>
+          <tr class="product-row"><td class="row-num">104</td><td class="col-model">Bolt</td><td class="col-base">Bolt</td><td class="col-variant"><span class=empty-variant>&mdash;</span></td><td class="col-slug">fnatic-bolt</td><td class="col-file">mouse\fnatic\bolt.json</td></tr>
+          <tr class="product-row"><td class="row-num">105</td><td class="col-model">x Lamzu MAYA 8K</td><td class="col-base">x Lamzu MAYA</td><td class="col-variant">8K</td><td class="col-slug">fnatic-x-lamzu-maya-8k</td><td class="col-file">mouse\fnatic\x-lamzu-maya-8k.json</td></tr>
+          <tr class="product-row"><td class="row-num">106</td><td class="col-model">x Lamzu MAYA X 8K</td><td class="col-base">x Lamzu MAYA</td><td class="col-variant">X 8K</td><td class="col-slug">fnatic-x-lamzu-maya-x-8k</td><td class="col-file">mouse\fnatic\x-lamzu-maya-x-8k.json</td></tr>
+          <tr class="product-row"><td class="row-num">107</td><td class="col-model">x Lamzu THORN</td><td class="col-base">x Lamzu THORN</td><td class="col-variant"><span class=empty-variant>&mdash;</span></td><td class="col-slug">fnatic-x-lamzu-thorn</td><td class="col-file">mouse\fnatic\x-lamzu-thorn.json</td></tr>
+          <tr class="brand-header"><td colspan="6">G-Wolves <span class="brand-count">(24)</span></td></tr>
+          <tr class="product-row"><td class="row-num">108</td><td class="col-model">Hati HTM ACE Wired</td><td class="col-base">Hati HTM</td><td class="col-variant">ACE Wired</td><td class="col-slug">g-wolves-hati-htm-ace-wired</td><td class="col-file">mouse\g-wolves\hati-htm-ace-wired.json</td></tr>
+          <tr class="product-row"><td class="row-num">109</td><td class="col-model">Hati HTM Classic Wired</td><td class="col-base">Hati HTM</td><td class="col-variant">Classic Wired</td><td class="col-slug">g-wolves-hati-htm-classic-wired</td><td class="col-file">mouse\g-wolves\hati-htm-classic-wired.json</td></tr>
+          <tr class="product-row"><td class="row-num">110</td><td class="col-model">Hati-M HTM ACE Wireless</td><td class="col-base">Hati-M HTM</td><td class="col-variant">ACE Wireless</td><td class="col-slug">g-wolves-hati-m-htm-ace-wireless</td><td class="col-file">mouse\g-wolves\hati-m-htm-ace-wireless.json</td></tr>
+          <tr class="product-row"><td class="row-num">111</td><td class="col-model">Hati-S ACE Wireless</td><td class="col-base">Hati-S</td><td class="col-variant">ACE Wireless</td><td class="col-slug">g-wolves-hati-s-ace-wireless</td><td class="col-file">mouse\g-wolves\hati-s-ace-wireless.json</td></tr>
+          <tr class="product-row"><td class="row-num">112</td><td class="col-model">Hati-S HTS ACE Wired</td><td class="col-base">Hati-S HTS</td><td class="col-variant">ACE Wired</td><td class="col-slug">g-wolves-hati-s-hts-ace-wired</td><td class="col-file">mouse\g-wolves\hati-s-hts-ace-wired.json</td></tr>
+          <tr class="product-row"><td class="row-num">113</td><td class="col-model">Hati-S OPEN Source Wireless</td><td class="col-base">Hati-S</td><td class="col-variant">OPEN Source Wireless</td><td class="col-slug">g-wolves-hati-s-open-source-wireless</td><td class="col-file">mouse\g-wolves\hati-s-open-source-wireless.json</td></tr>
+          <tr class="product-row"><td class="row-num">114</td><td class="col-model">HSK Plus 4k Wireless</td><td class="col-base">HSK Plus</td><td class="col-variant">4k Wireless</td><td class="col-slug">g-wolves-hsk-plus-4k-wireless</td><td class="col-file">mouse\g-wolves\hsk-plus-4k-wireless.json</td></tr>
+          <tr class="product-row"><td class="row-num">115</td><td class="col-model">HSK Plus Ace-2 Wireless</td><td class="col-base">HSK Plus</td><td class="col-variant">Ace-2 Wireless</td><td class="col-slug">g-wolves-hsk-plus-ace-2-wireless</td><td class="col-file">mouse\g-wolves\hsk-plus-ace-2-wireless.json</td></tr>
+          <tr class="product-row"><td class="row-num">116</td><td class="col-model">HSK Plus Lite Wireless</td><td class="col-base">HSK Plus</td><td class="col-variant">Lite Wireless</td><td class="col-slug">g-wolves-hsk-plus-lite-wireless</td><td class="col-file">mouse\g-wolves\hsk-plus-lite-wireless.json</td></tr>
+          <tr class="product-row"><td class="row-num">117</td><td class="col-model">HSK Pro 4K Wireless</td><td class="col-base">HSK Pro</td><td class="col-variant">4K Wireless</td><td class="col-slug">g-wolves-hsk-pro-4k-wireless</td><td class="col-file">mouse\g-wolves\hsk-pro-4k-wireless.json</td></tr>
+          <tr class="product-row"><td class="row-num">118</td><td class="col-model">HSK Pro ACE Wireless</td><td class="col-base">HSK Pro</td><td class="col-variant">ACE Wireless</td><td class="col-slug">g-wolves-hsk-pro-ace-wireless</td><td class="col-file">mouse\g-wolves\hsk-pro-ace-wireless.json</td></tr>
+          <tr class="product-row"><td class="row-num">119</td><td class="col-model">HSK Wired</td><td class="col-base">HSK</td><td class="col-variant">Wired</td><td class="col-slug">g-wolves-hsk-wired</td><td class="col-file">mouse\g-wolves\hsk-wired.json</td></tr>
+          <tr class="product-row"><td class="row-num">120</td><td class="col-model">HT-S2 8k Wireless</td><td class="col-base">HT-S2</td><td class="col-variant">8k Wireless</td><td class="col-slug">g-wolves-ht-s2-8k-wireless</td><td class="col-file">mouse\g-wolves\ht-s2-8k-wireless.json</td></tr>
+          <tr class="product-row"><td class="row-num">121</td><td class="col-model">HTR 8k Wireless</td><td class="col-base">HTR</td><td class="col-variant">8k Wireless</td><td class="col-slug">g-wolves-htr-8k-wireless</td><td class="col-file">mouse\g-wolves\htr-8k-wireless.json</td></tr>
+          <tr class="product-row"><td class="row-num">122</td><td class="col-model">HTR PRO 8k Wireless</td><td class="col-base">HTR</td><td class="col-variant">PRO 8k Wireless</td><td class="col-slug">g-wolves-htr-pro-8k-wireless</td><td class="col-file">mouse\g-wolves\htr-pro-8k-wireless.json</td></tr>
+          <tr class="product-row"><td class="row-num">123</td><td class="col-model">HTS Plus 4K Wireless</td><td class="col-base">HTS Plus</td><td class="col-variant">4K Wireless</td><td class="col-slug">g-wolves-hts-plus-4k-wireless</td><td class="col-file">mouse\g-wolves\hts-plus-4k-wireless.json</td></tr>
+          <tr class="product-row"><td class="row-num">124</td><td class="col-model">HTS Plus 8K Wireless</td><td class="col-base">HTS Plus</td><td class="col-variant">8K Wireless</td><td class="col-slug">g-wolves-hts-plus-8k-wireless</td><td class="col-file">mouse\g-wolves\hts-plus-8k-wireless.json</td></tr>
+          <tr class="product-row"><td class="row-num">125</td><td class="col-model">HTS Plus Ace Wireless</td><td class="col-base">HTS Plus</td><td class="col-variant">Ace Wireless</td><td class="col-slug">g-wolves-hts-plus-ace-wireless</td><td class="col-file">mouse\g-wolves\hts-plus-ace-wireless.json</td></tr>
+          <tr class="product-row"><td class="row-num">126</td><td class="col-model">HTS Plus Classic Wireless</td><td class="col-base">HTS Plus</td><td class="col-variant">Classic Wireless</td><td class="col-slug">g-wolves-hts-plus-classic-wireless</td><td class="col-file">mouse\g-wolves\hts-plus-classic-wireless.json</td></tr>
+          <tr class="product-row"><td class="row-num">127</td><td class="col-model">HTS Ultra 8K Wireless</td><td class="col-base">HTS Ultra</td><td class="col-variant">8K Wireless</td><td class="col-slug">g-wolves-hts-ultra-8k-wireless</td><td class="col-file">mouse\g-wolves\hts-ultra-8k-wireless.json</td></tr>
+          <tr class="product-row"><td class="row-num">128</td><td class="col-model">HTX 4K Wireless</td><td class="col-base">HTX</td><td class="col-variant">4K Wireless</td><td class="col-slug">g-wolves-htx-4k-wireless</td><td class="col-file">mouse\g-wolves\htx-4k-wireless.json</td></tr>
+          <tr class="product-row"><td class="row-num">129</td><td class="col-model">HTX ACE Wireless</td><td class="col-base">HTX</td><td class="col-variant">ACE Wireless</td><td class="col-slug">g-wolves-htx-ace-wireless</td><td class="col-file">mouse\g-wolves\htx-ace-wireless.json</td></tr>
+          <tr class="product-row"><td class="row-num">130</td><td class="col-model">HTX Mini 8K Wireless</td><td class="col-base">HTX</td><td class="col-variant">Mini 8K Wireless</td><td class="col-slug">g-wolves-htx-mini-8k-wireless</td><td class="col-file">mouse\g-wolves\htx-mini-8k-wireless.json</td></tr>
+          <tr class="product-row"><td class="row-num">131</td><td class="col-model">Skoll Mini SK-S Wired</td><td class="col-base">Skoll Mini</td><td class="col-variant">SK-S Wired</td><td class="col-slug">g-wolves-skoll-mini-sk-s-wired</td><td class="col-file">mouse\g-wolves\skoll-mini-sk-s-wired.json</td></tr>
+          <tr class="brand-header"><td colspan="6">Glorious <span class="brand-count">(16)</span></td></tr>
+          <tr class="product-row"><td class="row-num">132</td><td class="col-model">Model D 2 PRO 4K/8KHz Edition</td><td class="col-base">Model D 2 PRO</td><td class="col-variant">4K/8KHz Edition</td><td class="col-slug">glorious-model-d-2-pro-series-wireless-8khz-edition</td><td class="col-file">mouse\glorious\model-d-2-pro-series-wireless-8khz-edition.json</td></tr>
+          <tr class="product-row"><td class="row-num">133</td><td class="col-model">Model D 2 PRO Wireless</td><td class="col-base">Model D 2 PRO</td><td class="col-variant">Wireless</td><td class="col-slug">glorious-model-d-2-pro-series-wireless</td><td class="col-file">mouse\glorious\model-d-2-pro-series-wireless.json</td></tr>
+          <tr class="product-row"><td class="row-num">134</td><td class="col-model">Model D 2 Wired</td><td class="col-base">Model D 2</td><td class="col-variant">Wired</td><td class="col-slug">glorious-model-d-2-wired</td><td class="col-file">mouse\glorious\model-d-2-wired.json</td></tr>
+          <tr class="product-row"><td class="row-num">135</td><td class="col-model">Model D 2 Wireless</td><td class="col-base">Model D 2</td><td class="col-variant">Wireless</td><td class="col-slug">glorious-model-d-2-wireless</td><td class="col-file">mouse\glorious\model-d-2-wireless.json</td></tr>
+          <tr class="product-row"><td class="row-num">136</td><td class="col-model">Model D Minus Wired</td><td class="col-base">Model D Minus</td><td class="col-variant">Wired</td><td class="col-slug">glorious-model-d-minus-wired</td><td class="col-file">mouse\glorious\model-d-minus-wired.json</td></tr>
+          <tr class="product-row"><td class="row-num">137</td><td class="col-model">Model D Minus Wireless</td><td class="col-base">Model D Minus</td><td class="col-variant">Wireless</td><td class="col-slug">glorious-model-d-minus-wireless</td><td class="col-file">mouse\glorious\model-d-minus-wireless.json</td></tr>
+          <tr class="product-row"><td class="row-num">138</td><td class="col-model">Model D Wired</td><td class="col-base">Model D</td><td class="col-variant">Wired</td><td class="col-slug">glorious-model-d-wired</td><td class="col-file">mouse\glorious\model-d-wired.json</td></tr>
+          <tr class="product-row"><td class="row-num">139</td><td class="col-model">Model I 2 Wired</td><td class="col-base">Model I 2</td><td class="col-variant">Wired</td><td class="col-slug">glorious-model-i-2-wired</td><td class="col-file">mouse\glorious\model-i-2-wired.json</td></tr>
+          <tr class="product-row"><td class="row-num">140</td><td class="col-model">Model I 2 Wireless</td><td class="col-base">Model I 2</td><td class="col-variant">Wireless</td><td class="col-slug">glorious-model-i-2-wireless</td><td class="col-file">mouse\glorious\model-i-2-wireless.json</td></tr>
+          <tr class="product-row"><td class="row-num">141</td><td class="col-model">Model O 2 Mini Wired</td><td class="col-base">Model O 2 Mini</td><td class="col-variant">Wired</td><td class="col-slug">glorious-model-o-2-mini-wired</td><td class="col-file">mouse\glorious\model-o-2-mini-wired.json</td></tr>
+          <tr class="product-row"><td class="row-num">142</td><td class="col-model">Model O 2 Mini Wireless</td><td class="col-base">Model O 2 Mini</td><td class="col-variant">Wireless</td><td class="col-slug">glorious-model-o-2-mini-wireless</td><td class="col-file">mouse\glorious\model-o-2-mini-wireless.json</td></tr>
+          <tr class="product-row"><td class="row-num">143</td><td class="col-model">Model O 2 PRO 4K/8KHz Edition</td><td class="col-base">Model O 2 PRO</td><td class="col-variant">4K/8KHz Edition</td><td class="col-slug">glorious-model-o-2-pro-series-wireless-8khz-edition</td><td class="col-file">mouse\glorious\model-o-2-pro-series-wireless-8khz-edition.json</td></tr>
+          <tr class="product-row"><td class="row-num">144</td><td class="col-model">Model O 2 PRO Wireless</td><td class="col-base">Model O 2 PRO</td><td class="col-variant">Wireless</td><td class="col-slug">glorious-model-o-2-pro-series</td><td class="col-file">mouse\glorious\model-o-2-pro-series.json</td></tr>
+          <tr class="product-row"><td class="row-num">145</td><td class="col-model">Model O 2 Wired</td><td class="col-base">Model O 2</td><td class="col-variant">Wired</td><td class="col-slug">glorious-model-o-2-wired</td><td class="col-file">mouse\glorious\model-o-2-wired.json</td></tr>
+          <tr class="product-row"><td class="row-num">146</td><td class="col-model">Model O 2 Wireless</td><td class="col-base">Model O 2</td><td class="col-variant">Wireless</td><td class="col-slug">glorious-model-o-2-wireless</td><td class="col-file">mouse\glorious\model-o-2-wireless.json</td></tr>
+          <tr class="product-row"><td class="row-num">147</td><td class="col-model">Series 2 PRO Wireless</td><td class="col-base">Series 2 PRO</td><td class="col-variant">Wireless</td><td class="col-slug">glorious-series-2-pro-wireless</td><td class="col-file">mouse\glorious\series-2-pro-wireless.json</td></tr>
+          <tr class="brand-header"><td colspan="6">HyperX <span class="brand-count">(9)</span></td></tr>
+          <tr class="product-row"><td class="row-num">148</td><td class="col-model">Pulsefire Core</td><td class="col-base">Pulsefire Core</td><td class="col-variant"><span class=empty-variant>&mdash;</span></td><td class="col-slug">hyperx-pulsefire-core</td><td class="col-file">mouse\hyperx\pulsefire-core.json</td></tr>
+          <tr class="product-row"><td class="row-num">149</td><td class="col-model">Pulsefire Haste</td><td class="col-base">Pulsefire Haste</td><td class="col-variant"><span class=empty-variant>&mdash;</span></td><td class="col-slug">hyperx-pulsefire-haste</td><td class="col-file">mouse\hyperx\pulsefire-haste.json</td></tr>
+          <tr class="product-row"><td class="row-num">150</td><td class="col-model">Pulsefire Haste 2</td><td class="col-base">Pulsefire Haste 2</td><td class="col-variant"><span class=empty-variant>&mdash;</span></td><td class="col-slug">hyperx-pulsefire-haste-2</td><td class="col-file">mouse\hyperx\pulsefire-haste-2.json</td></tr>
+          <tr class="product-row"><td class="row-num">151</td><td class="col-model">Pulsefire Haste 2 Core Wireless</td><td class="col-base">Pulsefire Haste 2</td><td class="col-variant">Core Wireless</td><td class="col-slug">hyperx-pulsefire-haste-2-core-wireless</td><td class="col-file">mouse\hyperx\pulsefire-haste-2-core-wireless.json</td></tr>
+          <tr class="product-row"><td class="row-num">152</td><td class="col-model">Pulsefire Haste 2 Mini Wireless</td><td class="col-base">Pulsefire Haste 2</td><td class="col-variant">Mini Wireless</td><td class="col-slug">hyperx-pulsefire-wireless-haste-2-mini-wireless</td><td class="col-file">mouse\hyperx\pulsefire-wireless-haste-2-mini-wireless.json</td></tr>
+          <tr class="product-row"><td class="row-num">153</td><td class="col-model">Pulsefire Haste 2 Pro 4K Wireless</td><td class="col-base">Pulsefire Haste 2</td><td class="col-variant">Pro 4K Wireless</td><td class="col-slug">hyperx-pulsefire-haste-2-pro-wireless</td><td class="col-file">mouse\hyperx\pulsefire-haste-2-pro-wireless.json</td></tr>
+          <tr class="product-row"><td class="row-num">154</td><td class="col-model">Pulsefire Haste 2 Wireless</td><td class="col-base">Pulsefire Haste 2</td><td class="col-variant">Wireless</td><td class="col-slug">hyperx-pulsefire-haste-2-wireless</td><td class="col-file">mouse\hyperx\pulsefire-haste-2-wireless.json</td></tr>
+          <tr class="product-row"><td class="row-num">155</td><td class="col-model">Pulsefire Haste Wireless</td><td class="col-base">Pulsefire Haste</td><td class="col-variant">Wireless</td><td class="col-slug">hyperx-pulsefire-haste-wireless</td><td class="col-file">mouse\hyperx\pulsefire-haste-wireless.json</td></tr>
+          <tr class="product-row"><td class="row-num">156</td><td class="col-model">Pulsefire Surge</td><td class="col-base">Pulsefire Surge</td><td class="col-variant"><span class=empty-variant>&mdash;</span></td><td class="col-slug">hyperx-pulsefire-surge</td><td class="col-file">mouse\hyperx\pulsefire-surge.json</td></tr>
+          <tr class="brand-header"><td colspan="6">Lamzu <span class="brand-count">(13)</span></td></tr>
+          <tr class="product-row"><td class="row-num">157</td><td class="col-model">Atlantis Mini 4K</td><td class="col-base">Atlantis Mini</td><td class="col-variant">4K</td><td class="col-slug">lamzu-atlantis-mini-4k</td><td class="col-file">mouse\lamzu\atlantis-mini-4k.json</td></tr>
+          <tr class="product-row"><td class="row-num">158</td><td class="col-model">Atlantis Mini [Champion Edition]</td><td class="col-base">Atlantis Mini</td><td class="col-variant">[Champion Edition]</td><td class="col-slug">lamzu-atlantis-mini-champion-edition</td><td class="col-file">mouse\lamzu\atlantis-mini-champion-edition.json</td></tr>
+          <tr class="product-row"><td class="row-num">159</td><td class="col-model">Atlantis Mini Pro (4K Compatible)</td><td class="col-base">Atlantis Mini</td><td class="col-variant">Pro (4K Compatible)</td><td class="col-slug">lamzu-atlantis-mini-pro-4k-compatible</td><td class="col-file">mouse\lamzu\atlantis-mini-pro-4k-compatible.json</td></tr>
+          <tr class="product-row"><td class="row-num">160</td><td class="col-model">Atlantis OG V2 4K</td><td class="col-base">Atlantis OG V2</td><td class="col-variant">4K</td><td class="col-slug">lamzu-atlantis-og-v2-4k</td><td class="col-file">mouse\lamzu\atlantis-og-v2-4k.json</td></tr>
+          <tr class="product-row"><td class="row-num">161</td><td class="col-model">Atlantis OG V2 Pro (4K Compatible)</td><td class="col-base">Atlantis OG V2</td><td class="col-variant">Pro (4K Compatible)</td><td class="col-slug">lamzu-atlantis-og-v2-pro-4k-compatible</td><td class="col-file">mouse\lamzu\atlantis-og-v2-pro-4k-compatible.json</td></tr>
+          <tr class="product-row"><td class="row-num">162</td><td class="col-model">Maya (4k Compatible)</td><td class="col-base">Maya</td><td class="col-variant">(4k Compatible)</td><td class="col-slug">lamzu-maya-4k-compatible</td><td class="col-file">mouse\lamzu\maya-4k-compatible.json</td></tr>
+          <tr class="product-row"><td class="row-num">163</td><td class="col-model">Maya 4k</td><td class="col-base">Maya</td><td class="col-variant">4k</td><td class="col-slug">lamzu-maya-4k</td><td class="col-file">mouse\lamzu\maya-4k.json</td></tr>
+          <tr class="product-row"><td class="row-num">164</td><td class="col-model">Maya Doodle</td><td class="col-base">Maya</td><td class="col-variant">Doodle</td><td class="col-slug">lamzu-maya-doodle</td><td class="col-file">mouse\lamzu\maya-doodle.json</td></tr>
+          <tr class="product-row"><td class="row-num">165</td><td class="col-model">Maya X</td><td class="col-base">Maya X</td><td class="col-variant"><span class=empty-variant>&mdash;</span></td><td class="col-slug">lamzu-maya-x</td><td class="col-file">mouse\lamzu\maya-x.json</td></tr>
+          <tr class="product-row"><td class="row-num">166</td><td class="col-model">Paro</td><td class="col-base">Paro</td><td class="col-variant"><span class=empty-variant>&mdash;</span></td><td class="col-slug">lamzu-paro</td><td class="col-file">mouse\lamzu\paro.json</td></tr>
+          <tr class="product-row"><td class="row-num">167</td><td class="col-model">Tachi</td><td class="col-base">Tachi</td><td class="col-variant"><span class=empty-variant>&mdash;</span></td><td class="col-slug">lamzu-tachi</td><td class="col-file">mouse\lamzu\tachi.json</td></tr>
+          <tr class="product-row"><td class="row-num">168</td><td class="col-model">Thorn (4K Compatible)</td><td class="col-base">Thorn</td><td class="col-variant">(4K Compatible)</td><td class="col-slug">lamzu-thorn-4k-4k-compatible</td><td class="col-file">mouse\lamzu\thorn-4k-4k-compatible.json</td></tr>
+          <tr class="product-row"><td class="row-num">169</td><td class="col-model">Thorn 4k</td><td class="col-base">Thorn</td><td class="col-variant">4k</td><td class="col-slug">lamzu-thorn-4k</td><td class="col-file">mouse\lamzu\thorn-4k.json</td></tr>
+          <tr class="brand-header"><td colspan="6">Lenovo Legion <span class="brand-count">(5)</span></td></tr>
+          <tr class="product-row"><td class="row-num">170</td><td class="col-model">M210 RGB</td><td class="col-base">M210 RGB</td><td class="col-variant"><span class=empty-variant>&mdash;</span></td><td class="col-slug">lenovo-legion-m210-rgb</td><td class="col-file">mouse\lenovo-legion\m210-rgb.json</td></tr>
+          <tr class="product-row"><td class="row-num">171</td><td class="col-model">M300s RGB</td><td class="col-base">M300s RGB</td><td class="col-variant"><span class=empty-variant>&mdash;</span></td><td class="col-slug">lenovo-legion-m300s-rgb</td><td class="col-file">mouse\lenovo-legion\m300s-rgb.json</td></tr>
+          <tr class="product-row"><td class="row-num">172</td><td class="col-model">M410 Wireless RGB</td><td class="col-base">M410 Wireless RGB</td><td class="col-variant"><span class=empty-variant>&mdash;</span></td><td class="col-slug">lenovo-legion-m410-wireless-rgb</td><td class="col-file">mouse\lenovo-legion\m410-wireless-rgb.json</td></tr>
+          <tr class="product-row"><td class="row-num">173</td><td class="col-model">M600 Wireless</td><td class="col-base">M600 Wireless</td><td class="col-variant"><span class=empty-variant>&mdash;</span></td><td class="col-slug">lenovo-legion-m600-wireless</td><td class="col-file">mouse\lenovo-legion\m600-wireless.json</td></tr>
+          <tr class="product-row"><td class="row-num">174</td><td class="col-model">M600s Wireless</td><td class="col-base">M600s Wireless</td><td class="col-variant"><span class=empty-variant>&mdash;</span></td><td class="col-slug">lenovo-legion-m600s-wireless</td><td class="col-file">mouse\lenovo-legion\m600s-wireless.json</td></tr>
+          <tr class="brand-header"><td colspan="6">Logitech G <span class="brand-count">(19)</span></td></tr>
+          <tr class="product-row"><td class="row-num">175</td><td class="col-model">G203 Lightsync</td><td class="col-base">G203</td><td class="col-variant">Lightsync</td><td class="col-slug">logitech-g-g203-lightsync</td><td class="col-file">mouse\logitech-g\g203-lightsync.json</td></tr>
+          <tr class="product-row"><td class="row-num">176</td><td class="col-model">G305 Lightspeed</td><td class="col-base">G305</td><td class="col-variant">Lightspeed</td><td class="col-slug">logitech-g-g305-lightspeed</td><td class="col-file">mouse\logitech-g\g305-lightspeed.json</td></tr>
+          <tr class="product-row"><td class="row-num">177</td><td class="col-model">G309 Lightspeed</td><td class="col-base">G309</td><td class="col-variant">Lightspeed</td><td class="col-slug">logitech-g-g309-lightspeed</td><td class="col-file">mouse\logitech-g\g309-lightspeed.json</td></tr>
+          <tr class="product-row"><td class="row-num">178</td><td class="col-model">G403 Hero</td><td class="col-base">G403</td><td class="col-variant">Hero</td><td class="col-slug">logitech-g-g403-hero</td><td class="col-file">mouse\logitech-g\g403-hero.json</td></tr>
+          <tr class="product-row"><td class="row-num">179</td><td class="col-model">G502 Hero</td><td class="col-base">G502</td><td class="col-variant">Hero</td><td class="col-slug">logitech-g-g502-hero</td><td class="col-file">mouse\logitech-g\g502-hero.json</td></tr>
+          <tr class="product-row"><td class="row-num">180</td><td class="col-model">G502 Lightspeed</td><td class="col-base">G502</td><td class="col-variant">Lightspeed</td><td class="col-slug">logitech-g-g502-lightspeed</td><td class="col-file">mouse\logitech-g\g502-lightspeed.json</td></tr>
+          <tr class="product-row"><td class="row-num">181</td><td class="col-model">G502 X</td><td class="col-base">G502 X</td><td class="col-variant"><span class=empty-variant>&mdash;</span></td><td class="col-slug">logitech-g-g502-x</td><td class="col-file">mouse\logitech-g\g502-x.json</td></tr>
+          <tr class="product-row"><td class="row-num">182</td><td class="col-model">G502 X Lightspeed</td><td class="col-base">G502 X</td><td class="col-variant">Lightspeed</td><td class="col-slug">logitech-g-g502-x-lightspeed-wireless</td><td class="col-file">mouse\logitech-g\g502-x-lightspeed-wireless.json</td></tr>
+          <tr class="product-row"><td class="row-num">183</td><td class="col-model">G502 X Plus</td><td class="col-base">G502 X</td><td class="col-variant">Plus</td><td class="col-slug">logitech-g-g502-x-plus</td><td class="col-file">mouse\logitech-g\g502-x-plus.json</td></tr>
+          <tr class="product-row"><td class="row-num">184</td><td class="col-model">G703 Lightspeed</td><td class="col-base">G703</td><td class="col-variant">Lightspeed</td><td class="col-slug">logitech-g-g703-hero-lightspeed</td><td class="col-file">mouse\logitech-g\g703-hero-lightspeed.json</td></tr>
+          <tr class="product-row"><td class="row-num">185</td><td class="col-model">G705 Wireless</td><td class="col-base">G705</td><td class="col-variant">Wireless</td><td class="col-slug">logitech-g-g705-wireless</td><td class="col-file">mouse\logitech-g\g705-wireless.json</td></tr>
+          <tr class="product-row"><td class="row-num">186</td><td class="col-model">G903 Lightspeed</td><td class="col-base">G903</td><td class="col-variant">Lightspeed</td><td class="col-slug">logitech-g-g903-lightspeed</td><td class="col-file">mouse\logitech-g\g903-lightspeed.json</td></tr>
+          <tr class="product-row"><td class="row-num">187</td><td class="col-model">Pro 2 Lightspeed</td><td class="col-base">Pro 2</td><td class="col-variant">Lightspeed</td><td class="col-slug">logitech-g-pro-2-lightspeed</td><td class="col-file">mouse\logitech-g\pro-2-lightspeed.json</td></tr>
+          <tr class="product-row"><td class="row-num">188</td><td class="col-model">Pro Wireless</td><td class="col-base">Pro</td><td class="col-variant">Wireless</td><td class="col-slug">logitech-g-pro-wireless</td><td class="col-file">mouse\logitech-g\pro-wireless.json</td></tr>
+          <tr class="product-row"><td class="row-num">189</td><td class="col-model">Pro X Superlight</td><td class="col-base">Pro X Superlight</td><td class="col-variant"><span class=empty-variant>&mdash;</span></td><td class="col-slug">logitech-g-pro-x-superlight</td><td class="col-file">mouse\logitech-g\pro-x-superlight.json</td></tr>
+          <tr class="product-row"><td class="row-num">190</td><td class="col-model">Pro X Superlight 2</td><td class="col-base">Pro X Superlight 2</td><td class="col-variant"><span class=empty-variant>&mdash;</span></td><td class="col-slug">logitech-g-pro-x-superlight-2</td><td class="col-file">mouse\logitech-g\pro-x-superlight-2.json</td></tr>
+          <tr class="product-row"><td class="row-num">191</td><td class="col-model">Pro X Superlight 2 Dex</td><td class="col-base">Pro X Superlight 2</td><td class="col-variant">Dex</td><td class="col-slug">logitech-g-pro-x-superlight-2-dex</td><td class="col-file">mouse\logitech-g\pro-x-superlight-2-dex.json</td></tr>
+          <tr class="product-row"><td class="row-num">192</td><td class="col-model">Pro X Superlight 2c</td><td class="col-base">Pro X Superlight</td><td class="col-variant">2c</td><td class="col-slug">logitech-g-pro-x-superlight-2c</td><td class="col-file">mouse\logitech-g\pro-x-superlight-2c.json</td></tr>
+          <tr class="product-row"><td class="row-num">193</td><td class="col-model">Pro X2 Superstrike</td><td class="col-base">Pro X2</td><td class="col-variant">Superstrike</td><td class="col-slug">logitech-g-pro-x-2-superstrike</td><td class="col-file">mouse\logitech-g\pro-x-2-superstrike.json</td></tr>
+          <tr class="brand-header"><td colspan="6">Mad Catz <span class="brand-count">(14)</span></td></tr>
+          <tr class="product-row"><td class="row-num">194</td><td class="col-model">B.A.T. 6+</td><td class="col-base">B.A.T. 6+</td><td class="col-variant"><span class=empty-variant>&mdash;</span></td><td class="col-slug">mad-catz-bat-6</td><td class="col-file">mouse\mad-catz\bat-6.json</td></tr>
+          <tr class="product-row"><td class="row-num">195</td><td class="col-model">M.O.J.O. M1</td><td class="col-base">M.O.J.O.</td><td class="col-variant">M1</td><td class="col-slug">mad-catz-mojo-m1</td><td class="col-file">mouse\mad-catz\mojo-m1.json</td></tr>
+          <tr class="product-row"><td class="row-num">196</td><td class="col-model">M.O.J.O. M2</td><td class="col-base">M.O.J.O.</td><td class="col-variant">M2</td><td class="col-slug">mad-catz-mojo-m2</td><td class="col-file">mouse\mad-catz\mojo-m2.json</td></tr>
+          <tr class="product-row"><td class="row-num">197</td><td class="col-model">R.A.T. 1+</td><td class="col-base">R.A.T. 1+</td><td class="col-variant"><span class=empty-variant>&mdash;</span></td><td class="col-slug">mad-catz-rat-1</td><td class="col-file">mouse\mad-catz\rat-1.json</td></tr>
+          <tr class="product-row"><td class="row-num">198</td><td class="col-model">R.A.T. 2+</td><td class="col-base">R.A.T. 2+</td><td class="col-variant"><span class=empty-variant>&mdash;</span></td><td class="col-slug">mad-catz-rat-2</td><td class="col-file">mouse\mad-catz\rat-2.json</td></tr>
+          <tr class="product-row"><td class="row-num">199</td><td class="col-model">R.A.T. 4+</td><td class="col-base">R.A.T. 4+</td><td class="col-variant"><span class=empty-variant>&mdash;</span></td><td class="col-slug">mad-catz-rat-4</td><td class="col-file">mouse\mad-catz\rat-4.json</td></tr>
+          <tr class="product-row"><td class="row-num">200</td><td class="col-model">R.A.T. 6+</td><td class="col-base">R.A.T. 6+</td><td class="col-variant"><span class=empty-variant>&mdash;</span></td><td class="col-slug">mad-catz-rat-6</td><td class="col-file">mouse\mad-catz\rat-6.json</td></tr>
+          <tr class="product-row"><td class="row-num">201</td><td class="col-model">R.A.T. 8+</td><td class="col-base">R.A.T. 8+</td><td class="col-variant"><span class=empty-variant>&mdash;</span></td><td class="col-slug">mad-catz-rat-8</td><td class="col-file">mouse\mad-catz\rat-8.json</td></tr>
+          <tr class="product-row"><td class="row-num">202</td><td class="col-model">R.A.T. 8+ ADV</td><td class="col-base">R.A.T. 8+</td><td class="col-variant">ADV</td><td class="col-slug">mad-catz-rat-8-adv</td><td class="col-file">mouse\mad-catz\rat-8-adv.json</td></tr>
+          <tr class="product-row"><td class="row-num">203</td><td class="col-model">R.A.T. AIR</td><td class="col-base">R.A.T. AIR</td><td class="col-variant"><span class=empty-variant>&mdash;</span></td><td class="col-slug">mad-catz-rat-air</td><td class="col-file">mouse\mad-catz\rat-air.json</td></tr>
+          <tr class="product-row"><td class="row-num">204</td><td class="col-model">R.A.T. DWS</td><td class="col-base">R.A.T. DWS</td><td class="col-variant"><span class=empty-variant>&mdash;</span></td><td class="col-slug">mad-catz-rat-dws</td><td class="col-file">mouse\mad-catz\rat-dws.json</td></tr>
+          <tr class="product-row"><td class="row-num">205</td><td class="col-model">R.A.T. PRO S3</td><td class="col-base">R.A.T. PRO</td><td class="col-variant">S3</td><td class="col-slug">mad-catz-rat-pro-s3</td><td class="col-file">mouse\mad-catz\rat-pro-s3.json</td></tr>
+          <tr class="product-row"><td class="row-num">206</td><td class="col-model">R.A.T. PRO X3</td><td class="col-base">R.A.T. PRO X3</td><td class="col-variant"><span class=empty-variant>&mdash;</span></td><td class="col-slug">mad-catz-rat-pro-x3</td><td class="col-file">mouse\mad-catz\rat-pro-x3.json</td></tr>
+          <tr class="product-row"><td class="row-num">207</td><td class="col-model">R.A.T. PRO X3 Supreme</td><td class="col-base">R.A.T. PRO X3</td><td class="col-variant">Supreme</td><td class="col-slug">mad-catz-rat-pro-x3-supreme</td><td class="col-file">mouse\mad-catz\rat-pro-x3-supreme.json</td></tr>
+          <tr class="brand-header"><td colspan="6">MSI <span class="brand-count">(17)</span></td></tr>
+          <tr class="product-row"><td class="row-num">208</td><td class="col-model">Clutch DM07</td><td class="col-base">Clutch DM07</td><td class="col-variant"><span class=empty-variant>&mdash;</span></td><td class="col-slug">msi-clutch-dm07</td><td class="col-file">mouse\msi\clutch-dm07.json</td></tr>
+          <tr class="product-row"><td class="row-num">209</td><td class="col-model">Clutch GM08</td><td class="col-base">Clutch GM08</td><td class="col-variant"><span class=empty-variant>&mdash;</span></td><td class="col-slug">msi-clutch-gm08</td><td class="col-file">mouse\msi\clutch-gm08.json</td></tr>
+          <tr class="product-row"><td class="row-num">210</td><td class="col-model">Clutch GM11</td><td class="col-base">Clutch GM11</td><td class="col-variant"><span class=empty-variant>&mdash;</span></td><td class="col-slug">msi-clutch-gm11</td><td class="col-file">mouse\msi\clutch-gm11.json</td></tr>
+          <tr class="product-row"><td class="row-num">211</td><td class="col-model">Clutch GM20 Elite</td><td class="col-base">Clutch GM20</td><td class="col-variant">Elite</td><td class="col-slug">msi-clutch-gm20-elite</td><td class="col-file">mouse\msi\clutch-gm20-elite.json</td></tr>
+          <tr class="product-row"><td class="row-num">212</td><td class="col-model">Clutch GM30</td><td class="col-base">Clutch GM30</td><td class="col-variant"><span class=empty-variant>&mdash;</span></td><td class="col-slug">msi-clutch-gm30</td><td class="col-file">mouse\msi\clutch-gm30.json</td></tr>
+          <tr class="product-row"><td class="row-num">213</td><td class="col-model">Clutch GM31 Lightweight</td><td class="col-base">Clutch GM31 Lightweight</td><td class="col-variant"><span class=empty-variant>&mdash;</span></td><td class="col-slug">msi-clutch-gm31-lw</td><td class="col-file">mouse\msi\clutch-gm31-lw.json</td></tr>
+          <tr class="product-row"><td class="row-num">214</td><td class="col-model">Clutch GM31 Lightweight Wireless</td><td class="col-base">Clutch GM31 Lightweight</td><td class="col-variant">Wireless</td><td class="col-slug">msi-clutch-gm31-lw-wireless</td><td class="col-file">mouse\msi\clutch-gm31-lw-wireless.json</td></tr>
+          <tr class="product-row"><td class="row-num">215</td><td class="col-model">Clutch GM41 Lightweight</td><td class="col-base">Clutch GM41 Lightweight</td><td class="col-variant"><span class=empty-variant>&mdash;</span></td><td class="col-slug">msi-clutch-gm41-lw</td><td class="col-file">mouse\msi\clutch-gm41-lw.json</td></tr>
+          <tr class="product-row"><td class="row-num">216</td><td class="col-model">Clutch GM41 Lightweight V2</td><td class="col-base">Clutch GM41 Lightweight</td><td class="col-variant">V2</td><td class="col-slug">msi-clutch-gm41-lw-v2</td><td class="col-file">mouse\msi\clutch-gm41-lw-v2.json</td></tr>
+          <tr class="product-row"><td class="row-num">217</td><td class="col-model">Clutch GM41 Lightweight Wireless</td><td class="col-base">Clutch GM41 Lightweight</td><td class="col-variant">Wireless</td><td class="col-slug">msi-clutch-gm41-lw-wireless</td><td class="col-file">mouse\msi\clutch-gm41-lw-wireless.json</td></tr>
+          <tr class="product-row"><td class="row-num">218</td><td class="col-model">Clutch GM51 Lightweight</td><td class="col-base">Clutch GM51 Lightweight</td><td class="col-variant"><span class=empty-variant>&mdash;</span></td><td class="col-slug">msi-clutch-gm51-lw</td><td class="col-file">mouse\msi\clutch-gm51-lw.json</td></tr>
+          <tr class="product-row"><td class="row-num">219</td><td class="col-model">Clutch GM51 Lightweight Wireless</td><td class="col-base">Clutch GM51 Lightweight</td><td class="col-variant">Wireless</td><td class="col-slug">msi-clutch-gm51-lw-wireless</td><td class="col-file">mouse\msi\clutch-gm51-lw-wireless.json</td></tr>
+          <tr class="product-row"><td class="row-num">220</td><td class="col-model">Forge GM100</td><td class="col-base">Forge GM100</td><td class="col-variant"><span class=empty-variant>&mdash;</span></td><td class="col-slug">msi-forge-gm100</td><td class="col-file">mouse\msi\forge-gm100.json</td></tr>
+          <tr class="product-row"><td class="row-num">221</td><td class="col-model">Forge GM300</td><td class="col-base">Forge GM300</td><td class="col-variant"><span class=empty-variant>&mdash;</span></td><td class="col-slug">msi-forge-gm300</td><td class="col-file">mouse\msi\forge-gm300.json</td></tr>
+          <tr class="product-row"><td class="row-num">222</td><td class="col-model">Forge GM310</td><td class="col-base">Forge GM310</td><td class="col-variant"><span class=empty-variant>&mdash;</span></td><td class="col-slug">msi-forge-gm310</td><td class="col-file">mouse\msi\forge-gm310.json</td></tr>
+          <tr class="product-row"><td class="row-num">223</td><td class="col-model">Versa 300 Elite Wireless</td><td class="col-base">Versa 300</td><td class="col-variant">Elite Wireless</td><td class="col-slug">msi-versa-300-elite-wireless</td><td class="col-file">mouse\msi\versa-300-elite-wireless.json</td></tr>
+          <tr class="product-row"><td class="row-num">224</td><td class="col-model">Versa 300 Wireless</td><td class="col-base">Versa 300</td><td class="col-variant">Wireless</td><td class="col-slug">msi-versa-300-wireless</td><td class="col-file">mouse\msi\versa-300-wireless.json</td></tr>
+          <tr class="brand-header"><td colspan="6">NZXT <span class="brand-count">(3)</span></td></tr>
+          <tr class="product-row"><td class="row-num">225</td><td class="col-model">Lift 2 Ergo</td><td class="col-base">Lift 2</td><td class="col-variant">Ergo</td><td class="col-slug">nzxt-lift-2-ergo</td><td class="col-file">mouse\nzxt\lift-2-ergo.json</td></tr>
+          <tr class="product-row"><td class="row-num">226</td><td class="col-model">Lift 2 Symm</td><td class="col-base">Lift 2</td><td class="col-variant">Symm</td><td class="col-slug">nzxt-lift-2-symm</td><td class="col-file">mouse\nzxt\lift-2-symm.json</td></tr>
+          <tr class="product-row"><td class="row-num">227</td><td class="col-model">Lift Elite Wireless</td><td class="col-base">Lift Elite Wireless</td><td class="col-variant"><span class=empty-variant>&mdash;</span></td><td class="col-slug">nzxt-lift-elite-wireless</td><td class="col-file">mouse\nzxt\lift-elite-wireless.json</td></tr>
+          <tr class="brand-header"><td colspan="6">Pulsar <span class="brand-count">(43)</span></td></tr>
+          <tr class="product-row"><td class="row-num">228</td><td class="col-model">[First Edition] Feinmann F01</td><td class="col-base">[First Edition] Feinmann F01</td><td class="col-variant"><span class=empty-variant>&mdash;</span></td><td class="col-slug">pulsar-first-edition-feinmann-f01</td><td class="col-file">mouse\pulsar\first-edition-feinmann-f01.json</td></tr>
+          <tr class="product-row"><td class="row-num">229</td><td class="col-model">[Founders Edition] X2 v2</td><td class="col-base">[Founders Edition] X2 v2</td><td class="col-variant"><span class=empty-variant>&mdash;</span></td><td class="col-slug">pulsar-founders-edition-x2-v2</td><td class="col-file">mouse\pulsar\founders-edition-x2-v2.json</td></tr>
+          <tr class="product-row"><td class="row-num">230</td><td class="col-model">[Founders Edition] X2 v2 Mini</td><td class="col-base">[Founders Edition] X2 v2</td><td class="col-variant">Mini</td><td class="col-slug">pulsar-founders-edition-x2-v2-mini</td><td class="col-file">mouse\pulsar\founders-edition-x2-v2-mini.json</td></tr>
+          <tr class="product-row"><td class="row-num">231</td><td class="col-model">[Founders Edition] X2A eS</td><td class="col-base">[Founders Edition] X2A eS</td><td class="col-variant"><span class=empty-variant>&mdash;</span></td><td class="col-slug">pulsar-founders-edition-x2a-es</td><td class="col-file">mouse\pulsar\founders-edition-x2a-es.json</td></tr>
+          <tr class="product-row"><td class="row-num">232</td><td class="col-model">[Founders Edition] X2H</td><td class="col-base">[Founders Edition] X2H</td><td class="col-variant"><span class=empty-variant>&mdash;</span></td><td class="col-slug">pulsar-founders-edition-x2h</td><td class="col-file">mouse\pulsar\founders-edition-x2h.json</td></tr>
+          <tr class="product-row"><td class="row-num">233</td><td class="col-model">[Founders Edition] X2H eS</td><td class="col-base">[Founders Edition] X2H eS</td><td class="col-variant"><span class=empty-variant>&mdash;</span></td><td class="col-slug">pulsar-founders-edition-x2h-es</td><td class="col-file">mouse\pulsar\founders-edition-x2h-es.json</td></tr>
+          <tr class="product-row"><td class="row-num">234</td><td class="col-model">[Founders Edition] X2H Mini</td><td class="col-base">[Founders Edition] X2H</td><td class="col-variant">Mini</td><td class="col-slug">pulsar-founders-edition-x2h-mini</td><td class="col-file">mouse\pulsar\founders-edition-x2h-mini.json</td></tr>
+          <tr class="product-row"><td class="row-num">235</td><td class="col-model">[Founders Edition] Xlite v3 eS</td><td class="col-base">[Founders Edition] Xlite v3 eS</td><td class="col-variant"><span class=empty-variant>&mdash;</span></td><td class="col-slug">pulsar-founders-edition-xlite-v3-es</td><td class="col-file">mouse\pulsar\founders-edition-xlite-v3-es.json</td></tr>
+          <tr class="product-row"><td class="row-num">236</td><td class="col-model">X2 Crazylight</td><td class="col-base">X2 Crazylight</td><td class="col-variant"><span class=empty-variant>&mdash;</span></td><td class="col-slug">pulsar-x2-crazylight</td><td class="col-file">mouse\pulsar\x2-crazylight.json</td></tr>
+          <tr class="product-row"><td class="row-num">237</td><td class="col-model">X2 v1</td><td class="col-base">X2 v1</td><td class="col-variant"><span class=empty-variant>&mdash;</span></td><td class="col-slug">pulsar-x2-v1</td><td class="col-file">mouse\pulsar\x2-v1.json</td></tr>
+          <tr class="product-row"><td class="row-num">238</td><td class="col-model">X2 v1 Mini</td><td class="col-base">X2 v1</td><td class="col-variant">Mini</td><td class="col-slug">pulsar-x2-v1-mini</td><td class="col-file">mouse\pulsar\x2-v1-mini.json</td></tr>
+          <tr class="product-row"><td class="row-num">239</td><td class="col-model">X2 v2</td><td class="col-base">X2 v2</td><td class="col-variant"><span class=empty-variant>&mdash;</span></td><td class="col-slug">pulsar-x2-v2</td><td class="col-file">mouse\pulsar\x2-v2.json</td></tr>
+          <tr class="product-row"><td class="row-num">240</td><td class="col-model">X2 v2 Mini</td><td class="col-base">X2 v2</td><td class="col-variant">Mini</td><td class="col-slug">pulsar-x2-v2-mini</td><td class="col-file">mouse\pulsar\x2-v2-mini.json</td></tr>
+          <tr class="product-row"><td class="row-num">241</td><td class="col-model">X2 v3</td><td class="col-base">X2 v3</td><td class="col-variant"><span class=empty-variant>&mdash;</span></td><td class="col-slug">pulsar-x2-v3</td><td class="col-file">mouse\pulsar\x2-v3.json</td></tr>
+          <tr class="product-row"><td class="row-num">242</td><td class="col-model">X2 v3 Mini</td><td class="col-base">X2 v3</td><td class="col-variant">Mini</td><td class="col-slug">pulsar-x2-v3-mini</td><td class="col-file">mouse\pulsar\x2-v3-mini.json</td></tr>
+          <tr class="product-row"><td class="row-num">243</td><td class="col-model">X2 Wired</td><td class="col-base">X2 Wired</td><td class="col-variant"><span class=empty-variant>&mdash;</span></td><td class="col-slug">pulsar-x2-wired</td><td class="col-file">mouse\pulsar\x2-wired.json</td></tr>
+          <tr class="product-row"><td class="row-num">244</td><td class="col-model">X2A</td><td class="col-base">X2A</td><td class="col-variant"><span class=empty-variant>&mdash;</span></td><td class="col-slug">pulsar-x2a</td><td class="col-file">mouse\pulsar\x2a.json</td></tr>
+          <tr class="product-row"><td class="row-num">245</td><td class="col-model">X2A eS</td><td class="col-base">X2A eS</td><td class="col-variant"><span class=empty-variant>&mdash;</span></td><td class="col-slug">pulsar-x2a-es</td><td class="col-file">mouse\pulsar\x2a-es.json</td></tr>
+          <tr class="product-row"><td class="row-num">246</td><td class="col-model">X2A Mini</td><td class="col-base">X2A</td><td class="col-variant">Mini</td><td class="col-slug">pulsar-x2a-mini</td><td class="col-file">mouse\pulsar\x2a-mini.json</td></tr>
+          <tr class="product-row"><td class="row-num">247</td><td class="col-model">X2A v3</td><td class="col-base">X2A v3</td><td class="col-variant"><span class=empty-variant>&mdash;</span></td><td class="col-slug">pulsar-x2a-v3</td><td class="col-file">mouse\pulsar\x2a-v3.json</td></tr>
+          <tr class="product-row"><td class="row-num">248</td><td class="col-model">X2A Wired</td><td class="col-base">X2A Wired</td><td class="col-variant"><span class=empty-variant>&mdash;</span></td><td class="col-slug">pulsar-x2a-wired</td><td class="col-file">mouse\pulsar\x2a-wired.json</td></tr>
+          <tr class="product-row"><td class="row-num">249</td><td class="col-model">X2H</td><td class="col-base">X2H</td><td class="col-variant"><span class=empty-variant>&mdash;</span></td><td class="col-slug">pulsar-x2h</td><td class="col-file">mouse\pulsar\x2h.json</td></tr>
+          <tr class="product-row"><td class="row-num">250</td><td class="col-model">X2H eS</td><td class="col-base">X2H eS</td><td class="col-variant"><span class=empty-variant>&mdash;</span></td><td class="col-slug">pulsar-x2h-es</td><td class="col-file">mouse\pulsar\x2h-es.json</td></tr>
+          <tr class="product-row"><td class="row-num">251</td><td class="col-model">X2H Medium</td><td class="col-base">X2H</td><td class="col-variant">Medium</td><td class="col-slug">pulsar-x2h-medium</td><td class="col-file">mouse\pulsar\x2h-medium.json</td></tr>
+          <tr class="product-row"><td class="row-num">252</td><td class="col-model">X2H Mini</td><td class="col-base">X2H</td><td class="col-variant">Mini</td><td class="col-slug">pulsar-x2h-mini</td><td class="col-file">mouse\pulsar\x2h-mini.json</td></tr>
+          <tr class="product-row"><td class="row-num">253</td><td class="col-model">X2H v3</td><td class="col-base">X2H v3</td><td class="col-variant"><span class=empty-variant>&mdash;</span></td><td class="col-slug">pulsar-x2h-v3</td><td class="col-file">mouse\pulsar\x2h-v3.json</td></tr>
+          <tr class="product-row"><td class="row-num">254</td><td class="col-model">X2H v3 Mini</td><td class="col-base">X2H v3</td><td class="col-variant">Mini</td><td class="col-slug">pulsar-x2h-v3-mini</td><td class="col-file">mouse\pulsar\x2h-v3-mini.json</td></tr>
+          <tr class="product-row"><td class="row-num">255</td><td class="col-model">X2H Wired</td><td class="col-base">X2H Wired</td><td class="col-variant"><span class=empty-variant>&mdash;</span></td><td class="col-slug">pulsar-x2h-wired</td><td class="col-file">mouse\pulsar\x2h-wired.json</td></tr>
+          <tr class="product-row"><td class="row-num">256</td><td class="col-model">X3</td><td class="col-base">X3</td><td class="col-variant"><span class=empty-variant>&mdash;</span></td><td class="col-slug">pulsar-x3</td><td class="col-file">mouse\pulsar\x3.json</td></tr>
+          <tr class="product-row"><td class="row-num">257</td><td class="col-model">X3 LHD</td><td class="col-base">X3 LHD</td><td class="col-variant"><span class=empty-variant>&mdash;</span></td><td class="col-slug">pulsar-x3-lhd</td><td class="col-file">mouse\pulsar\x3-lhd.json</td></tr>
+          <tr class="product-row"><td class="row-num">258</td><td class="col-model">X3 LHD Mini</td><td class="col-base">X3 LHD</td><td class="col-variant">Mini</td><td class="col-slug">pulsar-x3-lhd-mini</td><td class="col-file">mouse\pulsar\x3-lhd-mini.json</td></tr>
+          <tr class="product-row"><td class="row-num">259</td><td class="col-model">X3 Mini</td><td class="col-base">X3</td><td class="col-variant">Mini</td><td class="col-slug">pulsar-x3-mini</td><td class="col-file">mouse\pulsar\x3-mini.json</td></tr>
+          <tr class="product-row"><td class="row-num">260</td><td class="col-model">Xlite v2</td><td class="col-base">Xlite v2</td><td class="col-variant"><span class=empty-variant>&mdash;</span></td><td class="col-slug">pulsar-xlite-v2</td><td class="col-file">mouse\pulsar\xlite-v2.json</td></tr>
+          <tr class="product-row"><td class="row-num">261</td><td class="col-model">Xlite v2 Mini</td><td class="col-base">Xlite v2</td><td class="col-variant">Mini</td><td class="col-slug">pulsar-xlite-v2-mini</td><td class="col-file">mouse\pulsar\xlite-v2-mini.json</td></tr>
+          <tr class="product-row"><td class="row-num">262</td><td class="col-model">Xlite v3 eS</td><td class="col-base">Xlite v3 eS</td><td class="col-variant"><span class=empty-variant>&mdash;</span></td><td class="col-slug">pulsar-xlite-v3-es</td><td class="col-file">mouse\pulsar\xlite-v3-es.json</td></tr>
+          <tr class="product-row"><td class="row-num">263</td><td class="col-model">Xlite v3 Large</td><td class="col-base">Xlite v3</td><td class="col-variant">Large</td><td class="col-slug">pulsar-xlite-v3-large</td><td class="col-file">mouse\pulsar\xlite-v3-large.json</td></tr>
+          <tr class="product-row"><td class="row-num">264</td><td class="col-model">Xlite v3 Medium</td><td class="col-base">Xlite v3</td><td class="col-variant">Medium</td><td class="col-slug">pulsar-xlite-v3-medium</td><td class="col-file">mouse\pulsar\xlite-v3-medium.json</td></tr>
+          <tr class="product-row"><td class="row-num">265</td><td class="col-model">Xlite v3 Mini</td><td class="col-base">Xlite v3</td><td class="col-variant">Mini</td><td class="col-slug">pulsar-xlite-v3-mini</td><td class="col-file">mouse\pulsar\xlite-v3-mini.json</td></tr>
+          <tr class="product-row"><td class="row-num">266</td><td class="col-model">Xlite v4</td><td class="col-base">Xlite v4</td><td class="col-variant"><span class=empty-variant>&mdash;</span></td><td class="col-slug">pulsar-xlite-v4</td><td class="col-file">mouse\pulsar\xlite-v4.json</td></tr>
+          <tr class="product-row"><td class="row-num">267</td><td class="col-model">Xlite v4 eS</td><td class="col-base">Xlite v4 eS</td><td class="col-variant"><span class=empty-variant>&mdash;</span></td><td class="col-slug">pulsar-xlite-v4-es</td><td class="col-file">mouse\pulsar\xlite-v4-es.json</td></tr>
+          <tr class="product-row"><td class="row-num">268</td><td class="col-model">Xlite v4 Large</td><td class="col-base">Xlite v4</td><td class="col-variant">Large</td><td class="col-slug">pulsar-xlite-v4-large</td><td class="col-file">mouse\pulsar\xlite-v4-large.json</td></tr>
+          <tr class="product-row"><td class="row-num">269</td><td class="col-model">Xlite v4 Mini</td><td class="col-base">Xlite v4</td><td class="col-variant">Mini</td><td class="col-slug">pulsar-xlite-v4-mini</td><td class="col-file">mouse\pulsar\xlite-v4-mini.json</td></tr>
+          <tr class="product-row"><td class="row-num">270</td><td class="col-model">Xlite Wired</td><td class="col-base">Xlite Wired</td><td class="col-variant"><span class=empty-variant>&mdash;</span></td><td class="col-slug">pulsar-xlite-wired</td><td class="col-file">mouse\pulsar\xlite-wired.json</td></tr>
+          <tr class="brand-header"><td colspan="6">Pwnage <span class="brand-count">(12)</span></td></tr>
+          <tr class="product-row"><td class="row-num">271</td><td class="col-model">StormBreaker</td><td class="col-base">StormBreaker</td><td class="col-variant"><span class=empty-variant>&mdash;</span></td><td class="col-slug">pwnage-stormbreaker-8k</td><td class="col-file">mouse\pwnage\stormbreaker-8k.json</td></tr>
+          <tr class="product-row"><td class="row-num">272</td><td class="col-model">StormBreaker MAX CF</td><td class="col-base">StormBreaker</td><td class="col-variant">MAX CF</td><td class="col-slug">pwnage-stormbreaker-max-cf</td><td class="col-file">mouse\pwnage\stormbreaker-max-cf.json</td></tr>
+          <tr class="product-row"><td class="row-num">273</td><td class="col-model">StormBreaker X BLG Valorant</td><td class="col-base">StormBreaker</td><td class="col-variant">X BLG Valorant</td><td class="col-slug">pwnage-stormbreaker-x-blg-valorant</td><td class="col-file">mouse\pwnage\stormbreaker-x-blg-valorant.json</td></tr>
+          <tr class="product-row"><td class="row-num">274</td><td class="col-model">StormBreaker x Whzy MAX CF</td><td class="col-base">StormBreaker</td><td class="col-variant">x Whzy MAX CF</td><td class="col-slug">pwnage-stormbreaker-x-whzy-max-cf</td><td class="col-file">mouse\pwnage\stormbreaker-x-whzy-max-cf.json</td></tr>
+          <tr class="product-row"><td class="row-num">275</td><td class="col-model">Trinity CF</td><td class="col-base">Trinity CF</td><td class="col-variant"><span class=empty-variant>&mdash;</span></td><td class="col-slug">pwnage-trinity-cf</td><td class="col-file">mouse\pwnage\trinity-cf.json</td></tr>
+          <tr class="product-row"><td class="row-num">276</td><td class="col-model">Ultra Custom Ergo</td><td class="col-base">Ultra Custom</td><td class="col-variant">Ergo</td><td class="col-slug">pwnage-ultra-custom-ergo</td><td class="col-file">mouse\pwnage\ultra-custom-ergo.json</td></tr>
+          <tr class="product-row"><td class="row-num">277</td><td class="col-model">Ultra Custom Symm</td><td class="col-base">Ultra Custom</td><td class="col-variant">Symm</td><td class="col-slug">pwnage-ultra-custom-symm</td><td class="col-file">mouse\pwnage\ultra-custom-symm.json</td></tr>
+          <tr class="product-row"><td class="row-num">278</td><td class="col-model">Ultra Custom Symm 2</td><td class="col-base">Ultra Custom</td><td class="col-variant">Symm 2</td><td class="col-slug">pwnage-ultra-custom-symm-2</td><td class="col-file">mouse\pwnage\ultra-custom-symm-2.json</td></tr>
+          <tr class="product-row"><td class="row-num">279</td><td class="col-model">Ultra Custom Wireless Ambi</td><td class="col-base">Ultra Custom</td><td class="col-variant">Wireless Ambi</td><td class="col-slug">pwnage-ultra-custom-wireless-ambi</td><td class="col-file">mouse\pwnage\ultra-custom-wireless-ambi.json</td></tr>
+          <tr class="product-row"><td class="row-num">280</td><td class="col-model">Ultra Custom Wireless Ergo Gen 2</td><td class="col-base">Ultra Custom</td><td class="col-variant">Wireless Ergo Gen 2</td><td class="col-slug">pwnage-ultra-custom-wireless-ergo-gen-2</td><td class="col-file">mouse\pwnage\ultra-custom-wireless-ergo-gen-2.json</td></tr>
+          <tr class="product-row"><td class="row-num">281</td><td class="col-model">Ultra Custom Wireless Symm 1 Gen 2</td><td class="col-base">Ultra Custom</td><td class="col-variant">Wireless Symm 1 Gen 2</td><td class="col-slug">pwnage-ultra-custom-wireless-symm-1-gen-2</td><td class="col-file">mouse\pwnage\ultra-custom-wireless-symm-1-gen-2.json</td></tr>
+          <tr class="product-row"><td class="row-num">282</td><td class="col-model">Ultra Custom Wireless Symm 2</td><td class="col-base">Ultra Custom</td><td class="col-variant">Wireless Symm 2</td><td class="col-slug">pwnage-ultra-custom-wireless-symm-2</td><td class="col-file">mouse\pwnage\ultra-custom-wireless-symm-2.json</td></tr>
+          <tr class="brand-header"><td colspan="6">Razer <span class="brand-count">(18)</span></td></tr>
+          <tr class="product-row"><td class="row-num">283</td><td class="col-model">Basilisk V3 35K</td><td class="col-base">Basilisk V3</td><td class="col-variant">35K</td><td class="col-slug">razer-basilisk-v3-35k</td><td class="col-file">mouse\razer\basilisk-v3-35k.json</td></tr>
+          <tr class="product-row"><td class="row-num">284</td><td class="col-model">Basilisk V3 Pro 35K</td><td class="col-base">Basilisk V3</td><td class="col-variant">Pro 35K</td><td class="col-slug">razer-basilisk-v3-pro-35k</td><td class="col-file">mouse\razer\basilisk-v3-pro-35k.json</td></tr>
+          <tr class="product-row"><td class="row-num">285</td><td class="col-model">Basilisk V3 X HyperSpeed</td><td class="col-base">Basilisk V3</td><td class="col-variant">X HyperSpeed</td><td class="col-slug">razer-basilisk-v3-x-hyperspeed</td><td class="col-file">mouse\razer\basilisk-v3-x-hyperspeed.json</td></tr>
+          <tr class="product-row"><td class="row-num">286</td><td class="col-model">Cobra</td><td class="col-base">Cobra</td><td class="col-variant"><span class=empty-variant>&mdash;</span></td><td class="col-slug">razer-cobra</td><td class="col-file">mouse\razer\cobra.json</td></tr>
+          <tr class="product-row"><td class="row-num">287</td><td class="col-model">Cobra Pro</td><td class="col-base">Cobra</td><td class="col-variant">Pro</td><td class="col-slug">razer-cobra-pro</td><td class="col-file">mouse\razer\cobra-pro.json</td></tr>
+          <tr class="product-row"><td class="row-num">288</td><td class="col-model">DeathAdder V3</td><td class="col-base">DeathAdder</td><td class="col-variant">V3</td><td class="col-slug">razer-deathadder-v3</td><td class="col-file">mouse\razer\deathadder-v3.json</td></tr>
+          <tr class="product-row"><td class="row-num">289</td><td class="col-model">DeathAdder V3 HyperSpeed</td><td class="col-base">DeathAdder</td><td class="col-variant">V3 HyperSpeed</td><td class="col-slug">razer-deathadder-v3-hyperspeed</td><td class="col-file">mouse\razer\deathadder-v3-hyperspeed.json</td></tr>
+          <tr class="product-row"><td class="row-num">290</td><td class="col-model">DeathAdder V3 Pro</td><td class="col-base">DeathAdder</td><td class="col-variant">V3 Pro</td><td class="col-slug">razer-deathadder-v3-pro</td><td class="col-file">mouse\razer\deathadder-v3-pro.json</td></tr>
+          <tr class="product-row"><td class="row-num">291</td><td class="col-model">DeathAdder V4 Pro</td><td class="col-base">DeathAdder</td><td class="col-variant">V4 Pro</td><td class="col-slug">razer-deathadder-v4-pro</td><td class="col-file">mouse\razer\deathadder-v4-pro.json</td></tr>
+          <tr class="product-row"><td class="row-num">292</td><td class="col-model">Naga Left-Handed Edition</td><td class="col-base">Naga Left-Handed Edition</td><td class="col-variant"><span class=empty-variant>&mdash;</span></td><td class="col-slug">razer-naga-left-handed-edition</td><td class="col-file">mouse\razer\naga-left-handed-edition.json</td></tr>
+          <tr class="product-row"><td class="row-num">293</td><td class="col-model">Naga V2 HyperSpeed</td><td class="col-base">Naga V2</td><td class="col-variant">HyperSpeed</td><td class="col-slug">razer-naga-v2-hyperspeed</td><td class="col-file">mouse\razer\naga-v2-hyperspeed.json</td></tr>
+          <tr class="product-row"><td class="row-num">294</td><td class="col-model">Naga V2 Pro</td><td class="col-base">Naga V2</td><td class="col-variant">Pro</td><td class="col-slug">razer-naga-v2-pro</td><td class="col-file">mouse\razer\naga-v2-pro.json</td></tr>
+          <tr class="product-row"><td class="row-num">295</td><td class="col-model">Naga X</td><td class="col-base">Naga X</td><td class="col-variant"><span class=empty-variant>&mdash;</span></td><td class="col-slug">razer-naga-x</td><td class="col-file">mouse\razer\naga-x.json</td></tr>
+          <tr class="product-row"><td class="row-num">296</td><td class="col-model">Orochi V2</td><td class="col-base">Orochi V2</td><td class="col-variant"><span class=empty-variant>&mdash;</span></td><td class="col-slug">razer-orochi-v2</td><td class="col-file">mouse\razer\orochi-v2.json</td></tr>
+          <tr class="product-row"><td class="row-num">297</td><td class="col-model">Pro Click</td><td class="col-base">Pro Click</td><td class="col-variant"><span class=empty-variant>&mdash;</span></td><td class="col-slug">razer-pro-click</td><td class="col-file">mouse\razer\pro-click.json</td></tr>
+          <tr class="product-row"><td class="row-num">298</td><td class="col-model">Viper Mini Signature Edition</td><td class="col-base">Viper Mini</td><td class="col-variant">Signature Edition</td><td class="col-slug">razer-viper-mini-signature-edition</td><td class="col-file">mouse\razer\viper-mini-signature-edition.json</td></tr>
+          <tr class="product-row"><td class="row-num">299</td><td class="col-model">Viper V3 HyperSpeed</td><td class="col-base">Viper V3</td><td class="col-variant">HyperSpeed</td><td class="col-slug">razer-viper-v3-hyperspeed</td><td class="col-file">mouse\razer\viper-v3-hyperspeed.json</td></tr>
+          <tr class="product-row"><td class="row-num">300</td><td class="col-model">Viper V3 Pro</td><td class="col-base">Viper V3</td><td class="col-variant">Pro</td><td class="col-slug">razer-viper-v3-pro</td><td class="col-file">mouse\razer\viper-v3-pro.json</td></tr>
+          <tr class="brand-header"><td colspan="6">Redragon <span class="brand-count">(36)</span></td></tr>
+          <tr class="product-row"><td class="row-num">301</td><td class="col-model">Aatrox M811 MMO</td><td class="col-base">Aatrox M811</td><td class="col-variant">MMO</td><td class="col-slug">redragon-aatrox-m811-mmo</td><td class="col-file">mouse\redragon\aatrox-m811-mmo.json</td></tr>
+          <tr class="product-row"><td class="row-num">302</td><td class="col-model">Aatrox M811 Pro</td><td class="col-base">Aatrox M811</td><td class="col-variant">Pro</td><td class="col-slug">redragon-aatrox-m811-pro</td><td class="col-file">mouse\redragon\aatrox-m811-pro.json</td></tr>
+          <tr class="product-row"><td class="row-num">303</td><td class="col-model">Bullseye M806</td><td class="col-base">Bullseye M806</td><td class="col-variant"><span class=empty-variant>&mdash;</span></td><td class="col-slug">redragon-bullseye-m806</td><td class="col-file">mouse\redragon\bullseye-m806.json</td></tr>
+          <tr class="product-row"><td class="row-num">304</td><td class="col-model">Bullseye M806 Pro</td><td class="col-base">Bullseye M806</td><td class="col-variant">Pro</td><td class="col-slug">redragon-bullseye-m806-pro</td><td class="col-file">mouse\redragon\bullseye-m806-pro.json</td></tr>
+          <tr class="product-row"><td class="row-num">305</td><td class="col-model">Cobra M711</td><td class="col-base">Cobra M711</td><td class="col-variant"><span class=empty-variant>&mdash;</span></td><td class="col-slug">redragon-cobra-m711</td><td class="col-file">mouse\redragon\cobra-m711.json</td></tr>
+          <tr class="product-row"><td class="row-num">306</td><td class="col-model">Cobra M711 FPS</td><td class="col-base">Cobra M711</td><td class="col-variant">FPS</td><td class="col-slug">redragon-cobra-m711-fps</td><td class="col-file">mouse\redragon\cobra-m711-fps.json</td></tr>
+          <tr class="product-row"><td class="row-num">307</td><td class="col-model">Devourer M993</td><td class="col-base">Devourer M993</td><td class="col-variant"><span class=empty-variant>&mdash;</span></td><td class="col-slug">redragon-devourer-m993</td><td class="col-file">mouse\redragon\devourer-m993.json</td></tr>
+          <tr class="product-row"><td class="row-num">308</td><td class="col-model">EISA K1NG M916 Pro (1khz)</td><td class="col-base">EISA K1NG M916</td><td class="col-variant">Pro (1khz)</td><td class="col-slug">redragon-eisa-k1ng-m916-pro-1khz</td><td class="col-file">mouse\redragon\eisa-k1ng-m916-pro-1khz.json</td></tr>
+          <tr class="product-row"><td class="row-num">309</td><td class="col-model">FYZU M995</td><td class="col-base">FYZU M995</td><td class="col-variant"><span class=empty-variant>&mdash;</span></td><td class="col-slug">redragon-fyzu-m995</td><td class="col-file">mouse\redragon\fyzu-m995.json</td></tr>
+          <tr class="product-row"><td class="row-num">310</td><td class="col-model">Gainer M656</td><td class="col-base">Gainer M656</td><td class="col-variant"><span class=empty-variant>&mdash;</span></td><td class="col-slug">redragon-gainer-m656</td><td class="col-file">mouse\redragon\gainer-m656.json</td></tr>
+          <tr class="product-row"><td class="row-num">311</td><td class="col-model">Impact Elite M913</td><td class="col-base">Impact Elite M913</td><td class="col-variant"><span class=empty-variant>&mdash;</span></td><td class="col-slug">redragon-impact-elite-m913</td><td class="col-file">mouse\redragon\impact-elite-m913.json</td></tr>
+          <tr class="product-row"><td class="row-num">312</td><td class="col-model">Impact M908</td><td class="col-base">Impact M908</td><td class="col-variant"><span class=empty-variant>&mdash;</span></td><td class="col-slug">redragon-impact-m908</td><td class="col-file">mouse\redragon\impact-m908.json</td></tr>
+          <tr class="product-row"><td class="row-num">313</td><td class="col-model">Invader M719 Pro</td><td class="col-base">Invader M719</td><td class="col-variant">Pro</td><td class="col-slug">redragon-invader-m719-pro</td><td class="col-file">mouse\redragon\invader-m719-pro.json</td></tr>
+          <tr class="product-row"><td class="row-num">314</td><td class="col-model">K1NG M724 (1K Hz)</td><td class="col-base">K1NG M724</td><td class="col-variant">(1K Hz)</td><td class="col-slug">redragon-k1ng-m724-1k-hz</td><td class="col-file">mouse\redragon\k1ng-m724-1k-hz.json</td></tr>
+          <tr class="product-row"><td class="row-num">315</td><td class="col-model">K1NG M916 (2.4Ghz Wireless)</td><td class="col-base">K1NG M916</td><td class="col-variant">(2.4Ghz Wireless)</td><td class="col-slug">redragon-k1ng-m916-24ghz-wireless</td><td class="col-file">mouse\redragon\k1ng-m916-24ghz-wireless.json</td></tr>
+          <tr class="product-row"><td class="row-num">316</td><td class="col-model">K1NG M916 PRO (1K Hz)</td><td class="col-base">K1NG M916</td><td class="col-variant">PRO (1K Hz)</td><td class="col-slug">redragon-k1ng-m916-pro-1k-hz</td><td class="col-file">mouse\redragon\k1ng-m916-pro-1k-hz.json</td></tr>
+          <tr class="product-row"><td class="row-num">317</td><td class="col-model">K1NG M916 PRO (4K Hz)</td><td class="col-base">K1NG M916</td><td class="col-variant">PRO (4K Hz)</td><td class="col-slug">redragon-k1ng-m916-pro-4k-hz</td><td class="col-file">mouse\redragon\k1ng-m916-pro-4k-hz.json</td></tr>
+          <tr class="product-row"><td class="row-num">318</td><td class="col-model">K1NG M996 (8K Hz)</td><td class="col-base">K1NG M996</td><td class="col-variant">(8K Hz)</td><td class="col-slug">redragon-k1ng-m996-8k-hz</td><td class="col-file">mouse\redragon\k1ng-m996-8k-hz.json</td></tr>
+          <tr class="product-row"><td class="row-num">319</td><td class="col-model">K1NG MAX M918 (1K Hz)</td><td class="col-base">K1NG MAX M918</td><td class="col-variant">(1K Hz)</td><td class="col-slug">redragon-k1ng-max-m918-1k-hz</td><td class="col-file">mouse\redragon\k1ng-max-m918-1k-hz.json</td></tr>
+          <tr class="product-row"><td class="row-num">320</td><td class="col-model">K1NG MAX M918 PRO (1K Hz)</td><td class="col-base">K1NG MAX M918</td><td class="col-variant">PRO (1K Hz)</td><td class="col-slug">redragon-k1ng-max-m918-pro-1k-hz</td><td class="col-file">mouse\redragon\k1ng-max-m918-pro-1k-hz.json</td></tr>
+          <tr class="product-row"><td class="row-num">321</td><td class="col-model">Legend Chroma M990</td><td class="col-base">Legend Chroma M990</td><td class="col-variant"><span class=empty-variant>&mdash;</span></td><td class="col-slug">redragon-legend-chroma-m990</td><td class="col-file">mouse\redragon\legend-chroma-m990.json</td></tr>
+          <tr class="product-row"><td class="row-num">322</td><td class="col-model">M991</td><td class="col-base">M991</td><td class="col-variant"><span class=empty-variant>&mdash;</span></td><td class="col-slug">redragon-m991-wireless-fps</td><td class="col-file">mouse\redragon\m991-wireless-fps.json</td></tr>
+          <tr class="product-row"><td class="row-num">323</td><td class="col-model">Mirage 2 M690-1</td><td class="col-base">Mirage 2 M690-1</td><td class="col-variant"><span class=empty-variant>&mdash;</span></td><td class="col-slug">redragon-mirage-2-m690-1</td><td class="col-file">mouse\redragon\mirage-2-m690-1.json</td></tr>
+          <tr class="product-row"><td class="row-num">324</td><td class="col-model">Mirage M690 Pro</td><td class="col-base">Mirage M690</td><td class="col-variant">Pro</td><td class="col-slug">redragon-mirage-m690-pro</td><td class="col-file">mouse\redragon\mirage-m690-pro.json</td></tr>
+          <tr class="product-row"><td class="row-num">325</td><td class="col-model">Nirvana M652</td><td class="col-base">Nirvana M652</td><td class="col-variant"><span class=empty-variant>&mdash;</span></td><td class="col-slug">redragon-nirvana-m652</td><td class="col-file">mouse\redragon\nirvana-m652.json</td></tr>
+          <tr class="product-row"><td class="row-num">326</td><td class="col-model">Predator M612</td><td class="col-base">Predator M612</td><td class="col-variant"><span class=empty-variant>&mdash;</span></td><td class="col-slug">redragon-predator-m612</td><td class="col-file">mouse\redragon\predator-m612.json</td></tr>
+          <tr class="product-row"><td class="row-num">327</td><td class="col-model">Predator M612 Pro</td><td class="col-base">Predator M612</td><td class="col-variant">Pro</td><td class="col-slug">redragon-predator-m612-pro</td><td class="col-file">mouse\redragon\predator-m612-pro.json</td></tr>
+          <tr class="product-row"><td class="row-num">328</td><td class="col-model">Rind M813 Pro</td><td class="col-base">Rind M813</td><td class="col-variant">Pro</td><td class="col-slug">redragon-rind-m813-pro</td><td class="col-file">mouse\redragon\rind-m813-pro.json</td></tr>
+          <tr class="product-row"><td class="row-num">329</td><td class="col-model">Storm M808</td><td class="col-base">Storm M808</td><td class="col-variant"><span class=empty-variant>&mdash;</span></td><td class="col-slug">redragon-storm-m808</td><td class="col-file">mouse\redragon\storm-m808.json</td></tr>
+          <tr class="product-row"><td class="row-num">330</td><td class="col-model">Storm M808-N</td><td class="col-base">Storm M808-N</td><td class="col-variant"><span class=empty-variant>&mdash;</span></td><td class="col-slug">redragon-storm-m808-n</td><td class="col-file">mouse\redragon\storm-m808-n.json</td></tr>
+          <tr class="product-row"><td class="row-num">331</td><td class="col-model">Storm Pro M808</td><td class="col-base">Storm Pro M808</td><td class="col-variant"><span class=empty-variant>&mdash;</span></td><td class="col-slug">redragon-storm-pro-m808</td><td class="col-file">mouse\redragon\storm-pro-m808.json</td></tr>
+          <tr class="product-row"><td class="row-num">332</td><td class="col-model">Taipan Pro M810 Pro</td><td class="col-base">Taipan Pro M810</td><td class="col-variant">Pro</td><td class="col-slug">redragon-taipan-pro-m810-pro</td><td class="col-file">mouse\redragon\taipan-pro-m810-pro.json</td></tr>
+          <tr class="product-row"><td class="row-num">333</td><td class="col-model">Trident M616</td><td class="col-base">Trident M616</td><td class="col-variant"><span class=empty-variant>&mdash;</span></td><td class="col-slug">redragon-trident-m616</td><td class="col-file">mouse\redragon\trident-m616.json</td></tr>
+          <tr class="product-row"><td class="row-num">334</td><td class="col-model">Trident M693</td><td class="col-base">Trident M693</td><td class="col-variant"><span class=empty-variant>&mdash;</span></td><td class="col-slug">redragon-trident-m693</td><td class="col-file">mouse\redragon\trident-m693.json</td></tr>
+          <tr class="product-row"><td class="row-num">335</td><td class="col-model">Vampire Elite M686</td><td class="col-base">Vampire Elite M686</td><td class="col-variant"><span class=empty-variant>&mdash;</span></td><td class="col-slug">redragon-vampire-elite-m686</td><td class="col-file">mouse\redragon\vampire-elite-m686.json</td></tr>
+          <tr class="product-row"><td class="row-num">336</td><td class="col-model">Woki M994</td><td class="col-base">Woki M994</td><td class="col-variant"><span class=empty-variant>&mdash;</span></td><td class="col-slug">redragon-woki-m994</td><td class="col-file">mouse\redragon\woki-m994.json</td></tr>
+          <tr class="brand-header"><td colspan="6">Turtle Beach <span class="brand-count">(6)</span></td></tr>
+          <tr class="product-row"><td class="row-num">337</td><td class="col-model">Burst II Air</td><td class="col-base">Burst II</td><td class="col-variant">Air</td><td class="col-slug">turtle-beach-burst-ii-air</td><td class="col-file">mouse\turtle-beach\burst-ii-air.json</td></tr>
+          <tr class="product-row"><td class="row-num">338</td><td class="col-model">Kone II</td><td class="col-base">Kone II</td><td class="col-variant"><span class=empty-variant>&mdash;</span></td><td class="col-slug">turtle-beach-kone-ii</td><td class="col-file">mouse\turtle-beach\kone-ii.json</td></tr>
+          <tr class="product-row"><td class="row-num">339</td><td class="col-model">Kone II Air</td><td class="col-base">Kone II</td><td class="col-variant">Air</td><td class="col-slug">turtle-beach-kone-ii-air</td><td class="col-file">mouse\turtle-beach\kone-ii-air.json</td></tr>
+          <tr class="product-row"><td class="row-num">340</td><td class="col-model">Kone XP Air</td><td class="col-base">Kone XP</td><td class="col-variant">Air</td><td class="col-slug">turtle-beach-kone-xp-air</td><td class="col-file">mouse\turtle-beach\kone-xp-air.json</td></tr>
+          <tr class="product-row"><td class="row-num">341</td><td class="col-model">Pure Air</td><td class="col-base">Pure</td><td class="col-variant">Air</td><td class="col-slug">turtle-beach-pure-air</td><td class="col-file">mouse\turtle-beach\pure-air.json</td></tr>
+          <tr class="product-row"><td class="row-num">342</td><td class="col-model">Pure SEL</td><td class="col-base">Pure</td><td class="col-variant">SEL</td><td class="col-slug">turtle-beach-pure-sel</td><td class="col-file">mouse\turtle-beach\pure-sel.json</td></tr>
+          <tr class="cat-header"><td colspan="6"><span class="cat-icon">&#x1F5A5;</span> Monitor <span class="cat-meta">12 products &middot; 10 brands</span></td></tr>
+          <tr class="brand-header"><td colspan="6">Acer <span class="brand-count">(1)</span></td></tr>
+          <tr class="product-row"><td class="row-num">343</td><td class="col-model">Predator X34 OLED</td><td class="col-base">Predator X34</td><td class="col-variant">OLED</td><td class="col-slug">acer-predator-x34-oled</td><td class="col-file">monitor\acer\predator-x34-oled.json</td></tr>
+          <tr class="brand-header"><td colspan="6">Alienware <span class="brand-count">(2)</span></td></tr>
+          <tr class="product-row"><td class="row-num">344</td><td class="col-model">AW2725Q</td><td class="col-base">AW2725Q</td><td class="col-variant"><span class=empty-variant>&mdash;</span></td><td class="col-slug">alienware-aw2725q</td><td class="col-file">monitor\dell\aw2725q.json</td></tr>
+          <tr class="product-row"><td class="row-num">345</td><td class="col-model">AW3423DWF</td><td class="col-base">AW3423DWF</td><td class="col-variant"><span class=empty-variant>&mdash;</span></td><td class="col-slug">alienware-aw3423dwf</td><td class="col-file">monitor\alienware\aw3423dwf.json</td></tr>
+          <tr class="brand-header"><td colspan="6">Asus <span class="brand-count">(1)</span></td></tr>
+          <tr class="product-row"><td class="row-num">346</td><td class="col-model">ROG Swift PG27AQDM</td><td class="col-base">ROG Swift PG27AQDM</td><td class="col-variant"><span class=empty-variant>&mdash;</span></td><td class="col-slug">asus-rog-swift-pg27aqdm</td><td class="col-file">monitor\asus\rog-swift-pg27aqdm.json</td></tr>
+          <tr class="brand-header"><td colspan="6">Dell <span class="brand-count">(1)</span></td></tr>
+          <tr class="product-row"><td class="row-num">347</td><td class="col-model">UltraSharp U3425WE</td><td class="col-base">UltraSharp U3425WE</td><td class="col-variant"><span class=empty-variant>&mdash;</span></td><td class="col-slug">dell-ultrasharp-u3425we</td><td class="col-file">monitor\dell\ultrasharp-u3425we.json</td></tr>
+          <tr class="brand-header"><td colspan="6">Gigabyte <span class="brand-count">(1)</span></td></tr>
+          <tr class="product-row"><td class="row-num">348</td><td class="col-model">MO27Q2</td><td class="col-base">MO27Q2</td><td class="col-variant"><span class=empty-variant>&mdash;</span></td><td class="col-slug">gigabyte-mo27q2</td><td class="col-file">monitor\gigabyte\mo27q2.json</td></tr>
+          <tr class="brand-header"><td colspan="6">HP <span class="brand-count">(1)</span></td></tr>
+          <tr class="product-row"><td class="row-num">349</td><td class="col-model">Omen Transcend 32</td><td class="col-base">Omen Transcend 32</td><td class="col-variant"><span class=empty-variant>&mdash;</span></td><td class="col-slug">hp-omen-transcend-32</td><td class="col-file">monitor\hp\omen-transcend-32.json</td></tr>
+          <tr class="brand-header"><td colspan="6">LG <span class="brand-count">(1)</span></td></tr>
+          <tr class="product-row"><td class="row-num">350</td><td class="col-model">27GR95QE-B</td><td class="col-base">27GR95QE-B</td><td class="col-variant"><span class=empty-variant>&mdash;</span></td><td class="col-slug">lg-27gr95qe-b</td><td class="col-file">monitor\lg\27gr95qe-b.json</td></tr>
+          <tr class="brand-header"><td colspan="6">MSI <span class="brand-count">(2)</span></td></tr>
+          <tr class="product-row"><td class="row-num">351</td><td class="col-model">MAG 274QRF QD E2</td><td class="col-base">MAG 274QRF QD E2</td><td class="col-variant"><span class=empty-variant>&mdash;</span></td><td class="col-slug">msi-mag-274qrf-qd-e2</td><td class="col-file">monitor\msi\mag-274qrf-qd-e2.json</td></tr>
+          <tr class="product-row"><td class="row-num">352</td><td class="col-model">MPG 321URX QD-OLED</td><td class="col-base">MPG 321URX QD-OLED</td><td class="col-variant"><span class=empty-variant>&mdash;</span></td><td class="col-slug">msi-mpg-321urx-qd-oled</td><td class="col-file">monitor\msi\mpg-321urx-qd-oled.json</td></tr>
+          <tr class="brand-header"><td colspan="6">Samsung <span class="brand-count">(1)</span></td></tr>
+          <tr class="product-row"><td class="row-num">353</td><td class="col-model">Smart Monitor M9</td><td class="col-base">Smart Monitor M9</td><td class="col-variant"><span class=empty-variant>&mdash;</span></td><td class="col-slug">samsung-smart-monitor-m9</td><td class="col-file">monitor\samsung\smart-monitor-m9.json</td></tr>
+          <tr class="brand-header"><td colspan="6">ViewSonic <span class="brand-count">(1)</span></td></tr>
+          <tr class="product-row"><td class="row-num">354</td><td class="col-model">Elite XG321UG</td><td class="col-base">Elite XG321UG</td><td class="col-variant"><span class=empty-variant>&mdash;</span></td><td class="col-slug">viewsonic-elite-xg321ug</td><td class="col-file">monitor\viewsonic\elite-xg321ug.json</td></tr>
+          <tr class="cat-header"><td colspan="6"><span class="cat-icon">&#x2328;</span> Keyboard <span class="cat-meta">12 products &middot; 10 brands</span></td></tr>
+          <tr class="brand-header"><td colspan="6">Asus <span class="brand-count">(1)</span></td></tr>
+          <tr class="product-row"><td class="row-num">355</td><td class="col-model">ROG Strix Scope II 96 Wireless</td><td class="col-base">ROG Strix Scope II 96 Wireless</td><td class="col-variant"><span class=empty-variant>&mdash;</span></td><td class="col-slug">asus-rog-strix-scope-ii-96-wireless</td><td class="col-file">keyboard\asus\rog-strix-scope-ii-96-wireless.json</td></tr>
+          <tr class="brand-header"><td colspan="6">Corsair <span class="brand-count">(1)</span></td></tr>
+          <tr class="product-row"><td class="row-num">356</td><td class="col-model">K100 RGB</td><td class="col-base">K100 RGB</td><td class="col-variant"><span class=empty-variant>&mdash;</span></td><td class="col-slug">corsair-k100-rgb</td><td class="col-file">keyboard\corsair\k100-rgb.json</td></tr>
+          <tr class="brand-header"><td colspan="6">HyperX <span class="brand-count">(1)</span></td></tr>
+          <tr class="product-row"><td class="row-num">357</td><td class="col-model">Alloy Origins</td><td class="col-base">Alloy Origins</td><td class="col-variant"><span class=empty-variant>&mdash;</span></td><td class="col-slug">hyperx-alloy-origins</td><td class="col-file">keyboard\hyperx\alloy-origins.json</td></tr>
+          <tr class="brand-header"><td colspan="6">Lemokey <span class="brand-count">(1)</span></td></tr>
+          <tr class="product-row"><td class="row-num">358</td><td class="col-model">P1 HE Wireless</td><td class="col-base">P1 HE Wireless</td><td class="col-variant"><span class=empty-variant>&mdash;</span></td><td class="col-slug">lemokey-p1-he-wireless</td><td class="col-file">keyboard\lemokey\p1-he-wireless.json</td></tr>
+          <tr class="brand-header"><td colspan="6">Logitech G <span class="brand-count">(1)</span></td></tr>
+          <tr class="product-row"><td class="row-num">359</td><td class="col-model">G915 TKL</td><td class="col-base">G915</td><td class="col-variant">TKL</td><td class="col-slug">logitech-g-g915-tkl</td><td class="col-file">keyboard\logitech-g\g915-tkl.json</td></tr>
+          <tr class="brand-header"><td colspan="6">Mountain <span class="brand-count">(1)</span></td></tr>
+          <tr class="product-row"><td class="row-num">360</td><td class="col-model">Everest 60</td><td class="col-base">Everest</td><td class="col-variant">60</td><td class="col-slug">mountain-everest-60</td><td class="col-file">keyboard\mountain\everest-60.json</td></tr>
+          <tr class="brand-header"><td colspan="6">NuPhy <span class="brand-count">(1)</span></td></tr>
+          <tr class="product-row"><td class="row-num">361</td><td class="col-model">Field75 HE</td><td class="col-base">Field75</td><td class="col-variant">HE</td><td class="col-slug">nuphy-field75he</td><td class="col-file">keyboard\nuphy\field75he.json</td></tr>
+          <tr class="brand-header"><td colspan="6">Razer <span class="brand-count">(2)</span></td></tr>
+          <tr class="product-row"><td class="row-num">362</td><td class="col-model">BlackWidow V3</td><td class="col-base">BlackWidow V3</td><td class="col-variant"><span class=empty-variant>&mdash;</span></td><td class="col-slug">razer-blackwidow-v3</td><td class="col-file">keyboard\razer\blackwidow-v3.json</td></tr>
+          <tr class="product-row"><td class="row-num">363</td><td class="col-model">Huntsman V2 Analog</td><td class="col-base">Huntsman V2</td><td class="col-variant">Analog</td><td class="col-slug">razer-huntsman-v2-analog</td><td class="col-file">keyboard\razer\huntsman-v2-analog.json</td></tr>
+          <tr class="brand-header"><td colspan="6">SteelSeries <span class="brand-count">(2)</span></td></tr>
+          <tr class="product-row"><td class="row-num">364</td><td class="col-model">Apex Pro Gen 3</td><td class="col-base">Apex Pro</td><td class="col-variant">Gen 3</td><td class="col-slug">steelseries-apex-pro-gen-3</td><td class="col-file">keyboard\steelseries\apex-pro-gen-3.json</td></tr>
+          <tr class="product-row"><td class="row-num">365</td><td class="col-model">Apex Pro TKL Gen 3</td><td class="col-base">Apex Pro</td><td class="col-variant">TKL Gen 3</td><td class="col-slug">steelseries-apex-pro-tkl-gen-3</td><td class="col-file">keyboard\steelseries\apex-pro-tkl-gen-3.json</td></tr>
+          <tr class="brand-header"><td colspan="6">Wooting <span class="brand-count">(1)</span></td></tr>
+          <tr class="product-row"><td class="row-num">366</td><td class="col-model">60HE</td><td class="col-base">60HE</td><td class="col-variant"><span class=empty-variant>&mdash;</span></td><td class="col-slug">wooting-60he</td><td class="col-file">keyboard\wooting\60he.json</td></tr>
+        </tbody>
+      </table>
+    </main>
+  </div>
+
+  <script>
+    const input = document.getElementById('search');
+    const tbody = document.getElementById('tbody');
+
+    input.addEventListener('input', () => {
+      const q = input.value.toLowerCase().trim();
+      const rows = tbody.querySelectorAll('tr');
+      let lastCatVisible = false;
+      let lastBrandVisible = false;
+      let lastCatRow = null;
+      let lastBrandRow = null;
+
+      rows.forEach(row => {
+        if (row.classList.contains('cat-header')) {
+          lastCatRow = row;
+          lastCatVisible = false;
+          row.classList.add('hidden');
+          return;
+        }
+        if (row.classList.contains('brand-header')) {
+          lastBrandRow = row;
+          lastBrandVisible = false;
+          row.classList.add('hidden');
+          return;
+        }
+
+        if (!q) {
+          row.classList.remove('hidden');
+          if (lastCatRow) lastCatRow.classList.remove('hidden');
+          if (lastBrandRow) lastBrandRow.classList.remove('hidden');
+          return;
+        }
+
+        const text = row.textContent.toLowerCase();
+        const match = text.includes(q);
+        row.classList.toggle('hidden', !match);
+
+        if (match) {
+          if (lastCatRow) { lastCatRow.classList.remove('hidden'); lastCatVisible = true; }
+          if (lastBrandRow) { lastBrandRow.classList.remove('hidden'); lastBrandVisible = true; }
+        }
+      });
+    });
+  </script>
+</body>
+</html>

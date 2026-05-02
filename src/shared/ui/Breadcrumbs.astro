@@ -1,0 +1,93 @@
+---
+/**
+ * Breadcrumbs - reusable breadcrumb nav with Schema.org BreadcrumbList microdata.
+ * Port of HBS site_shared.css breadcrumb styles (.breadcrumbs / .breadcrumb / .crumb).
+ * Used on site-index pages, article pages, snapshot pages.
+ */
+interface BreadcrumbItem {
+  label: string;
+  href?: string;
+}
+
+interface Props {
+  items: BreadcrumbItem[];
+  categoryClass?: string;
+}
+
+const { items, categoryClass } = Astro.props;
+---
+
+<header class:list={['breadcrumbs', categoryClass]}>
+  <nav aria-label="Breadcrumb">
+    <ol class="breadcrumb" itemscope itemtype="https://schema.org/BreadcrumbList">
+      {items.map((item, i) => (
+        <li
+          class="crumb"
+          itemprop="itemListElement"
+          itemscope
+          itemtype="https://schema.org/ListItem"
+          aria-current={item.href ? undefined : 'page'}
+        >
+          {item.href ? (
+            <a
+              class="crumb__link"
+              href={item.href}
+              itemprop="item"
+            >
+              <span itemprop="name">{item.label}</span>
+            </a>
+          ) : (
+            <span class="crumb__current" itemprop="name">
+              {item.label}
+            </span>
+          )}
+          <meta itemprop="position" content={String(i + 1)} />
+        </li>
+      ))}
+    </ol>
+  </nav>
+</header>
+
+<style>
+  /* Port of HBS site_shared.css lines 915-945 - breadcrumb styling */
+  .breadcrumbs {
+    font-family: var(--identity-font);
+    font-weight: var(--font-weight4);
+    font-size: var(--font-size-13px);
+  }
+
+  .breadcrumb {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    color: var(--grey-color-2);
+    text-transform: capitalize;
+  }
+
+  .crumb {
+    display: inline-flex;
+    align-items: center;
+    margin: 0;
+    color: var(--grey-color-2);
+  }
+
+  .crumb + .crumb::before {
+    content: '\203A';
+    margin: 0 4px;
+    color: var(--grey-color-2);
+  }
+
+  .crumb__link,
+  .crumb__current {
+    text-decoration: none;
+    color: var(--grey-color-2);
+  }
+
+  a.crumb__link:hover {
+    text-decoration: underline;
+    color: var(--card-color, var(--site-color));
+  }
+</style>

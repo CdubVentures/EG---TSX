@@ -1,9 +1,9 @@
 {
   "slug": "lamzu-atlantis-mini-4k",
   "brand": "Lamzu",
-  "model": "Atlantis Mini 4k",
-  "baseModel": "Atlantis",
-  "variant": "Mini 4k",
+  "model": "Atlantis Mini 4K",
+  "baseModel": "Atlantis Mini",
+  "variant": "4K",
   "category": "mouse",
   "imagePath": "/images/mouse/lamzu/atlantis-mini-4k",
   "cardTags": "false",

@@ -1,0 +1,74 @@
+[
+  {
+    "path": "src/pages/api/search.ts",
+    "file_type": "MODIFIED",
+    "category": "api",
+    "mtime": "2026-03-07T15:05:00Z"
+  },
+  {
+    "path": "src/features/auth/server/cognito.ts",
+    "file_type": "MODIFIED",
+    "category": "auth",
+    "mtime": "2026-03-07T15:04:00Z"
+  },
+  {
+    "path": "src/features/search/index.ts",
+    "file_type": "MODIFIED",
+    "category": "search",
+    "mtime": "2026-03-07T15:03:00Z"
+  },
+  {
+    "path": "src/content/data-products/mice/razer/razer-viper-v3-pro.json",
+    "file_type": "MODIFIED",
+    "category": "product",
+    "mtime": "2026-03-07T15:02:00Z"
+  },
+  {
+    "path": "src/content/reviews/razer-viper-v3-pro/index.mdx",
+    "file_type": "MODIFIED",
+    "category": "review",
+    "mtime": "2026-03-07T15:01:00Z"
+  },
+  {
+    "path": "src/content/guides/best-gaming-mice-2026/index.mdx",
+    "file_type": "MODIFIED",
+    "category": "guide",
+    "mtime": "2026-03-07T15:00:00Z"
+  },
+  {
+    "path": "src/content/news/march-deploy-readiness/index.mdx",
+    "file_type": "MODIFIED",
+    "category": "news",
+    "mtime": "2026-03-07T14:59:00Z"
+  },
+  {
+    "path": "src/shared/ui/Button.tsx",
+    "file_type": "MODIFIED",
+    "category": "shared",
+    "mtime": "2026-03-07T14:58:00Z"
+  },
+  {
+    "path": "public/images/mice/razer-viper-v3-pro/top.webp",
+    "file_type": "MODIFIED",
+    "category": "image",
+    "mtime": "2026-03-07T14:57:00Z"
+  },
+  {
+    "path": "src/content/pages/home/index.mdx",
+    "file_type": "MODIFIED",
+    "category": "page",
+    "mtime": "2026-03-07T14:56:00Z"
+  },
+  {
+    "path": "src/data/tooltips/mouse.ts",
+    "file_type": "MODIFIED",
+    "category": "data",
+    "mtime": "2026-03-07T14:55:00Z"
+  },
+  {
+    "path": "src/features/pc-builder/store.ts",
+    "file_type": "MODIFIED",
+    "category": "feature",
+    "mtime": "2026-03-07T14:54:00Z"
+  }
+]

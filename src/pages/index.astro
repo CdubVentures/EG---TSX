@@ -12,7 +12,7 @@ import LatestNews from '@features/home/components/LatestNews.astro';
 import { CONFIG } from '@core/config';
 import { getProducts } from '@core/products';
 import { getReviews, getGuides, getNews, getGames } from '@core/content';
-import { buildDashboard } from '@core/dashboard';
+import { buildDashboard, sortByPinnedThenDate, pinnedSet, badgesMap } from '@core/dashboard';
 import type { DashboardEntry } from '@core/article-helpers';
 import { toFeaturedItem, groupByCategory, getActiveCategories } from '@features/home/featured-scroller-utils';
 
@@ -33,7 +33,7 @@ const taggedNews    = news.map(e => ({ ...e, _collection: 'news' })) as Dashboar
 
 const allArticles = [...taggedReviews, ...taggedGuides, ...taggedNews];
 
-// Dashboard: editorial slot control, pins, badges from config/data/dashboard.json
+// Dashboard: editorial slot control, pins, badges from config/data/content.json
 const dashboardItems = buildDashboard(allArticles);
 
 // News sidebar: first 3 news items with hero image (from original news list, not merged)
@@ -43,14 +43,19 @@ const newsItems = taggedNews.filter(e => e.data.hero).slice(0, 3);
 const _usedIds = new Set(dashboardItems.map(e => e.entry.id));
 
 // ── Games data ──
-const games = await getGames();
+// WHY: Tag with _collection so sortByPinnedThenDate can build "games:{id}" keys
+// to match against pinnedSet. Without this, pinned games don't float to front.
+const rawGames = await getGames();
+const taggedGames = rawGames.map(e => ({ ...e, _collection: 'games' })) as DashboardEntry[];
+const games = sortByPinnedThenDate(taggedGames, pinnedSet);
 
 // ── Featured Reviews + Highlighted Guides data ──
 const availableReviews = taggedReviews.filter(e => !_usedIds.has(e.id));
 const availableGuides  = taggedGuides.filter(e => !_usedIds.has(e.id));
 
-const reviewItems = availableReviews.filter(e => e.data.hero).map(toFeaturedItem);
-const guideItems  = availableGuides.filter(e => e.data.hero).map(toFeaturedItem);
+const pinBadgeConfig = { pinnedSet, badgesMap };
+const reviewItems = sortByPinnedThenDate(availableReviews.filter(e => e.data.hero), pinnedSet).map(e => toFeaturedItem(e, pinBadgeConfig));
+const guideItems  = sortByPinnedThenDate(availableGuides.filter(e => e.data.hero), pinnedSet).map(e => toFeaturedItem(e, pinBadgeConfig));
 
 const reviewsByCategory = groupByCategory(reviewItems);
 const guidesByCategory  = groupByCategory(guideItems);
@@ -59,12 +64,13 @@ const guideActiveCats   = getActiveCategories(guidesByCategory, CONFIG.contentCa
 
 // ── Latest News data (scroller4x4 section) ──
 const availableNews = taggedNews.filter(e => !_usedIds.has(e.id) && e.data.hero);
-const latestNewsItems = availableNews.map(toFeaturedItem);
+const latestNewsItems = sortByPinnedThenDate(availableNews, pinnedSet).map(e => toFeaturedItem(e, pinBadgeConfig));
 ---
 
 <MainLayout
   title={`${CONFIG.site.name} — The Smarter Way to Compare PC Gear`}
   description={CONFIG.site.defaultDescription}
+  canonicalUrl={`${CONFIG.site.url}/`}
   theme="gaming"
 >
   <AnnouncementBar />
@@ -79,7 +85,7 @@ const latestNewsItems = availableNews.map(toFeaturedItem);
 
     <aside class="home-rail -right" style="--rail-pad-top: 5rem;">
       <div class="sticky-stack" data-sticky="true">
-        <AdSlot campaign="home-rail-top" />
+        <AdSlot position="sidebar_sticky" />
       </div>
     </aside>
   </section>
@@ -89,13 +95,13 @@ const latestNewsItems = availableNews.map(toFeaturedItem);
     <div class="home-rail-main">
       <Dashboard items={dashboardItems} newsItems={newsItems} />
       <div class="home-ad">
-        <AdSlot campaign="inline-ad" />
+        <AdSlot position="in_content" />
       </div>
     </div>
 
     <aside class="home-rail -right" style="--rail-pad-top: 3.75rem;">
       <div class="sticky-stack" data-sticky="true">
-        <AdSlot campaign="home-rail-body-1" />
+        <AdSlot position="sidebar_sticky" />
       </div>
     </aside>
   </section>
@@ -110,7 +116,7 @@ const latestNewsItems = availableNews.map(toFeaturedItem);
             subtitle="Reviewed and Pro-Tested"
             seeMoreHref="/games"
           />
-          <GamesScroller games={games} />
+          <GamesScroller games={games} pinnedSet={pinnedSet} badgesMap={badgesMap} />
         </div>
       )}
 
@@ -127,13 +133,13 @@ const latestNewsItems = availableNews.map(toFeaturedItem);
       </div>
 
       <div class="home-ad">
-        <AdSlot campaign="inline-ad" />
+        <AdSlot position="in_content" />
       </div>
     </div>
 
     <aside class="home-rail -right" style="--rail-pad-top: 4rem;">
       <div class="sticky-stack" data-sticky="true">
-        <AdSlot campaign="home-rail-body-2" />
+        <AdSlot position="sidebar_sticky" />
       </div>
     </aside>
   </section>
@@ -162,7 +168,7 @@ const latestNewsItems = availableNews.map(toFeaturedItem);
 
     <aside class="home-rail -right" style="--rail-pad-top: 4rem;">
       <div class="sticky-stack" data-sticky="true">
-        <AdSlot campaign="home-rail-body-3" />
+        <AdSlot position="sidebar_sticky" />
       </div>
     </aside>
   </section>
@@ -246,15 +252,15 @@ const latestNewsItems = availableNews.map(toFeaturedItem);
   .home-page-body {
     width: calc(100% - 3rem);
     max-width: var(--home-width);
-    margin: 2rem auto;
+    margin: var(--section-gap) auto;
   }
 
   .home-page-body.home-news {
-    margin: 5rem auto 2rem auto;
+    margin: var(--section-gap) auto;
   }
 
   .home-page-body--first {
-    margin-top: 2rem;
+    margin-top: var(--section-gap);
   }
 
   /* ── Home top wrapper (dark hero area) ── */
@@ -306,7 +312,7 @@ const latestNewsItems = availableNews.map(toFeaturedItem);
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: 42px 0 0;
+    margin: var(--section-gap) 0;
     width: 100%;
   }
 </style>

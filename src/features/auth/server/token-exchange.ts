@@ -14,9 +14,9 @@ export interface TokenResponse {
  * Returns null on failure.
  */
 export async function exchangeCodeForTokens(code: string, codeVerifier?: string): Promise<TokenResponse | null> {
-  const env = typeof import.meta !== 'undefined' && import.meta.env
-    ? import.meta.env
-    : process.env;
+  // WHY: process.env for server-only vars — they must be read at runtime from
+  // the Lambda environment, not baked in at build time via import.meta.env.
+  const env = process.env;
 
   const clientId = env.PUBLIC_COGNITO_APP_CLIENT_ID;
   const clientSecret = env.COGNITO_CLIENT_SECRET;
@@ -51,11 +51,20 @@ export async function exchangeCodeForTokens(code: string, codeVerifier?: string)
       body: body.toString(),
     });
 
-    if (!res.ok) return null;
+    if (!res.ok) {
+      const errBody = await res.text();
+      console.error('[token-exchange] Cognito error:', res.status, errBody);
+      console.error('[token-exchange] tokenUrl:', tokenUrl);
+      console.error('[token-exchange] redirect_uri:', callbackUrl);
+      console.error('[token-exchange] client_id:', clientId);
+      console.error('[token-exchange] code_verifier present:', !!codeVerifier);
+      return null;
+    }
 
     const data = await res.json() as TokenResponse;
     return data;
-  } catch {
+  } catch (err) {
+    console.error('[token-exchange] Fetch error:', (err as Error).message);
     return null;
   }
 }

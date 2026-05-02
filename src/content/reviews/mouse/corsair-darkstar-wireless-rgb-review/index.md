@@ -15,6 +15,7 @@ tags:
   - MMO Mouse
 hero: feature-image
 productId: corsair-darkstar-wireless-rgb
+pinned: true
 toc: false
 ---
 

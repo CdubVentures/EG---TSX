@@ -1,9 +1,9 @@
 {
   "slug": "nuphy-field75he",
   "brand": "NuPhy",
-  "model": "Field75HE",
-  "baseModel": "Field75HE",
-  "variant": "",
+  "model": "Field75 HE",
+  "baseModel": "Field75",
+  "variant": "HE",
   "category": "keyboard",
   "imagePath": "/images/keyboard/nuphy/field75he",
   "cardTags": "false",

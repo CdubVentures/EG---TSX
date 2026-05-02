@@ -1,148 +1,45 @@
-# EG-TSX
+# EG - TSX
 
-Expert Gaming rebuilt with Astro 5, React 19, Tailwind v4, and MDX.
+Astro 5 + React 19 implementation of the EG site. This repo also contains the
+config manager app under `config/` and the deploy dashboard under
+`tools/deploy-dashboard/`.
 
-Migrating from EG-HBS (Express/Handlebars/jQuery/Redis) to a modern static-first architecture with SSR opt-in for auth and API routes.
+## Start Here
 
-## Stack
+- [docs/README.md](docs/README.md) - canonical site documentation entrypoint
+- [docs/03-architecture/system-map.md](docs/03-architecture/system-map.md) - deployment topology
+- [docs/03-architecture/routing-and-gui.md](docs/03-architecture/routing-and-gui.md) - route ownership
+- [docs/02-dependencies/environment-and-config.md](docs/02-dependencies/environment-and-config.md) - env and config surfaces
+- [config/README.md](config/README.md) - config manager app and colocated docs
+- [tools/deploy-dashboard/README.md](tools/deploy-dashboard/README.md) - deploy dashboard app docs
 
-- **Astro 5** — hybrid rendering (SSG default, SSR opt-in)
-- **React 19** — interactive islands (`client:load`, `client:visible`)
-- **Tailwind v4** — utility-first CSS with CSS variable theming
-- **MDX** — articles with embedded React components
-- **TypeScript** — strict, Zod at trust boundaries
-- **Nano Stores** — cross-island state (`$auth`, `$vault`, `$authDialog`)
+## Local Contracts
 
-## Quick Start
+Read the nearest folder `README.md` before changing code in that boundary:
+
+- [src/README.md](src/README.md) - source boundary map for pages, content, core, shared, and features
+- [src/pages/README.md](src/pages/README.md) - Astro route ownership and composition-root rules
+- [src/content/README.md](src/content/README.md) - content collection and frontmatter contract
+- [scripts/README.md](scripts/README.md) - build, deploy, migration, and validation script contract
+- [infrastructure/README.md](infrastructure/README.md) - infrastructure-as-code and generated artifact boundary
+- [config/README.md](config/README.md) - config manager app and mutable JSON contract
+- [tools/deploy-dashboard/README.md](tools/deploy-dashboard/README.md) - local deploy operator app contract
+
+## Verified Runtime Shape
+
+- Static HTML and assets are built by Astro and served from S3 behind CloudFront.
+- Dynamic auth, search, vault, admin, and utility routes run through the Astro
+  standalone adapter behind the Lambda Function URL.
+- Search is backed by PostgreSQL.
+- Auth is backed by Cognito.
+- Signed-in vault persistence is backed by DynamoDB.
+
+## Local Commands
 
 ```sh
 npm install
-npm run dev          # localhost:4321
+npm run dev
+npm run type-check
+npm run test:js
+npm run build
 ```
-
-Copy `.env.example` to `.env` and fill in Cognito + DynamoDB values.
-
-## Commands
-
-| Command | Action |
-|:--------|:-------|
-| `npm run dev` | Dev server at `localhost:4321` |
-| `npm run build` | Production build to `./dist/` |
-| `npm run preview` | Preview production build locally |
-| `node --import tsx --test src/features/auth/tests/*.test.mjs` | Run auth tests (69 tests) |
-
-## Data Gateways (How to Access Products & Articles)
-
-Full contract: [`docs/DATA-GATEWAY-CONTRACT.md`](docs/DATA-GATEWAY-CONTRACT.md)
-
-**Products** and **articles** are accessed exclusively through gateway functions that respect category visibility flags from `config/data/categories.json`. This is enforced project-wide.
-
-```typescript
-// PRODUCTS — always use this, never raw getCollection('dataProducts')
-import { getProducts } from '@core/products';
-const products = await getProducts();
-
-// ARTICLES — always use this, never raw getCollection('reviews')
-import { getReviews, getGuides, getNews, getBrands, getGames } from '@core/content';
-const reviews = await getReviews();   // filtered by flags, drafts excluded, sorted by date
-const news    = await getNews();
-```
-
-**How category control works:**
-
-```
-categories.json (flags)  →  CONFIG.categories / CONFIG.contentCategories  →  gateway functions
-       ↑
-category-manager.py GUI
-```
-
-Disable a category in `category-manager.py` (or edit JSON directly) and that category's products/articles vanish from the entire site — no code changes required.
-
-**Adding a new category:** See [`docs/DATA-GATEWAY-CONTRACT.md`](docs/DATA-GATEWAY-CONTRACT.md#adding-a-new-category)
-
-**Tests:**
-```sh
-node --test test/products-gateway.test.mjs test/content-filter.test.mjs  # 28 tests
-```
-
-## Architecture
-
-Full documentation: [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md)
-
-### Key directories
-
-```
-src/
-  content/          # MDX articles (147 files, slug-folder layout)
-  content/data-products/  # Product JSON (366 files)
-  core/             # App-wide infra (images.ts, media.ts, config.ts)
-  features/         # Domain features (auth, vault, hub, pc-builder)
-  shared/           # Reusable UI primitives + layouts
-  pages/            # File-based routing (static + SSR)
-  styles/           # global.css (CSS vars + Tailwind v4 @theme)
-
-public/images/      # All product + article images (served as-is)
-scripts/            # Build-time scripts (media, migration, validation)
-config/             # categories.json + Python GUI managers
-cognitoUI/          # Cognito Hosted UI dark theme CSS
-docs/               # Architecture, contracts, diagrams
-```
-
-### Content counts
-
-- 342 mouse + 12 keyboard + 12 monitor = **366 products**
-- 47 reviews + 29 brands + 11 games + 33 guides + 23 news + 4 pages = **147 articles**
-
-## Auth System
-
-Industry-standard OAuth with AWS Cognito. HttpOnly cookies, PKCE (RFC 7636), automatic token refresh, and postMessage-based popup flow.
-
-- **3 login providers:** Google, Discord, Email/Password
-- **Desktop:** Popup window with postMessage notification + cookie poll fallback
-- **Mobile:** Full-page redirect with return URL preservation
-- **Token refresh:** Middleware auto-refreshes JWT within 5 minutes of expiry
-- **PKCE:** Every login generates SHA-256 code challenge
-- **Hosted UI theming:** Dark CSS uploaded to Cognito (`cognitoUI/template.css`)
-- **69 tests** across 5 test files
-
-### Auth endpoints
-
-| Route | Purpose |
-|-------|---------|
-| `GET /login` | Email/password login (identity_provider=COGNITO) |
-| `GET /login/google` | Google OAuth (skips Hosted UI) |
-| `GET /login/discord` | Discord OAuth (skips Hosted UI) |
-| `GET /auth/callback` | Smart callback (postMessage for popup, 302 for mobile) |
-| `GET /api/auth/me` | Server-verified auth status (Cache-Control: no-store) |
-| `GET /logout` | Clear cookies + Cognito sign-out |
-
-## Phase Status
-
-| Phase | Status | Description |
-|-------|--------|-------------|
-| 1. Data Foundation | DONE | Content migrated, schemas validated |
-| 2. Project Scaffold | DONE | Astro 5, themes, config, images |
-| 3. Content Migration | DONE | Slug-folders, MDX conversion pending per-component |
-| 4. Global Shell & Home | IN PROGRESS | Navbar done (4.1-4.2), 4.3 next |
-| 5. Snapshot Page | Not started | Product detail pages |
-| 6. Hub Page | Not started | Filterable product grids |
-| 7. Content Pages | Not started | Reviews, guides, news, brands, games |
-| 9. Auth & Dynamic | IN PROGRESS | Auth done, vault done, comments/PC builder pending |
-| 10. SEO & Performance | Not started | Meta, structured data, image optimization |
-| 12. Infrastructure | Not started | Deploy pipeline, Sharp image sizing |
-| 13. CMS Configuration | Not started | Spec Factory integration |
-
-## Cognito Hosted UI Customization
-
-The `cognitoUI/template.css` file themes the Cognito login/signup pages to match the site's dark palette. Upload via:
-
-**AWS Console:** Cognito > User Pool > App integration > Hosted UI customization > Upload CSS
-
-**CLI:**
-```sh
-aws cognito-idp set-ui-customization \
-  --user-pool-id <pool-id> \
-  --css "$(cat cognitoUI/template.css)"
-```
-
-CSS limit: 3KB (current: ~1.9KB). Only `-customizable` class selectors are supported.

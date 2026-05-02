@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 728 90" width="728" height="90">
+  <rect width="728" height="90" fill="#0b1220"/>
+  <text x="708" y="16" font-family="Inter, Arial, Helvetica, sans-serif" font-size="9" fill="#93c5fd" text-anchor="end">Ad</text>
+
+  <text x="24" y="28" font-family="Inter, Arial, Helvetica, sans-serif" font-size="17" font-weight="700" fill="#eff6ff">Pulse Audio</text>
+  <text x="24" y="48" font-family="Inter, Arial, Helvetica, sans-serif" font-size="14" fill="#cbd5e1">Noise-canceling gear for editors and creators</text>
+
+  <rect x="330" y="26" width="130" height="36" rx="8" fill="#38bdf8"/>
+  <text x="395" y="51" font-family="Inter, Arial, Helvetica, sans-serif" font-size="12" fill="#0b1220" text-anchor="middle" font-weight="700">Save 12%</text>
+
+  <text x="24" y="66" font-family="Inter, Arial, Helvetica, sans-serif" font-size="11" fill="#94a3b8">Rated for low-latency streaming sessions.</text>
+  <rect x="24" y="72" width="110" height="1" fill="#334155"/>
+</svg>

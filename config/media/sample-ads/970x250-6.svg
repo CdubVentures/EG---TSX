@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 970 250" width="970" height="250">
+  <rect width="970" height="250" fill="#f4f6ff" stroke="#bfd0ff" stroke-width="1"/>
+  <text x="950" y="16" font-family="Inter, Arial, Helvetica, sans-serif" font-size="9" fill="#475569" text-anchor="end">Ad</text>
+
+  <text x="28" y="42" font-family="Inter, Arial, Helvetica, sans-serif" font-size="15" fill="#0f172a" font-weight="700">Google</text>
+  <text x="28" y="64" font-family="Inter, Arial, Helvetica, sans-serif" font-size="30" fill="#0f172a" font-weight="800">Pixel-perfect gear for remote-first teams</text>
+  <line x1="28" y1="74" x2="480" y2="74" stroke="#93c5fd" stroke-width="3"/>
+  <text x="28" y="100" font-family="Inter, Arial, Helvetica, sans-serif" font-size="16" fill="#334155">Secure checkout, trusted shipping windows, and fast support.</text>
+
+  <g transform="translate(520,30)">
+    <rect x="0" y="0" width="420" height="180" rx="12" fill="#0b1224"/>
+    <rect x="28" y="36" width="364" height="18" fill="#1e3a8a" opacity="0.28"/>
+    <rect x="28" y="64" width="306" height="14" fill="#38bdf8" opacity="0.3"/>
+    <rect x="28" y="86" width="240" height="14" fill="#93c5fd" opacity="0.34"/>
+    <rect x="28" y="118" width="150" height="14" fill="#f8fafc" opacity="0.32"/>
+  </g>
+
+  <rect x="28" y="132" width="210" height="40" rx="8" fill="#1d4ed8"/>
+  <text x="133" y="158" font-family="Inter, Arial, Helvetica, sans-serif" font-size="14" fill="#ffffff" text-anchor="middle" font-weight="700">Shop now</text>
+
+  <text x="28" y="198" font-family="Inter, Arial, Helvetica, sans-serif" font-size="12" fill="#334155">Save 18% on office bundles this weekend.</text>
+  <text x="28" y="216" font-family="Inter, Arial, Helvetica, sans-serif" font-size="10" fill="#64748b">Limited slots for first-order discount.</text>
+</svg>

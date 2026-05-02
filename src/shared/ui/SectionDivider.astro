@@ -27,7 +27,7 @@ const { title, titleHref, subtitle, seeMoreHref, class: className } = Astro.prop
   </div>
   <div class="section-divider-actions">
     {seeMoreHref && (
-      <a href={seeMoreHref} class="section-divider-link">See More</a>
+      <a href={seeMoreHref} class="section-divider-link" aria-label={`See more ${title}`}>See More</a>
     )}
     <slot name="actions" />
   </div>
@@ -45,7 +45,7 @@ const { title, titleHref, subtitle, seeMoreHref, class: className } = Astro.prop
     align-items: center;
     justify-content: space-between;
     width: 100%;
-    margin: 2.75rem auto 2.25rem auto;
+    margin: var(--section-gap) auto 2.25rem auto;
     max-width: var(--home-width);
     row-gap: 0.5rem;
   }
@@ -167,6 +167,7 @@ const { title, titleHref, subtitle, seeMoreHref, class: className } = Astro.prop
   /* ── Action button (pill-shaped, inside .section-divider-actions) ── */
   /* Port of HBS site_shared.css lines 489–550 */
   .section-divider-actions .section-divider-link {
+    appearance: none;
     display: inline-block;
     padding: 0.75rem 1.75rem;
     margin-top: 0.25em;

@@ -13,9 +13,10 @@ const CognitoConfigSchema = z.object({
 });
 
 function loadConfig() {
-  const env = typeof import.meta !== 'undefined' && import.meta.env
-    ? import.meta.env
-    : process.env;
+  // WHY: process.env for server-only vars — they must be read at runtime from
+  // the Lambda environment, not baked in at build time via import.meta.env.
+  // PUBLIC_ vars also use process.env here since this file only runs server-side.
+  const env = process.env;
 
   return CognitoConfigSchema.parse({
     region: env.PUBLIC_COGNITO_REGION,

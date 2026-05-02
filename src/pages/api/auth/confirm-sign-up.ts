@@ -1,6 +1,7 @@
 /** POST /api/auth/confirm-sign-up — Verify email with confirmation code. */
 
 import type { APIRoute } from 'astro';
+import { jsonNoIndex } from '@core/seo/indexation-policy';
 import { cognitoConfirmSignUp } from '@features/auth/server/cognito-api';
 
 export const prerender = false;
@@ -10,7 +11,7 @@ export const POST: APIRoute = async ({ request }) => {
   try {
     body = await request.json();
   } catch {
-    return Response.json(
+    return jsonNoIndex(
       { error: { code: 'InvalidRequest', message: 'Invalid JSON body' } },
       { status: 400 },
     );
@@ -18,7 +19,7 @@ export const POST: APIRoute = async ({ request }) => {
 
   const { email, code } = body;
   if (!email || !code) {
-    return Response.json(
+    return jsonNoIndex(
       { error: { code: 'InvalidRequest', message: 'Email and code are required' } },
       { status: 400 },
     );
@@ -28,8 +29,8 @@ export const POST: APIRoute = async ({ request }) => {
   const result = await confirm(email, code);
 
   if (!result.ok) {
-    return Response.json({ error: result.error }, { status: 400 });
+    return jsonNoIndex({ error: result.error }, { status: 400 });
   }
 
-  return Response.json({ status: 'confirmed' });
+  return jsonNoIndex({ status: 'confirmed' });
 };

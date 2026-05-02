@@ -1,25 +1,54 @@
-/** Zod schemas for vault API — validates DynamoDB payloads and REST request/response shapes. */
-
 import { z } from 'zod';
 
-// ─── Product + Entry ───────────────────────────────────────────────────────
+const NonEmptyString = z.string().trim().min(1);
+const OptionalNonEmptyString = z.preprocess((value) => {
+  if (typeof value === 'string' && value.trim().length === 0) return undefined;
+  return value;
+}, NonEmptyString.optional());
+
+const ThumbnailStemSchema = z.preprocess((value) => {
+  if (value === undefined || value === null) return 'top';
+  if (typeof value === 'string') {
+    const stem = value.trim();
+    if (stem.length === 0) return 'top';
+    const normalized = stem.toLowerCase();
+    if (normalized === 'undefined' || normalized === 'null' || normalized === 'nan') return 'top';
+    return stem;
+  }
+  return value;
+}, NonEmptyString);
 
 export const VaultProductSchema = z.object({
-  id: z.string().min(1),
-  slug: z.string().min(1),
-  brand: z.string().min(1),
-  model: z.string().min(1),
-  category: z.string().min(1),
+  id: NonEmptyString,
+  slug: NonEmptyString,
+  brand: NonEmptyString,
+  model: NonEmptyString,
+  category: NonEmptyString,
   imagePath: z.string(),
-  thumbnailStem: z.string().min(1),
+  thumbnailStem: ThumbnailStemSchema,
 });
 
-export const VaultEntrySchema = z.object({
+const VaultEntryBaseSchema = z.object({
+  productId: OptionalNonEmptyString,
+  category: OptionalNonEmptyString,
   product: VaultProductSchema,
   addedAt: z.number().int().nonnegative(),
 });
 
-// ─── DynamoDB versioned envelope ───────────────────────────────────────────
+export const VaultEntrySchema = VaultEntryBaseSchema.transform((entry) => {
+  const productId = entry.productId ?? entry.product.id;
+  const category = entry.category ?? entry.product.category;
+  return {
+    productId,
+    category,
+    product: {
+      ...entry.product,
+      id: productId,
+      category,
+    },
+    addedAt: entry.addedAt,
+  };
+});
 
 export const VaultDbPayloadSchema = z.object({
   v: z.literal(1),
@@ -29,16 +58,11 @@ export const VaultDbPayloadSchema = z.object({
 
 export type VaultDbPayload = z.infer<typeof VaultDbPayloadSchema>;
 
-// ─── REST: PUT /api/user/vault ─────────────────────────────────────────────
-// WHY max 160: 16 per category × 10 categories = 160 ceiling
-
 export const VaultPutRequestSchema = z.object({
   compare: z.array(VaultEntrySchema).max(160),
 });
 
 export type VaultPutRequest = z.infer<typeof VaultPutRequestSchema>;
-
-// ─── REST: GET /api/user/vault ─────────────────────────────────────────────
 
 export const VaultGetResponseSchema = z.object({
   compare: z.array(VaultEntrySchema),
@@ -48,11 +72,37 @@ export const VaultGetResponseSchema = z.object({
 
 export type VaultGetResponse = z.infer<typeof VaultGetResponseSchema>;
 
-// ─── REST: PUT /api/user/vault response ────────────────────────────────────
-
 export const VaultPutResponseSchema = z.object({
   ok: z.literal(true),
   rev: z.number().int().nonnegative(),
 });
 
 export type VaultPutResponse = z.infer<typeof VaultPutResponseSchema>;
+
+const VaultThumbResolveRequestItemSchema = z.object({
+  requestId: NonEmptyString,
+  category: NonEmptyString,
+});
+
+export const VaultThumbResolveRequestSchema = z.object({
+  items: z.array(VaultThumbResolveRequestItemSchema).max(160),
+});
+
+export type VaultThumbResolveRequest = z.infer<typeof VaultThumbResolveRequestSchema>;
+
+const VaultThumbResolveResponseItemSchema = z.object({
+  requestId: NonEmptyString,
+  productId: NonEmptyString,
+  category: NonEmptyString,
+  slug: NonEmptyString,
+  brand: NonEmptyString,
+  model: NonEmptyString,
+  imagePath: z.string(),
+  thumbnailStem: NonEmptyString,
+});
+
+export const VaultThumbResolveResponseSchema = z.object({
+  items: z.array(VaultThumbResolveResponseItemSchema),
+});
+
+export type VaultThumbResolveResponse = z.infer<typeof VaultThumbResolveResponseSchema>;

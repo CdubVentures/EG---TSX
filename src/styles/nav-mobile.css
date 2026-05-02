@@ -60,6 +60,13 @@ html.logged .side-auth-logged-show { display: flex !important; }
   }
 }
 
+@media (max-width: 825px) {
+  .mobile-hamburger-menu-icon {
+    order: 1;
+    margin-right: 1rem;
+  }
+}
+
 /* Side menu drawer */
 .side-menu {
   position: absolute;

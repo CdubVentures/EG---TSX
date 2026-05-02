@@ -8,9 +8,12 @@
 
 import { CONFIG } from '@core/config';
 import { buildCategoryVarsBlock } from '@core/categories';
+import { buildDocumentIndexation } from '@core/seo/indexation-policy';
 import GlobalNav from './GlobalNav.astro';
+import SiteFooter from './SiteFooter.astro';
 import { AuthDialog } from '@features/auth';
 import SettingsDialog from '@features/settings/components/SettingsDialog';
+import { ToastContainer } from '@features/notifications';
 
 const categoryVars = buildCategoryVarsBlock();
 
@@ -19,9 +22,11 @@ interface Props {
   description: string;
   canonicalUrl?: string;
   ogImage?: string;
+  ogImageAlt?: string;
   ogType?: 'website' | 'article';
   theme?: 'default' | 'gaming' | 'workstation' | 'review';
   noIndex?: boolean;
+  structuredData?: Record<string, unknown> | Array<Record<string, unknown>>;
 }
 
 const {
@@ -29,13 +34,21 @@ const {
   description,
   canonicalUrl = Astro.url.href,
   ogImage,
+  ogImageAlt,
   ogType = 'website',
   theme = 'default',
   noIndex = false,
+  structuredData,
 } = Astro.props;
 
 const siteName = CONFIG.site.name;
-const resolvedOgImage = ogImage ?? `${Astro.site ?? ''}images/favicons/icon-512.png`;
+const resolvedOgImage = ogImage ?? `${Astro.site ?? ''}images/social/eg-default-1200x630.png`;
+const indexation = buildDocumentIndexation({ noIndex });
+const pageStructuredData = Array.isArray(structuredData)
+  ? structuredData
+  : structuredData
+    ? [structuredData]
+    : [];
 
 /* WHY: theme-color map used by the inline script to set <meta name="theme-color">
    before first paint. Values match --color-bg-base per theme. */
@@ -75,6 +88,10 @@ import '@/styles/dialogs.css';
     })();
   </script>
 
+  {/* CDN preconnect — reduces connection latency for product/article images */}
+  <link rel="preconnect" href="https://d3m2jw9ed15b7k.cloudfront.net" crossorigin />
+  <link rel="dns-prefetch" href="https://d3m2jw9ed15b7k.cloudfront.net" />
+
   {/* Font preloads — critical weights only to prevent FOUT */}
   <link rel="preload" as="font" href="/fonts/open-sans-v40-latin-regular.woff2" type="font/woff2" crossorigin="anonymous" />
   <link rel="preload" as="font" href="/fonts/open-sans-v40-latin-700.woff2" type="font/woff2" crossorigin="anonymous" />
@@ -82,7 +99,8 @@ import '@/styles/dialogs.css';
 
   <title>{title}</title>
   <meta name="description" content={description} />
-  {noIndex && <meta name="robots" content="noindex,nofollow" />}
+  <meta name="robots" content={indexation.robots} />
+  <meta name="googlebot" content={indexation.googlebot} />
   <link rel="canonical" href={canonicalUrl} />
 
   {/* Open Graph */}
@@ -93,12 +111,16 @@ import '@/styles/dialogs.css';
   <meta property="og:url" content={canonicalUrl} />
   <meta property="og:locale" content="en_US" />
   <meta property="og:image" content={resolvedOgImage} />
+  <meta property="og:image:width" content="512" />
+  <meta property="og:image:height" content="512" />
+  <meta property="og:image:alt" content={ogImageAlt ?? siteName} />
 
   {/* Twitter */}
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content={title} />
   <meta name="twitter:description" content={description} />
   <meta name="twitter:image" content={resolvedOgImage} />
+  <meta name="twitter:site" content="@EGGear" />
 
   {/* Favicons */}
   <link rel="icon" type="image/x-icon" href="/images/favicons/favicon.ico" />
@@ -107,6 +129,7 @@ import '@/styles/dialogs.css';
   <link rel="icon" type="image/png" sizes="192x192" href="/images/favicons/icon-192.png" />
   <link rel="icon" type="image/png" sizes="512x512" href="/images/favicons/icon-512.png" />
   <link rel="apple-touch-icon" sizes="180x180" href="/images/favicons/apple-touch-icon.png" />
+  <link rel="manifest" href="/site.webmanifest" />
 
   <meta name="generator" content={Astro.generator} />
 
@@ -121,13 +144,110 @@ import '@/styles/dialogs.css';
     document.documentElement.classList.toggle('logged', hasHint);
   })();
   </script>
+
+  {/* Structured data — Organization + WebSite */}
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "@id": `${CONFIG.site.url}/#organization`,
+    "name": siteName,
+    "url": `${CONFIG.site.url}/`,
+    "logo": {
+      "@type": "ImageObject",
+      "url": `${CONFIG.site.url}/images/favicons/icon-512.png`,
+      "width": 512,
+      "height": 512
+    }
+  })} />
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "@id": `${CONFIG.site.url}/#website`,
+    "url": `${CONFIG.site.url}/`,
+    "name": siteName,
+    "publisher": { "@id": `${CONFIG.site.url}/#organization` }
+  })} />
+  {pageStructuredData.map((entry) => (
+    <script type="application/ld+json" set:html={JSON.stringify(entry)} />
+  ))}
+
 </head>
 
 <body class="min-h-dvh bg-bg-base text-text-primary" style="padding-top: var(--nav-height);">
+  <a href="#main-content" class="skip-to-content">Skip to content</a>
+  {/* EG LOGO SVG BUILDER — shared by broken-image placeholder and dynamic favicon.
+      Reads CSS vars at runtime so the logo matches the active theme.
+      WHY is:inline: must run before any <img> errors fire (capture phase).
+      WHY data URI: SVGs loaded via <img src> / <link rel=icon> are sandboxed —
+      cannot read CSS variables from the document. */}
+  <script is:inline>
+  (function () {
+    var G = 'M114.53,21.66l-16.41,5.19c-9.45-12.17-29.46-14.15-37.76.4-5.7,9.98-5.11,24.42,5.04,31.21,10.41,6.97,25.69,4.8,31.41-6.98l-15.09-2.04,2.12-3.51c1.69-3.6,1.42-7.34.52-11.1l32.78,4.58c-.46,19.96-14.67,37.74-35.29,39.02-28.95,1.79-48.84-22.21-41.26-50.36C46.9,4.62,70.56-4.28,92.72,2.87c9.55,3.08,17.55,9.68,21.81,18.79Z';
+    var E = 'M50.33,1.54c.33,1.02.39,2.17.18,3.47.22,1.3.16,2.46-.18,3.48-2.84,2.24-5.27,4.9-7.43,7.8-6.28-.73-13.11.96-18.08,4.9-4.15,3.3-5.95,7.45-7.08,12.57l19.16-3.71c-.85,4.97-1.34,10.03-.73,15.07l-16.27,3.37c2.19,7.36,9.47,12.7,17.12,13.18,1.09.07,4.67-.35,5.16-.13.39.18,3.24,4.15,3.95,4.91,1.19,1.28,3.3,3.28,4.67,4.31.71.45.58,5.06.31,5.35-.08.08-.19.12-.31.16-24.02,6.42-46.15-5.45-50.23-30.61C-4.24,15.97,21.74-6.15,50.33,1.54Z';
+    var J1 = 'M53.45,2.5l.5.4c.09.14.03,3.01-.27,3.2-1.05.68-2.37,1.62-3.35,2.4-.37-2.18-.42-4.78,0-6.95,1.22.33,1.89.5,3.11.96Z';
+    var J2 = 'M50.81,70.76c1.06.8,2.73,1.76,3.91,2.44.35.2,1.8.71,1.84.8.08.19.09.46-.16.6-.98.55-4.31,1.33-5.59,1.67v-5.51Z';
+    var J3 = 'M53.45,2.5c1.21.46,2.4.92,3.59,1.44.12.56-.08.38-.31.53-.88.57-2.09,1-3.04,1.62-.54-1-.11-2.45-.24-3.59Z';
+
+    function egLogoSvg(opts) {
+      var s = getComputedStyle(document.documentElement);
+      var c1 = s.getPropertyValue('--site-end-color').trim() || '#3258a6';
+      var c2 = s.getPropertyValue('--site-start-color').trim() || '#3fa3db';
+      var grad = '<defs><linearGradient id="g" x1="250.41" y1="693.15" x2="-69.58" y2="694.99" gradientTransform="translate(56.1 -126.75) scale(.24)" gradientUnits="userSpaceOnUse">' +
+        '<stop offset="0" stop-color="' + c2 + '"/>' +
+        '<stop offset="1" stop-color="' + c1 + '"/>' +
+        '</linearGradient></defs>';
+      var paths = '<path d="' + G + '" fill="url(#g)"/>' +
+        '<path d="' + E + '" fill="' + c1 + '"/>' +
+        '<path d="' + J1 + '" fill="' + c1 + '"/>' +
+        '<path d="' + J2 + '" fill="' + c1 + '"/>' +
+        '<path d="' + J3 + '" fill="' + c1 + '"/>';
+      if (opts && opts.placeholder) {
+        var bg = s.getPropertyValue('--section-dark-background-color').trim() || '#1d2021';
+        return 'data:image/svg+xml,' + encodeURIComponent(
+          '<svg xmlns="http://www.w3.org/2000/svg" width="400" height="300" viewBox="0 0 400 300">' +
+          '<rect width="400" height="300" fill="' + bg + '"/>' +
+          '<g opacity="0.25" transform="translate(83,72) scale(2)">' +
+          grad + paths + '</g></svg>'
+        );
+      }
+      return 'data:image/svg+xml,' + encodeURIComponent(
+        '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 117.13 78.53">' +
+        grad + paths + '</svg>'
+      );
+    }
+
+    /* Expose globally so setTheme() can call it from the Vite bundle. */
+    window.__egUpdateFavicon = function () {
+      var link = document.querySelector('link[rel="icon"][type="image/svg+xml"]');
+      if (link) link.setAttribute('href', egLogoSvg());
+    };
+
+    /* Set themed favicon on initial load. */
+    window.__egUpdateFavicon();
+
+    /* Broken image fallback — capture phase (error events don't bubble).
+       WHY transparent pixel + CSS background: data URI SVGs in <img src> have
+       unpredictable intrinsic sizing across browsers. CSS background-image
+       always scales correctly via background-size. */
+    var _ph;
+    var TRANSPARENT_PX = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7';
+    document.addEventListener('error', function (e) {
+      var el = e.target;
+      if (el && el.tagName === 'IMG' && !el.dataset.fallback) {
+        el.dataset.fallback = '1';
+        el.srcset = '';
+        el.src = TRANSPARENT_PX;
+        if (!_ph) _ph = egLogoSvg({ placeholder: true });
+        el.style.backgroundImage = 'url("' + _ph + '")';
+      }
+    }, true);
+  })();
+  </script>
+
   <GlobalNav />
 
   {/* Auth dialog — React island replaces old popup divs + overlay + controller */}
-  <AuthDialog client:load />
+  <AuthDialog client:only="react" />
 
   {/* Settings dialog — React island for user preferences popup.
        client:only="react" because it reads $theme/$userPrefs from localStorage
@@ -145,17 +265,25 @@ import '@/styles/dialogs.css';
   {/* AUTH HYDRATION — Vite-bundled module. Fetches /api/auth/me to hydrate
       $auth store with server-verified user data. Settings prefs loaded after auth. */}
   <script>
-    import { hydrateAuth } from '@features/auth';
+    import { hydrateAuthFromCookieHint } from '@features/auth';
     import { initVaultSync } from '@features/vault/sync';
+    import { initVaultBridge } from '@features/notifications';
     import { loadPrefs, loadTheme } from '@features/settings/store';
-    hydrateAuth();
+    hydrateAuthFromCookieHint(document.cookie);
     initVaultSync();
+    initVaultBridge();
     loadPrefs();
     loadTheme();
   </script>
 
-  <main>
+  <main id="main-content">
     <slot />
   </main>
+
+  <SiteFooter />
+
+  {/* Toast notifications — global mount point for vault add/remove feedback.
+      client:only keeps the interaction-only UI out of Astro SSR. */}
+  <ToastContainer client:only="react" />
 </body>
 </html>

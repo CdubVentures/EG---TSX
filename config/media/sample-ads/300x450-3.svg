@@ -1,0 +1,78 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 450" width="300" height="450">
+  <!-- Video Ad — Fitness app promo (Mediavine sidebar video style) -->
+
+  <rect width="300" height="450" fill="#000000"/>
+
+  <defs>
+    <linearGradient id="gymBg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#1a1a1a"/>
+      <stop offset="100%" stop-color="#2d1f3d"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Video area (top 240px) -->
+  <rect y="0" width="300" height="240" fill="url(#gymBg)"/>
+
+  <!-- Fake video: person exercising silhouette -->
+  <g transform="translate(90, 30)" opacity="0.18">
+    <!-- Person running silhouette -->
+    <circle cx="60" cy="20" r="14" fill="#22c55e"/>
+    <path d="M60,34 L60,80 M60,50 L40,70 M60,50 L80,70 M60,80 L42,120 M60,80 L78,120" stroke="#22c55e" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+  </g>
+
+  <!-- Animated pulse rings around runner (static SVG representation) -->
+  <circle cx="150" cy="110" r="50" fill="none" stroke="#22c55e" stroke-width="1" opacity="0.1"/>
+  <circle cx="150" cy="110" r="70" fill="none" stroke="#22c55e" stroke-width="0.8" opacity="0.06"/>
+  <circle cx="150" cy="110" r="90" fill="none" stroke="#22c55e" stroke-width="0.5" opacity="0.03"/>
+
+  <!-- Stats overlay (like fitness video) -->
+  <rect x="12" y="170" width="80" height="50" rx="6" fill="#000000" opacity="0.6"/>
+  <text x="52" y="188" font-family="Arial, Helvetica, sans-serif" font-size="8" fill="#22c55e" text-anchor="middle" font-weight="600">CALORIES</text>
+  <text x="52" y="208" font-family="Arial, Helvetica, sans-serif" font-size="18" fill="#ffffff" text-anchor="middle" font-weight="700">347</text>
+
+  <rect x="208" y="170" width="80" height="50" rx="6" fill="#000000" opacity="0.6"/>
+  <text x="248" y="188" font-family="Arial, Helvetica, sans-serif" font-size="8" fill="#22c55e" text-anchor="middle" font-weight="600">DURATION</text>
+  <text x="248" y="208" font-family="Arial, Helvetica, sans-serif" font-size="18" fill="#ffffff" text-anchor="middle" font-weight="700">24:15</text>
+
+  <!-- Play button -->
+  <circle cx="150" cy="100" r="24" fill="#000000" opacity="0.5"/>
+  <circle cx="150" cy="100" r="22" fill="none" stroke="#ffffff" stroke-width="2" opacity="0.8"/>
+  <polygon points="143,88 143,112 163,100" fill="#ffffff"/>
+
+  <!-- AD badge -->
+  <rect x="8" y="8" width="28" height="16" rx="3" fill="#000000" opacity="0.7"/>
+  <text x="22" y="19" font-family="Arial, Helvetica, sans-serif" font-size="9" font-weight="600" fill="#fbbf24" text-anchor="middle">AD</text>
+
+  <!-- Progress bar -->
+  <rect x="0" y="236" width="300" height="3" fill="#374151"/>
+  <rect x="0" y="236" width="120" height="3" fill="#22c55e"/>
+  <circle cx="120" cy="237.5" r="4" fill="#22c55e"/>
+
+  <!-- Below video: white card -->
+  <rect x="0" y="239" width="300" height="211" fill="#f0fdf4"/>
+  <rect x="0" y="239" width="300" height="211" fill="none" stroke="#e5e7eb" stroke-width="1"/>
+
+  <!-- Brand -->
+  <rect x="16" y="254" width="32" height="32" rx="16" fill="#059669"/>
+  <text x="32" y="274" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="800" fill="#ffffff" text-anchor="middle">F</text>
+
+  <text x="56" y="266" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="700" fill="#111827">FitTrack</text>
+  <text x="56" y="280" font-family="Arial, Helvetica, sans-serif" font-size="9" fill="#6b7280">Sponsored</text>
+
+  <!-- Headline -->
+  <text x="16" y="312" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="700" fill="#111827">Your Personal Trainer</text>
+  <text x="16" y="332" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="700" fill="#059669">— Free Download</text>
+
+  <text x="16" y="356" font-family="Arial, Helvetica, sans-serif" font-size="10" fill="#6b7280">1000+ guided workouts. Progress tracking.</text>
+  <text x="16" y="370" font-family="Arial, Helvetica, sans-serif" font-size="10" fill="#6b7280">No equipment needed.</text>
+
+  <!-- App store buttons (simulated) -->
+  <rect x="16" y="386" width="130" height="32" rx="6" fill="#111827"/>
+  <text x="81" y="406" font-family="Arial, Helvetica, sans-serif" font-size="9" font-weight="600" fill="#ffffff" text-anchor="middle">▶ Google Play</text>
+
+  <rect x="154" y="386" width="130" height="32" rx="6" fill="#111827"/>
+  <text x="219" y="406" font-family="Arial, Helvetica, sans-serif" font-size="9" font-weight="600" fill="#ffffff" text-anchor="middle"> App Store</text>
+
+  <!-- Fine print -->
+  <text x="150" y="438" font-family="Arial, Helvetica, sans-serif" font-size="7" fill="#9ca3af" text-anchor="middle">Video ad by Mediavine</text>
+</svg>

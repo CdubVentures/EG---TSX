@@ -1,5 +1,7 @@
 /** HTML helpers for server-rendered auth pages. */
 
+import { withNoIndexHeaders } from '@core/seo/indexation-policy';
+
 /** HTML-escape a string to prevent XSS in server-rendered HTML. */
 export function escapeHtml(str: string): string {
   return str
@@ -21,6 +23,6 @@ export function errorPage(message: string): Response {
 
   return new Response(html, {
     status: 400,
-    headers: { 'Content-Type': 'text/html' },
+    headers: withNoIndexHeaders({ 'Content-Type': 'text/html' }),
   });
 }

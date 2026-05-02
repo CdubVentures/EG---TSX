@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 
-const scriptPath = resolve(process.cwd(), 'photoshop', 'png-all-options.jsx');
+const scriptPath = resolve(process.cwd(), 'tools', 'photoshop', 'png-all-options.jsx');
 const script = readFileSync(scriptPath, 'utf8');
 
 function presetBlock(name) {

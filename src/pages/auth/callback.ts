@@ -7,6 +7,7 @@ import { verifyIdToken } from '@features/auth/server/jwt';
 import { buildAuthCookieHeaders, buildClearPkceCookie } from '@features/auth/server/cookies';
 import { readVaultRev } from '@features/vault/server/db';
 import { errorPage, escapeHtml } from '@features/auth/server/html';
+import { withNoIndexHeaders } from '@core/seo/indexation-policy';
 
 export const prerender = false;
 
@@ -31,17 +32,20 @@ export const GET: APIRoute = async ({ url, cookies }) => {
   const codeVerifier = cookies.get('eg_pkce')?.value;
 
   // Token exchange
-  const tokens = await exchangeCodeForTokens(code, codeVerifier || undefined);
+  const exchange = globalThis.__mockExchangeCodeForTokens ?? exchangeCodeForTokens;
+  const tokens = await exchange(code, codeVerifier || undefined);
   if (!tokens) return errorPage('Token exchange failed — please try again.');
 
   // JWT verification
-  const claims = await verifyIdToken(tokens.id_token);
+  const verify = globalThis.__mockVerifyIdToken ?? verifyIdToken;
+  const claims = await verify(tokens.id_token);
   if (!claims) return errorPage('Token verification failed — please try again.');
 
   // First-signup detection: no DynamoDB record → first login → merge guest vault
   let isFirstSignup = false;
   try {
-    const rev = await readVaultRev(claims.uid);
+    const readRev = globalThis.__mockReadVaultRev ?? readVaultRev;
+    const rev = await readRev(claims.uid);
     isFirstSignup = rev === 0;
   } catch {
     // DynamoDB unreachable — safer to default to false (no merge, no data loss)
@@ -66,7 +70,7 @@ export const GET: APIRoute = async ({ url, cookies }) => {
     // Mobile: clear return cookie and 302 to the validated return URL
     cookieHeaders.push('eg_return=; Path=/; Max-Age=0');
     const destination = validateReturnUrl(returnUrl);
-    const headers = new Headers({ Location: destination });
+    const headers = withNoIndexHeaders({ Location: destination });
     for (const cookie of cookieHeaders) {
       headers.append('Set-Cookie', cookie);
     }
@@ -85,7 +89,7 @@ setTimeout(function(){window.close()},150);
 <p style="font-family:sans-serif;padding:2rem;color:#a3a3a3;">Signed in — you can close this window.</p>
 </body></html>`;
 
-  const headers = new Headers({ 'Content-Type': 'text/html' });
+  const headers = withNoIndexHeaders({ 'Content-Type': 'text/html' });
   for (const cookie of cookieHeaders) {
     headers.append('Set-Cookie', cookie);
   }

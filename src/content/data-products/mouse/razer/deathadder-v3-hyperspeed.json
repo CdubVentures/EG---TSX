@@ -1,9 +1,9 @@
 {
   "slug": "razer-deathadder-v3-hyperspeed",
   "brand": "Razer",
-  "model": "Deathadder V3 Hyperspeed",
-  "baseModel": "Deathadder",
-  "variant": "V3 Hyperspeed",
+  "model": "DeathAdder V3 HyperSpeed",
+  "baseModel": "DeathAdder",
+  "variant": "V3 HyperSpeed",
   "category": "mouse",
   "imagePath": "/images/mouse/razer/deathadder-v3-hyperspeed",
   "cardTags": "false",

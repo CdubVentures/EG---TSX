@@ -1,37 +1,73 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="300" height="450" viewBox="0 0 300 450">
-  <defs>
-    <linearGradient id="bg" x1="0" y1="0" x2="0.2" y2="1">
-      <stop offset="0%" stop-color="#0c1222"/>
-      <stop offset="100%" stop-color="#0a0e1a"/>
-    </linearGradient>
-    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0%" stop-color="#06b6d4"/>
-      <stop offset="100%" stop-color="#0891b2"/>
-    </linearGradient>
-  </defs>
-  <rect width="300" height="450" fill="url(#bg)"/>
-  <rect width="300" height="3" fill="url(#accent)"/>
-  <polygon points="300,0 300,160 200,0" fill="#0e1a2e" opacity="0.5"/>
-  <circle cx="150" cy="210" r="65" fill="#06b6d4" opacity="0.04"/>
-  <rect x="20" y="22" width="8" height="8" rx="4" fill="#06b6d4"/>
-  <text x="36" y="31" font-family="system-ui, sans-serif" font-size="11" font-weight="700" fill="#8b949e" letter-spacing="2">SAMPLE BRAND</text>
-  <text x="20" y="76" font-family="system-ui, sans-serif" font-size="30" font-weight="900" fill="#ffffff">ERGONOMIC</text>
-  <text x="20" y="110" font-family="system-ui, sans-serif" font-size="30" font-weight="900" fill="#06b6d4">DESIGN</text>
-  <text x="20" y="140" font-family="system-ui, sans-serif" font-size="13" font-weight="400" fill="#8b949e">Built for marathon gaming sessions</text>
-  <g transform="translate(50, 165)" opacity="0.06">
-    <ellipse cx="100" cy="45" rx="80" ry="50" fill="#06b6d4"/>
+  <!-- GreenEnergy — Solar Ad (300x450) -->
+  <rect width="300" height="450" fill="#ffffff" stroke="#e5e7eb" stroke-width="1"/>
+
+  <!-- Ad label -->
+  <text x="280" y="16" font-family="Arial, Helvetica, sans-serif" font-size="9" fill="#9ca3af" text-anchor="end">Ad</text>
+
+  <!-- Brand -->
+  <circle cx="30" cy="34" r="10" fill="#16a34a"/>
+  <!-- Sun rays in logo -->
+  <line x1="30" y1="26" x2="30" y2="22" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round"/>
+  <line x1="36" y1="28" x2="39" y2="25" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round"/>
+  <line x1="24" y1="28" x2="21" y2="25" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round"/>
+  <circle cx="30" cy="34" r="4" fill="#ffffff"/>
+  <text x="48" y="39" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="700" fill="#15803d">GreenEnergy</text>
+
+  <!-- House with solar panels -->
+  <rect x="30" y="60" width="240" height="190" rx="6" fill="#f0fdf4"/>
+  <!-- Sky -->
+  <circle cx="230" cy="85" r="18" fill="#fde68a" opacity="0.5"/>
+  <!-- Sun rays -->
+  <line x1="230" y1="65" x2="230" y2="60" stroke="#fbbf24" stroke-width="1" opacity="0.4"/>
+  <line x1="248" y1="73" x2="252" y2="69" stroke="#fbbf24" stroke-width="1" opacity="0.4"/>
+  <line x1="248" y1="85" x2="253" y2="85" stroke="#fbbf24" stroke-width="1" opacity="0.4"/>
+
+  <!-- House body -->
+  <rect x="80" y="145" width="140" height="85" fill="#d1d5db"/>
+  <!-- Roof -->
+  <polygon points="70,145 150,90 230,145" fill="#9ca3af"/>
+  <!-- Solar panels on roof -->
+  <rect x="105" y="108" width="28" height="18" rx="2" fill="#1e3a5f" stroke="#16a34a" stroke-width="1"/>
+  <line x1="119" y1="108" x2="119" y2="126" stroke="#16a34a" stroke-width="0.5"/>
+  <line x1="105" y1="117" x2="133" y2="117" stroke="#16a34a" stroke-width="0.5"/>
+  <rect x="138" y="115" width="28" height="18" rx="2" fill="#1e3a5f" stroke="#16a34a" stroke-width="1"/>
+  <line x1="152" y1="115" x2="152" y2="133" stroke="#16a34a" stroke-width="0.5"/>
+  <line x1="138" y1="124" x2="166" y2="124" stroke="#16a34a" stroke-width="0.5"/>
+  <rect x="171" y="122" width="28" height="18" rx="2" fill="#1e3a5f" stroke="#16a34a" stroke-width="1"/>
+  <line x1="185" y1="122" x2="185" y2="140" stroke="#16a34a" stroke-width="0.5"/>
+  <line x1="171" y1="131" x2="199" y2="131" stroke="#16a34a" stroke-width="0.5"/>
+  <!-- Door -->
+  <rect x="135" y="185" width="30" height="45" rx="2" fill="#78716c"/>
+  <circle cx="159" cy="210" r="2" fill="#a8a29e"/>
+  <!-- Window -->
+  <rect x="95" y="165" width="25" height="22" rx="2" fill="#bae6fd"/>
+  <line x1="107.5" y1="165" x2="107.5" y2="187" stroke="#d1d5db" stroke-width="1"/>
+  <line x1="95" y1="176" x2="120" y2="176" stroke="#d1d5db" stroke-width="1"/>
+  <rect x="180" y="165" width="25" height="22" rx="2" fill="#bae6fd"/>
+  <line x1="192.5" y1="165" x2="192.5" y2="187" stroke="#d1d5db" stroke-width="1"/>
+  <line x1="180" y1="176" x2="205" y2="176" stroke="#d1d5db" stroke-width="1"/>
+  <!-- Ground -->
+  <rect x="30" y="230" width="240" height="14" rx="2" fill="#bbf7d0"/>
+
+  <!-- Headline -->
+  <text x="150" y="280" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="700" fill="#0f172a" text-anchor="middle">Cut Your Power Bill</text>
+  <text x="150" y="308" font-family="Arial, Helvetica, sans-serif" font-size="30" font-weight="800" fill="#16a34a" text-anchor="middle">60%</text>
+
+  <!-- Features -->
+  <g font-family="Arial, Helvetica, sans-serif" font-size="12" fill="#4b5563">
+    <text x="40" y="340">&#10003;</text>
+    <text x="58" y="340" fill="#374151">$0 down financing available</text>
+    <text x="40" y="360">&#10003;</text>
+    <text x="58" y="360" fill="#374151">25-year warranty included</text>
+    <text x="40" y="380">&#10003;</text>
+    <text x="58" y="380" fill="#374151">Federal tax credit eligible</text>
   </g>
-  <rect x="20" y="270" width="260" height="1" fill="#152238"/>
-  <text x="20" y="300" font-family="system-ui, sans-serif" font-size="11" font-weight="700" fill="#64748b" letter-spacing="2">KEY FEATURES</text>
-  <text x="20" y="328" font-family="system-ui, sans-serif" font-size="13" font-weight="500" fill="#94a3b8">Contoured thumb rest</text>
-  <text x="280" y="328" font-family="system-ui, sans-serif" font-size="13" font-weight="700" fill="#06b6d4" text-anchor="end">&#10003;</text>
-  <text x="20" y="354" font-family="system-ui, sans-serif" font-size="13" font-weight="500" fill="#94a3b8">Adjustable side grips</text>
-  <text x="280" y="354" font-family="system-ui, sans-serif" font-size="13" font-weight="700" fill="#06b6d4" text-anchor="end">&#10003;</text>
-  <text x="20" y="380" font-family="system-ui, sans-serif" font-size="13" font-weight="500" fill="#94a3b8">PTFE glides included</text>
-  <text x="280" y="380" font-family="system-ui, sans-serif" font-size="13" font-weight="700" fill="#06b6d4" text-anchor="end">&#10003;</text>
-  <text x="20" y="420" font-family="system-ui, sans-serif" font-size="24" font-weight="900" fill="#ffffff">$79</text>
-  <rect x="170" y="400" width="110" height="38" rx="19" fill="#06b6d4"/>
-  <text x="225" y="425" font-family="system-ui, sans-serif" font-size="13" font-weight="800" fill="#0c1222" text-anchor="middle" letter-spacing="1">SHOP NOW</text>
-  <text x="280" y="444" font-family="system-ui, sans-serif" font-size="9" font-weight="500" fill="#4a5568" text-anchor="end">Sponsored</text>
-  <rect y="447" width="300" height="3" fill="url(#accent)"/>
+
+  <!-- CTA button -->
+  <rect x="55" y="396" width="190" height="42" rx="21" fill="#16a34a"/>
+  <text x="150" y="422" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="700" fill="#ffffff" text-anchor="middle">Free Quote</text>
+
+  <!-- Footer -->
+  <text x="150" y="448" font-family="Arial, Helvetica, sans-serif" font-size="0" fill="#9ca3af" text-anchor="middle"></text>
 </svg>

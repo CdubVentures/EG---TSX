@@ -1,0 +1,59 @@
+---
+/**
+ * /brands/ index page — hero + body (A-Z brand card grid, sidebar, pagination).
+ * Handles: /brands/, /brands/mouse/, /brands/keyboard/, etc.
+ */
+import MainLayout from '@shared/layouts/MainLayout.astro';
+import IndexBleed from '@features/site-index/components/IndexBleed.astro';
+import BrandBody from '@features/site-index/components/BrandBody.astro';
+import {
+  getBrandStaticPaths,
+  buildBrandPageVm,
+} from '@features/site-index/definitions';
+import type { BrandStaticPathProps } from '@features/site-index/definitions';
+
+export async function getStaticPaths() {
+  return getBrandStaticPaths();
+}
+
+const pageProps = Astro.props as BrandStaticPathProps;
+const vm = await buildBrandPageVm(pageProps);
+
+const title = pageProps.category
+  ? `${vm.bleed.categoryLabel} Brands - EG`
+  : 'Brands - EG';
+const description = pageProps.category
+  ? `Browse ${vm.bleed.categoryLabel} brands in gaming and PC tech.`
+  : 'Browse all gaming and PC tech brands. Filter by category and jump into brand pages.';
+const canonicalUrl = pageProps.category
+  ? `${import.meta.env.PUBLIC_SITE_URL ?? 'https://eggear.com'}/brands/${pageProps.category}/`
+  : `${import.meta.env.PUBLIC_SITE_URL ?? 'https://eggear.com'}/brands/`;
+---
+
+<MainLayout
+  title={title}
+  description={description}
+  canonicalUrl={canonicalUrl}
+>
+  <IndexBleed
+    type={vm.bleed.type}
+    typeLabel={vm.bleed.typeLabel}
+    category={vm.bleed.category}
+    categoryLabel={vm.bleed.categoryLabel}
+    categoryClass={vm.bleed.categoryClass}
+    page={vm.bleed.page}
+    headerDek={vm.bleed.headerDek}
+    brandDashboardItems={vm.bleed.brandDashboardItems}
+    heading={vm.bleed.heading}
+    breadcrumbs={vm.bleed.breadcrumbs}
+  />
+  <BrandBody
+    heading={vm.body.heading}
+    pageItems={vm.body.pageItems}
+    allCount={vm.body.allCount}
+    pagination={vm.body.pagination}
+    filterCategories={vm.body.filterCategories}
+    activeCategory={vm.body.activeCategory}
+    categoryClass={vm.body.categoryClass}
+  />
+</MainLayout>

@@ -1,246 +1,49 @@
 {
-  "adsenseClient": "ca-pub-5013419984370459",
-  "adLabel": "Ad",
-  "showProductionPlaceholders": true,
-  "loadSampleAds": true,
-  "sections": [
-    {
-      "name": "Inline",
-      "placements": [
-        "inline-ad"
-      ]
-    },
-    {
-      "name": "Home Rail",
-      "placements": [
-        "home-rail-top",
-        "home-rail-body-1",
-        "home-rail-body-2",
-        "home-rail-body-3"
-      ]
-    },
-    {
-      "name": "Hero",
-      "placements": [
-        "hero-right",
-        "hero-left"
-      ]
-    },
-    {
-      "name": "Sidebar",
-      "placements": [
-        "sidebar-right-top",
-        "sidebar-right-mid",
-        "sidebar-right-index2",
-        "sidebar-right-index3",
-        "sidebar-right-index4"
-      ]
-    },
-    {
-      "name": "Footer",
-      "placements": [
-        "footer-right",
-        "footer-left"
-      ]
-    },
-    {
-      "name": "Hub / Index",
-      "placements": [
-        "site-index-rail",
-        "type-dashboard-rail",
-        "type-dashboard-rail-1row"
-      ]
-    },
-    {
-      "name": "Snapshot",
-      "placements": [
-        "moreof-rail",
-        "snap-rail-one",
-        "snap-rail-two"
-      ]
-    },
-    {
-      "name": "GPT",
-      "placements": [
-        "inline-gpt",
-        "gpt-sidebar-right-top"
-      ]
-    }
-  ],
-  "placements": {
-    "inline-ad": {
+  "global": {
+    "adsenseClient": "ca-pub-5013419984370459",
+    "adLabel": "Ad",
+    "showProductionPlaceholders": true,
+    "loadSampleAds": true,
+    "sampleAdMode": "mixed",
+    "sampleAdNetwork": "mixed"
+  },
+  "positions": {
+    "sidebar": {
       "provider": "adsense",
-      "adClient": "ca-pub-5013419984370459",
+      "adSlot": "6560707323",
+      "sizes": "300x400,300x250,300x300",
+      "display": true,
+      "notes": "Standard sidebar/rail ad unit"
+    },
+    "sidebar_sticky": {
+      "provider": "adsense",
+      "adSlot": "3735233435",
+      "sizes": "300x600,300x250",
+      "display": true,
+      "notes": "Tall sidebar ad, typically sticky-positioned"
+    },
+    "in_content": {
+      "provider": "adsense",
       "adSlot": "1051669276",
       "sizes": "970x250,728x90,336x280,300x250,320x100,320x50",
       "display": true,
-      "placementType": "inline"
+      "placementType": "inline",
+      "notes": "Inline content ad (auto-injected or manual)"
     },
-    "home-rail-top": {
+    "hero_leaderboard": {
       "provider": "adsense",
-      "adClient": "ca-pub-5013419984370459",
+      "adSlot": "1051669276",
+      "sizes": "970x250,728x90",
+      "display": true,
+      "placementType": "inline",
+      "notes": "Page 2+ hero section leaderboard"
+    },
+    "hero_companion": {
+      "provider": "adsense",
       "adSlot": "6560707323",
-      "sizes": "300x400,300x250,300x300",
+      "sizes": "300x250",
       "display": true,
-      "placementType": "rail"
-    },
-    "home-rail-body-1": {
-      "provider": "adsense",
-      "adClient": "ca-pub-5013419984370459",
-      "adSlot": "6560707323",
-      "sizes": "300x400,300x250,300x300",
-      "display": true,
-      "placementType": "rail"
-    },
-    "home-rail-body-2": {
-      "provider": "adsense",
-      "adClient": "ca-pub-5013419984370459",
-      "adSlot": "6560707323",
-      "sizes": "300x400,300x250,300x300",
-      "display": true,
-      "placementType": "rail"
-    },
-    "home-rail-body-3": {
-      "provider": "adsense",
-      "adClient": "ca-pub-5013419984370459",
-      "adSlot": "6560707323",
-      "sizes": "300x400,300x250,300x300",
-      "display": true,
-      "placementType": "rail"
-    },
-    "hero-right": {
-      "provider": "adsense",
-      "adClient": "ca-pub-5013419984370459",
-      "adSlot": "6560707323",
-      "sizes": "300x400,300x250,300x300",
-      "display": true,
-      "placementType": "rail"
-    },
-    "hero-left": {
-      "provider": "adsense",
-      "adClient": "ca-pub-5013419984370459",
-      "adSlot": "6560707323",
-      "sizes": "300x400,300x250,300x300",
-      "display": true,
-      "placementType": "rail"
-    },
-    "sidebar-right-top": {
-      "provider": "adsense",
-      "adClient": "ca-pub-5013419984370459",
-      "adSlot": "6560707323",
-      "sizes": "300x250,300x300",
-      "display": true,
-      "placementType": "rail"
-    },
-    "sidebar-right-mid": {
-      "provider": "adsense",
-      "adClient": "ca-pub-5013419984370459",
-      "adSlot": "3735233435",
-      "sizes": "300x600,300x250",
-      "display": true,
-      "placementType": "rail"
-    },
-    "sidebar-right-index2": {
-      "provider": "adsense",
-      "adClient": "ca-pub-5013419984370459",
-      "adSlot": "6560707323",
-      "sizes": "300x450,300x300,300x250",
-      "display": true,
-      "placementType": "rail"
-    },
-    "sidebar-right-index3": {
-      "provider": "adsense",
-      "adClient": "ca-pub-5013419984370459",
-      "adSlot": "3735233435",
-      "sizes": "300x600,300x250",
-      "display": true,
-      "placementType": "rail"
-    },
-    "sidebar-right-index4": {
-      "provider": "adsense",
-      "adClient": "ca-pub-5013419984370459",
-      "adSlot": "3735233435",
-      "sizes": "300x600,300x250",
-      "display": true,
-      "placementType": "rail"
-    },
-    "footer-right": {
-      "provider": "adsense",
-      "adClient": "ca-pub-5013419984370459",
-      "adSlot": "3735233435",
-      "sizes": "300x300,300x250",
-      "display": true,
-      "placementType": "rail"
-    },
-    "footer-left": {
-      "provider": "adsense",
-      "adClient": "ca-pub-5013419984370459",
-      "adSlot": "6560707323",
-      "sizes": "300x300,300x250",
-      "display": true,
-      "placementType": "rail"
-    },
-    "site-index-rail": {
-      "provider": "adsense",
-      "adClient": "ca-pub-5013419984370459",
-      "adSlot": "3735233435",
-      "sizes": "300x600,300x250,300x300",
-      "display": true,
-      "placementType": "rail"
-    },
-    "type-dashboard-rail": {
-      "provider": "adsense",
-      "adClient": "ca-pub-5013419984370459",
-      "adSlot": "3735233435",
-      "sizes": "300x450,300x300,300x250",
-      "display": true,
-      "placementType": "rail"
-    },
-    "type-dashboard-rail-1row": {
-      "provider": "adsense",
-      "adClient": "ca-pub-5013419984370459",
-      "adSlot": "3735233435",
-      "sizes": "300x300,300x250",
-      "display": true,
-      "placementType": "rail"
-    },
-    "moreof-rail": {
-      "provider": "adsense",
-      "adClient": "ca-pub-5013419984370459",
-      "adSlot": "6560707323",
-      "sizes": "300x450,300x300,300x250",
-      "display": true,
-      "placementType": "rail"
-    },
-    "snap-rail-one": {
-      "provider": "adsense",
-      "adClient": "ca-pub-5013419984370459",
-      "adSlot": "6560707323",
-      "sizes": "300x400,300x250,300x300",
-      "display": true,
-      "placementType": "rail"
-    },
-    "snap-rail-two": {
-      "provider": "adsense",
-      "adClient": "ca-pub-5013419984370459",
-      "adSlot": "3735233435",
-      "sizes": "300x600,300x400,300x250,300x300",
-      "display": true,
-      "placementType": "rail"
-    },
-    "inline-gpt": {
-      "provider": "gpt",
-      "slot": "/1234567/site/inline_gpt",
-      "sizes": "300x250,336x280,320x100,320x50",
-      "display": false,
-      "placementType": "inline"
-    },
-    "gpt-sidebar-right-top": {
-      "provider": "gpt",
-      "slot": "/1234567/site/rr_top",
-      "sizes": "300x600,300x250,300x300",
-      "display": false,
-      "placementType": "rail"
+      "notes": "Page 2+ hero companion ad (desktop rail, beside leaderboard)"
     }
   }
 }

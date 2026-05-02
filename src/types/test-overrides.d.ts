@@ -4,6 +4,9 @@
 
 import type { CognitoResult, AuthResult } from '@features/auth/server/cognito-api';
 import type { VerifiedClaims } from '@features/auth/server/jwt';
+import type { TokenResponse } from '@features/auth/server/token-exchange';
+import type { VaultReadResult } from '@features/vault/server/db';
+import type { VaultEntry } from '@features/vault/types';
 
 declare global {
   var __mockCognitoSignIn: ((email: string, password: string) => Promise<CognitoResult<AuthResult>>) | undefined;
@@ -12,8 +15,12 @@ declare global {
   var __mockCognitoForgotPassword: ((email: string) => Promise<CognitoResult<{ codeDelivery: string }>>) | undefined;
   var __mockCognitoConfirmForgotPassword: ((email: string, code: string, newPassword: string) => Promise<CognitoResult<void>>) | undefined;
   var __mockCognitoResendCode: ((email: string) => Promise<CognitoResult<{ codeDelivery: string }>>) | undefined;
+  var __mockExchangeCodeForTokens: ((code: string, codeVerifier?: string) => Promise<TokenResponse | null>) | undefined;
   var __mockVerifyIdToken: ((token: string) => Promise<VerifiedClaims | null>) | undefined;
   var __mockReadVaultRev: ((uid: string) => Promise<number>) | undefined;
+  var __mockReadVault: ((uid: string) => Promise<VaultReadResult>) | undefined;
+  var __mockWriteVault: ((uid: string, compare: VaultEntry[], builds: unknown[]) => Promise<number>) | undefined;
+  var __mockGetProducts: (() => Promise<Array<{ id: string; data: unknown }>>) | undefined;
 }
 
 export {};

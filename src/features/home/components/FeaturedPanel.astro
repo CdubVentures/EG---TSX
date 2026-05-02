@@ -4,6 +4,7 @@
  * Extracted to deduplicate the "All" and per-category panel markup.
  * Dark theme values are LOCKED — match HBS exactly.
  */
+import PinTag from '@shared/ui/PinTag.astro';
 import EditorsBadge from '@shared/ui/EditorsBadge.astro';
 import { catVar } from '@core/categories';
 import type { FeaturedItem } from '../featured-scroller-utils';
@@ -24,8 +25,11 @@ const tile = items[0]!;
 const cards = items.slice(1, 10);
 ---
 
-<div id={panelId} class={`${prefix}-section`} style={visible ? 'display: block;' : 'display: none;'}>
+<div id={panelId} class={`${prefix}-section`}
+     role="tabpanel" aria-labelledby={`${prefix}-tab-${panelId.replace(`${prefix}-`, '')}`}
+     style={visible ? 'display: block;' : 'display: none;'}>
   <a href={tile.url} class="feature-board-large-tile">
+    {tile.isPinned && <PinTag categoryColor={catVar(tile.category)} />}
     {tile.egbadge && (
       <div class="feature-board-badge-wrap">
         <EditorsBadge badgeText={tile.egbadge} category={tile.category} />
@@ -55,15 +59,16 @@ const cards = items.slice(1, 10);
   {cards.length > 0 && (
     <section class="feature-board-scroller-container">
       <div class="feature-board-scroller">
-        <div class="feature-board-left-arrow feature-board-arrow scroller-arrow">
+        <button type="button" class="feature-board-left-arrow feature-board-arrow scroller-arrow" aria-label={`Scroll ${prefix} items left`}>
           <svg aria-hidden="true" class="svg-base" focusable="false" height="16"
             viewBox="0 0 16 16" width="16" xmlns="http://www.w3.org/2000/svg">
             <path fill="currentColor" d="M2.38 7.784 8.796 1.37l1.414 1.414-5 5 5 5-1.414 1.414z"></path>
           </svg>
-        </div>
+        </button>
         <div class="feature-board-slider">
           {cards.map(item => (
             <a href={item.url} class="feature-board-item feature-board-row1-item">
+              {item.isPinned && <PinTag categoryColor={catVar(item.category)} />}
               {item.egbadge && (
                 <div class="feature-board-badge-wrap">
                   <EditorsBadge badgeText={item.egbadge} category={item.category} />
@@ -90,12 +95,12 @@ const cards = items.slice(1, 10);
             </a>
           ))}
         </div>
-        <div class="feature-board-right-arrow feature-board-arrow scroller-arrow">
+        <button type="button" class="feature-board-right-arrow feature-board-arrow scroller-arrow" aria-label={`Scroll ${prefix} items right`}>
           <svg aria-hidden="true" class="svg-base" focusable="false" height="16"
             viewBox="0 0 16 16" width="16" xmlns="http://www.w3.org/2000/svg">
             <path fill="currentColor" d="m13.21 7.784-6.415 6.414-1.414-1.414 5-5-5-5L6.795 1.37z"></path>
           </svg>
-        </div>
+        </button>
       </div>
     </section>
   )}

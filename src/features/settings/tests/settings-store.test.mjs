@@ -26,6 +26,18 @@ globalThis.dispatchEvent = globalThis.dispatchEvent ?? _eventTarget.dispatchEven
 // WHY: store.ts guards with `typeof window !== 'undefined'` for SSR safety.
 // In Node tests we need this to be truthy so window.closeSettingsPopup is set.
 globalThis.window = globalThis.window ?? globalThis;
+// WHY: auth/store.ts opens a BroadcastChannel when window exists. Disable it
+// here so the settings suite does not leave an open handle behind.
+Object.defineProperty(globalThis, 'BroadcastChannel', {
+  value: undefined,
+  configurable: true,
+  writable: true,
+});
+globalThis.requestAnimationFrame = globalThis.requestAnimationFrame ?? ((cb) => {
+  cb(0);
+  return 0;
+});
+globalThis.cancelAnimationFrame = globalThis.cancelAnimationFrame ?? (() => {});
 
 // WHY: auth store's $auth.listen() toggles document.documentElement.classList.
 // setTheme() uses setAttribute on documentElement and querySelector for meta[name="theme-color"].

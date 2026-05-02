@@ -36,6 +36,10 @@ function makeNonJsonContext() {
   };
 }
 
+function assertNoIndexHeader(response) {
+  assert.equal(response.headers.get('X-Robots-Tag'), 'noindex,nofollow');
+}
+
 // ─── Sign-In Endpoint ────────────────────────────────────────────────────────
 
 describe('POST /api/auth/sign-in', () => {
@@ -76,6 +80,7 @@ describe('POST /api/auth/sign-in', () => {
     const ctx = makeContext({ email: 'user@example.com', password: 'Pass1!' });
     const res = await mod.POST(ctx);
     assert.equal(res.status, 200);
+    assertNoIndexHeader(res);
     const json = await res.json();
     assert.equal(json.status, 'authenticated');
     assert.equal(json.uid, 'user-123');
@@ -162,6 +167,7 @@ describe('POST /api/auth/sign-up', () => {
     const ctx = makeContext({ email: 'new@example.com', password: 'Pass1!' });
     const res = await mod.POST(ctx);
     assert.equal(res.status, 200);
+    assertNoIndexHeader(res);
     const json = await res.json();
     assert.equal(json.status, 'confirm-required');
     assert.equal(json.email, 'new@example.com');
@@ -206,6 +212,7 @@ describe('POST /api/auth/confirm-sign-up', () => {
     const ctx = makeContext({ email: 'user@example.com', code: '123456' });
     const res = await mod.POST(ctx);
     assert.equal(res.status, 200);
+    assertNoIndexHeader(res);
     const json = await res.json();
     assert.equal(json.status, 'confirmed');
   });
@@ -244,6 +251,7 @@ describe('POST /api/auth/forgot-password', () => {
     const ctx = makeContext({ email: 'user@example.com' });
     const res = await mod.POST(ctx);
     assert.equal(res.status, 200);
+    assertNoIndexHeader(res);
     const json = await res.json();
     assert.equal(json.status, 'code-sent');
     assert.equal(json.email, 'user@example.com');
@@ -280,6 +288,7 @@ describe('POST /api/auth/confirm-forgot-password', () => {
     const ctx = makeContext({ email: 'user@example.com', code: '123456', newPassword: 'NewPass1!' });
     const res = await mod.POST(ctx);
     assert.equal(res.status, 200);
+    assertNoIndexHeader(res);
     const json = await res.json();
     assert.equal(json.status, 'password-reset');
   });
@@ -324,6 +333,7 @@ describe('POST /api/auth/resend-code', () => {
     const ctx = makeContext({ email: 'user@example.com' });
     const res = await mod.POST(ctx);
     assert.equal(res.status, 200);
+    assertNoIndexHeader(res);
     const json = await res.json();
     assert.equal(json.status, 'code-sent');
   });

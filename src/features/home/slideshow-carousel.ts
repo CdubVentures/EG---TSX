@@ -9,6 +9,7 @@ import EmblaCarousel from 'embla-carousel';
 import { createElement } from 'react';
 import { createRoot } from 'react-dom/client';
 import VaultToggleButton from '@features/vault/components/VaultToggleButton';
+import { createAutoplayController } from './slideshow-autoplay';
 
 // ─── Constants ──────────────────────────────────────────────────────────────
 const AUTO_INTERVAL = 5000;
@@ -16,10 +17,16 @@ const RESET_AFTER_INTERACTION = 5000;
 
 // ─── State ──────────────────────────────────────────────────────────────────
 let embla: ReturnType<typeof EmblaCarousel> | null = null;
-let autoID: ReturnType<typeof setInterval> | null = null;
 let isPaused = false;
 let isTabPaused = false;
+let hasInitialized = false;
 const lastSelectedPerCategory: Record<string, string> = {};
+const autoplay = createAutoplayController({
+  autoIntervalMs: AUTO_INTERVAL,
+  canRun: () => !isPaused && !isTabPaused && !!embla,
+  onTick: () => embla?.scrollNext(),
+});
+let cleanupRootInteractions: (() => void) | null = null;
 
 // ─── Lazy-load helpers ──────────────────────────────────────────────────────
 function loadImgIfNeeded(img: HTMLImageElement | null) {
@@ -76,24 +83,12 @@ function hydrateVaultToggles(container: HTMLElement) {
 }
 
 // ─── Autoplay controls ─────────────────────────────────────────────────────
-function clearAutoplay() { if (autoID) { clearInterval(autoID); autoID = null; } }
+function startAuto() { autoplay.start(); }
 
-function startAuto() {
-  clearAutoplay();
-  if (!isPaused && !isTabPaused && embla) {
-    autoID = setInterval(() => embla?.scrollNext(), AUTO_INTERVAL);
-  }
-}
+function pauseAuto(ms: number) { autoplay.pause(ms); }
 
-function pauseAuto(ms: number) {
-  clearAutoplay();
-  if (!isPaused && !isTabPaused && embla) {
-    setTimeout(() => startAuto(), ms);
-  }
-}
-
-function fullPause() { clearAutoplay(); }
-function fullResume() { if (!isPaused && !isTabPaused && embla) startAuto(); }
+function fullPause() { autoplay.stop(); }
+function fullResume() { autoplay.start(); }
 
 // ─── Press effect on arrows ─────────────────────────────────────────────────
 function pressFX(el: Element | null) {
@@ -106,16 +101,6 @@ function pressFX(el: Element | null) {
 }
 
 // ─── Keyboard support on arrows ─────────────────────────────────────────────
-function addKeyboardSupport(el: HTMLElement | null) {
-  if (!el) return;
-  el.addEventListener('keydown', (e) => {
-    if (e.key === 'Enter' || e.key === ' ') {
-      e.preventDefault();
-      el.click();
-    }
-  });
-}
-
 // ─── Overlay counter + pause icon ──────────────────────────────────────────
 function getOverlayEls() {
   const overlay = document.querySelector('.slide-info-overlay');
@@ -128,10 +113,15 @@ function getOverlayEls() {
   };
 }
 
-function updatePauseIcon(barsEl: HTMLElement | null | undefined, playEl: HTMLElement | null | undefined) {
+function updatePauseIcon(
+  barsEl: HTMLElement | null | undefined,
+  playEl: HTMLElement | null | undefined,
+  pauseBtn: HTMLElement | null | undefined,
+) {
   if (!barsEl || !playEl) return;
   barsEl.style.display = isPaused ? 'none' : 'flex';
   playEl.style.display = isPaused ? 'flex' : 'none';
+  pauseBtn?.setAttribute('aria-label', isPaused ? 'Play slideshow' : 'Pause slideshow');
 }
 
 // ─── Category color propagation ────────────────────────────────────────────
@@ -168,6 +158,9 @@ function initCarousel(category: string, isFirstRun = false) {
   if (!root) return;
   const track = root.querySelector<HTMLElement>('.slideshow-track');
   if (!track) return;
+
+  cleanupRootInteractions?.();
+  cleanupRootInteractions = null;
 
   // Store pristine clones on first run
   if (cleanClones.length === 0) {
@@ -220,7 +213,7 @@ function initCarousel(category: string, isFirstRun = false) {
 
   // Reset pause state
   isPaused = false;
-  updatePauseIcon(barsEl, playEl);
+  updatePauseIcon(barsEl, playEl, pauseBtn);
   startAuto();
 
   // Drag pauses autoplay
@@ -230,7 +223,7 @@ function initCarousel(category: string, isFirstRun = false) {
   if (pauseBtn) {
     pauseBtn.onclick = () => {
       isPaused = !isPaused;
-      updatePauseIcon(barsEl, playEl);
+      updatePauseIcon(barsEl, playEl, pauseBtn);
       isPaused ? fullPause() : fullResume();
     };
   }
@@ -238,8 +231,6 @@ function initCarousel(category: string, isFirstRun = false) {
   // Arrow buttons
   pressFX(leftArrow);
   pressFX(rightArrow);
-  addKeyboardSupport(leftArrow);
-  addKeyboardSupport(rightArrow);
 
   if (leftArrow) {
     leftArrow.onclick = (e) => {
@@ -258,6 +249,16 @@ function initCarousel(category: string, isFirstRun = false) {
 
   // Compare toggle pauses
   root.onclick = (e) => {
+    const dealButton = (e.target as Element)?.closest<HTMLElement>('.slide-deal-cta');
+    if (dealButton) {
+      e.preventDefault();
+      e.stopPropagation();
+      const href = dealButton.dataset.dealHref;
+      if (href) window.open(href, '_blank', 'noopener,noreferrer');
+      pauseAuto(RESET_AFTER_INTERACTION);
+      return;
+    }
+
     if ((e.target as Element)?.closest('.compare-label, .compare-toggle')) {
       pauseAuto(RESET_AFTER_INTERACTION);
     }
@@ -326,23 +327,31 @@ function initCarousel(category: string, isFirstRun = false) {
   // Drag suppression — prevent link activation during drag
   let pointerStartX = 0;
   let wasDragged = false;
-
-  root.addEventListener('pointerdown', (e) => {
+  const handlePointerDown = (e: PointerEvent) => {
     pointerStartX = e.clientX;
     wasDragged = false;
-  }, { passive: true });
+  };
 
-  root.addEventListener('pointermove', (e) => {
+  const handlePointerMove = (e: PointerEvent) => {
     if (Math.abs(e.clientX - pointerStartX) > 3) wasDragged = true;
-  }, { passive: true });
+  };
 
-  root.addEventListener('click', (e) => {
+  const handleCaptureClick = (e: MouseEvent) => {
     const anchor = (e.target as Element)?.closest('.slide-anchor');
     if (anchor && wasDragged) {
       e.preventDefault();
       e.stopPropagation();
     }
-  }, true);
+  };
+
+  root.addEventListener('pointerdown', handlePointerDown, { passive: true });
+  root.addEventListener('pointermove', handlePointerMove, { passive: true });
+  root.addEventListener('click', handleCaptureClick, true);
+  cleanupRootInteractions = () => {
+    root.removeEventListener('pointerdown', handlePointerDown);
+    root.removeEventListener('pointermove', handlePointerMove);
+    root.removeEventListener('click', handleCaptureClick, true);
+  };
 }
 
 // ─── Refresh listener (called by CategoryDropdown via CustomEvent) ────────
@@ -372,6 +381,9 @@ document.addEventListener('visibilitychange', () => {
 
 // ─── Public init ──────────────────────────────────────────────────────────
 export function initSlideshow() {
+  if (hasInitialized) return;
+  hasInitialized = true;
+
   initCarousel('all', true);
 
   // Load all images after page load (background prefetch)

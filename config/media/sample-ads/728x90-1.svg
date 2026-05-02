@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 728 90" width="728" height="90">
+  <!-- Background with border -->
+  <rect x="0.5" y="0.5" width="727" height="89" rx="4" fill="#fff8f0" stroke="#e5e7eb" stroke-width="1"/>
+
+  <!-- Brand area left: plate/bowl icon + brand -->
+  <circle cx="48" cy="42" r="28" fill="#e8590c"/>
+  <circle cx="48" cy="38" r="14" fill="none" stroke="#ffffff" stroke-width="1.5" opacity="0.9"/>
+  <ellipse cx="48" cy="38" rx="8" ry="5" fill="#ffffff" opacity="0.25"/>
+  <!-- Steam lines -->
+  <path d="M42 22 Q44 18 42 14" fill="none" stroke="#ffffff" stroke-width="1.2" stroke-linecap="round" opacity="0.6"/>
+  <path d="M48 20 Q50 16 48 12" fill="none" stroke="#ffffff" stroke-width="1.2" stroke-linecap="round" opacity="0.6"/>
+  <path d="M54 22 Q56 18 54 14" fill="none" stroke="#ffffff" stroke-width="1.2" stroke-linecap="round" opacity="0.6"/>
+  <text x="48" y="60" font-family="Arial, Helvetica, sans-serif" font-size="8" font-weight="800" fill="#ffffff" text-anchor="middle" dominant-baseline="central" letter-spacing="1">QUICKBITE</text>
+
+  <!-- Divider -->
+  <line x1="90" y1="18" x2="90" y2="72" stroke="#f3d5b5" stroke-width="1"/>
+
+  <!-- Headline center -->
+  <text x="220" y="33" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="800" fill="#9a3412" text-anchor="middle" dominant-baseline="central">Hungry?</text>
+  <text x="380" y="33" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="800" fill="#e8590c" text-anchor="middle" dominant-baseline="central">$10 Off First Order</text>
+  <text x="310" y="60" font-family="Arial, Helvetica, sans-serif" font-size="12" fill="#b45309" text-anchor="middle" dominant-baseline="central">Delivery in 30 min. Use code WELCOME10 at checkout.</text>
+
+  <!-- CTA button right (pill shape) -->
+  <rect x="568" y="21" width="134" height="48" rx="24" fill="#e8590c"/>
+  <text x="635" y="46" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="700" fill="#ffffff" text-anchor="middle" dominant-baseline="central">Order Now</text>
+
+  <!-- Ad label top-right -->
+  <rect x="693" y="4" width="28" height="16" rx="3" fill="none" stroke="#d1d5db" stroke-width="1"/>
+  <text x="707" y="13" font-family="Arial, Helvetica, sans-serif" font-size="9" fill="#9ca3af" text-anchor="middle" dominant-baseline="central">Ad</text>
+</svg>

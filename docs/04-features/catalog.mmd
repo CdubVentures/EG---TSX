@@ -1,0 +1,88 @@
+sequenceDiagram
+  autonumber
+  actor U as User
+  participant UI as HomeSlideshow or site-index card UI
+  participant DROP as CategoryDropdown and slideshow-carousel
+  participant TOGGLE as VaultToggleButton
+  participant VSTORE as vault store
+  participant NOTICE as vault action bridge
+  participant LOCAL as localStorage
+  participant SYNC as vault sync
+  participant BUS as BroadcastChannel and storage listeners
+  participant PUT as /api/user/vault
+  participant THUMBS as /api/vault/thumbs
+  participant JWT as verifyIdToken()
+  participant DDB as DynamoDB eg_profiles
+
+  opt Browse-only client refresh
+    U->>DROP: Change top products category
+    DROP->>DROP: update selected category state and data attribute
+    DROP->>UI: dispatch slideshow refresh event
+    UI->>UI: rebuild Embla slides and rehydrate compare mounts
+  end
+
+  U->>TOGGLE: Click COMPARE on a product card
+  TOGGLE->>TOGGLE: restart pulse animation and prevent default checkbox toggle
+  alt Item already in vault
+    TOGGLE->>VSTORE: removeFromVault(productId)
+  else New item requested
+    TOGGLE->>VSTORE: addToVault(product)
+    VSTORE->>VSTORE: normalize image path and thumbnail stem
+    alt Duplicate product
+      VSTORE-->>TOGGLE: reject duplicate
+    else Category at limit
+      VSTORE-->>TOGGLE: reject category-full
+    else Accepted
+      VSTORE->>VSTORE: append entry with addedAt timestamp
+    end
+  end
+
+  VSTORE->>NOTICE: emit vault action event
+  NOTICE-->>U: update notifications and counts
+  VSTORE->>LOCAL: debounce flush current scope snapshot
+
+  par Same-tab reactivity
+    VSTORE-->>UI: all mounted compare toggles re-render from the store
+  and Cross-tab propagation
+    SYNC->>BUS: broadcast scope and entries
+    BUS-->>SYNC: sibling tabs apply the same entries
+  end
+
+  alt Guest scope
+    SYNC->>SYNC: stop before network sync
+    SYNC-->>U: vault persists locally only
+  else Authenticated scope
+    SYNC->>SYNC: schedule pushToServer after debounce
+    SYNC->>PUT: PUT /api/user/vault with compare entries
+    PUT->>JWT: verify session cookie
+    JWT-->>PUT: authenticated uid
+    PUT->>DDB: read current compare, builds, and rev
+    DDB-->>PUT: existing vault payload
+    PUT->>DDB: writeVault with new compare and preserved builds
+    DDB-->>PUT: incremented rev
+    PUT-->>SYNC: ok and new rev
+    SYNC->>LOCAL: store rev for current uid
+
+    opt Thumbnail normalization pass
+      SYNC->>THUMBS: POST /api/vault/thumbs
+      THUMBS-->>SYNC: resolved thumbnail metadata from product registry
+      SYNC->>VSTORE: patch entries with repaired thumbnail data
+      VSTORE->>LOCAL: flush repaired snapshot
+    end
+
+    opt Revalidation on visibility or login hydration
+      SYNC->>PUT: GET /api/user/vault with current rev
+      alt Server rev unchanged
+        PUT-->>SYNC: 304 not modified
+      else Server rev changed
+        PUT->>JWT: verify session cookie
+        JWT-->>PUT: authenticated uid
+        PUT->>DDB: readVault(uid)
+        DDB-->>PUT: compare, builds, and rev
+        PUT-->>SYNC: latest vault payload
+        SYNC->>VSTORE: replace local entries from server
+      end
+    end
+  end
+
+  Note over PUT,DDB: Browse pages are static S3 and CloudFront documents. DynamoDB is entered only when catalog UI persists or refreshes authenticated vault state.

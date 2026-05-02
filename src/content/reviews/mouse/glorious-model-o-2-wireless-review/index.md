@@ -12,6 +12,8 @@ tags:
   - Sleek Mouse
 hero: feature-image
 productId: glorious-model-o-2-wireless
+pinned: true
+egbadge: "Top Rated"
 toc: false
 ---
 

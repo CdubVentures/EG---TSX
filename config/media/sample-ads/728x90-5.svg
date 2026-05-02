@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 728 90" width="728" height="90">
+  <rect width="728" height="90" fill="#0b1328"/>
+  <text x="708" y="16" font-family="Inter, Arial, Helvetica, sans-serif" font-size="9" fill="#93c5fd" text-anchor="end">Ad</text>
+
+  <text x="20" y="32" font-family="Inter, Arial, Helvetica, sans-serif" font-size="18" fill="#f8fafc" font-weight="700">Stripe Atlas</text>
+  <text x="20" y="54" font-family="Inter, Arial, Helvetica, sans-serif" font-size="12" fill="#cbd5e1">Launch payments in under 10 minutes.</text>
+
+  <rect x="410" y="22" width="112" height="38" rx="8" fill="#38bdf8"/>
+  <text x="466" y="47" font-family="Inter, Arial, Helvetica, sans-serif" font-size="12" fill="#0b1328" text-anchor="middle" font-weight="700">Start free</text>
+  <rect x="20" y="68" width="130" height="1" fill="#334155"/>
+</svg>

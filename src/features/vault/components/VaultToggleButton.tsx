@@ -60,7 +60,7 @@ export default function VaultToggleButton({ product }: VaultToggleButtonProps) {
   const toggleRef = useRef<HTMLDivElement>(null);
   const touchTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  const inVault = entries.some(e => e.product.id === product.id);
+  const inVault = entries.some(e => e.productId === product.id);
 
   const handleClick = useCallback((e: React.MouseEvent) => {
     // WHY: prevent the label's default checkbox toggle — React owns checked state

@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 250" width="300" height="250">
+  <!-- Background with subtle border -->
+  <rect x="0.5" y="0.5" width="299" height="249" fill="#fff8f0" stroke="#e5e7eb" stroke-width="1"/>
+
+  <!-- "Sponsored" label top-right -->
+  <text x="286" y="14" font-family="Arial, Helvetica, sans-serif" font-size="9" fill="#9ca3af" text-anchor="end">Sponsored</text>
+
+  <!-- Brand mark: orange dot + brand name -->
+  <circle cx="20" cy="18" r="5" fill="#e8590c"/>
+  <text x="30" y="22" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="700" fill="#e8590c">QuickBite</text>
+
+  <!-- Food bowl with steam -->
+  <g transform="translate(116, 38)">
+    <!-- Bowl -->
+    <ellipse cx="34" cy="34" rx="30" ry="11" fill="#fed7aa" stroke="#e8590c" stroke-width="1.4"/>
+    <path d="M4,34 Q4,56 34,56 Q64,56 64,34" fill="#fdba74" stroke="#e8590c" stroke-width="1.4"/>
+    <!-- Food items -->
+    <circle cx="20" cy="30" r="5" fill="#ef4444" opacity="0.65"/>
+    <circle cx="34" cy="28" r="5.5" fill="#22c55e" opacity="0.55"/>
+    <circle cx="48" cy="30" r="5" fill="#f59e0b" opacity="0.65"/>
+    <circle cx="27" cy="36" r="3.5" fill="#a855f7" opacity="0.45"/>
+    <circle cx="41" cy="35" r="4" fill="#ef4444" opacity="0.55"/>
+    <!-- Steam -->
+    <path d="M18,20 Q15,12 19,4" fill="none" stroke="#d6d3d1" stroke-width="1.5" stroke-linecap="round"/>
+    <path d="M34,18 Q31,10 35,2" fill="none" stroke="#d6d3d1" stroke-width="1.5" stroke-linecap="round"/>
+    <path d="M50,20 Q47,12 51,4" fill="none" stroke="#d6d3d1" stroke-width="1.5" stroke-linecap="round"/>
+  </g>
+
+  <!-- Headline -->
+  <text x="150" y="122" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="700" fill="#1c1917" text-anchor="middle">$10 Off First Order</text>
+
+  <!-- Subtext -->
+  <text x="150" y="144" font-family="Arial, Helvetica, sans-serif" font-size="13" fill="#78716c" text-anchor="middle">Free Delivery on All Orders</text>
+  <text x="150" y="162" font-family="Arial, Helvetica, sans-serif" font-size="11" fill="#a8a29e" text-anchor="middle">Use code FIRST10 at checkout</text>
+
+  <!-- CTA Button -->
+  <rect x="92" y="176" width="116" height="36" rx="8" fill="#e8590c"/>
+  <text x="150" y="199" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="700" fill="#ffffff" text-anchor="middle">Order Now</text>
+
+  <!-- Fine print -->
+  <text x="150" y="234" font-family="Arial, Helvetica, sans-serif" font-size="8" fill="#a8a29e" text-anchor="middle">Min. order $25. New customers only. Terms apply.</text>
+</svg>

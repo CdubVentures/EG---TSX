@@ -1,0 +1,19 @@
+---
+import IndexBleed from './IndexBleed.astro';
+import IndexBody from './IndexBody.astro';
+import type { SiteIndexPageVm } from '../page-builder';
+
+interface Props {
+  vm: SiteIndexPageVm;
+}
+
+const { vm } = Astro.props;
+// WHY: SiteIndexPage is only used for article-type indexes (reviews/news/guides).
+// Brands use their own page route with separate VM. Narrow the widened SiteIndexType
+// so IndexBleed/IndexBody get the article-only type they expect.
+const bleed = { ...vm.bleed, type: vm.bleed.type as 'reviews' | 'news' | 'guides' };
+const body = { ...vm.body, type: vm.body.type as 'reviews' | 'news' | 'guides' };
+---
+
+<IndexBleed {...bleed} />
+<IndexBody {...body} />

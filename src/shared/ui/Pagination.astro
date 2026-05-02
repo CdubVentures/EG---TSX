@@ -1,0 +1,179 @@
+---
+/**
+ * Pagination — page numbers + prev/next chevron arrows.
+ * Standard pattern: ‹ 1 2 3 … 200 › — arrows only render when there's a page to go to.
+ */
+import type { PaginationData } from "@features/site-index/build-pagination";
+
+interface Props {
+  pagination: PaginationData;
+  categoryClass?: string;
+}
+
+const { pagination, categoryClass } = Astro.props;
+---
+
+<nav class:list={["site-pager", categoryClass]} aria-label="Pagination">
+  {
+    pagination.prevUrl && (
+      <a class="site-pager__btn" rel="prev" href={pagination.prevUrl} aria-label="Previous page">
+        <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
+          <path
+            fill="currentColor"
+            d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"
+          />
+        </svg>
+      </a>
+    )
+  }
+
+  {
+    pagination.pages.map((p) =>
+      p.ellipsis ? (
+        <span class="site-pager__ellipsis" aria-hidden="true">
+          &hellip;
+        </span>
+      ) : p.active ? (
+        <span class="site-pager__btn is-active" aria-current="page" aria-label={`Page ${p.num}`}>
+          {p.num}
+        </span>
+      ) : (
+        <a class="site-pager__btn" href={p.url} aria-label={`Go to page ${p.num}`}>
+          {p.num}
+        </a>
+      )
+    )
+  }
+
+  {
+    pagination.nextUrl && (
+      <a class="site-pager__btn" rel="next" href={pagination.nextUrl} aria-label="Next page">
+        <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
+          <path
+            fill="currentColor"
+            d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"
+          />
+        </svg>
+      </a>
+    )
+  }
+</nav>
+
+<style>
+  .site-pager {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    margin: 28px 0 8px;
+    user-select: none;
+  }
+
+  /* Every button — page numbers AND arrows — identical size  */
+  .site-pager__btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 40px;
+    min-width: 40px;
+    padding: 0 4px;
+    border-radius: 8px;
+    font-family: var(--identity-font, inherit);
+    font-weight: 600;
+    font-size: var(--font-size-15px);
+    line-height: 1;
+    text-decoration: none;
+    color: var(--white-color-1);
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    cursor: pointer;
+    transition:
+      background-color 0.15s ease,
+      border-color 0.15s ease,
+      box-shadow 0.15s ease,
+      color 0.15s ease;
+  }
+
+  .site-pager__btn:hover {
+    background: rgba(255, 255, 255, 0.12);
+    border-color: rgba(255, 255, 255, 0.16);
+  }
+
+  .site-pager__btn.is-active {
+    color: #fff;
+    background: var(--card-color, var(--site-start-color));
+    border-color: transparent;
+    cursor: default;
+    pointer-events: none;
+  }
+
+  /* Chevron SVG inside arrow buttons */
+  .site-pager__btn svg {
+    width: 10px;
+    height: 10px;
+    flex-shrink: 0;
+  }
+
+  /* Ellipsis — just text, no box */
+  .site-pager__ellipsis {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 40px;
+    color: var(--grey-color-3, #6b7280);
+    font-weight: 700;
+    font-size: var(--font-size-15px);
+    letter-spacing: 2px;
+  }
+
+  /* Focus ring */
+  .site-pager__btn:focus-visible {
+    outline: 2px solid var(--site-start-color, #5a6ef8);
+    outline-offset: 2px;
+  }
+
+  /* ── ≤600px — slightly smaller but still 36px touch target ── */
+  @media (max-width: 600px) {
+    .site-pager {
+      gap: 4px;
+    }
+
+    .site-pager__btn {
+      height: 36px;
+      min-width: 36px;
+      font-size: var(--font-size-14px);
+      border-radius: 6px;
+    }
+
+    .site-pager__ellipsis {
+      height: 36px;
+      width: 20px;
+    }
+  }
+
+  /* ── Light theme overrides — dark mode untouched ── */
+  :global([data-theme="default"]) .site-pager__btn,
+  :global([data-theme="workstation"]) .site-pager__btn,
+  :global([data-theme="review"]) .site-pager__btn {
+    background: var(--section-dark-background-color);
+    border-color: var(--section-medium-background-color);
+    box-shadow: var(--card-shadow);
+  }
+
+  :global([data-theme="default"]) .site-pager__btn:hover,
+  :global([data-theme="workstation"]) .site-pager__btn:hover,
+  :global([data-theme="review"]) .site-pager__btn:hover {
+    background: var(--section-dusk-background-color);
+    border-color: var(--section-light-background-color);
+    box-shadow: var(--card-shadow-hover);
+  }
+
+  :global([data-theme="default"]) .site-pager__btn.is-active,
+  :global([data-theme="workstation"]) .site-pager__btn.is-active,
+  :global([data-theme="review"]) .site-pager__btn.is-active {
+    background: var(--card-color, var(--site-start-color));
+    border-color: transparent;
+    box-shadow: none;
+  }
+</style>

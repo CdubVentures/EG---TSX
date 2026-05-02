@@ -1,9 +1,9 @@
 {
   "slug": "lamzu-atlantis-og-v2-4k",
   "brand": "Lamzu",
-  "model": "Atlantis OG V2 4k",
-  "baseModel": "Atlantis",
-  "variant": "OG V2 4k",
+  "model": "Atlantis OG V2 4K",
+  "baseModel": "Atlantis OG V2",
+  "variant": "4K",
   "category": "mouse",
   "imagePath": "/images/mouse/lamzu/atlantis-og-v2-4k",
   "cardTags": "false",
