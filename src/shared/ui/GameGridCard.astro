@@ -1,0 +1,118 @@
+---
+/**
+ * GameGridCard.astro — 7:10 box-art poster card for the games index grid.
+ * Port of HBS site-games-grid.handlebars lines 53-73 (the .game-card block).
+ * Dark-theme values copied from EG-HBS to stay locked.
+ */
+import type { PackedGame } from '@features/site-index/games-helpers';
+
+interface Props {
+  game: PackedGame;
+}
+
+const { game } = Astro.props;
+const base = game.boxCoverArt;
+const ext = game.logoExt || 'webp';
+---
+
+<a href={game.url} class="game-card" aria-label={game.name}>
+  <div
+    class="game-card__artWrap"
+    data-tilt
+    data-tilt-max="10"
+    data-tilt-scale="1.02"
+    data-tilt-speed="300"
+    data-tilt-perspective="900"
+    data-tilt-reset="true"
+    data-tilt-glare="true"
+    data-tilt-max-glare="0.12"
+  >
+    <img
+      loading="lazy"
+      decoding="async"
+      src={`${base}_s.${ext}`}
+      srcset={`${base}_xxs.${ext} 100w, ${base}_xs.${ext} 200w, ${base}_s.${ext} 400w, ${base}_m.${ext} 600w, ${base}_l.${ext} 800w, ${base}_xl.${ext} 1000w, ${base}_xxl.${ext} 2000w`}
+      sizes="(min-width: 1401px) calc((min(1500px, 100vw - 48px) - 200px - 300px - 60px - 42px) / 4),
+             (min-width: 1151px) calc((min(1500px, 100vw - 48px) - 300px - 30px - 42px) / 4),
+             (min-width: 601px)  calc((min(1500px, 100vw - 48px) - 42px) / 4),
+             (min-width: 401px)  calc((min(1500px, 100vw - 48px) - 28px) / 3),
+             calc((min(1500px, 100vw - 48px) - 14px) / 2)"
+      alt={`${game.name} cover art`}
+      class="game-card__art lazy-no-blur"
+      draggable="false"
+    />
+  </div>
+  <span class="game-card__name">{game.name}</span>
+</a>
+
+<style>
+  /* ─── Card — 7:10 poster + tilt-friendly wrapper ─────────────────────────── */
+  .game-card {
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+    color: inherit;
+    transition: transform 0.3s ease;
+  }
+
+  .game-card__artWrap {
+    width: 100%;
+    aspect-ratio: 7 / 10;
+    overflow: hidden;
+    border-radius: 8px;
+    position: relative;
+    will-change: transform;
+    transform-style: preserve-3d;
+    box-shadow: var(--card-shadow, none);
+    transition: box-shadow 0.2s ease;
+  }
+
+  .game-card__art {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+  }
+
+  .game-card__name {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    font-family: var(--identity-font);
+    font-weight: var(--font-weight7);
+    font-size: var(--ft-16-14);
+    color: var(--white-color-1);
+    line-height: 1.2;
+    padding: 0.7rem 5px;
+    word-break: break-word;
+  }
+
+  @media (max-width: 600px) {
+    .game-card__name {
+      font-size: var(--fm-14-13);
+    }
+  }
+
+  /* ─── Hover (pointer devices only) ───────────────────────────────────────── */
+  @media (hover: hover) and (pointer: fine) {
+    .game-card:hover {
+      transform: translateY(8px);
+    }
+
+    .game-card:hover .game-card__artWrap {
+      box-shadow: var(--card-shadow-hover, var(--card-shadow, none));
+    }
+
+    .game-card:hover .game-card__name {
+      background: var(--site-gradient-text);
+      -webkit-background-clip: text;
+      -moz-text-fill-color: transparent;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .game-card:hover .game-card__art {
+      transform: none;
+    }
+  }
+</style>

@@ -1,0 +1,141 @@
+---
+/**
+ * GamesBody.astro — Body section for /games/ index pages.
+ * Mirrors BrandBody.astro structure: CategorySidebar (genre filter) +
+ * FeedHeader + GameGrid + Pagination + ad rail.
+ */
+import type { GamesBodyVm } from '../games-types';
+import CategorySidebar from './CategorySidebar.astro';
+import FeedHeader from './FeedHeader.astro';
+import GameGrid from './GameGrid.astro';
+import Pagination from '@shared/ui/Pagination.astro';
+import AdSlot from '@features/ads/components/AdSlot.astro';
+
+interface Props {
+  vm: GamesBodyVm;
+}
+
+const { vm } = Astro.props;
+const {
+  heading,
+  pageItems,
+  pagination,
+  filterGenres,
+  activeGenre,
+  categoryClass,
+  allCount,
+} = vm;
+---
+
+<div class="site-index site-index--games">
+  <section class="site-index__grid">
+    <aside class="site-index__cats">
+      <CategorySidebar
+        categories={filterGenres}
+        activeCategory={activeGenre}
+        type="games"
+        allCount={allCount}
+        categoryClass={categoryClass}
+      />
+    </aside>
+
+    <div class="site-index__main">
+      <FeedHeader
+        heading={heading}
+        prevUrl={pagination.prevUrl || undefined}
+        nextUrl={pagination.nextUrl || undefined}
+        filterCategories={filterGenres}
+        activeCategory={activeGenre}
+        type="games"
+        allCount={allCount}
+        categoryClass={categoryClass}
+      />
+
+      <GameGrid items={pageItems} />
+
+      {pagination.total > 1 && (
+        <Pagination pagination={pagination} categoryClass={categoryClass} />
+      )}
+    </div>
+
+    <aside class:list={['site-index__rail', 'first-type-rail', categoryClass]} aria-label="Advertisement">
+      <div class="sticky-stack" data-sticky="true">
+        <AdSlot position="sidebar_sticky" />
+      </div>
+    </aside>
+  </section>
+</div>
+
+<style>
+  /* ─── Layout — copy of BrandBody grid (HBS site_index.css body grid) ────── */
+  .site-index {
+    --si-max: 1500px;
+    --si-gap: 22px;
+    --si-gap-lg: 30px;
+    --si-col-cats: 200px;
+    --si-col-rail: 300px;
+    box-sizing: content-box;
+    margin: 0 auto;
+    max-width: calc(var(--si-max) + 32px);
+    padding-left: clamp(0px, -1650px + 103.125vw, 330px);
+  }
+
+  .site-index__grid {
+    display: grid;
+    grid-template-columns: var(--si-col-cats) minmax(0, 1fr) var(--si-col-rail);
+    grid-template-areas: "cats main rail";
+    gap: var(--si-gap-lg);
+    align-items: start;
+    padding: 24px 24px 0px;
+    margin-bottom: 24px;
+  }
+
+  .site-index__cats { grid-area: cats; min-width: 0; }
+  .site-index__main { grid-area: main; min-width: 0; }
+  .site-index__rail { grid-area: rail; min-width: 0; height: 100%; }
+
+  .sticky-stack[data-sticky="true"] {
+    position: sticky;
+    top: var(--rail-sticky-top, calc(var(--top-bar-H, 64px) + 32px));
+    will-change: top;
+    isolation: isolate;
+    z-index: 1000;
+    min-height: 600px;
+  }
+
+  .site-index__rail :global(.ad-slot) {
+    width: var(--si-col-rail);
+    max-width: 100%;
+  }
+
+  @media (max-width: 1400px) {
+    .site-index__grid {
+      grid-template-columns: minmax(0, 1fr) var(--si-col-rail);
+      grid-template-areas:
+        "cats  rail"
+        "main  rail";
+      gap: var(--si-gap-lg);
+    }
+    .site-index__rail { align-self: stretch; }
+  }
+
+  @media (max-width: 1150px) {
+    .site-index__grid {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 0;
+      grid-template-areas:
+        "cats"
+        "main";
+    }
+    .site-index__rail,
+    .site-index__grid .site-index__rail {
+      display: none !important;
+    }
+  }
+
+  @media (max-width: 825px) {
+    .site-index--games .site-index__cats {
+      display: none !important;
+    }
+  }
+</style>

@@ -1,5 +1,5 @@
 import { CONFIG } from '@core/config';
-import { getBrands, getGuides, getNews, getReviews } from '@core/content';
+import { getBrands, getGames, getGuides, getNews, getReviews } from '@core/content';
 import { pinnedSet, badgesMap, indexHeroes } from '@core/dashboard';
 import { getProducts } from '@core/products';
 import type { DashboardEntry } from '@core/article-helpers';
@@ -23,6 +23,14 @@ import {
   type BrandBodyVm,
 } from './brand-page-builder';
 import { packBrand } from './brand-helpers';
+import {
+  buildGamesStaticPaths,
+  buildGamesPageVm,
+  type BuildGamesStaticPathsOptions,
+  type BuildGamesPageVmOptions,
+} from './games-page-builder';
+import type { GameEntryLike } from './games-helpers';
+import type { GameStaticPath, GameStaticPathProps, GamesPageVm } from './games-types';
 
 type SiteIndexEnrichItems = (args: {
   items: FeaturedItem[];
@@ -152,3 +160,32 @@ export async function buildBrandPageVm(
 }
 
 export type { BrandStaticPath, BrandStaticPathProps, BrandBleedVm, BrandBodyVm };
+
+// ─── Games index ──────────────────────────────────────────────────────────────
+
+const GAMES_HEADER_DEK =
+  'Find the most played and talked-about games. Filter by genre and jump into each game’s hub.';
+const GAMES_TYPE_LABEL = 'Games';
+
+export async function getGamesStaticPaths(): Promise<GameStaticPath[]> {
+  const entries = (await getGames()) as unknown as GameEntryLike[];
+  return buildGamesStaticPaths({
+    entries,
+    perPage: CONFIG.pagination.indexPerPage,
+  });
+}
+
+export async function buildGamesPageVmFromProps(
+  pageProps: GameStaticPathProps,
+): Promise<GamesPageVm> {
+  return buildGamesPageVm({
+    typeLabel: GAMES_TYPE_LABEL,
+    headerDek: GAMES_HEADER_DEK,
+    siteUrl: CONFIG.site.url,
+    perPage: CONFIG.pagination.indexPerPage,
+    pageProps,
+  });
+}
+
+export type { GameStaticPath, GameStaticPathProps, GamesPageVm };
+export type { BuildGamesStaticPathsOptions, BuildGamesPageVmOptions };

@@ -33,7 +33,8 @@ const dashboardConfigSchema = z.object({
     news: indexHeroesPerTypeSchema,
     guides: indexHeroesPerTypeSchema,
     brands: indexHeroesPerTypeSchema,
-  }).default({ reviews: {}, news: {}, guides: {}, brands: {} }),
+    games: indexHeroesPerTypeSchema,
+  }).default({ reviews: {}, news: {}, guides: {}, brands: {}, games: {} }),
 });
 
 export type DashboardConfig = z.infer<typeof dashboardConfigSchema>;

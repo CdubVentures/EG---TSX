@@ -1,0 +1,44 @@
+---
+/**
+ * /games/ index — full page (top half + bottom half).
+ * Handles: /games/, /games/page/2/, /games/{genre}/, /games/{genre}/page/2/
+ *
+ * Mirrors /reviews/[...slug].astro shape, but uses the games-specific page
+ * builder (genre buckets, day-seeded 6-tile dashboard).
+ */
+import MainLayout from '@shared/layouts/MainLayout.astro';
+import IndexBleed from '@features/site-index/components/IndexBleed.astro';
+import GamesBody from '@features/site-index/components/GamesBody.astro';
+import {
+  getGamesStaticPaths,
+  buildGamesPageVmFromProps,
+  type GameStaticPathProps,
+} from '@features/site-index/definitions';
+
+export async function getStaticPaths() {
+  return getGamesStaticPaths();
+}
+
+const vm = await buildGamesPageVmFromProps(Astro.props as GameStaticPathProps);
+---
+
+<MainLayout
+  title={vm.seo.title}
+  description={vm.seo.description}
+  canonicalUrl={vm.seo.canonicalUrl}
+  structuredData={vm.seo.structuredData}
+>
+  <IndexBleed
+    type="games"
+    typeLabel="Games"
+    category={vm.bleed.category}
+    categoryLabel={vm.bleed.categoryLabel}
+    categoryClass={vm.bleed.categoryClass}
+    page={vm.bleed.page}
+    headerDek={vm.bleed.headerDek}
+    gamesDashboardItems={vm.bleed.dashboardItems}
+    heading={vm.bleed.heading}
+    breadcrumbs={vm.bleed.breadcrumbs}
+  />
+  <GamesBody vm={vm.body} />
+</MainLayout>

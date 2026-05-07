@@ -8,10 +8,12 @@
  */
 import type { FeaturedItem } from '@features/home/featured-scroller-utils';
 import type { BrandTileItem } from '../brand-types';
+import type { PackedGame } from '../games-helpers';
 import type { SiteIndexType } from '../page-builder';
 import Breadcrumbs from '@shared/ui/Breadcrumbs.astro';
 import IndexDashboard from './IndexDashboard.astro';
 import BrandDashboard from './BrandDashboard.astro';
+import GamesDashboard from './GamesDashboard.astro';
 import IndexHeroAds from './IndexHeroAds.astro';
 
 interface BreadcrumbItem {
@@ -29,6 +31,7 @@ interface Props {
   headerDek: string;
   dashboardItems?: FeaturedItem[];
   brandDashboardItems?: BrandTileItem[];
+  gamesDashboardItems?: PackedGame[];
   heading: string;
   breadcrumbs: BreadcrumbItem[];
 }
@@ -43,14 +46,16 @@ const {
   headerDek,
   dashboardItems = [],
   brandDashboardItems,
+  gamesDashboardItems,
   heading,
   breadcrumbs,
 } = Astro.props;
 
 const isBrands = type === 'brands';
+const isGames = type === 'games';
 ---
 
-<div class:list={['site-index-bleed', isBrands && 'site-index-brands']}>
+<div class:list={['site-index-bleed', isBrands && 'site-index-brands', isGames && 'site-index-games']}>
   <div class:list={['site-index-wrapper', `site-index--${type}`]}>
     <div class="site-index__header">
       <Breadcrumbs
@@ -66,6 +71,8 @@ const isBrands = type === 'brands';
       {page === 1 ? (
         isBrands && brandDashboardItems ? (
           <BrandDashboard items={brandDashboardItems} categoryClass={categoryClass} />
+        ) : isGames ? (
+          <GamesDashboard items={gamesDashboardItems ?? []} categoryClass={categoryClass} />
         ) : (
           <IndexDashboard items={dashboardItems} type={type as 'reviews' | 'news' | 'guides'} />
         )

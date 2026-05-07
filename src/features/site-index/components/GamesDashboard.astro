@@ -1,0 +1,153 @@
+---
+/**
+ * GamesDashboard.astro — 3×2 featured-tile dashboard for the games index.
+ * Port of EG-HBS views/partials/site-grid-top-dashboard.handlebars (89 lines).
+ * Uses .moreof-hf / .brands-dash__stageGrid / .grid-dash__tile classes shared
+ * with the brands and hubs dashboards (parity with HBS).
+ *
+ * Dark-theme values are LOCKED — copied from HBS site_index.css.
+ */
+import type { PackedGame } from '@features/site-index/games-helpers';
+
+interface Props {
+  items: PackedGame[];
+  categoryClass?: string;
+}
+
+const { items, categoryClass } = Astro.props;
+const tiles = items.slice(0, 6);
+const isOneRow = tiles.length <= 3;
+---
+
+{tiles.length > 0 && (
+  <section
+    class:list={['moreof-hf', categoryClass, { '-oneRow': isOneRow }]}
+    data-feed-kind="type-dashboard"
+    data-layout="horizontal"
+  >
+    <div class="moreof-hf__grid" data-ad-rail="right">
+      <div class:list={['brands-dash__stageGrid', !isOneRow && 'u-gridRowsEven', 'u-show3At1Col']}>
+        {tiles.map((g) => {
+          const base = g.logoBase;
+          const ext = g.logoExt || 'webp';
+          const src = `${base}_s.${ext}`;
+          const srcset = `${base}_xxs.${ext} 100w, ${base}_xs.${ext} 200w, ${base}_s.${ext} 400w, ${base}_m.${ext} 600w, ${base}_l.${ext} 800w, ${base}_xl.${ext} 1000w, ${base}_xxl.${ext} 2000w`;
+          return (
+            <a
+              href={g.url}
+              class="grid-dash__tile u-minSizeZero"
+              aria-label={g.name}
+            >
+              <img
+                loading="eager"
+                fetchpriority="high"
+                decoding="async"
+                src={src}
+                srcset={srcset}
+                sizes="(min-width: 1401px) calc((924px - 32px) / 3),
+                       (min-width: 1151px) calc((100vw - 48px - 300px - 30px - 32px)/3),
+                       (min-width: 901px)  calc((100vw - 48px - 200px - 32px)/3),
+                       (min-width: 561px)  calc((100vw - 48px - 16px) / 2),
+                       calc(100vw - 48px)"
+                alt={`${g.name} cover`}
+                class="brands-dash__logo"
+              />
+            </a>
+          );
+        })}
+      </div>
+
+      <aside
+        class:list={['moreof-rail-ad', { '-oneRow': isOneRow }]}
+        aria-label="Advertisement"
+      >
+        {/* Ad rail placeholder — wire when ads bootstrap supports games dashboard slot */}
+      </aside>
+    </div>
+  </section>
+)}
+
+<style>
+  /* ═════════════════════════════════════════════════════════════════════════
+     GAMES DASHBOARD — Port of EG-HBS site_index.css moreof-hf / brands-dash__stageGrid
+     Dark-theme values LOCKED.
+     ═════════════════════════════════════════════════════════════════════════ */
+
+  .moreof-hf {
+    width: 100%;
+    margin: 0;
+  }
+
+  .moreof-hf__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 300px;
+    gap: 30px;
+    align-items: start;
+  }
+
+  .brands-dash__stageGrid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 16px;
+    min-width: 0;
+  }
+
+  .brands-dash__stageGrid.u-gridRowsEven {
+    grid-template-rows: 1fr 1fr;
+  }
+
+  /* ── Tile (poster aspect, rounded, click target) ── */
+  .grid-dash__tile {
+    position: relative;
+    display: block;
+    overflow: hidden;
+    border-radius: 10px;
+    aspect-ratio: 16 / 9;
+    background-color: var(--section-medium-background-color);
+    text-decoration: none;
+    box-shadow: var(--card-shadow, none);
+    transition: transform 0.25s ease, box-shadow 0.2s ease;
+  }
+
+  .brands-dash__logo {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  /* ── Hover (pointer devices) ── */
+  @media (hover: hover) and (pointer: fine) {
+    .grid-dash__tile:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--card-shadow-hover, var(--card-shadow, none));
+    }
+  }
+
+  .moreof-rail-ad {
+    width: 300px;
+    min-height: 250px;
+  }
+
+  /* ─── Responsive collapse — mirrors HBS site_index.css breakpoints ───────── */
+  @media (max-width: 1150px) {
+    .moreof-hf__grid {
+      grid-template-columns: minmax(0, 1fr);
+    }
+    .moreof-rail-ad {
+      display: none;
+    }
+  }
+
+  @media (max-width: 900px) {
+    .brands-dash__stageGrid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (max-width: 560px) {
+    .brands-dash__stageGrid.u-show3At1Col {
+      grid-template-columns: minmax(0, 1fr);
+    }
+  }
+</style>

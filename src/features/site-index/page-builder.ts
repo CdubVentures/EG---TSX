@@ -13,7 +13,7 @@ import {
   enrichReviewItemsWithScores as enrichReviewItemsWithScoresPure,
 } from './page-builder.mjs';
 
-export type SiteIndexType = 'reviews' | 'guides' | 'news' | 'brands';
+export type SiteIndexType = 'reviews' | 'guides' | 'news' | 'brands' | 'games';
 
 export interface SiteIndexStaticPathProps {
   category: string;

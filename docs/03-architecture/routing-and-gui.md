@@ -36,6 +36,7 @@ Local contracts:
 | [`src/pages/guides/[...slug].astro`](../../src/pages/guides/[...slug].astro) | `/guides/`, `/guides/page/{n}/`, `/guides/{category}/`, `/guides/{category}/page/{n}/` | Static HTML from S3 via CloudFront | `SiteIndexPage.astro` article index family |
 | [`src/pages/news/[...slug].astro`](../../src/pages/news/[...slug].astro) | `/news/`, `/news/page/{n}/`, `/news/{category}/`, `/news/{category}/page/{n}/` | Static HTML from S3 via CloudFront | `SiteIndexPage.astro` article index family |
 | [`src/pages/brands/[...slug].astro`](../../src/pages/brands/[...slug].astro) | `/brands/`, `/brands/page/{n}/`, `/brands/{category}/`, `/brands/{category}/page/{n}/` | Static HTML from S3 via CloudFront | `IndexBleed.astro` plus `BrandBody.astro` |
+| [`src/pages/games/[...slug].astro`](../../src/pages/games/[...slug].astro) | `/games/`, `/games/page/{n}/`, `/games/{genre}/`, `/games/{genre}/page/{n}/` | Static HTML from S3 via CloudFront | `IndexBleed.astro` plus `GamesBody.astro` (3×2 day-seeded dashboard + A–Z poster grid) |
 | [`src/pages/login/google.ts`](../../src/pages/login/google.ts) | `/login/google` | Lambda | Redirect builder into Cognito Hosted UI |
 | [`src/pages/login/discord.ts`](../../src/pages/login/discord.ts) | `/login/discord` | Lambda | Redirect builder into Cognito Hosted UI |
 | [`src/pages/auth/callback.ts`](../../src/pages/auth/callback.ts) | `/auth/callback` | Lambda | OAuth callback, token exchange, cookie issuance |
@@ -74,7 +75,7 @@ These URL contracts are validated link emissions in the current source tree. The
 
 | URL contract | Source files | Current interpretation |
 |---|---|---|
-| `/games` and `/games/{slug}` | [`NavLinks.astro`](../../src/shared/layouts/NavLinks.astro), [`NavMobile.tsx`](../../src/shared/layouts/NavMobile.tsx), [`HomeHero.astro`](../../src/features/home/components/HomeHero.astro) | Navigation contract exists, but no local `src/pages/games/**` route file exists in this snapshot |
+| `/games/{slug}` | [`NavLinks.astro`](../../src/shared/layouts/NavLinks.astro), [`NavMobile.tsx`](../../src/shared/layouts/NavMobile.tsx), [`HomeHero.astro`](../../src/features/home/components/HomeHero.astro) | Single-game detail URL — no local route file in this snapshot (`/games/` index is implemented in `src/pages/games/[...slug].astro`) |
 | `/hubs` and `/hubs/{category}` | [`NavLinks.astro`](../../src/shared/layouts/NavLinks.astro), [`NavMobile.tsx`](../../src/shared/layouts/NavMobile.tsx), [`HomeHero.astro`](../../src/features/home/components/HomeHero.astro), [`TopProducts.astro`](../../src/features/home/components/TopProducts.astro) | Navigation contract exists, but no local `src/pages/hubs/**` route file exists in this snapshot |
 | `/hubs/{category}/{brandSlug}/{modelSlug}` | [`HomeSlideshow.astro`](../../src/features/home/components/HomeSlideshow.astro), [`src/pages/api/search.ts`](../../src/pages/api/search.ts), [`url-contract.ts`](../../src/core/seo/url-contract.ts) | Helper-generated product detail URL with no local route file in this snapshot |
 | `/{collection}/{entryId}` | [`src/pages/api/search.ts`](../../src/pages/api/search.ts), [`article-helpers.ts`](../../src/core/article-helpers.ts) | Helper-generated editorial detail URL with no local route file in this snapshot |

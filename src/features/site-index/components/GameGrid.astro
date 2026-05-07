@@ -1,0 +1,100 @@
+---
+/**
+ * GameGrid.astro — A–Z poster grid for the games index body.
+ * Port of HBS site-games-grid.handlebars's grid wrapper (.game-grid).
+ * Renders a sequence of GameGridCard components in a responsive 4-col grid.
+ */
+import type { PackedGame } from '@features/site-index/games-helpers';
+import GameGridCard from '@shared/ui/GameGridCard.astro';
+
+interface Props {
+  items: PackedGame[];
+  id?: string;
+}
+
+const { items, id = 'games-grid' } = Astro.props;
+---
+
+<div id={`${id}-list`} class="game-grid" aria-live="polite">
+  {items.map((g) => (
+    <GameGridCard game={g} />
+  ))}
+</div>
+
+<style>
+  /* ─── 4-col responsive grid ────────────────────────────────────────────────
+     Breakpoints mirror EG-HBS site_index_games.css game-grid (which falls back
+     to site_index.css generic feed grids — 4 / 4 / 3 / 2 cols). */
+  .game-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 14px;
+    margin-bottom: 24px;
+  }
+
+  /* Match brand-grid breakpoints in BrandBody.astro for consistency. */
+  @media (max-width: 1250px) {
+    .game-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+
+  /* WHY: at ≤1150px the rail is hidden — extra width buys back the 4th col. */
+  @media (max-width: 1150px) {
+    .game-grid {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+  }
+
+  @media (max-width: 900px) {
+    .game-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+
+  @media (max-width: 400px) {
+    .game-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+</style>
+
+<script>
+  // ─── VanillaTilt init for game cards ─────────────────────────────────────
+  // Same pattern as GamesScroller.astro: load /js/widget_tile_tilt.js on demand.
+  // WHY: tilt is a polish effect — load it lazily so it never blocks first paint.
+  function initGameGridTilt() {
+    const tiltEls = document.querySelectorAll<HTMLElement>('.game-card__artWrap');
+    if (!tiltEls.length) return;
+
+    const TILT_OPTS = {
+      max: 10,
+      speed: 300,
+      scale: 1.02,
+      perspective: 900,
+      glare: true,
+      'max-glare': 0.12,
+      reset: true,
+    };
+
+    function applyTilt() {
+      const VT = (window as Window & { VanillaTilt?: { init(els: Element[], opts: object): void } }).VanillaTilt;
+      if (VT) VT.init(Array.from(tiltEls), TILT_OPTS);
+    }
+
+    if ((window as Window & { VanillaTilt?: unknown }).VanillaTilt) {
+      applyTilt();
+    } else {
+      const script = document.createElement('script');
+      script.src = '/js/widget_tile_tilt.js';
+      script.onload = applyTilt;
+      document.head.appendChild(script);
+    }
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initGameGridTilt);
+  } else {
+    initGameGridTilt();
+  }
+</script>
